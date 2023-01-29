@@ -250,6 +250,8 @@ function SaveCharacter(%clientId, %silent)
 	$funk::var["[\"" @ %name @ "\", 8, 4]"] = fetchData(%clientId, "BankGemItems");
 	$funk::var["[\"" @ %name @ "\", 8, 5]"] = fetchData(%clientId, "PotionItems");
 	$funk::var["[\"" @ %name @ "\", 8, 6]"] = fetchData(%clientId, "BankPotionItems");
+	$funk::var["[\"" @ %name @ "\", 8, 7]"] = fetchData(%clientId, "WeaponItems");
+	$funk::var["[\"" @ %name @ "\", 8, 8]"] = fetchData(%clientId, "BankWeaponItems");
 
 	%recallList = fetchData(%clientId,"recallList");
 	$funk::var["[\"" @ %name @ "\", 8, recallList]"] = %recallList;
@@ -412,13 +414,14 @@ function LoadCharacter(%clientId)
 		$numMessage[%clientId, "numpad-"] = $funk::var[%name, 7, "numpad-"];
 		$numMessage[%clientId, "numpad+"] = $funk::var[%name, 7, "numpad+"];
 
-
 		storeData(%clientId, "AmmoItems", $funk::var[%name, 8, 1]);
 		storeData(%clientId, "BankAmmoItems", $funk::var[%name, 8, 2]);
 		storeData(%clientId, "GemItems", $funk::var[%name, 8, 3]);
 		storeData(%clientId, "BankGemItems", $funk::var[%name, 8, 4]);
-		storeData(%clientId, "PotionItems", $funk::var[%name, 0, 5]);
-		storeData(%clientId, "BankPotionItems", $funk::var[%name, 0, 6]);
+		storeData(%clientId, "PotionItems", $funk::var[%name, 8, 5]);
+		storeData(%clientId, "BankPotionItems", $funk::var[%name, 8, 6]);
+		storeData(%clientId, "WeaponItems", $funk::var[%name, 8, 7]);
+		storeData(%clientId, "BankWeaponItems", $funk::var[%name, 8, 8]);
 
 		%recallList = $funk::var[%name, 8, recallList];
 		storeData(%clientId,"recallList", %recallList);
