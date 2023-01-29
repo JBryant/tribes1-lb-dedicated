@@ -394,11 +394,12 @@ function Game::menuRequest(%clientId)
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "View your stats" , "viewstats");
 			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Settings..." , "settings");
 			if(!IsDead(%clientId)){
-				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Belt... (wt:"@Belt::GetWeight(%clientid)@")","viewbelt");
+				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Inventory (wt: "@Belt::GetWeight(%clientid)@")","viewbelt");
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Skill points..." , "sp");
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Compass" , "compass");
 			}
-			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Party options..." , "partyoptions");			if($sanctionedAdmin[rpg::getname(%clientId)] > 0)
+			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Party options..." , "partyoptions");
+			if($sanctionedAdmin[rpg::getname(%clientId)] > 0)
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Admin controls", "admincontrol");
 			if(GetAccessoryList(%clientId, 9, -1) != "")
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Ranged weapons..." , "rweapons");
@@ -434,8 +435,21 @@ function processMenuOptions(%clientId, %option)
 
 		Client::addMenuItem(%clientId, %curItem++ @ "Battle message config..." , "battmsg");
 
-	}
-	else if(%opt == "compass")	{		Client::buildMenu(%clientId, "Sense heading: "@$playerSkill[%clientId,$SkillSenseHeading], "compass", true);		Client::addMenuItem(%clientId, %curItem++ @ "Recall (skill: 0)" , "recall");		Client::addMenuItem(%clientId, %curItem++ @ "Nearest town (skill: 3)" , "town");		Client::addMenuItem(%clientId, %curItem++ @ "Nearest dungeon (skill: 3)" , "dungeon");		Client::addMenuItem(%clientId, %curItem++ @ "Nearest zones list (skill: 20)" , "advcompass");		Client::addMenuItem(%clientId, %curItem++ @ "Track player (skill: 15)" , "track player");		Client::addMenuItem(%clientId, %curItem++ @ "Track AI (skill: 15)" , "track bot");		Client::addMenuItem(%clientId, %curItem++ @ "Track your packs (skill: 0)" , "trackpack own");		Client::addMenuItem(%clientId, %curItem++ @ "Track all packs (skill: 85)" , "trackpack all");		return;	}
+	}
+
+	else if(%opt == "compass")
+	{
+		Client::buildMenu(%clientId, "Sense heading: "@$playerSkill[%clientId,$SkillSenseHeading], "compass", true);
+		Client::addMenuItem(%clientId, %curItem++ @ "Recall (skill: 0)" , "recall");
+		Client::addMenuItem(%clientId, %curItem++ @ "Nearest town (skill: 3)" , "town");
+		Client::addMenuItem(%clientId, %curItem++ @ "Nearest dungeon (skill: 3)" , "dungeon");
+		Client::addMenuItem(%clientId, %curItem++ @ "Nearest zones list (skill: 20)" , "advcompass");
+		Client::addMenuItem(%clientId, %curItem++ @ "Track player (skill: 15)" , "track player");
+		Client::addMenuItem(%clientId, %curItem++ @ "Track AI (skill: 15)" , "track bot");
+		Client::addMenuItem(%clientId, %curItem++ @ "Track your packs (skill: 0)" , "trackpack own");
+		Client::addMenuItem(%clientId, %curItem++ @ "Track all packs (skill: 85)" , "trackpack all");
+		return;
+	}
 	else if(%opt == "selspell")
 	{
 		Client::buildMenu(%clientId, "Select a spell", "selectspell", true);
@@ -684,7 +698,10 @@ function processMenuadmincontrol(%clientId, %option){
 			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "600 seconds" , %cl@" 600");
 		}
 	}
-	if(%opt == "kick"){		Client::buildMenu(%clientId, "Confirm kick?", "acconfirm", true);		Client::addMenuItem(%clientId, "1Confirm kick" , "confirm "@%opt@" "@%cl);		Client::addMenuItem(%clientId, "2Cancel" , "cancel");
+	if(%opt == "kick"){
+		Client::buildMenu(%clientId, "Confirm kick?", "acconfirm", true);
+		Client::addMenuItem(%clientId, "1Confirm kick" , "confirm "@%opt@" "@%cl);
+		Client::addMenuItem(%clientId, "2Cancel" , "cancel");
 	}
 	if(%opt == "setrace"){
 		Client::buildMenu(%clientId, "Set race for "@rpg::getname(%cl), "setrace", true);
@@ -692,8 +709,21 @@ function processMenuadmincontrol(%clientId, %option){
 		Client::addMenuItem(%clientId, "2Female Human" , "FemaleHuman "@%cl);
 		Client::addMenuItem(%clientId, "3Death Knight" , "DeathKnight "@%cl);
 	}
-}
-function processMenuacconfirm(%clientId, %option){	%c = getWord(%option,0);	%opt = getWord(%option,1);	%cl = getWord(%option,2);	if(%c == "confirm"){		if(%opt == "kick"){			if(admin::hasPermissionToMod(%clientId, %cl))				Admin::DirectKick(%clientId, %cl, "You have been kicked by the administrator.");			else				Client::sendMessage(%clientId, 0, "Could not process command: Target admin clearance level too high.");		}	}}
+}
+
+function processMenuacconfirm(%clientId, %option){
+	%c = getWord(%option,0);
+	%opt = getWord(%option,1);
+	%cl = getWord(%option,2);
+	if(%c == "confirm"){
+		if(%opt == "kick"){
+			if(admin::hasPermissionToMod(%clientId, %cl))
+				Admin::DirectKick(%clientId, %cl, "You have been kicked by the administrator.");
+			else
+				Client::sendMessage(%clientId, 0, "Could not process command: Target admin clearance level too high.");
+		}
+	}
+}
 
 function processMenujail(%clientId, %option){
 	if(%clientId.adminlevel < 2) return;
@@ -763,7 +793,33 @@ function processMenusettings(%clientId, %option)
 	}
 	else if(%opt == "battmsg")
 	{
-		Client::buildMenu(%clientId, "Battle message config:", "battmsgcfg", true);		%cur = fetchData(%clientId, "battlemsg");		if(%cur == "")			%cur = "auto";		%choices = "chathud topprint bottomprint auto";		%eng["chathud"] = "Chat HUD";		%eng["topprint"] = "Top Print";		%eng["bottomprint"] = "Bottom Print";		%eng["auto"] = "Automatic";		if(%clientId.repack >= 32){			%choices = "chathud topleft topprint bottomleft bottomprint auto";			%eng["topleft"] = "Top Left";			%eng["topprint"] = "Top Right";			%eng["bottomleft"] = "Bottom Left";			%eng["bottomprint"] = "Bottom Right";		}				for(%i = 0; getword(%choices, %i) != -1; %i++)		{			%w = getword(%choices, %i);			%eng = %eng[%w];			if(%cur == %w)				%eng = string::translate(%eng);			Client::addMenuItem(%clientId, %curitem++ @ %eng, %w);		}		if(%clientId.repack < 32)			Client::addMenuItem(%clientId, %curitem++ @ "Print # of lines..", "printlength");
+		Client::buildMenu(%clientId, "Battle message config:", "battmsgcfg", true);
+		%cur = fetchData(%clientId, "battlemsg");
+		if(%cur == "")
+			%cur = "auto";
+		%choices = "chathud topprint bottomprint auto";
+		%eng["chathud"] = "Chat HUD";
+		%eng["topprint"] = "Top Print";
+		%eng["bottomprint"] = "Bottom Print";
+		%eng["auto"] = "Automatic";
+		if(%clientId.repack >= 32){
+			%choices = "chathud topleft topprint bottomleft bottomprint auto";
+			%eng["topleft"] = "Top Left";
+			%eng["topprint"] = "Top Right";
+			%eng["bottomleft"] = "Bottom Left";
+			%eng["bottomprint"] = "Bottom Right";
+		}
+		
+		for(%i = 0; getword(%choices, %i) != -1; %i++)
+		{
+			%w = getword(%choices, %i);
+			%eng = %eng[%w];
+			if(%cur == %w)
+				%eng = string::translate(%eng);
+			Client::addMenuItem(%clientId, %curitem++ @ %eng, %w);
+		}
+		if(%clientId.repack < 32)
+			Client::addMenuItem(%clientId, %curitem++ @ "Print # of lines..", "printlength");
 		return;
 	}
 }
@@ -800,9 +856,21 @@ function processMenubattmsgcfg(%clientId, %option)
 
 	storeData(%clientId, "battlemsg", %opt);
 
-	%eng["chathud"] = "Chat HUD";	%eng["topprint"] = "Top Print";	%eng["bottomprint"] = "Bottom Print";	%eng["auto"] = "Automatic";	if(%clientId.repack >= 32){		%eng["topleft"] = "Top Left";		%eng["topprint"] = "Top Right";		%eng["bottomleft"] = "Bottom Left";		%eng["bottomprint"] = "Bottom Right";	}
 
-	if(%clientId.repack >= 32)		refreshBattleHudPos(%clientId);	processMenusettings(%clientId, "battmsg");
+	%eng["chathud"] = "Chat HUD";
+	%eng["topprint"] = "Top Print";
+	%eng["bottomprint"] = "Bottom Print";
+	%eng["auto"] = "Automatic";
+	if(%clientId.repack >= 32){
+		%eng["topleft"] = "Top Left";
+		%eng["topprint"] = "Top Right";
+		%eng["bottomleft"] = "Bottom Left";
+		%eng["bottomprint"] = "Bottom Right";
+	}
+
+	if(%clientId.repack >= 32)
+		refreshBattleHudPos(%clientId);
+	processMenusettings(%clientId, "battmsg");
 
 //	if(%opt == "chathud")
 //		Client::sendMessage(%ClientId, 0, "Battle messages now appear in your chat hud.");

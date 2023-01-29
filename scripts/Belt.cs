@@ -124,7 +124,7 @@ function MenuViewBelt(%clientId, %page, %victim)
 		if(%type == -1)
 			break;
 		%num = getword(Belt::GetNS(%victim,%type),0);
-		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%cnt++,1) @ getDisp(%type) @ " ("@%num@" kinds)", %type@" "@%victim);
+		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%cnt++,1) @ getDisp(%type) @ " ("@%num@")", %type@" "@%victim);
 	}
 
 	if(%page == 1)
@@ -1399,7 +1399,7 @@ function Belt::GetNS(%clientid,%type)
 	return %bn@%list;
 }
 
-function BeltItem::Add(%name,%item,%type,%weight,%cost)
+function BeltItem::Add(%name, %item, %type, %weight, %cost)
 {
 	%num = $count[%type]++;
 	$beltItemData[$numBeltItems] = %item;
@@ -1771,4 +1771,44 @@ $AccessoryVar[CrystalEnergyVial, $MiscInfo] = "A crystal energy vial that provid
 $restoreValue[CrystalEnergyVial, MP] = 50;
 
 //Weapons
-BeltItem::Add("Knife", "Knife", "WeaponItems", 1, GenerateItemCost(Knife));
+BeltItem::Add("Hatchet", "Hatchet", "WeaponItems", $AccessoryVar[Hatchet, $Weight], GenerateItemCost(Hatchet));
+BeltItem::Add("Broad Sword", "BroadSword", "WeaponItems", $AccessoryVar[BroadSword, $Weight], GenerateItemCost(BroadSword));
+BeltItem::Add("War Axe", "WarAxe", "WeaponItems", $AccessoryVar[WarAxe, $Weight], GenerateItemCost(WarAxe));
+BeltItem::Add("Long Sword", "LongSword", "WeaponItems", $AccessoryVar[LongSword, $Weight], GenerateItemCost(LongSword));
+BeltItem::Add("Battle Axe", "BattleAxe", "WeaponItems", $AccessoryVar[BattleAxe, $Weight], GenerateItemCost(BattleAxe));
+BeltItem::Add("Bastard Sword", "BastardSword", "WeaponItems", $AccessoryVar[BastardSword, $Weight], GenerateItemCost(BastardSword));
+BeltItem::Add("Halberd", "Halberd", "WeaponItems", $AccessoryVar[Halberd, $Weight], GenerateItemCost(Halberd));
+BeltItem::Add("Claymore", "Claymore", "WeaponItems", $AccessoryVar[Claymore, $Weight], GenerateItemCost(Claymore));
+BeltItem::Add("Keldrinite Long Sword", "KeldriniteLS", "WeaponItems", $AccessoryVar[KeldriniteLS, $Weight], GenerateItemCost(KeldriniteLS));
+
+BeltItem::Add("Club", "Club", "WeaponItems", $AccessoryVar[Club, $Weight], GenerateItemCost(Club));
+BeltItem::Add("Quarter Staff", "QuarterStaff", "WeaponItems", $AccessoryVar[QuarterStaff, $Weight], GenerateItemCost(QuarterStaff));
+BeltItem::Add("Bone Club", "BoneClub", "WeaponItems", $AccessoryVar[BoneClub, $Weight], GenerateItemCost(BoneClub));
+BeltItem::Add("Spiked Club", "SpikedClub", "WeaponItems", $AccessoryVar[SpikedClub, $Weight], GenerateItemCost(SpikedClub));
+BeltItem::Add("Mace", "Mace", "WeaponItems", $AccessoryVar[Mace, $Weight], GenerateItemCost(Mace));
+BeltItem::Add("Hammer Pick", "HammerPick", "WeaponItems", $AccessoryVar[HammerPick, $Weight], GenerateItemCost(HammerPick));
+BeltItem::Add("Spiked Bone Club", "SpikedBoneClub", "WeaponItems", $AccessoryVar[SpikedBoneClub, $Weight], GenerateItemCost(SpikedBoneClub));
+BeltItem::Add("Long Staff", "LongStaff", "WeaponItems", $AccessoryVar[LongStaff, $Weight], GenerateItemCost(LongStaff));
+BeltItem::Add("War Hammer", "WarHammer", "WeaponItems", $AccessoryVar[WarHammer, $Weight], GenerateItemCost(WarHammer));
+BeltItem::Add("Justice Staff", "JusticeStaff", "WeaponItems", $AccessoryVar[JusticeStaff, $Weight], GenerateItemCost(JusticeStaff));
+BeltItem::Add("War Maul", "WarMaul", "WeaponItems", $AccessoryVar[WarMaul, $Weight], GenerateItemCost(WarMaul));
+
+BeltItem::Add("Pick Axe", "PickAxe", "WeaponItems", $AccessoryVar[PickAxe, $Weight], GenerateItemCost(PickAxe));
+BeltItem::Add("Knife", "Knife", "WeaponItems", $AccessoryVar[Knife, $Weight], GenerateItemCost(Knife));
+BeltItem::Add("Dagger", "Dagger", "WeaponItems", $AccessoryVar[Dagger, $Weight], GenerateItemCost(Dagger));
+BeltItem::Add("Short Sword", "ShortSword", "WeaponItems", $AccessoryVar[ShortSword, $Weight], GenerateItemCost(ShortSword));
+BeltItem::Add("Spear", "Spear", "WeaponItems", $AccessoryVar[Spear, $Weight], GenerateItemCost(Spear));
+BeltItem::Add("Gladius", "Gladius", "WeaponItems", $AccessoryVar[Gladius, $Weight], GenerateItemCost(Gladius));
+BeltItem::Add("Trident", "Trident", "WeaponItems", $AccessoryVar[Trident, $Weight], GenerateItemCost(Trident));
+BeltItem::Add("Rapier", "Rapier", "WeaponItems", $AccessoryVar[Rapier, $Weight], GenerateItemCost(Rapier));
+BeltItem::Add("Awl Pike", "AwlPike", "WeaponItems", $AccessoryVar[AwlPike, $Weight], GenerateItemCost(AwlPike));
+
+BeltItem::Add("Sling", "Sling", "WeaponItems", $AccessoryVar[Sling, $Weight], GenerateItemCost(Sling));
+BeltItem::Add("ShortBow", "ShortBow", "WeaponItems", $AccessoryVar[ShortBow, $Weight], GenerateItemCost(ShortBow));
+BeltItem::Add("LightCrossbow", "LightCrossbow", "WeaponItems", $AccessoryVar[LightCrossbow, $Weight], GenerateItemCost(LightCrossbow));
+BeltItem::Add("LongBow", "LongBow", "WeaponItems", $AccessoryVar[LongBow, $Weight], GenerateItemCost(LongBow));
+BeltItem::Add("CompositeBow", "CompositeBow", "WeaponItems", $AccessoryVar[CompositeBow, $Weight], GenerateItemCost(CompositeBow));
+BeltItem::Add("RepeatingCrossbow", "RepeatingCrossbow", "WeaponItems", $AccessoryVar[RepeatingCrossbow, $Weight], GenerateItemCost(RepeatingCrossbow));
+BeltItem::Add("ElvenBow", "ElvenBow", "WeaponItems", $AccessoryVar[ElvenBow, $Weight], GenerateItemCost(ElvenBow));
+BeltItem::Add("AeolusWing", "AeolusWing", "WeaponItems", $AccessoryVar[AeolusWing, $Weight], GenerateItemCost(AeolusWing));
+BeltItem::Add("HeavyCrossbow", "HeavyCrossbow", "WeaponItems", $AccessoryVar[HeavyCrossbow, $Weight], GenerateItemCost(HeavyCrossbow));

@@ -2414,7 +2414,35 @@ function internalSay(%clientId, %team, %message, %senderName)
 					Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 				else if(%id != -1)
 				{
-					Player::setItemCount(%id, GetWord(%cropped, 1), GetWord(%cropped, 2));
+					%belt = False;
+					%item = $beltitem[GetWord(%cropped, 1), "Item"];
+
+					if($beltitem[%item, "Name"] == "") {
+						%itemString = Belt::HasItemNamed(%TrueClientId, %cropped);
+						if(%itemString == False){
+							for(%i = 0; $beltItemData[%i] != ""; %i++)
+							{
+								if(string::icompare($beltitem[$beltItemData[%i], "Name"], String::replace(%cropped, "armor", "armour")) == 0){
+									%item = $beltItemData[%i];
+									%belt = True;
+									break;
+								}
+							}
+						}
+						else if(getWord(%itemString,1) > 0){
+							%item = getWord(%itemString,0);
+							%belt = True;
+						}
+					}
+					else
+						%belt = True;
+
+					if (%belt) {
+						Belt::GiveThisStuff(%id, GetWord(%cropped, 1), GetWord(%cropped, 2));
+					} else {
+						Player::setItemCount(%id, GetWord(%cropped, 1), GetWord(%cropped, 2));
+					}
+
 					RefreshAll(%id);
 					if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Set " @ %name @ " (" @ %id @ ") " @ GetWord(%cropped, 1) @ " count to " @ GetWord(%cropped, 2));
 				}
