@@ -12,8 +12,11 @@ function Item::giveItem(%player, %item, %delta, %showmsg)
 
 	if(%showmsg)
 		Client::sendMessage(%clientId, 0, "You received " @ %delta @ " " @ %item.description @ ".");
-
-	if(isbeltitem(%item))		belt::givethisstuff(%clientId, %item, %delta);	else
+
+
+	if(isbeltitem(%item))
+		belt::givethisstuff(%clientId, %item, %delta);
+	else
 		Player::incItemCount(%clientId, %item, %delta);
 
 	return %delta;
@@ -170,7 +173,7 @@ function Item::onUnmount(%player,%item)
 {
 }
 
-function Item::onUse(%player,%item)
+function Item::onUse(%player, %item)
 {
 	dbecho($dbechoMode, "Item::onUse(" @ %player @ ", " @ %item @ ")");
 
@@ -197,6 +200,9 @@ function Item::onUse(%player,%item)
 					Client::sendMessage(%clientId, $MsgBeige, "You equipped " @ %item.description @ ".");
 					Player::setItemCount(%player, %item, Player::getItemCount(%player, %item)-1);
 					Player::setItemCount(%player, %item @ "0", Player::getItemCount(%player, %item @ "0")+1);
+					// modify the belt 
+					Belt::TakeThisStuff(%clientId, %item, 1);
+					Belt::GiveThisStuff(%clientid, %item @ "0", 1);
 				}
 				else
 					Client::sendMessage(%clientId, $MsgRed, "You can't equip this item because you have too many already equipped.~wC_BuySell.wav");
@@ -213,6 +219,10 @@ function Item::onUse(%player,%item)
 			Client::sendMessage(%clientId, $MsgBeige, "You unequipped " @ %item.description @ ".");
 			Player::setItemCount(%player, %item, Player::getItemCount(%player, %item)-1);
 			Player::setItemCount(%player, %o, Player::getItemCount(%player, %o)+1);
+
+			// modify the belt 
+			Belt::TakeThisStuff(%clientId, %item, 1);
+			Belt::GiveThisStuff(%clientid, %o, 1);
 
 			if($OverrideMountPoint[%item] == "")
 				Player::unMountItem(%player, 1);

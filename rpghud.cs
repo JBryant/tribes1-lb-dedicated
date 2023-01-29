@@ -69,11 +69,11 @@ function getrpgdata()
 	$mdef = $rpgdata["MDEF"];
 	$class = $rpgdata["CLASS"];
 	$race = $rpgdata["RACE"];
-        $zonedesc = $rpgdata["zonedesc"];
-        $remort = $rpgdata["RemortStep"];
+    $zonedesc = $rpgdata["zonedesc"];
+    $remort = $rpgdata["RemortStep"];
 
-        if($zonedesc == -1)
-                $zonedesc = "unknown";
+    if($zonedesc == -1)
+        $zonedesc = "Keldrinia";
 
 	$expneeded = ((floor($exp / 1000) + 1) * 1000) - $exp;
 

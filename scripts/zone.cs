@@ -172,12 +172,16 @@ function setzoneflags(%object, %z)
 
 	%clientId = Player::getClient(%object);
 	storeData(%clientId, "tmpzone", %z);
-}function UpdateZone(%object)
+}
+function UpdateZone(%object)
 {
 	dbecho($dbechoMode, "UpdateZone(" @ %object @ ")");
 
-	%clientId = Player::getClient(%object);	if(%clientId == -1)		return;
-	%clientId.remoteEvalSpam = "";	%clientId.tabMenuSpam = "";
+	%clientId = Player::getClient(%object);
+	if(%clientId == -1)
+		return;
+	%clientId.remoteEvalSpam = "";
+	%clientId.tabMenuSpam = "";
 	%zoneflag = fetchData(%clientId, "tmpzone");
 
 	//check if the player was found inside a zone
@@ -297,7 +301,13 @@ function setzoneflags(%object, %z)
 	//			Client::sendMessage(%clientId, 0, "~w" @ $Zone::Music[0, %clientId.currentMusic]);
 	//			%clientId.MusicTicksLeft = $Zone::MusicTicks[0, %clientId.currentMusic]+2;
 	//		}
-	//	}		//-----------------------------------------------------------		// Apply Hail!!!!		//-----------------------------------------------------------		if($IsHail){			hailHit(%clientId);		}
+	//	}
+		//-----------------------------------------------------------
+		// Apply Hail!!!!
+		//-----------------------------------------------------------
+		if($IsHail){
+			hailHit(%clientId);
+		}
 	}
 
 	//-----------------------------------------------------------
@@ -372,15 +382,92 @@ function setzoneflags(%object, %z)
 				storeData(%clientId, "lastScent", GameBase::getPosition(%clientId));
 			}
 		}
-		%isai = Player::isAiControlled(%clientId);		if(!%isai){			if($isSnow)				setupIce(%clientId, %pos);
+		%isai = Player::isAiControlled(%clientId);
+		if(!%isai){
+			if($isSnow)
+				setupIce(%clientId, %pos);
+
 		}
 	}
 	%clientId.zoneLastPos = %pos;
 
 	storeData(%clientId, "tmpzone", "");
 }
-function hailHit(%clientId){	if(fetchData(%clientId, "InSleepZone") != "")		return;	if(getrandom() < 0.75)		return;	if(fetchData(%clientId, "LVL") > 15)		return;	Client::sendMessage(%clientId, 1, "You are hit by hail.");	%dmg = getrandom()/5;	GameBase::virtual(%clientId, "onDamage", $DebrisDamageType, %dmg, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId);}
-//Note: Camera's getLOSInfo ray is emitted .5 game units above it's position.function setupIce(%client, %pos){//Written by phantom, using a camera trick by Plasmatic	%camera = newObject("Camera","Turret",HappyStand,true);	addtoset("MissionCleanup", %camera);	GameBase::setPosition(%camera,vector::add(%pos,"0 0 290"));	if(GameBase::getLOSInfo(%camera,300,"-1.5708 0 0"))	{			%cl = player::getClient($los::object);		if(%cl == %client)			%foundSky = True;				}	if(!%foundSky){		deleteobject(%camera);		return false;	}	GameBase::setPosition(%camera,vector::add(%pos,"0 0 -1.2"));	if(GameBase::getLOSInfo(%camera,0.8,"1.5708 0 0"))	{		if(player::getClient($los::object) == %client || $personalFerry[%client] == $los::object)		{			deleteobject(%camera);			return false;		}		%detectedSurface = False;		if($los::object == 8)//all terrains are 8		{			%direction = $los::normal;			%playerpos = vector::add(%pos,(getWord(%direction,0)*0.1)@" "@(getWord(%direction,1)*0.1)@" "@(getWord(%direction,2)*0.1));			%direction = (getWord(%direction,0)*1.9)@" "@(getWord(%direction,1)*1.9)@" "@(getWord(%direction,2)*1.9);			%icepos = vector::sub($los::position, %direction);			%detectedSurface = True;		}		deleteobject(%camera);		if(!%detectedSurface){			return false;		}		%tilt = vector::getDistance($los::normal, "0 0 1");		if(player::getClient($los::object) == %client)		{			pecho("player ice error");			return false;		}		%iceType = "icexs50f.dis";		if(!$los::object.isIce){			%object = newObject("icepad", InteriorShape, %iceType);			%object.isIce = True;			addtoset("MissionCleanup/iceBlocks", %object);			gamebase::setRotation(%object,vector::getrotation($los::normal));			gamebase::setPosition(%client,%playerpos);			gamebase::setposition(%object,%icepos);		}		return true;	}	else		deleteobject(%camera);	return false;	}
+
+function hailHit(%clientId){
+	if(fetchData(%clientId, "InSleepZone") != "")
+		return;
+	if(getrandom() < 0.75)
+		return;
+	if(fetchData(%clientId, "LVL") > 15)
+		return;
+
+	Client::sendMessage(%clientId, 1, "You are hit by hail.");
+	%dmg = getrandom()/5;
+	GameBase::virtual(%clientId, "onDamage", $DebrisDamageType, %dmg, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId);
+}
+
+//Note: Camera's getLOSInfo ray is emitted .5 game units above it's position.
+function setupIce(%client, %pos)
+{//Written by phantom, using a camera trick by Plasmatic
+	%camera = newObject("Camera","Turret",HappyStand,true);
+	addtoset("MissionCleanup", %camera);
+	GameBase::setPosition(%camera,vector::add(%pos,"0 0 290"));
+	if(GameBase::getLOSInfo(%camera,300,"-1.5708 0 0"))
+	{	
+		%cl = player::getClient($los::object);
+		if(%cl == %client)
+			%foundSky = True;
+			
+	}
+	if(!%foundSky){
+		deleteobject(%camera);
+		return false;
+	}
+	GameBase::setPosition(%camera,vector::add(%pos,"0 0 -1.2"));
+	if(GameBase::getLOSInfo(%camera,0.8,"1.5708 0 0"))
+	{
+		if(player::getClient($los::object) == %client || $personalFerry[%client] == $los::object)
+		{
+			deleteobject(%camera);
+			return false;
+		}
+		%detectedSurface = False;
+		if($los::object == 8)//all terrains are 8
+		{
+			%direction = $los::normal;
+			%playerpos = vector::add(%pos,(getWord(%direction,0)*0.1)@" "@(getWord(%direction,1)*0.1)@" "@(getWord(%direction,2)*0.1));
+			%direction = (getWord(%direction,0)*1.9)@" "@(getWord(%direction,1)*1.9)@" "@(getWord(%direction,2)*1.9);
+			%icepos = vector::sub($los::position, %direction);
+			%detectedSurface = True;
+		}
+		deleteobject(%camera);
+		if(!%detectedSurface){
+			return false;
+		}
+		%tilt = vector::getDistance($los::normal, "0 0 1");
+		if(player::getClient($los::object) == %client)
+		{
+			pecho("player ice error");
+			return false;
+		}
+		%iceType = "icexs50f.dis";
+
+		if(!$los::object.isIce){
+			%object = newObject("icepad", InteriorShape, %iceType);
+			%object.isIce = True;
+			addtoset("MissionCleanup/iceBlocks", %object);
+			gamebase::setRotation(%object,vector::getrotation($los::normal));
+			gamebase::setPosition(%client,%playerpos);
+
+			gamebase::setposition(%object,%icepos);
+		}
+		return true;
+	}
+	else
+		deleteobject(%camera);
+	return false;	
+}
 
 function gravWorkaround(%clientId, %method)
 {
@@ -490,7 +577,8 @@ function Zone::DoExit(%z, %clientId)
 	{
 		%msg = "You have left " @ $Zone::Desc[%z] @ ".";
 		%color = $MsgBeige;
-	}
+	}
+
 
 	//Repack zone exit
 	if(%clientId.repack){
@@ -590,7 +678,20 @@ function Zone::getDesc(%z)
 	}
 	return -1;
 }
-//Added in rpg 6.8function Zone::descToId(%z){	dbecho($dbechoMode, "Zone::getDesc(" @ %z @ ")");	for(%i = 1; %i <= $numZones; %i++)	{		if($Zone::Desc[%i] == %z)		{			return $Zone::FolderID[%i];		}	}	return "";}
+//Added in rpg 6.8
+function Zone::descToId(%z)
+{
+	dbecho($dbechoMode, "Zone::getDesc(" @ %z @ ")");
+
+	for(%i = 1; %i <= $numZones; %i++)
+	{
+		if($Zone::Desc[%i] == %z)
+		{
+			return $Zone::FolderID[%i];
+		}
+	}
+	return "";
+}
 function Zone::getEnterSound(%z)
 {
 	dbecho($dbechoMode, "Zone::getEnterSound(" @ %z @ ")");
@@ -872,11 +973,96 @@ function Zone::getPlayerList(%z, %type)
 }
 
 //Added in rpg 6.8
-function findZoneFrom(%zone, %pos){	if($Zone::compassPoint[%zone, 0] == ""){		return $Zone::Marker[%zone];	}	%closestDist = 999999;	%closest = 0;	for(%c = 0; $Zone::compassPoint[%zone, %c] != ""; %c++){		%dist = vector::getdistance(%pos, $Zone::compassPoint[%zone, %c]);		if(%dist < %closestDist){			%closestDist = %dist;			%closest = %c;		}	}	%pos = $Zone::compassPoint[%zone, %closest];	return %pos;}
+function findZoneFrom(%zone, %pos)
+{
+	if($Zone::compassPoint[%zone, 0] == ""){
+		return $Zone::Marker[%zone];
+	}
+	%closestDist = 999999;
+	%closest = 0;
+	for(%c = 0; $Zone::compassPoint[%zone, %c] != ""; %c++){
+		%dist = vector::getdistance(%pos, $Zone::compassPoint[%zone, %c]);
+		if(%dist < %closestDist){
+			%closestDist = %dist;
+			%closest = %c;
+		}
+	}
 
-//Added in rpg 6.8//Unlike getZoneAt, this returns a string.function getWorldAt(%pos, %zone){	if($Zone::World[%zone] != ""){		return $Zone::World[%zone];	}	%z = "Unknown";	return %z;}
+	%pos = $Zone::compassPoint[%zone, %closest];
+	return %pos;
+}
 
-//Added in rpg 6.8function getZoneAt(%pos){	%xt = GetWord(%pos, 0);	%yt = GetWord(%pos, 1);	%zt = GetWord(%pos, 2);	%zoneflag = "";	//for(%zone = 1; %zone <= $numZones; %zone++)	for(%zone = $numZones; %zone > 0; %zone--)	{		%x = GetWord($Zone::Marker[%zone], 0);		%y = GetWord($Zone::Marker[%zone], 1);		%z = GetWord($Zone::Marker[%zone], 2);		%w = $Zone::Length[%zone]/2;		%l = $Zone::Width[%zone]/2;		%h = $Zone::Height[%zone]/2;		if(%xt > (%x - %w) && %xt < (%x + %w)){			if(%yt > (%y - %l) && %yt < (%y + %l)){				if(%zt > (%z - %h) && %zt < (%z + %h)){					%zoneflag = %zone;					break;				}			}		}	}	return %zoneflag;}
-//Added in rpg 6.8function getNearestZones(%clpos, %dist){	for(%i = 1; %i <= $numZones; %i++)	{		%finalpos = findZoneFrom(%i, %clpos);		%curDist = Vector::getDistance(%finalpos, %clpos);		if(%curDist < %dist)		{			%ret = %ret@%i@" "@getNESWa(%clpos, %finalpos)@" "@%curDist@" ";		}	}	return %ret;}
+//Added in rpg 6.8
+//Unlike getZoneAt, this returns a string.
+function getWorldAt(%pos, %zone){
+	if($Zone::World[%zone] != ""){
+		return $Zone::World[%zone];
+	}
+	%z = "Keldrinia";
+	return %z;
+}
 
-//Added in rpg 6.8function TeleportToZone(%clientId, %markergroup, %testpos, %random){	for(%zone = 1; $Zone::desc[%zone] != ""; %zone++)	{		if($Zone::desc[%zone] == %markergroup)			break;	}	%num = 1;	if(%random){		for(%c = 1; $Zone::droppoint[%zone, %c] != ""; %c++){} %c--;		%num = floor(getRandom() * %c) + 1;	}	%worldLoc = $Zone::droppoint[%zone, %num];	if(%worldLoc == "")		return False;	GameBase::setPosition(%clientId, %worldLoc);	return %worldLoc;}
+//Added in rpg 6.8
+function getZoneAt(%pos){
+	%xt = GetWord(%pos, 0);
+	%yt = GetWord(%pos, 1);
+	%zt = GetWord(%pos, 2);
+
+	%zoneflag = "";
+	//for(%zone = 1; %zone <= $numZones; %zone++)
+	for(%zone = $numZones; %zone > 0; %zone--)
+	{
+		%x = GetWord($Zone::Marker[%zone], 0);
+		%y = GetWord($Zone::Marker[%zone], 1);
+		%z = GetWord($Zone::Marker[%zone], 2);
+		%w = $Zone::Length[%zone]/2;
+		%l = $Zone::Width[%zone]/2;
+		%h = $Zone::Height[%zone]/2;
+
+		if(%xt > (%x - %w) && %xt < (%x + %w)){
+			if(%yt > (%y - %l) && %yt < (%y + %l)){
+				if(%zt > (%z - %h) && %zt < (%z + %h)){
+					%zoneflag = %zone;
+					break;
+				}
+			}
+		}
+	}
+	
+	return %zoneflag;
+}
+
+//Added in rpg 6.8
+function getNearestZones(%clpos, %dist)
+{
+	for(%i = 1; %i <= $numZones; %i++)
+	{
+		%finalpos = findZoneFrom(%i, %clpos);
+		%curDist = Vector::getDistance(%finalpos, %clpos);
+		if(%curDist < %dist)
+		{
+			%ret = %ret@%i@" "@getNESWa(%clpos, %finalpos)@" "@%curDist@" ";
+		}
+	}
+	return %ret;
+}
+
+//Added in rpg 6.8
+function TeleportToZone(%clientId, %markergroup, %testpos, %random)
+{
+	for(%zone = 1; $Zone::desc[%zone] != ""; %zone++)
+	{
+		if($Zone::desc[%zone] == %markergroup)
+			break;
+	}
+	%num = 1;
+	if(%random){
+		for(%c = 1; $Zone::droppoint[%zone, %c] != ""; %c++){} %c--;
+		%num = floor(getRandom() * %c) + 1;
+	}
+	%worldLoc = $Zone::droppoint[%zone, %num];
+	if(%worldLoc == "")
+		return False;
+	GameBase::setPosition(%clientId, %worldLoc);
+	return %worldLoc;
+}

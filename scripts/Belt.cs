@@ -52,11 +52,12 @@ function getDisp(%type){
 	%disp["GemItems"] = "Gems";
 	%disp["PotionItems"] = "Potions";
 	%disp["WeaponItems"] = "Weapons";
+	%disp["ArmorItems"] = "Armors";
 
 	return %disp[%type];
 }
 
-$belttypelist = "AmmoItems GemItems PotionItems WeaponItems";
+$belttypelist = "AmmoItems GemItems PotionItems WeaponItems ArmorItems";
 
 function belt::checkmenus(%clientId)
 {
@@ -80,17 +81,19 @@ function MenuViewBelt(%clientId, %page, %victim)
 	%victim = confirmVictim(%clientId, %victim);
 	if(%victim == -1)
 		return;
+
 	$yourstats[%clientId] = True;
 	%title = "Belt:";
+
 	if(%victim != %clientId){
 		%victimName = rpg::getname(%victim);
 		%title = %victimName@"'s " @ %title;
 	}
-	Client::buildMenu(%clientId, %title, "ViewBelt", true);
 
+	Client::buildMenu(%clientId, %title, "ViewBelt", true);
 	%cnt = -1;
 
-	if(%victim == %clientId.currentInvSteal){
+	if(%victim == %clientId.currentInvSteal) {
 		//%coins = fetchData(%victim, "COINS");
 		//Client::addMenuItem(%clientId, string::getsubstr($menuChars,%cnt++,1) @ "Steal Coins (has "@%coins@")", "stealcoins "@%victim);
 		if(!SkillCanUse(%clientId, "#pickpocket")){
@@ -102,16 +105,14 @@ function MenuViewBelt(%clientId, %page, %victim)
 	%optionsPerPage = 7;
 	if(%clientId.repack >= 18)
 		%optionsPerPage = 32;
+
 	%nx = 16;
-
-
-
 	%nf = belt::checkmenus(%victim);
 	%ns = GetWord(%nf,0);
-
 	%np = floor(%ns / %optionsPerPage);
 	%lb = (%page * %optionsPerPage) - (%optionsPerPage-1);
 	%ub = %lb + (%optionsPerPage-1);
+
 	if(%ub > %ns)
 		%ub = %ns;
 
@@ -121,18 +122,20 @@ function MenuViewBelt(%clientId, %page, %victim)
 	{
 		%x++;
 		%type = getword(%nf,%x);
+
 		if(%type == -1)
 			break;
-		%num = getword(Belt::GetNS(%victim,%type),0);
-		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%cnt++,1) @ getDisp(%type) @ " ("@%num@")", %type@" "@%victim);
+
+		%num = getword(Belt::GetNS(%victim, %type), 0);
+		%beltTypeWeight = Belt::GetWeightByType(%clientid, %type);
+
+		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%cnt++,1) @ getDisp(%type) @ " ("@%num@" types, "@%beltTypeWeight@" wt)", %type@" "@%victim);
 	}
 
-	if(%page == 1)
-	{
+	if(%page == 1) {
 		if(%ns > %optionsPerPage) Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1);
 	}
-	else if(%page == 2)
-	{
+	else if(%page == 2) {
 		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1);
 	}
 }
@@ -142,11 +145,12 @@ function processMenuViewBelt(%clientId, %opt)
 	%o = GetWord(%opt, 0);
 	%p = GetWord(%opt, 1);
 
-	if(%o == "page")
+	if(%o == "page")	
 	{
 		MenuViewBelt(%clientId, %p);
 		return;
 	}
+
 	%victim = %p;
 	if($count[%o] > 0)
 	{
@@ -305,6 +309,9 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 	else if(%type == "WeaponItems") {
 		Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
 	}
+	else if(%type == "ArmorItems") {
+		Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
+	}
 
 	if(!$playerNoDrop[%item]){
 
@@ -331,6 +338,7 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 	%item = GetWord(%opt, 2);
 	%amnt = GetWord(%opt, 3);
 	%amnt = floor(%amnt);
+
 	if(%amnt <= 0) %amnt = 1;
 
 	%victim = GetWord(%opt, 4);
@@ -359,7 +367,12 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 	}
 	else if(%option == "equip")
 	{
-		RPGmountItem(%clientid, %item, $WeaponSlot);
+		if (%type == "WeaponItems") {
+			RPGmountItem(%clientid, %item, $WeaponSlot);
+		}
+		else if (%type == "ArmorItems") {
+			Item::onUse(%clientId, %item);
+		}
 	}
 
 	if(%option == "dropb")
@@ -1356,6 +1369,7 @@ function Belt::GetWeight(%clientid)
 	%list[2] = "GemItems";
 	%list[3] = "PotionItems";
 	%list[4] = "WeaponItems";
+	%list[5] = "ArmorItems";
 
 	for(%s=1;%list[%s] != "";%s++)
 	{
@@ -1368,6 +1382,24 @@ function Belt::GetWeight(%clientid)
 			%total += %amnt * %weig;
 		}
 	}
+
+	return fixDecimals(%total);
+}
+
+function Belt::GetWeightByType(%clientid, %type) {
+	%list[1] = "AmmoItems";
+	%list[2] = "GemItems";
+	%list[3] = "PotionItems";
+	%list[4] = "WeaponItems";
+	%list[4] = "ArmorItems";
+
+	for(%i=0; %i <= $count[%type]; %i++) {
+		%item = $beltitem[%i, "Num", %type];
+		%amnt = Belt::HasThisStuff(%clientid, %item);
+		%weig = $AccessoryVar[%item, $Weight];
+		%total += %amnt * %weig;
+	}
+	
 	return fixDecimals(%total);
 }
 
@@ -1376,7 +1408,7 @@ function Belt::DropItem(%clientid,%item,%amnt,%type)
 	%chk = Belt::HasThisStuff(%clientid,%item);
 	if(%chk >= %amnt)
 	{
-		Belt::TakeThisStuff(%clientid,%item,%amnt);
+		Belt::TakeThisStuff(%clientid, %item, %amnt);
 		TossLootbag(%clientId, %item@" "@%amnt, 8, "*", 0, 1);
 		refreshWeight(%clientId);
 	}
@@ -1447,7 +1479,7 @@ function Belt::GiveThisStuff(%clientid, %item, %amnt, %echo)
 	}
 }
 
-function Belt::TakeThisStuff(%clientid,%item,%amnt)
+function Belt::TakeThisStuff(%clientid, %item, %amnt)
 {
 	%amnt = floor(%amnt);
 	if(%amnt > 0)
@@ -1701,6 +1733,7 @@ $count["AmmoItems"] = 0;
 $count["GemItems"] = 0;
 $count["PotionItems"] = 0;
 $count["WeaponItems"] = 0;
+$count["ArmorItems"] = 0;
 $numBeltItems = 0;
 
 
@@ -1812,3 +1845,7 @@ BeltItem::Add("RepeatingCrossbow", "RepeatingCrossbow", "WeaponItems", $Accessor
 BeltItem::Add("ElvenBow", "ElvenBow", "WeaponItems", $AccessoryVar[ElvenBow, $Weight], GenerateItemCost(ElvenBow));
 BeltItem::Add("AeolusWing", "AeolusWing", "WeaponItems", $AccessoryVar[AeolusWing, $Weight], GenerateItemCost(AeolusWing));
 BeltItem::Add("HeavyCrossbow", "HeavyCrossbow", "WeaponItems", $AccessoryVar[HeavyCrossbow, $Weight], GenerateItemCost(HeavyCrossbow));
+
+// Armors
+BeltItem::Add("Padded Armor", "PaddedArmor", "ArmorItems", $AccessoryVar[PaddedArmor, $Weight], GenerateItemCost(PaddedArmor));
+BeltItem::Add("Padded Armor (worn)", "PaddedArmor0", "ArmorItems", $AccessoryVar[PaddedArmor, $Weight], GenerateItemCost(PaddedArmor));

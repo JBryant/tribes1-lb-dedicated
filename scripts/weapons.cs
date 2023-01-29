@@ -104,6 +104,7 @@ $AccessoryVar[LightQuarrel, $AccessoryType] = $ProjectileAccessoryType;
 $AccessoryVar[HeavyQuarrel, $AccessoryType] = $ProjectileAccessoryType;
 $AccessoryVar[ShortQuarrel, $AccessoryType] = $ProjectileAccessoryType;
 $AccessoryVar[CastingBlade, $AccessoryType] = $SwordAccessoryType;
+$AccessoryVar[Wand, $AccessoryType] = $SwordAccessoryType;
 $AccessoryVar[KeldriniteLS, $AccessoryType] = $SwordAccessoryType;
 $AccessoryVar[AeolusWing, $AccessoryType] = $RangedAccessoryType;
 $AccessoryVar[StoneFeather, $AccessoryType] = $ProjectileAccessoryType;
@@ -146,6 +147,7 @@ $AccessoryVar[Rapier, $SpecialVar] = "6 110";			//66 (5)
 $AccessoryVar[AwlPike, $SpecialVar] = "6 200";			//75 (8)
 //.................................................................................
 $AccessoryVar[CastingBlade, $SpecialVar] = "6 18";
+$AccessoryVar[Wand, $SpecialVar] = "6 18";
 //.................................................................................
 $AccessoryVar[Sling, $SpecialVar] = "6 11";			//11 (2)
 $AccessoryVar[ShortBow, $SpecialVar] = "6 23";			//23 (3)
@@ -220,6 +222,7 @@ $AccessoryVar[LightQuarrel, $Weight] = "0.1";
 $AccessoryVar[HeavyQuarrel, $Weight] = "0.2";
 $AccessoryVar[ShortQuarrel, $Weight] = "0.1";
 $AccessoryVar[CastingBlade, $Weight] = "0.5";
+$AccessoryVar[Wand, $Weight] = "0.5";
 $AccessoryVar[StoneFeather, $Weight] = "0.1";
 $AccessoryVar[MetalFeather, $Weight] = "0.1";
 $AccessoryVar[Talon, $Weight] = "0.2";
@@ -267,6 +270,7 @@ $AccessoryVar[LightQuarrel, $MiscInfo] = "A light quarrel";
 $AccessoryVar[HeavyQuarrel, $MiscInfo] = "A heavy quarrel";
 $AccessoryVar[ShortQuarrel, $MiscInfo] = "A heavy quarrel";
 $AccessoryVar[CastingBlade, $MiscInfo] = "Selects the best spell and casts it.  Used only for bots.";
+$AccessoryVar[Wand, $MiscInfo] = "A magical wand that can shoot spells from it on command.";
 $AccessoryVar[KeldriniteLS, $MiscInfo] = "The Keldrinite LongSword is one of the rarest and most powerful weapons in the world of Tribes RPG.";
 $AccessoryVar[AeolusWing, $MiscInfo] = "Aeolus's wing is a mystical bow with the power of wind";
 $AccessoryVar[StoneFeather, $MiscInfo] = "A feather made of stone";
@@ -320,6 +324,7 @@ $SkillType[LightQuarrel] = $SkillArchery;
 $SkillType[HeavyQuarrel] = $SkillArchery;
 $SkillType[ShortQuarrel] = $SkillArchery;
 $SkillType[CastingBlade] = $SkillPiercing;
+$SkillType[Wand] = $SkillPiercing;
 $SkillType[KeldriniteLS] = $SkillSlashing;
 $SkillType[AeolusWing] = $SkillArchery;
 $SkillType[StoneFeather] = $SkillArchery;
@@ -339,12 +344,21 @@ $WeaponRange[AeolusWing] = 400;
 $WeaponRange[HeavyCrossbow] = 500;
 $WeaponRange[RepeatingCrossbow] = 280;
 $WeaponRange[CastingBlade] = 1000;	//will swing from anywhere...BUT will be able to snipe with beam
+$WeaponRange[Wand] = 1000;
 
-$WeaponDelay[Sling] = 1.5;
+$WeaponDelay[Sling] = 1;
+$WeaponDelay[ShortBow] = 1;
+$WeaponDelay[LongBow] = 1.5;
+$WeaponDelay[ElvenBow] = 1;
+$WeaponDelay[CompositeBow] = 2;
+$WeaponDelay[LightCrossbow] = 1;
+$WeaponDelay[AeolusWing] = 1;
+$WeaponDelay[HeavyCrossbow] = 3;
+$WeaponDelay[RepeatingCrossbow] = 0.5;
 
 $ProjRestrictions[SmallRock] = ",Sling,";
 $ProjRestrictions[BasicArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,";
-$ProjRestrictions[SheafArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,";
+$ProjRestrictions[SheafArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,";		
 $ProjRestrictions[BladedArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,";
 $ProjRestrictions[LightQuarrel] = ",LightCrossbow,HeavyCrossbow,RLightCrossbow,";
 $ProjRestrictions[HeavyQuarrel] = ",LightCrossbow,HeavyCrossbow,RLightCrossbow,";
@@ -402,6 +416,7 @@ function GenerateAllWeaponCosts()
 	$ItemCost[HeavyQuarrel] = GenerateItemCost(HeavyQuarrel);
 	$ItemCost[ShortQuarrel] = GenerateItemCost(ShortQuarrel);
 	$ItemCost[CastingBlade] = 0;
+    $ItemCost[Wand] = 0;
 	$ItemCost[KeldriniteLS] = GenerateItemCost(KeldriniteLS);
 	$ItemCost[AeolusWing] = GenerateItemCost(AeolusWing);
 	$ItemCost[StoneFeather] = GenerateItemCost(StoneFeather);
@@ -434,7 +449,9 @@ function MeleeAttack(%player, %length, %weapon)
 	%clientId = Player::getClient(%player);
 	if(%clientId == "")
 		%clientId = 0;
-	if(%clientId.sleepMode > 0)		return;
+
+	if(%clientId.sleepMode > 0)
+		return;
 
 	//==== ANTI-SPAM CHECK, CAUSE FOR SPAM UNKNOWN ==========
 	//%time = getIntegerTime(true) >> 5;
@@ -442,7 +459,14 @@ function MeleeAttack(%player, %length, %weapon)
 	//	return;
 	//%clientId.lastFireTime = %time;
 	//=======================================================
-	if($WeaponDelay[%weapon] != ""){		if($justmeleed[%clientId])			return;	}	else		$WeaponDelay[%weapon] = GetDelay(%weapon);	$justmeleed[%clientId] = True;	schedule("$justmeleed["@%clientId@"]=\"\";",$WeaponDelay[%weapon]-0.11);
+	if($WeaponDelay[%weapon] != ""){
+		if($justmeleed[%clientId])
+			return;
+	}
+	else
+		$WeaponDelay[%weapon] = GetDelay(%weapon);
+	$justmeleed[%clientId] = True;
+	schedule("$justmeleed["@%clientId@"]=\"\";",$WeaponDelay[%weapon]-0.11);
 
 	$los::object = "";
 	if(GameBase::getLOSinfo(%player, %length))
@@ -471,15 +495,29 @@ function ProjectileAttack(%clientId, %weapon, %vel)
 	//	return;
 	//%clientId.lastFireTime = %time;
 	//=======================================================
-	if(%clientId.sleepMode > 0)		return;	if($WeaponDelay[%weapon] != ""){		if($justRanged[%clientId])			return;	}	else		$WeaponDelay[%weapon] = GetDelay(%weapon);	$justRanged[%clientId] = True;	schedule("$justRanged["@%clientId@"]=\"\";",$WeaponDelay[%weapon]-0.11);
-
-
-	%loadedProjectile = fetchData(%clientId, "LoadedProjectile " @ %weapon);
-	if(%loadedProjectile == ""){		if(!Player::isAiControlled(%clientId)){			processMenuselectrweapon(%clientId, %weapon);		}		return;
+	if(%clientId.sleepMode > 0)
+		return;
+	if($WeaponDelay[%weapon] != ""){
+		if($justRanged[%clientId])
+			return;
 	}
-	if(belt::hasthisstuff(%clientId, %loadedProjectile) <= 0)		return;
+	else
+		$WeaponDelay[%weapon] = GetDelay(%weapon);
 
-	%zoffset = 0.44;
+	$justRanged[%clientId] = True;
+	schedule("$justRanged["@%clientId@"]=\"\";",$WeaponDelay[%weapon]-0.11);
+	%loadedProjectile = fetchData(%clientId, "LoadedProjectile " @ %weapon);
+
+	if(%loadedProjectile == ""){
+		if(!Player::isAiControlled(%clientId)){
+			processMenuselectrweapon(%clientId, %weapon);
+		}
+		return;
+	}
+	if(belt::hasthisstuff(%clientId, %loadedProjectile) <= 0)
+		return;
+
+	%zoffset = 0.44; // 0.44
 
 	%arrow = newObject("", "Item", %loadedProjectile, 1, false);
 	%arrow.owner = %clientId;
@@ -520,7 +558,14 @@ function PickAxeSwing(%player, %length, %weapon)
 	//	return;
 	//%clientId.lastFireTime = %time;
 	//=======================================================
-	if($WeaponDelay[%weapon] != ""){		if($justmeleed[%clientId])			return;	}	else		$WeaponDelay[%weapon] = GetDelay(%weapon);	$justmeleed[%clientId] = True;	schedule("$justmeleed["@%clientId@"]=\"\";",$WeaponDelay[%weapon]-0.11);
+	if($WeaponDelay[%weapon] != ""){
+		if($justmeleed[%clientId])
+			return;
+	}
+	else
+		$WeaponDelay[%weapon] = GetDelay(%weapon);
+	$justmeleed[%clientId] = True;
+	schedule("$justmeleed["@%clientId@"]=\"\";",$WeaponDelay[%weapon]-0.11);
 
 	$los::object = "";
 	if(GameBase::getLOSinfo(%player, %length))
@@ -564,7 +609,12 @@ function PickAxeSwing(%player, %length, %weapon)
 	}
 
 	PostAttack(%clientId, %weapon);
-}function ice::hit(%client, %target){	if(%target < 1)		return;	deleteobject(%target);}
+}
+function ice::hit(%client, %target){
+	if(%target < 1)
+		return;
+	deleteobject(%target);
+}
 
 function PostAttack(%clientId, %weapon)
 {
@@ -2244,6 +2294,74 @@ function CastingBladeImage::onFire(%player, %slot)
 			MeleeAttack(%player, GetRange(Hatchet), CastingBlade);	//mimic the hatchet range
 	}
 	%hasCast = "";
+}
+
+//****************************************************************************************************
+//   WAND
+//****************************************************************************************************
+
+ItemImageData WandImage
+{
+	shapeFile  = "force"; // dagger
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Wand);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = NoSound;
+	sfxActivate = NoSound;
+};
+
+ItemData Wand
+{
+	heading = "bWeapons";
+	description = "Wand";
+	className = "Weapon";
+	shapeFile  = "force";
+	hudIcon = "dagger";
+	shadowDetailMask = 4;
+	imageType = WandImage;
+	price = 0;
+	showWeaponBar = true;
+};
+
+function WandImage::onFire(%player, %slot)
+{
+	%clientId = Player::getClient(%player);
+	if(%clientId == "")
+		%clientId = 0;
+
+	internalSay(%clientId, 0, "#cast fireball");
+
+	// %index = GetBestSpell(%clientId, 1, True);
+
+	// %length = $Spell::LOSrange[%index]-1;
+		
+	// $los::object = "";
+	// if(GameBase::getLOSinfo(%player, %length) && %index != -1)
+	// {
+	// 	%obj = getObjectType($los::object);
+	// 	if(%obj == "Player")
+	// 	{
+	// 		if(Player::isAiControlled(%clientId))
+	// 		{
+	// 			AI::newDirectiveRemove(fetchData(%clientId, "BotInfoAiName"), 99);
+	// 		}
+	// 		internalSay(%clientId, 0, "#cast " @ $Spell::keyword[%index]);
+	// 		%hasCast = True;
+	// 	}
+	// }
+	// if(!%hasCast)
+	// {
+	// 	if(OddsAre(3))
+	// 		MeleeAttack(%player, GetRange(Hatchet), CastingBlade);	//mimic the hatchet range
+	// }
+	// %hasCast = "";
 }
 
 //====== "Projectiles" ======================================================
