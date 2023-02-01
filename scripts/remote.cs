@@ -60,7 +60,8 @@ function remotePlayMode(%clientId)
 function remoteCommandMode(%clientId)
 {
 	//RPG players don't need commander mode.
-	remoteRawKey(%clientId, "c");	return;
+	remoteRawKey(%clientId, "c");
+	return;
 
 	//if(!(%clientId.adminLevel >= 1))
 	//{
@@ -152,7 +153,9 @@ function remoteUseItem(%clientId, %type)
 {
 	dbecho($dbechoMode, "remoteUseItem(" @ %clientId @ ", " @ %type @ ")");
 
-	%trueClientId = player::getclient(%clientId);	if(%trueClientId == "" || %trueClientId == -1)		%trueClientId = %clientId;
+	%trueClientId = player::getclient(%clientId);
+	if(%trueClientId == "" || %trueClientId == -1)
+		%trueClientId = %clientId;
 
 	%time = getIntegerTime(true) >> 5;
 	if(%time - %trueClientId.lastWaitActionTime > $waitActionDelay)
@@ -163,7 +166,12 @@ function remoteUseItem(%clientId, %type)
 
 		%item = getItemData(%type);
 
-		if(%item == "BeltItemTool")		{			MenuViewBelt(%trueClientId, 1);			return;		}
+
+		if(%item == "BeltItemTool")
+		{
+			MenuViewBelt(%trueClientId, 1);
+			return;
+		}
 
 		%pressedKey = -1;
 		if(%item == Backpack) 
@@ -171,10 +179,31 @@ function remoteUseItem(%clientId, %type)
 			%item = -1;
 			remoteConsider(%trueClientId);
 			return;
-		}
-		%weaponNameToKey["Blaster"] = 1;		%weaponNameToKey["PlasmaGun"] = 2;		%weaponNameToKey["Chaingun"] = 3;		%weaponNameToKey["DiscLauncher"] = 4;		%weaponNameToKey["GrenadeLauncher"] = 5;		%weaponNameToKey["LaserRifle"] = 6;		%weaponNameToKey["ElfGun"] = 7;		%weaponNameToKey["Mortar"] = 8;		%weaponNameToKey["TargetingLaser"] = 9;		%weaponNameToKey["RepairKit"] = "h";		%weaponNameToKey["Beacon"] = "b";
-		if(%weaponNameToKey[%item] != ""){			%pressedKey = %weaponNameToKey[%item];
-			if(%trueClientId.overrideKeybinds){				remoteRawOverride(%trueClientId, %pressedKey);				return;			}			if($numMessage[%trueClientId, %pressedKey] == "")				client::sendmessage(%trueClientId, 0, "#set "@%pressedKey@" [message]");			else				internalSay(%trueClientId,0,$numMessage[%trueClientId, %pressedKey]);		}
+		}
+
+		%weaponNameToKey["Blaster"] = 1;
+		%weaponNameToKey["PlasmaGun"] = 2;
+		%weaponNameToKey["Chaingun"] = 3;
+		%weaponNameToKey["DiscLauncher"] = 4;
+		%weaponNameToKey["GrenadeLauncher"] = 5;
+		%weaponNameToKey["LaserRifle"] = 6;
+		%weaponNameToKey["ElfGun"] = 7;
+		%weaponNameToKey["Mortar"] = 8;
+		%weaponNameToKey["TargetingLaser"] = 9;
+		%weaponNameToKey["RepairKit"] = "h";
+		%weaponNameToKey["Beacon"] = "b";
+
+		if(%weaponNameToKey[%item] != ""){
+			%pressedKey = %weaponNameToKey[%item];
+			if(%trueClientId.overrideKeybinds){
+				remoteRawOverride(%trueClientId, %pressedKey);
+				return;
+			}
+			if($numMessage[%trueClientId, %pressedKey] == "")
+				client::sendmessage(%trueClientId, 0, "#set "@%pressedKey@" [message]");
+			else
+				internalSay(%trueClientId,0,$numMessage[%trueClientId, %pressedKey]);
+		}
 		else
 		{
 			if (%item == Weapon) 
@@ -191,7 +220,16 @@ function remoteUseItem(%clientId, %type)
 function remoteThrowItem(%clientId,%type,%strength)
 {
 	%trueClientId = player::getclient(%clientId);
-	%item = getItemData(%type);	%pressedKey = -1;	if(%item == Grenade)		%pressedKey = "g";	else if(%item == MineAmmo)		%pressedKey = "m";	if(%pressedKey != -1){		remoteRawKey(%clientId, %pressedKey);		return;	}
+	%item = getItemData(%type);
+	%pressedKey = -1;
+	if(%item == Grenade)
+		%pressedKey = "g";
+	else if(%item == MineAmmo)
+		%pressedKey = "m";
+	if(%pressedKey != -1){
+		remoteRawKey(%clientId, %pressedKey);
+		return;
+	}
 	return;
 
 	//echo("Throw item: " @ %type @ " " @ %strength);
@@ -222,7 +260,10 @@ function remoteDropItem(%clientId,%type)
 				//echo("Drop item: ",%type);
 				%clientId.throwStrength = 1;
 	
-				%item = getItemData(%type);				if(%item == "BeltItemTool"){					return;				}
+				%item = getItemData(%type);
+				if(%item == "BeltItemTool"){
+					return;
+				}
 				if(%item == Weapon)
 				{
 					%item = Player::getMountedItem(%clientId,$WeaponSlot);
@@ -262,9 +303,43 @@ function remoteConsider(%clientId)
 {
 	dbecho($dbechoMode, "remoteConsider(" @ %clientId @ ")");
 
-
-	%object = fetchData(%clientId, "InEnterBox");		if(IsJailed(%clientId))			return;	if(%object != ""){		enterEnterBox(%clientId,%object);		return;	}
-	%inSleepZone = fetchData(%clientId, "InSleepZone");	if(%inSleepZone != ""){		if(IsDead(%clientId))			return;		if(%clientId.sleepMode == ""){			%clientId.sleepMode = 1;			Client::setControlObject(%clientId, Client::getObserverCamera(%clientId));			Observer::setOrbitObject(%clientId, Client::getOwnedObject(%clientId), 30, 30, 30);			RefreshAll(%clientId);			centerprint(%clientId, "<jc>You are asleep.\n<f2>Press T to awaken.", 10);		}		else {			%clientId.sleepMode = "";			Client::setControlObject(%clientId, %clientId);			RefreshAll(%clientId);			centerprint(%clientId, "<jc>You wake up.\nThis spot feels relaxing enough to sleep.\n<f2>Press T to sleep.", 10);		}		return;	} else {		if(%clientId.sleepMode != "")		{			%clientId.sleepMode = "";			Client::setControlObject(%clientId, %clientId);			RefreshAll(%clientId);			centerprint(%clientId, "<jc>You wake up.", 3);			return;		}	}
+
+
+	%object = fetchData(%clientId, "InEnterBox");
+		if(IsJailed(%clientId))
+			return;
+	if(%object != ""){
+		enterEnterBox(%clientId,%object);
+		return;
+	}
+	%inSleepZone = fetchData(%clientId, "InSleepZone");
+	if(%inSleepZone != ""){
+		if(IsDead(%clientId))
+			return;
+		if(%clientId.sleepMode == ""){
+			%clientId.sleepMode = 1;
+			Client::setControlObject(%clientId, Client::getObserverCamera(%clientId));
+			Observer::setOrbitObject(%clientId, Client::getOwnedObject(%clientId), 30, 30, 30);
+			RefreshAll(%clientId);
+			centerprint(%clientId, "<jc>You are asleep.\n<f2>Press T to awaken.", 10);
+		}
+		else {
+			%clientId.sleepMode = "";
+			Client::setControlObject(%clientId, %clientId);
+			RefreshAll(%clientId);
+			centerprint(%clientId, "<jc>You wake up.\nThis spot feels relaxing enough to sleep.\n<f2>Press T to sleep.", 10);
+		}
+		return;
+	} else {
+		if(%clientId.sleepMode != "")
+		{
+			%clientId.sleepMode = "";
+			Client::setControlObject(%clientId, %clientId);
+			RefreshAll(%clientId);
+			centerprint(%clientId, "<jc>You wake up.", 3);
+			return;
+		}
+	}
 
 	%msgText[7] = "Easy prey!";
 	%msgText[6] = "Shouldn't be a problem at all.";
@@ -310,7 +385,26 @@ function remoteConsider(%clientId)
 			DisplayGetInfo(%clientId, %cl, %object);
 			%sawsomething = True;
 		}
-		else if($BotInfo[%object.name, NAME] != "")		{			%clientPos = GameBase::getPosition(%clientId);			%botPos = GameBase::getPosition(%object);			%closest = Vector::getDistance(%clientPos, %botPos);			%botz = getWord(%botPos, 2);			%clz = getWord(%clientPos, 2);			newRotateTownBot(%clientId, %object, %clientPos, %botPos);			if(Client::getTeam(%clientId) != 0)				AI::sayLater(%clientId, %object, "Eek!", True);			else if(%closest <= ($maxAIdistVec + ($PlayerSkill[%clientId, $SkillSpeech] / 50))){				if(%clientId.tmpbottalk != "")					%clientId.tmpbottalk = "";				endBotTalkChoice(%clientId);				eval("bottalk::"@clipTrailingNumbers(%object.name)@"("@%clientId@","@%object@",True,\"#say considerhi\");");			}			else				AI::sayLater(%clientId, %object, "I can't hear you all the way over there!", True);			%sawsomething = True;		}
+		else if($BotInfo[%object.name, NAME] != "")
+		{
+			%clientPos = GameBase::getPosition(%clientId);
+			%botPos = GameBase::getPosition(%object);
+			%closest = Vector::getDistance(%clientPos, %botPos);
+			%botz = getWord(%botPos, 2);
+			%clz = getWord(%clientPos, 2);
+			newRotateTownBot(%clientId, %object, %clientPos, %botPos);
+			if(Client::getTeam(%clientId) != 0)
+				AI::sayLater(%clientId, %object, "Eek!", True);
+			else if(%closest <= ($maxAIdistVec + ($PlayerSkill[%clientId, $SkillSpeech] / 50))){
+				if(%clientId.tmpbottalk != "")
+					%clientId.tmpbottalk = "";
+				endBotTalkChoice(%clientId);
+				eval("bottalk::"@clipTrailingNumbers(%object.name)@"("@%clientId@","@%object@",True,\"#say considerhi\");");
+			}
+			else
+				AI::sayLater(%clientId, %object, "I can't hear you all the way over there!", True);
+			%sawsomething = True;
+		}
 		else if(%obj == "InteriorShape" && %object.tag != "" && %clientId.adminLevel >= 1)
 		{
 			Client::sendMessage(%clientId, $MsgWhite, %object @ "'s tag name: " @ %object.tag);
@@ -372,14 +466,46 @@ function remoteConsider(%clientId)
 }
 
 
-function disableOverrides(%client){	schedule::Cancel("NewBotMessage"@%client);
-	schedule::cancel("transportmenu"@%client);	if(%client.overrideKeybinds == 2){		%index = floor(%client.castingmenuindex);		EndCast(%client,False,0,%index,gamebase::getposition(%client),False);	}	%client.keyOverride = "";	%client.overrideKeybinds = "";}
-
-function remoteRawOverride(%client, %key, %mod){	if(string::getsubstr(%key, 0, 6) == "numpad" && string::len(%key) == 7)		%key = string::getsubstr(%key, 6, 1);	if(string::getsubstr(%key, 0, 1) == "f" && string::len(%key) < 4)		%key = string::getsubstr(%key, 1, 2);	if(%mod == "control")		%key += 9;	if(String::Compare(floor(%key), %key) != 0){		client::sendmessage(%client, 0, "Please press a number corresponding to your choice.");		return;	}	if(%client.keyOverride != ""){		%evalstring = %client.keyOverride@"("@%client@",\""@%key@"\");";		eval(%evalstring);	}}
+function disableOverrides(%client){
+	schedule::Cancel("NewBotMessage"@%client);
+	schedule::cancel("transportmenu"@%client);
+	if(%client.overrideKeybinds == 2){
+		%index = floor(%client.castingmenuindex);
+		EndCast(%client,False,0,%index,gamebase::getposition(%client),False);
+	}
+	%client.keyOverride = "";
+	%client.overrideKeybinds = "";
+}
 
-$redirectKey["t"] = "remoteConsider";
+
+function remoteRawOverride(%client, %key, %mod){
+	if(string::getsubstr(%key, 0, 6) == "numpad" && string::len(%key) == 7)
+		%key = string::getsubstr(%key, 6, 1);
+	if(string::getsubstr(%key, 0, 1) == "f" && string::len(%key) < 4)
+		%key = string::getsubstr(%key, 1, 2);
+	if(%mod == "control")
+		%key += 9;
+	if(String::Compare(floor(%key), %key) != 0){
+		client::sendmessage(%client, 0, "Please press a number corresponding to your choice.");
+		return;
+	}
+
+	if(%client.keyOverride != ""){
+		%evalstring = %client.keyOverride@"("@%client@",\""@%key@"\");";
+		eval(%evalstring);
+	}
+}
+
+
+$redirectKey["t"] = "remoteConsider";
 //By phantom: tribesrpg.org
-function remoteRawKey(%client, %key, %mod){	if(%mod == "") {		if($redirectKey[%key] != ""){			eval($redirectKey[%key]@"("@%client@");");			return;		}	}
+function remoteRawKey(%client, %key, %mod){
+	if(%mod == "") {
+		if($redirectKey[%key] != ""){
+			eval($redirectKey[%key]@"("@%client@");");
+			return;
+		}
+	}
 	if(%mod != "" && %mod != "control" && %mod != "alt" && %mod != "shift"){
 		Client::sendMessage(%client, 0, "Erroneous modifier key.");
 		return;
@@ -396,7 +522,11 @@ function remoteRawKey(%client, %key, %mod){	if(%mod == "") {		if($redirectKey[
 		client::sendmessage(%client, 0, "You have no character loaded yet!");
 		return;
 	}
-	if(%client.overrideKeybinds){		remoteRawOverride(%client, %key, %mod);		return;	}
+
+	if(%client.overrideKeybinds){
+		remoteRawOverride(%client, %key, %mod);
+		return;
+	}
 	if(string::getsubstr(%key, 0, 1) == "f")
 	{
 		Client::sendMessage(%client, 0, "This key ("@%key@") is not yet supported.");
@@ -430,6 +560,21 @@ function remoteRawKey(%client, %key, %mod){	if(%mod == "") {		if($redirectKey[
 	//See the current repack version's extra-controls.cs for a full list of
 	//acceptable input, and note that this could be updated in the future.
 
-}
-function refreshBattleHudPos(%clientId){	%cur = fetchData(%clientId, "battlemsg");	if(%cur == "chathud"){		remoteEval(%clientId, DisableRPGMsghud, False);		return;	}	%coords["topleft"] = "0 0";	%coords["topprint"] = "1 0";	%coords["bottomleft"] = "0 1";	%coords["bottomprint"] = "1 1";	%pos = %coords[%cur];	if(%pos == "")		%pos = "1 1";
-	remoteEval(%clientId, RPGMsgHudPos, %pos);}
+}
+
+function refreshBattleHudPos(%clientId){
+	%cur = fetchData(%clientId, "battlemsg");
+	if(%cur == "chathud"){
+		remoteEval(%clientId, DisableRPGMsghud, False);
+		return;
+	}
+	%coords["topleft"] = "0 0";
+	%coords["topprint"] = "1 0";
+	%coords["bottomleft"] = "0 1";
+	%coords["bottomprint"] = "1 1";
+	%pos = %coords[%cur];
+	if(%pos == "")
+		%pos = "1 1";
+
+	remoteEval(%clientId, RPGMsgHudPos, %pos);
+}

@@ -23,6 +23,10 @@
 //Starsiege: Tribes, including the engine, retains a proprietary license forbidding resale.
 
 
+$unknownMusic[0] = "CAP_Remembrance.wav";
+$unknownMusicTicks[0] = "60";
+$unknownMusic[1] = "CAP_Awakening.wav";
+$unknownMusicTicks[1] = "63";
 
 function InitZones()
 {
@@ -59,8 +63,13 @@ function InitZones()
 			}
 			else if(GetWord(%system, 0) == "MUSIC")
 			{
-				$Zone::Music[0, %umusiccnt++] = GetWord(%system, 1);
-				$Zone::MusicTicks[0, %umusiccnt] = GetWord(%system, 2);
+				// choose random travel music
+				//%rand = floor(getRandom() * 2);//0,1,2,3
+				//%randMusic = $unknownMusic[%rand];
+				//%randMusicTicks = $unknownMusicTicks[%rand];
+
+				//$Zone::Music[0, %umusiccnt++] = %randMusic;
+				//$Zone::MusicTicks[0, %umusiccnt] = %randMusicTicks;
 			}
 			//---------------------------------------------------------------
 			else
@@ -221,7 +230,7 @@ function UpdateZone(%object)
 					%clientId.currentMusic = floor(getRandom() * %m) + 1;
 
 					Client::sendMessage(%clientId, 0, "~w" @ $Zone::Music[%zoneflag, %clientId.currentMusic]);
-					%clientId.MusicTicksLeft = $Zone::MusicTicks[%zoneflag, %clientId.currentMusic]+2;
+					%clientId.MusicTicksLeft = $Zone::MusicTicks[%zoneflag, %clientId.currentMusic] + 15;
 				}
 			}
 			if($Zone::Type[%zoneflag] == "WATER")
@@ -271,37 +280,36 @@ function UpdateZone(%object)
 		if(fetchData(%clientId, "zone") != "")
 			Zone::DoExit(Zone::getIndex(fetchData(%clientId, "zone")), %clientId);
 	
-		//start playing the ambient sound for the unknown zone
-		//if($Zone::AmbientSound[0] != "")
-		if($Zone::Music[0, 1] != "")
-		{
-			//%m = $Zone::AmbientSoundPerc[0];
-			//%m = 9;
-			if(%m == "") %m = 100;
+		// //start playing the ambient sound for the unknown zone
+		// //if($Zone::AmbientSound[0] != "")
+		// if($Zone::Music[0, 1] != "")
+		// {
+		// 	//%m = $Zone::AmbientSoundPerc[0];
+		// 	//%m = 9;
+		// 	if(%m == "") %m = 100;
 			
-			%r = floor(getRandom() * 100)+1;
-			if(%r <= %m)
-				Client::sendMessage(%clientId, 0, "~w" @ $Zone::Music[0, 1]);
-		//		Client::sendMessage(%clientId, 0, "~w" @ $Zone::AmbientSound[0]);
-		}
+		// 	%r = floor(getRandom() * 100)+1;
+		// 	if(%r <= %m)
+		// 		Client::sendMessage(%clientId, 0, "~w" @ $Zone::Music[0, 1]);
+		// //		Client::sendMessage(%clientId, 0, "~w" @ $Zone::AmbientSound[0]);
+		// }
 	
 		//play the enter sound for the unknown zone
 		if($Zone::EnterSound[0] != "")
 			Client::sendMessage(%clientId, 0, "~w" @ $Zone::EnterSound[0]);
 
 		//play unknown zone music
-	//	if($Zone::Music[0, 1] != "")
-	//	{
-	//		if(%clientId.MusicTicksLeft < 1)
-	//		{
-	//			for(%m = 1; $Zone::Music[0, %m] != ""; %m++){}
-	//			%m--;
-	//			%clientId.currentMusic = floor(getRandom() * %m) + 1;
-	//
-	//			Client::sendMessage(%clientId, 0, "~w" @ $Zone::Music[0, %clientId.currentMusic]);
-	//			%clientId.MusicTicksLeft = $Zone::MusicTicks[0, %clientId.currentMusic]+2;
-	//		}
-	//	}
+		if(%clientId.MusicTicksLeft < 1)
+		{	
+			%rand = floor(getRandom() * 2);//0,1,2,3
+			%randTravelMusic = $unknownMusic[%rand];
+			%randMusicTicks = $unknownMusicTicks[%rand];
+			%clientId.currentMusic = %randTravelMusic;
+
+			Client::sendMessage(%clientId, 0, "~w" @ %clientId.currentMusic);
+			%clientId.MusicTicksLeft = %randMusicTicks + 30;
+		}
+
 		//-----------------------------------------------------------
 		// Apply Hail!!!!
 		//-----------------------------------------------------------
@@ -516,8 +524,16 @@ function Zone::DoEnter(%z, %clientId)
 
 	%oldZone = fetchData(%clientId, "zone");
 	%newZone = $Zone::FolderID[%z];
+	%lastZone = fetchData(%clientId, "lastZone");
 
 	storeData(%clientId, "zone", $Zone::FolderID[%z]);
+
+	// end music for new music to start, but only if it is a new zone
+	// keep the original music running if they are going in and out
+	if(%clientId.repack && %newZone != %lastZone) {
+		remoteeval(%clientId, RSound, 3);
+		%clientId.MusicTicksLeft = 0;
+	}
 
 	if($Zone::Type[%z] == "PROTECTED")
 	{
@@ -558,11 +574,12 @@ function Zone::DoExit(%z, %clientId)
 	%zoneLeft = fetchData(%clientId, "zone");
 
 	storeData(%clientId, "zone", "");
+	storeData(%clientId, "lastZone", %zoneLeft);
 
 	if($Zone::Type[%z] == "PROTECTED")
 	{
 		%msg = "You have left " @ $Zone::Desc[%z] @ ".";
-		%color = $MsgRed;
+		%color = $MsgBeige;
 	}
 	else if($Zone::Type[%z] == "DUNGEON")
 	{
@@ -579,18 +596,20 @@ function Zone::DoExit(%z, %clientId)
 		%color = $MsgBeige;
 	}
 
+	// LongBow - Allow music to finish even when leaving zone
+	// Handle turning off music when entering a new zone instead
+	// this will allow music to trail off more often when going into wilderness
+	// 	//Repack zone exit
+	// 	if(%clientId.repack) {
+	// 		remoteeval(%clientId, RSound, 3);
+	// 		%clientId.MusicTicksLeft = 0;
+	// 	}
 
-	//Repack zone exit
-	if(%clientId.repack){
-		remoteeval(%clientId,RSound,3);
-		%clientId.MusicTicksLeft = 0;
-	}
-
-	if($Zone::ExitSound[%z] != "")
-		%msg = %msg @ "~w" @ $Zone::ExitSound[%z];
+	// 	if($Zone::ExitSound[%z] != "")
+	// 		%msg = %msg @ "~w" @ $Zone::ExitSound[%z];
 
 	if(%msg != "")
-	      Client::sendMessage(%clientId, %color, %msg);
+		Client::sendMessage(%clientId, %color, %msg);
 
 	if(!Player::isAiControlled(%clientId))
 		Game::refreshClientScore(%clientId);	//this is so players can see which zone this client is in

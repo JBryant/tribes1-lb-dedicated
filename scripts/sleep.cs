@@ -47,12 +47,41 @@ function GroupTrigger::onTrigEnter(%object, %this)
 		{
 			storeData(%clientId, "InSleepZone", %object);
 			//Trigger delay isn't needed anymore since centerprint spam doesn't matter
-			if(%clientId.sleepMode == "")				centerprint(%clientId, "<jc>This spot feels relaxing enough to sleep.\n <f2>Press T to sleep.", 10);			else				centerprint(%clientId, "<jc>You are asleep.\n<f2>Press T to awaken.", 10);
+			if(%clientId.sleepMode == "")
+				centerprint(%clientId, "<jc>This spot feels relaxing enough to sleep.\n <f2>Press T to sleep.", 10);
+			else
+				centerprint(%clientId, "<jc>You are asleep.\n<f2>Press T to awaken.", 10);
 		}
 	}
 	else if(String::ICompare(Object::getName(getGroup(getGroup(%object))), "EnterBoxes") == 0)
 	{
-		%need = %object.need;		%esay = %object.esay;		%nsay = %object.nsay;			storeData(%clientId, "InEnterBox", %object);			%h = HasThisStuff(%clientId, %need);			if(%h != 667 && %h != 666 && %h != False)			{				centerprint(%clientId, "<jc><f1>"@%esay, 8);			}			else			{				for(%i = 0; GetWord(%need, %i) != -1; %i+=2)				{					%w = GetWord(%need, %i);					%w2 = GetWord(%need, %i+1);					if(%w == "LVLM"){						%lvlm = %w2;						break;					}				}				%lvlm++;				%lvlm = %lvlm - (fetchData(%clientId,"RemortStep") * 2);				%nsay = String::replace(%nsay, "<lvlm>", %lvlm);				centerprint(%clientId, "<jc><f0>"@%nsay, 8);			}	}
+		%need = %object.need;
+		%esay = %object.esay;
+		%nsay = %object.nsay;
+			storeData(%clientId, "InEnterBox", %object);
+
+			%h = HasThisStuff(%clientId, %need);
+			if(%h != 667 && %h != 666 && %h != False)
+			{
+				centerprint(%clientId, "<jc><f1>"@%esay, 8);
+			}
+			else
+			{
+				for(%i = 0; GetWord(%need, %i) != -1; %i+=2)
+				{
+					%w = GetWord(%need, %i);
+					%w2 = GetWord(%need, %i+1);
+					if(%w == "LVLM"){
+						%lvlm = %w2;
+						break;
+					}
+				}
+				%lvlm++;
+				%lvlm = %lvlm - (fetchData(%clientId,"RemortStep") * 2);
+				%nsay = String::replace(%nsay, "<lvlm>", %lvlm);
+				centerprint(%clientId, "<jc><f0>"@%nsay, 8);
+			}
+	}
 	else if(String::ICompare(Object::getName(getGroup(getGroup(getGroup(%object)))), "TeleportBoxes") == 0)
 	{
 		//echo("entered teleporter box");
@@ -105,8 +134,16 @@ function GroupTrigger::onTrigLeave(%object, %this)
 
 	if(fetchData(%clientId, "InSleepZone") != "")
 	{
-		storeData(%clientId, "InSleepZone", "");		if(%clientId.sleepMode == "")			centerprint(%clientId, "<jc>You have left the sleeping area.", 4);		else			centerprint(%clientId, "<jc>You have left the sleeping area.\n<f2>Press T to awaken.", 10);
-	}	if(fetchData(%clientId, "InEnterBox") != ""){		storeData(%clientId, "InEnterBox", "");		centerprint(%clientId, "", 1);	}
+		storeData(%clientId, "InSleepZone", "");
+		if(%clientId.sleepMode == "")
+			centerprint(%clientId, "<jc>You have left the sleeping area.", 4);
+		else
+			centerprint(%clientId, "<jc>You have left the sleeping area.\n<f2>Press T to awaken.", 10);
+	}
+	if(fetchData(%clientId, "InEnterBox") != ""){
+		storeData(%clientId, "InEnterBox", "");
+		centerprint(%clientId, "", 1);
+	}
 	
 //	if(String::ICompare(Object::getName(getGroup(getGroup(getGroup(%object)))), "TeleportBoxes") == 0)
 //	{
@@ -196,5 +233,29 @@ function DoCampSetup(%clientId, %step, %pos)
 	}
 }
 
-function enterEnterBox(%clientId,%object){	%need = %object.need;	%take = %object.take;	%nsay = %object.nsay;	%gsay = %object.gsay;	%h = HasThisStuff(%clientId, %need);	if(%h != 667 && %h != 666 && %h != False)	{
-		TakeThisStuff(%clientId, %take);		%landingPos = %object.landingPos;		Item::setVelocity(%clientId, "0 0 0");		GameBase::setPosition(%clientId, %landingPos);		if(!fetchData(%clientId, "invisible"))			GameBase::startFadeIn(%clientId);				RefreshAll(%clientId);				schedule("Client::sendMessage(" @ %clientId @ ", $MsgBeige, \"" @ %gsay @ "\");", 0.22);	}	else		Client::sendMessage(%clientId, $MsgRed, %nsay);}
+function enterEnterBox(%clientId, %object) {
+	%need = %object.need;
+	%take = %object.take;
+	%nsay = %object.nsay;
+	%gsay = %object.gsay;
+
+	%h = HasThisStuff(%clientId, %need);
+	if(%h != 667 && %h != 666 && %h != False)
+	{
+		TakeThisStuff(%clientId, %take);
+		%landingPos = %object.landingPos;
+
+		Item::setVelocity(%clientId, "0 0 0");
+		GameBase::setPosition(%clientId, %landingPos);
+
+		if(!fetchData(%clientId, "invisible"))
+			GameBase::startFadeIn(%clientId);
+		
+		RefreshAll(%clientId);
+		
+		Client::sendMessage(%clientId, 0, "~wclosedoor.wav");
+		schedule("Client::sendMessage(" @ %clientId @ ", $MsgBeige, \"" @ %gsay @ "\");", 0.22);
+	}
+	else
+		Client::sendMessage(%clientId, $MsgRed, %nsay);
+}

@@ -776,33 +776,33 @@ instant SimGroup "MissionGroup" {
 		};
 	};
 	instant SimGroup "Zones" {
-		instant SimGroup "PROTECTED Keldrin Town" {
-			instant SimGroup "MUSIC KeldrinTown.wav 55";
-			instant SimGroup "MUSIC keldrinmusic2.wav 28";
+		instant SimGroup "PROTECTED Kalm" {
+			instant SimGroup "MUSIC fftown.wav 55";
+			instant SimGroup "MUSIC gelid.wav 28";
 			instant SimGroup "ENTERSOUND object_harp.wav";
 			instant SimGroup "DropPoints" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2730.75 -281.125 219.125";
+					position = "2001.94 498.4 2405.5";
 					rotation = "0 -0 0.719863";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2732 -286.25 219.125";
+					position = "2005.41 49454 2405.5";
 					rotation = "0 -0 0.719863";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2733.75 -282.625 219.125";
+					position = "2003.8 496.443 2405.5";
 					rotation = "0 -0 0.719863";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2735.25 -280.375 219.125";
+					position = "1997.91 502.974 2405.5";
 					rotation = "0 -0 0.719863";
 				};
 			};
@@ -817,6 +817,7 @@ instant SimGroup "MissionGroup" {
 		instant SimGroup "DUNGEON Keldrin Mine" {
 			instant SimGroup "MUSIC minemusic.wav 24";
 			instant SimGroup "MUSIC minemusic2.wav 24";
+			instant SimGroup "ENTERSOUND enterdungeon.wav";
 			instant SimGroup "DropPoints" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
@@ -916,7 +917,8 @@ instant SimGroup "MissionGroup" {
 					rotation = "0 0 0";
 				};
 			};
-			instant SimGroup "MUSIC cryptmusic2.wav 18";
+			instant SimGroup "MUSIC cryptmusic.wav 25";
+			instant SimGroup "ENTERSOUND enterdungeon.wav";
 			instant Marker "80 80 35 0" {
 				dataBlock = "PathMarker";
 				name = "";
@@ -952,6 +954,7 @@ instant SimGroup "MissionGroup" {
 				};
 			};
 			instant SimGroup "MUSIC yolandamusic2.wav 21";
+			instant SimGroup "ENTERSOUND enterdungeon.wav";
 			instant Marker "120 120 100 0" {
 				dataBlock = "PathMarker";
 				name = "";
@@ -1061,6 +1064,7 @@ instant SimGroup "MissionGroup" {
 				};
 			};
 			instant SimGroup "MUSIC travmusic2.wav 30";
+			instant SimGroup "ENTERSOUND enterdungeon.wav";
 			instant Marker "300 300 300 0" {
 				dataBlock = "PathMarker";
 				name = "";
@@ -1133,6 +1137,7 @@ instant SimGroup "MissionGroup" {
 				};
 			};
 			instant SimGroup "MUSIC elvenmusic2.wav 27";
+			instant SimGroup "ENTERSOUND enterdungeon.wav";
 			instant Marker "310 420 800 0" {
 				dataBlock = "PathMarker";
 				name = "";
@@ -1168,6 +1173,7 @@ instant SimGroup "MissionGroup" {
 				};
 			};
 			instant SimGroup "MUSIC ubermusic.wav 21";
+			instant SimGroup "ENTERSOUND enterdungeon.wav";
 			instant Marker "250 600 50 0" {
 				dataBlock = "PathMarker";
 				name = "";
@@ -1210,7 +1216,7 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 0 0";
 			};
 		};
-		instant SimGroup "PROTECTED A House" {
+		instant SimGroup "PROTECTED Kalm Inn" {
 			instant SimGroup "MUSIC CAP_Alchemist.wav 78";
 			instant SimGroup "DropPoints" {
 				instant Marker "Marker1" {
@@ -2226,7 +2232,7 @@ instant SimGroup "MissionGroup" {
 				esay = "Press T to enter Theora's house.";
 			};
 		};
-		instant SimGroup "ktown house 1ex" {
+		instant SimGroup "kalm house 1ex" {
 			instant Trigger "GroupTrigger1" {
 				dataBlock = "GroupTrigger";
 				name = "";
@@ -2235,7 +2241,7 @@ instant SimGroup "MissionGroup" {
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
 				landingPos = "-2395 -253 65";
-				esay = "Press T to return to Keldrin Town.";
+				esay = "Press T to return to Kalm.";
 			};
 		};
 		instant SimGroup "hfs1 en" {
@@ -2263,7 +2269,7 @@ instant SimGroup "MissionGroup" {
 				esay = "Press T to exit this house.";
 			};
 		};
-		instant SimGroup "ktown inn ente" {
+		instant SimGroup "kalm inn ente" {
 			instant Trigger "GroupTrigger1" {
 				dataBlock = "GroupTrigger";
 				name = "";
@@ -2276,7 +2282,7 @@ instant SimGroup "MissionGroup" {
 				esay = "Press T to enter this inn.";
 			};
 		};
-		instant SimGroup "ktown inn exit" {
+		instant SimGroup "kalm inn exit" {
 			instant Trigger "GroupTrigger1" {
 				dataBlock = "GroupTrigger";
 				name = "";
@@ -2286,7 +2292,7 @@ instant SimGroup "MissionGroup" {
 				isSphere = "True";
 				landingPos = "-2362 -281.75 65";
 				need = "AI false";
-				esay = "Press T to go to Keldrin Town.";
+				esay = "Press T to go to Kalm.";
 			};
 		};
 	};
@@ -3061,7 +3067,7 @@ instant SimGroup "MissionGroup" {
 	};
 	instant SimGroup "TownBots" {
 		instant SimGroup "merchant1" {
-			instant Marker "keldrin merchant" {
+			instant Marker "kalm merchant" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "-2403.5 -296.25 65.0934";
@@ -3095,7 +3101,7 @@ instant SimGroup "MissionGroup" {
 			};
 		};
 		instant SimGroup "banker1" {
-			instant Marker "keldrin banker" {
+			instant Marker "kalm banker" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "-2410.75 -302.18 65.0934";
@@ -3274,7 +3280,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "SIMGROUP GroupBotMaker1";
 		};
 		instant SimGroup "blacksmith1" {
-			instant Marker "keldrin blacksmith" {
+			instant Marker "kalm blacksmith" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "-2393 -283.125 65.0934";

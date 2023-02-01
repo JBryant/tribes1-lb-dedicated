@@ -679,7 +679,7 @@ function Game::refreshClientScore(%clientId)
 
 	%z = Zone::getDesc(fetchData(%clientId, "zone"));
 	if(%z == -1)
-		%z = "unknown";
+		%z = "Wilderness";
 
 	if($displayPingAndPL)
 		Client::setScore(%clientId, "%n\t" @ %z @ "\t  " @ fetchData(%clientId, "LVL") @ "\t%p\t%l", fetchData(%clientId, "LVL"));
