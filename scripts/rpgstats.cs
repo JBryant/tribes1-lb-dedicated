@@ -109,6 +109,7 @@ function fetchData(%clientId, %type)
 	}
 	else if(%type == "MaxWeight")
 	{
+		// TODO: Add bonus here for spells/items that make you lighter
 		%a = 50 + $PlayerSkill[%clientId, $SkillWeightCapacity];
 		//%b = AddPoints(%clientId, 9);
 		%c = AddBonusStatePoints(%clientId, "MaxWeight");
@@ -189,7 +190,16 @@ function remotefetchData(%clientId, %type)
 	{
 		return;
 		%data = SpellCanCastNow(%clientId, %s);
-	}	else if(GetWord(%type, 0) == "itemcount" && (%s = GetWord(%type, 1)) != -1)	{		if(isBeltItem(%s))			%data = belt::hasthisstuff(%clientId, %s);		else if(%s.description != False)			%data = player::getitemcount(%clientId, %s);		else			%data = -1;	}
+	}
+	else if(GetWord(%type, 0) == "itemcount" && (%s = GetWord(%type, 1)) != -1)
+	{
+		if(isBeltItem(%s))
+			%data = belt::hasthisstuff(%clientId, %s);
+		else if(%s.description != False)
+			%data = player::getitemcount(%clientId, %s);
+		else
+			%data = -1;
+	}
 	else if(%type == "RACE" || %type == "CLASS" || %type == "EXP" || %type == "LCK" || %type == "COINS" || %type == "MANA" || %type == "RemortStep" || %type == "bounty" || %type == "RankPoints" || %type == "MyHouse" || %type == "HP" || %type == "MaxHP" || %type == "BANK" || %type == "DEF" || %type == "MDEF" || %type == "SPcredits" || %type == "isMimic" || %type == "ATK" || %type == "MaxMANA" || %type == "MaxWeight" || %type == "LCKconsequence" || %type == "Weight" || %type == "LVL" || %type == "grouplist")
 		%data = fetchData(%clientId, %type);
 	else
@@ -400,7 +410,9 @@ function processMenupickclass(%clientId, %opt)
 	}
 
 	//let the player enter the world
-	%clientId.choosingClass = "";	storeData(%clientId, "tmphp", fetchData(%clientId, "MaxHP"));	storeData(%clientId, "tmpmana", fetchData(%clientId, "MaxMANA"));
+	%clientId.choosingClass = "";
+	storeData(%clientId, "tmphp", fetchData(%clientId, "MaxHP"));
+	storeData(%clientId, "tmpmana", fetchData(%clientId, "MaxMANA"));
 	Game::playerSpawn(%clientId, false);
 
 	//######### set a few start-up variables ########

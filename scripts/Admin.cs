@@ -479,12 +479,12 @@ function processMenuOptions(%clientId, %option)
 
 		if(fetchData(%clientId, "MyHouse") != "")
 		{
-			%a[%tmp++] = "Rank Pts: " @ fetchData(%clientId, "RankPoints") @ "\n";
 			%a[%tmp++] = "House: " @ fetchData(%clientId, "MyHouse") @ "\n";
 		}
+		%a[%tmp++] = "Rank Pts: " @ fetchData(%clientId, "RankPoints") @ "\n";
 
 		%a[%tmp++] = "Experience: " @ fetchData(%clientId, "EXP") @ "\n";
-            %a[%tmp++] = "Exp needed: " @ (GetExp(GetLevel(fetchData(%clientId, "EXP"), %clientId)+1, %clientId) - fetchData(%clientId, "EXP") @ "\n\n");
+        %a[%tmp++] = "Exp needed: " @ (GetExp(GetLevel(fetchData(%clientId, "EXP"), %clientId)+1, %clientId) - fetchData(%clientId, "EXP") @ "\n\n");
 
 		%a[%tmp++] = "Coins: " @ fetchData(%clientId, "COINS") @ " - Bank: " @ fetchData(%clientId, "BANK") @ "\n";
 		%a[%tmp++] = "TOTAL $: " @ fetchData(%clientId, "COINS") + fetchData(%clientId, "BANK") @ "\n\n";

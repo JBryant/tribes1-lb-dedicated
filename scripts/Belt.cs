@@ -175,9 +175,9 @@ function MenuBeltGear(%clientid, %type, %page, %victim)
 	%victim = confirmVictim(%clientId, %victim);
 	if(%victim == -1)
 		return;
+
 	if(%victim != %clientId)
 		%victimName = rpg::getname(%victim);
-
 
 	%title = getDisp(%type);
 	if(%victimName != "")
@@ -196,32 +196,31 @@ function MenuBeltGear(%clientid, %type, %page, %victim)
 	%np = floor(%ns / %optionsPerPage);
 	%lb = (%page * %optionsPerPage) - (%optionsPerPage-1);
 	%ub = %lb + (%optionsPerPage-1);
+
 	if(%ub > %ns)
 		%ub = %ns;
 
 	%x = %lb - 1;
 	%cnt = -1;
-	for(%i = %lb; %i <= %ub; %i++)
-	{
+	for(%i = %lb; %i <= %ub; %i++) {
 		%x++;
 		%item = getword(%nf,%x);
 		%amnt = Belt::HasThisStuff(%victim,%item);
 		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%cnt++,1) @%amnt@" "@ $beltitem[%item, "Name"], %item @ " " @ %page @" "@%type@" "@%victim);
 	}
-	if(%page == 1)
-	{
+
+	if(%page == 1) {
 		if(%ns > %optionsPerPage) Client::addMenuItem(%victim, "]Next >>", "page " @ %page+1 @" "@%type@" "@%victim);
 		Client::addMenuItem(%clientId, "z<< Back", "back");
 	}
-	else if(%page == %np+1)
-	{
+	else if(%page == %np+1) {
 		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1 @" "@%type@" "@%victim);
 	}
-	else
-	{
+	else {
 		Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1 @" "@%type@" "@%victim);
 		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1 @" "@%type@" "@%victim);
 	}
+
 	return;
 }
 
@@ -396,14 +395,21 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 	}
 	else if(%option == "drop")
 	{
-		%cmnt = belt::hasthisstuff(%clientId,%item);
+		%cmnt = belt::hasthisstuff(%clientId, %item);
+
 		if(%amnt > %cmnt)
 			return;
-		if($playerNoDrop[%item])
-		{
+
+		if($playerNoDrop[%item]) {
 			Client::sendMessage(%clientId, $MsgWhite, "Sorry. Can't drop that. Reasons.");
 			return;
 		}
+
+		if (%type == "ArmorItems" && %item.className == Equipped) {
+			Client::sendMessage(%clientId, $MsgWhite, "You cannot drop equipped items.");
+			return;
+		}
+
 		Belt::DropItem(%clientid,%item,%amnt,%type);
 
 		if(belt::hasthisstuff(%clientId, %item) > 0)
@@ -1387,12 +1393,6 @@ function Belt::GetWeight(%clientid)
 }
 
 function Belt::GetWeightByType(%clientid, %type) {
-	%list[1] = "AmmoItems";
-	%list[2] = "GemItems";
-	%list[3] = "PotionItems";
-	%list[4] = "WeaponItems";
-	%list[4] = "ArmorItems";
-
 	for(%i=0; %i <= $count[%type]; %i++) {
 		%item = $beltitem[%i, "Num", %type];
 		%amnt = Belt::HasThisStuff(%clientid, %item);
@@ -1414,14 +1414,15 @@ function Belt::DropItem(%clientid,%item,%amnt,%type)
 	}
 }
 
-function Belt::GetNS(%clientid,%type)
+function Belt::GetNS(%clientid, %type)
 {
 	%bn = 0;
 	%num = $count[%type];
 	for(%i;%i<=%num;%i++)
 	{
 		%item = $beltitem[%i, "Num", %type];
-		%amnt = Belt::HasThisStuff(%clientid,%item);
+		%amnt = Belt::HasThisStuff(%clientid, %item);
+
 		if(%amnt > 0) {
 			%list = %list @" "@%item;
 			%bn++;
@@ -1474,7 +1475,8 @@ function Belt::GiveThisStuff(%clientid, %item, %amnt, %echo)
 		}
 
 		%list = Belt::AddToList(%list, %item@" "@%amnt);
-		Storedata(%clientid,%type,%list);
+		echo(%list);
+		Storedata(%clientid, %type, %list);
 		refreshWeight(%clientId);
 	}
 }

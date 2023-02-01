@@ -22,8 +22,6 @@
 //This GPL does not apply to Starsiege: Tribes or any non-RPG related files included.
 //Starsiege: Tribes, including the engine, retains a proprietary license forbidding resale.
 
-
-
 $Server::teamName[0] = "Citizen";
 $Server::teamSkin[0] = "rpgbase";
 $Server::teamName[1] = "Enemy";
@@ -104,6 +102,13 @@ $NameForRace[Reaper] = "Minotaur";
 $NameForRace[Sloth] = "Uber";
 $NameForRace[Gohort] = "Uber";
 
+$NameForRace[Acolyte] = "Cultist";
+$NameForRace[Doomsayer] = "Cultist";
+
+//----- dynamic skins for races
+$SkinForRace[Acolyte] = "robeblack";
+$SkinForRace[Doomsayer] = "RMSkins3";
+
 //------------------------------
 
 $ArmorTypeToRace[TravellerArmor] = "Traveller";
@@ -118,6 +123,7 @@ $ArmorTypeToRace[MinotaurArmor] = "Minotaur";
 $ArmorTypeToRace[UberArmor] = "Uber";
 $ArmorTypeToRace[ZombieArmor] = "Zombie";
 $ArmorTypeToRace[DemonArmor] = "Demon";
+$ArmorTypeToRace[CultistArmor] = "Cultist";
 
 $RaceToArmorType[Goblin] = "GoblinArmor";
 $RaceToArmorType[Gnoll] = "GnollArmor";
@@ -131,6 +137,7 @@ $RaceToArmorType[Minotaur] = "MinotaurArmor";
 $RaceToArmorType[Uber] = "UberArmor";
 $RaceToArmorType[Zombie] = "ZombieArmor";
 $RaceToArmorType[Demon] = "DemonArmor";
+$RaceToArmorType[Cultist] = "CultistArmor";
 
 //------------------------------
 
@@ -196,7 +203,11 @@ $spawnIndex[50] = "Gohort";
 
 $spawnIndex[51] = "Conjurer";
 $spawnIndex[52] = "Magi";
+
 $spawnIndex[53] = "Spawn";
+
+$spawnIndex[54] = "Acolyte";
+$spawnIndex[55] = "Doomsayer";
 
 //------------------------------
 
@@ -252,6 +263,9 @@ $BotEquipment[Reaper] = 	"CLASS Mage LVL 174/50 COINS 105/50 LCK 2 CastingBlade 
 $BotEquipment[Sloth] = 		"CLASS Paladin LVL 317/50 COINS 115/50 LCK 3 RLongSword 1 DragonScale 1/-3000 Gold 1/-1000";
 $BotEquipment[Gohort] = 	"CLASS Mage LVL 527/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000";
 
+$BotEquipment[Acolyte] = 	"CLASS Paladin LVL 817/50 COINS 115/50 LCK 3 RLongSword 1 DragonScale 1/-3000 Gold 1/-1000";
+$BotEquipment[Doomsayer] = 	"CLASS Mage LVL 1027/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000";
+
 //------------------------------
 
 $TeamForRace[Traveller] = 1;
@@ -266,6 +280,7 @@ $TeamForRace[Minotaur] = 6;
 $TeamForRace[Uber] = 7;
 $TeamForRace[Zombie] = 4;
 $TeamForRace[Demon] = 4;
+$TeamForRace[Cultist] = 1;
 
 //------------------------------
 
@@ -358,6 +373,14 @@ $RaceSound[Demon, Hit, 1] = SoundUndeadHit1;
 $RaceSound[Demon, Hit, 2] = SoundUndeadHit2;
 $RaceSound[Demon, Taunt, 1] = SoundUndeadTaunt1;
 $RaceSound[Demon, RandomWait, 1] = SoundUndeadRandom1;
+
+$RaceSound[Cultist, Death, 1] = SoundTravellerDeath1;
+$RaceSound[Cultist, Acquired, 1] = SoundTravellerAcquired1;
+$RaceSound[Cultist, Acquired, 2] = SoundTravellerAcquired2;
+$RaceSound[Cultist, Acquired, 3] = SoundTravellerAcquired3;
+$RaceSound[Cultist, Hit, 1] = SoundTravellerHit1;
+$RaceSound[Cultist, Hit, 2] = SoundTravellerHit2;
+$RaceSound[Cultist, Hit, 3] = SoundTravellerHit3;
 
 //------------------------------------------------------------------
 // Traveller armor data:	(light)
@@ -2356,6 +2379,174 @@ PlayerData DemonArmor
 
 	boxNormalHeadPercentage  = 0.83;
 	boxNormalTorsoPercentage = 0.49;
+
+	boxHeadLeftPercentage  = 0;
+	boxHeadRightPercentage = 1;
+	boxHeadBackPercentage  = 0;
+	boxHeadFrontPercentage = 1;
+};
+
+//------------------------------------------------------------------
+// Cultist armor data:	(light)
+//------------------------------------------------------------------
+
+PlayerData CultistArmor
+{
+	className = "Armor";
+	shapeFile = "rpgmalehuman";
+	damageSkinData = "armorDamageSkins";
+	debrisId = playerDebris;
+	flameShapeName = "lflame";
+	shieldShapeName = "shield";
+	shadowDetailMask = 1;
+
+	visibleToSensor = True;
+	mapFilter = 1;
+	mapIcon = "M_player";
+	canCrouch = false;
+
+	maxJetSideForceFactor = 1;
+	maxJetForwardVelocity = 1.0;
+	minJetEnergy = 60;
+	jetForce = 1;
+	jetEnergyDrain = 0.0;
+
+	maxDamage = 1.0;
+	maxForwardSpeed = $spdmed;
+	maxBackwardSpeed = $spdmed * 0.8;
+	maxSideSpeed = $spdmed * 0.75;
+
+	groundForce = 75 * 9.0;
+	mass = 9.0;
+	groundTraction = 3.0;
+	maxEnergy = 60;
+	drag = 1.0;
+	density = 1.2;
+
+	minDamageSpeed = 16;
+	damageScale = $damageScale;
+
+	jumpImpulse = 75;
+	jumpSurfaceMinDot = $jumpSurfaceMinDot;
+
+	// animation data:
+	// animation name, one shot, direction, firstPerson, chaseCam, thirdPerson, signalThread
+	// movement animations:
+	animData[0]  = { "root", none, 1, true, true, true, false, 0 };
+	animData[1]  = { "run", none, 1, true, false, true, false, 3 };
+	animData[2]  = { "runback", none, 1, true, false, true, false, 3 };
+	animData[3]  = { "side left", none, 1, true, false, true, false, 3 };
+	animData[4]  = { "side left", none, -1, true, false, true, false, 3 };
+	animData[5] = { "jump stand", none, 1, true, false, true, false, 3 };
+	animData[6] = { "jump run", none, 1, true, false, true, false, 3 };
+	animData[7] = { "crouch root", none, 1, true, true, true, false, 3 };
+	animData[8] = { "crouch root", none, 1, true, true, true, false, 3 };
+	animData[9] = { "crouch root", none, -1, true, true, true, false, 3 };
+	animData[10] = { "crouch forward", none, 1, true, false, true, false, 3 };
+	animData[11] = { "crouch forward", none, -1, true, false, true, false, 3 };
+	animData[12] = { "crouch side left", none, 1, true, false, true, false, 3 };
+	animData[13] = { "crouch side left", none, -1, true, false, true, false, 3 };
+	animData[14]  = { "fall", none, 1, true, true, true, false, 3 };
+	animData[15]  = { "landing", SoundLandOnGround, 1, true, false, false, false, 3 };
+	animData[16]  = { "landing", SoundLandOnGround, 1, true, false, false, false, 3 };
+	animData[17]  = { "tumble loop", none, 1, true, false, false, false, 3 };
+	animData[18]  = { "tumble end", none, 1, true, false, false, false, 3 };
+	animData[19] = { "jet", none, 1, true, true, true, false, 3 };
+
+	// misc. animations:
+	animData[20] = { "die back", none, 1, true, false, false, false, 0 };
+	animData[21] = { "throw", none, 1, true, false, false, false, 3 };
+	animData[22] = { "flyer root", none, 1, false, false, false, false, 3 };
+	animData[23] = { "apc root", none, 1, true, true, true, false, 3 };
+	animData[24] = { "apc pilot", none, 1, false, false, false, false, 3 };
+   
+	// death animations:
+	animData[25] = { "crouch die", none, 1, false, false, false, false, 4 };
+	animData[26] = { "die chest", none, 1, false, false, false, false, 4 };
+	animData[27] = { "die head", none, 1, false, false, false, false, 4 };
+	animData[28] = { "die grab back", none, 1, false, false, false, false, 4 };
+	animData[29] = { "die right side", none, 1, false, false, false, false, 4 };
+	animData[30] = { "die left side", none, 1, false, false, false, false, 4 };
+	animData[31] = { "die leg left", none, 1, false, false, false, false, 4 };
+	animData[32] = { "die leg right", none, 1, false, false, false, false, 4 };
+	animData[33] = { "die blown back", none, 1, false, false, false, false, 4 };
+	animData[34] = { "die spin", none, 1, false, false, false, false, 4 };
+	animData[35] = { "die forward", none, 1, false, false, false, false, 4 };
+	animData[36] = { "die forward kneel", none, 1, false, false, false, false, 4 };
+	animData[37] = { "die back", none, 1, false, false, false, false, 4 };
+
+	// signal moves:
+	animData[38] = { "sign over here",  none, 1, true, false, false, false, 2 };
+	animData[39] = { "sign point", none, 1, true, false, false, false, 1 };
+	animData[40] = { "sign retreat",none, 1, true, false, false, false, 2 };
+	animData[41] = { "sign stop", none, 1, true, false, false, true, 1 };
+	animData[42] = { "sign salut", none, 1, true, false, false, true, 1 }; 
+
+	// celebration animations:
+	animData[43] = { "celebration 1",none, 1, true, false, false, false, 2 };
+	animData[44] = { "celebration 2", none, 1, true, false, false, false, 2 };
+	animData[45] = { "celebration 3", none, 1, true, false, false, false, 2 };
+ 
+	// taunt animations:
+	animData[46] = { "taunt 1", none, 1, true, false, false, false, 2 };
+	animData[47] = { "taunt 2", none, 1, true, false, false, false, 2 };
+ 
+	// poses:
+	animData[48] = { "pose kneel", none, 1, true, false, false, true, 1 };
+	animData[49] = { "pose stand", none, 1, true, false, false, true, 1 };
+
+	// Bonus wave
+	animData[50] = { "wave", none, 1, true, false, false, true, 1 };
+
+	jetSound = NoSound;
+	rFootSounds = 
+	{
+		SoundLFootRSoft,
+		SoundLFootRHard,
+		SoundLFootRSoft,
+		SoundLFootRHard,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRHard,
+		SoundLFootRSnow,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRSoft
+	}; 
+	lFootSounds =
+	{
+		SoundLFootLSoft,
+		SoundLFootLHard,
+		SoundLFootLSoft,
+		SoundLFootLHard,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLHard,
+		SoundLFootLSnow,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLSoft
+	};
+
+	footPrints = { 0, 1 };
+
+	boxWidth = 0.5;
+	boxDepth = 0.5;
+	boxNormalHeight = 2.3;
+	boxCrouchHeight = 1.8;
+
+	boxNormalHeadPercentage  = 0.83;
+	boxNormalTorsoPercentage = 0.53;
+	boxCrouchHeadPercentage  = 0.6666;
+	boxCrouchTorsoPercentage = 0.3333;
 
 	boxHeadLeftPercentage  = 0;
 	boxHeadRightPercentage = 1;

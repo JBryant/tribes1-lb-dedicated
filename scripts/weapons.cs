@@ -104,7 +104,6 @@ $AccessoryVar[LightQuarrel, $AccessoryType] = $ProjectileAccessoryType;
 $AccessoryVar[HeavyQuarrel, $AccessoryType] = $ProjectileAccessoryType;
 $AccessoryVar[ShortQuarrel, $AccessoryType] = $ProjectileAccessoryType;
 $AccessoryVar[CastingBlade, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[Wand, $AccessoryType] = $SwordAccessoryType;
 $AccessoryVar[KeldriniteLS, $AccessoryType] = $SwordAccessoryType;
 $AccessoryVar[AeolusWing, $AccessoryType] = $RangedAccessoryType;
 $AccessoryVar[StoneFeather, $AccessoryType] = $ProjectileAccessoryType;
@@ -113,6 +112,10 @@ $AccessoryVar[Talon, $AccessoryType] = $ProjectileAccessoryType;
 $AccessoryVar[CeraphumsFeather, $AccessoryType] = $ProjectileAccessoryType;
 $AccessoryVar[BoneClub, $AccessoryType] = $BludgeonAccessoryType;
 $AccessoryVar[SpikedBoneClub, $AccessoryType] = $BludgeonAccessoryType;
+// New Weapons
+$AccessoryVar[Wand, $AccessoryType] = $SwordAccessoryType;
+$AccessoryVar[Tester, $AccessoryType] = $SwordAccessoryType;
+$AccessoryVar[TesterBow, $AccessoryType] = $ProjectileAccessoryType;
 
 $AccessoryVar[Hatchet, $SpecialVar] = "6 20";			//12 (5)
 $AccessoryVar[BroadSword, $SpecialVar] = "6 35";		//21 (5)
@@ -123,6 +126,7 @@ $AccessoryVar[BastardSword, $SpecialVar] = "6 133";		//57 (7)
 $AccessoryVar[Halberd, $SpecialVar] = "6 176";			//66 (8)
 $AccessoryVar[Claymore, $SpecialVar] = "6 188";			//75.2 (7.5)
 $AccessoryVar[KeldriniteLS, $SpecialVar] = "6 90";		//90 (0.5)
+$AccessoryVar[Tester, $SpecialVar] = "6 90";		//90 (0.5)
 //.................................................................................
 $AccessoryVar[Club, $SpecialVar] = "6 12";			//12 (3)
 $AccessoryVar[QuarterStaff, $SpecialVar] = "6 35";		//21 (5)
@@ -158,6 +162,7 @@ $AccessoryVar[RepeatingCrossbow, $SpecialVar] = "6 75";	//75 (3)
 $AccessoryVar[ElvenBow, $SpecialVar] = "6 89";			//89 (3)
 $AccessoryVar[AeolusWing, $SpecialVar] = "6 101";		//101 (2)
 $AccessoryVar[HeavyCrossbow, $SpecialVar] = "6 300";		//112.5 (8)
+$AccessoryVar[TesterBow, $SpecialVar] = "6 101";			//11 (2)
 //.................................................................................
 $AccessoryVar[SmallRock, $SpecialVar] = "6 10";
 $AccessoryVar[BasicArrow, $SpecialVar] = "6 12";
@@ -181,6 +186,7 @@ $AccessoryVar[BastardSword, $Weight] = 7;
 $AccessoryVar[Halberd, $Weight] = 8;
 $AccessoryVar[Claymore, $Weight] = "7.5";
 $AccessoryVar[KeldriniteLS, $Weight] = "0.5";
+$AccessoryVar[Tester, $Weight] = 1;
 //.................................................................................
 $AccessoryVar[Club, $Weight] = 3;
 $AccessoryVar[QuarterStaff, $Weight] = 5;
@@ -213,6 +219,7 @@ $AccessoryVar[RepeatingCrossbow, $Weight] = 3;
 $AccessoryVar[ElvenBow, $Weight] = 3;
 $AccessoryVar[AeolusWing, $Weight] = 2;
 $AccessoryVar[HeavyCrossbow, $Weight] = 8;
+$AccessoryVar[TesterBow, $Weight] = 2;
 //.................................................................................
 $AccessoryVar[SmallRock, $Weight] = "0.2";
 $AccessoryVar[BasicArrow, $Weight] = "0.1";
@@ -279,6 +286,8 @@ $AccessoryVar[Talon, $MiscInfo] = "A gemmed talon. It is terribly sharp";
 $AccessoryVar[CeraphumsFeather, $MiscInfo] = "Said to have come from the wing of a ceraphum. But we all knew that it came from the forge";
 $AccessoryVar[BoneClub, $MiscInfo] = "A club made made of skeleton bones";
 $AccessoryVar[SpikedBoneClub, $MiscInfo] = "A spiked club made of skeleton bones";
+$AccessoryVar[Tester, $MiscInfo] = "A test weapon";
+$AccessoryVar[TesterBow, $MiscInfo] = "A test bow";
 
 //NOTE: See shopping.cs for the shopIndexes
 
@@ -333,6 +342,8 @@ $SkillType[Talon] = $SkillArchery;
 $SkillType[CeraphumsFeather] = $SkillArchery;
 $SkillType[BoneClub] = $SkillBludgeoning;
 $SkillType[SpikedBoneClub] = $SkillBludgeoning;
+$SkillType[Tester] = $SkillSlashing;
+$SkillType[TesterBow] = $SkillArchery;
 
 $WeaponRange[Sling] = 35;
 $WeaponRange[ShortBow] = 120;
@@ -345,6 +356,7 @@ $WeaponRange[HeavyCrossbow] = 500;
 $WeaponRange[RepeatingCrossbow] = 280;
 $WeaponRange[CastingBlade] = 1000;	//will swing from anywhere...BUT will be able to snipe with beam
 $WeaponRange[Wand] = 1000;
+$WeaponRange[TesterBow] = 400;
 
 $WeaponDelay[Sling] = 1;
 $WeaponDelay[ShortBow] = 1;
@@ -355,11 +367,12 @@ $WeaponDelay[LightCrossbow] = 1;
 $WeaponDelay[AeolusWing] = 1;
 $WeaponDelay[HeavyCrossbow] = 3;
 $WeaponDelay[RepeatingCrossbow] = 0.5;
+$WeaponDelay[TesterBow] = 1;
 
 $ProjRestrictions[SmallRock] = ",Sling,";
-$ProjRestrictions[BasicArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,";
-$ProjRestrictions[SheafArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,";		
-$ProjRestrictions[BladedArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,";
+$ProjRestrictions[BasicArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,TesterBow,";
+$ProjRestrictions[SheafArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,TesterBow,";		
+$ProjRestrictions[BladedArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,TesterBow,";
 $ProjRestrictions[LightQuarrel] = ",LightCrossbow,HeavyCrossbow,RLightCrossbow,";
 $ProjRestrictions[HeavyQuarrel] = ",LightCrossbow,HeavyCrossbow,RLightCrossbow,";
 $ProjRestrictions[ShortQuarrel] = ",RepeatingCrossbow,";
@@ -740,6 +753,43 @@ function GenerateItemCost(%item)
 	%f = floor(%e + %extracost);
 
 	return %f;
+}
+
+//****************************************************************************************************
+//   Tester
+//****************************************************************************************************
+
+ItemImageData TesterImage
+{
+	shapeFile  = "walkBlade";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	reloadTime = 0;
+	fireTime = GetDelay(Tester);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing2;
+	sfxActivate = ActivateAS;
+};
+ItemData Tester
+{
+	heading = "bWeapons";
+	description = "Tester";
+	className = "Weapon";
+	shapeFile  = "walkBlade";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = TesterImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function TesterImage::onFire(%player, %slot)
+{
+	MeleeAttack(%player, GetRange(Tester), Tester);
 }
 
 //****************************************************************************************************
@@ -1858,6 +1908,51 @@ function SlingImage::onFire(%player, %slot)
 
 	%vel = 60;
 	ProjectileAttack(%clientId, Sling, %vel);
+}
+
+//****************************************************************************************************
+//   Tester Bow
+//****************************************************************************************************
+
+ItemImageData TesterBowImage
+{
+	shapeFile = "cyborggun";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	ammoType = "";
+	projectileType = NoProjectile;
+	accuFire = false;
+	reloadTime = 0;
+	fireTime = GetDelay(TesterBow);
+
+	lightType = 3;  // Weapon Fire
+	lightRadius = 3;
+	lightTime = 1;
+	lightColor = { 0.6, 1, 1.0 };
+
+	sfxFire = CrossbowShoot1;
+	sfxActivate = CrossbowSwitch1;
+	sfxReload = NoSound;
+};
+ItemData TesterBow
+{
+	description = "Tester Bow";
+	className = "Weapon";
+	shapeFile = "cyborggun";
+	hudIcon = "bow";
+	heading = "bWeapons";
+	shadowDetailMask = 4;
+	imageType = TesterBowImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function TesterBowImage::onFire(%player, %slot)
+{
+	%clientId = Player::getClient(%player);
+
+	%vel = 100;
+	ProjectileAttack(%clientId, TesterBow, %vel);
 }
 
 //****************************************************************************************************

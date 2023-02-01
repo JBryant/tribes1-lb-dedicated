@@ -273,24 +273,28 @@ function SaveCharacter(%clientId, %silent)
 	%ii = 0;
 
 	//determine which weapons player has
-
 	if(!IsDead(%clientId))
 	{
 		%s = "";
 		%max = getNumItems();
+
 		for(%i = 0; %i < %max; %i++)
 		{
 			%checkItem = getItemData(%i);
 			%itemcount = Player::getItemCount(%clientId, %checkItem);
+
 			if(%itemcount > $maxItem)
 				%itemcount = $maxItem;
-			if(%itemcount > 0)
+			if(%itemcount > 0 && !isBeltItem(%checkItem))
 				%s = %s @ %checkItem @ " " @ %itemcount @ " ";
 		}
+
 		$funk::var["[\"" @ %name @ "\", 0, 15]"] = %s;
 	}
-	else
+	else {
+		%spawnStuffs = fetchData(%clientId, "spawnStuff");
 		$funk::var["[\"" @ %name @ "\", 0, 15]"] = fetchData(%clientId, "spawnStuff");
+	}
 
 	%cnt = 0;
 	%list = GetBotIdList();

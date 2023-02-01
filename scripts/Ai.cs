@@ -743,13 +743,14 @@ function AI::helper(%aiName, %displayName, %commandIssuer, %loadout)
 	if(%aiName == %displayName)
 		%displayName = $NameForRace[%aiName] @ %newName;
 	$numAI++;
-	SpawnAI(%newName, %displayName, %spawnPos, %commandIssuer, %loadout);
+	SpawnAI(%newName, %displayName, %spawnPos, %commandIssuer, %loadout, %aiName);
 
 	setAInumber(%newName, %n);
 
 	return %newName;
 }
-function SpawnAI(%newName, %displayName, %aiSpawnPos, %commandIssuer, %loadout)
+
+function SpawnAI(%newName, %displayName, %aiSpawnPos, %commandIssuer, %loadout, %aiName)
 {
 	dbecho($dbechoMode, "SpawnAI(" @ %newName @ ", " @ %displayName @ ", " @ %aiSpawnPos @ ", " @ %commandIssuer @ ")");
 
@@ -795,6 +796,12 @@ function SpawnAI(%newName, %displayName, %aiSpawnPos, %commandIssuer, %loadout)
 		}
 
 		AI::setWeapons(%newName, %loadout);
+
+		// set custom skin 
+		%customSkin = $SkinForRace[%aiName];
+		if (%customSkin != "") {
+			Client::setSkin(%aiId, %customSkin);
+		}
 
 		return ( %newName );
 	}
@@ -1360,8 +1367,20 @@ function RotateTownBot(%id, %rot)
 	%townbot.name = %name;
 
 	$TownBotList = $TownBotList @ %townbot @ " ";
-}
-function newRotateTownBot(%client, %object, %clientPos, %botPos){	%dist = vector::getDistance(%clientPos, %botPos);	%rot = Vector::getRotation(Vector::normalize(Vector::sub(%clientPos, %botPos)));	%rot = "0 -0 "@GetWord(%rot, 2);	if(%dist < 1.57)	{//Prevent us from trapping the player		player::applyimpulse(%client, vector::getfromrot(%rot, 30, 12));		schedule("newRotateTownBot("@%client@", "@%object@", gamebase::getposition("@%client@"), gamebase::getposition("@%object@"));",0.3);		return;	}	GameBase::setRotation(%object, %rot);}
+}
+
+function newRotateTownBot(%client, %object, %clientPos, %botPos){
+	%dist = vector::getDistance(%clientPos, %botPos);
+	%rot = Vector::getRotation(Vector::normalize(Vector::sub(%clientPos, %botPos)));
+	%rot = "0 -0 "@GetWord(%rot, 2);
+	if(%dist < 1.57)
+	{//Prevent us from trapping the player
+		player::applyimpulse(%client, vector::getfromrot(%rot, 30, 12));
+		schedule("newRotateTownBot("@%client@", "@%object@", gamebase::getposition("@%client@"), gamebase::getposition("@%object@"));",0.3);
+		return;
+	}
+	GameBase::setRotation(%object, %rot);
+}
 
 function GatherBotInfo(%group)
 {

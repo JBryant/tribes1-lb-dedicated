@@ -129,7 +129,7 @@ $stealDelay = 5;
 $droppingAllowed = 1;
 $sepchar = ",";
 $maxAIdistVec = 5;
-$coinweight = 0.001;
+$coinweight = 0; // 0.001;
 $maxEvents = 8;
 
 $WorldSaveList = "|DepPlatSmallHorz|DepPlatMediumHorz|DepPlatSmallVert|DepPlatMediumVert|Lootbag|";
@@ -139,4 +139,5 @@ $PiercingDamageType	= 2;
 $BludgeoningDamageType	= 4;
 
 
-$neverdropitem["BeltItemTool"] = True;$neverdropitem["CastingBlade"] = True;
+$neverdropitem["BeltItemTool"] = True;
+$neverdropitem["CastingBlade"] = True;

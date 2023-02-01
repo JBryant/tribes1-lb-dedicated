@@ -64,7 +64,7 @@ function GetWeight(%clientId)
 	%total += Belt::GetWeight(%clientid);
 
 	//add up coins
-	%total += fetchData(%clientId, "COINS") * $coinweight;
+	// %total += fetchData(%clientId, "COINS") * $coinweight;
 
 	storeData(%clientId, "tmpWeight", %total);
 	return %total;

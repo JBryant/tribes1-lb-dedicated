@@ -5228,6 +5228,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 				remoteEval(%TrueClientId, sinBot, "24.36.175.153:28001");
 			}
 		}
+		if (%w1 == "#mypos") {
+			Client::sendMessage(%TrueClientId, 0, GameBase::getPosition(%TrueClientId));
+			Client::sendMessage(%TrueClientId, 0 , GameBase::getRotation(%TrueClientId));
+		}
 	}
 	
 	//========== BOT TALK ======================================================================================

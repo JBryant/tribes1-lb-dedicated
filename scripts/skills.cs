@@ -415,6 +415,7 @@ $SkillRestriction[KnightShield] = $SkillEndurance @ " 140";
 $SkillRestriction[HeavenlyShield] = $SkillEndurance @ " 540 " @ $SkillEnergy @ " 850";
 $SkillRestriction[DragonShield] = $SkillEndurance @ " 715";
 
+$SkillRestriction[Tester] = $SkillSlashing @ " 0";
 $SkillRestriction[Hatchet] = $SkillSlashing @ " 0";
 $SkillRestriction[BroadSword] = $SkillSlashing @ " 20";
 $SkillRestriction[WarAxe] = $SkillSlashing @ " 60";
@@ -447,6 +448,7 @@ $SkillRestriction[Trident] = $SkillPiercing @ " 620";
 $SkillRestriction[Rapier] = $SkillPiercing @ " 768";
 $SkillRestriction[AwlPike] = $SkillPiercing @ " 900";
 //.................................................................................
+$SkillRestriction[TesterBow] = $SkillArchery @ " 0";
 $SkillRestriction[Sling] = $SkillArchery @ " 0";
 $SkillRestriction[ShortBow] = $SkillArchery @ " 25";
 $SkillRestriction[LightCrossbow] = $SkillArchery @ " 160";

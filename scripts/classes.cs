@@ -48,6 +48,7 @@ $MinHP[Undead] = 11;
 $MinHP[Elf] = 10;
 $MinHP[Minotaur] = 15;
 $MinHP[Uber] = 25;
+$MinHP[Cultist] = 35;
 $MinHP[DeathKnight] = 5000;
 $MinHP[DeathKnight] = 12;
 

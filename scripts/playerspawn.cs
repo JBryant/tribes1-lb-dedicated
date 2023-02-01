@@ -145,7 +145,9 @@ function Game::playerSpawn(%clientId, %respawn)
 			%spawnRot = GameBase::getRotation(%spawnMarker);
 		}
 
-		%armor = $RaceToArmorType[fetchData(%clientId, "RACE")];		if(%armor.mass == False)			%armor = "MaleHumanArmor0";
+		%armor = $RaceToArmorType[fetchData(%clientId, "RACE")];
+		if(%armor.mass == False)
+			%armor = "MaleHumanArmor0";
 
 		%pl = spawnPlayer(%armor, %spawnPos, %spawnRot);
 		PlaySound(SoundSpawn2, %spawnPos);
@@ -160,16 +162,25 @@ function Game::playerSpawn(%clientId, %respawn)
 			Client::setOwnedObject(%clientId, %pl);
 			Client::setControlObject(%clientId, %pl);
 			Game::playerSpawned(%pl, %clientId, %armor, %respawn);
-			%spawnhp = 1;			%spawnmana = 1;
+
+			%spawnhp = 1;
+			%spawnmana = 1;
 			if(%respawn)	      
-			{				%spawnhp = fetchData(%clientId, "MaxHP");				%spawnmana = fetchData(%clientId, "MaxMANA");
+			{
+				%spawnhp = fetchData(%clientId, "MaxHP");
+				%spawnmana = fetchData(%clientId, "MaxMANA");
 			}
 			else
 			{
-				%spawnhp = fetchData(%clientId, "tmphp");				%spawnmana = fetchData(%clientId, "tmpmana");
+				%spawnhp = fetchData(%clientId, "tmphp");
+				%spawnmana = fetchData(%clientId, "tmpmana");
 				storeData(%clientId, "tmphp", "");
 				storeData(%clientId, "tmpmana", "");
-			}			if(%spawnhp < 1){ %spawnhp = 1; echo("Error: spawn hp was less than 1"); }			if(%spawnmana < 1){ %spawnmana = 1; echo("Error: spawn mp was less than 1"); }			setHP(%clientId, %spawnhp);			setMANA(%clientId, %spawnmana);
+			}
+			if(%spawnhp < 1){ %spawnhp = 1; echo("Error: spawn hp was less than 1"); }
+			if(%spawnmana < 1){ %spawnmana = 1; echo("Error: spawn mp was less than 1"); }
+			setHP(%clientId, %spawnhp);
+			setMANA(%clientId, %spawnmana);
 			storeData(%clientId.possessId, "dumbAIflag", "");
 			storeData(%clientId, "isDead", False);
 		}
@@ -181,11 +192,25 @@ function Game::playerSpawn(%clientId, %respawn)
 	//	Client::sendMessage(%clientId,0,"Sorry No Respawn Positions Are Empty - Try again later ");
 	//	return false;
 	//}
-}
-function afterspawnstuff(%clientId){	if(isDead(%clientId))		return;
-	if(%clientId.hasSpawned)		return;	%clientId.hasSpawned = True;
-	%name = rpg::getname(%clientId);	for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))	{		if(%cl.repack >= 24){			Client::sendMessage(%cl, $MsgWhite, %name@" has entered the world.");		}	}
-	schedule("repackAlert("@%clientId@");",1.0);	if(%clientId.repack > 29)		initEscText(%clientId);
+}
+
+function afterspawnstuff(%clientId){
+	if(isDead(%clientId))
+		return;
+	if(%clientId.hasSpawned)
+		return;
+	%clientId.hasSpawned = True;
+
+	%name = rpg::getname(%clientId);
+	for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))
+	{
+		if(%cl.repack >= 24){
+			Client::sendMessage(%cl, $MsgWhite, %name@" has entered the world.");
+		}
+	}
+	schedule("repackAlert("@%clientId@");",1.0);
+	if(%clientId.repack > 29)
+		initEscText(%clientId);
 }
 
 function Game::playerSpawned(%pl, %clientId, %armor)
@@ -207,7 +232,8 @@ function Game::playerSpawned(%pl, %clientId, %armor)
 	}
 
 	if(fetchData(%clientId, "LCK") < 0)
-		storeData(%clientId, "LCK", 0);
+		storeData(%clientId, "LCK", 0);
+
 	player::setitemcount(%clientId,BeltItemTool, 1);
 
 	RefreshAll(%clientId);

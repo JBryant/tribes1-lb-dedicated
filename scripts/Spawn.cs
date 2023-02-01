@@ -8,7 +8,7 @@ function InitSpawnPoints()
 	{
 		for(%i = 0; %i <= Group::objectCount(%group)-1; %i++)
 		{
-		      %this = Group::getObject(%group, %i);
+		    %this = Group::getObject(%group, %i);
 			%info = Object::getName(%this);
 
 			$MarkerZone[%this] = ObjectInWhichZone(%this);

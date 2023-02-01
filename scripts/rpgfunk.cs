@@ -23,17 +23,37 @@
 //Starsiege: Tribes, including the engine, retains a proprietary license forbidding resale.
 
 
-
-//This is a lazy attempt to transform Tribes engine names into RPG-handlable names.//The difference is, when a player crashes and comes back, he'll//come with the same name, so Tribes adds .1 to the end of duplicate names.
-function rpg::getname(%client){	%oldname = client::getname(%client);	%finalname = String::GetSubStr(%oldname, 0, string::len(%oldname)-2);	if((%finalname @ ".1") == %oldname)		return %finalname;	else		return %oldname;}
+
+
+//This is a lazy attempt to transform Tribes engine names into RPG-handlable names.
+//The difference is, when a player crashes and comes back, he'll
+//come with the same name, so Tribes adds .1 to the end of duplicate names.
+function rpg::getname(%client){
+	%oldname = client::getname(%client);
+	%finalname = String::GetSubStr(%oldname, 0, string::len(%oldname)-2);
+	if((%finalname @ ".1") == %oldname)
+		return %finalname;
+	else
+		return %oldname;
+}
+
 //Client will only identify to this if they have been
 //asked by the server; see connectivity.cs
-function remoteRepackConfirm(%client, %val){
+function remoteRepackConfirm(%client, %val)
+{
 	if(%client == 2048)
-		return;	%val = floor(%val);	if(%val > 0 && %val <= 9999)		%client.repack = %val;
+		return;
+	%val = floor(%val);
+	if(%val > 0 && %val <= 9999)
+		%client.repack = %val;
 
 	if(%val > 25)
-		remoteEval(%client, FontSet);}function remotecurrentFontSet(%client, %val){	if(%val == "rpgfonts.vol")		%client.alttext = True;}
+		remoteEval(%client, FontSet);
+}
+function remotecurrentFontSet(%client, %val){
+	if(%val == "rpgfonts.vol")
+		%client.alttext = True;
+}
 function viewGroupList(%clientId)
 {
 	dbecho($dbechoMode, "viewGroupList(" @ %clientId @ ")");
@@ -270,12 +290,17 @@ function SaveWorld()
 	//messageAll(2, "SaveWorld in progress... This process might induce temporary lag");
 	//You know, we don't really need to spam. Saveworld isn't the end of the world.
 	deletevariables("$world::*");
-	deletevariables("$sw::*");	$swpacknum = 0;
+	deletevariables("$sw::*");
+	$swpacknum = 0;
 	%i = 0;
 	%ii = 0;
 	%othercnt = 0;
 	if($saveworldsearch == "")
-		$saveworldsearch = 100;	%eomID = $END_OF_MAP;	if(%eomID < 1){		%eomId = 8361;	}
+		$saveworldsearch = 100;
+	%eomID = $END_OF_MAP;
+	if(%eomID < 1){
+		%eomId = 8361;
+	}
 	while(%othercnt < $saveworldsearch)
 	{
 		%i++;
@@ -307,7 +332,11 @@ function SaveWorld()
 				%w1 = getWord(%loot, 1);
 				if(%w1 != "*")
 					%loot = %w0 @ " * " @ String::getSubStr(%loot, String::len(%w0)+String::len(%w1)+2, 99999);
-				$world::special[%ii] = %loot;				%ownername = GetWord(%loot, 0);				$sw::packowner[%ii] = %ownername;				$sw::packid[%ii] = %ID;				$swpacknum++;
+				$world::special[%ii] = %loot;
+				%ownername = GetWord(%loot, 0);
+				$sw::packowner[%ii] = %ownername;
+				$sw::packid[%ii] = %ID;
+				$swpacknum++;
 			}
 		}
 		//if(%obj == "")
@@ -327,15 +356,36 @@ function SaveWorld()
 	%stamp = string::getsubstr(%time,0,19);
 	echo("SaveWorld|"@%stamp@"|Objects:"@%ii);
 	//messageAll(2, "SaveWorld complete.");
-	%list = GetPlayerIdList();	%time = string::getsubstr(%time,11,5);
-	%smsg = "["@%time@"] SaveWorld complete.";	%echo = "Saved chars:";
-	%ii = 0;	for(%i = 0; GetWord(%list, %i) != -1; %i++)	{		if(%ii >= 9){
+
+	%list = GetPlayerIdList();
+	%time = string::getsubstr(%time,11,5);
+	%smsg = "["@%time@"] SaveWorld complete.";
+	%echo = "Saved chars:";
+	%ii = 0;
+	for(%i = 0; GetWord(%list, %i) != -1; %i++)
+	{
+		if(%ii >= 9){
 			//max 16 chars per name, plus each one followed by ":complete ",
 			//26 chars per character, plus about 13 at start, 247.
-			//256 is where it gets crashy.			echo(%echo);			%echo = "Saved chars:";
-			%ii = 0;		}
-		%ii++;		%id = GetWord(%list, %i);		%curname = rpg::getname(%id);		%ret = SaveCharacter(%id, 1);
-		%msg = %smsg;		if(%ret == "complete")		{			%msg = %msg @ " " @ %curname @ " saved.";		}		Client::sendMessage(%id, $MsgBeige, %msg);		%echo = %echo @ " " @ %curname @ ":" @ %ret;	}	if(%ii > 0)		echo(%echo);
+			//256 is where it gets crashy.
+			echo(%echo);
+			%echo = "Saved chars:";
+			%ii = 0;
+		}
+		%ii++;
+		%id = GetWord(%list, %i);
+		%curname = rpg::getname(%id);
+		%ret = SaveCharacter(%id, 1);
+		%msg = %smsg;
+		if(%ret == "complete")
+		{
+			%msg = %msg @ " " @ %curname @ " saved.";
+		}
+		Client::sendMessage(%id, $MsgBeige, %msg);
+		%echo = %echo @ " " @ %curname @ ":" @ %ret;
+	}
+	if(%ii > 0)
+		echo(%echo);
 
 }
 function LoadWorld()
@@ -425,7 +475,10 @@ function DeployLootbag(%pos, %rot, %special)
 	%lootbag = newObject("", "Item", "Lootbag", 1, false);
 
 	$loot[%lootbag] = %special;
-	$swpacknum++;	$sw::packowner[$swpacknum] = getWord(%special,0);	$sw::packid[$swpacknum] = %lootbag;
+
+	$swpacknum++;
+	$sw::packowner[$swpacknum] = getWord(%special,0);
+	$sw::packid[$swpacknum] = %lootbag;
 
  	addToSet("MissionCleanup", %lootbag);
 	
@@ -576,7 +629,20 @@ function UpdateTeam(%clientId)
 function ChangeRace(%clientId, %race)
 {
 	dbecho($dbechoMode, "ChangeRace(" @ %clientId @ ", " @ %race @ ")");
-	%gender = Client::getGender(%clientId);	if(%gender == "")		%gender = "Male";	%at = $RaceToArmorType[%race];	if(%race == "Human"){		%newRace = %gender @ %race;	}	else if($ArmorTypeToRace[%at] != "")		%newRace = $ArmorTypeToRace[%at];	if(%newRace != "")		storeData(%clientId, "RACE", %newRace);	else		echo("Failed to change race to "@%race@" for "@%clientId);
+
+	%gender = Client::getGender(%clientId);
+	if(%gender == "")
+		%gender = "Male";
+	%at = $RaceToArmorType[%race];
+	if(%race == "Human"){
+		%newRace = %gender @ %race;
+	}
+	else if($ArmorTypeToRace[%at] != "")
+		%newRace = $ArmorTypeToRace[%at];
+	if(%newRace != "")
+		storeData(%clientId, "RACE", %newRace);
+	else
+		echo("Failed to change race to "@%race@" for "@%clientId);
 
 	setHP(%clientId, fetchData(%clientId, "MaxHP"));
 	setMANA(%clientId, fetchData(%clientId, "MaxMANA"));
@@ -728,7 +794,12 @@ function ChangeWeather()
 	//Some of the hail code came from MR-TRPG
 	//Other code written by phantom.
 
-		%wasSnow = $isSnow;		$isSnow = "";		%washail = $isHail;		$isHail = "";
+
+		%wasSnow = $isSnow;
+		$isSnow = "";
+
+		%washail = $isHail;
+		$isHail = "";
 
 		$isRaining = "";
 
@@ -741,10 +812,35 @@ function ChangeWeather()
 
 		%t = floor(getRandom() * 100);
 
-		if(%t < 10)		{
-			%cansnow = isObject("MissionGroup\\Volumes\\walkbovRPGObjsTex");			if(%cansnow && %t > 6){				if(!%wasSnow){					for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))						Client::sendMessage(%cl, 1, "Watch your step, a snowstorm begins!");					%Group = newObject("iceBlocks", SimGroup);					addToSet("MissionCleanup", %Group);				}				$IsSnow = True;			}
+
+		if(%t < 10)
+		{
+			%cansnow = isObject("MissionGroup\\Volumes\\walkbovRPGObjsTex");
+			if(%cansnow && %t > 6){
+				if(!%wasSnow){
+					for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))
+						Client::sendMessage(%cl, 1, "Watch your step, a snowstorm begins!");
+					%Group = newObject("iceBlocks", SimGroup);
+					addToSet("MissionCleanup", %Group);
+				}
+				$IsSnow = True;
+			}
 			%type = 2;//snow
-			$isRaining = True;		}		else if(%t < 20)		{			for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))			  Client::sendMessage(%cl, 1, "Get to a town or dungeon, a hailstorm begins!");			%type = 1;			//HAILSTORM			%x = -90;			%y = -50;			%z = -300 + (floor(getRandom() * 40));			%vec = %x @ " " @ %y @ " " @ %z;			$isRaining = True;			$isHail = True;		}
+			$isRaining = True;
+		}
+		else if(%t < 20)
+		{
+			for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))
+			  Client::sendMessage(%cl, 1, "Get to a town or dungeon, a hailstorm begins!");
+
+			%type = 1;			//HAILSTORM
+			%x = -90;
+			%y = -50;
+			%z = -300 + (floor(getRandom() * 40));
+			%vec = %x @ " " @ %y @ " " @ %z;
+			$isRaining = True;
+			$isHail = True;
+		}
 		else if(%t < 30)
 		{
 			%type = 1;			//rain
@@ -754,13 +850,31 @@ function ChangeWeather()
 		{
 			%type = -1;			//stop any weather
 		}
-		if(!$isHail && %washail)		{			for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))				Client::sendMessage(%cl, 1, "The hailstorm ends.");		}		if(!$isSnow && %wasSnow)		{			for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))				Client::sendMessage(%cl, 1, "The snowstorm ends.");			%simset = nameToID("MissionCleanup/iceBlocks");			for(%i = 0; (%o = Group::getObject(%simset, %i)) != -1; %i++)			{				deleteobject(%o);			}			deleteobject(%simset);		}
+
+		if(!$isHail && %washail)
+		{
+			for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))
+				Client::sendMessage(%cl, 1, "The hailstorm ends.");
+		}
+		if(!$isSnow && %wasSnow)
+		{
+			for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))
+				Client::sendMessage(%cl, 1, "The snowstorm ends.");
+			%simset = nameToID("MissionCleanup/iceBlocks");
+			for(%i = 0; (%o = Group::getObject(%simset, %i)) != -1; %i++)
+			{
+				deleteobject(%o);
+			}
+			deleteobject(%simset);
+		}
 
 		if(isObject("weather"))
 			deleteObject("weather");
 
 		if(%type == 1)
-			%weather = newObject("weather", Snowfall, %intensity, %vec, 0, %type);		else if(%type == 2)			%weather = newObject("weather", Snowfall, %intensity, %vec, 0, snow);
+			%weather = newObject("weather", Snowfall, %intensity, %vec, 0, %type);
+		else if(%type == 2)
+			%weather = newObject("weather", Snowfall, %intensity, %vec, 0, snow);
 }
 
 function FindInvalidChar(%name)
@@ -1029,7 +1143,18 @@ function TeleportToMarker(%clientId, %markergroup, %testpos, %random)
 	
 	return False;
 }
-function unLockLootBag(%lootbag){		%ownerName = getWord($loot[%lootbag],0);		%namelist = getWord($loot[%lootbag],1);		%preLoot = %ownerName @ " " @ %namelist;		%lenToReplace = String::Len(%preLoot);		%oldLoot = String::NEWgetSubStr($loot[%lootbag], %lenToReplace, 2000);		if(String::findSubStr(%oldLoot, ",") == -1){			%newLoot = %ownerName @ " *"@%oldLoot;			$loot[%lootbag] = %newLoot;		}}
+
+function unLockLootBag(%lootbag){
+		%ownerName = getWord($loot[%lootbag],0);
+		%namelist = getWord($loot[%lootbag],1);
+		%preLoot = %ownerName @ " " @ %namelist;
+		%lenToReplace = String::Len(%preLoot);
+		%oldLoot = String::NEWgetSubStr($loot[%lootbag], %lenToReplace, 2000);
+		if(String::findSubStr(%oldLoot, ",") == -1){
+			%newLoot = %ownerName @ " *"@%oldLoot;
+			$loot[%lootbag] = %newLoot;
+		}
+}
 
 function TossLootbag(%clientId, %loot, %vel, %namelist, %t)
 {
@@ -1042,7 +1167,8 @@ function TossLootbag(%clientId, %loot, %vel, %namelist, %t)
 
 	%preLoot = %ownerName @ " " @ %namelist;
 
-	if(%t > 0){		schedule("unLockLootBag("@%lootBag@");", %t, %lootbag);
+	if(%t > 0){
+		schedule("unLockLootBag("@%lootBag@");", %t, %lootbag);
 	}
 //	else
 //	{
@@ -1057,7 +1183,10 @@ function TossLootbag(%clientId, %loot, %vel, %namelist, %t)
 
 	$loot[%lootbag] = %loot;
 	storeData(%clientId, "lootbaglist", AddToCommaList(fetchData(%clientId, "lootbaglist"), %lootbag));
-	$swpacknum++;	$sw::packowner[$swpacknum] = %ownerName;	$sw::packid[$swpacknum] = %lootbag;
+
+	$swpacknum++;
+	$sw::packowner[$swpacknum] = %ownerName;
+	$sw::packid[$swpacknum] = %lootbag;
 
 	addToSet("MissionCleanup", %lootbag);
 	GameBase::setMapName(%lootbag, "Backpack");
@@ -1293,7 +1422,15 @@ function HasThisStuff(%clientId, %list, %multiplier)
 				%flag = True;
 			else
 				return False;
-		}		else if(isBeltItem(%w))		{			%amnt = Belt::HasThisStuff(%clientid,%w);			if(%amnt >= %w2)				%flag = True;			else				return False;		}
+		}
+		else if(isBeltItem(%w))
+		{
+			%amnt = Belt::HasThisStuff(%clientid,%w);
+			if(%amnt >= %w2)
+				%flag = True;
+			else
+				return False;
+		}
 		else if(%w != "COINS" && %w != "REMORT" && %w != "LVLG" && %w != "LVLS" && %w != "LVLE" && %w != "CNT" && %w != "CNTAFFECTS" && %w != "RankPoints" && %w != "AI" && %w != "EXP")
 		{
 			if(Player::getItemCount(%clientId, %w) >= %w2)
@@ -1334,7 +1471,11 @@ function TakeThisStuff(%clientId, %list, %multiplier)
 				storeData(%clientId, "EXP", %w2, "dec");
 			else
 				return False;
-		}		else if(isBeltItem(%w))		{			Belt::TakeThisStuff(%clientid, %w, %w2, %echo);		}
+		}
+		else if(isBeltItem(%w))
+		{
+			Belt::TakeThisStuff(%clientid, %w, %w2, %echo);
+		}
 		else if(%w == "CNT" || %w == "CNTAFFECTS" || %w == "LVLG" || %w == "LVLS" || %w == "LVLE")
 		{
 			//ignore
@@ -1434,6 +1575,11 @@ function GiveThisStuff(%clientId, %list, %echo, %multiplier)
 			GameBase::setTeam(%clientId, %w2);
 			if(%echo) Client::sendMessage(%clientId, 0, "Team set to " @ %w2 @ ".");
 		}
+		else if(%w == "RP")
+		{
+			storeData(%clientId, "RankPoints", %w2, "inc");
+			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ %w2 @ " Rank Points.");
+		}
 		else if(%w == "RankPoints")
 		{
 			storeData(%clientId, "RankPoints", %w2, "inc");
@@ -1447,7 +1593,11 @@ function GiveThisStuff(%clientId, %list, %echo, %multiplier)
 		else if(%w == "CNTAFFECTS")
 		{
 			%tmpcntaffects[%cntindex] = %w2;
-		}		else if(isBeltItem(%w))		{			Belt::GiveThisStuff(%clientid, %w, %w2, %echo);		}
+		}
+		else if(isBeltItem(%w))
+		{
+			Belt::GiveThisStuff(%clientid, %w, %w2, %echo);
+		}
 		else
 		{
 			Item::giveItem(%clientId, %w, %w2, %echo);
@@ -1485,7 +1635,9 @@ function getSpawnIndex(%aiName)
 function FellOffMap(%id, %silent)
 {
 	dbecho($dbechoMode, "FellOffMap(" @ %id @ ")");
-	if(IsDead(%id))		return;
+
+	if(IsDead(%id))
+		return;
 	RefreshAll(%id);
 
 	if(Player::isAiControlled(%id))
@@ -1498,14 +1650,46 @@ function FellOffMap(%id, %silent)
 	{
 		CheckAndBootFromArena(%id);
 		Item::setVelocity(%id, "0 0 0");
-		%toname = "Safe Location";		if(%id.recallingToName != ""){			%toname = %id.recallingToName;			%id.recallingToName = "";		}		if(%id.recallingTo != ""){ 			TeleportToPos(%id, %id.recallingTo, 0, 0);			%id.recallingTo = "";		}		else
+		%toname = "Safe Location";
+		if(%id.recallingToName != ""){
+			%toname = %id.recallingToName;
+			%id.recallingToName = "";
+		}
+		if(%id.recallingTo != ""){ 
+			TeleportToPos(%id, %id.recallingTo, 0, 0);
+			%id.recallingTo = "";
+		}
+		else
 			TeleportToMarker(%id, "TheArena\\TeleportExitMarkers", 0, 0);
-		if(!%silent)			Client::sendMessage(%id, $MsgRed, "You have been warped to "@%toname@".");
+
+		if(!%silent)
+			Client::sendMessage(%id, $MsgRed, "You have been warped to "@%toname@".");
 	}
 }
 
 //Added in rpg 6.8
-function recallTimer(%client, %seconds, %pos){	if(Vector::getDistance(%pos, GameBase::getPosition(%client)) > 1){		centerPrint(%client,"<jc>Recall cancelled; you moved.",10);		storeData(%client, "tmprecall", "");		return;	}	if(isDead(%client)){		storeData(%client, "tmprecall", "");		pecho(%client@" died during recall");		return;	}	%seconds--;	if(%seconds < 1){		FellOffMap(%client);		CheckAndBootFromArena(%client);		storeData(%client, "tmprecall", "");		return;	}	centerPrint(%client,"<jc>Recalling, please stay still - "@%seconds@" seconds left.",4);	schedule("recallTimer(" @ %client @ "," @ %seconds @ ",\"" @ %pos @ "\");",1);}
+function recallTimer(%client, %seconds, %pos)
+{
+	if(Vector::getDistance(%pos, GameBase::getPosition(%client)) > 1){
+		centerPrint(%client,"<jc>Recall cancelled; you moved.",10);
+		storeData(%client, "tmprecall", "");
+		return;
+	}
+	if(isDead(%client)){
+		storeData(%client, "tmprecall", "");
+		pecho(%client@" died during recall");
+		return;
+	}
+	%seconds--;
+	if(%seconds < 1){
+		FellOffMap(%client);
+		CheckAndBootFromArena(%client);
+		storeData(%client, "tmprecall", "");
+		return;
+	}
+	centerPrint(%client,"<jc>Recalling, please stay still - "@%seconds@" seconds left.",4);
+	schedule("recallTimer(" @ %client @ "," @ %seconds @ ",\"" @ %pos @ "\");",1);
+}
 
 function SetStuffString(%stuff, %item, %amount)
 {
@@ -1718,7 +1902,9 @@ function IsPartOfCombo(%combo, %n)
 
 function IsDead(%id)
 {
-	dbecho($dbechoMode, "IsDead(" @ %id @ ")");	if(fetchData(%id, "isDead"))		return True;
+	dbecho($dbechoMode, "IsDead(" @ %id @ ")");
+	if(fetchData(%id, "isDead"))
+		return True;
 
 	%clientId = Player::getClient(%id);
 	%player = Client::getOwnedObject(%clientId);
@@ -1947,12 +2133,39 @@ function WhatIs(%clientId, %item)
 	//This is the first time this has been outside that server
 	//This allows the #w command to accept spaces in the names of items.
 	//So you can #w Studded Leather Armor instead of just #w studdedleather
-	//The original syntax still works though.	if(%item.description == False && $beltitem[%item, "Name"] == ""){		%i = 0;		for(%i = 0; $beltItemData[%i] != ""; %i++)		{			if(string::icompare($beltitem[$beltItemData[%i], "Name"],%item) == 0){				%item = $beltItemData[%i];				%belt = True;				break;			}		}		if(!%belt){			%max = getNumItems();			for(%i = 0; %i < %max; %i++)			{				%checkItem = getItemData(%i);				if(string::icompare(%checkItem.description, %item) == 0){					%item = %checkItem;					break;				}			}
-		}	}
+	//The original syntax still works though.
+	if(%item.description == False && $beltitem[%item, "Name"] == ""){
+		%i = 0;
+		for(%i = 0; $beltItemData[%i] != ""; %i++)
+		{
+			if(string::icompare($beltitem[$beltItemData[%i], "Name"],%item) == 0){
+				%item = $beltItemData[%i];
+				%belt = True;
+				break;
+			}
+		}
+		if(!%belt){
+			%max = getNumItems();
+			for(%i = 0; %i < %max; %i++)
+			{
+				%checkItem = getItemData(%i);
+				if(string::icompare(%checkItem.description, %item) == 0){
+					%item = %checkItem;
+					break;
+				}
+			}
+		}
+	}
 
 
 
-	//--------- GATHER INFO ------------------	if(isBeltItem(%item)){		%belt = True;		%desc = $beltitem[%item, "Name"];	}	else {		%belt = False;
+	//--------- GATHER INFO ------------------
+	if(isBeltItem(%item)){
+		%belt = True;
+		%desc = $beltitem[%item, "Name"];
+	}
+	else {
+		%belt = False;
 		if(%item.description == False)	
 			%desc = %item;
 		else
@@ -2016,11 +2229,47 @@ function WhatIs(%clientId, %item)
 	//return %msg;
 }
 
-
-function rpg::longPrint(%clientId,%msg,%position,%time){//%position://0 = Centre//1 = Bottom//2 = Top		%len = string::len(%msg);		if(%len > 250 && %clientId.repack > 15){			message::rpBufferPrint(%clientId, %position, %msg, %time);		}		else{			if(%position == 1)				bottomprint(%clientId, %msg, %time);			else if(%position == 0)				centerprint(%clientId, %msg, %time);			else if(%position == 2)				topprint(%clientId, %msg, %time);		}}
-function message::rpBufferPrint(%cl, %type, %msg, %timeout) {	if(%timeout == "")		%timeout = 5;
 
-	%cl.bufferedId++;	%index = 0;	remoteEval(%cl, "BufferedCenterPrint2", String::NEWgetSubStr(%msg, 0, 250), %timeout, %type, %index, %cl.bufferedId);	%msg = String::NEWgetSubStr(%msg, 250, 999999);	%len = String::Len(%msg);	%index++;	while(%len >= 255) {		%final = String::NEWgetSubStr(%msg, 0, 255);		remoteeval(%cl,BufferedCenterPrint2,%final, -2, %type, %index, %cl.bufferedId);		%msg = String::NEWgetSubStr(%msg, 255, 999999);		%len = String::Len(%msg);		%index++;	}	remoteeval(%cl,bufferedcenterprint2,%msg, -1, %type, %index, %cl.bufferedId);
+
+function rpg::longPrint(%clientId,%msg,%position,%time)
+{
+//%position:
+//0 = Centre
+//1 = Bottom
+//2 = Top
+		%len = string::len(%msg);
+		if(%len > 250 && %clientId.repack > 15){
+			message::rpBufferPrint(%clientId, %position, %msg, %time);
+		}
+		else{
+			if(%position == 1)
+				bottomprint(%clientId, %msg, %time);
+			else if(%position == 0)
+				centerprint(%clientId, %msg, %time);
+			else if(%position == 2)
+				topprint(%clientId, %msg, %time);
+		}
+}
+
+
+function message::rpBufferPrint(%cl, %type, %msg, %timeout) {
+	if(%timeout == "")
+		%timeout = 5;
+
+	%cl.bufferedId++;
+	%index = 0;
+	remoteEval(%cl, "BufferedCenterPrint2", String::NEWgetSubStr(%msg, 0, 250), %timeout, %type, %index, %cl.bufferedId);
+	%msg = String::NEWgetSubStr(%msg, 250, 999999);
+	%len = String::Len(%msg);
+	%index++;
+	while(%len >= 255) {
+		%final = String::NEWgetSubStr(%msg, 0, 255);
+		remoteeval(%cl,BufferedCenterPrint2,%final, -2, %type, %index, %cl.bufferedId);
+		%msg = String::NEWgetSubStr(%msg, 255, 999999);
+		%len = String::Len(%msg);
+		%index++;
+	}
+	remoteeval(%cl,bufferedcenterprint2,%msg, -1, %type, %index, %cl.bufferedId);
 }
 
 function AddToCommaList(%list, %item)
@@ -2374,7 +2623,8 @@ function InitObjectives()
 		Team::setObjective(%i, 11, "<f7><jc>KILL ALL HUMAN PLAYERS");
 	}
 }
-
+
+
 $latestRepack = 34;
 //By phantom, tribesrpg.org
 function repackAlert(%clientId)
@@ -2413,7 +2663,15 @@ function help(%startup){
 	pecho("quit(); //restart (if using infinitespawn) or shut down server.");
 }
 
-function rpg::EnglishItem(%item){	%name = %item;	if($beltitem[%item, "Name"] != "")		%name = $beltitem[%item, "Name"];	else if(%item.description != False)		%name = %item.description;	return %name;
+
+function rpg::EnglishItem(%item){
+	%name = %item;
+	if($beltitem[%item, "Name"] != "")
+		%name = $beltitem[%item, "Name"];
+	else if(%item.description != False)
+		%name = %item.description;
+	return %name;
+
 }
 function revertControls(%TrueClientId){
 			if(%TrueClientId.possessId > 2048){
@@ -2426,13 +2684,80 @@ function revertControls(%TrueClientId){
 	%TrueClientId.eyesing = "";
 }
 
-function rpg::eyes(%TrueClientId, %id){	if(IsDead(%id))	{		Client::sendMessage(%TrueClientId, 0, "Target client is dead.");		return;	}	//revert	revertControls(%TrueClientId);	//eyes	Client::setControlObject(%TrueClientId, Client::getObserverCamera(%TrueClientId));	Observer::setOrbitObject(%TrueClientId, Client::getOwnedObject(%id), -3, -3, -3);	%TrueClientId.eyesing = %id;	%TrueClientId.currentInvSteal = "";	DisplayGetInfo(%TrueClientId, %id);	client::sendmessage(%TrueClientId, $msgWhite, "#revert to return view.");	return;}
+function rpg::eyes(%TrueClientId, %id){
+	if(IsDead(%id))
+	{
+		Client::sendMessage(%TrueClientId, 0, "Target client is dead.");
+		return;
+	}
+	//revert
+	revertControls(%TrueClientId);
+	//eyes
+	Client::setControlObject(%TrueClientId, Client::getObserverCamera(%TrueClientId));
+	Observer::setOrbitObject(%TrueClientId, Client::getOwnedObject(%id), -3, -3, -3);
+	%TrueClientId.eyesing = %id;
+	%TrueClientId.currentInvSteal = "";
 
-function initEscText(%clientId){	%num = -1;	remoteEval(%clientId, SetServerTextLine, %num++, "Tribes RPG");
+	DisplayGetInfo(%TrueClientId, %id);
+	client::sendmessage(%TrueClientId, $msgWhite, "#revert to return view.");
+	return;
+}
+
+function initEscText(%clientId){
+	%num = -1;
+	remoteEval(%clientId, SetServerTextLine, %num++, "Tribes RPG");
 	remoteEval(%clientId, SetServerTextLine, %num++, "\nWelcome to the Tribes RPG Mod. Visit the web site for more information at www.tribesrpg.org");
 	remoteEval(%clientId, SetServerTextLine, %num++, "\n<f2>If you get lost or stuck, you can return to a starting area by saying #recall");
 	remoteEval(%clientId, SetServerTextLine, %num++, "<f0>You can talk to an NPC by pressing use, which is either T or P");
-	//You can add many lines here in the same way}
-function arrowTowards(%clientPos, %zonePos, %name){	%arrow = newObject("pointer", StaticShape, "nArrow");	if(%arrow < 1000){		pecho("arrow error");		return;	}	safePosition(%arrow, %clientPos, "arrowTowards");	%rot = Vector::getRotation(Vector::normalize(Vector::sub(%zonePos, %clientPos)));	%rot = "0 -0 "@GetWord(%rot, 2);	gamebase::setrotation(%arrow, %rot);	GameBase::setMapName(%arrow, %name);	GameBase::setTeam(%arrow, 0);	schedule("item::pop("@%arrow@", \"arrowTowards\");",20);}
+	//You can add many lines here in the same way
+}
 
-//Added in rpg 6.8function findGroundPos(%mpos, %sizex, %sizey){	%searchHeight = 500;	%searchDist = 800;	%x = GetWord(%mpos, 0);	%y = GetWord(%mpos, 1);	%z = GetWord(%mpos, 2);	%types = 0xFF;	%start = %x @ " " @ %y @ " " @ %z + %searchHeight;	%dir[0] = vector::add(%start, %sizex@" 0 0");	%dir[1] = vector::add(%start, -%sizex@" 0 0");	%dir[2] = vector::add(%start, "0 "@%sizey@" 0");	%dir[3] = vector::add(%start, "0 "@-%sizey@" 0");	%rand = floor(getRandom() * 4);//0,1,2,3	%abovePos = %dir[%rand];	%belowPos = vector::add(%abovePos, "0 0 -"@(%searchDist));	if(getLOSinfo(%abovePos, %belowPos, %types))		return $los::position;	for(%i = -3.14; %i < 3.14; %i += 0.2) {		%rotvec = rotateVector(%sizex@" 0 0",%i);		%abovePos = vector::add(%start, %rotvec);		%belowPos = vector::add(%abovePos, "0 0 -"@(%searchDist));		if(getLOSinfo(%abovePos, %belowPos, %types))			return $los::position;	}	return False;}
+function arrowTowards(%clientPos, %zonePos, %name){
+
+	%arrow = newObject("pointer", StaticShape, "nArrow");
+	if(%arrow < 1000){
+		pecho("arrow error");
+		return;
+	}
+	safePosition(%arrow, %clientPos, "arrowTowards");
+	%rot = Vector::getRotation(Vector::normalize(Vector::sub(%zonePos, %clientPos)));
+	%rot = "0 -0 "@GetWord(%rot, 2);
+	gamebase::setrotation(%arrow, %rot);
+	GameBase::setMapName(%arrow, %name);
+	GameBase::setTeam(%arrow, 0);
+	schedule("item::pop("@%arrow@", \"arrowTowards\");",20);
+}
+
+//Added in rpg 6.8
+function findGroundPos(%mpos, %sizex, %sizey)
+{
+	%searchHeight = 500;
+	%searchDist = 800;
+
+	%x = GetWord(%mpos, 0);
+	%y = GetWord(%mpos, 1);
+	%z = GetWord(%mpos, 2);
+
+	%types = 0xFF;
+	%start = %x @ " " @ %y @ " " @ %z + %searchHeight;
+
+	%dir[0] = vector::add(%start, %sizex@" 0 0");
+	%dir[1] = vector::add(%start, -%sizex@" 0 0");
+	%dir[2] = vector::add(%start, "0 "@%sizey@" 0");
+	%dir[3] = vector::add(%start, "0 "@-%sizey@" 0");
+	%rand = floor(getRandom() * 4);//0,1,2,3
+	%abovePos = %dir[%rand];
+	%belowPos = vector::add(%abovePos, "0 0 -"@(%searchDist));
+	if(getLOSinfo(%abovePos, %belowPos, %types))
+		return $los::position;
+
+	for(%i = -3.14; %i < 3.14; %i += 0.2) {
+		%rotvec = rotateVector(%sizex@" 0 0",%i);
+		%abovePos = vector::add(%start, %rotvec);
+		%belowPos = vector::add(%abovePos, "0 0 -"@(%searchDist));
+		if(getLOSinfo(%abovePos, %belowPos, %types))
+			return $los::position;
+	}
+
+	return False;
+}
