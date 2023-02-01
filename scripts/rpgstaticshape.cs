@@ -861,6 +861,51 @@ StaticShapeData WavyWater16
 	isTranslucent = "True";
 };
 
-StaticShapeData MaleHumanTownBot{	debrisId = defaultDebrisSmall;	maxDamage = 9999.0;	description = "Male Town Bot";	className = "TownBot";	shapeFile = "rpgmalehuman";	visibleToSensor = true;	//thanks Adger!!	mapFilter = 1;		//thanks Adger!!};StaticShapeData FemaleHumanTownBot{	debrisId = defaultDebrisSmall;	maxDamage = 9999.0;	description = "Female Town Bot";	className = "TownBot";	shapeFile = "lfemalehuman";	visibleToSensor = true;	//thanks Adger!!	mapFilter = 1;		//thanks Adger!!};
 
-StaticShapeData nArrow{	shapeFile = "arrow5_b";	debrisId = defaultDebrisSmall;	maxDamage = 10000.0;	disableCollision = true;	shadowDetailMask = 1;	visibleToSensor = true;	//thanks Adger!!	mapFilter = 1;		//thanks Adger!!};
+StaticShapeData MaleHumanTownBot
+{
+	debrisId = defaultDebrisSmall;
+	maxDamage = 9999.0;
+	description = "Male Town Bot";
+	className = "TownBot";
+	shapeFile = "rpgmalehuman";
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};
+
+StaticShapeData FemaleHumanTownBot
+{
+	debrisId = defaultDebrisSmall;
+	maxDamage = 9999.0;
+	description = "Female Town Bot";
+	className = "TownBot";
+	shapeFile = "lfemalehuman";
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};
+
+StaticShapeData GoblinTownBot
+{
+	debrisId = defaultDebrisSmall;
+	maxDamage = 9999.0;
+	description = "Goblin Town Bot";
+	className = "TownBot";
+	shapeFile = "goblin";
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};
+
+StaticShapeData nArrow
+{
+	shapeFile = "arrow5_b";
+	debrisId = defaultDebrisSmall;
+	maxDamage = 10000.0;
+	disableCollision = true;
+	shadowDetailMask = 1;
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};
