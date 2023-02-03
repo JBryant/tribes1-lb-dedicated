@@ -177,30 +177,33 @@ function Item::onUnmount(%player,%item)
 function Item::onUse(%player, %item)
 {
 	dbecho($dbechoMode, "Item::onUse(" @ %player @ ", " @ %item @ ")");
-
+	
 	%clientId = Player::getClient(%player);
+	%beltItemType = BeltItem::GetType(%item);
+	%isEquipped = BeltItem::IsEquipped(%clientId, %item);
 
 	if(!IsDead(%clientId))
 	{
+		%isAccessory = %beltItemType == "ArmorItems";
 		//this is how you toggle back and forth from equipped to carrying.
-		if(%item.className == Accessory)
+		if(%isAccessory && !%isEquipped)
 		{
 			%cnt = 0;
-			%max = getNumItems();
-			for(%i = 0; %i < %max; %i++)
-			{
-				%checkItem = getItemData(%i);
-				if(%checkItem.className == Equipped && GetAccessoryVar(%checkItem, $AccessoryType) == GetAccessoryVar(%item, $AccessoryType))
-					%cnt += Player::getItemCount(%player, %checkItem);
+			%totalItems = GetEquippedAccessoriesCount(%clientId);
+
+			for(%i = 1; %i <= %totalItems; %i++) {
+				%checkItem = getword(%itemList, %i);
+				%amnt = Belt::HasThisStuff(%clientId, %item);
+				
+				if(GetAccessoryVar(%checkItem, $AccessoryType) == GetAccessoryVar(%item, $AccessoryType) && %amnt > 0)
+					%cnt += %amnt;
 			}
 
 			if(SkillCanUse(%clientId, %item))
 			{
 				if(%cnt < $maxAccessory[GetAccessoryVar(%item, $AccessoryType)])
 				{
-					Client::sendMessage(%clientId, $MsgBeige, "You equipped " @ %item.description @ ".");
-					Player::setItemCount(%player, %item, Player::getItemCount(%player, %item)-1);
-					Player::setItemCount(%player, %item @ "0", Player::getItemCount(%player, %item @ "0")+1);
+					Client::sendMessage(%clientId, $MsgBeige, "You equipped " @ BeltItem::GetName(%item) @ ".");
 
 					if(isbeltitem(%item)) {
 						// modify the belt
@@ -214,15 +217,15 @@ function Item::onUse(%player, %item)
 			else
 				Client::sendMessage(%clientId, $MsgRed, "You can't equip this item because you lack the necessary skills.~wC_BuySell.wav");
 
-			if($OverrideMountPoint[%item] == "")
+			if($OverrideMountPoint[%item] == "" && !isbeltitem(%item)) {
 				Player::mountItem(%player, %item @ "0", 1, 0);
+			}
 		}
-		else if(%item.className == Equipped)
+		else if(%isAccessory && %isEquipped)
 		{
 			%o = String::getSubStr(%item, 0, String::len(%item)-1);	//remove the 0
-			Client::sendMessage(%clientId, $MsgBeige, "You unequipped " @ %item.description @ ".");
-			Player::setItemCount(%player, %item, Player::getItemCount(%player, %item)-1);
-			Player::setItemCount(%player, %o, Player::getItemCount(%player, %o)+1);
+			%itemName = BeltItem::GetName(String::getSubStr(%item, 0, String::len(%item)-1));
+			Client::sendMessage(%clientId, $MsgBeige, "You unequipped " @ %itemName @ ".");
 
 			if(isbeltitem(%item)) {
 				// modify the belt 
@@ -230,7 +233,7 @@ function Item::onUse(%player, %item)
 				Belt::GiveThisStuff(%clientid, %o, 1);
 			}
 
-			if($OverrideMountPoint[%item] == "")
+			if($OverrideMountPoint[%item] == "" && !isbeltitem(%item))
 				Player::unMountItem(%player, 1);
 		}
 		else

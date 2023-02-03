@@ -236,20 +236,6 @@ function Game::playerSpawned(%pl, %clientId, %armor)
 
 	player::setitemcount(%clientId, BeltItemTool, 1);
 
-	// equip his armor for him
-	// %itemList = Belt::GetNS(%clientId, "ArmorItems");
-	// %totalItems = GetWord(%itemList, 0);
-
-	// for(%i = 1; %i <= %totalItems; %i++) {
-	// 	%item = getword(%itemList, %i);
-	// 	%amnt = Belt::HasThisStuff(%clientId, %item);
-	// 	%o = String::getSubStr(%item, 0, String::len(%item)-1);
-
-	// 	if (%o == 0 && %amnt > 0) {
-	// 		Player::setItemCount(%clientId, %item, 1);
-	// 	}
-	// }
-
 	RefreshAll(%clientId);
 } 
 

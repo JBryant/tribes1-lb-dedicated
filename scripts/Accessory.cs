@@ -285,6 +285,10 @@ function GetAccessoryList(%clientId, %type, %filter)
 	return %list;
 }
 
+function GetEquippedAccessoriesCount(%clientId) {
+	return Belt::GetNS(%clientId, "ArmorItems");
+}
+
 function GetEquippedAccessories(%clientId) {
 	%itemList = Belt::GetNS(%clientId, "ArmorItems");
 	%totalItems = GetWord(%itemList, 0);
@@ -292,10 +296,8 @@ function GetEquippedAccessories(%clientId) {
 
 	for(%i = 1; %i <= %totalItems; %i++) {
 		%item = getword(%itemList, %i);
-		%amnt = Belt::HasThisStuff(%clientId, %item);
-		%o = String::getSubStr(%item, String::len(%item)-1, String::len(%item));
 
-		if (%o == "0" && %amnt > 0) {
+		if (BeltItem::isEquipped(%clientId, %item)) {
 			%list = %list @ " " @ %item;
 		}
 	}
@@ -311,15 +313,13 @@ function GetEquippedAccessoriesByType(%clientId, %type) {
 
 	for(%i = 1; %i <= %totalItems; %i++) {
 		%item = getword(%itemList, %i);
-		%amnt = Belt::HasThisStuff(%clientId, %item);
-		%o = String::getSubStr(%item, String::len(%item)-1, String::len(%item));
 
-		if (%o == "0" && %amnt > 0) {
+		if (BeltItem::isEquipped(%clientId, %item)) {
 			%av = GetAccessoryVar(%item, $SpecialVar);
 
-			for(%j = 0; GetWord(%av, %j) != -1; %j+=2)
-			{
+			for(%j = 0; GetWord(%av, %j) != -1; %j+=2) {
 				%w = GetWord(%av, %j);
+
 				if(String::findSubStr(%type, %w) != -1)
 					%list = %list @ " " @ %item;
 			}

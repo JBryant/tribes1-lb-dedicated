@@ -1426,7 +1426,7 @@ function Belt::GetNS(%clientid, %type)
 		%amnt = Belt::HasThisStuff(%clientid, %item);
 
 		if(%amnt > 0) {
-			%list = %list @" "@%item;
+			%list = %list @" "@ %item;
 			%bn++;
 		}
 	}
@@ -1445,6 +1445,24 @@ function BeltItem::Add(%name, %item, %type, %weight, %cost)
 	$beltitem[%item, "Type"] = %type;
 	$AccessoryVar[%item, $Weight] = %weight;
 	$HardcodedItemCost[%item] = %cost;
+}
+
+function BeltItem::GetType(%item) {
+	return $beltitem[%item, "Type"];
+}
+
+function BeltItem::GetName(%item) {
+	return $beltitem[%item, "Name"];
+}
+
+function BeltItem::IsEquipped(%clientId, %item) {
+	%amnt = Belt::HasThisStuff(%clientid, %item);
+	%itemIsWorn = String::findSubStr(BeltItem::GetName(%item), "(worn)") != -1;
+
+	if (%amnt > 0 && %itemIsWorn)
+		return true;
+		
+	return false;
 }
 
 function Belt::HasThisStuff(%clientid,%item)

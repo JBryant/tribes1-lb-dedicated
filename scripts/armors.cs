@@ -276,495 +276,495 @@ $ArmorList[25] = "DragonMail";
 $ArmorList[26] = "KeldrinArmor";
 
 //============================================================================
-ItemData PaddedArmor
-{
-	description = "Padded Armor";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData PaddedArmor0
-{
-	description = "Padded Armor";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData LeatherArmor
-{
-	description = "Leather Armor";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData LeatherArmor0
-{
-	description = "Leather Armor";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData StuddedLeather
-{
-	description = "Studded Leather Armor";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData StuddedLeather0
-{
-	description = "Studded Leather Armor";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData SpikedLeather
-{
-	description = "Spiked Leather Armor";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData SpikedLeather0
-{
-	description = "Spiked Leather Armor";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData HideArmor
-{
-	description = "Hide Armor";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData HideArmor0
-{
-	description = "Hide Armor";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData ScaleMail
-{
-	description = "Scale Mail";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData ScaleMail0
-{
-	description = "Scale Mail";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData BrigandineArmor
-{
-	description = "Brigandine Armor";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData BrigandineArmor0
-{
-	description = "Brigandine Armor";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData ChainMail
-{
-	description = "Chain Mail";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData ChainMail0
-{
-	description = "Chain Mail";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData RingMail
-{
-	description = "Ring Mail";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData RingMail0
-{
-	description = "Ring Mail";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData BandedMail
-{
-	description = "Banded Mail";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData BandedMail0
-{
-	description = "Banded Mail";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData SplintMail
-{
-	description = "Splint Mail";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData SplintMail0
-{
-	description = "Splint Mail";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData DragonMail
-{
-	description = "Dragon Mail";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData DragonMail0
-{
-	description = "Dragon Mail";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData BronzePlateMail
-{
-	description = "Bronze Plate Mail";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData BronzePlateMail0
-{
-	description = "Bronze Plate Mail";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData PlateMail
-{
-	description = "Plate Mail";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData PlateMail0
-{
-	description = "Plate Mail";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData FieldPlateArmor
-{
-	description = "Field Plate Armor";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData FieldPlateArmor0
-{
-	description = "Field Plate Armor";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData FullPlateArmor
-{
-	description = "Full Plate Armor";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData FullPlateArmor0
-{
-	description = "Full Plate Armor";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData KeldrinArmor
-{
-	description = "Keldrin Armor";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData KeldrinArmor0
-{
-	description = "Keldrin Armor";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData ApprenticeRobe
-{
-	description = "Apprentice Robe";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData ApprenticeRobe0
-{
-	description = "Apprentice Robe";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData LightRobe
-{
-	description = "Light Robe";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData LightRobe0
-{
-	description = "Light Robe";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData FineRobe
-{
-	description = "Fine Robe";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData FineRobe0
-{
-	description = "Fine Robe";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData BloodRobe
-{
-	description = "Blood Robe";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData BloodRobe0
-{
-	description = "Blood Robe";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData AdvisorRobe
-{
-	description = "Advisor Robe";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData AdvisorRobe0
-{
-	description = "Advisor Robe";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData ElvenRobe
-{
-	description = "Elven Robe";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData ElvenRobe0
-{
-	description = "Elven Robe";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData RobeOfVenjance
-{
-	description = "Robe Of Venjance";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData RobeOfVenjance0
-{
-	description = "Robe Of Venjance";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData PhensRobe
-{
-	description = "Phen's Robe";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData PhensRobe0
-{
-	description = "Phen's Robe";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
-
-//============================================================================
-ItemData QuestMasterRobe
-{
-	description = "Quest Master Robe";
-	className = "Accessory";
-	shapeFile = "discammo";
-
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData QuestMasterRobe0
-{
-	description = "Quest Master Robe";
-	className = "Equipped";
-	shapeFile = "discammo";
-
-	heading = "aArmor";
-};
+// ItemData PaddedArmor
+// {
+// 	description = "Padded Armor";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData PaddedArmor0
+// {
+// 	description = "Padded Armor";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData LeatherArmor
+// {
+// 	description = "Leather Armor";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData LeatherArmor0
+// {
+// 	description = "Leather Armor";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData StuddedLeather
+// {
+// 	description = "Studded Leather Armor";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData StuddedLeather0
+// {
+// 	description = "Studded Leather Armor";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData SpikedLeather
+// {
+// 	description = "Spiked Leather Armor";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData SpikedLeather0
+// {
+// 	description = "Spiked Leather Armor";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData HideArmor
+// {
+// 	description = "Hide Armor";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData HideArmor0
+// {
+// 	description = "Hide Armor";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData ScaleMail
+// {
+// 	description = "Scale Mail";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData ScaleMail0
+// {
+// 	description = "Scale Mail";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData BrigandineArmor
+// {
+// 	description = "Brigandine Armor";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData BrigandineArmor0
+// {
+// 	description = "Brigandine Armor";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData ChainMail
+// {
+// 	description = "Chain Mail";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData ChainMail0
+// {
+// 	description = "Chain Mail";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData RingMail
+// {
+// 	description = "Ring Mail";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData RingMail0
+// {
+// 	description = "Ring Mail";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData BandedMail
+// {
+// 	description = "Banded Mail";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData BandedMail0
+// {
+// 	description = "Banded Mail";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData SplintMail
+// {
+// 	description = "Splint Mail";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData SplintMail0
+// {
+// 	description = "Splint Mail";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData DragonMail
+// {
+// 	description = "Dragon Mail";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData DragonMail0
+// {
+// 	description = "Dragon Mail";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData BronzePlateMail
+// {
+// 	description = "Bronze Plate Mail";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData BronzePlateMail0
+// {
+// 	description = "Bronze Plate Mail";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData PlateMail
+// {
+// 	description = "Plate Mail";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData PlateMail0
+// {
+// 	description = "Plate Mail";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData FieldPlateArmor
+// {
+// 	description = "Field Plate Armor";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData FieldPlateArmor0
+// {
+// 	description = "Field Plate Armor";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData FullPlateArmor
+// {
+// 	description = "Full Plate Armor";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData FullPlateArmor0
+// {
+// 	description = "Full Plate Armor";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData KeldrinArmor
+// {
+// 	description = "Keldrin Armor";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData KeldrinArmor0
+// {
+// 	description = "Keldrin Armor";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData ApprenticeRobe
+// {
+// 	description = "Apprentice Robe";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData ApprenticeRobe0
+// {
+// 	description = "Apprentice Robe";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData LightRobe
+// {
+// 	description = "Light Robe";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData LightRobe0
+// {
+// 	description = "Light Robe";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData FineRobe
+// {
+// 	description = "Fine Robe";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData FineRobe0
+// {
+// 	description = "Fine Robe";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData BloodRobe
+// {
+// 	description = "Blood Robe";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData BloodRobe0
+// {
+// 	description = "Blood Robe";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData AdvisorRobe
+// {
+// 	description = "Advisor Robe";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData AdvisorRobe0
+// {
+// 	description = "Advisor Robe";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData ElvenRobe
+// {
+// 	description = "Elven Robe";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData ElvenRobe0
+// {
+// 	description = "Elven Robe";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData RobeOfVenjance
+// {
+// 	description = "Robe Of Venjance";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData RobeOfVenjance0
+// {
+// 	description = "Robe Of Venjance";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData PhensRobe
+// {
+// 	description = "Phen's Robe";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData PhensRobe0
+// {
+// 	description = "Phen's Robe";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };
+
+// //============================================================================
+// ItemData QuestMasterRobe
+// {
+// 	description = "Quest Master Robe";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
+
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData QuestMasterRobe0
+// {
+// 	description = "Quest Master Robe";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
+
+// 	heading = "aArmor";
+// };

@@ -536,10 +536,8 @@ function UpdateAppearance(%clientId)
 
 	for(%i = 1; %i <= %totalItems; %i++) {
 		%item = getword(%itemList, %i);
-		%amnt = Belt::HasThisStuff(%clientId, %item);
-		%lastChar = String::getSubStr(%item, String::len(%item)-1, String::len(%item));
 
-		if (%lastChar == "0" && %amnt > 0) {
+		if (BeltItem::isEquipped(%clientId, %item)) {
 			%armor = String::getSubStr(%item, 0, String::len(%item)-1);
 		}
 	}
@@ -552,7 +550,7 @@ function UpdateAppearance(%clientId)
 		else if($AccessoryVar[%w, $AccessoryType] == $ShieldAccessoryType)
 			%shield = %w;
 	}
-	
+
 	%player = Client::getOwnedObject(%clientId);
 	%race = fetchData(%clientId, "RACE");
 	%model = Player::getArmor(%clientId);
