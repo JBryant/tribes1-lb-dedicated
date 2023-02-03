@@ -254,6 +254,8 @@ function SaveCharacter(%clientId, %silent)
 	$funk::var["[\"" @ %name @ "\", 8, 8]"] = fetchData(%clientId, "BankWeaponItems");
 	$funk::var["[\"" @ %name @ "\", 8, 9]"] = fetchData(%clientId, "ArmorItems");
 	$funk::var["[\"" @ %name @ "\", 8, 10]"] = fetchData(%clientId, "BankArmorItems");
+	$funk::var["[\"" @ %name @ "\", 8, 11]"] = fetchData(%clientId, "QuestItems");
+	$funk::var["[\"" @ %name @ "\", 8, 12]"] = fetchData(%clientId, "BankQuestItems");
 
 	%recallList = fetchData(%clientId,"recallList");
 	$funk::var["[\"" @ %name @ "\", 8, recallList]"] = %recallList;
@@ -277,6 +279,8 @@ function SaveCharacter(%clientId, %silent)
 	{
 		%s = "";
 		%max = getNumItems();
+		echo("---- get num items ----");
+		echo(%max);
 
 		for(%i = 0; %i < %max; %i++)
 		{
@@ -430,6 +434,8 @@ function LoadCharacter(%clientId)
 		storeData(%clientId, "BankWeaponItems", $funk::var[%name, 8, 8]);
 		storeData(%clientId, "ArmorItems", $funk::var[%name, 8, 9]);
 		storeData(%clientId, "BankArmorItems", $funk::var[%name, 8, 10]);
+		storeData(%clientId, "QuestItems", $funk::var[%name, 8, 11]);
+		storeData(%clientId, "BankQuestItems", $funk::var[%name, 8, 12]);
 
 		%recallList = $funk::var[%name, 8, recallList];
 		storeData(%clientId,"recallList", %recallList);
@@ -473,6 +479,11 @@ function LoadCharacter(%clientId)
 		//------------
 
 		//===========================================================
+
+		if(%clientId.repack) {
+			remoteeval(%clientId, RSound, 3);
+			%clientId.MusicTicksLeft = 0;
+		}
 		
 		echo("Load complete.");
 	}

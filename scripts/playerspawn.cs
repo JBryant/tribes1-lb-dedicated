@@ -194,7 +194,7 @@ function Game::playerSpawn(%clientId, %respawn)
 	//}
 }
 
-function afterspawnstuff(%clientId){
+function afterspawnstuff(%clientId) {
 	if(isDead(%clientId))
 		return;
 	if(%clientId.hasSpawned)
@@ -234,7 +234,21 @@ function Game::playerSpawned(%pl, %clientId, %armor)
 	if(fetchData(%clientId, "LCK") < 0)
 		storeData(%clientId, "LCK", 0);
 
-	player::setitemcount(%clientId,BeltItemTool, 1);
+	player::setitemcount(%clientId, BeltItemTool, 1);
+
+	// equip his armor for him
+	%itemList = Belt::GetNS(%clientId, "ArmorItems");
+	%totalItems = GetWord(%itemList, 0);
+
+	for(%i = 1; %i <= %totalItems; %i++) {
+		%item = getword(%itemList, %i);
+		%amnt = Belt::HasThisStuff(%clientId, %item);
+		%o = String::getSubStr(%item, 0, String::len(%item)-1);
+
+		if (%o == 0 && %amnt > 0) {
+			Player::setItemCount(%clientId, %item, 1);
+		}
+	}
 
 	RefreshAll(%clientId);
 } 

@@ -256,43 +256,43 @@ function RecursiveWorld(%seconds)
 		$ConsoleWorld::DefaultSearchPath = $ConsoleWorld::DefaultSearchPath;	//thanks Presto
 
 		//check for tmpPrize.cs, execute, and delete it.
-		if(isFile("config\\tmpPrize.cs"))
-		{
-			$pAcnt = "";
-			$pBcnt = "";
+		// if(isFile("config\\tmpPrize.cs"))
+		// {
+		// 	$pAcnt = "";
+		// 	$pBcnt = "";
 
-			//Make sure the stupid exec file gets exec'd...
-			//Note: still doesn't work.  exec sucks.
-			%goFlag = "";
-			for(%i = 1; %i <= 2; %i++)
-			{
-				if(exec("tmpPrize.cs"))
-				{
-					%goFlag = True;
-					break;
-				}
-				else
-					$ConsoleWorld::DefaultSearchPath = $ConsoleWorld::DefaultSearchPath;	//thanks Presto
-			}
+		// 	//Make sure the stupid exec file gets exec'd...
+		// 	//Note: still doesn't work.  exec sucks.
+		// 	%goFlag = "";
+		// 	for(%i = 1; %i <= 2; %i++)
+		// 	{
+		// 		if(exec("tmpPrize.cs"))
+		// 		{
+		// 			%goFlag = True;
+		// 			break;
+		// 		}
+		// 		else
+		// 			$ConsoleWorld::DefaultSearchPath = $ConsoleWorld::DefaultSearchPath;	//thanks Presto
+		// 	}
 
-			if(%goFlag)
-			{
-				File::delete("config\\tmpPrize.cs");
+		// 	if(%goFlag)
+		// 	{
+		// 		File::delete("config\\tmpPrize.cs");
 
-				for(%i = 1; $PrizeA[%i] != ""; %i++)
-				{
-					OnOrOfflineGive($PrizeA[%i], "Trancephyte 1");
-					$PrizeA[%i] = "";
-				}
-				for(%i = 1; $PrizeB[%i] != ""; %i++)
-				{
-					OnOrOfflineGive($PrizeB[%i], "Trancephyte 1 MagicDust 1");
-					$PrizeB[%i] = "";
-				}
-				$pAcnt = "";
-				$pBcnt = "";
-			}
-		}
+		// 		for(%i = 1; $PrizeA[%i] != ""; %i++)
+		// 		{
+		// 			OnOrOfflineGive($PrizeA[%i], "Trancephyte 1");
+		// 			$PrizeA[%i] = "";
+		// 		}
+		// 		for(%i = 1; $PrizeB[%i] != ""; %i++)
+		// 		{
+		// 			OnOrOfflineGive($PrizeB[%i], "Trancephyte 1 MagicDust 1");
+		// 			$PrizeB[%i] = "";
+		// 		}
+		// 		$pAcnt = "";
+		// 		$pBcnt = "";
+		// 	}
+		// }
 
 		if($dedicated)
 		{

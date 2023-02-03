@@ -528,12 +528,12 @@ function Zone::DoEnter(%z, %clientId)
 
 	storeData(%clientId, "zone", $Zone::FolderID[%z]);
 
-	// end music for new music to start, but only if it is a new zone
-	// keep the original music running if they are going in and out
-	if(%clientId.repack && %newZone != %lastZone) {
-		remoteeval(%clientId, RSound, 3);
-		%clientId.MusicTicksLeft = 0;
-	}
+	// // end music for new music to start, but only if it is a new zone
+	// // keep the original music running if they are going in and out
+	// if(%clientId.repack && %newZone != %lastZone) {
+	// 	remoteeval(%clientId, RSound, 3);
+	// 	%clientId.MusicTicksLeft = 0;
+	// }
 
 	if($Zone::Type[%z] == "PROTECTED")
 	{

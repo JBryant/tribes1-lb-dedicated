@@ -165,7 +165,33 @@ function GetAccessoryList(%clientId, %type, %filter)
 	if(IsDead(%clientId) || !fetchData(%clientId, "HasLoadedAndSpawned") || %clientId.IsInvalid || %clientId.choosingGroup || %clientId.choosingClass)
 		return "";
 
-	%list = "";	if(%type == 10)	{		%max = $count[AmmoItems];		for(%i = 0; %i < %max; %i++)		{			%item = $beltitem[%i+1, "Num", "AmmoItems"];			%count = belt::hasthisstuff(%clientId, %item);			if(%count)			{				if(%filter != -1)				{					%flag2 = False;					%av = GetAccessoryVar(%item, $SpecialVar);					for(%j = 0; GetWord(%av, %j) != -1; %j+=2)					{						%w = GetWord(%av, %j);						if(String::findSubStr(%filter, %w) != -1)							%flag2 = True;					}				}				if(%filter == -1 || %flag2)					%list = %list @ %item @ " ";			}		}		return %list;	}
+	%list = "";
+	if(%type == 10)
+	{
+		%max = $count[AmmoItems];
+		for(%i = 0; %i < %max; %i++)
+		{
+			%item = $beltitem[%i+1, "Num", "AmmoItems"];
+			%count = belt::hasthisstuff(%clientId, %item);
+			if(%count)
+			{
+				if(%filter != -1)
+				{
+					%flag2 = False;
+					%av = GetAccessoryVar(%item, $SpecialVar);
+					for(%j = 0; GetWord(%av, %j) != -1; %j+=2)
+					{
+						%w = GetWord(%av, %j);
+						if(String::findSubStr(%filter, %w) != -1)
+							%flag2 = True;
+					}
+				}
+				if(%filter == -1 || %flag2)
+					%list = %list @ %item @ " ";
+			}
+		}
+		return %list;
+	}
 	%max = getNumItems();
 	for(%i = 0; %i < %max; %i++)
 	{
@@ -344,8 +370,20 @@ function NullItemList(%clientId, %type, %msgcolor, %msg)
 
 	for(%z = 1; $ItemList[%type, %z] != ""; %z++)
 	{
-		%item = $ItemList[%type, %z];
-		if(isBeltItem(%item))		{			%amnt = Belt::HasThisStuff(%clientid,%item);			if(%amnt > 0)			{				%item = $beltitem[%item, "Item"];				%name = $beltitem[%item, "Name"];				%newmsg = nsprintf(%msg, %name);				Client::sendMessage(%clientId, %msgcolor, %newmsg);				Belt::TakeThisStuff(%clientid,%item,%amnt);			}		}
+		%item = $ItemList[%type, %z];
+
+		if(isBeltItem(%item))
+		{
+			%amnt = Belt::HasThisStuff(%clientid,%item);
+			if(%amnt > 0)
+			{
+				%item = $beltitem[%item, "Item"];
+				%name = $beltitem[%item, "Name"];
+				%newmsg = nsprintf(%msg, %name);
+				Client::sendMessage(%clientId, %msgcolor, %newmsg);
+				Belt::TakeThisStuff(%clientid,%item,%amnt);
+			}
+		}
 		else if(Player::getItemCount(%clientId, %item))
 		{
 			Player::setItemCount(%clientId, %item, 0);
@@ -719,58 +757,57 @@ $ItemList[Mining, 11] = "Emerald " @ round($HardcodedItemCost[Emerald] / %f)+2;
 $ItemList[Mining, 12] = "Diamond " @ round($HardcodedItemCost[Diamond] / %f)+2;
 $ItemList[Mining, 13] = "Keldrinite " @ round($HardcodedItemCost[Keldrinite] / %f)+2;
 
-
 $AccessoryVar[BlackStatue, $Weight] = 1;
 $AccessoryVar[BlackStatue, $MiscInfo] = "A black statue";
 
-ItemData BlackStatue
-{
-	description = "Black Statue";
-	className = "Accessory";
-	shapeFile = "mineammo";
-	heading = "eMiscellany";
-	shadowDetailMask = 4;
-	price = 0;
-};
+// ItemData BlackStatue
+// {
+// 	description = "Black Statue";
+// 	className = "Accessory";
+// 	shapeFile = "mineammo";
+// 	heading = "eMiscellany";
+// 	shadowDetailMask = 4;
+// 	price = 0;
+// };
 
 $AccessoryVar[SkeletonBone, $Weight] = 1;
 $AccessoryVar[SkeletonBone, $MiscInfo] = "A skeleton bone";
 
-ItemData SkeletonBone
-{
-	description = "Skeleton Bone";
-	className = "Accessory";
-	shapeFile = "grenade";
-	heading = "eMiscellany";
-	shadowDetailMask = 4;
-	price = 0;
-};
+// ItemData SkeletonBone
+// {
+// 	description = "Skeleton Bone";
+// 	className = "Accessory";
+// 	shapeFile = "grenade";
+// 	heading = "eMiscellany";
+// 	shadowDetailMask = 4;
+// 	price = 0;
+// };
 
 $AccessoryVar[EnchantedStone, $Weight] = 5;
 $AccessoryVar[EnchantedStone, $MiscInfo] = "An enchanted stone";
 
-ItemData EnchantedStone
-{
-	description = "Enchanted Stone";
-	className = "Accessory";
-	shapeFile = "granite";
-	heading = "eMiscellany";
-	shadowDetailMask = 4;
-	price = 0;
-};
+// ItemData EnchantedStone
+// {
+// 	description = "Enchanted Stone";
+// 	className = "Accessory";
+// 	shapeFile = "granite";
+// 	heading = "eMiscellany";
+// 	shadowDetailMask = 4;
+// 	price = 0;
+// };
 
 $AccessoryVar[DragonScale, $Weight] = 8;
 $AccessoryVar[DragonScale, $MiscInfo] = "A dragon scale";
 
-ItemData DragonScale
-{
-	description = "Dragon Scale";
-	className = "Accessory";
-	shapeFile = "granite";
-	heading = "eMiscellany";
-	shadowDetailMask = 4;
-	price = 0;
-};
+// ItemData DragonScale
+// {
+// 	description = "Dragon Scale";
+// 	className = "Accessory";
+// 	shapeFile = "granite";
+// 	heading = "eMiscellany";
+// 	shadowDetailMask = 4;
+// 	price = 0;
+// };
 
 //===================
 //  LORE ITEMS
@@ -782,41 +819,41 @@ $AccessoryVar[Parchment, $Weight] = 0.2;
 $AccessoryVar[Parchment, $MiscInfo] = "A parchment";
 $LoreItem[Parchment] = True;
 
-ItemData Parchment
-{
-	description = "Parchment";
-	className = "Accessory";
-	shapeFile = "grenade";
-	heading = "eMiscellany";
-	shadowDetailMask = 4;
-	price = 0;
-};
+// ItemData Parchment
+// {
+// 	description = "Parchment";
+// 	className = "Accessory";
+// 	shapeFile = "grenade";
+// 	heading = "eMiscellany";
+// 	shadowDetailMask = 4;
+// 	price = 0;
+// };
 
 $AccessoryVar[MagicDust, $Weight] = 0.2;
 $AccessoryVar[MagicDust, $MiscInfo] = "A small bag containing magic dust";
 $LoreItem[MagicDust] = True;
 
-ItemData MagicDust
-{
-	description = "Magic Dust";
-	className = "Accessory";
-	shapeFile = "grenade";
-	heading = "eMiscellany";
-	shadowDetailMask = 4;
-	price = 0;
-};
-function MagicDust::onUse(%player, %item)
-{
-	Player::decItemCount(%player, %item);
+// ItemData MagicDust
+// {
+// 	description = "Magic Dust";
+// 	className = "Accessory";
+// 	shapeFile = "grenade";
+// 	heading = "eMiscellany";
+// 	shadowDetailMask = 4;
+// 	price = 0;
+// };
+// function MagicDust::onUse(%player, %item)
+// {
+// 	Player::decItemCount(%player, %item);
 
-	%list = GetEveryoneIdList();
-	for(%i = 0; (%id = GetWord(%list, %i)) != -1; %i++)
-	{
-		%pl = Client::getOwnedObject(%clientId);
-		if(Vector::getDistance(GameBase::getPosition(%player), GameBase::getPosition(%pl)) <= 20)
-			Player::applyImpulse(%pl, "0 0 500");
-	}
-}
+// 	%list = GetEveryoneIdList();
+// 	for(%i = 0; (%id = GetWord(%list, %i)) != -1; %i++)
+// 	{
+// 		%pl = Client::getOwnedObject(%clientId);
+// 		if(Vector::getDistance(GameBase::getPosition(%player), GameBase::getPosition(%pl)) <= 20)
+// 			Player::applyImpulse(%pl, "0 0 500");
+// 	}
+// }
 
 //===================
 // Badges
@@ -1009,8 +1046,35 @@ ItemData RepairKit
 };
 
 
-//used for iceTurretData HappyStand {		className = "Turret";	shapeFile = "camera";	maxDamage = 2500;	maxEnergy = 10;	speed = 20;	speedModifier = 1.0;	range = 0.0;	sequenceSound[0] = { "deploy", SoundActivateMotionSensor };	visibleToSensor = true;	shadowDetailMask = 4;	castLOS = true;	supression = false;	supressable = false;	mapFilter = 2;	mapIcon = "M_camera";	debrisId = defaultDebrisSmall;	FOV = 0.707;	pinger = false;	explosionId = debrisExpMedium;	description = "HappyStand";};
-function HappyStand::onDamage(%this,%type,%value,%pos,%vec,%mom,%object){	//do nothing, no damage..}
+//used for ice
+TurretData HappyStand 
+{	
+	className = "Turret";
+	shapeFile = "camera";
+	maxDamage = 2500;
+	maxEnergy = 10;
+	speed = 20;
+	speedModifier = 1.0;
+	range = 0.0;
+	sequenceSound[0] = { "deploy", SoundActivateMotionSensor };
+	visibleToSensor = true;
+	shadowDetailMask = 4;
+	castLOS = true;
+	supression = false;
+	supressable = false;
+	mapFilter = 2;
+	mapIcon = "M_camera";
+	debrisId = defaultDebrisSmall;
+	FOV = 0.707;
+	pinger = false;
+	explosionId = debrisExpMedium;
+	description = "HappyStand";
+};
+
+function HappyStand::onDamage(%this,%type,%value,%pos,%vec,%mom,%object)
+{
+	//do nothing, no damage..
+}
 
 ItemData BeltItemTool
 {
