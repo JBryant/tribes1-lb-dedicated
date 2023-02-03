@@ -529,13 +529,30 @@ function UpdateAppearance(%clientId)
 	%armor = -1;
 	%shield = -1;
 	%list = GetAccessoryList(%clientId, 2, "3 7");
+
+	// equip his armor for him
+	%itemList = Belt::GetNS(%clientId, "ArmorItems");
+	%totalItems = GetWord(%itemList, 0);
+
+	for(%i = 1; %i <= %totalItems; %i++) {
+		%item = getword(%itemList, %i);
+		%amnt = Belt::HasThisStuff(%clientId, %item);
+		%lastChar = String::getSubStr(%item, String::len(%item)-1, String::len(%item));
+
+		if (%lastChar == "0" && %amnt > 0) {
+			%armor = String::getSubStr(%item, 0, String::len(%item)-1);
+		}
+	}
+
 	for(%i = 0; (%w = getCroppedItem(GetWord(%list, %i))) != -1; %i++)
 	{
+		echo(%w);
 		if($AccessoryVar[%w, $AccessoryType] == $BodyAccessoryType)
 			%armor = %w;
 		else if($AccessoryVar[%w, $AccessoryType] == $ShieldAccessoryType)
 			%shield = %w;
 	}
+	
 	%player = Client::getOwnedObject(%clientId);
 	%race = fetchData(%clientId, "RACE");
 	%model = Player::getArmor(%clientId);

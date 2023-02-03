@@ -195,11 +195,12 @@ function GetAccessoryList(%clientId, %type, %filter)
 	%max = getNumItems();
 	for(%i = 0; %i < %max; %i++)
 	{
+		%item = getItemData(%i);
 		%count = Player::getItemCount(%clientId, %i);
 
 		if(%count)
 		{
-			%item = getItemData(%i);
+			// %item = getItemData(%i);
 
 			%flag = "";
 			if(%type == 1)
@@ -284,12 +285,58 @@ function GetAccessoryList(%clientId, %type, %filter)
 	return %list;
 }
 
+function GetEquippedAccessories(%clientId) {
+	%itemList = Belt::GetNS(%clientId, "ArmorItems");
+	%totalItems = GetWord(%itemList, 0);
+	%list = "";
+
+	for(%i = 1; %i <= %totalItems; %i++) {
+		%item = getword(%itemList, %i);
+		%amnt = Belt::HasThisStuff(%clientId, %item);
+		%o = String::getSubStr(%item, String::len(%item)-1, String::len(%item));
+
+		if (%o == "0" && %amnt > 0) {
+			%list = %list @ " " @ %item;
+		}
+	}
+
+	return %list;
+}
+
+function GetEquippedAccessoriesByType(%clientId, %type) {
+	// TODO: get more than just ArmorItem
+	%itemList = Belt::GetNS(%clientId, "ArmorItems");
+	%totalItems = GetWord(%itemList, 0);
+	%list = "";
+
+	for(%i = 1; %i <= %totalItems; %i++) {
+		%item = getword(%itemList, %i);
+		%amnt = Belt::HasThisStuff(%clientId, %item);
+		%o = String::getSubStr(%item, String::len(%item)-1, String::len(%item));
+
+		if (%o == "0" && %amnt > 0) {
+			%av = GetAccessoryVar(%item, $SpecialVar);
+
+			for(%j = 0; GetWord(%av, %j) != -1; %j+=2)
+			{
+				%w = GetWord(%av, %j);
+				if(String::findSubStr(%type, %w) != -1)
+					%list = %list @ " " @ %item;
+			}
+		}
+	}
+
+	return %list;
+}
+
 function AddPoints(%clientId, %char)
 {
 	dbecho($dbechoMode, "AddPoints(" @ %clientId @ ", " @ %char @ ")");
 
 	%add = 0;
-	%list = GetAccessoryList(%clientId, 4, %char);
+	// %list = GetAccessoryList(%clientId, 4, %char);
+	%list = GetEquippedAccessoriesByType(%clientId, %char);
+
 	for(%i = 0; GetWord(%list, %i) != -1; %i++)
 	{
 		%w = GetWord(%list, %i);
@@ -307,8 +354,14 @@ function AddPoints(%clientId, %char)
 			else
 				%count = 0;
 		}
-		else
-			%count = Player::getItemCount(%clientId, %w);
+		else {
+			// if belt item, get count via belt
+			if (isBeltItem(%w)) {
+				%count = Belt::HasThisStuff(%clientid, %w);
+			} else {
+				%count = Player::getItemCount(%clientId, %w);
+			}
+		}
 
 		%tmp = GetAccessoryVar(%w, $SpecialVar);
 

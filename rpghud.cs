@@ -51,8 +51,8 @@ function getrpgdata()
 	rpgfetchdata("MDEF");
 	rpgfetchdata("CLASS");
 	rpgfetchdata("RACE");
-        rpgfetchdata("zonedesc");
-        rpgfetchdata("RemortStep");
+    rpgfetchdata("zonedesc");
+    rpgfetchdata("RemortStep");
 
 	$mana = $rpgdata["MANA"];
 	$maxmana = $rpgdata["MaxMANA"];
@@ -89,10 +89,10 @@ function UpdateRPGHUD(%hud)
 {
 	getrpgdata();
 
-        HUD::AddTextLine(%hud, "<f0>Level <f2>" @ $lvl @ "<f0> / <f2>" @ $remort);
-        HUD::AddTextLine(%hud, "<f1>" @ $race @ " " @ $class);
-        HUD::AddText(%hud, "<f0>Zone: ");
-        HUD::AddTextLine(%hud, "<f2>" @ $zonedesc @ "\n");
+	HUD::AddTextLine(%hud, "<f0>Level <f2>" @ $lvl @ "<f0> / <f2>" @ $remort);
+	HUD::AddTextLine(%hud, "<f1>" @ $race @ " " @ $class);
+	HUD::AddText(%hud, "<f0>Zone: ");
+	HUD::AddTextLine(%hud, "<f2>" @ $zonedesc @ "\n");
 	HUD::AddText(%hud, "<f0>HP: ");
 	HUD::AddTextLine(%hud, "<f2>" @ $hp @ "<f0> / <f2>" @ $maxhp);
 	HUD::AddText(%hud, "<f0>MANA: ");

@@ -39,7 +39,8 @@ function fetchData(%clientId, %type)
 		%c = (%a + %b);
 		%d = (fetchData(%clientId, "OverweightStep") * 7.0) / 100;
 		%e = Cap(%c - (%c * %d), 0, "inf");
-		
+
+		echo(floor(%e));
 		return floor(%e);
 	}
 	else if(%type == "MDEF")
