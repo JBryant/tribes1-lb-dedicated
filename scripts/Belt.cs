@@ -345,34 +345,27 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 
 	if(isDead(%clientId))
 		return;
-	if(IsJailed(%clientId)){
+	if(IsJailed(%clientId)) {
 		Client::sendMessage(%clientId, $MsgWhite, "You can't do that in jail.");
 		return;
 	}
 	%clientId.tabMenuSpam++;
-	if(%clientId.tabMenuSpam > 20){
+	if(%clientId.tabMenuSpam > 20) {
 		exploitBan(%clientId, "Item spam", 5);
 		return;
 	}
-	if(%option == "back")
-	{
+	if(%option == "back") {
 		MenuBeltGear(%clientId, %type, 1, %item);
 		return;
 	}
-	else if(%option == "examine")
-	{
+	else if(%option == "examine") {
 		WhatIs(%clientId, %item);
 		MenuBeltDrop(%clientid, %item, %type, %victim);
 		return;
 	}
-	else if(%option == "equip")
-	{
-		if (%type == "WeaponItems") {
-			RPGmountItem(%clientid, %item, $WeaponSlot);
-		}
-		else if (%type == "ArmorItems") {
-			Item::onUse(%clientId, %item);
-		}
+	else if(%option == "equip") {
+		Belt::EquipItem(%clientid, %item);
+		return;
 	}
 
 	if(%option == "dropb")
@@ -1760,13 +1753,31 @@ function Belt::GetDeathItems(%clientid, %killerId)
 	return %tmploot;
 }
 
+// handle equiping belt items
 function Belt::EquipItem(%clientid, %item) {
+	%count = belt::hasthisstuff(%clientId, %item);
+	if (%count <= 0) {
+		Client::sendMessage(%clientId, $MsgRed, "You do not have a " @ BeltItem::GetName(%item) @ ".~wbutton3.wav");
+		return;
+	}
+
+	%beltItemType = BeltItem::GetType(%item);
+
+	if (%beltItemType == "WeaponItems") {
+		RPGmountItem(%clientid, %item, $WeaponSlot);
+	}
+	else if (%beltItemType == "ArmorItems") {
+		Item::onUse(%clientId, %item);
+	}
+}
+
+function Belt::EquipAccessory(%clientid, %item) {
 	Client::sendMessage(%clientId, $MsgBeige, "You equipped " @ BeltItem::GetName(%item) @ ".~wCrossbow_Switch1.wav");
 	Belt::TakeThisStuff(%clientId, %item, 1);
 	Belt::GiveThisStuff(%clientid, %item @ "0", 1);
 }
 
-function Belt::UnequipItem(%clientid, %item) {
+function Belt::UnequipAccessory(%clientid, %item) {
 	%baseItem = String::getSubStr(%item, 0, String::len(%item)-1);	//remove the 0
 	Client::sendMessage(%clientId, $MsgBeige, "You unequipped " @ BeltItem::GetName(%baseItem) @ ".");
 	Belt::TakeThisStuff(%clientId, %item, 1);

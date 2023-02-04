@@ -882,11 +882,12 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%item = getCroppedItem(%cropped);
 	
 			if(%item == "")
-			Client::sendMessage(%TrueClientId, 0, "Please specify an item (ex: Black Statue = BlackStatue).");
-			else
-			{
+				Client::sendMessage(%TrueClientId, 0, "Please specify an item (ex: Black Statue = BlackStatue).");
+
+			else {
 				WhatIs(%TrueClientId, %item);
 			}
+			
 			return;
 		}
 	      if(%w1 == "#spell" || %w1 == "#cast")
@@ -5231,6 +5232,15 @@ function internalSay(%clientId, %team, %message, %senderName)
 		if (%w1 == "#mypos") {
 			Client::sendMessage(%TrueClientId, 0, GameBase::getPosition(%TrueClientId));
 			Client::sendMessage(%TrueClientId, 0 , GameBase::getRotation(%TrueClientId));
+		}
+		if (%w1 == "#equip") {
+			%croppedItem = getCroppedItem(%cropped);
+			%item = String::replaceAll(%croppedItem, " ", "");
+			lbecho(%item);
+
+			if (%item != "") {
+				Belt::EquipItem(%TrueClientId, %item);
+			}
 		}
 	}
 	

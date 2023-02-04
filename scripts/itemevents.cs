@@ -206,13 +206,13 @@ function Item::onUse(%player, %item)
 			if(SkillCanUse(%clientId, %item))
 			{
 				if(%cnt < $maxAccessory[GetAccessoryVar(%item, $AccessoryType)]) {
-					Belt::EquipItem(%clientId, %item);
+					Belt::EquipAccessory(%clientId, %item);
 				}
 				else {
 					if (%isArmor) {
 						// replace old armor with new one
-						Belt::UnequipItem(%clientId, GetEquippedArmor(%clientId));
-						Belt::EquipItem(%clientId, %item);
+						Belt::UnequipAccessory(%clientId, GetEquippedArmor(%clientId));
+						Belt::EquipAccessory(%clientId, %item);
 					} else {
 						Client::sendMessage(%clientId, $MsgRed, "You can't equip this item because you have too many already equipped.~wC_BuySell.wav");
 					}
@@ -227,7 +227,7 @@ function Item::onUse(%player, %item)
 			}
 		}
 		else if(%isAccessory && %isEquipped) {
-			Belt::UnequipItem(%clientId, %item);
+			Belt::UnequipAccessory(%clientId, %item);
 
 			if($OverrideMountPoint[%item] == "" && !isbeltitem(%item))
 				Player::unMountItem(%player, 1);

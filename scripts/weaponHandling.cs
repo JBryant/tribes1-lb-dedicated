@@ -57,13 +57,11 @@ function RPGmountItem(%player, %item, %slot)
 
 	%clientId = Player::getClient(%player);
 
-	if(SkillCanUse(%clientId, %item))
-	{
+	if(SkillCanUse(%clientId, %item)) {
 		Player::mountItem(%player, %item, %slot);
 		return True;
 	}
-	else
-	{
+	else {
 		Client::sendMessage(%clientId, $MsgRed, "You can't equip this item because you lack the necessary skills.~wC_BuySell.wav");
 		return False;
 	}
