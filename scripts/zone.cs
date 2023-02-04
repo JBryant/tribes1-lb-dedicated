@@ -528,13 +528,6 @@ function Zone::DoEnter(%z, %clientId)
 
 	storeData(%clientId, "zone", $Zone::FolderID[%z]);
 
-	// // end music for new music to start, but only if it is a new zone
-	// // keep the original music running if they are going in and out
-	// if(%clientId.repack && %newZone != %lastZone) {
-	// 	remoteeval(%clientId, RSound, 3);
-	// 	%clientId.MusicTicksLeft = 0;
-	// }
-
 	if($Zone::Type[%z] == "PROTECTED")
 	{
 		%msg = "You have entered " @ $Zone::Desc[%z] @ ".  This is protected territory.";
@@ -544,6 +537,12 @@ function Zone::DoEnter(%z, %clientId)
 	{
 		%msg = "You have entered " @ $Zone::Desc[%z] @ ".  Beware of enemies!";
 		%color = $MsgRed;
+
+		// if entering a dungeon change the music
+		if(%clientId.repack && %newZone != %lastZone) {
+			remoteeval(%clientId, RSound, 3);
+			%clientId.MusicTicksLeft = 0;
+		}
 	}
 	else if($Zone::Type[%z] == "WATER")
 	{
@@ -585,6 +584,12 @@ function Zone::DoExit(%z, %clientId)
 	{
 		%msg = "You have left " @ $Zone::Desc[%z] @ ".";
 		%color = $MsgBeige;
+
+		// if leaving a dungeon change the music
+		if(%clientId.repack && %newZone != %lastZone) {
+			remoteeval(%clientId, RSound, 3);
+			%clientId.MusicTicksLeft = 0;
+		}
 	}
 	else if($Zone::Type[%z] == "WATER")
 	{

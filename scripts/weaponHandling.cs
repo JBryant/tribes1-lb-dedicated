@@ -201,6 +201,7 @@ function GetBestRangedProj(%clientId, %item)
 	//This function was written for BOTS.  It WILL work for players, but it will defeat the purpose of manually
 	//equipping projectiles for each ranged weapon.
 
+	// test getting ammo items
 	%list = GetAccessoryList(%clientId, 10, -1);
 
 	%highest = -1;

@@ -184,35 +184,40 @@ function Item::onUse(%player, %item)
 
 	if(!IsDead(%clientId))
 	{
+		// needs to support more types (like talismans, badges, rings, etc)
+		%isArmor = %beltItemType == "ArmorItems";
 		%isAccessory = %beltItemType == "ArmorItems";
 		//this is how you toggle back and forth from equipped to carrying.
 		if(%isAccessory && !%isEquipped)
 		{
 			%cnt = 0;
-			%totalItems = GetEquippedAccessoriesCount(%clientId);
+			%totalItems = GetEquippedAccessoriesCountByBeltType(%clientI, %beltItemTyped);
+			%itemList = GetEquippedAccessoriesByBeltType(%clientId, %beltItemType);
 
-			for(%i = 1; %i <= %totalItems; %i++) {
+			for(%i = 0; %i <= %totalItems; %i++) {
 				%checkItem = getword(%itemList, %i);
 				%amnt = Belt::HasThisStuff(%clientId, %item);
 				
-				if(GetAccessoryVar(%checkItem, $AccessoryType) == GetAccessoryVar(%item, $AccessoryType) && %amnt > 0)
+				if(GetAccessoryVar(%checkItem, $AccessoryType) == GetAccessoryVar(%item, $AccessoryType) && %amnt > 0) {
 					%cnt += %amnt;
+				}
 			}
 
 			if(SkillCanUse(%clientId, %item))
 			{
-				if(%cnt < $maxAccessory[GetAccessoryVar(%item, $AccessoryType)])
-				{
-					Client::sendMessage(%clientId, $MsgBeige, "You equipped " @ BeltItem::GetName(%item) @ ".");
-
-					if(isbeltitem(%item)) {
-						// modify the belt
-						Belt::TakeThisStuff(%clientId, %item, 1);
-						Belt::GiveThisStuff(%clientid, %item @ "0", 1);
+				if(%cnt < $maxAccessory[GetAccessoryVar(%item, $AccessoryType)]) {
+					Belt::EquipItem(%clientId, %item);
+				}
+				else {
+					if (%isArmor) {
+						// replace old armor with new one
+						Belt::UnequipItem(%clientId, GetEquippedArmor(%clientId));
+						Belt::EquipItem(%clientId, %item);
+					} else {
+						Client::sendMessage(%clientId, $MsgRed, "You can't equip this item because you have too many already equipped.~wC_BuySell.wav");
 					}
 				}
-				else
-					Client::sendMessage(%clientId, $MsgRed, "You can't equip this item because you have too many already equipped.~wC_BuySell.wav");
+					
 			}
 			else
 				Client::sendMessage(%clientId, $MsgRed, "You can't equip this item because you lack the necessary skills.~wC_BuySell.wav");
@@ -221,23 +226,13 @@ function Item::onUse(%player, %item)
 				Player::mountItem(%player, %item @ "0", 1, 0);
 			}
 		}
-		else if(%isAccessory && %isEquipped)
-		{
-			%o = String::getSubStr(%item, 0, String::len(%item)-1);	//remove the 0
-			%itemName = BeltItem::GetName(String::getSubStr(%item, 0, String::len(%item)-1));
-			Client::sendMessage(%clientId, $MsgBeige, "You unequipped " @ %itemName @ ".");
-
-			if(isbeltitem(%item)) {
-				// modify the belt 
-				Belt::TakeThisStuff(%clientId, %item, 1);
-				Belt::GiveThisStuff(%clientid, %o, 1);
-			}
+		else if(%isAccessory && %isEquipped) {
+			Belt::UnequipItem(%clientId, %item);
 
 			if($OverrideMountPoint[%item] == "" && !isbeltitem(%item))
 				Player::unMountItem(%player, 1);
 		}
-		else
-		{
+		else {
 			RPGmountItem(%player, %item, $DefaultSlot);
 		}
 

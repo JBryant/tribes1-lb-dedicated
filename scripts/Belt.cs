@@ -1461,7 +1461,7 @@ function BeltItem::IsEquipped(%clientId, %item) {
 
 	if (%amnt > 0 && %itemIsWorn)
 		return true;
-		
+
 	return false;
 }
 
@@ -1495,7 +1495,7 @@ function Belt::GiveThisStuff(%clientid, %item, %amnt, %echo)
 		}
 
 		%list = Belt::AddToList(%list, %item@" "@%amnt);
-		echo(%list);
+
 		Storedata(%clientid, %type, %list);
 		refreshWeight(%clientId);
 	}
@@ -1664,34 +1664,35 @@ function Belt::BankGetNS(%clientid,%type)
 	return %bn@%list;
 }
 
-function Belt::packgen(%clientId, %tmploot){
-		if(Player::isAiControlled(%clientId))
-			TossLootbag(%clientId, %tmploot, 1, "*", 300);
+function Belt::packgen(%clientId, %tmploot) {
+	if(Player::isAiControlled(%clientId))
+		TossLootbag(%clientId, %tmploot, 1, "*", 300);
+	else
+	{
+		%namelist = rpg::getname(%clientId) @ ",";
+		if(fetchData(%clientId, "LCK") >= 0)
+			%tehLootBag = TossLootbag(%clientId, %tmploot, 5, %namelist, 0);//Cap(fetchData(%clientId, "LVL") * 300, 300, 0) //, 3600));
 		else
+			%tehLootBag = TossLootbag(%clientId, %tmploot, 5, %namelist, Cap(fetchData(%clientId, "LVL") * 0.2, 5, "inf"));
+		pecho("Packgen num: "@%tehLootBag);
+		pecho("Items: "@String::getSubStr(%tmploot, 0, 245));
+		for(%i=0;getword(%tmploot,%i)!=-1;%i++)
 		{
-			%namelist = rpg::getname(%clientId) @ ",";
-			if(fetchData(%clientId, "LCK") >= 0)
-				%tehLootBag = TossLootbag(%clientId, %tmploot, 5, %namelist, 0);//Cap(fetchData(%clientId, "LVL") * 300, 300, 0) //, 3600));
-			else
-				%tehLootBag = TossLootbag(%clientId, %tmploot, 5, %namelist, Cap(fetchData(%clientId, "LVL") * 0.2, 5, "inf"));
-			pecho("Packgen num: "@%tehLootBag);
-			pecho("Items: "@String::getSubStr(%tmploot, 0, 245));
-			for(%i=0;getword(%tmploot,%i)!=-1;%i++)
-			{
-				%a = getword(%tmploot,%i);
-				%b = getword(%tmploot,%i++);
+			%a = getword(%tmploot,%i);
+			%b = getword(%tmploot,%i++);
 
-				if($StealProtectedItem[%a] || $playerNoDrop[%a])
-				{
-					%ba = Belt::RemoveFromList(%tmploot, %a@" "@%b);
-					%tmploot = %ba;
-					%i-=2;
-				}
-				else
-					Belt::TakeThisStuff(%clientid, %a, %b);
+			if($StealProtectedItem[%a] || $playerNoDrop[%a])
+			{
+				%ba = Belt::RemoveFromList(%tmploot, %a@" "@%b);
+				%tmploot = %ba;
+				%i-=2;
 			}
+			else
+				Belt::TakeThisStuff(%clientid, %a, %b);
 		}
+	}
 }
+
 function Belt::GetDeathItems(%clientid, %killerId)
 {
 	%tmploot = "";
@@ -1757,6 +1758,19 @@ function Belt::GetDeathItems(%clientid, %killerId)
 	if(%tmploot == "")
 		%tmploot = " ";
 	return %tmploot;
+}
+
+function Belt::EquipItem(%clientid, %item) {
+	Client::sendMessage(%clientId, $MsgBeige, "You equipped " @ BeltItem::GetName(%item) @ ".~wCrossbow_Switch1.wav");
+	Belt::TakeThisStuff(%clientId, %item, 1);
+	Belt::GiveThisStuff(%clientid, %item @ "0", 1);
+}
+
+function Belt::UnequipItem(%clientid, %item) {
+	%baseItem = String::getSubStr(%item, 0, String::len(%item)-1);	//remove the 0
+	Client::sendMessage(%clientId, $MsgBeige, "You unequipped " @ BeltItem::GetName(%baseItem) @ ".");
+	Belt::TakeThisStuff(%clientId, %item, 1);
+	Belt::GiveThisStuff(%clientid, %baseItem, 1);
 }
 
 $count["AmmoItems"] = 0;

@@ -528,7 +528,17 @@ function UpdateAppearance(%clientId)
 	//Determine armor from shields
 	%armor = -1;
 	%shield = -1;
+	// TODO: this should not be necessary anymore
 	%list = GetAccessoryList(%clientId, 2, "3 7");
+
+	for(%i = 0; (%w = getCroppedItem(GetWord(%list, %i))) != -1; %i++)
+	{
+		lbecho(%w);
+		if($AccessoryVar[%w, $AccessoryType] == $BodyAccessoryType)
+			%armor = %w;
+		else if($AccessoryVar[%w, $AccessoryType] == $ShieldAccessoryType)
+			%shield = %w;
+	}
 
 	// equip his armor for him
 	%itemList = Belt::GetNS(%clientId, "ArmorItems");
@@ -540,15 +550,6 @@ function UpdateAppearance(%clientId)
 		if (BeltItem::isEquipped(%clientId, %item)) {
 			%armor = String::getSubStr(%item, 0, String::len(%item)-1);
 		}
-	}
-
-	for(%i = 0; (%w = getCroppedItem(GetWord(%list, %i))) != -1; %i++)
-	{
-		echo(%w);
-		if($AccessoryVar[%w, $AccessoryType] == $BodyAccessoryType)
-			%armor = %w;
-		else if($AccessoryVar[%w, $AccessoryType] == $ShieldAccessoryType)
-			%shield = %w;
 	}
 
 	%player = Client::getOwnedObject(%clientId);
@@ -2775,4 +2776,9 @@ function findGroundPos(%mpos, %sizex, %sizey)
 	}
 
 	return False;
+}
+
+// different echo util to keep track of my stupid echos
+function lbecho(%message) {
+	echo(%message);
 }

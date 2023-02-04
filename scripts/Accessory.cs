@@ -158,6 +158,7 @@ function getCroppedItem(%item)
 	return %nitem;
 }
 
+// Old GetAccessoryList - Expensive and not sure if needed anymore
 function GetAccessoryList(%clientId, %type, %filter)
 {
 	dbecho($dbechoMode, "GetAccessoryList(" @ %clientId @ ", " @ %type @ ", " @ %filter @ ")");
@@ -192,6 +193,7 @@ function GetAccessoryList(%clientId, %type, %filter)
 		}
 		return %list;
 	}
+
 	%max = getNumItems();
 	for(%i = 0; %i < %max; %i++)
 	{
@@ -286,11 +288,20 @@ function GetAccessoryList(%clientId, %type, %filter)
 }
 
 function GetEquippedAccessoriesCount(%clientId) {
-	return Belt::GetNS(%clientId, "ArmorItems");
+	// TODO: loop through all belt types to look for equipped items
+	// may never even need this function
+	%itemList = Belt::GetNS(%clientId, "ArmorItems");
+	%amnt = GetWord(%itemList, 0);
+
+	return %amnt;
 }
 
-function GetEquippedAccessories(%clientId) {
-	%itemList = Belt::GetNS(%clientId, "ArmorItems");
+function GetEquippedAccessoriesCountByBeltType(%clientId, %beltType) {
+	return GetWord(Belt::GetNS(%clientId, %beltType), 0);
+}
+
+function GetEquippedAccessoriesByBeltType(%clientId, %beltType) {
+	%itemList = Belt::GetNS(%clientId, %beltType);
 	%totalItems = GetWord(%itemList, 0);
 	%list = "";
 
@@ -298,14 +309,28 @@ function GetEquippedAccessories(%clientId) {
 		%item = getword(%itemList, %i);
 
 		if (BeltItem::isEquipped(%clientId, %item)) {
-			%list = %list @ " " @ %item;
+			if (%list == "")
+				%list = %list @ "" @ %item;
+			else
+				%list = %list @ " " @ %item;
 		}
 	}
 
 	return %list;
 }
 
-function GetEquippedAccessoriesByType(%clientId, %type) {
+function GetEquippedAccessories(%clientId) {
+	%list = GetEquippedAccessoriesByBeltType(%clientId, "ArmorItems");
+
+	// TODO: loop through all belt types to look for equipped items
+	return %list;
+}
+
+function GetEquippedArmor(%clientId) {
+	return GetEquippedAccessoriesByBeltType(%clientId, "ArmorItems");
+}
+
+function GetEquippedAccessoriesBySpecialVar(%clientId, %specialVar) {
 	// TODO: get more than just ArmorItem
 	%itemList = Belt::GetNS(%clientId, "ArmorItems");
 	%totalItems = GetWord(%itemList, 0);
@@ -320,7 +345,7 @@ function GetEquippedAccessoriesByType(%clientId, %type) {
 			for(%j = 0; GetWord(%av, %j) != -1; %j+=2) {
 				%w = GetWord(%av, %j);
 
-				if(String::findSubStr(%type, %w) != -1)
+				if(String::findSubStr(%specialVar, %w) != -1)
 					%list = %list @ " " @ %item;
 			}
 		}
@@ -329,13 +354,13 @@ function GetEquippedAccessoriesByType(%clientId, %type) {
 	return %list;
 }
 
-function AddPoints(%clientId, %char)
+function AddPoints(%clientId, %specialVar)
 {
-	dbecho($dbechoMode, "AddPoints(" @ %clientId @ ", " @ %char @ ")");
+	dbecho($dbechoMode, "AddPoints(" @ %clientId @ ", " @ %specialVar @ ")");
 
 	%add = 0;
-	// %list = GetAccessoryList(%clientId, 4, %char);
-	%list = GetEquippedAccessoriesByType(%clientId, %char);
+	// %list = GetAccessoryList(%clientId, 4, %specialVar);
+	%list = GetEquippedAccessoriesBySpecialVar(%clientId, %specialVar);
 
 	for(%i = 0; GetWord(%list, %i) != -1; %i++)
 	{
@@ -368,7 +393,7 @@ function AddPoints(%clientId, %char)
 		for(%j = 0; GetWord(%tmp, %j) != -1; %j+=2)
 		{
 			%e = GetWord(%tmp, %j);
-			if(String::findSubStr(%char, %e) != -1)
+			if(String::findSubStr(%specialVar, %e) != -1)
 				%add += GetWord(%tmp, %j+1) * %count;
 		}
 	}
@@ -376,16 +401,16 @@ function AddPoints(%clientId, %char)
 	return %add;
 }
 
-function AddItemSpecificPoints(%item, %char)
+function AddItemSpecificPoints(%item, %specialVar)
 {
-	dbecho($dbechoMode, "AddItemSpecificPoints(" @ %item @ ", " @ %char @ ")");
+	dbecho($dbechoMode, "AddItemSpecificPoints(" @ %item @ ", " @ %specialVar @ ")");
 
 	%tmp = GetAccessoryVar(%item, $SpecialVar);
 
 	for(%j = 0; GetWord(%tmp, %j) != -1; %j+=2)
 	{
 		%e = GetWord(%tmp, %j);
-		if(%e == %char)
+		if(%e == %specialVar)
 		{
 			%info = GetWord(%tmp, %j+1);
 			break;

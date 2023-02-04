@@ -401,6 +401,7 @@ function Game::menuRequest(%clientId)
 			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Party options..." , "partyoptions");
 			if($sanctionedAdmin[rpg::getname(%clientId)] > 0)
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Admin controls", "admincontrol");
+			// If they have a ranged weapon, we can change this to not use GetAccessoryList in the future
 			if(GetAccessoryList(%clientId, 9, -1) != "")
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Ranged weapons..." , "rweapons");
 		}
@@ -570,6 +571,7 @@ function processMenuOptions(%clientId, %option)
 	}
 	else if(%opt == "rweapons")
 	{
+		// If they have a ranged weapon, we can change this to not use GetAccessoryList in the future
 		%list = GetAccessoryList(%clientId, 9, -1);
 
 		Client::buildMenu(%clientId, "Ranged weapons:", "selectrweapon", true);
@@ -928,6 +930,7 @@ function processMenuselectspell(%clientId, %option)
 }
 function processMenuselectrweapon(%clientId, %item)
 {
+	// If they have a ranged weapon, we can change this to not use GetAccessoryList in the future
 	%list = GetAccessoryList(%clientId, 10, -1);
 
 	Client::buildMenu(%clientId, "Projectiles:", "selectproj", true);

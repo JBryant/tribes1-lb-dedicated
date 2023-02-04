@@ -585,7 +585,7 @@ function AddSkillPoint(%clientId, %skill, %delta)
 	%d = round(%c * 10);
 	%e = (%d / 10) * 1.000001;
 
-	$PlayerSkill[%clientId, %skill] = %e;
+	$PlayerSkill[%clientId, %skill] = FixDecimals(%e);
 
 	return True;
 }

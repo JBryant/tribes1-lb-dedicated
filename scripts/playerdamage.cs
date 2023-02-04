@@ -87,10 +87,17 @@ function Player::onKilled(%this)
 	%clientId = Player::getClient(%this);
 	%killerId = fetchData(%clientId, "tmpkillerid");
 	storeData(%clientId, "tmpkillerid", "");
-
-	%iscp = Player::isAIcontrolled(%clientId);	if(%iscp)	{
+
+
+	%iscp = Player::isAIcontrolled(%clientId);
+	if(%iscp)
+	{
 		%AIname = fetchData(%clientId, "BotInfoAiName");
-		storeData(%clientId, "frozen", True);		AI::setVar(%AIname, SpotDist, 0);		AI::newDirectiveRemove(%AIname, 99);		ai::callbackPeriodic(%aiName, 0, AI::Periodic);	}
+		storeData(%clientId, "frozen", True);
+		AI::setVar(%AIname, SpotDist, 0);
+		AI::newDirectiveRemove(%AIname, 99);
+		ai::callbackPeriodic(%aiName, 0, AI::Periodic);
+	}
 
 	//revert
 	Client::setControlObject(%clientId.possessId, %clientId.possessId);
@@ -153,7 +160,8 @@ function Player::onKilled(%this)
 					%flag = True;
 
 				if(fetchData(%clientId, "LCK") < 0 && Player::isAiControlled(%clientId))
-					%flag = True;
+					%flag = True;
+
 				if($neverdropitem[%a] == True)
 					%flag = False;//We don't want these to be found in loot bags. Typically set in globals.cs.
 
@@ -194,8 +202,29 @@ function Player::onKilled(%this)
 				}
 			}
 		}
-		%weapon = Player::getMountedItem(%clientId,$WeaponSlot);		if(%weapon != -1) {			Player::unMountItem(%clientId,$WeaponSlot);		}
-		%beltstuff = Belt::GetDeathItems(%clientid, %killerId);		if((String::len(%tmploot) + String::len(%beltstuff)) < 200)			%tmploot = %tmploot @ %beltstuff;		else		{			if(Player::isAiControlled(%clientId))				TossLootbag(%clientId, %beltstuff, 1, "*", 300);			else			{				%namelist = rpg::getname(%clientId) @ ",";				if(fetchData(%clientId, "LCK") >= 0)					%tehLootBag = TossLootbag(%clientId, %beltstuff, 5, %namelist, 0);				else					%tehLootBag = TossLootbag(%clientId, %beltstuff, 5, %namelist, Cap(fetchData(%clientId, "LVL") * 0.2, 5, "inf"));			}			%beltstuff = "";		}
+
+		%weapon = Player::getMountedItem(%clientId,$WeaponSlot);
+		if(%weapon != -1) {
+			Player::unMountItem(%clientId,$WeaponSlot);
+		}
+
+		%beltstuff = Belt::GetDeathItems(%clientid, %killerId);
+		if((String::len(%tmploot) + String::len(%beltstuff)) < 200)
+			%tmploot = %tmploot @ %beltstuff;
+		else
+		{
+			if(Player::isAiControlled(%clientId))
+				TossLootbag(%clientId, %beltstuff, 1, "*", 300);
+			else
+			{
+				%namelist = rpg::getname(%clientId) @ ",";
+				if(fetchData(%clientId, "LCK") >= 0)
+					%tehLootBag = TossLootbag(%clientId, %beltstuff, 5, %namelist, 0);
+				else
+					%tehLootBag = TossLootbag(%clientId, %beltstuff, 5, %namelist, Cap(fetchData(%clientId, "LVL") * 0.2, 5, "inf"));
+			}
+			%beltstuff = "";
+		}
 
 		if(%tmploot != "" && %tmploot != " ")
 		{
@@ -374,7 +403,7 @@ function Player::onKilled(%this)
 	}
 }
 
-function Player::onDamage(%this,%type,%value,%pos,%vec,%mom,%vertPos,%rweapon,%object,%weapon,%preCalcMiss)
+function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rweapon, %object, %weapon, %preCalcMiss)
 {
 	dbecho($dbechoMode2, "Player::onDamage(" @ %this @ ", " @ %type @ ", " @ %value @ ", " @ %pos @ ", " @ %vec @ ", " @ %mom @ ", " @ %vertPos @ ", " @ %rweapon @ ", " @ %object @ ", " @ %weapon @ ", " @ %preCalcMiss @ ")");
 
@@ -442,7 +471,8 @@ function Player::onDamage(%this,%type,%value,%pos,%vec,%mom,%vertPos,%rweapon,%o
 
 			//Bash
 			if(fetchData(%shooterClient, "NextHitBash"))
-			{
+			{
+
 				%delay = 1;
 				if(%skilltype == $SkillBludgeoning)
 				{
@@ -453,7 +483,9 @@ function Player::onDamage(%this,%type,%value,%pos,%vec,%mom,%vertPos,%rweapon,%o
 					%Bash = True;
 
 					%delay = Cap(101 - fetchData(%shooterClient, "LVL"), 5, 50);
-				}				if(%shooterClient.repack > 33)					remoteEval(%shooterClient, "rpgbarhud", %delay, 7, 2, "||", 1, "Bash regen");
+				}
+				if(%shooterClient.repack > 33)
+					remoteEval(%shooterClient, "rpgbarhud", %delay, 7, 2, "||", 1, "Bash regen");
 
 				schedule("storeData(" @ %shooterClient @ ", \"blockBash\", \"\");", %delay);
 				storeData(%shooterClient, "NextHitBash", "");
@@ -655,7 +687,10 @@ function Player::onDamage(%this,%type,%value,%pos,%vec,%mom,%vertPos,%rweapon,%o
 
 			%hitby = Client::getName(%shooterClient);
 			%msgcolor = "";
-			%hitpresent = $skillHitPresent[%skilltype];			if(%hitpresent == "")				%hitpresent = "hit";
+
+			%hitpresent = $skillHitPresent[%skilltype];
+			if(%hitpresent == "")
+				%hitpresent = "hit";
 
 			if(%isMiss)
 			{
@@ -729,7 +764,8 @@ function Player::onDamage(%this,%type,%value,%pos,%vec,%mom,%vertPos,%rweapon,%o
 				if(%value < 0)
 					%value = 0;
 				%backupValue = %value;
-
+
+
 				%prehithp = fetchData(%damagedClient,"HP");
 
 				%rhp = refreshHP(%damagedClient, %value);
@@ -801,7 +837,12 @@ function Player::onDamage(%this,%type,%value,%pos,%vec,%mom,%vertPos,%rweapon,%o
 						%saction = "bashed";
 					}
 					else
-					{						%hitpast = $skillHitPast[%skilltype];						if(%hitpast == "")							%hitpast = "damaged";						%daction = %hitpast;						%saction = %hitpast;
+					{
+						%hitpast = $skillHitPast[%skilltype];
+						if(%hitpast == "")
+							%hitpast = "damaged";
+						%daction = %hitpast;
+						%saction = %hitpast;
 					}
 
 					//--------------------
@@ -836,7 +877,10 @@ function Player::onDamage(%this,%type,%value,%pos,%vec,%mom,%vertPos,%rweapon,%o
 						else
 							%sname = Client::getName(%shooterClient);
 						%dname = Client::getName(%damagedClient);
-					}					%hitpresentrad = %hitpresent;					if(%hitpresentrad == "slash")						%hitpresentrad = "slashe";
+					}
+					%hitpresentrad = %hitpresent;
+					if(%hitpresentrad == "slash")
+						%hitpresentrad = "slashe";
 					radiusAllExcept(%damagedClient, %shooterClient, "<f1>"@%sname @ "<ff> "@%hitpresentrad@"s " @ %dname @ " for <f2>" @ %convValue @ "<ff> points of damage!", true);
 				}
 				else if(%convValue < 0)
@@ -880,7 +924,16 @@ function Player::onDamage(%this,%type,%value,%pos,%vec,%mom,%vertPos,%rweapon,%o
 						}
 					}
 				}
-				%flash = %prehithp;				%flash = %convValue / %flash;				%flash += 0.05;				if (%flash > 1)					%flash = 1;				Player::SetDamageFlash(%this,%flash);				%blood = floor(%flash*10);				for(%i=1; %i <= %blood; %i++)					bloodSpray(%damagedClient);
+
+				%flash = %prehithp;
+				%flash = %convValue / %flash;
+				%flash += 0.05;
+				if (%flash > 1)
+					%flash = 1;
+				Player::SetDamageFlash(%this,%flash);
+				%blood = floor(%flash*10);
+				for(%i=1; %i <= %blood; %i++)
+					bloodSpray(%damagedClient);
 
 				//slow the player down for a bit
 				if(!Player::isAiControlled(%damagedClient))
@@ -935,9 +988,24 @@ function Player::onDamage(%this,%type,%value,%pos,%vec,%mom,%vertPos,%rweapon,%o
 		}
 	}
 }
-function bloodSpray(%client){
+
+function bloodSpray(%client){
 	if(BloodSpot.shapefile == False)
-		return;	$los::object = "";	%player = Client::getOwnedObject(%client);	if(GameBase::getLOSInfo(%player,5,(getRandom()*6.29317)@" "@(getRandom()*6.29317)@" "@(getRandom()*6.29317))){		%target = $los::object;		%obj = getObjectType(%target);		if(%obj != "Player"){			%blood = newObject("Blood", StaticShape, BloodSpot, true);			%finalpos = $los::position;			gamebase::setposition(%blood,%finalpos);			gamebase::setRotation(%blood,vector::add(vector::getrotation($los::normal),"1.57 0 0"));			Item::pop(%blood);		}	}}
+		return;
+	$los::object = "";
+	%player = Client::getOwnedObject(%client);
+	if(GameBase::getLOSInfo(%player,5,(getRandom()*6.29317)@" "@(getRandom()*6.29317)@" "@(getRandom()*6.29317))){
+		%target = $los::object;
+		%obj = getObjectType(%target);
+		if(%obj != "Player"){
+			%blood = newObject("Blood", StaticShape, BloodSpot, true);
+			%finalpos = $los::position;
+			gamebase::setposition(%blood,%finalpos);
+			gamebase::setRotation(%blood,vector::add(vector::getrotation($los::normal),"1.57 0 0"));
+			Item::pop(%blood);
+		}
+	}
+}
 
 function remoteKill(%clientId)
 {
