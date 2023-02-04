@@ -1431,6 +1431,7 @@ function BeltItem::Add(%name, %item, %type, %weight, %cost)
 {
 	%num = $count[%type]++;
 	$beltItemData[$numBeltItems] = %item;
+	$beltItemNameToItem[$name] = %item;
 	$numBeltItems++;
 	$beltitem[%num, "Num", %type] = %item;
 	$beltitem[%item, "Item"] = %item;
@@ -1756,6 +1757,7 @@ function Belt::GetDeathItems(%clientid, %killerId)
 // handle equiping belt items
 function Belt::EquipItem(%clientid, %item) {
 	%count = belt::hasthisstuff(%clientId, %item);
+	
 	if (%count <= 0) {
 		Client::sendMessage(%clientId, $MsgRed, "You do not have a " @ BeltItem::GetName(%item) @ ".~wbutton3.wav");
 		return;

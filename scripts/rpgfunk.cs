@@ -2139,23 +2139,21 @@ function RemoveFromTargetList(%clientId, %cl)
 	}
 }
 
-//WhatIs can now be called from anywhere, such as menus.
-function WhatIs(%clientId, %item)
-{
-	dbecho($dbechoMode, "WhatIs(" @ %item @ ")");
+//Original code from Phantom Worlds RPG
+//This is the first time this has been outside that server
+//This allows the #w command to accept spaces in the names of items.
+//So you can #w Studded Leather Armor instead of just #w studdedleather
+//The original syntax still works though.
+// Moved this to a helper function for more use -LongBow
+function FindItemByName(%item) {
+	%foundItem = "";
 
-
-	//Original code from Phantom Worlds RPG
-	//This is the first time this has been outside that server
-	//This allows the #w command to accept spaces in the names of items.
-	//So you can #w Studded Leather Armor instead of just #w studdedleather
-	//The original syntax still works though.
 	if(%item.description == False && $beltitem[%item, "Name"] == ""){
 		%i = 0;
 		for(%i = 0; $beltItemData[%i] != ""; %i++)
 		{
 			if(string::icompare($beltitem[$beltItemData[%i], "Name"],%item) == 0){
-				%item = $beltItemData[%i];
+				%foundItem = $beltItemData[%i];
 				%belt = True;
 				break;
 			}
@@ -2166,14 +2164,26 @@ function WhatIs(%clientId, %item)
 			{
 				%checkItem = getItemData(%i);
 				if(string::icompare(%checkItem.description, %item) == 0){
-					%item = %checkItem;
+					%foundItem = %checkItem;
 					break;
 				}
 			}
 		}
 	}
 
+	return %foundItem;
+}
 
+//WhatIs can now be called from anywhere, such as menus.
+function WhatIs(%clientId, %item)
+{
+	dbecho($dbechoMode, "WhatIs(" @ %item @ ")");
+
+	%foundItem = FindItemByName(%item);
+
+	if (%foundItem != "") {
+		%item = %foundItem;
+	}
 
 	//--------- GATHER INFO ------------------
 	if(isBeltItem(%item)){

