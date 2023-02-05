@@ -478,12 +478,15 @@ function GetCurrentlyWearingArmor(%clientId)
 
 	//the $ArmorList is present only for this function so far, in order to speed things up and not have to cycle thru
 	//each and every item in the game
-	for(%i = 1; $ArmorList[%i] != ""; %i++)
-	{
-		if(Player::getItemCount(%clientId, $ArmorList[%i] @ "0"))
-			return $ArmorList[%i];
-	}
-	return "";
+	// for(%i = 1; $ArmorList[%i] != ""; %i++)
+	// {
+	// 	if(Player::getItemCount(%clientId, $ArmorList[%i] @ "0"))
+	// 		return $ArmorList[%i];
+	// }
+
+	// We no longer need to loop through all armors, just directly read from belt with GetEquippedArmor();
+	// Much faster and efficient -LongBow
+	return GetEquippedArmor(%clientId);
 }
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

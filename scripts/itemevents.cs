@@ -30,9 +30,9 @@ function Item::onCollision(%this,%object)
 	%clientId = Player::getClient(%object);
 	%armor = Player::getArmor(%clientId);
 
-	if(getObjectType(%object) == "Player" && !IsDead(%clientId))
-      {
+	if(getObjectType(%object) == "Player" && !IsDead(%clientId)) {
 		%time = getIntegerTime(true) >> 5;
+		
 		if(%time - %clientId.lastItemPickupTime <= 0.1)
 			return 0;
 
@@ -40,18 +40,16 @@ function Item::onCollision(%this,%object)
 
 		%item = Item::getItemData(%this);
 
-            if(%item == "Lootbag")
-            {
+		if(%item == "Lootbag") {
 			%msg = "";
 
 			%ownerName = GetWord($loot[%this], 0);
 			%namelist = GetWord($loot[%this], 1);
 			if($loot[%this] == "")
 				%msg = "You found an empty backpack.";
-			else
-			{
-				if(IsInCommaList(%namelist, Client::getName(%clientId)) || %namelist == "*")
-				{
+
+			else {
+				if(IsInCommaList(%namelist, Client::getName(%clientId)) || %namelist == "*") {
 					if(String::ICompare(%ownerName, Client::getName(%clientId)) == 0)
 						%msg = "You found one of your backpacks.";
 					else if(%ownerName == "*")
@@ -61,8 +59,7 @@ function Item::onCollision(%this,%object)
 				}
 			}
 
-			if(%msg != "")
-			{
+			if(%msg != "") {
 				%newloot = String::getSubStr($loot[%this], String::len(%ownerName)+String::len(%namelist)+2, 99999);
 
 				Client::sendMessage(%clientId, 0, %msg);
@@ -102,18 +99,17 @@ function Item::onCollision(%this,%object)
 				deleteObject(%this);
 				ClearEvents(%this);
 			}
-			else
-			{
+			else {
 				if(%ownerName == "*")
 					Client::sendMessage(%clientId, $MsgRed, "You do not have the right to take this backpack.");
 				else
 					Client::sendMessage(%clientId, $MsgRed, "You do not have the right to take " @ %ownerName @ "'s backpack.");
 			}
-            }
-            else if(%item.className == "Projectile")
-            {
+		}
+        else if(%item.className == "Projectile") {
 			%damagedClient = %clientId;
 			%shooterClient = %this.owner;
+
 			if(%shooterClient != "")
 			{
 				%vec = Vector::getDistance("0 0 0", Item::getVelocity(%this));
@@ -140,27 +136,22 @@ function Item::onCollision(%this,%object)
 
 			deleteObject(%this);
 		}
-            else if(%item.className == "Accessory" || $LoreItem[%item] == True)
-            {
-			if(Item::giveItem(%clientId, %item, 1, True))
-			{
+        else if(%item.className == "Accessory" || $LoreItem[%item] == True) {
+			if(Item::giveItem(%clientId, %item, 1, True)) {
 				Item::playPickupSound(%this);
 				RefreshAll(%clientId);
 				deleteObject(%this);
 			}
 		}
-		else if(%item.className == "TownBot")
-		{
+		else if(%item.className == "TownBot") {
 			//do nothing.
 		}
-            else
-            {
-            	//%count = Player::getItemCount(%object,%item);
-            	if(Item::giveItem(%object, %item, %this.delta, True))
-                  {
-                  	Item::playPickupSound(%this);
+        else {
+            //%count = Player::getItemCount(%object,%item);
+            if(Item::giveItem(%object, %item, %this.delta, True)) {
+                Item::playPickupSound(%this);
 				RefreshAll(%clientId);
-                        Item::respawn(%this);
+                Item::respawn(%this);
 			}
 		}
 	}
@@ -211,8 +202,14 @@ function Item::onUse(%player, %item)
 				else {
 					if (%isArmor) {
 						// replace old armor with new one
-						Belt::UnequipAccessory(%clientId, GetEquippedArmor(%clientId));
-						Belt::EquipAccessory(%clientId, %item);
+						%equippedArmor = GetEquippedArmor(%clientId);
+						
+						if  (%item @ "0" == %equippedArmor) {
+							Client::sendMessage(%clientId, $MsgRed, "You already have this item equipped.~wC_BuySell.wav");
+						} else {
+							Belt::UnequipAccessory(%clientId, %equippedArmor);
+							Belt::EquipAccessory(%clientId, %item);
+						}
 					} else {
 						Client::sendMessage(%clientId, $MsgRed, "You can't equip this item because you have too many already equipped.~wC_BuySell.wav");
 					}

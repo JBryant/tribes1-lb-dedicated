@@ -533,7 +533,6 @@ function UpdateAppearance(%clientId)
 
 	for(%i = 0; (%w = getCroppedItem(GetWord(%list, %i))) != -1; %i++)
 	{
-		lbecho(%w);
 		if($AccessoryVar[%w, $AccessoryType] == $BodyAccessoryType)
 			%armor = %w;
 		else if($AccessoryVar[%w, $AccessoryType] == $ShieldAccessoryType)
@@ -566,8 +565,11 @@ function UpdateAppearance(%clientId)
 	{
 		%skinbase = "rpgbase";
 
-		if(%armor != -1)
+		if(%armor != -1) {
 			%skinbase = $ArmorSkin[%armor];
+		}
+
+		%p = %race @ %apm @ %cw;
 	}
 	else if(%race == "DeathKnight")
 	{
@@ -586,8 +588,7 @@ function UpdateAppearance(%clientId)
 		%cw = "Armor22";
 		%armor = 0;
 	}
-	else
-	{
+	else {
 		%p = $RaceToArmorType[%race];
 		%armor = -1;
 	}
@@ -598,13 +599,12 @@ function UpdateAppearance(%clientId)
 	//=================================
 	// Update player model
 	//=================================
-	if(%armor != -1)
+	if(%armor != -1) {
 		%p = %race @ %apm @ %cw;
+	}
 
 	%ae = GameBase::getEnergy(%player);
-
-	if(Player::getArmor(%clientId) != %p && %p != "")
-	{
+	if(Player::getArmor(%clientId) != %p && %p != "") {
 		Player::setArmor(%clientId, %p);
 		GameBase::setEnergy(%player, %ae);
 	}
@@ -612,16 +612,13 @@ function UpdateAppearance(%clientId)
 	//=================================
 	// Update shields and Orb
 	//=================================
-	if(%shield != -1)
-	{
-		if(Player::getMountedItem(%clientId, 2) != %shield)
-		{
+	if(%shield != -1) {
+		if(Player::getMountedItem(%clientId, 2) != %shield) {
 			Player::unmountItem(%clientId, 2);
 			Player::mountItem(%clientId, %shield, 2);
 		}
 	}
-	else
-	{
+	else {
 		if(Player::getMountedItem(%clientId, 2) != -1)
 			Player::unmountItem(%clientId, 2);
 

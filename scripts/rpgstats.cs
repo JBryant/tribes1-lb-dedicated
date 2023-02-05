@@ -37,11 +37,11 @@ function fetchData(%clientId, %type)
 		%a = AddPoints(%clientId, 7);
 		%b = AddBonusStatePoints(%clientId, "DEF");
 		%c = (%a + %b);
-		%d = (fetchData(%clientId, "OverweightStep") * 7.0) / 100;
-		%e = Cap(%c - (%c * %d), 0, "inf");
+		// don't make armor go down if you are over weight
+		//%d = (fetchData(%clientId, "OverweightStep") * 7.0) / 100;
+		//%e = Cap(%c - (%c * %d), 0, "inf");
 
-		echo(floor(%e));
-		return floor(%e);
+		return floor(%c);
 	}
 	else if(%type == "MDEF")
 	{

@@ -83,7 +83,20 @@ function RefreshWeight(%clientId)
 		%changeweightstep = 5;
 
 		//determine the new armor to use
-		%newarmor = $ArmorForSpeed[fetchData(%clientId, "RACE"), 0];
+		// figure out if robed or not
+		%race = fetchData(%clientId, "RACE");
+		%currentArmor = Player::getArmor(%clientId);
+		%isRobed = String::findSubStr(%currentArmor, "Robed") != -1;
+		%isFemale = String::findSubStr(%currentArmor, "FemaleHuman") != -1;
+
+		if (%isRobed) {
+			if (%isFemale)
+				%race = "FemaleHumanRobed";
+			else
+				%race = "MaleHumanRobed";
+		}
+
+		%newarmor = $ArmorForSpeed[%race, 0];
 		%spill = %weight - fetchData(%clientId, "MaxWeight");
 
 		%num = floor(%spill / %changeweightstep);
@@ -93,8 +106,9 @@ function RefreshWeight(%clientId)
 			//overweight, select appropriate armor
 			for(%i = -1; %i >= -%num; %i--)
 			{
-				if($ArmorForSpeed[fetchData(%clientId, "RACE"), %i] != "")
-					%newarmor = $ArmorForSpeed[fetchData(%clientId, "RACE"), %i];
+				if($ArmorForSpeed[%race, %i] != "") {
+					%newarmor = $ArmorForSpeed[%race, %i];
+				}
 				else
 					break;
 			}
@@ -103,20 +117,19 @@ function RefreshWeight(%clientId)
 		{
 			//when not overweight, the special armor-modifying items come in
 			%x = $GetWeight::ArmorMod;
-			if(%x > 0)
-				%newarmor = $ArmorForSpeed[fetchData(%clientId, "RACE"), %x];
+			if(%x > 0) {
+				%newarmor = $ArmorForSpeed[%race, %x];
+			}
 		}
 	}
-	else
-	{
-		%newarmor = $ArmorForSpeed[fetchData(%clientId, "RACE"), -5];
+	else {
+		%newarmor = $ArmorForSpeed[%race, -5];
 	}
 
 	%a = Player::getArmor(%clientId);
 	%ae = GameBase::getEnergy(%player);
 
-	if(%a != %newarmor && %newarmor != "")
-	{
+	if(%a != %newarmor && %newarmor != "") {
 		//set the new armor
 		Player::setArmor(%clientId, %newarmor);
 		GameBase::setEnergy(%player, %ae);
