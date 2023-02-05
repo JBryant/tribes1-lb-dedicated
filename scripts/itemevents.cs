@@ -173,16 +173,15 @@ function Item::onUse(%player, %item)
 	%beltItemType = BeltItem::GetType(%item);
 	%isEquipped = BeltItem::IsEquipped(%clientId, %item);
 
-	if(!IsDead(%clientId))
-	{
+	if(!IsDead(%clientId)) {
 		// needs to support more types (like talismans, badges, rings, etc)
 		%isArmor = %beltItemType == "ArmorItems";
-		%isAccessory = %beltItemType == "ArmorItems";
+		%isAccessory = %beltItemType == "ArmorItems" || %beltItemType == "AccessoryItems";
 		//this is how you toggle back and forth from equipped to carrying.
 		if(%isAccessory && !%isEquipped)
 		{
 			%cnt = 0;
-			%totalItems = GetEquippedAccessoriesCountByBeltType(%clientI, %beltItemTyped);
+			%totalItems = GetEquippedAccessoriesCountByBeltType(%clientId, %beltItemTyped);
 			%itemList = GetEquippedAccessoriesByBeltType(%clientId, %beltItemType);
 
 			for(%i = 0; %i <= %totalItems; %i++) {
@@ -202,7 +201,7 @@ function Item::onUse(%player, %item)
 				else {
 					if (%isArmor) {
 						// replace old armor with new one
-						%equippedArmor = GetEquippedArmor(%clientId);
+						%equippedArmor = GetCurrentlyWearingArmor(%clientId) @ "0";
 						
 						if  (%item @ "0" == %equippedArmor) {
 							Client::sendMessage(%clientId, $MsgRed, "You already have this item equipped.~wC_BuySell.wav");

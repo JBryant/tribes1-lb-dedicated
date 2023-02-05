@@ -40,23 +40,36 @@ function GetWeight(%clientId)
 	$GetWeight::ArmorMod = "";
 	%total = 0;
 
-	//add up items
-	%max = getNumItems();
-	for(%i = 0; %i < %max; %i++)
-	{
-		%checkItem = getItemData(%i);
-		%itemcount = Player::getItemCount(%clientId, %checkItem);
+	// old add up items - much slower
+	// %max = getNumItems();
+	// for(%i = 0; %i < %max; %i++)
+	// {
+	// 	%checkItem = getItemData(%i);
+	// 	%itemcount = Player::getItemCount(%clientId, %checkItem);
 
-		if(%itemcount)
-		{
-			%weight = GetAccessoryVar(%checkItem, $Weight);
-			if(%weight != "" && %weight != False)
-				%total += %weight * %itemcount;
+	// 	if(%itemcount)
+	// 	{
+	// 		%weight = GetAccessoryVar(%checkItem, $Weight);
+	// 		if(%weight != "" && %weight != False)
+	// 			%total += %weight * %itemcount;
 
-			//Replaces the laggy AddPoints(%clientId, 8) in RefreshWeight (the real lag comes from GetAccessoryList however)
-			%specialvar = GetAccessoryVar(%checkItem, $SpecialVar);
-			if(GetWord(%specialvar, 0) == 8 && %checkItem.className == Equipped)
-				$GetWeight::ArmorMod = GetWord(%specialvar, 1);
+	// 		//Replaces the laggy AddPoints(%clientId, 8) in RefreshWeight (the real lag comes from GetAccessoryList however)
+	// 		%specialvar = GetAccessoryVar(%checkItem, $SpecialVar);
+	// 		if(GetWord(%specialvar, 0) == 8 && %checkItem.className == Equipped)
+	// 			$GetWeight::ArmorMod = GetWord(%specialvar, 1);
+	// 	}
+	// }
+
+	// loop through equipped accessory items to modify their special vars
+	%totalItems = GetEquippedAccessoriesCountByBeltType(%clientid, "AccessoryItems");
+	%itemList = GetEquippedAccessoriesByBeltType(%clientid, "AccessoryItems");
+
+	for(%i = 0; %i <= %totalItems; %i++) {
+		%checkItem = getword(%itemList, %i);
+		%specialvar = GetAccessoryVar(%checkItem, $SpecialVar);
+
+		if(GetWord(%specialvar, 0) == 8) {
+			$GetWeight::ArmorMod = GetWord(%specialvar, 1);
 		}
 	}
 

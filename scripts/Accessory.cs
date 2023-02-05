@@ -92,7 +92,7 @@ $maxAccessory[$TalismanAccessoryType] = 1;
 
 //these are used for $AccessoryVar
 $AccessoryType = 1;			//(used in item.cs)
-$SpecialVar = 2;				//(used in player.cs)
+$SpecialVar = 2;			//(used in player.cs)
 $Weight = 3;				//(used in rpgfunk.cs)
 $ShopIndex = 4;
 $MiscInfo = 5;
@@ -320,10 +320,7 @@ function GetEquippedAccessoriesByBeltType(%clientId, %beltType) {
 }
 
 function GetEquippedAccessories(%clientId) {
-	%list = GetEquippedAccessoriesByBeltType(%clientId, "ArmorItems");
-
-	// TODO: loop through all belt types to look for equipped items
-	return %list;
+	return GetEquippedAccessoriesByBeltType(%clientId, "AccessoryItems");
 }
 
 function GetEquippedArmor(%clientId) {
@@ -331,13 +328,27 @@ function GetEquippedArmor(%clientId) {
 }
 
 function GetEquippedAccessoriesBySpecialVar(%clientId, %specialVar) {
-	// TODO: get more than just ArmorItem
-	%itemList = Belt::GetNS(%clientId, "ArmorItems");
-	%totalItems = GetWord(%itemList, 0);
 	%list = "";
 
-	for(%i = 1; %i <= %totalItems; %i++) {
-		%item = getword(%itemList, %i);
+	%armorList = Belt::GetNS(%clientId, "ArmorItems");
+	for(%i = 1; %i <= GetWord(%armorList, 0); %i++) {
+		%item = getword(%armorList, %i);
+
+		if (BeltItem::isEquipped(%clientId, %item)) {
+			%av = GetAccessoryVar(%item, $SpecialVar);
+
+			for(%j = 0; GetWord(%av, %j) != -1; %j+=2) {
+				%w = GetWord(%av, %j);
+
+				if(String::findSubStr(%specialVar, %w) != -1)
+					%list = %list @ " " @ %item;
+			}
+		}
+	}
+
+	%accessoryList = Belt::GetNS(%clientId, "AccessoryItems");
+	for(%i = 1; %i <= GetWord(%accessoryList, 0); %i++) {
+		%item = getword(%accessoryList, %i);
 
 		if (BeltItem::isEquipped(%clientId, %item)) {
 			%av = GetAccessoryVar(%item, $SpecialVar);
@@ -354,10 +365,7 @@ function GetEquippedAccessoriesBySpecialVar(%clientId, %specialVar) {
 	return %list;
 }
 
-function AddPoints(%clientId, %specialVar)
-{
-	dbecho($dbechoMode, "AddPoints(" @ %clientId @ ", " @ %specialVar @ ")");
-
+function AddPoints(%clientId, %specialVar) {
 	%add = 0;
 	// %list = GetAccessoryList(%clientId, 4, %specialVar);
 	%list = GetEquippedAccessoriesBySpecialVar(%clientId, %specialVar);
@@ -472,21 +480,16 @@ function NullItemList(%clientId, %type, %msgcolor, %msg)
 	}
 }
 
-function GetCurrentlyWearingArmor(%clientId)
-{
+function GetCurrentlyWearingArmor(%clientId) {
 	dbecho($dbechoMode, "GetCurrentlyWearingArmor(" @ %clientId @ ")");
 
-	//the $ArmorList is present only for this function so far, in order to speed things up and not have to cycle thru
-	//each and every item in the game
-	// for(%i = 1; $ArmorList[%i] != ""; %i++)
-	// {
-	// 	if(Player::getItemCount(%clientId, $ArmorList[%i] @ "0"))
-	// 		return $ArmorList[%i];
-	// }
+	// loop through all armor
+	for(%i = 1; $ArmorList[%i] != ""; %i++) {
+		%armorName = $ArmorList[%i] @ "0";
 
-	// We no longer need to loop through all armors, just directly read from belt with GetEquippedArmor();
-	// Much faster and efficient -LongBow
-	return GetEquippedArmor(%clientId);
+		if(Belt::HasThisStuff(%clientId, %armorName) > 0)
+			return $ArmorList[%i];
+	}
 }
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -587,74 +590,74 @@ $RingWeight = 1;
 //   ARMOR MODIFYING ACCESSORIES
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-$AccessoryVar[CheetaursPaws, $AccessoryType] = $BootsAccessoryType;
-$AccessoryVar[CheetaursPaws, $SpecialVar] = "8 1";
-$AccessoryVar[CheetaursPaws, $Weight] = 3;
-$AccessoryVar[CheetaursPaws, $MiscInfo] = "Cheetaur's Paws increase speed and jump power";
+// $AccessoryVar[CheetaursPaws, $AccessoryType] = $BootsAccessoryType;
+// $AccessoryVar[CheetaursPaws, $SpecialVar] = "8 1";
+// $AccessoryVar[CheetaursPaws, $Weight] = 3;
+// $AccessoryVar[CheetaursPaws, $MiscInfo] = "Cheetaur's Paws increase speed and jump power";
 
-ItemData CheetaursPaws
-{
-	description = "Cheetaur's Paws";
-	className = "Accessory";
-	shapeFile = "discammo";
+// ItemData CheetaursPaws
+// {
+// 	description = "Cheetaur's Paws";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
 
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData CheetaursPaws0
-{
-	description = "Cheetaur's Paws";
-	className = "Equipped";
-	shapeFile = "discammo";
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData CheetaursPaws0
+// {
+// 	description = "Cheetaur's Paws";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
 
-	heading = "aArmor";
-};
+// 	heading = "aArmor";
+// };
 
-$AccessoryVar[BootsOfGliding, $AccessoryType] = $BootsAccessoryType;
-$AccessoryVar[BootsOfGliding, $SpecialVar] = "8 2";
-$AccessoryVar[BootsOfGliding, $Weight] = 3;
-$AccessoryVar[BootsOfGliding, $MiscInfo] = "Boots Of Gliding let you glide";
+// $AccessoryVar[BootsOfGliding, $AccessoryType] = $BootsAccessoryType;
+// $AccessoryVar[BootsOfGliding, $SpecialVar] = "8 2";
+// $AccessoryVar[BootsOfGliding, $Weight] = 3;
+// $AccessoryVar[BootsOfGliding, $MiscInfo] = "Boots Of Gliding let you glide";
 
-ItemData BootsOfGliding
-{
-	description = "Boots Of Gliding";
-	className = "Accessory";
-	shapeFile = "discammo";
+// ItemData BootsOfGliding
+// {
+// 	description = "Boots Of Gliding";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
 
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData BootsOfGliding0
-{
-	description = "Boots Of Gliding";
-	className = "Equipped";
-	shapeFile = "discammo";
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData BootsOfGliding0
+// {
+// 	description = "Boots Of Gliding";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
 
-	heading = "aArmor";
-};
+// 	heading = "aArmor";
+// };
 
-$AccessoryVar[WindWalkers, $AccessoryType] = $BootsAccessoryType;
-$AccessoryVar[WindWalkers, $SpecialVar] = "8 3";
-$AccessoryVar[WindWalkers, $Weight] = 3;
-$AccessoryVar[WindWalkers, $MiscInfo] = "Wind Walkers let you fly!";
+// $AccessoryVar[WindWalkers, $AccessoryType] = $BootsAccessoryType;
+// $AccessoryVar[WindWalkers, $SpecialVar] = "8 3";
+// $AccessoryVar[WindWalkers, $Weight] = 3;
+// $AccessoryVar[WindWalkers, $MiscInfo] = "Wind Walkers let you fly!";
 
-ItemData WindWalkers
-{
-	description = "Wind Walkers";
-	className = "Accessory";
-	shapeFile = "discammo";
+// ItemData WindWalkers
+// {
+// 	description = "Wind Walkers";
+// 	className = "Accessory";
+// 	shapeFile = "discammo";
 
-	heading = "eMiscellany";
-	price = 0;
-};
-ItemData WindWalkers0
-{
-	description = "Wind Walkers";
-	className = "Equipped";
-	shapeFile = "discammo";
+// 	heading = "eMiscellany";
+// 	price = 0;
+// };
+// ItemData WindWalkers0
+// {
+// 	description = "Wind Walkers";
+// 	className = "Equipped";
+// 	shapeFile = "discammo";
 
-	heading = "aArmor";
-};
+// 	heading = "aArmor";
+// };
 
 //============================================================================
 

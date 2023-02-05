@@ -623,7 +623,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 						}
 					}
 				}
-				else if(getWord(%itemString,1) > 0){
+				else if(getWord(%itemString,1) > 0) {
 					%item = getWord(%itemString,0);
 					%belt = True;
 				}
@@ -644,7 +644,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 					else if (%type == "WeaponItems") {
 						RPGmountItem(%TrueClientId, %item, $WeaponSlot);
 					}
-					else if (%type == "ArmorItems") {
+					else if (%type == "ArmorItems" || %type == "AccessoryItems") {
 						Item::onUse(%TrueClientId, %item);
 					}
 					else

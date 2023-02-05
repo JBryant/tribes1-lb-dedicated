@@ -46,6 +46,7 @@
 // Menu Functions      //
 // ------------------- //
 
+$equippedString = "(worn)";
 
 function getDisp(%type){
 	%disp["AmmoItems"] = "Ammunition";
@@ -54,11 +55,12 @@ function getDisp(%type){
 	%disp["WeaponItems"] = "Weapons";
 	%disp["ArmorItems"] = "Armors";
 	%disp["QuestItems"] = "Quest Items";
+	%disp["AccessoryItems"] = "Accessory Items";
 
 	return %disp[%type];
 }
 
-$belttypelist = "AmmoItems GemItems PotionItems WeaponItems ArmorItems QuestItems";
+$belttypelist = "AmmoItems GemItems PotionItems WeaponItems ArmorItems QuestItems AccessoryItems";
 
 function belt::checkmenus(%clientId)
 {
@@ -312,6 +314,9 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 	else if(%type == "ArmorItems") {
 		Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
 	}
+	else if(%type == "AccessoryItems") {
+		Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
+	}
 
 	if(!$playerNoDrop[%item]){
 
@@ -399,8 +404,14 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 			return;
 		}
 
-		if (%type == "ArmorItems" && %item.className == Equipped) {
-			Client::sendMessage(%clientId, $MsgWhite, "You cannot drop equipped items.");
+		// TODO: check if armor is equipped
+		if (%type == "ArmorItems" && BeltItem::isEquipped(%clientId, %item)) {
+			Client::sendMessage(%clientId, $MsgWhite, "You cannot drop equipped armor.");
+			return;
+		}
+
+		if (%type == "AccessoryItems" && BeltItem::isEquipped(%clientId, %item)) {
+			Client::sendMessage(%clientId, $MsgWhite, "You cannot drop equipped accessories.");
 			return;
 		}
 
@@ -1371,6 +1382,7 @@ function Belt::GetWeight(%clientid)
 	%list[4] = "WeaponItems";
 	%list[5] = "ArmorItems";
 	%list[6] = "QuestItems";
+	%list[6] = "AccessoryItems";
 
 	for(%s=1;%list[%s] != "";%s++)
 	{
@@ -1451,7 +1463,7 @@ function BeltItem::GetName(%item) {
 
 function BeltItem::IsEquipped(%clientId, %item) {
 	%amnt = Belt::HasThisStuff(%clientid, %item);
-	%itemIsWorn = String::findSubStr(BeltItem::GetName(%item), "(worn)") != -1;
+	%itemIsWorn = String::findSubStr(BeltItem::GetName(%item), $equippedString) != -1;
 
 	if (%amnt > 0 && %itemIsWorn)
 		return true;
@@ -1768,7 +1780,7 @@ function Belt::EquipItem(%clientid, %item) {
 	if (%beltItemType == "WeaponItems") {
 		RPGmountItem(%clientid, %item, $WeaponSlot);
 	}
-	else if (%beltItemType == "ArmorItems") {
+	else if (%beltItemType == "ArmorItems" || %beltItemType == "AccessoryItems") {
 		Item::onUse(%clientId, %item);
 	}
 }
@@ -1792,6 +1804,7 @@ $count["PotionItems"] = 0;
 $count["WeaponItems"] = 0;
 $count["ArmorItems"] = 0;
 $count["QuestItems"] = 0;
+$count["AccessoryItems"] = 0;
 $numBeltItems = 0;
 
 
@@ -1906,55 +1919,69 @@ BeltItem::Add("HeavyCrossbow", "HeavyCrossbow", "WeaponItems", $AccessoryVar[Hea
 
 // Armors
 BeltItem::Add("Padded Armor", "PaddedArmor", "ArmorItems", $AccessoryVar[PaddedArmor, $Weight], GenerateItemCost(PaddedArmor));
-BeltItem::Add("Padded Armor (worn)", "PaddedArmor0", "ArmorItems", $AccessoryVar[PaddedArmor, $Weight], GenerateItemCost(PaddedArmor));
+BeltItem::Add("Padded Armor "@$equippedString, "PaddedArmor0", "ArmorItems", $AccessoryVar[PaddedArmor, $Weight], GenerateItemCost(PaddedArmor));
 BeltItem::Add("Leather Armor", "LeatherArmor", "ArmorItems", $AccessoryVar[LeatherArmor, $Weight], GenerateItemCost(LeatherArmor));
-BeltItem::Add("Leather Armor (worn)", "LeatherArmor0", "ArmorItems", $AccessoryVar[LeatherArmor, $Weight], GenerateItemCost(LeatherArmor));
+BeltItem::Add("Leather Armor "@$equippedString, "LeatherArmor0", "ArmorItems", $AccessoryVar[LeatherArmor, $Weight], GenerateItemCost(LeatherArmor));
 BeltItem::Add("Studded Leather", "StuddedLeather", "ArmorItems", $AccessoryVar[StuddedLeather, $Weight], GenerateItemCost(StuddedLeather));
-BeltItem::Add("Studded Leather (worn)", "StuddedLeather0", "ArmorItems", $AccessoryVar[StuddedLeather, $Weight], GenerateItemCost(StuddedLeather));
+BeltItem::Add("Studded Leather "@$equippedString, "StuddedLeather0", "ArmorItems", $AccessoryVar[StuddedLeather, $Weight], GenerateItemCost(StuddedLeather));
 BeltItem::Add("Spiked Leather", "SpikedLeather", "ArmorItems", $AccessoryVar[SpikedLeather, $Weight], GenerateItemCost(SpikedLeather));
-BeltItem::Add("Spiked Leather (worn)", "SpikedLeather0", "ArmorItems", $AccessoryVar[SpikedLeather, $Weight], GenerateItemCost(SpikedLeather));
+BeltItem::Add("Spiked Leather "@$equippedString, "SpikedLeather0", "ArmorItems", $AccessoryVar[SpikedLeather, $Weight], GenerateItemCost(SpikedLeather));
 BeltItem::Add("Hide Armor", "HideArmor", "ArmorItems", $AccessoryVar[HideArmor, $Weight], GenerateItemCost(HideArmor));
-BeltItem::Add("Hide Armor (worn)", "HideArmor0", "ArmorItems", $AccessoryVar[HideArmor, $Weight], GenerateItemCost(HideArmor));
+BeltItem::Add("Hide Armor "@$equippedString, "HideArmor0", "ArmorItems", $AccessoryVar[HideArmor, $Weight], GenerateItemCost(HideArmor));
 BeltItem::Add("Scale Mail", "ScaleMail", "ArmorItems", $AccessoryVar[ScaleMail, $Weight], GenerateItemCost(ScaleMail));
-BeltItem::Add("Scale Mail (worn)", "ScaleMail0", "ArmorItems", $AccessoryVar[ScaleMail, $Weight], GenerateItemCost(ScaleMail));
+BeltItem::Add("Scale Mail "@$equippedString, "ScaleMail0", "ArmorItems", $AccessoryVar[ScaleMail, $Weight], GenerateItemCost(ScaleMail));
 BeltItem::Add("Brigandine Armor", "BrigandineArmor", "ArmorItems", $AccessoryVar[BrigandineArmor, $Weight], GenerateItemCost(BrigandineArmor));
-BeltItem::Add("Brigandine Armor (worn)", "BrigandineArmor0", "ArmorItems", $AccessoryVar[BrigandineArmor, $Weight], GenerateItemCost(BrigandineArmor));
+BeltItem::Add("Brigandine Armor "@$equippedString, "BrigandineArmor0", "ArmorItems", $AccessoryVar[BrigandineArmor, $Weight], GenerateItemCost(BrigandineArmor));
 BeltItem::Add("Chain Mail", "ChainMail", "ArmorItems", $AccessoryVar[ChainMail, $Weight], GenerateItemCost(ChainMail));
-BeltItem::Add("Chain Mail (worn)", "ChainMail0", "ArmorItems", $AccessoryVar[ChainMail, $Weight], GenerateItemCost(ChainMail));
+BeltItem::Add("Chain Mail "@$equippedString, "ChainMail0", "ArmorItems", $AccessoryVar[ChainMail, $Weight], GenerateItemCost(ChainMail));
 BeltItem::Add("Ring Mail", "RingMail", "ArmorItems", $AccessoryVar[RingMail, $Weight], GenerateItemCost(RingMail));
-BeltItem::Add("Ring Mail (worn)", "RingMail0", "ArmorItems", $AccessoryVar[RingMail, $Weight], GenerateItemCost(RingMail));
+BeltItem::Add("Ring Mail "@$equippedString, "RingMail0", "ArmorItems", $AccessoryVar[RingMail, $Weight], GenerateItemCost(RingMail));
 BeltItem::Add("Banded Mail", "BandedMail", "ArmorItems", $AccessoryVar[BandedMail, $Weight], GenerateItemCost(BandedMail));
-BeltItem::Add("Banded Mail (worn)", "BandedMail0", "ArmorItems", $AccessoryVar[BandedMail, $Weight], GenerateItemCost(BandedMail));
+BeltItem::Add("Banded Mail "@$equippedString, "BandedMail0", "ArmorItems", $AccessoryVar[BandedMail, $Weight], GenerateItemCost(BandedMail));
 BeltItem::Add("Splint Mail", "SplintMail", "ArmorItems", $AccessoryVar[SplintMail, $Weight], GenerateItemCost(SplintMail));
-BeltItem::Add("Splint Mail (worn)", "SplintMail0", "ArmorItems", $AccessoryVar[SplintMail, $Weight], GenerateItemCost(SplintMail));
+BeltItem::Add("Splint Mail "@$equippedString, "SplintMail0", "ArmorItems", $AccessoryVar[SplintMail, $Weight], GenerateItemCost(SplintMail));
 BeltItem::Add("Bronze Plate Mail", "BronzePlateMail", "ArmorItems", $AccessoryVar[BronzePlateMail, $Weight], GenerateItemCost(BronzePlateMail));
-BeltItem::Add("Bronze Plate Mail (worn)", "BronzePlateMail0", "ArmorItems", $AccessoryVar[BronzePlateMail, $Weight], GenerateItemCost(BronzePlateMail));
+BeltItem::Add("Bronze Plate Mail "@$equippedString, "BronzePlateMail0", "ArmorItems", $AccessoryVar[BronzePlateMail, $Weight], GenerateItemCost(BronzePlateMail));
 BeltItem::Add("Plate Mail", "PlateMail", "ArmorItems", $AccessoryVar[PlateMail, $Weight], GenerateItemCost(PlateMail));
-BeltItem::Add("Plate Mail (worn)", "PlateMail0", "ArmorItems", $AccessoryVar[PlateMail, $Weight], GenerateItemCost(PlateMail));
+BeltItem::Add("Plate Mail "@$equippedString, "PlateMail0", "ArmorItems", $AccessoryVar[PlateMail, $Weight], GenerateItemCost(PlateMail));
 BeltItem::Add("Field Plate Armor", "FieldPlateArmor", "ArmorItems", $AccessoryVar[FieldPlateArmor, $Weight], GenerateItemCost(FieldPlateArmor));
-BeltItem::Add("Field Plate Armor (worn)", "FieldPlateArmor0", "ArmorItems", $AccessoryVar[FieldPlateArmor, $Weight], GenerateItemCost(FieldPlateArmor));
+BeltItem::Add("Field Plate Armor "@$equippedString, "FieldPlateArmor0", "ArmorItems", $AccessoryVar[FieldPlateArmor, $Weight], GenerateItemCost(FieldPlateArmor));
 BeltItem::Add("Full Plate Armor", "FullPlateArmor", "ArmorItems", $AccessoryVar[FullPlateArmor, $Weight], GenerateItemCost(FullPlateArmor));
-BeltItem::Add("Full Plate Armor (worn)", "FullPlateArmor0", "ArmorItems", $AccessoryVar[FullPlateArmor, $Weight], GenerateItemCost(FullPlateArmor));
+BeltItem::Add("Full Plate Armor "@$equippedString, "FullPlateArmor0", "ArmorItems", $AccessoryVar[FullPlateArmor, $Weight], GenerateItemCost(FullPlateArmor));
 BeltItem::Add("Dragon Mail", "DragonMail", "ArmorItems", $AccessoryVar[DragonMail, $Weight], GenerateItemCost(DragonMail));
-BeltItem::Add("Dragon Mail (worn)", "DragonMail0", "ArmorItems", $AccessoryVar[DragonMail, $Weight], GenerateItemCost(DragonMail));
+BeltItem::Add("Dragon Mail "@$equippedString, "DragonMail0", "ArmorItems", $AccessoryVar[DragonMail, $Weight], GenerateItemCost(DragonMail));
 BeltItem::Add("Keldrin Armor", "KeldrinArmor", "ArmorItems", $AccessoryVar[KeldrinArmor, $Weight], GenerateItemCost(KeldrinArmor));
-BeltItem::Add("Keldrin Armor (worn)", "KeldrinArmor0", "ArmorItems", $AccessoryVar[KeldrinArmor, $Weight], GenerateItemCost(KeldrinArmor));
+BeltItem::Add("Keldrin Armor "@$equippedString, "KeldrinArmor0", "ArmorItems", $AccessoryVar[KeldrinArmor, $Weight], GenerateItemCost(KeldrinArmor));
 BeltItem::Add("Light Robe", "LightRobe", "ArmorItems", $AccessoryVar[LightRobe, $Weight], GenerateItemCost(LightRobe));
-BeltItem::Add("Light Robe (worn)", "LightRobe0", "ArmorItems", $AccessoryVar[LightRobe, $Weight], GenerateItemCost(LightRobe));
+BeltItem::Add("Light Robe "@$equippedString, "LightRobe0", "ArmorItems", $AccessoryVar[LightRobe, $Weight], GenerateItemCost(LightRobe));
 BeltItem::Add("Blood Robe", "BloodRobe", "ArmorItems", $AccessoryVar[BloodRobe, $Weight], GenerateItemCost(BloodRobe));
-BeltItem::Add("Blood Robe (worn)", "BloodRobe0", "ArmorItems", $AccessoryVar[BloodRobe, $Weight], GenerateItemCost(BloodRobe));
+BeltItem::Add("Blood Robe "@$equippedString, "BloodRobe0", "ArmorItems", $AccessoryVar[BloodRobe, $Weight], GenerateItemCost(BloodRobe));
 BeltItem::Add("Advisor Robe", "AdvisorRobe", "ArmorItems", $AccessoryVar[AdvisorRobe, $Weight], GenerateItemCost(AdvisorRobe));
-BeltItem::Add("Advisor Robe (worn)", "AdvisorRobe0", "ArmorItems", $AccessoryVar[AdvisorRobe, $Weight], GenerateItemCost(AdvisorRobe));
+BeltItem::Add("Advisor Robe "@$equippedString, "AdvisorRobe0", "ArmorItems", $AccessoryVar[AdvisorRobe, $Weight], GenerateItemCost(AdvisorRobe));
 BeltItem::Add("Robe Of Venjance", "RobeOfVenjance", "ArmorItems", $AccessoryVar[RobeOfVenjance, $Weight], GenerateItemCost(RobeOfVenjance));
-BeltItem::Add("Robe Of Venjance (worn)", "RobeOfVenjance0", "ArmorItems", $AccessoryVar[RobeOfVenjance, $Weight], GenerateItemCost(RobeOfVenjance));
+BeltItem::Add("Robe Of Venjance "@$equippedString, "RobeOfVenjance0", "ArmorItems", $AccessoryVar[RobeOfVenjance, $Weight], GenerateItemCost(RobeOfVenjance));
 BeltItem::Add("Phens Robe", "PhensRobe", "ArmorItems", $AccessoryVar[PhensRobe, $Weight], GenerateItemCost(PhensRobe));
-BeltItem::Add("Phens Robe (worn)", "PhensRobe0", "ArmorItems", $AccessoryVar[PhensRobe, $Weight], GenerateItemCost(PhensRobe));
+BeltItem::Add("Phens Robe "@$equippedString, "PhensRobe0", "ArmorItems", $AccessoryVar[PhensRobe, $Weight], GenerateItemCost(PhensRobe));
 BeltItem::Add("Quest Master Robe", "QuestMasterRobe", "ArmorItems", $AccessoryVar[QuestMasterRobe, $Weight], GenerateItemCost(QuestMasterRobe));
-BeltItem::Add("Quest Master Robe (worn)", "QuestMasterRobe0", "ArmorItems", $AccessoryVar[QuestMasterRobe, $Weight], GenerateItemCost(QuestMasterRobe));
+BeltItem::Add("Quest Master Robe "@$equippedString, "QuestMasterRobe0", "ArmorItems", $AccessoryVar[QuestMasterRobe, $Weight], GenerateItemCost(QuestMasterRobe));
 BeltItem::Add("Fine Robe", "FineRobe", "ArmorItems", $AccessoryVar[FineRobe, $Weight], GenerateItemCost(FineRobe));
-BeltItem::Add("Fine Robe (worn)", "FineRobe0", "ArmorItems", $AccessoryVar[FineRobe, $Weight], GenerateItemCost(FineRobe));
+BeltItem::Add("Fine Robe "@$equippedString, "FineRobe0", "ArmorItems", $AccessoryVar[FineRobe, $Weight], GenerateItemCost(FineRobe));
 BeltItem::Add("Elven Robe", "ElvenRobe", "ArmorItems", $AccessoryVar[ElvenRobe, $Weight], GenerateItemCost(ElvenRobe));
-BeltItem::Add("Elven Robe (worn)", "ElvenRobe0", "ArmorItems", $AccessoryVar[ElvenRobe, $Weight], GenerateItemCost(ElvenRobe));
+BeltItem::Add("Elven Robe "@$equippedString, "ElvenRobe0", "ArmorItems", $AccessoryVar[ElvenRobe, $Weight], GenerateItemCost(ElvenRobe));
+BeltItem::Add("Knight Shield", "KnightShield", "ArmorItems", $AccessoryVar[KnightShield, $Weight], GenerateItemCost(WindWKnightShieldalkers));
+BeltItem::Add("Knight Shield "@$equippedString, "KnightShield0", "ArmorItems", $AccessoryVar[KnightShield, $Weight], GenerateItemCost(KnightShield));
+BeltItem::Add("Heavenly Shield", "HeavenlyShield", "ArmorItems", $AccessoryVar[HeavenlyShield, $Weight], GenerateItemCost(HeavenlyShield));
+BeltItem::Add("Heavenly Shield "@$equippedString, "HeavenlyShield0", "ArmorItems", $AccessoryVar[HeavenlyShield, $Weight], GenerateItemCost(HeavenlyShield));
+BeltItem::Add("Dragon Shield", "DragonShield", "ArmorItems", $AccessoryVar[DragonShield, $Weight], GenerateItemCost(DragonShield));
+BeltItem::Add("Dragon Shield "@$equippedString, "DragonShield0", "ArmorItems", $AccessoryVar[DragonShield, $Weight], GenerateItemCost(DragonShield));
+
+// Accessory Items
+BeltItem::Add("Cheetaurs Paws", "CheetaursPaws", "AccessoryItems", $AccessoryVar[CheetaursPaws, $Weight], GenerateItemCost(CheetaursPaws));
+BeltItem::Add("Cheetaurs Paws "@$equippedString, "CheetaursPaws0", "AccessoryItems", $AccessoryVar[CheetaursPaws, $Weight], GenerateItemCost(CheetaursPaws));
+BeltItem::Add("Boots of Gliding", "BootsOfGliding", "AccessoryItems", $AccessoryVar[BootsOfGliding, $Weight], GenerateItemCost(BootsOfGliding));
+BeltItem::Add("Boots of Gliding "@$equippedString, "BootsOfGliding0", "AccessoryItems", $AccessoryVar[BootsOfGliding, $Weight], GenerateItemCost(BootsOfGliding));
+BeltItem::Add("Wind Walkers", "WindWalkers", "AccessoryItems", $AccessoryVar[WindWalkers, $Weight], GenerateItemCost(WindWalkers));
+BeltItem::Add("Wind Walkers "@$equippedString, "WindWalkers0", "AccessoryItems", $AccessoryVar[WindWalkers, $Weight], GenerateItemCost(WindWalkers));
 
 // Quest Items
 BeltItem::Add("Black Statue", "BlackStatue", "QuestItems", $AccessoryVar[BlackStatue, $Weight], GenerateItemCost(BlackStatue));
