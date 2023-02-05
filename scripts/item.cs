@@ -98,49 +98,49 @@ function Item::pop(%item)
 // Tools, Weapons & ammo
 //----------------------------------------------------------------------------
 
-ItemData Tool
-{
-	description = "Tool";
-	showInventory = false;
-};
+// ItemData Tool
+// {
+// 	description = "Tool";
+// 	showInventory = false;
+// };
 
-function Tool::onUse(%player,%item)
-{
-	dbecho($dbechoMode, "Tool::onUse(" @ %player @ ", " @ %item @ ")");
+// function Tool::onUse(%player,%item)
+// {
+// 	dbecho($dbechoMode, "Tool::onUse(" @ %player @ ", " @ %item @ ")");
 
-	Player::mountItem(%player,%item,$ToolSlot);
-}
+// 	Player::mountItem(%player, %item, $ToolSlot);
+// }
 
 
 //----------------------------------------------------------------------------
 
-ItemData Ammo
-{
-	description = "Ammo";
-	showInventory = false;
-};
+// ItemData Ammo
+// {
+// 	description = "Ammo";
+// 	showInventory = false;
+// };
 
 //----------------------------------------------------------------------------
 // Backpacks
 //----------------------------------------------------------------------------
 
-ItemData Backpack
-{				
-	description = "Backpack";
-	showInventory = false;
-};
+// ItemData Backpack
+// {				
+// 	description = "Backpack";
+// 	showInventory = false;
+// };
 
-function Backpack::onUse(%player,%item)
-{
-	dbecho($dbechoMode, "Backpack::onUse(" @ %player @ ", " @ %item @ ")");
+// function Backpack::onUse(%player,%item)
+// {
+// 	dbecho($dbechoMode, "Backpack::onUse(" @ %player @ ", " @ %item @ ")");
 
-	if (Player::getMountedItem(%player,$BackpackSlot) != %item) {
-		Player::mountItem(%player,%item,$BackpackSlot);
-	}
-	else {
-		Player::trigger(%player,$BackpackSlot);
-	}
-}
+// 	if (Player::getMountedItem(%player,$BackpackSlot) != %item) {
+// 		Player::mountItem(%player,%item,$BackpackSlot);
+// 	}
+// 	else {
+// 		Player::trigger(%player,$BackpackSlot);
+// 	}
+// }
 
 function checkDeployArea(%clientId, %pos)
 {
@@ -219,34 +219,34 @@ function Item::deployShape(%player,%name,%shape,%item)
 
 //----------------------------------------------------------------------------
 
-ItemData RepairPatch
-{
-	description = "Repair Patch";
-	className = "Repair";
-	shapeFile = "armorPatch";
-	heading = "eMiscellany";
-	shadowDetailMask = 4;
-  	price = 1;
-};
+// ItemData RepairPatch
+// {
+// 	description = "Repair Patch";
+// 	className = "Repair";
+// 	shapeFile = "armorPatch";
+// 	heading = "eMiscellany";
+// 	shadowDetailMask = 4;
+//   	price = 1;
+// };
 
-function RepairPatch::onCollision(%this,%object)
-{
-	dbecho($dbechoMode, "RepairPatch::onCollision(" @ %this @ ", " @ %object @ ")");
+// function RepairPatch::onCollision(%this,%object)
+// {
+// 	dbecho($dbechoMode, "RepairPatch::onCollision(" @ %this @ ", " @ %object @ ")");
 
-	if (getObjectType(%object) == "Player") {
-		if(GameBase::getDamageLevel(%object)) {
-			refreshHP(Player::getClient(%object), -0.125);
-			%item = Item::getItemData(%this);
-			Item::playPickupSound(%this);
-			Item::respawn(%this);
-		}
-	}
-}
+// 	if (getObjectType(%object) == "Player") {
+// 		if(GameBase::getDamageLevel(%object)) {
+// 			refreshHP(Player::getClient(%object), -0.125);
+// 			%item = Item::getItemData(%this);
+// 			Item::playPickupSound(%this);
+// 			Item::respawn(%this);
+// 		}
+// 	}
+// }
 
-function RepairPatch::onUse(%player,%item)
-{
-	dbecho($dbechoMode, "RepairPatch::onUse(" @ %player @ ", " @ %item @ ")");
+// function RepairPatch::onUse(%player,%item)
+// {
+// 	dbecho($dbechoMode, "RepairPatch::onUse(" @ %player @ ", " @ %item @ ")");
 
-	Player::decItemCount(%player,%item);
-	refreshHP(Player::getClient(%player), -0.1);
-}
+// 	Player::decItemCount(%player,%item);
+// 	refreshHP(Player::getClient(%player), -0.1);
+// }

@@ -1037,6 +1037,10 @@ $SkillType[RWarAxe] = $SkillSlashing;
 // Rather than having an Item defined for each Weapon, we can simple re-use the same Item/Image data for all weapons
 // Many weapons share the same model, so we only need to define one shared weapons data for each indiviual model
 
+// ===============================
+// OLD WEAPON IMAGES
+// ===============================
+
 // SWORD - Broad Sword image
 ItemImageData SwordImage
 {
@@ -1686,4 +1690,591 @@ function CompositeBowImage::onFire(%player, %slot) {
 	%vel = 100;
 
 	ProjectileAttack(%clientId, %vel);
+}
+
+// ================================
+// NEW WEAPON IMAGES
+// ================================
+
+// BROAD SWORD - New sword image
+ItemImageData BroadSwordImage
+{
+	shapeFile  = "broadsword";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData BroadSword
+{
+	heading = "bWeapons";
+	description = "Sword";
+	className = "Weapon";
+	shapeFile  = "sword";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = BroadSwordImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function BroadSwordImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// GLADIUS - Short, fat stubby blade, with a stabby action. Honestly looks kinda weird?
+ItemImageData GladiusImage
+{
+	shapeFile  = "gladius";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData Gladius
+{
+	heading = "bWeapons";
+	description = "Gladius";
+	className = "Weapon";
+	shapeFile  = "gladius";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = GladiusImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function GladiusImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// CRIM AXE - Savage looking large hand axe or small baxe
+ItemImageData BattleAxeNewImage
+{
+	shapeFile  = "CRIMAXE2";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	reloadTime = 0;
+	fireTime = GetDelay(BattleAxe);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing7;
+	sfxActivate = AxeSlash2;
+
+	mountOffset = {0, 0, -0.5};
+};
+ItemData BattleAxeNew
+{
+	heading = "bWeapons";
+	description = "Battle Axe new";
+	className = "Weapon";
+	shapeFile  = "CRIMAXE2";
+	hudIcon = "axe";
+	shadowDetailMask = 4;
+	imageType = BattleAxeNewImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function BattleAxeNewImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// GOLIATH SWORD
+ItemImageData GoliathSwordImage
+{
+	shapeFile  = "goliathsword";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData GoliathSword
+{
+	heading = "bWeapons";
+	description = "GoliathSword";
+	className = "Weapon";
+	shapeFile  = "goliathsword";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = GoliathSwordImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function GoliathSwordImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// GREEN SWORD
+ItemImageData GreenSwordImage
+{
+	shapeFile  = "greensword";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData GreenSword
+{
+	heading = "bWeapons";
+	description = "GreenSword";
+	className = "Weapon";
+	shapeFile  = "greensword";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = GreenSwordImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function GreenSwordImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// GEM SWORD
+ItemImageData GemSwordImage
+{
+	shapeFile  = "long_sword2";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData GemSword
+{
+	heading = "bWeapons";
+	description = "GemSword";
+	className = "Weapon";
+	shapeFile  = "long_sword2";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = GemSwordImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function GemSwordImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// SPIKED MACE
+ItemImageData SpikedMaceImage
+{
+	shapeFile  = "mace2";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData SpikedMace
+{
+	heading = "bWeapons";
+	description = "SpikedMace";
+	className = "Weapon";
+	shapeFile  = "mace2";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = SpikedMaceImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function SpikedMaceImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// BONE SWORD
+ItemImageData BoneSwordImage
+{
+	shapeFile  = "PBONESWORD";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData BoneSword
+{
+	heading = "bWeapons";
+	description = "BoneSword";
+	className = "Weapon";
+	shapeFile  = "PBONESWORD";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = BoneSwordImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function BoneSwordImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// PHENS SWORD
+ItemImageData PhensSwordImage
+{
+	shapeFile  = "phenssword";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData PhensSword
+{
+	heading = "bWeapons";
+	description = "PhensSword";
+	className = "Weapon";
+	shapeFile  = "phenssword";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = PhensSwordImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function PhensSwordImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// SLASHER
+ItemImageData SlasherImage
+{
+	shapeFile  = "slasher";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData Slasher
+{
+	heading = "bWeapons";
+	description = "Slasher";
+	className = "Weapon";
+	shapeFile  = "phenssword";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = SlasherImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function SlasherImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// JAVELIN
+ItemImageData JavelinImage
+{
+	shapeFile  = "spear2";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData Javelin
+{
+	heading = "bWeapons";
+	description = "Javelin";
+	className = "Weapon";
+	shapeFile  = "spear2";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = JavelinImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function JavelinImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// SPIKED CLUB
+ItemImageData SpikedClubImage
+{
+	shapeFile  = "SpikedClub";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData SpikedClub
+{
+	heading = "bWeapons";
+	description = "SpikedClub";
+	className = "Weapon";
+	shapeFile  = "SpikedClub";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = SpikedClubImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function SpikedClubImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// CLUB
+ItemImageData ClubImage
+{
+	shapeFile  = "club";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData Club
+{
+	heading = "bWeapons";
+	description = "Club";
+	className = "Weapon";
+	shapeFile  = "club";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = ClubImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function ClubImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+// ======================
+// Ranged
+// ======================
+ItemImageData SlingImage
+{
+	shapeFile = "sling";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	ammoType = "";
+	projectileType = NoProjectile;
+	accuFire = false;
+	reloadTime = 0;
+	fireTime = GetDelay(Sling);
+
+	lightType = 3;  // Weapon Fire
+	lightRadius = 3;
+	lightTime = 1;
+	lightColor = { 0.6, 1, 1.0 };
+
+	sfxFire = CrossbowShoot1;
+	sfxActivate = CrossbowSwitch1;
+	sfxReload = NoSound;
+};
+ItemData Sling
+{
+	description = "Sling";
+	className = "Weapon";
+	shapeFile = "sling";
+	hudIcon = "bow";
+	heading = "bWeapons";
+	shadowDetailMask = 4;
+	imageType = SlingImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function SlingImage::onFire(%player, %slot) {
+	ProjectileAttack(Player::getClient(%player), 100);
+}
+
+// ======================
+// Admin Weapons
+// ======================
+// CLUB
+ItemImageData CandyCaneImage
+{
+	shapeFile  = "CANDYCANER";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = GetDelay(Broadsword);
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData CandyCane
+{
+	heading = "bWeapons";
+	description = "CandyCane";
+	className = "Weapon";
+	shapeFile  = "CANDYCANER";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = CandyCaneImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function CandyCaneImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+ItemImageData PistolImage
+{
+	shapeFile = "pistol";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	ammoType = "";
+	projectileType = NoProjectile;
+	accuFire = false;
+	reloadTime = 0;
+	fireTime = GetDelay(Sling);
+
+	lightType = 3;  // Weapon Fire
+	lightRadius = 3;
+	lightTime = 1;
+	lightColor = { 0.6, 1, 1.0 };
+
+	// maybe change sound?
+	sfxFire = CrossbowShoot1;
+	sfxActivate = CrossbowSwitch1;
+	sfxReload = NoSound;
+};
+ItemData Pistol
+{
+	description = "Pistol";
+	className = "Weapon";
+	shapeFile = "pistol";
+	hudIcon = "bow";
+	heading = "bWeapons";
+	shadowDetailMask = 4;
+	imageType = PistolImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function PistolImage::onFire(%player, %slot) {
+	ProjectileAttack(Player::getClient(%player), 100);
+}
+
+ItemImageData CyborgGunImage
+{
+	shapeFile = "cyborggun";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	ammoType = "";
+	projectileType = NoProjectile;
+	accuFire = false;
+	reloadTime = 0;
+	fireTime = GetDelay(Sling);
+
+	lightType = 3;  // Weapon Fire
+	lightRadius = 3;
+	lightTime = 1;
+	lightColor = { 0.6, 1, 1.0 };
+
+	// maybe change sound?
+	sfxFire = CrossbowShoot1;
+	sfxActivate = CrossbowSwitch1;
+	sfxReload = NoSound;
+};
+ItemData CyborgGun
+{
+	description = "CyborgGun";
+	className = "Weapon";
+	shapeFile = "cyborggun";
+	hudIcon = "bow";
+	heading = "bWeapons";
+	shadowDetailMask = 4;
+	imageType = CyborgGunImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function CyborgGunImage::onFire(%player, %slot) {
+	ProjectileAttack(Player::getClient(%player), 100);
 }
