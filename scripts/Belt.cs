@@ -1439,7 +1439,7 @@ function Belt::GetNS(%clientid, %type)
 	return %bn@%list;
 }
 
-function BeltItem::Add(%name, %item, %type, %weight, %cost)
+function BeltItem::Add(%name, %item, %type, %weight, %cost, %image)
 {
 	%num = $count[%type]++;
 	$beltItemData[$numBeltItems] = %item;
@@ -1449,6 +1449,7 @@ function BeltItem::Add(%name, %item, %type, %weight, %cost)
 	$beltitem[%item, "Item"] = %item;
 	$beltitem[%item, "Name"] = %name;
 	$beltitem[%item, "Type"] = %type;
+	$beltitem[%item, "Image"] = %image;
 	$AccessoryVar[%item, $Weight] = %weight;
 	$HardcodedItemCost[%item] = %cost;
 }
@@ -1459,6 +1460,10 @@ function BeltItem::GetType(%item) {
 
 function BeltItem::GetName(%item) {
 	return $beltitem[%item, "Name"];
+}
+
+function BeltItem::GetImage(%item) {
+	return $beltitem[%item, "Image"];
 }
 
 function BeltItem::IsEquipped(%clientId, %item) {
@@ -1807,12 +1812,11 @@ $count["QuestItems"] = 0;
 $count["AccessoryItems"] = 0;
 $numBeltItems = 0;
 
-
 //Ammunition
 BeltItem::Add("Small Rock","SmallRock","AmmoItems",0.2,13);
-BeltItem::Add("Basic Arrow","BasicArrow","AmmoItems",0.1,GenerateItemCost(BasicArrow));
-BeltItem::Add("Sheaf Arrow","SheafArrow","AmmoItems",0.1,GenerateItemCost(SheafArrow));
-BeltItem::Add("Bladed Arrow","BladedArrow","AmmoItems",0.1,GenerateItemCost(BladedArrow));
+BeltItem::Add("Basic Arrow","BasicArrow","AmmoItems",0.1,GenerateItemCost(BasicArrow), "Arrow");
+BeltItem::Add("Sheaf Arrow","SheafArrow","AmmoItems",0.1,GenerateItemCost(SheafArrow), "Arrow");
+BeltItem::Add("Bladed Arrow","BladedArrow","AmmoItems",0.1,GenerateItemCost(BladedArrow), "Arrow");
 BeltItem::Add("Light Quarrel","LightQuarrel","AmmoItems",0.1,GenerateItemCost(LightQuarrel));
 BeltItem::Add("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.1,GenerateItemCost(HeavyQuarrel));
 BeltItem::Add("Short Quarrel","ShortQuarrel","AmmoItems",0.1,GenerateItemCost(ShortQuarrel));

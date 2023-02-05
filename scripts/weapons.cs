@@ -532,10 +532,13 @@ function ProjectileAttack(%clientId, %weapon, %vel)
 
 	%zoffset = 0.44; // 0.44
 
-	%arrow = newObject("", "Item", %loadedProjectile, 1, false);
+	// check if item has an image associated with it
+	%image = BeltItem::GetImage(%loadedProjectile);
+	%arrow = newObject("", "Item", %image, 1, false);
 	%arrow.owner = %clientId;
 	%arrow.delta = 1;
 	%arrow.weapon = %weapon;
+	%arrow.projectile = %loadedProjectile;
 
 	addToSet("MissionCleanup", %arrow);
   	schedule("Item::Pop(" @ %arrow @ ");", 30, %arrow);
@@ -972,6 +975,7 @@ ItemData Broadsword
 	price = 0;
 	showWeaponBar = true;
 };
+
 function BroadswordImage::onFire(%player, %slot)
 {
 	MeleeAttack(%player, GetRange(Broadsword), Broadsword);
@@ -2461,6 +2465,16 @@ function WandImage::onFire(%player, %slot)
 
 //====== "Projectiles" ======================================================
 
+ItemData Arrow
+{
+	description = "Arrow";
+	className = "Projectile";
+	shapeFile = "tracer";
+	heading = "xAmmunition";
+	shadowDetailMask = 4;
+	price = 0;
+};
+
 ItemData SmallRock
 {
 	description = "Small Rock";
@@ -2470,33 +2484,33 @@ ItemData SmallRock
 	shadowDetailMask = 4;
 	price = 0;
 };
-ItemData BasicArrow
-{
-	description = "Basic Arrow";
-	className = "Projectile";
-	shapeFile = "tracer";
-	heading = "xAmmunition";
-	shadowDetailMask = 4;
-	price = 0;
-};
-ItemData SheafArrow
-{
-	description = "Sheaf Arrow";
-	className = "Projectile";
-	shapeFile = "tracer";
-	heading = "xAmmunition";
-	shadowDetailMask = 4;
-	price = 0;
-};
-ItemData BladedArrow
-{
-	description = "Bladed Arrow";
-	className = "Projectile";
-	shapeFile = "tracer";
-	heading = "xAmmunition";
-	shadowDetailMask = 4;
-	price = 0;
-};
+// ItemData BasicArrow
+// {
+// 	description = "Basic Arrow";
+// 	className = "Projectile";
+// 	shapeFile = "tracer";
+// 	heading = "xAmmunition";
+// 	shadowDetailMask = 4;
+// 	price = 0;
+// };
+// ItemData SheafArrow
+// {
+// 	description = "Sheaf Arrow";
+// 	className = "Projectile";
+// 	shapeFile = "tracer";
+// 	heading = "xAmmunition";
+// 	shadowDetailMask = 4;
+// 	price = 0;
+// };
+// ItemData BladedArrow
+// {
+// 	description = "Bladed Arrow";
+// 	className = "Projectile";
+// 	shapeFile = "tracer";
+// 	heading = "xAmmunition";
+// 	shadowDetailMask = 4;
+// 	price = 0;
+// };
 ItemData LightQuarrel
 {
 	description = "Light Quarrel";
@@ -3099,91 +3113,91 @@ function RWarAxeImage::onFire(%player, %slot)
 }
 
 
-ItemData Blaster
-{
-	heading = "zOmg";
-	description = "Blaster";
-	className = "Weapon";
-	shapeFile  = "energygun";
-	hudIcon = "blaster";
-};
+// ItemData Blaster
+// {
+// 	heading = "zOmg";
+// 	description = "Blaster";
+// 	className = "Weapon";
+// 	shapeFile  = "energygun";
+// 	hudIcon = "blaster";
+// };
 
 
-ItemData PlasmaGun
-{
-	heading = "zOmg";
-	description = "Plasma Gun";
-	className = "Weapon";
-	shapeFile  = "energygun";
-	hudIcon = "blaster";
-};
+// ItemData PlasmaGun
+// {
+// 	heading = "zOmg";
+// 	description = "Plasma Gun";
+// 	className = "Weapon";
+// 	shapeFile  = "energygun";
+// 	hudIcon = "blaster";
+// };
 
 
-ItemData Chaingun
-{
-	heading = "zOmg";
-	description = "Chaingun";
-	className = "Weapon";
-	shapeFile  = "energygun";
-	hudIcon = "blaster";
-};
+// ItemData Chaingun
+// {
+// 	heading = "zOmg";
+// 	description = "Chaingun";
+// 	className = "Weapon";
+// 	shapeFile  = "energygun";
+// 	hudIcon = "blaster";
+// };
 
 
-ItemData DiscLauncher
-{
-	heading = "zOmg";
-	description = "Disc Launcher";
-	className = "Weapon";
-	shapeFile  = "energygun";
-	hudIcon = "blaster";
-};
+// ItemData DiscLauncher
+// {
+// 	heading = "zOmg";
+// 	description = "Disc Launcher";
+// 	className = "Weapon";
+// 	shapeFile  = "energygun";
+// 	hudIcon = "blaster";
+// };
 
 
-ItemData GrenadeLauncher
-{
-	heading = "zOmg";
-	description = "Grenade Launcher";
-	className = "Weapon";
-	shapeFile  = "energygun";
-	hudIcon = "blaster";
-};
+// ItemData GrenadeLauncher
+// {
+// 	heading = "zOmg";
+// 	description = "Grenade Launcher";
+// 	className = "Weapon";
+// 	shapeFile  = "energygun";
+// 	hudIcon = "blaster";
+// };
 
 
-ItemData LaserRifle
-{
-	heading = "zOmg";
-	description = "Laser Rifle";
-	className = "Weapon";
-	shapeFile  = "energygun";
-	hudIcon = "blaster";
-};
+// ItemData LaserRifle
+// {
+// 	heading = "zOmg";
+// 	description = "Laser Rifle";
+// 	className = "Weapon";
+// 	shapeFile  = "energygun";
+// 	hudIcon = "blaster";
+// };
 
 
-ItemData ElfGun
-{
-	heading = "zOmg";
-	description = "Elf Gun";
-	className = "Weapon";
-	shapeFile  = "energygun";
-	hudIcon = "blaster";
-};
+// ItemData ElfGun
+// {
+// 	heading = "zOmg";
+// 	description = "Elf Gun";
+// 	className = "Weapon";
+// 	shapeFile  = "energygun";
+// 	hudIcon = "blaster";
+// };
 
 
-ItemData Mortar
-{
-	heading = "zOmg";
-	description = "Mortar";
-	className = "Weapon";
-	shapeFile  = "energygun";
-	hudIcon = "blaster";
-};
+// ItemData Mortar
+// {
+// 	heading = "zOmg";
+// 	description = "Mortar";
+// 	className = "Weapon";
+// 	shapeFile  = "energygun";
+// 	hudIcon = "blaster";
+// };
 
 
-ItemData TargetingLaser
-{
-	heading = "zOmg";
-	description = "Targeting Laser";
-	className = "Weapon";
-	shapeFile  = "energygun";
-	hudIcon = "blaster";
-};
+// ItemData TargetingLaser
+// {
+// 	heading = "zOmg";
+// 	description = "Targeting Laser";
+// 	className = "Weapon";
+// 	shapeFile  = "energygun";
+// 	hudIcon = "blaster";
+// };

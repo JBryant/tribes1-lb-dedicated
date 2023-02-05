@@ -11,20 +11,21 @@ function Item::giveItem(%player, %item, %delta, %showmsg)
 	//by giving the client an item and pre-equipping it.
 
 	if(%showmsg)
-		Client::sendMessage(%clientId, 0, "You received " @ %delta @ " " @ %item.description @ ".");
+		Client::sendMessage(%clientId, 0, "You received " @ %delta @ " " @ BeltItem::GetName(%item) @ ".");
 
-
-	if(isbeltitem(%item)) {
+	if(isBeltItem(%item)) {
 		belt::givethisstuff(%clientId, %item, %delta);
 	}
-	else
+	else {
 		Player::incItemCount(%clientId, %item, %delta);
+	}
 
 	return %delta;
 }
 
-function Item::onCollision(%this,%object)
+function Item::onCollision(%this, %object)
 {
+	
 	dbecho($dbechoMode, "Item::onCollision(" @ %this @ ", " @ %object @ ")");
 
 	%clientId = Player::getClient(%object);
@@ -106,7 +107,7 @@ function Item::onCollision(%this,%object)
 					Client::sendMessage(%clientId, $MsgRed, "You do not have the right to take " @ %ownerName @ "'s backpack.");
 			}
 		}
-        else if(%item.className == "Projectile") {
+        else if(%item.className == "projectile") {
 			%damagedClient = %clientId;
 			%shooterClient = %this.owner;
 
@@ -127,8 +128,7 @@ function Item::onCollision(%this,%object)
 			}
 			else
 			{
-				if(Item::giveItem(%clientId, %item, %this.delta, True))
-				{
+				if(Item::giveItem(%clientId, %this.projectile, %this.delta, True)) {
 					Item::playPickupSound(%this);
 					RefreshAll(%clientId);
 				}

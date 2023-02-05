@@ -661,6 +661,12 @@ $AccessoryVar[WindWalkers, $MiscInfo] = "Wind Walkers let you fly!";
 
 //============================================================================
 
+
+// shield1 = small round metal shield
+// shield2 = bright yellow / gold kite shield
+// shield3 = classic gray kite shield
+// shieldr = large blue magical shield (prolly for a spell) (above/over)
+// shieldshield = large blue magical shield with different orrientation (wall)
 $AccessoryVar[KnightShield, $AccessoryType] = $ShieldAccessoryType;
 $AccessoryVar[KnightShield, $SpecialVar] = "7 250";
 $AccessoryVar[KnightShield, $Weight] = 16;
@@ -841,57 +847,21 @@ $ItemList[Mining, 11] = "Emerald " @ round($HardcodedItemCost[Emerald] / %f)+2;
 $ItemList[Mining, 12] = "Diamond " @ round($HardcodedItemCost[Diamond] / %f)+2;
 $ItemList[Mining, 13] = "Keldrinite " @ round($HardcodedItemCost[Keldrinite] / %f)+2;
 
+//===================
+//  QUEST ITEMS
+//===================
+
 $AccessoryVar[BlackStatue, $Weight] = 1;
 $AccessoryVar[BlackStatue, $MiscInfo] = "A black statue";
-
-// ItemData BlackStatue
-// {
-// 	description = "Black Statue";
-// 	className = "Accessory";
-// 	shapeFile = "mineammo";
-// 	heading = "eMiscellany";
-// 	shadowDetailMask = 4;
-// 	price = 0;
-// };
 
 $AccessoryVar[SkeletonBone, $Weight] = 1;
 $AccessoryVar[SkeletonBone, $MiscInfo] = "A skeleton bone";
 
-// ItemData SkeletonBone
-// {
-// 	description = "Skeleton Bone";
-// 	className = "Accessory";
-// 	shapeFile = "grenade";
-// 	heading = "eMiscellany";
-// 	shadowDetailMask = 4;
-// 	price = 0;
-// };
-
 $AccessoryVar[EnchantedStone, $Weight] = 5;
 $AccessoryVar[EnchantedStone, $MiscInfo] = "An enchanted stone";
 
-// ItemData EnchantedStone
-// {
-// 	description = "Enchanted Stone";
-// 	className = "Accessory";
-// 	shapeFile = "granite";
-// 	heading = "eMiscellany";
-// 	shadowDetailMask = 4;
-// 	price = 0;
-// };
-
 $AccessoryVar[DragonScale, $Weight] = 8;
 $AccessoryVar[DragonScale, $MiscInfo] = "A dragon scale";
-
-// ItemData DragonScale
-// {
-// 	description = "Dragon Scale";
-// 	className = "Accessory";
-// 	shapeFile = "granite";
-// 	heading = "eMiscellany";
-// 	shadowDetailMask = 4;
-// 	price = 0;
-// };
 
 //===================
 //  LORE ITEMS
@@ -903,41 +873,9 @@ $AccessoryVar[Parchment, $Weight] = 0.2;
 $AccessoryVar[Parchment, $MiscInfo] = "A parchment";
 $LoreItem[Parchment] = True;
 
-// ItemData Parchment
-// {
-// 	description = "Parchment";
-// 	className = "Accessory";
-// 	shapeFile = "grenade";
-// 	heading = "eMiscellany";
-// 	shadowDetailMask = 4;
-// 	price = 0;
-// };
-
 $AccessoryVar[MagicDust, $Weight] = 0.2;
 $AccessoryVar[MagicDust, $MiscInfo] = "A small bag containing magic dust";
 $LoreItem[MagicDust] = True;
-
-// ItemData MagicDust
-// {
-// 	description = "Magic Dust";
-// 	className = "Accessory";
-// 	shapeFile = "grenade";
-// 	heading = "eMiscellany";
-// 	shadowDetailMask = 4;
-// 	price = 0;
-// };
-// function MagicDust::onUse(%player, %item)
-// {
-// 	Player::decItemCount(%player, %item);
-
-// 	%list = GetEveryoneIdList();
-// 	for(%i = 0; (%id = GetWord(%list, %i)) != -1; %i++)
-// 	{
-// 		%pl = Client::getOwnedObject(%clientId);
-// 		if(Vector::getDistance(GameBase::getPosition(%player), GameBase::getPosition(%pl)) <= 20)
-// 			Player::applyImpulse(%pl, "0 0 500");
-// 	}
-// }
 
 //===================
 // Badges
@@ -1102,32 +1040,32 @@ ItemData OrbOfBreath0
 	heading = "aArmor";
 };
 
-ItemData Grenade
-{
-	description = "Grenade";
-	shapeFile = "grenade";
-	heading = "eMiscellany";
-	shadowDetailMask = 4;
-	price = 5;
-	className = "HandAmmo";
-};
-ItemData MineAmmo
-{
-	description = "Mine";
-	shapeFile = "mineammo";
-	heading = "eMiscellany";
-	shadowDetailMask = 4;
-	price = 10;
-	className = "HandAmmo";
-};
-ItemData RepairKit
-{
-   description = "Repair Kit";
-   shapeFile = "armorKit";
-   heading = "eMiscellany";
-   shadowDetailMask = 4;
-   price = 35;
-};
+// ItemData Grenade
+// {
+// 	description = "Grenade";
+// 	shapeFile = "grenade";
+// 	heading = "eMiscellany";
+// 	shadowDetailMask = 4;
+// 	price = 5;
+// 	className = "HandAmmo";
+// };
+// ItemData MineAmmo
+// {
+// 	description = "Mine";
+// 	shapeFile = "mineammo";
+// 	heading = "eMiscellany";
+// 	shadowDetailMask = 4;
+// 	price = 10;
+// 	className = "HandAmmo";
+// };
+// ItemData RepairKit
+// {
+//    description = "Repair Kit";
+//    shapeFile = "armorKit";
+//    heading = "eMiscellany";
+//    shadowDetailMask = 4;
+//    price = 35;
+// };
 
 
 //used for ice
