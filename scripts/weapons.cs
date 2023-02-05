@@ -2465,6 +2465,16 @@ function WandImage::onFire(%player, %slot)
 
 //====== "Projectiles" ======================================================
 
+ItemData SmallRock
+{
+	description = "Small Rock";
+	className = "Projectile";
+	shapeFile = "little_rock";
+	heading = "xAmmunition";
+	shadowDetailMask = 4;
+	price = 0;
+};
+
 ItemData Arrow
 {
 	description = "Arrow";
@@ -2475,101 +2485,11 @@ ItemData Arrow
 	price = 0;
 };
 
-ItemData SmallRock
+ItemData Quarrel
 {
-	description = "Small Rock";
-	className = "Projectile";
-	shapeFile = "little_rock";
-	heading = "xAmmunition";
-	shadowDetailMask = 4;
-	price = 0;
-};
-// ItemData BasicArrow
-// {
-// 	description = "Basic Arrow";
-// 	className = "Projectile";
-// 	shapeFile = "tracer";
-// 	heading = "xAmmunition";
-// 	shadowDetailMask = 4;
-// 	price = 0;
-// };
-// ItemData SheafArrow
-// {
-// 	description = "Sheaf Arrow";
-// 	className = "Projectile";
-// 	shapeFile = "tracer";
-// 	heading = "xAmmunition";
-// 	shadowDetailMask = 4;
-// 	price = 0;
-// };
-// ItemData BladedArrow
-// {
-// 	description = "Bladed Arrow";
-// 	className = "Projectile";
-// 	shapeFile = "tracer";
-// 	heading = "xAmmunition";
-// 	shadowDetailMask = 4;
-// 	price = 0;
-// };
-ItemData LightQuarrel
-{
-	description = "Light Quarrel";
+	description = "Quarrel";
 	className = "Projectile";
 	shapeFile = "bullet";
-	heading = "xAmmunition";
-	shadowDetailMask = 4;
-	price = 0;
-};
-ItemData HeavyQuarrel
-{
-	description = "Heavy Quarrel";
-	className = "Projectile";
-	shapeFile = "bullet";
-	heading = "xAmmunition";
-	shadowDetailMask = 4;
-	price = 0;
-};
-ItemData ShortQuarrel
-{
-	description = "Short Quarrel";
-	className = "Projectile";
-	shapeFile = "bullet";
-	heading = "xAmmunition";
-	shadowDetailMask = 4;
-	price = 0;
-};
-ItemData StoneFeather
-{
-	description = "Stone Feather";
-	className = "Projectile";
-	shapeFile = "tracer";
-	heading = "xAmmunition";
-	shadowDetailMask = 4;
-	price = 0;
-};
-ItemData MetalFeather
-{
-	description = "Metal Feather";
-	className = "Projectile";
-	shapeFile = "tracer";
-	heading = "xAmmunition";
-	shadowDetailMask = 4;
-	price = 0;
-};
-ItemData Talon
-{
-	description = "Talon";
-	className = "Projectile";
-	shapeFile = "tracer";
-	heading = "xAmmunition";
-	shadowDetailMask = 4;
-	price = 0;
-};
-ItemData CeraphumsFeather
-{
-	description = "Ceraphum's Feather";
-	className = "Projectile";
-	shapeFile = "tracer";
 	heading = "xAmmunition";
 	shadowDetailMask = 4;
 	price = 0;
