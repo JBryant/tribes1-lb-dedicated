@@ -193,8 +193,7 @@ function Item::onUse(%player, %item)
 				}
 			}
 
-			if(SkillCanUse(%clientId, %item))
-			{
+			if(SkillCanUse(%clientId, %item)) {
 				if(%cnt < $maxAccessory[GetAccessoryVar(%item, $AccessoryType)]) {
 					Belt::EquipAccessory(%clientId, %item);
 				}
