@@ -327,6 +327,10 @@ function GetEquippedArmor(%clientId) {
 	return GetEquippedAccessoriesByBeltType(%clientId, "ArmorItems");
 }
 
+function GetEquippedWeapon(%clientId) {
+	return GetEquippedAccessoriesByBeltType(%clientId, "WeaponItems");
+}
+
 function GetEquippedAccessoriesBySpecialVar(%clientId, %specialVar) {
 	%list = "";
 

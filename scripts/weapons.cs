@@ -455,11 +455,21 @@ function GenerateAllWeaponCosts()
 
 //****************************************************************************************************
 
-function MeleeAttack(%player, %length, %weapon)
+function MeleeAttack(%player)
 {
 	dbecho($dbechoMode, "MeleeAttack(" @ %player @ ", " @ %length @ ")");
 
 	%clientId = Player::getClient(%player);
+	// attempt to get current weapon
+
+	// get equipped weapon
+	%weapon = getCroppedItem(GetEquippedWeapon(%clientId));
+
+	if (%weapon == "")
+		return;
+
+	%length = GetRange(%weapon);
+	
 	if(%clientId == "")
 		%clientId = 0;
 
@@ -472,12 +482,15 @@ function MeleeAttack(%player, %length, %weapon)
 	//	return;
 	//%clientId.lastFireTime = %time;
 	//=======================================================
+	// I have found that calling Player::setArmor() seems to cause the spam swing
+
 	if($WeaponDelay[%weapon] != ""){
 		if($justmeleed[%clientId])
 			return;
 	}
 	else
 		$WeaponDelay[%weapon] = GetDelay(%weapon);
+
 	$justmeleed[%clientId] = True;
 	schedule("$justmeleed["@%clientId@"]=\"\";",$WeaponDelay[%weapon]-0.11);
 
@@ -940,14 +953,12 @@ ItemData Shortsword
 };
 function ShortswordImage::onFire(%player, %slot)
 {
-	MeleeAttack(%player, GetRange(Shortsword), Shortsword);
+	MeleeAttack(%player);
 }
 
-//****************************************************************************************************
-//   BROAD SWORD
-//****************************************************************************************************
+// Test Shared Sword
 
-ItemImageData BroadswordImage
+ItemImageData SwordImage
 {
 	shapeFile  = "sword";
 	mountPoint = 0;
@@ -963,23 +974,61 @@ ItemImageData BroadswordImage
 	sfxFire = SoundSwing5;
 	sfxActivate = AxeSlash2;
 };
-ItemData Broadsword
+
+ItemData Sword
 {
 	heading = "bWeapons";
-	description = "Broad Sword";
+	description = "Sword";
 	className = "Weapon";
 	shapeFile  = "sword";
 	hudIcon = "blaster";
 	shadowDetailMask = 4;
-	imageType = BroadswordImage;
+	imageType = SwordImage;
 	price = 0;
 	showWeaponBar = true;
 };
 
-function BroadswordImage::onFire(%player, %slot)
-{
-	MeleeAttack(%player, GetRange(Broadsword), Broadsword);
+function SwordImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
 }
+
+//****************************************************************************************************
+//   BROAD SWORD
+//****************************************************************************************************
+
+// ItemImageData BroadswordImage
+// {
+// 	shapeFile  = "sword";
+// 	mountPoint = 0;
+
+// 	weaponType = 0; // Single Shot
+// 	reloadTime = 0;
+// 	fireTime = GetDelay(Broadsword);
+// 	minEnergy = 0;
+// 	maxEnergy = 0;
+
+// 	accuFire = true;
+
+// 	sfxFire = SoundSwing5;
+// 	sfxActivate = AxeSlash2;
+// };
+// ItemData Broadsword
+// {
+// 	heading = "bWeapons";
+// 	description = "Broad Sword";
+// 	className = "Weapon";
+// 	shapeFile  = "sword";
+// 	hudIcon = "blaster";
+// 	shadowDetailMask = 4;
+// 	imageType = BroadswordImage;
+// 	price = 0;
+// 	showWeaponBar = true;
+// };
+
+// function BroadswordImage::onFire(%player, %slot)
+// {
+// 	MeleeAttack(%player, GetRange(Broadsword), Broadsword);
+// }
 
 //****************************************************************************************************
 //   LONG SWORD
@@ -2325,7 +2374,7 @@ function RepeatingCrossbowImage::onFire(%player, %slot)
 
 ItemImageData CastingBladeImage
 {
-	shapeFile  = "dagger";
+	shapeFile  = "quarterstaff";
 	mountPoint = 0;
 
 	weaponType = 0;
@@ -2344,7 +2393,7 @@ ItemData CastingBlade
 	heading = "bWeapons";
 	description = "Casting Blade";
 	className = "Weapon";
-	shapeFile  = "dagger";
+	shapeFile  = "quarterstaff";
 	hudIcon = "dagger";
 	shadowDetailMask = 4;
 	imageType = CastingBladeImage;

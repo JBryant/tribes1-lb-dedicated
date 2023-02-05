@@ -153,6 +153,17 @@ function Game::playerSpawn(%clientId, %respawn)
 		PlaySound(SoundSpawn2, %spawnPos);
 		GameBase::startFadeIn(Client::getOwnedObject(%clientId));
 
+		// check for equipped weapon
+		%equippedWeapon = GetEquippedWeapon(%clientId);
+		if (%equippedWeapon != "") {
+			%image = BeltItem::GetImage(%equippedWeapon);
+			if (%image != "") {
+				Player::mountItem(%pl, %image, $WeaponSlot);
+			} else {
+				Player::mountItem(%pl, getCroppedItem(%equippedWeapon), $WeaponSlot);
+			}
+		}
+
 		echo("SPAWN: cl:" @ %clientId @ " pl:" @ %pl @ " marker:" @ %spawnMarker @ " position: " @ %spawnPos @ " armor:" @ %armor);
 
 		if(%pl != -1)

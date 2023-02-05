@@ -23,7 +23,7 @@
 //Starsiege: Tribes, including the engine, retains a proprietary license forbidding resale.
 
 
-
+// need to update this to work with belt weapons to fix AI spawn bug
 function CreateWeaponCyclingTables()
 {
 	dbecho($dbechoMode, "CreateWeaponCyclingTables()");
@@ -57,8 +57,27 @@ function RPGmountItem(%player, %item, %slot)
 
 	%clientId = Player::getClient(%player);
 
+	if(BeltItem::IsEquipped(%clientId, %item)) {
+		Client::sendMessage(%clientId, $MsgRed, "You can't equip this item because you are already using one.~wC_BuySell.wav");
+		return False;
+	}
+
 	if(SkillCanUse(%clientId, %item)) {
-		Player::mountItem(%player, %item, %slot);
+		// check if they already have an equipped weapon, if so unequip that weapon
+		%equippedWeapon = GetEquippedWeapon(%clientId);
+		if (%equippedWeapon != "") {
+			Belt::UnequipAccessory(%clientId, %equippedWeapon);
+		}
+
+		Belt::EquipWeapon(%clientId, %item);
+		%image = BeltItem::GetImage(%item);
+
+		if (%image != "") {
+			Player::mountItem(%player, %image, %slot);
+		} else {
+			Player::mountItem(%player, %item, %slot);
+		}
+
 		return True;
 	}
 	else {
@@ -126,7 +145,7 @@ function selectValidWeapon(%clientId)
 	{
 		if(isSelectableWeapon(%clientId, %weapon))
 		{
-			Player::useItem(%clientId, %weapon);
+			// Player::useItem(%clientId, %weapon);
 			break;
 		}
 
@@ -137,7 +156,7 @@ function selectValidWeapon(%clientId)
 	}
 }
 
-function isSelectableWeapon(%clientId,%weapon)
+function isSelectableWeapon(%clientId, %weapon)
 {
 	dbecho($dbechoMode, "isSelectableWeapon(" @ %clientId @ ", " @ %weapon @ ")");
 
@@ -147,12 +166,14 @@ function isSelectableWeapon(%clientId,%weapon)
 	if(!SkillCanUse(%clientId, %weapon))
 		return false;
 
-	if(Player::getItemCount(%clientId, %weapon))
+	// if(Player::getItemCount(%clientId, %weapon))
+	if(belt::hasthisstuff(%clientId, %weapon) > 0)
 	{
 		//%ammo = $WeaponAmmo[%weapon];
 		//if (%ammo == "" || Player::getItemCount(%clientId,%ammo) > 0)
 			return true;
 	}
+
 	return false;
 }
 
@@ -228,11 +249,19 @@ function GetBestWeapon(%clientId)
 	%highest = -1;
 	%bestWeapon = -1;
 
-	%item = Knife;
-	for(%weapon = $NextWeapon[%item]; %weapon != %item; %weapon = $NextWeapon[%weapon])
-	{
-		if(isSelectableWeapon(%clientId, %weapon))
-		{
+	// if they have the casting blade, always use that
+	if(Player::getItemCount(%clientId, "CastingBlade") > 0) {
+		return "CastingBlade";
+	}
+
+	// then search through their weapon list
+	%itemList = Belt::GetNS(%clientId, "WeaponItems");
+	%totalItems = GetWord(%itemList, 0);
+	
+	for(%i = 1; %i <= %totalItems; %i++) {
+		%weapon = getword(%itemList, %i);
+
+		if(isSelectableWeapon(%clientId, %weapon)) {
 			%x = "";
 			%add = 0;
 			if(GetAccessoryVar(%weapon, $AccessoryType) == $RangedAccessoryType)

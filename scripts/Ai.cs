@@ -477,7 +477,18 @@ function AI::SelectBestWeapon(%aiId)
 
 		if(%x != -1)
 		{
-			Player::useItem(%aiId, %weapon);
+			if (isBeltItem(%weapon)) {
+				%image = BeltItem::GetImage(%weapon);
+				if (%image != "") {
+					Player::mountItem(%aiId, %image, %slot);
+				} else {
+					Player::mountItem(%aiId, %weapon, %slot);
+				}
+			} else {
+				Player::useItem(%aiId, %weapon);
+			}
+		
+
 			AI::SetSpotDist(%aiId);
 		}
 	}
