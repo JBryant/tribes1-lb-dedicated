@@ -1493,7 +1493,7 @@ function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image, %e
 }
 
 $shoppingIndex = 134;
-function BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction) {
+function BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction, %enchant) {
 	// copied from GetDelay() if you change that formula update it here
 	%a = 3.0;
 	%b = Cap(%image.imageType.fireTime * %a, 1.0, "inf");
@@ -1527,7 +1527,19 @@ function BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessory
 	// increase nums
 	$numBeltItems++;
 	$shoppingIndex++;
-} 
+
+	if (%enchant != "") {
+		$beltitem[%item, "Enchantment"] = %enchant;
+	}
+}
+
+$WeaponEnchantments = "FireI FireII FireIII FireIV FireV";
+$WeaponEnchantment[FireI, "name"] = "Fire I";
+$WeaponEnchantment[FireI, "name"] = "Fire I";
+$WeaponEnchantment[FireII, "name"] = "Fire II";
+$WeaponEnchantment[FireIII, "name"] = "Fire III";
+$WeaponEnchantment[FireIV, "name"] = "Fire IV";
+$WeaponEnchantment[FireV, "name"] = "Fire V";
 
 function BeltItem::AddWeapon(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction) {
 	// add base weapon
@@ -1539,6 +1551,18 @@ function BeltItem::AddWeapon(%name, %item, %type, %weight, %image, %accessoryTyp
 	BelItem::AddWeaponData(%equippedName, %equippedItem, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction);
 
 	// create enchanted versions
+	for(%i = 0; getWord($WeaponEnchantments, %i) != "" && getWord($WeaponEnchantments, %i) != -1; %i++) {
+		%enchant = getWord($WeaponEnchantments, %i);
+		%enchantName = $WeaponEnchantment[%enchant, "name"];
+
+		%enchantedWeaponName = %name @ " of " @ %enchantName;
+		%enchantedWeaponItem = %item @ %enchant;
+		BelItem::AddWeaponData(%enchantedWeaponName, %enchantedWeaponItem, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction, %enchant);
+
+		%equippedEnchantedName = %enchantedWeaponName @ " " @ $equippedString;
+		%equippedEnchantedItem = %enchantedWeaponItem @ "0";
+		BelItem::AddWeaponData(%equippedEnchantedName, %equippedEnchantedItem, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction, %enchant);
+	}
 }
 
 function BeltItem::GetType(%item) {
