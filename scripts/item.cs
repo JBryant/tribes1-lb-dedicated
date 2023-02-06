@@ -98,18 +98,18 @@ function Item::pop(%item)
 // Tools, Weapons & ammo
 //----------------------------------------------------------------------------
 
-// ItemData Tool
-// {
-// 	description = "Tool";
-// 	showInventory = false;
-// };
+ItemData Tool
+{
+	description = "Tool";
+	showInventory = false;
+};
 
-// function Tool::onUse(%player,%item)
-// {
-// 	dbecho($dbechoMode, "Tool::onUse(" @ %player @ ", " @ %item @ ")");
+function Tool::onUse(%player,%item)
+{
+	dbecho($dbechoMode, "Tool::onUse(" @ %player @ ", " @ %item @ ")");
 
-// 	Player::mountItem(%player, %item, $ToolSlot);
-// }
+	Player::mountItem(%player, %item, $ToolSlot);
+}
 
 
 //----------------------------------------------------------------------------

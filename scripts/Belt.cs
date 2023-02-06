@@ -1459,7 +1459,7 @@ function BeltItem::Add(%name, %item, %type, %weight, %cost, %image)
 	$HardcodedItemCost[%item] = %cost;
 }
 
-function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image)
+function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image, %enchantable)
 {
 	// add base version
 	%num = $count[%type]++;
@@ -1488,6 +1488,57 @@ function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image)
 	$beltitem[%equippedItem, "Image"] = %image;
 	$AccessoryVar[%equippedItem, $Weight] = %weight;
 	$HardcodedItemCost[%equippedItem] = %cost;
+
+	// if enchantable, make all the different versions
+}
+
+$shoppingIndex = 134;
+function BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction) {
+	// copied from GetDelay() if you change that formula update it here
+	%a = 3.0;
+	%b = Cap(%image.imageType.fireTime * %a, 1.0, "inf");
+	%c = %b * $DelayFactorTable[%accessoryType];
+	%suggestedWeight = FixDecimals(%c);
+
+	// generate belt information
+	%num = $count[%type]++;
+	$beltItemData[$numBeltItems] = %item;
+	$beltItemNameToItem[%name] = %item;
+	$beltitem[%num, "Num", %type] = %item;
+	$beltitem[%item, "Item"] = %item;
+	$beltitem[%item, "Name"] = %name;
+	$beltitem[%item, "Type"] = %type;
+	$beltitem[%item, "Image"] = %image;
+
+	// generate weapon information
+	$AccessoryVar[%item, $Weight] = %suggestedWeight;
+	$AccessoryVar[%item, $AccessoryType] = %accessoryType;
+	$AccessoryVar[%item, $SpecialVar] = %specialVar;
+	$AccessoryVar[%item, $MiscInfo] = %miscInfo;
+	$AccessoryVar[%item, $ShopIndex] = $shoppingIndex;
+	$SkillType[%item] = %weaponSkill;
+	$SkillRestriction[%item] = %skillRestriction;
+
+	// generate cost
+	%cost = GenerateItemCost(%item);
+	$HardcodedItemCost[%item] = %cost;
+	$ItemCost[%item] = %cost;
+
+	// increase nums
+	$numBeltItems++;
+	$shoppingIndex++;
+} 
+
+function BeltItem::AddWeapon(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction) {
+	// add base weapon
+	BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction);
+
+	// add equipped version
+	%equippedName = %name @ " " @ $equippedString;
+	%equippedItem = %item @ "0";
+	BelItem::AddWeaponData(%equippedName, %equippedItem, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction);
+
+	// create enchanted versions
 }
 
 function BeltItem::GetType(%item) {
@@ -1922,8 +1973,8 @@ $AccessoryVar[CrystalEnergyVial, $MiscInfo] = "A crystal energy vial that provid
 $restoreValue[CrystalEnergyVial, MP] = 50;
 
 //Weapons
-BeltItem::AddEquippable("Hatchet", "Hatchet", "WeaponItems", $AccessoryVar[Hatchet, $Weight], GenerateItemCost(Hatchet), "Hatchet");
-BeltItem::AddEquippable("Broad Sword", "BroadSword", "WeaponItems", $AccessoryVar[BroadSword, $Weight], GenerateItemCost(BroadSword), "CyborgGun"); // Sword
+BeltItem::AddEquippable("Hatchet", "Hatchet", "WeaponItems", $AccessoryVar[Hatchet, $Weight], GenerateItemCost(Hatchet), "Hatchet", True);
+BeltItem::AddEquippable("Broad Sword", "BroadSword", "WeaponItems", $AccessoryVar[BroadSword, $Weight], GenerateItemCost(BroadSword), "Sword");
 BeltItem::AddEquippable("War Axe", "WarAxe", "WeaponItems", $AccessoryVar[WarAxe, $Weight], GenerateItemCost(WarAxe), "Axe");
 BeltItem::AddEquippable("Long Sword", "LongSword", "WeaponItems", $AccessoryVar[LongSword, $Weight], GenerateItemCost(LongSword), "LongSword");
 BeltItem::AddEquippable("Battle Axe", "BattleAxe", "WeaponItems", $AccessoryVar[BattleAxe, $Weight], GenerateItemCost(BattleAxe), "BattleAxe");
@@ -1937,7 +1988,7 @@ BeltItem::AddEquippable("Quarter Staff", "QuarterStaff", "WeaponItems", $Accesso
 BeltItem::AddEquippable("Bone Club", "BoneClub", "WeaponItems", $AccessoryVar[BoneClub, $Weight], GenerateItemCost(BoneClub), "Mace");
 BeltItem::AddEquippable("Spiked Club", "SpikedClub", "WeaponItems", $AccessoryVar[SpikedClub, $Weight], GenerateItemCost(SpikedClub), "Mace");
 BeltItem::AddEquippable("Mace", "Mace", "WeaponItems", $AccessoryVar[Mace, $Weight], GenerateItemCost(Mace), "Mace");
-BeltItem::AddEquippable("Hammer Pick", "HammerPick", "WeaponItems", $AccessoryVar[HammerPick, $Weight], GenerateItemCost(HammerPick), "Pike");
+BeltItem::AddEquippable("Hammer Pick", "HammerPick", "WeaponItems", $AccessoryVar[HammerPick, $Weight], GenerateItemCost(HammerPick), "Pick");
 BeltItem::AddEquippable("Spiked Bone Club", "SpikedBoneClub", "WeaponItems", $AccessoryVar[SpikedBoneClub, $Weight], GenerateItemCost(SpikedBoneClub), "Mace");
 BeltItem::AddEquippable("Long Staff", "LongStaff", "WeaponItems", $AccessoryVar[LongStaff, $Weight], GenerateItemCost(LongStaff), "LongStaff");
 BeltItem::AddEquippable("War Hammer", "WarHammer", "WeaponItems", $AccessoryVar[WarHammer, $Weight], GenerateItemCost(WarHammer), "Hammer");
@@ -1963,6 +2014,13 @@ BeltItem::AddEquippable("Repeating Crossbow", "RepeatingCrossbow", "WeaponItems"
 BeltItem::AddEquippable("Elven Bow", "ElvenBow", "WeaponItems", $AccessoryVar[ElvenBow, $Weight], GenerateItemCost(ElvenBow), "LongBow");
 BeltItem::AddEquippable("Aeolus Wing", "AeolusWing", "WeaponItems", $AccessoryVar[AeolusWing, $Weight], GenerateItemCost(AeolusWing), "CompositeBow");
 BeltItem::AddEquippable("Heavy Crossbow", "HeavyCrossbow", "WeaponItems", $AccessoryVar[HeavyCrossbow, $Weight], GenerateItemCost(HeavyCrossbow), "Crossbow");
+
+// IMPORTANT: The weight of the weapon needs to match up with the Image Being used otherwise they will not be in sync.
+// To help with this, try to set the weight of all weapons that use the same image to be the same.
+// If you specifically WANT to create a faster or slower verison if something you will need
+// to make a new ItemImage for that speed. Name it as such and use it as much as you want.
+// AddWeapon(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction)
+BeltItem::AddWeapon("Rune Sword", "RuneSword", "WeaponItems", 10, "GemSword", $SwordAccessoryType, "6 200", "A mystical rune blade", $SkillSlashing, $SkillSlashing @ " 20");
 
 // rusties + damaged weapons
 BeltItem::AddEquippable("Rusty Hatchet", "RHatchet", "WeaponItems", $AccessoryVar[RHatchet, $Weight], $ItemCost[RHatchet], "Hatchet");
@@ -2004,6 +2062,7 @@ BeltItem::AddEquippable("Phens Robe", "PhensRobe", "ArmorItems", $AccessoryVar[P
 BeltItem::AddEquippable("Quest Master Robe", "QuestMasterRobe", "ArmorItems", $AccessoryVar[QuestMasterRobe, $Weight], GenerateItemCost(QuestMasterRobe));
 BeltItem::AddEquippable("Fine Robe", "FineRobe", "ArmorItems", $AccessoryVar[FineRobe, $Weight], GenerateItemCost(FineRobe));
 BeltItem::AddEquippable("Elven Robe", "ElvenRobe", "ArmorItems", $AccessoryVar[ElvenRobe, $Weight], GenerateItemCost(ElvenRobe));
+// Shields
 BeltItem::AddEquippable("Knight Shield", "KnightShield", "ArmorItems", $AccessoryVar[KnightShield, $Weight], GenerateItemCost(WindWKnightShieldalkers));
 BeltItem::AddEquippable("Heavenly Shield", "HeavenlyShield", "ArmorItems", $AccessoryVar[HeavenlyShield, $Weight], GenerateItemCost(HeavenlyShield));
 BeltItem::AddEquippable("Dragon Shield", "DragonShield", "ArmorItems", $AccessoryVar[DragonShield, $Weight], GenerateItemCost(DragonShield));

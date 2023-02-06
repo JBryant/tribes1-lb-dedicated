@@ -177,6 +177,10 @@ $AccessoryVar[Talon, $SpecialVar] = "6 80";
 $AccessoryVar[CeraphumsFeather, $SpecialVar] = "6 105";
 //.................................................................................
 
+// Weapon Weight are important, they affect time to swing as well overall weight
+// Rough Estimate: Delay = (Weight / 3) * Delay Factor (1)
+// So 3 weight should be a delay of 1, let's test it
+
 $AccessoryVar[Hatchet, $Weight] = 5;
 $AccessoryVar[BroadSword, $Weight] = 5;
 $AccessoryVar[WarAxe, $Weight] = 7;
@@ -358,6 +362,8 @@ $WeaponRange[CastingBlade] = 1000;	//will swing from anywhere...BUT will be able
 $WeaponRange[Wand] = 1000;
 $WeaponRange[TesterBow] = 400;
 
+// We have a choice... either we let weapon delay be decided by weight
+// Or we hard code it for every weapon.
 $WeaponDelay[Sling] = 1;
 $WeaponDelay[ShortBow] = 1;
 $WeaponDelay[LongBow] = 1.5;
@@ -714,6 +720,7 @@ function GetRange(%weapon)
 	else
 		return %minRange + $RangeTable[$AccessoryVar[%weapon, $AccessoryType]];
 }
+
 function GetDelay(%weapon)
 {
 	dbecho($dbechoMode, "GetDelay(" @ %weapon @ ")");

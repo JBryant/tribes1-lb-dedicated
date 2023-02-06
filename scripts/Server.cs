@@ -227,7 +227,7 @@ function createServer(%mission, %dedicated)
 	exec(Item);
 	exec(Accessory);
 	exec(smithing);
-	exec(weapons);
+	exec(weapons); // weapons
 	exec(armors);
 	exec(Crystal);
 	exec(Spawn);
