@@ -495,6 +495,7 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 				%rweapondamage = GetRoll(GetWord(GetAccessoryVar(%rweapon, $SpecialVar), 1));
 			else
 				%rweapondamage = 0;
+			
 			%weapondamage = GetRoll(GetWord(GetAccessoryVar(%weapon, $SpecialVar), 1));
 			%value = round((( (%weapondamage + %rweapondamage) / 1000) * $PlayerSkill[%shooterClient, %skilltype]) * %multi);
 
@@ -763,6 +764,7 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 			{
 				if(%value < 0)
 					%value = 0;
+
 				%backupValue = %value;
 
 
@@ -846,11 +848,51 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 					}
 
 					//--------------------
+					//check for enchanting damage
+					//--------------------
+
+					lbecho("check for enchanting damage");
+					lbecho(%weapon);
+					%enchantment = BeltItem::GetEnchant(%weapon);
+					lbecho(%enchantment);
+
+					%extraDamage = 0;
+					if (%enchantment != "") {
+						%enchantMod = $WeaponEnchantment[%enchantment, "mod"];
+						%enchantAction = $WeaponEnchantment[%enchantment, "action"];
+						lbecho(%enchantMod);
+						%modId = GetWord(%enchantMod, 0);
+						%modValue = GetWord(%enchantMod, 1);
+	
+						// percentage increase to damage
+						if (%modId == 1) {
+							lbecho("convalue:" @ %convValue);
+							%floor = floor(%convValue * (%modValue / 100));
+							lbecho("floor: " @%floor);
+							%extraDamage = floor(%convValue * (%modValue / 100)) + 1;
+							lbecho("extra damage: " @ %extraDamage);
+						}
+					}
+
+					//--------------------
 					//display to involved
 					//--------------------
-					if(%shooterClient != %damagedClient)
+
+					// This is where we shine! Take damage modifers into account, change the damage value, and send messages to porper parties
+					if(%shooterClient != %damagedClient) {
 						newprintmsg(%shooterClient, "You " @ %saction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ %convValue @ "<f0> points", $MsgRed);
+
+						if (%extraDamage > 0) {
+							newprintmsg(%shooterClient, "You " @ %enchantAction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ %extraDamage @ "<f0> points", $MsgRed);
+						}
+					}
+
 					newprintmsg(%damagedClient, "You were " @ %daction @ " by <f1>" @ %hitby @ "<ff> - <f2>" @ %convValue @ "<ff> points", $MsgRed);
+
+					if (%extraDamage > 0) {
+						newprintmsg(%damagedClient, "You were " @ %enchantAction @ " by <f1>" @ %hitby @ "<ff> - <f2>" @ %extraDamage @ "<ff> points", $MsgRed);
+						%convValue = %convValue + %extraDamage;
+					}
 
 					//--------------------
 					//display to radius
@@ -876,11 +918,13 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 							%sname = "An unknown assailant";
 						else
 							%sname = Client::getName(%shooterClient);
+
 						%dname = Client::getName(%damagedClient);
 					}
 					%hitpresentrad = %hitpresent;
 					if(%hitpresentrad == "slash")
 						%hitpresentrad = "slashe";
+
 					radiusAllExcept(%damagedClient, %shooterClient, "<f1>"@%sname @ "<ff> "@%hitpresentrad@"s " @ %dname @ " for <f2>" @ %convValue @ "<ff> points of damage!", true);
 				}
 				else if(%convValue < 0)
@@ -943,6 +987,7 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 				//	RefreshWeight(%damagedClient);
 				//	schedule("storeData(" @ %damagedClient @ ", \"SlowdownHitFlag\", False);", $SlowdownHitDelay);
 				//	schedule("RefreshWeight(" @ %damagedClient @ ");", $SlowdownHitDelay, Client::getOwnedObject(%damagedClient));
+				//	=== This idea is also DUMB and not FUN... screw it -LongBow
 				}
 
 				//If player not dead then play a random hurt sound

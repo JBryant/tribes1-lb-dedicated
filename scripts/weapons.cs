@@ -1886,6 +1886,11 @@ ItemImageData GemSwordImage
 
 	sfxFire = SoundSwing5;
 	sfxActivate = AxeSlash2;
+
+	lightType = 2; // 2
+	lightRadius = 5;
+	lightTime = 1; // 1
+	lightColor = { 1, 0.35, 0.21 }; // { r, g, b }, and it kicks in and out unless you use liogh
 };
 ItemData GemSword
 {

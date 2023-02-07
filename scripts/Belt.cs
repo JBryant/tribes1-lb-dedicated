@@ -1534,12 +1534,22 @@ function BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessory
 }
 
 $WeaponEnchantments = "FireI FireII FireIII FireIV FireV";
+
 $WeaponEnchantment[FireI, "name"] = "Fire I";
-$WeaponEnchantment[FireI, "name"] = "Fire I";
+$WeaponEnchantment[FireI, "mod"] = "1 4";
+$WeaponEnchantment[FireI, "action"] = "burned";
 $WeaponEnchantment[FireII, "name"] = "Fire II";
+$WeaponEnchantment[FireII, "mod"] = "1 8";
+$WeaponEnchantment[FireII, "action"] = "burned";
 $WeaponEnchantment[FireIII, "name"] = "Fire III";
+$WeaponEnchantment[FireIII, "mod"] = "1 12";
+$WeaponEnchantment[FireIII, "action"] = "burned";
 $WeaponEnchantment[FireIV, "name"] = "Fire IV";
+$WeaponEnchantment[FireIV, "mod"] = "1 16";
+$WeaponEnchantment[FireIV, "action"] = "burned";
 $WeaponEnchantment[FireV, "name"] = "Fire V";
+$WeaponEnchantment[FireV, "mod"] = "1 20";
+$WeaponEnchantment[FireV, "action"] = "burned";
 
 function BeltItem::AddWeapon(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction) {
 	// add base weapon
@@ -1575,6 +1585,10 @@ function BeltItem::GetName(%item) {
 
 function BeltItem::GetImage(%item) {
 	return $beltitem[%item, "Image"];
+}
+
+function BeltItem::GetEnchant(%item) {
+	return $beltitem[%item, "Enchantment"];
 }
 
 function BeltItem::IsEquipped(%clientId, %item) {
