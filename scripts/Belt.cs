@@ -46,7 +46,7 @@
 // Menu Functions      //
 // ------------------- //
 
-$equippedString = "(equipped)";
+$equippedString = "(+)";
 
 function getDisp(%type){
 	%disp["AmmoItems"] = "Ammunition";
@@ -1459,6 +1459,22 @@ function BeltItem::Add(%name, %item, %type, %weight, %cost, %image)
 	$HardcodedItemCost[%item] = %cost;
 }
 
+function BeltItem::AddItem(%name, %item, %type, %weight, %miscInfo) {
+	// add base weapon
+	%num = $count[%type]++;
+	$beltItemData[$numBeltItems] = %item;
+	$beltItemNameToItem[%name] = %item;
+	$numBeltItems++;
+	$beltitem[%num, "Num", %type] = %item;
+	$beltitem[%item, "Item"] = %item;
+	$beltitem[%item, "Name"] = %name;
+	$beltitem[%item, "Type"] = %type;
+
+	$AccessoryVar[%item, $Weight] = %weight;
+	$AccessoryVar[%item, $Weight] = %miscInfo;
+	$HardcodedItemCost[%item] = %cost;
+}
+
 function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image, %enchantable)
 {
 	// add base version
@@ -1533,23 +1549,87 @@ function BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessory
 	}
 }
 
-$WeaponEnchantments = "FireI FireII FireIII FireIV FireV";
+// ==============================
+// ========== SMITHING ==========
+// ==============================
 
-$WeaponEnchantment[FireI, "name"] = "Fire I";
-$WeaponEnchantment[FireI, "mod"] = "1 4";
-$WeaponEnchantment[FireI, "action"] = "burned";
-$WeaponEnchantment[FireII, "name"] = "Fire II";
-$WeaponEnchantment[FireII, "mod"] = "1 8";
-$WeaponEnchantment[FireII, "action"] = "burned";
-$WeaponEnchantment[FireIII, "name"] = "Fire III";
-$WeaponEnchantment[FireIII, "mod"] = "1 12";
-$WeaponEnchantment[FireIII, "action"] = "burned";
-$WeaponEnchantment[FireIV, "name"] = "Fire IV";
-$WeaponEnchantment[FireIV, "mod"] = "1 16";
-$WeaponEnchantment[FireIV, "action"] = "burned";
-$WeaponEnchantment[FireV, "name"] = "Fire V";
-$WeaponEnchantment[FireV, "mod"] = "1 20";
-$WeaponEnchantment[FireV, "action"] = "burned";
+$smithingNum = 0;
+Smith::addItem("RHatchet","RHatchet 1","Hatchet 1",$smithingNum++);
+Smith::addItem("RBroadSword","RBroadSword 1","BroadSword 1",$smithingNum++);
+Smith::addItem("RLongSword","RLongSword 1","LongSword 1",$smithingNum++);
+Smith::addItem("RClub","RClub 1","Club 1",$smithingNum++);
+Smith::addItem("RSpikedClub","RSpikedClub 1","SpikedClub 1",$smithingNum++);
+Smith::addItem("RKnife","RKnife 1","BroadSword 1",$smithingNum++);
+Smith::addItem("RDagger","RDagger 1","Dagger 1",$smithingNum++);
+Smith::addItem("RShortSword","RShortSword 1","ShortSword 1",$smithingNum++);
+Smith::addItem("RPickAxe","RPickAxe 1","PickAxe 1",$smithingNum++);
+Smith::addItem("RShortBow","RShortBow 1","ShortBow 1",$smithingNum++);
+Smith::addItem("RLightCrossbow","RLightCrossbow 1","LightCrossbow 1",$smithingNum++);
+Smith::addItem("RWarAxe","RWarAxe 1","WarAxe 1",$smithingNum++);
+Smith::addItem("KeldriniteLS","Keldrinite 1 LongSword 1","KeldriniteLS 1",$smithingNum++);
+Smith::addItem("AeolusWing","ElvenBow 1 CompositeBow 1 Quartz 3","AeolusWing 1",$smithingNum++);
+Smith::addItem("StoneFeather","SmallRock 1 Quartz 1","StoneFeather 1",$smithingNum++);
+Smith::addItem("MetalFeather","Knife 1 Quartz 1","MetalFeather 1",$smithingNum++);
+Smith::addItem("Talon","Dagger 1 Quartz 1 Granite 2","Talon 1",$smithingNum++);
+Smith::addItem("CeraphumsFeather","Dagger 2 Jade 2 Quartz 4","CeraphumsFeather 1",$smithingNum++);
+Smith::addItem("BoneClub","Club 1 SkeletonBone 1 Granite 3","BoneClub 1",$smithingNum++);
+Smith::addItem("SpikedBoneClub","SpikedClub 1 SkeletonBone 2 Granite 5","SpikedBoneClub 1",$smithingNum++);
+Smith::addItem("FineRobe","LightRobe 1 ApprenticeRobe 1 EnchantedStone 5","FineRobe 1",$smithingNum++);
+Smith::addItem("KeldrinArmor","Keldrinite 2 FullPlateArmor 1 Gold 5 Emerald 5 Diamond 5 EnchantedStone 5","KeldrinArmor 1",$smithingNum++);
+Smith::addItem("DragonMail","DragonScale 5 Diamond 5 Ruby 3","DragonMail 1",$smithingNum++);
+Smith::addItem("DragonShield","DragonScale 3 Ruby 2","DragonShield 1",$smithingNum++);
+Smith::addItem("ElvenRobe","AdvisorRobe 1 Topaz 2 EnchantedStone 4","ElvenRobe 1",$smithingNum++);
+Smith::addItem("JusticeStaff","LongStaff 1 Granite 4 Turquoise 2","JusticeStaff 1",$smithingNum++);
+Smith::addItem("JusticeStaff","LongStaff 1 Granite 4 Turquoise 2","JusticeStaff 1",$smithingNum++);
+
+// ==============================
+// ======== ENCHANTMENTS ========
+// ==============================
+
+$WeaponEnchantments = "";
+$baseEnchants = "Fire Lightning Ice Earth Poison";
+
+$enchantDamageVerb["Fire"] = "burned";
+$enchantDamageVerb["Lightning"] = "shocked";
+$enchantDamageVerb["Ice"] = "froze";
+$enchantDamageVerb["Earth"] = "smashed";
+$enchantDamageVerb["Poison"] = "poisoned";
+$enchantDamageVerb["Holy"] = "smited";
+
+$materiaMiscInfo["Fire"] = "A small red glowing orb that gives off a warm aura. This materia is embued with the element of Fire.";
+$materiaMiscInfo["Lightning"] = "A small yellow glowing orb that crackles with energy. This materia is embued with the element of Lightning.";
+$materiaMiscInfo["Ice"] = "A small blue glowing orb that softly swirls a cold breeze around it. This materia is embued with the element of Ice.";
+$materiaMiscInfo["Earth"] = "A small brown glowing orb that feels rock hard. This materia is embued with the element of Earth.";
+$materiaMiscInfo["Poison"] = "A small green glowing orb that emanates a sickly smell and green tint. This materia is embued with the element of Poison.";
+$materiaMiscInfo["Holy"] = "A small white glowing orb that emanates a holy aura of peace and justice. This materia is embued with the element of Holy.";
+
+$enchantLevels[1] = "I";
+$enchantLevels[2] = "II";
+$enchantLevels[3] = "III";
+$enchantLevels[4] = "IV";
+$enchantLevels[5] = "V";
+
+function generateEnchantsAndMateria() {
+	for(%i = 0; getWord($baseEnchants, %i) != "" && getWord($baseEnchants, %i) != -1; %i++) {
+			%baseEnchant = getWord($baseEnchants, %i);
+			%baseDamage = 4;
+
+			for(%x = 1; %x <= 5; %x++) {
+				%enchantLevel = $enchantLevels[%x];
+				%item = %baseEnchant@%enchantLevel;
+				%damage = %baseDamage * %x;
+
+				$WeaponEnchantment[%item, "name"] = %baseEnchant @ " " @ %enchantLevel;
+				$WeaponEnchantment[%item, "mod"] = "1 " @ %damage;
+				$WeaponEnchantment[%item, "action"] = $enchantDamageVerb[%baseEnchant];
+				$WeaponEnchantment[%item, "materia"] = %baseEnchant @ "Materia" @ %enchantLevel;
+
+				$WeaponEnchantments = $WeaponEnchantments @ " " @ %item;
+				// add materia
+				BeltItem::AddItem(%baseEnchant @ " Materia " @ %enchantLevel, %baseEnchant @ "Materia" @ %enchantLevel, "QuestItems", 1, $materiaMiscInfo[%baseEnchant]);
+			}
+	}
+}
 
 function BeltItem::AddWeapon(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction) {
 	// add base weapon
@@ -1564,6 +1644,7 @@ function BeltItem::AddWeapon(%name, %item, %type, %weight, %image, %accessoryTyp
 	for(%i = 0; getWord($WeaponEnchantments, %i) != "" && getWord($WeaponEnchantments, %i) != -1; %i++) {
 		%enchant = getWord($WeaponEnchantments, %i);
 		%enchantName = $WeaponEnchantment[%enchant, "name"];
+		%enchantMateria = $WeaponEnchantment[%enchant, "materia"];
 
 		%enchantedWeaponName = %name @ " of " @ %enchantName;
 		%enchantedWeaponItem = %item @ %enchant;
@@ -1572,6 +1653,9 @@ function BeltItem::AddWeapon(%name, %item, %type, %weight, %image, %accessoryTyp
 		%equippedEnchantedName = %enchantedWeaponName @ " " @ $equippedString;
 		%equippedEnchantedItem = %enchantedWeaponItem @ "0";
 		BelItem::AddWeaponData(%equippedEnchantedName, %equippedEnchantedItem, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction, %enchant);
+
+		// add the smithing recipe for the enchant
+		// Smith::addItem(%enchantedWeaponItem, %item @ " 1 " @ %enchantMateria @ " 1", %enchantedWeaponItem @ " 1", $smithingNum++);
 	}
 }
 
@@ -1943,6 +2027,8 @@ $count["ArmorItems"] = 0;
 $count["QuestItems"] = 0;
 $count["AccessoryItems"] = 0;
 $numBeltItems = 0;
+
+generateEnchantsAndMateria();
 
 //Ammunition
 BeltItem::Add("Small Rock","SmallRock","AmmoItems",0.2,13, "SmallRock");

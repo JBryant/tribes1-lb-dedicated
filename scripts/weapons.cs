@@ -1887,10 +1887,10 @@ ItemImageData GemSwordImage
 	sfxFire = SoundSwing5;
 	sfxActivate = AxeSlash2;
 
-	lightType = 2; // 2
-	lightRadius = 5;
-	lightTime = 1; // 1
-	lightColor = { 1, 0.35, 0.21 }; // { r, g, b }, and it kicks in and out unless you use liogh
+	// lightType = 2; // 2
+	// lightRadius = 5;
+	// lightTime = 1; // 1
+	// lightColor = { 0.1, 1, 0.1 }; // { 1, 0.35, 0.21 }; // { r, g, b }, and it kicks in and out unless you use liogh
 };
 ItemData GemSword
 {
@@ -1907,6 +1907,44 @@ ItemData GemSword
 function GemSwordImage::onFire(%player, %slot) {
 	MeleeAttack(%player);
 }
+
+
+// ItemImageData GemSwordFireImage
+// {
+// 	shapeFile  = "long_sword2";
+// 	mountPoint = 0;
+
+// 	weaponType = 0;
+// 	reloadTime = 0;
+// 	fireTime = GetDelay(Broadsword);
+// 	minEnergy = 0;
+// 	maxEnergy = 0;
+
+// 	accuFire = true;
+
+// 	sfxFire = SoundSwing5;
+// 	sfxActivate = AxeSlash2;
+
+// 	// lightType = 2; // 2
+// 	// lightRadius = 5;
+// 	// lightTime = 1; // 1
+// 	// lightColor = { 0.1, 1, 0.1 }; // { 1, 0.35, 0.21 }; // { r, g, b }, and it kicks in and out unless you use liogh
+// };
+// ItemData GemSwordFire
+// {
+// 	heading = "bWeapons";
+// 	description = "GemSwordFire";
+// 	className = "Weapon";
+// 	shapeFile  = "long_sword2";
+// 	hudIcon = "blaster";
+// 	shadowDetailMask = 4;
+// 	imageType = GemSwordFireImage;
+// 	price = 0;
+// 	showWeaponBar = true;
+// };
+// function GemSwordFireImage::onFire(%player, %slot) {
+// 	MeleeAttack(%player);
+// }
 
 // SPIKED MACE
 ItemImageData SpikedMaceImage

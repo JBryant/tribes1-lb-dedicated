@@ -528,11 +528,11 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 					%x = (fetchData(%damagedClient, "MDEF") / 5) + $PlayerSkill[%damagedClient, $SkillSpellResistance] + 5;
 				else
 					%x = (fetchData(%damagedClient, "DEF") / 5) + $PlayerSkill[%damagedClient, $SkillDodging] + 5;
+
 				%y = $PlayerSkill[%shooterClient, %skilltype] + 5;
-	
 				%n = %x + %y;
-	
-				%r = floor(getRandom() * %n) + 1;
+				%hitOffset = %n * 0.25;
+				%r = floor(getRandom() * %n) + 1 + %hitOffset;
 	
 				if(%r <= %x)
 					%isMiss = True;
@@ -852,25 +852,19 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 					//--------------------
 
 					lbecho("check for enchanting damage");
-					lbecho(%weapon);
 					%enchantment = BeltItem::GetEnchant(%weapon);
-					lbecho(%enchantment);
-
-					%extraDamage = 0;
+					%enchantDamage = 0;
+					
 					if (%enchantment != "") {
 						%enchantMod = $WeaponEnchantment[%enchantment, "mod"];
 						%enchantAction = $WeaponEnchantment[%enchantment, "action"];
-						lbecho(%enchantMod);
 						%modId = GetWord(%enchantMod, 0);
 						%modValue = GetWord(%enchantMod, 1);
 	
 						// percentage increase to damage
 						if (%modId == 1) {
-							lbecho("convalue:" @ %convValue);
 							%floor = floor(%convValue * (%modValue / 100));
-							lbecho("floor: " @%floor);
-							%extraDamage = floor(%convValue * (%modValue / 100)) + 1;
-							lbecho("extra damage: " @ %extraDamage);
+							%enchantDamage = floor(%convValue * (%modValue / 100)) + 1;
 						}
 					}
 
@@ -882,16 +876,16 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 					if(%shooterClient != %damagedClient) {
 						newprintmsg(%shooterClient, "You " @ %saction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ %convValue @ "<f0> points", $MsgRed);
 
-						if (%extraDamage > 0) {
-							newprintmsg(%shooterClient, "You " @ %enchantAction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ %extraDamage @ "<f0> points", $MsgRed);
+						if (%enchantDamage > 0) {
+							newprintmsg(%shooterClient, "You " @ %enchantAction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ %enchantDamage @ "<f0> points", $MsgRed);
 						}
 					}
 
 					newprintmsg(%damagedClient, "You were " @ %daction @ " by <f1>" @ %hitby @ "<ff> - <f2>" @ %convValue @ "<ff> points", $MsgRed);
 
-					if (%extraDamage > 0) {
-						newprintmsg(%damagedClient, "You were " @ %enchantAction @ " by <f1>" @ %hitby @ "<ff> - <f2>" @ %extraDamage @ "<ff> points", $MsgRed);
-						%convValue = %convValue + %extraDamage;
+					if (%enchantDamage > 0) {
+						newprintmsg(%damagedClient, "You were " @ %enchantAction @ " by <f1>" @ %hitby @ "<ff> - <f2>" @ %enchantDamage @ "<ff> points", $MsgRed);
+						%convValue = %convValue + %enchantDamage;
 					}
 
 					//--------------------
