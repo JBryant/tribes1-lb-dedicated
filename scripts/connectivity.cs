@@ -149,17 +149,20 @@ function Game::initialMissionDrop(%clientId)
 		// him/her choose stats if creating a new char)
 		//==================================================
 
-		if(%clientId.choosingGroup)
+		if(%clientId.choosingClass) {
 			StartStatSelection(%clientId);
-		else
+		}
+		else {
 			Game::playerSpawn(%clientId, false);
+		}
 	}
 }
 
 function Server::onClientDisconnect(%clientId)
 {
 	dbecho($dbechoMode2, "Server::onClientDisconnect(" @ %clientId @ ")");
-	$players--;
+
+	$players--;
 	setWindowTitle($players@"/"@$server::maxplayers@" Tribes RPG server");
 
 	Client::setControlObject(%clientId, -1);
@@ -193,8 +196,14 @@ function Server::onClientDisconnect(%clientId)
 
 		SaveCharacter(%clientId);
 
-		ClearEvents(%clientId);
-		for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))		{			if(%cl.repack >= 24){				Client::sendMessage(%cl, $MsgWhite, rpg::getname(%clientId)@" has left the world.");			}		}
+		ClearEvents(%clientId);
+
+		for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))
+		{
+			if(%cl.repack >= 24){
+				Client::sendMessage(%cl, $MsgWhite, rpg::getname(%clientId)@" has left the world.");
+			}
+		}
 	}
 
 	for(%i = 0; %i < 10; %i++)
@@ -209,12 +218,14 @@ function Server::onClientDisconnect(%clientId)
 
 function Server::onClientConnect(%clientId)
 {
-	dbecho($dbechoMode2, "Server::onClientConnect(" @ %clientId @ ")");
+	dbecho($dbechoMode2, "Server::onClientConnect(" @ %clientId @ ")");
+
 	$players++;
 	setWindowTitle($players@"/"@$server::maxplayers@" Tribes RPG server");
 
 	%hisip = Client::getTransportAddress(%clientId);
-
+
+
 	%bannedFlag = False;
 	for(%i = 1; $bannedip[%i] != ""; %i++)
 	{
@@ -226,8 +237,10 @@ function Server::onClientConnect(%clientId)
 			%bannedFlag = true;
 		}
 	}
-	if(!%bannedFlag){		//Connection spam protection, 5 second delay on each connection, per IP
-		BanList::add(%hisip, 5);
+	if(!%bannedFlag){
+		//Connection spam protection, 5 second delay on each connection, per IP
+		BanList::add(%hisip, 5);
+
 	}
 
 
@@ -264,12 +277,25 @@ function Client::leaveGame(%clientId)
 {
 }
 
-function newKick(%client, %msg, %force){	if(!isObject(%client))		return false;	if($newKicked[%client])		return false;	if(%client.blockAllKicks && !%force)		return false;	$newKicked[%client] = True;
+
+function newKick(%client, %msg, %force)
+{
+	if(!isObject(%client))
+		return false;
+	if($newKicked[%client])
+		return false;
+	if(%client.blockAllKicks && !%force)
+		return false;
+	$newKicked[%client] = True;
 	if(%msg == "")
-		%msg = " ";//So clients won't assume the "server went down".	%msg = escapestring(%msg);	pecho("Kick "@rpg::getname(%client)@": "@%msg);	schedule("net::kick("@%client@",\""@%msg@"\");$newKicked["@%client@"]=\"\";",0.05);
+		%msg = " ";//So clients won't assume the "server went down".
+	%msg = escapestring(%msg);
+	pecho("Kick "@rpg::getname(%client)@": "@%msg);
+	schedule("net::kick("@%client@",\""@%msg@"\");$newKicked["@%client@"]=\"\";",0.05);
 	//Using a schedule prevents us from crashing because then it doesn't
 	//happen while doing other operations on the client.
-	return true;}
+	return true;
+}
 
 // Part of phantom's hack block thingies
 function delayedban(%id)
@@ -278,7 +304,12 @@ function delayedban(%id)
 	newKick(%id, "2 hour ban for bad behaviour.");
 	BanList::add(%hisip, 7200);
 }
-function exploitBan(%id, %type, %period){	%hisip = Client::getTransportAddress(%id);	%banmsg = "You have been temporarily auto-banned for "@%period@" minutes. Reason: "@%type;
+
+function exploitBan(%id, %type, %period)
+{
+	%hisip = Client::getTransportAddress(%id);
+
+	%banmsg = "You have been temporarily auto-banned for "@%period@" minutes. Reason: "@%type;
 	%ret = newKick(%id,%banmsg, True);
 	if(%ret){
 		%period = %period * 60;
@@ -287,5 +318,78 @@ function delayedban(%id)
 		messageall(0,%msg);
 		pecho(%msg);
 	}
-	return %ret;}
-//For use from the server console. Coded functions should use newKick.//You can use a name or an ID on this.//Message is optional.//Examples:////kick("phantom", "testing and stuff");//kick("phantom");//kick(2049);//function kick(%target, %msg){	if(%target == "")	{		pecho("kick(\"Name/id\", \"kick message\");");		pecho("ex: kick(2049,\"Oh behave!\");");		pecho("Kicked players can return immediately.");		return false;	}	%client = %target;	if(client::getname(%target) == "")	{//looks like we were given a name		%client = NEWgetClientByName(%target);		if(%client == -1){			pecho("Couldn't kick "@%target@", name is invalid.");			return false;		}	}	if(%client < 2049){		pecho("Couldn't kick "@%client@", ID is invalid.");		return false;	}	if(!isObject(%client)){		pecho("Couldn't kick "@%client@", ID is invalid.");		return false;	}	newKick(%client, %msg, True);}function ban(%target, %period, %msg){	if(%target == "")	{		pecho("ban(\"Name/id\", minutes, \"kick message\");");		pecho("ex: ban(2049,10,\"Time for a time out!\");");		pecho("Banned players can't return until their ban runs out.");		return false;	}	%client = %target;	if(client::getname(%target) == "")	{//looks like we were given a name		%client = NEWgetClientByName(%target);		if(%client == -1){			pecho("Couldn't ban "@%target@", name is invalid.");			return false;		}	}	if(%client < 2049){		pecho("Couldn't ban "@%client@", ID is invalid.");		return false;	}	if(!isObject(%client)){		pecho("Couldn't ban "@%client@", ID is invalid.");		return false;	}	%hisip = Client::getTransportAddress(%client);	%period = %period * 60;	BanList::add(%hisip, %period);	newKick(%client, %msg);}
+	return %ret;
+}
+
+
+//For use from the server console. Coded functions should use newKick.
+//You can use a name or an ID on this.
+//Message is optional.
+//Examples:
+//
+//kick("phantom", "testing and stuff");
+//kick("phantom");
+//kick(2049);
+//
+function kick(%target, %msg)
+{
+	if(%target == "")
+	{
+		pecho("kick(\"Name/id\", \"kick message\");");
+		pecho("ex: kick(2049,\"Oh behave!\");");
+		pecho("Kicked players can return immediately.");
+		return false;
+	}
+	%client = %target;
+	if(client::getname(%target) == "")
+	{//looks like we were given a name
+		%client = NEWgetClientByName(%target);
+		if(%client == -1){
+			pecho("Couldn't kick "@%target@", name is invalid.");
+			return false;
+		}
+	}
+	if(%client < 2049){
+		pecho("Couldn't kick "@%client@", ID is invalid.");
+		return false;
+	}
+	if(!isObject(%client)){
+		pecho("Couldn't kick "@%client@", ID is invalid.");
+		return false;
+	}
+
+	newKick(%client, %msg, True);
+}
+
+
+function ban(%target, %period, %msg)
+{
+	if(%target == "")
+	{
+		pecho("ban(\"Name/id\", minutes, \"kick message\");");
+		pecho("ex: ban(2049,10,\"Time for a time out!\");");
+		pecho("Banned players can't return until their ban runs out.");
+		return false;
+	}
+	%client = %target;
+	if(client::getname(%target) == "")
+	{//looks like we were given a name
+		%client = NEWgetClientByName(%target);
+		if(%client == -1){
+			pecho("Couldn't ban "@%target@", name is invalid.");
+			return false;
+		}
+	}
+	if(%client < 2049){
+		pecho("Couldn't ban "@%client@", ID is invalid.");
+		return false;
+	}
+	if(!isObject(%client)){
+		pecho("Couldn't ban "@%client@", ID is invalid.");
+		return false;
+	}
+	%hisip = Client::getTransportAddress(%client);
+	%period = %period * 60;
+	BanList::add(%hisip, %period);
+	newKick(%client, %msg);
+}

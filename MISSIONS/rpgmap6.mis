@@ -3788,15 +3788,9 @@ instant SimGroup "MissionGroup" {
 			position = "-2472.75 -2297.25 82.791";
 			rotation = "0 0 0";
 		};
-		instant SimGroup "NAMES Maximus Geronimo Avatar Necron Sephter Abacus Ternim Unther Deytuv Kessam Henry Slivat Pronimus Fennis Mortyr Vlad Xavius Tuvan Fuckhead";
-		instant SimGroup "DEFAULTS Mage CastingBlade 1 LVL 9";
-		instant SimGroup "DEFAULTS Druid RShortsword 1 LVL 13";
-		instant SimGroup "DEFAULTS Fighter RDagger 1 LVL 9";
-		instant SimGroup "DEFAULTS Paladin RDagger 1 LVL 9";
-		instant SimGroup "DEFAULTS Thief RDagger 1 LVL 6";
-		instant SimGroup "DEFAULTS Bard RDagger 1 LVL 5";
-		instant SimGroup "DEFAULTS Cleric RLongSword 1 LVL 18";
-		instant SimGroup "DEFAULTS Ranger RDagger 1 LVL 10";
+		instant SimGroup "NAMES Maximus Geronimo Avatar Necron Sephter Abacus Ternim Unther Deytuv Kessam Henry Slivat Pronimus Fennis Mortyr Vlad Xavius Tuvan";
+		instant SimGroup "DEFAULTS Chemist RShortsword 1 LVL 13";
+		instant SimGroup "DEFAULTS Squire RLongSword 1 LVL 18";
 	};
 	instant InteriorShape "anvil1 anvil" {
 		fileName = "anvil.0.dis";

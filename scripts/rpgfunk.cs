@@ -1581,7 +1581,6 @@ function GiveThisStuff(%clientId, %list, %echo, %multiplier)
 		else if(%w == "CLASS")
 		{
 			storeData(%clientId, "CLASS", %w2);
-			storeData(%clientId, "GROUP", $ClassGroup[fetchData(%clientId, "CLASS")]);
 		}
 		else if(%w == "LVL")
 		{

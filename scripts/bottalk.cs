@@ -680,14 +680,14 @@ function bottalk::botmaker(%TrueClientId, %closestId, %initTalk, %message){
 		}
 		else
 		{
-			$botMenuOption[%TrueClientId,0] = "mage";
-			$botMenuOption[%TrueClientId,1] = "fighter";
-			$botMenuOption[%TrueClientId,2] = "paladin";
-			$botMenuOption[%TrueClientId,3] = "thief";
-			$botMenuOption[%TrueClientId,4] = "bard";
-			$botMenuOption[%TrueClientId,5] = "ranger";
-			$botMenuOption[%TrueClientId,6] = "cleric";
-			$botMenuOption[%TrueClientId,7] = "druid";
+			$botMenuOption[%TrueClientId,0] = "squire";
+			$botMenuOption[%TrueClientId,1] = "chemist";
+			// $botMenuOption[%TrueClientId,2] = "paladin";
+			// $botMenuOption[%TrueClientId,3] = "thief";
+			// $botMenuOption[%TrueClientId,4] = "bard";
+			// $botMenuOption[%TrueClientId,5] = "ranger";
+			// $botMenuOption[%TrueClientId,6] = "squire";
+			// $botMenuOption[%TrueClientId,7] = "chemist";
 			NewBotMessage(%TrueClientId, %closestId, "I have all sorts of helpers at my disposal. Tell me which class you are interested in.");
 			$state[%closestId, %TrueClientId] = 1;
 		}
@@ -711,22 +711,22 @@ function bottalk::botmaker(%TrueClientId, %closestId, %initTalk, %message){
 			%gflag = True;
 		}
 
-		if(String::ICompare(%class, "mage") == 0)
-			%class = "Mage";
-		else if(String::ICompare(%class, "fighter") == 0)
-			%class = "Fighter";
-		else if(String::ICompare(%class, "paladin") == 0)
-			%class = "Paladin";
-		else if(String::ICompare(%class, "thief") == 0)
-			%class = "Thief";
-		else if(String::ICompare(%class, "bard") == 0)
-			%class = "Bard";
-		else if(String::ICompare(%class, "ranger") == 0)
-			%class = "Ranger";
-		else if(String::ICompare(%class, "cleric") == 0)
-			%class = "Cleric";
-		else if(String::ICompare(%class, "druid") == 0)
-			%class = "Druid";
+		// if(String::ICompare(%class, "mage") == 0)
+		// 	%class = "Mage";
+		// else if(String::ICompare(%class, "fighter") == 0)
+		// 	%class = "Fighter";
+		// else if(String::ICompare(%class, "paladin") == 0)
+		// 	%class = "Paladin";
+		// else if(String::ICompare(%class, "thief") == 0)
+		// 	%class = "Thief";
+		// else if(String::ICompare(%class, "bard") == 0)
+		// 	%class = "Bard";
+		// else if(String::ICompare(%class, "ranger") == 0)
+		// 	%class = "Ranger";
+		else if(String::ICompare(%class, "squire") == 0)
+			%class = "Squire";
+		else if(String::ICompare(%class, "chemist") == 0)
+			%class = "Chemist";
 
 		if(%defaults != "")
 		{
@@ -751,7 +751,7 @@ function bottalk::botmaker(%TrueClientId, %closestId, %initTalk, %message){
 		}
 		else
 		{
-			NewBotMessage(%TrueClientId, %closestId, "Invalid class. Use any of the following: mage fighter paladin ranger thief bard cleric druid.");
+			NewBotMessage(%TrueClientId, %closestId, "Invalid class. Use any of the following: squire chemist.");
 			$state[%closestId, %TrueClientId] = "";
 		}
 	}

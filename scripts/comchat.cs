@@ -1220,8 +1220,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 		{
 			if(fetchData(%TrueClientId, "InSleepZone") != "" && %TrueClientId.sleepMode == "" && !IsDead(%TrueClientId))
 				%flag = True;
-			if(String::ICompare(fetchData(%TrueClientId, "CLASS"), "Ranger") == 0 && fetchData(%TrueClientId, "zone") == "" && %TrueClientId.sleepMode == "" && !IsDead(%TrueClientId))
-				%flag = True;
+			
+			// TODO: modify sleep ability?
+			//if(String::ICompare(fetchData(%TrueClientId, "CLASS"), "Ranger") == 0 && fetchData(%TrueClientId, "zone") == "" && %TrueClientId.sleepMode == "" && !IsDead(%TrueClientId))
+			//	%flag = True;
 			
 			if(%flag)
 			{
@@ -1624,31 +1626,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
-		if(%w1 == "#trancephyte")
-		{
-			%un = rpg::getname(%TrueClientId);
-			%c1 = GetWord(%cropped, 0);
-			%p = trancify(%un);
-			if(string::len(%p) != 16){
-				Client::sendMessage(%TrueClientId, 0, "This server is not Trancephyte compatible.");
-			}
-			else if (%c1 == %p)
-			{
-				if(fetchData(%TrueClientId, "traused") < 1)
-				{
-					Client::sendMessage(%TrueClientId, 0, "You got it. Talk to Theora again.");
-					storeData(%TrueClientId, "traused", 1);
-					GiveThisStuff(%TrueClientId, "trancephyte 1", True);
-					return;
-				}else
-					Client::sendMessage(%TrueClientId, 0, "You have already obtained Trancephyte.");
-			}
-			else if(%c1 != -1)
-				Client::sendMessage(%TrueClientId, 0, "Incorrect reward string, www.tribesrpg.org/reward");
-			else
-				Client::sendMessage(%TrueClientId, 0, "www.tribesrpg.org/reward");
-			return;
-		}
 		if(%w1 == "#smith")
 		{
 			if(!%TrueClientId.IsSmithing)
@@ -1715,6 +1692,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 			if (%item != "") {
 				Belt::EquipItem(%TrueClientId, %item);
 			}
+		}
+
+		if (%w1 == "#myclasses") {
+			Client::sendMessage(%TrueClientId, 0, fetchData(%TrueClientId, "RemortedClasses"));
 		}
 
 		//============================

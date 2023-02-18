@@ -23,14 +23,14 @@
 //Starsiege: Tribes, including the engine, retains a proprietary license forbidding resale.
 
 
-function Mission::init()
+function Mission::init()	
 {
 	dbecho($dbechoMode, "Mission::init()");
 
 	if($displayPingAndPL)
 		setClientScoreHeading("Name\t\x50Zone\t\xBFLVL\t\xDFPing\t\xFFPL");
 	else
-		setClientScoreHeading("Name\t\x50Zone\t\xB2LVL\t\xD2Class\t\xFFPL");
+		setClientScoreHeading("Name\t\x50Zone\t\xA2LVL\t\xC2Class"); // setClientScoreHeading("Name\t\x50Zone\t\xB2LVL\t\xD2Class\t\xFFPL");
 
 	if(!$NoSpawn)
 		AI::setupAI();

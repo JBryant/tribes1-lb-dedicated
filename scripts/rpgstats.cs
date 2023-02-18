@@ -360,49 +360,47 @@ function MenuClass(%clientId)
 
 	Client::buildMenu(%clientId, "Pick a class:", "pickclass", true);
 
+	// figure out the list of actually useable classes
+	// loop through class requirements
+	// for each requirement, check if it exists in the characters RemortedClasses
+	%remortedClasses = fetchData(%clientId, "RemortedClasses");
 	%op = 0;
-	for(%i = 1; $ClassName[%i, 0] != ""; %i++)
-	{
-		if(String::ICompare(fetchData(%clientId, "GROUP"), $ClassGroup[$ClassName[%i, 0]]) == 0)
-		{
+	for(%i = 1; $ClassName[%i] != ""; %i++) {
+		%meetsClassRequirements = True;
+		%classRequirements = $ClassRequirements[%i];
+
+		for(%x = 0; (%requiredClassName = getWord(%classRequirements, %x)) != -1; %x +=2) {
+			%requiredClassRemortLevel = getWord(%classRequirements, %x + 1);
+			// check if client has the class in the list
+			%remortedClassIndex = String::findSubStr(%remortedClasses, %requiredClassName);
+			// if %remortedClassIndex > 0 it exists, but how to get number next to it?
+			%cropped = String::getSubStr(%remortedClasses, %remortedClassIndex, 99999);
+			%remortedClassLevel = getword(%cropped, 1);
+
+			if (%remortedClassIndex == -1 || %remortedClassLevel < %requiredClassRemortLevel) {
+				%meetsClassRequirements = False;
+			}
+		}
+
+		if (%meetsClassRequirements == True) {
 			%op++;
-			Client::addMenuItem(%clientId, %op @ $ClassName[%i, 0], %op);
+			Client::addMenuItem(%clientId, %op @ $ClassName[%i], $ClassName[%i]);
 		}
 	}
-	Client::addMenuItem(%clientId, "x<-- BACK", "back");
-
 
 	return;
 }
-function processMenupickclass(%clientId, %opt)
+
+function processMenupickclass(%clientId, %className)
 {
 	dbecho($dbechoMode, "processMenupickclass(" @ %clientId @ ", " @ %opt @ ")");
 
-	if(%opt == "back")
-	{
-		%clientId.choosingClass = "";
-		%clientId.choosingGroup = True;
-		storeData(%clientId, "GROUP", "");
+	storeData(%clientId, "CLASS", %className);
+	%class = %className;
 
-		MenuGroup(%clientId);
-		return;
-	}
-
-	%op = 0;
-	for(%i = 1; $ClassName[%i, 0] != ""; %i++)
-	{
-		if(String::ICompare(fetchData(%clientId, "GROUP"), $ClassGroup[$ClassName[%i, 0]]) == 0)
-		{
-			%op++;
-			if(%op == %opt){
-				storeData(%clientId, "CLASS", $ClassName[%i, 0]);
-				%class = $ClassName[%i, 0];
-			}
-		}
-	}
 	if(%class == "")
 	{
-		%clientId.choosingClass = "";
+		%clientId.choosingFirstClass = "";
 		%clientId.choosingGroup = True;
 		storeData(%clientId, "GROUP", "");
 
@@ -411,13 +409,13 @@ function processMenupickclass(%clientId, %opt)
 	}
 
 	//let the player enter the world
-	%clientId.choosingClass = "";
+	%clientId.choosingFirstClass = "";
 	storeData(%clientId, "tmphp", fetchData(%clientId, "MaxHP"));
 	storeData(%clientId, "tmpmana", fetchData(%clientId, "MaxMANA"));
 	Game::playerSpawn(%clientId, false);
 
 	//######### set a few start-up variables ########
-	storeData(%clientId, "COINS", GetRoll($initcoins[fetchData(%clientId, "GROUP")]));
+	storeData(%clientId, "COINS", GetRoll("5d3x10"));
 
 	//add $autoStartupSP for each skill
 	for(%i = 1; %i <= getNumSkills(); %i++)
@@ -425,6 +423,57 @@ function processMenupickclass(%clientId, %opt)
 	//###############################################
 
 	centerprint(%clientId, "<f1>Server powered by the RPG MOD version " @ $rpgver @ "<f0>\n\n" @ $loginMsg, 15);
+}
+
+function MenuChangeClass(%clientId)
+{
+	dbecho($dbechoMode, "MenuChangeClass(" @ %clientId @ ")");
+
+	Client::buildMenu(%clientId, "Pick a class:", "changeclass", true);
+
+	// figure out the list of actually useable classes
+	// loop through class requirements
+	// for each requirement, check if it exists in the characters RemortedClasses
+	%remortedClasses = fetchData(%clientId, "RemortedClasses");
+	%op = 0;
+
+	for(%i = 1; $ClassName[%i] != ""; %i++) {
+		%meetsClassRequirements = True;
+		%classRequirements = $ClassRequirements[%i];
+
+		for(%x = 0; (%requiredClassName = getWord(%classRequirements, %x)) != -1; %x +=2) {
+			%requiredClassRemortLevel = getWord(%classRequirements, %x + 1);
+			// check if client has the class in the list
+			%remortedClassIndex = String::findSubStr(%remortedClasses, %requiredClassName);
+			// if %remortedClassIndex > 0 it exists, but how to get number next to it?
+			%cropped = String::getSubStr(%remortedClasses, %remortedClassIndex, 99999);
+			%remortedClassLevel = getword(%cropped, 1);
+
+			if (%remortedClassIndex == -1 || %remortedClassLevel < %requiredClassRemortLevel) {
+				%meetsClassRequirements = False;
+			}
+		}
+
+		if (%meetsClassRequirements == True) {
+			%op++;
+			Client::addMenuItem(%clientId, %op @ $ClassName[%i], $ClassName[%i]);
+		}
+	}
+
+
+	return;
+}
+
+function processMenuchangeclass(%clientId, %className)
+{
+	dbecho($dbechoMode, "processMenuchangeclass(" @ %clientId @ ", " @ %opt @ ")");
+
+	storeData(%clientId, "CLASS", %className);
+	
+	%class = %className;
+	%clientId.choosingClass = "";
+
+	SaveCharacter(%clientId);
 }
 
 function OldGetLevel(%ex, %clientId)
@@ -623,7 +672,7 @@ function StartStatSelection(%clientId)
 
 	storeData(%clientId, "SPcredits", $initSPcredits);
 
-	MenuGroup(%clientId);
+	MenuClass(%clientId);
 }
 
 function Game::refreshClientScore(%clientId)
@@ -660,10 +709,10 @@ function Game::refreshClientScore(%clientId)
 		storeData(%clientId, "templvl", GetLevel(fetchData(%clientId, "EXP"), %clientId));
 
 		%lvl = GetLevel(fetchData(%clientId, "EXP"), %clientId);
-		%rcheck = $ClassName[1, fetchData(%clientId, "RemortStep")+1];
+		//%rcheck = $ClassName[1, fetchData(%clientId, "RemortStep")+1];
 		%cr = fetchData(%clientId, "currentlyRemorting");
 		%maxlvl = 125 + fetchData(%clientId, "RemortStep");
-		if(%lvl >= %maxlvl && %rcheck != "" && !%cr && !Player::isAiControlled(%clientId))
+		if(%lvl >= %maxlvl && !%cr && !Player::isAiControlled(%clientId))
 		{
 			//FORCE REMORT!!!
 
@@ -686,7 +735,7 @@ function Game::refreshClientScore(%clientId)
 		Client::setScore(%clientId, "%n\t" @ %z @ "\t  " @ fetchData(%clientId, "LVL") @ "\t%p\t%l", fetchData(%clientId, "LVL"));
 	else
 	{
-            Client::setScore(%clientId, "%n\t" @ %z @ "\t  " @ fetchData(%clientId, "LVL") @ "\t" @ getFinalCLASS(%clientId) @ "\t%l", fetchData(%clientId, "LVL"));
+        Client::setScore(%clientId, "%n\t" @ %z @ "\t  " @ fetchData(%clientId, "LVL") @ "\t" @ getFinalCLASS(%clientId) @ "\t", fetchData(%clientId, "LVL"));
 	}
 }
 
@@ -704,8 +753,7 @@ function DoRemort(%clientId)
 
 	//skill variables
 	%cnt = 0;
-	for(%i = 1; %i <= GetNumSkills(); %i++)
-	{
+	for(%i = 1; %i <= GetNumSkills(); %i++) {
 		$PlayerSkill[%clientId, %i] = 0;
 		$SkillCounter[%clientId, %i] = 0;
 	}
@@ -719,7 +767,30 @@ function DoRemort(%clientId)
 	%pos = TeleportToMarker(%clientId, "Teams/team0/DropPoints", 0, 0);
 
 	playSound(RespawnC, GameBase::getPosition(%clientId));
-	
+
+	// update their remorted classes list
+	%currentClass = fetchData(%clientId, "CLASS");
+	%remortedClasses = fetchData(%clientId, "RemortedClasses");
+
+	if (String::findSubStr(%remortedClasses, %currentClass) != -1) {
+		%newRemortedClasses = "";
+		for(%x = 0; (%className = getWord(%remortedClasses, %x)) != -1; %x +=2) {
+			%classRemortLevel = getWord(%remortedClasses, %x + 1);
+			if (%className == %currentClass ) {
+				%nextLevel = %classRemortLevel + 1;
+				%newRemortedClasses = %newRemortedClasses @ %className @ " " @ %nextLevel @ " ";
+			} else {
+				%newRemortedClasses = %newRemortedClasses @ %className @ " " @ %classRemortLevel @ " ";
+			}
+		}
+		storeData(%clientId, "RemortedClasses", %newRemortedClasses);
+	} else {	
+		storeData(%clientId, "RemortedClasses", %remortedClasses @ %currentClass @ " 1 ");
+	}
+
+	%clientId.choosingClass = True;
+	MenuChangeClass(%clientId);
+
 	RefreshAll(%clientId);
 
 	Client::sendMessage(%clientId, $MsgBeige, "Welcome to Remort Level " @ fetchData(%clientId, "RemortStep") @ "!");

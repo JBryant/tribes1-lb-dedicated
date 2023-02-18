@@ -43,7 +43,8 @@ function SetupShop(%clientId, %botid)
 	%txt = "<f1><jc>COINS: " @ fetchData(%clientId, "COINS");
 	Client::setInventoryText(%clientId, %txt);
 
-	%info = $BotInfo[%botid.name, SHOP];	
+	%info = $BotInfo[%botid.name, SHOP];	
+
 	if($BotInfo[%botid.name, BeltEvaluated] == "")
 	{
 		$BotInfo[%botid.name, BeltEvaluated] = True;
@@ -66,7 +67,28 @@ function SetupShop(%clientId, %botid)
 		$BotInfo[%botid.name, SHOP] = %newString;
 		%info = %newString;
 	}
-	%max = getNumItems();			for(%id = 0; %id < %max; %id++)	{		%item = getItemData(%id);		for(%i = 0; GetWord(%info, %i) != -1; %i++)		{			%a = GetWord(%info, %i);			if($AccessoryVar[%item, $ShopIndex] == %a)			{				Client::setItemShopping(%clientId, %item);				Client::setItemBuying(%clientId, %item);			}		}	}	if($BotInfo[%botid.name, BELTSHOP] != ""){		Client::setItemShopping(%clientId, BeltItemTool);		Client::setItemBuying(%clientId, BeltItemTool);		if($BotInfo[%botid.name, SHOP] == ""){			%clientId.beltShop = %botid;			MenuBuyBeltItem(%clientId, 1);		}	}
+	%max = getNumItems();		
+	for(%id = 0; %id < %max; %id++)
+	{
+		%item = getItemData(%id);
+		for(%i = 0; GetWord(%info, %i) != -1; %i++)
+		{
+			%a = GetWord(%info, %i);
+			if($AccessoryVar[%item, $ShopIndex] == %a)
+			{
+				Client::setItemShopping(%clientId, %item);
+				Client::setItemBuying(%clientId, %item);
+			}
+		}
+	}
+	if($BotInfo[%botid.name, BELTSHOP] != "") {
+		Client::setItemShopping(%clientId, BeltItemTool);
+		Client::setItemBuying(%clientId, BeltItemTool);
+		if($BotInfo[%botid.name, SHOP] == ""){
+			%clientId.beltShop = %botid;
+			MenuBuyBeltItem(%clientId, 1);
+		}
+	}
 }
 
 function SetupBank(%clientId, %id)
@@ -89,14 +111,22 @@ function SetupBank(%clientId, %id)
 
 	%txt = "<f1><jc>COINS: " @ fetchData(%clientId, "COINS");
 	Client::setInventoryText(%clientId, %txt);
-	Client::setItemShopping(%clientId, BeltItemTool);	Client::setItemBuying(%clientId, BeltItemTool);
+
+	Client::setItemShopping(%clientId, BeltItemTool);
+	Client::setItemBuying(%clientId, BeltItemTool);
 
 	%info = fetchData(%clientId, "BankStorage");
 
 	for(%i = 0; GetWord(%info, %i) != -1; %i+=2)
 	{
 		%item = GetWord(%info, %i);
-		if(isBeltItem(%item)){			%cnt = GetStuffStringCount(fetchData(%clientId, "BankStorage"), %item);			givethisstuff(%clientId, %item@" "@%cnt, True);		}		else		{
+
+		if(isBeltItem(%item)){
+			%cnt = GetStuffStringCount(fetchData(%clientId, "BankStorage"), %item);
+			givethisstuff(%clientId, %item@" "@%cnt, True);
+		}
+		else
+		{
 			Client::setItemShopping(%clientId, %item);
 			Client::setItemBuying(%clientId, %item);
 		}

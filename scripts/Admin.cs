@@ -315,9 +315,14 @@ function Game::menuRequest(%clientId)
 		MenuGroup(%clientId);
 		return;
 	}
-	else if(%clientId.choosingClass)
+	else if(%clientId.choosingFirstClass)
 	{
 		MenuClass(%clientId);
+		return;
+	}
+	else if(%clientId.choosingClass)
+	{
+		MenuChangeClass(%clientId);
 		return;
 	}
 	else if(%clientId.currentShop != "")
@@ -392,15 +397,20 @@ function Game::menuRequest(%clientId)
 			%curItem = -1;
 			if(!IsDead(%clientId))
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "View your stats" , "viewstats");
+
 			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Settings..." , "settings");
+
 			if(!IsDead(%clientId)){
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Inventory (wt: "@Belt::GetWeight(%clientid)@")","viewbelt");
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Skill points..." , "sp");
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Compass" , "compass");
 			}
+
 			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Party options..." , "partyoptions");
+
 			if($sanctionedAdmin[rpg::getname(%clientId)] > 0)
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Admin controls", "admincontrol");
+				
 			// If they have a ranged weapon, we can change this to not use GetAccessoryList in the future
 			if(GetAccessoryList(%clientId, 9, -1) != "")
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Ranged weapons..." , "rweapons");

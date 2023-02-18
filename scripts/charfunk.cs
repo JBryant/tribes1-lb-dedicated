@@ -24,6 +24,7 @@ function ClearVariables(%clientId)
 	%clientId.lastWaitActionTime = "";
 	%clientId.choosingGroup = "";
 	%clientId.choosingClass = "";
+	%clientId.choosingFirstClass = "";
 	%clientId.possessId = "";
 	%clientId.sleepMode = "";
 	%clientId.lastSaveCharTime = "";
@@ -201,13 +202,13 @@ function SaveCharacter(%clientId, %silent)
 	$funk::var["[\"" @ %name @ "\", 0, 21]"] = fetchData(%clientId, "RemortStep");
 	$funk::var["[\"" @ %name @ "\", 0, 22]"] = fetchData(%clientId, "LCK");
 	$funk::var["[\"" @ %name @ "\", 0, 23]"] = $rpgver;
-	$funk::var["[\"" @ %name @ "\", 0, 26]"] = fetchData(%clientId, "GROUP");
+	$funk::var["[\"" @ %name @ "\", 0, 26]"] = fetchData(%clientId, "GROUP"); // get rid of groups
 	$funk::var["[\"" @ %name @ "\", 0, 27]"] = fetchData(%clientId, "CLASS");
 	$funk::var["[\"" @ %name @ "\", 0, 28]"] = fetchData(%clientId, "SPcredits");
 	//$funk::var["[\"" @ %name @ "\", 0, 29]"] = "";
 	$funk::var["[\"" @ %name @ "\", 0, 30]"] = GetHouseNumber(fetchData(%clientId, "MyHouse"));
 	$funk::var["[\"" @ %name @ "\", 0, 31]"] = fetchData(%clientId, "RankPoints");
-	$funk::var["[\"" @ %name @ "\", 0, 32]"] = fetchData(%clientId, "traused");
+	$funk::var["[\"" @ %name @ "\", 0, 32]"] = fetchData(%clientId, "RemortedClasses");
 
 
 	//Key binds
@@ -386,14 +387,13 @@ function LoadCharacter(%clientId)
 		storeData(%clientId, "RemortStep", $funk::var[%name, 0, 21]);
 		storeData(%clientId, "LCK", $funk::var[%name, 0, 22]);
 		storeData(%clientId, "tmpLastSaveVer", $funk::var[%name, 0, 23]);
-		storeData(%clientId, "GROUP", $funk::var[%name, 0, 26]);
+		storeData(%clientId, "GROUP", $funk::var[%name, 0, 26]); // get rid of groups
 		storeData(%clientId, "CLASS", $funk::var[%name, 0, 27]);
 		storeData(%clientId, "SPcredits", $funk::var[%name, 0, 28]);
 		//$funk::var[%name, 0, 29]);
 		storeData(%clientId, "MyHouse", $HouseName[$funk::var[%name, 0, 30]]);
 		storeData(%clientId, "RankPoints", $funk::var[%name, 0, 31]);
-		storeData(%clientId, "traused", $funk::var[%name, 0, 32]);
-
+		storeData(%clientId, "RemortedClasses", $funk::var[%name, 0, 32]); // 32 is now to store skills
 
 		$numMessage[%clientId, 1] = $funk::var[%name, 7, 1];
 		$numMessage[%clientId, 2] = $funk::var[%name, 7, 2];
@@ -516,7 +516,9 @@ function LoadCharacter(%clientId)
 		storeData(%clientId, "MyHouse", "");
 		storeData(%clientId, "RankPoints", 0);
 
-		%clientId.choosingGroup = True;
+		//%clientId.choosingGroup = True;
+		%clientId.choosingGroup = "";
+		%clientId.choosingFirstClass = True;
 
 		SetAllSkills(%clientId, 0);
 
