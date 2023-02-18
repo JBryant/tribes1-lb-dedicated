@@ -549,31 +549,58 @@ $SkillMultiplier[Dancer, $SkillHaggling] = 1.0;
 $EXPmultiplier[Dancer] = 0.9;
 
 //--------------
-// RedMage
+// Arithmetician
 //--------------
 
-$SkillMultiplier[RedMage, $SkillSlashing] = 0.3;
-$SkillMultiplier[RedMage, $SkillPiercing] = 0.8;
-$SkillMultiplier[RedMage, $SkillBludgeoning] = 0.3;
-$SkillMultiplier[RedMage, $SkillDodging] = 1.2;
-$SkillMultiplier[RedMage, $SkillWeightCapacity] = 0.6;
-$SkillMultiplier[RedMage, $SkillBashing] = 0.2;
-$SkillMultiplier[RedMage, $SkillStealing] = 0.2;
-$SkillMultiplier[RedMage, $SkillHiding] = 0.2;
-$SkillMultiplier[RedMage, $SkillBackstabbing] = 0.2;
-$SkillMultiplier[RedMage, $SkillOffensiveCasting] = 2.0;
-$SkillMultiplier[RedMage, $SkillDefensiveCasting] = 1.0;
-$SkillMultiplier[RedMage, $SkillNeutralCasting] = 1.8;
-$SkillMultiplier[RedMage, $SkillSpellResistance] = 1.5;
-$SkillMultiplier[RedMage, $SkillHealing] = 0.7;
-$SkillMultiplier[RedMage, $SkillArchery] = 0.8;
-$SkillMultiplier[RedMage, $SkillEndurance] = 0.4;
-$SkillMultiplier[RedMage, $SkillMining] = 1.0;
-$SkillMultiplier[RedMage, $SkillSpeech] = 1.2;
-$SkillMultiplier[RedMage, $SkillSenseHeading] = 0.7;
-$SkillMultiplier[RedMage, $SkillEnergy] = 2.0;
-$SkillMultiplier[RedMage, $SkillHaggling] = 1.0;
-$EXPmultiplier[RedMage] = 0.9;
+$SkillMultiplier[Arithmetician, $SkillSlashing] = 0.3;
+$SkillMultiplier[Arithmetician, $SkillPiercing] = 0.8;
+$SkillMultiplier[Arithmetician, $SkillBludgeoning] = 0.3;
+$SkillMultiplier[Arithmetician, $SkillDodging] = 1.2;
+$SkillMultiplier[Arithmetician, $SkillWeightCapacity] = 0.6;
+$SkillMultiplier[Arithmetician, $SkillBashing] = 0.2;
+$SkillMultiplier[Arithmetician, $SkillStealing] = 0.2;
+$SkillMultiplier[Arithmetician, $SkillHiding] = 0.2;
+$SkillMultiplier[Arithmetician, $SkillBackstabbing] = 0.2;
+$SkillMultiplier[Arithmetician, $SkillOffensiveCasting] = 2.0;
+$SkillMultiplier[Arithmetician, $SkillDefensiveCasting] = 1.0;
+$SkillMultiplier[Arithmetician, $SkillNeutralCasting] = 1.8;
+$SkillMultiplier[Arithmetician, $SkillSpellResistance] = 1.5;
+$SkillMultiplier[Arithmetician, $SkillHealing] = 0.7;
+$SkillMultiplier[Arithmetician, $SkillArchery] = 0.8;
+$SkillMultiplier[Arithmetician, $SkillEndurance] = 0.4;
+$SkillMultiplier[Arithmetician, $SkillMining] = 1.0;
+$SkillMultiplier[Arithmetician, $SkillSpeech] = 1.2;
+$SkillMultiplier[Arithmetician, $SkillSenseHeading] = 0.7;
+$SkillMultiplier[Arithmetician, $SkillEnergy] = 2.0;
+$SkillMultiplier[Arithmetician, $SkillHaggling] = 1.0;
+$EXPmultiplier[Arithmetician] = 0.9;
+
+//--------------
+// HolyKnight
+//--------------
+
+$SkillMultiplier[HolyKnight, $SkillSlashing] = 0.3;
+$SkillMultiplier[HolyKnight, $SkillPiercing] = 0.8;
+$SkillMultiplier[HolyKnight, $SkillBludgeoning] = 0.3;
+$SkillMultiplier[HolyKnight, $SkillDodging] = 1.2;
+$SkillMultiplier[HolyKnight, $SkillWeightCapacity] = 0.6;
+$SkillMultiplier[HolyKnight, $SkillBashing] = 0.2;
+$SkillMultiplier[HolyKnight, $SkillStealing] = 0.2;
+$SkillMultiplier[HolyKnight, $SkillHiding] = 0.2;
+$SkillMultiplier[HolyKnight, $SkillBackstabbing] = 0.2;
+$SkillMultiplier[HolyKnight, $SkillOffensiveCasting] = 2.0;
+$SkillMultiplier[HolyKnight, $SkillDefensiveCasting] = 1.0;
+$SkillMultiplier[HolyKnight, $SkillNeutralCasting] = 1.8;
+$SkillMultiplier[HolyKnight, $SkillSpellResistance] = 1.5;
+$SkillMultiplier[HolyKnight, $SkillHealing] = 0.7;
+$SkillMultiplier[HolyKnight, $SkillArchery] = 0.8;
+$SkillMultiplier[HolyKnight, $SkillEndurance] = 0.4;
+$SkillMultiplier[HolyKnight, $SkillMining] = 1.0;
+$SkillMultiplier[HolyKnight, $SkillSpeech] = 1.2;
+$SkillMultiplier[HolyKnight, $SkillSenseHeading] = 0.7;
+$SkillMultiplier[HolyKnight, $SkillEnergy] = 2.0;
+$SkillMultiplier[HolyKnight, $SkillHaggling] = 1.0;
+$EXPmultiplier[HolyKnight] = 0.8;
 
 //--------------
 // DarkKnight
@@ -601,6 +628,33 @@ $SkillMultiplier[DarkKnight, $SkillSenseHeading] = 0.7;
 $SkillMultiplier[DarkKnight, $SkillEnergy] = 2.0;
 $SkillMultiplier[DarkKnight, $SkillHaggling] = 1.0;
 $EXPmultiplier[DarkKnight] = 0.8;
+
+//--------------
+// Ancient
+//--------------
+
+$SkillMultiplier[Ancient, $SkillSlashing] = 0.3;
+$SkillMultiplier[Ancient, $SkillPiercing] = 0.8;
+$SkillMultiplier[Ancient, $SkillBludgeoning] = 0.3;
+$SkillMultiplier[Ancient, $SkillDodging] = 1.2;
+$SkillMultiplier[Ancient, $SkillWeightCapacity] = 0.6;
+$SkillMultiplier[Ancient, $SkillBashing] = 0.2;
+$SkillMultiplier[Ancient, $SkillStealing] = 0.2;
+$SkillMultiplier[Ancient, $SkillHiding] = 0.2;
+$SkillMultiplier[Ancient, $SkillBackstabbing] = 0.2;
+$SkillMultiplier[Ancient, $SkillOffensiveCasting] = 2.0;
+$SkillMultiplier[Ancient, $SkillDefensiveCasting] = 1.0;
+$SkillMultiplier[Ancient, $SkillNeutralCasting] = 1.8;
+$SkillMultiplier[Ancient, $SkillSpellResistance] = 1.5;
+$SkillMultiplier[Ancient, $SkillHealing] = 0.7;
+$SkillMultiplier[Ancient, $SkillArchery] = 0.8;
+$SkillMultiplier[Ancient, $SkillEndurance] = 0.4;
+$SkillMultiplier[Ancient, $SkillMining] = 1.0;
+$SkillMultiplier[Ancient, $SkillSpeech] = 1.2;
+$SkillMultiplier[Ancient, $SkillSenseHeading] = 0.7;
+$SkillMultiplier[Ancient, $SkillEnergy] = 2.0;
+$SkillMultiplier[Ancient, $SkillHaggling] = 1.0;
+$EXPmultiplier[Ancient] = 0.8;
 
 //--------------
 // HighSummoner
@@ -682,6 +736,60 @@ $SkillMultiplier[Kefka, $SkillSenseHeading] = 2.0;
 $SkillMultiplier[Kefka, $SkillEnergy] = 2.0;
 $SkillMultiplier[Kefka, $SkillHaggling] = 2.0;
 $EXPmultiplier[Kefka] = 0.8;
+
+//--------------
+// Soldier
+//--------------
+
+$SkillMultiplier[Soldier, $SkillSlashing] = 2.0;
+$SkillMultiplier[Soldier, $SkillPiercing] = 2.0;
+$SkillMultiplier[Soldier, $SkillBludgeoning] = 2.0;
+$SkillMultiplier[Soldier, $SkillDodging] = 2.0;
+$SkillMultiplier[Soldier, $SkillWeightCapacity] = 2.0;
+$SkillMultiplier[Soldier, $SkillBashing] = 2.0;
+$SkillMultiplier[Soldier, $SkillStealing] = 2.0;
+$SkillMultiplier[Soldier, $SkillHiding] = 2.0;
+$SkillMultiplier[Soldier, $SkillBackstabbing] = 2.0;
+$SkillMultiplier[Soldier, $SkillOffensiveCasting] = 2.0;
+$SkillMultiplier[Soldier, $SkillDefensiveCasting] = 2.0;
+$SkillMultiplier[Soldier, $SkillNeutralCasting] = 2.0;
+$SkillMultiplier[Soldier, $SkillSpellResistance] = 2.0;
+$SkillMultiplier[Soldier, $SkillHealing] = 2.0;
+$SkillMultiplier[Soldier, $SkillArchery] = 2.0;
+$SkillMultiplier[Soldier, $SkillEndurance] = 2.0;
+$SkillMultiplier[Soldier, $SkillMining] = 2.0;
+$SkillMultiplier[Soldier, $SkillSpeech] = 2.0;
+$SkillMultiplier[Soldier, $SkillSenseHeading] = 2.0;
+$SkillMultiplier[Soldier, $SkillEnergy] = 2.0;
+$SkillMultiplier[Soldier, $SkillHaggling] = 2.0;
+$EXPmultiplier[Soldier] = 0.8;
+
+//--------------
+// ExSoldier
+//--------------
+
+$SkillMultiplier[ExSoldier, $SkillSlashing] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillPiercing] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillBludgeoning] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillDodging] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillWeightCapacity] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillBashing] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillStealing] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillHiding] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillBackstabbing] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillOffensiveCasting] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillDefensiveCasting] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillNeutralCasting] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillSpellResistance] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillHealing] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillArchery] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillEndurance] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillMining] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillSpeech] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillSenseHeading] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillEnergy] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillHaggling] = 2.0;
+$EXPmultiplier[ExSoldier] = 0.8;
 
 //######################################################################################
 // Skill Restriction tables

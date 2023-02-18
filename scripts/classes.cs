@@ -75,15 +75,17 @@ $MinHP[DeathKnight] = 12;
 // Dragoon:   "Thief 5"
 // Orator:    "Mystic 5"
 // Summoner:  "TimeMage 5"
-// (RL 15+)
-// Samurai:   "Knight 4 Monk 5 Dragoon 2"
-// Ninja:     "Archer 4 Thief 5 Geomancer 2"
-// Arithmetician: "WhiteMage 5 BlackMage 5 TimeMage 4 Mystic 4"
-// Dancer:    "Geomancer 5 Dragoon 5"
-
+// (RL 25)
+// Samurai:   "Geomancer 5 Orator 1"
+// Ninja:     "Dragoon 5 Summoner 1"
+// Dancer:    "Orator 5 Dragoon 1"
+// Arithmetician:  "Summoner 5 Geomancer 1"
 // (end game)
-// DarkKnight: "BlackMage 8 Geomancer 8 Dragoon 8 Samurai 8 Ninja 8"
-// HighSummoner: "WhiteMage 8 Orator 8 Summoner 8 Arithmetician 8 Dancer 8"
+// DarkKnight: "BlackMage 8 TimeMage 8 Geomancer 8 Dragoon 8 Ninja 8"
+// HolyKnight: "WhiteMage 8 Mystic 8 Geomancer 8 Dragoon 8 Samurai 8"
+// Ancient: "WhiteMage 8 Summoner 8 Orator 8 Arithmetician 8 Dancer 8"
+// HighSummoner: "BlackMage 8 Summoner 8 Orator 8 Arithmetician 8 Dancer 8"
+
 // OnionKnight: "DarkKnight 1 HighSummoner 1"
 
 
@@ -115,35 +117,39 @@ $ClassName[11] = "Geomancer";
 $ClassRequirements[11] = "Monk 5";
 $ClassName[12] = "Dragoon";
 $ClassRequirements[12] = "Thief 5";
-$ClassName[13] = "Summoner";
+$ClassName[13] = "Orator";
 $ClassRequirements[13] = "Mystic 5";
-$ClassName[14] = "Orator";
+$ClassName[14] = "Summoner";
 $ClassRequirements[14] = "TimeMage 5";
-// (RL 20)
+// (RL 25)
 $ClassName[15] = "Samurai";
-$ClassRequirements[15] = "Geomancer 5 WhiteMage 3";
+$ClassRequirements[15] = "Geomancer 5 Orator 1";
 $ClassName[16] = "Ninja";
-$ClassRequirements[16] = "Dragoon 5 BlackMage 3";
+$ClassRequirements[16] = "Dragoon 5 Summoner 1";
 $ClassName[17] = "Dancer";
-$ClassRequirements[17] = "Summoner 5 Archer 3";
-$ClassName[18] = "RedMage";
-$ClassRequirements[18] = "Orator 5 Knight 3";
+$ClassRequirements[17] = "Orator 5 Dragoon 1";
+$ClassName[18] = "Arithmetician";
+$ClassRequirements[18] = "Summoner 5 Geomancer 1";
 // (RL 50+ end game)
-$ClassName[19] = "DarkKnight";
-$ClassRequirements[19] = "Geomancer 8 Dragoon 8 Samurai 8 Ninja 8";
-$ClassName[20] = "HighSummoner";
-$ClassRequirements[20] = "Orator 8 Summoner 8 RedMage 8 Dancer 8";
+$ClassName[19] = "HolyKnight";
+$ClassRequirements[19] = "Mystic 8 Geomancer 8 Orator 8 Samurai 8";
+$ClassName[20] = "DarkKnight";
+$ClassRequirements[20] = "TimeMage 8 Dragoon 8 Summoner 8 Ninja 8";
+$ClassName[21] = "Ancient";
+$ClassRequirements[21] = "Monk 8 Orator 8 Dragoon 8 Dancer 8";
+$ClassName[22] = "HighSummoner";
+$ClassRequirements[22] = "Thief 8 Summoner 8 Geomancer 8 Arithmetician 8";
 // epic tier classes
-$ClassName[21] = "OnionKnight";
-$ClassRequirements[21] = "Squire 100";
-$ClassName[22] = "Kefka";
-$ClassRequirements[22] = "Chemist 100";
+$ClassName[23] = "OnionKnight";
+$ClassRequirements[23] = "Squire 100";
+$ClassName[24] = "Kefka";
+$ClassRequirements[24] = "Chemist 100";
 // god tier class
-// $ClassName[23] = "Soldier";
-// $ClassRequirements[23] = "OnionKnight 100 Kefka 100";
+$ClassName[25] = "Soldier";
+$ClassRequirements[25] = "HolyKnight 1 DarkKnight 1 Ancient 1 HighSummoner 1";
 // // cloud tier class
-// $ClassName[24] = "ExSoldier";
-// $ClassRequirements[24] = "DarkKnight 100 HighSummoner 100 Soldier 100";
+$ClassName[26] = "ExSoldier";
+$ClassRequirements[26] = "Soldier 1 OnionKnight 1 Kefka 1";
 
 
 function getFinalCLASS(%clientId)

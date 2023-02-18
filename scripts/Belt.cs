@@ -2096,7 +2096,7 @@ BeltItem::Add("Crystal Energy Vial","CrystalEnergyVial","PotionItems",5,100);
 $AccessoryVar[CrystalEnergyVial, $MiscInfo] = "A crystal energy vial that provides 50 MP";
 $restoreValue[CrystalEnergyVial, MP] = 50;
 
-//Weapons
+// Swords
 BeltItem::AddEquippable("Hatchet", "Hatchet", "WeaponItems", $AccessoryVar[Hatchet, $Weight], GenerateItemCost(Hatchet), "Hatchet", True);
 BeltItem::AddEquippable("Broad Sword", "BroadSword", "WeaponItems", $AccessoryVar[BroadSword, $Weight], GenerateItemCost(BroadSword), "Sword");
 BeltItem::AddEquippable("War Axe", "WarAxe", "WeaponItems", $AccessoryVar[WarAxe, $Weight], GenerateItemCost(WarAxe), "Axe");
@@ -2107,6 +2107,7 @@ BeltItem::AddEquippable("Halberd", "Halberd", "WeaponItems", $AccessoryVar[Halbe
 BeltItem::AddEquippable("Claymore", "Claymore", "WeaponItems", $AccessoryVar[Claymore, $Weight], GenerateItemCost(Claymore), "Sword");
 BeltItem::AddEquippable("Keldrinite Long Sword", "KeldriniteLS", "WeaponItems", $AccessoryVar[KeldriniteLS, $Weight], GenerateItemCost(KeldriniteLS), "ElfinBlade");
 
+// Axes
 BeltItem::AddEquippable("Club", "Club", "WeaponItems", $AccessoryVar[Club, $Weight], GenerateItemCost(Club), "Mace");
 BeltItem::AddEquippable("Quarter Staff", "QuarterStaff", "WeaponItems", $AccessoryVar[QuarterStaff, $Weight], GenerateItemCost(QuarterStaff), "QuarterStaff");
 BeltItem::AddEquippable("Bone Club", "BoneClub", "WeaponItems", $AccessoryVar[BoneClub, $Weight], GenerateItemCost(BoneClub), "Mace");
@@ -2119,6 +2120,7 @@ BeltItem::AddEquippable("War Hammer", "WarHammer", "WeaponItems", $AccessoryVar[
 BeltItem::AddEquippable("Justice Staff", "JusticeStaff", "WeaponItems", $AccessoryVar[JusticeStaff, $Weight], GenerateItemCost(JusticeStaff), "LongStaff");
 BeltItem::AddEquippable("War Maul", "WarMaul", "WeaponItems", $AccessoryVar[WarMaul, $Weight], GenerateItemCost(WarMaul), "Hammer");
 
+// Hammers
 BeltItem::AddEquippable("Pick Axe", "PickAxe", "WeaponItems", $AccessoryVar[PickAxe, $Weight], GenerateItemCost(PickAxe), "Pick");
 BeltItem::AddEquippable("Knife", "Knife", "WeaponItems", $AccessoryVar[Knife, $Weight], GenerateItemCost(Knife), "Dagger");
 BeltItem::AddEquippable("Dagger", "Dagger", "WeaponItems", $AccessoryVar[Dagger, $Weight], GenerateItemCost(Dagger), "Dagger");
@@ -2129,6 +2131,7 @@ BeltItem::AddEquippable("Trident", "Trident", "WeaponItems", $AccessoryVar[Tride
 BeltItem::AddEquippable("Rapier", "Rapier", "WeaponItems", $AccessoryVar[Rapier, $Weight], GenerateItemCost(Rapier), "Katana");
 BeltItem::AddEquippable("Awl Pike", "AwlPike", "WeaponItems", $AccessoryVar[AwlPike, $Weight], GenerateItemCost(AwlPike), "Spear");
 
+// Katanas
 BeltItem::AddEquippable("Sling", "Sling", "WeaponItems", $AccessoryVar[Sling, $Weight], GenerateItemCost(Sling), "Sling");
 BeltItem::AddEquippable("Short Bow", "ShortBow", "WeaponItems", $AccessoryVar[ShortBow, $Weight], GenerateItemCost(ShortBow), "LongBow");
 BeltItem::AddEquippable("Light Crossbow", "LightCrossbow", "WeaponItems", $AccessoryVar[LightCrossbow, $Weight], GenerateItemCost(LightCrossbow), "Crossbow");
@@ -2138,6 +2141,12 @@ BeltItem::AddEquippable("Repeating Crossbow", "RepeatingCrossbow", "WeaponItems"
 BeltItem::AddEquippable("Elven Bow", "ElvenBow", "WeaponItems", $AccessoryVar[ElvenBow, $Weight], GenerateItemCost(ElvenBow), "LongBow");
 BeltItem::AddEquippable("Aeolus Wing", "AeolusWing", "WeaponItems", $AccessoryVar[AeolusWing, $Weight], GenerateItemCost(AeolusWing), "CompositeBow");
 BeltItem::AddEquippable("Heavy Crossbow", "HeavyCrossbow", "WeaponItems", $AccessoryVar[HeavyCrossbow, $Weight], GenerateItemCost(HeavyCrossbow), "Crossbow");
+
+// Staves
+
+// Bows
+
+// 
 
 // IMPORTANT: The weight of the weapon needs to match up with the Image Being used otherwise they will not be in sync.
 // To help with this, try to set the weight of all weapons that use the same image to be the same.

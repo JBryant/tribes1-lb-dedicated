@@ -35,40 +35,6 @@ function Smith::addItem(%item, %combo, %result, %num)
 	$SmithComboResult[%num] = %result;
 }
 
-
-//Notes on smithed items and rusties:
-//-To determine the cost of a final combined item, add up all the costs of the materials
-// involved and divide by $RustyCostAmp.
-
-//---------------------------------
-// %num = 0;
-// Smith::addItem("RHatchet","RHatchet 1","Hatchet 1",%num++);
-// Smith::addItem("RBroadSword","RBroadSword 1","BroadSword 1",%num++);
-// Smith::addItem("RLongSword","RLongSword 1","LongSword 1",%num++);
-// Smith::addItem("RClub","RClub 1","Club 1",%num++);
-// Smith::addItem("RSpikedClub","RSpikedClub 1","SpikedClub 1",%num++);
-// Smith::addItem("RKnife","RKnife 1","BroadSword 1",%num++);
-// Smith::addItem("RDagger","RDagger 1","Dagger 1",%num++);
-// Smith::addItem("RShortSword","RShortSword 1","ShortSword 1",%num++);
-// Smith::addItem("RPickAxe","RPickAxe 1","PickAxe 1",%num++);
-// Smith::addItem("RShortBow","RShortBow 1","ShortBow 1",%num++);
-// Smith::addItem("RLightCrossbow","RLightCrossbow 1","LightCrossbow 1",%num++);
-// Smith::addItem("RWarAxe","RWarAxe 1","WarAxe 1",%num++);
-// Smith::addItem("KeldriniteLS","Keldrinite 1 LongSword 1","KeldriniteLS 1",%num++);
-// Smith::addItem("AeolusWing","ElvenBow 1 CompositeBow 1 Quartz 3","AeolusWing 1",%num++);
-// Smith::addItem("StoneFeather","SmallRock 1 Quartz 1","StoneFeather 1",%num++);
-// Smith::addItem("MetalFeather","Knife 1 Quartz 1","MetalFeather 1",%num++);
-// Smith::addItem("Talon","Dagger 1 Quartz 1 Granite 2","Talon 1",%num++);
-// Smith::addItem("CeraphumsFeather","Dagger 2 Jade 2 Quartz 4","CeraphumsFeather 1",%num++);
-// Smith::addItem("BoneClub","Club 1 SkeletonBone 1 Granite 3","BoneClub 1",%num++);
-// Smith::addItem("SpikedBoneClub","SpikedClub 1 SkeletonBone 2 Granite 5","SpikedBoneClub 1",%num++);
-// Smith::addItem("FineRobe","LightRobe 1 ApprenticeRobe 1 EnchantedStone 5","FineRobe 1",%num++);
-// Smith::addItem("KeldrinArmor","Keldrinite 2 FullPlateArmor 1 Gold 5 Emerald 5 Diamond 5 EnchantedStone 5","KeldrinArmor 1",%num++);
-// Smith::addItem("DragonMail","DragonScale 5 Diamond 5 Ruby 3","DragonMail 1",%num++);
-// Smith::addItem("DragonShield","DragonScale 3 Ruby 2","DragonShield 1",%num++);
-// Smith::addItem("ElvenRobe","AdvisorRobe 1 Topaz 2 EnchantedStone 4","ElvenRobe 1",%num++);
-// Smith::addItem("JusticeStaff","LongStaff 1 Granite 4 Turquoise 2","JusticeStaff 1",%num++);
-
 //The code beyond here isn't used anymore.
 
 
