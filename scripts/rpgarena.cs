@@ -38,7 +38,7 @@ $DoCheckMatchWin = False;
 $ArenaBotMatchLengthInTicks = 36;
 $ArenaBotMatchTicker = 0;
 
-$ArenaEquipment = "Hatchet 1 Knife 1 Club 1 ";
+$ArenaEquipment = "Knife 1 ";
 
 //first part = chance, second part = prize
 $tmp="";

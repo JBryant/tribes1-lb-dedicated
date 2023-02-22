@@ -62,293 +62,6 @@ $CostFactorTable[$ProjectileAccessoryType] = "0.01";
 
 //****************************************************************************************************
 
-$AccessoryVar[Hatchet, $AccessoryType] = $AxeAccessoryType;
-$AccessoryVar[BroadSword, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[WarAxe, $AccessoryType] = $AxeAccessoryType;
-$AccessoryVar[LongSword, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[BattleAxe, $AccessoryType] = $AxeAccessoryType;
-$AccessoryVar[BastardSword, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[Halberd, $AccessoryType] = $AxeAccessoryType;
-$AccessoryVar[Claymore, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[Club, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[SpikedClub, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[Mace, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[HammerPick, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[WarHammer, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[WarMaul, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[QuarterStaff, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[LongStaff, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[JusticeStaff, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[Knife, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[Dagger, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[ShortSword, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[Spear, $AccessoryType] = $PolearmAccessoryType;
-$AccessoryVar[Gladius, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[Trident, $AccessoryType] = $PolearmAccessoryType;
-$AccessoryVar[Rapier, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[AwlPike, $AccessoryType] = $PolearmAccessoryType;
-$AccessoryVar[PickAxe, $AccessoryType] = $AxeAccessoryType;
-$AccessoryVar[Sling, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[ShortBow, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[LongBow, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[ElvenBow, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[CompositeBow, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[LightCrossbow, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[HeavyCrossbow, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[RepeatingCrossbow, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[SmallRock, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[BasicArrow, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[SheafArrow, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[BladedArrow, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[LightQuarrel, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[HeavyQuarrel, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[ShortQuarrel, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[CastingBlade, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[KeldriniteLS, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[AeolusWing, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[StoneFeather, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[MetalFeather, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[Talon, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[CeraphumsFeather, $AccessoryType] = $ProjectileAccessoryType;
-$AccessoryVar[BoneClub, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[SpikedBoneClub, $AccessoryType] = $BludgeonAccessoryType;
-// New Weapons
-$AccessoryVar[Wand, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[Tester, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[TesterBow, $AccessoryType] = $ProjectileAccessoryType;
-
-$AccessoryVar[Hatchet, $SpecialVar] = "6 20";			//12 (5)
-$AccessoryVar[BroadSword, $SpecialVar] = "6 35";		//21 (5)
-$AccessoryVar[WarAxe, $SpecialVar] = "6 70";			//30 (7)
-$AccessoryVar[LongSword, $SpecialVar] = "6 65";			//39 (5)
-$AccessoryVar[BattleAxe, $SpecialVar] = "6 144";		//48 (9)
-$AccessoryVar[BastardSword, $SpecialVar] = "6 133";		//57 (7)
-$AccessoryVar[Halberd, $SpecialVar] = "6 176";			//66 (8)
-$AccessoryVar[Claymore, $SpecialVar] = "6 188";			//75.2 (7.5)
-$AccessoryVar[KeldriniteLS, $SpecialVar] = "6 90";		//90 (0.5)
-$AccessoryVar[Tester, $SpecialVar] = "6 90";		//90 (0.5)
-//.................................................................................
-$AccessoryVar[Club, $SpecialVar] = "6 12";			//12 (3)
-$AccessoryVar[QuarterStaff, $SpecialVar] = "6 35";		//21 (5)
-$AccessoryVar[BoneClub, $SpecialVar] = "6 34";			//26 (4)
-$AccessoryVar[SpikedClub, $SpecialVar] = "6 30";		//30 (3)
-$AccessoryVar[Mace, $SpecialVar] = "6 78";			//39 (6)
-$AccessoryVar[HammerPick, $SpecialVar] = "6 80";		//48 (5)
-$AccessoryVar[SpikedBoneClub, $SpecialVar] = "6 70";		//52.5 (4)
-$AccessoryVar[LongStaff, $SpecialVar] = "6 114";		//57 (6)
-$AccessoryVar[WarHammer, $SpecialVar] = "6 176";		//66 (8)
-$AccessoryVar[JusticeStaff, $SpecialVar] = "6 118";		//70.8 (5)
-$AccessoryVar[WarMaul, $SpecialVar] = "6 175";			//75 (7)
-//.................................................................................
-$AccessoryVar[PickAxe, $SpecialVar] = "6 16";			//12 (4)
-$AccessoryVar[Knife, $SpecialVar] = "6 18";			//18 (1)
-$AccessoryVar[Dagger, $SpecialVar] = "6 23";			//23 (3)
-$AccessoryVar[ShortSword, $SpecialVar] = "6 50";		//30 (5)
-$AccessoryVar[Spear, $SpecialVar] = "6 78";			//39 (6)
-$AccessoryVar[Gladius, $SpecialVar] = "6 80";			//48 (5)
-$AccessoryVar[Trident, $SpecialVar] = "6 114";			//57 (6)
-$AccessoryVar[Rapier, $SpecialVar] = "6 110";			//66 (5)
-$AccessoryVar[AwlPike, $SpecialVar] = "6 200";			//75 (8)
-//.................................................................................
-$AccessoryVar[CastingBlade, $SpecialVar] = "6 18";
-$AccessoryVar[Wand, $SpecialVar] = "6 18";
-//.................................................................................
-$AccessoryVar[Sling, $SpecialVar] = "6 11";			//11 (2)
-$AccessoryVar[ShortBow, $SpecialVar] = "6 23";			//23 (3)
-$AccessoryVar[LightCrossbow, $SpecialVar] = "6 72";		//36 (6)
-$AccessoryVar[LongBow, $SpecialVar] = "6 86";			//51.6 (5)
-$AccessoryVar[CompositeBow, $SpecialVar] = "6 85";		//63.75 (4)
-$AccessoryVar[RepeatingCrossbow, $SpecialVar] = "6 75";	//75 (3)
-$AccessoryVar[ElvenBow, $SpecialVar] = "6 89";			//89 (3)
-$AccessoryVar[AeolusWing, $SpecialVar] = "6 101";		//101 (2)
-$AccessoryVar[HeavyCrossbow, $SpecialVar] = "6 300";		//112.5 (8)
-$AccessoryVar[TesterBow, $SpecialVar] = "6 101";			//11 (2)
-//.................................................................................
-$AccessoryVar[SmallRock, $SpecialVar] = "6 10";
-$AccessoryVar[BasicArrow, $SpecialVar] = "6 12";
-$AccessoryVar[ShortQuarrel, $SpecialVar] = "6 14";
-$AccessoryVar[LightQuarrel, $SpecialVar] = "6 16";
-$AccessoryVar[SheafArrow, $SpecialVar] = "6 30";
-$AccessoryVar[StoneFeather, $SpecialVar] = "6 40";
-$AccessoryVar[BladedArrow, $SpecialVar] = "6 42";
-$AccessoryVar[HeavyQuarrel, $SpecialVar] = "6 44";
-$AccessoryVar[MetalFeather, $SpecialVar] = "6 60";
-$AccessoryVar[Talon, $SpecialVar] = "6 80";
-$AccessoryVar[CeraphumsFeather, $SpecialVar] = "6 105";
-//.................................................................................
-
-// Weapon Weight are important, they affect time to swing as well overall weight
-// Rough Estimate: Delay = (Weight / 3) * Delay Factor (1)
-// So 3 weight should be a delay of 1, let's test it
-
-$AccessoryVar[Hatchet, $Weight] = 5;
-$AccessoryVar[BroadSword, $Weight] = 5;
-$AccessoryVar[WarAxe, $Weight] = 7;
-$AccessoryVar[LongSword, $Weight] = 5;
-$AccessoryVar[BattleAxe, $Weight] = 9;
-$AccessoryVar[BastardSword, $Weight] = 7;
-$AccessoryVar[Halberd, $Weight] = 8;
-$AccessoryVar[Claymore, $Weight] = "7.5";
-$AccessoryVar[KeldriniteLS, $Weight] = "0.5";
-$AccessoryVar[Tester, $Weight] = 1;
-//.................................................................................
-$AccessoryVar[Club, $Weight] = 3;
-$AccessoryVar[QuarterStaff, $Weight] = 5;
-$AccessoryVar[BoneClub, $Weight] = 4;
-$AccessoryVar[SpikedClub, $Weight] = 3;
-$AccessoryVar[Mace, $Weight] = 6;
-$AccessoryVar[HammerPick, $Weight] = 5;
-$AccessoryVar[SpikedBoneClub, $Weight] = 4;
-$AccessoryVar[LongStaff, $Weight] = 6;
-$AccessoryVar[WarHammer, $Weight] = 8;
-$AccessoryVar[JusticeStaff, $Weight] = 5;
-$AccessoryVar[WarMaul, $Weight] = 7;
-//.................................................................................
-$AccessoryVar[PickAxe, $Weight] = 4;
-$AccessoryVar[Knife, $Weight] = 1;
-$AccessoryVar[Dagger, $Weight] = 3;
-$AccessoryVar[ShortSword, $Weight] = 5;
-$AccessoryVar[Spear, $Weight] = 6;
-$AccessoryVar[Gladius, $Weight] = 5;
-$AccessoryVar[Trident, $Weight] = 6;
-$AccessoryVar[Rapier, $Weight] = 5;
-$AccessoryVar[AwlPike, $Weight] = 8;
-//.................................................................................
-$AccessoryVar[Sling, $Weight] = 2;
-$AccessoryVar[ShortBow, $Weight] = 3;
-$AccessoryVar[LightCrossbow, $Weight] = 6;
-$AccessoryVar[LongBow, $Weight] = 5;
-$AccessoryVar[CompositeBow, $Weight] = 4;
-$AccessoryVar[RepeatingCrossbow, $Weight] = 3;
-$AccessoryVar[ElvenBow, $Weight] = 3;
-$AccessoryVar[AeolusWing, $Weight] = 2;
-$AccessoryVar[HeavyCrossbow, $Weight] = 8;
-$AccessoryVar[TesterBow, $Weight] = 2;
-//.................................................................................
-$AccessoryVar[SmallRock, $Weight] = "0.2";
-$AccessoryVar[BasicArrow, $Weight] = "0.1";
-$AccessoryVar[SheafArrow, $Weight] = "0.1";
-$AccessoryVar[BladedArrow, $Weight] = "0.1";
-$AccessoryVar[LightQuarrel, $Weight] = "0.1";
-$AccessoryVar[HeavyQuarrel, $Weight] = "0.2";
-$AccessoryVar[ShortQuarrel, $Weight] = "0.1";
-$AccessoryVar[CastingBlade, $Weight] = "0.5";
-$AccessoryVar[Wand, $Weight] = "0.5";
-$AccessoryVar[StoneFeather, $Weight] = "0.1";
-$AccessoryVar[MetalFeather, $Weight] = "0.1";
-$AccessoryVar[Talon, $Weight] = "0.2";
-$AccessoryVar[CeraphumsFeather, $Weight] = "0.08";
-
-$AccessoryVar[Hatchet, $MiscInfo] = "A hatchet";
-$AccessoryVar[BroadSword, $MiscInfo] = "A broad sword";
-$AccessoryVar[WarAxe, $MiscInfo] = "A war axe";
-$AccessoryVar[LongSword, $MiscInfo] = "A long sword";
-$AccessoryVar[BattleAxe, $MiscInfo] = "A battle axe";
-$AccessoryVar[BastardSword, $MiscInfo] = "A bastard sword";
-$AccessoryVar[Halberd, $MiscInfo] = "A halberd";
-$AccessoryVar[Claymore, $MiscInfo] = "A claymore";
-$AccessoryVar[Club, $MiscInfo] = "A club";
-$AccessoryVar[SpikedClub, $MiscInfo] = "A spiked club";
-$AccessoryVar[Mace, $MiscInfo] = "A mace";
-$AccessoryVar[HammerPick, $MiscInfo] = "A hammer pick";
-$AccessoryVar[WarHammer, $MiscInfo] = "A war hammer";
-$AccessoryVar[WarMaul, $MiscInfo] = "A war maul";
-$AccessoryVar[QuarterStaff, $MiscInfo] = "A quarter staff";
-$AccessoryVar[LongStaff, $MiscInfo] = "A long staff";
-$AccessoryVar[JusticeStaff, $MiscInfo] = "A Justice long staff";
-$AccessoryVar[Knife, $MiscInfo] = "A knife";
-$AccessoryVar[Dagger, $MiscInfo] = "A dagger";
-$AccessoryVar[ShortSword, $MiscInfo] = "A short sword";
-$AccessoryVar[Spear, $MiscInfo] = "A spear";
-$AccessoryVar[Gladius, $MiscInfo] = "A gladius";
-$AccessoryVar[Trident, $MiscInfo] = "A trident";
-$AccessoryVar[Rapier, $MiscInfo] = "A rapier";
-$AccessoryVar[AwlPike, $MiscInfo] = "An awl pike";
-$AccessoryVar[PickAxe, $MiscInfo] = "A pick axe";
-$AccessoryVar[Sling, $MiscInfo] = "A sling";
-$AccessoryVar[ShortBow, $MiscInfo] = "A short bow";
-$AccessoryVar[LongBow, $MiscInfo] = "A long bow";
-$AccessoryVar[ElvenBow, $MiscInfo] = "An elven bow";
-$AccessoryVar[CompositeBow, $MiscInfo] = "A composite bow";
-$AccessoryVar[LightCrossbow, $MiscInfo] = "A light crossbow";
-$AccessoryVar[HeavyCrossbow, $MiscInfo] = "A heavy crossbow";
-$AccessoryVar[RepeatingCrossbow, $MiscInfo] = "A repeating crossbow";
-$AccessoryVar[SmallRock, $MiscInfo] = "A small rock";
-$AccessoryVar[BasicArrow, $MiscInfo] = "A basic arrow";
-$AccessoryVar[SheafArrow, $MiscInfo] = "A sheaf arrow";
-$AccessoryVar[BladedArrow, $MiscInfo] = "A bladed arrow";
-$AccessoryVar[LightQuarrel, $MiscInfo] = "A light quarrel";
-$AccessoryVar[HeavyQuarrel, $MiscInfo] = "A heavy quarrel";
-$AccessoryVar[ShortQuarrel, $MiscInfo] = "A heavy quarrel";
-$AccessoryVar[CastingBlade, $MiscInfo] = "Selects the best spell and casts it.  Used only for bots.";
-$AccessoryVar[Wand, $MiscInfo] = "A magical wand that can shoot spells from it on command.";
-$AccessoryVar[KeldriniteLS, $MiscInfo] = "The Keldrinite LongSword is one of the rarest and most powerful weapons in the world of Tribes RPG.";
-$AccessoryVar[AeolusWing, $MiscInfo] = "Aeolus's wing is a mystical bow with the power of wind";
-$AccessoryVar[StoneFeather, $MiscInfo] = "A feather made of stone";
-$AccessoryVar[MetalFeather, $MiscInfo] = "A Sharp metal feather. Beautifully crafted";
-$AccessoryVar[Talon, $MiscInfo] = "A gemmed talon. It is terribly sharp";
-$AccessoryVar[CeraphumsFeather, $MiscInfo] = "Said to have come from the wing of a ceraphum. But we all knew that it came from the forge";
-$AccessoryVar[BoneClub, $MiscInfo] = "A club made made of skeleton bones";
-$AccessoryVar[SpikedBoneClub, $MiscInfo] = "A spiked club made of skeleton bones";
-$AccessoryVar[Tester, $MiscInfo] = "A test weapon";
-$AccessoryVar[TesterBow, $MiscInfo] = "A test bow";
-
-//NOTE: See shopping.cs for the shopIndexes
-
-$SkillType[Hatchet] = $SkillSlashing;
-$SkillType[BroadSword] = $SkillSlashing;
-$SkillType[WarAxe] = $SkillSlashing;
-$SkillType[LongSword] = $SkillSlashing;
-$SkillType[BattleAxe] = $SkillSlashing;
-$SkillType[BastardSword] = $SkillSlashing;
-$SkillType[Halberd] = $SkillSlashing;
-$SkillType[Claymore] = $SkillSlashing;
-$SkillType[Club] = $SkillBludgeoning;
-$SkillType[SpikedClub] = $SkillBludgeoning;
-$SkillType[Mace] = $SkillBludgeoning;
-$SkillType[HammerPick] = $SkillBludgeoning;
-$SkillType[WarHammer] = $SkillBludgeoning;
-$SkillType[WarMaul] = $SkillBludgeoning;
-$SkillType[QuarterStaff] = $SkillBludgeoning;
-$SkillType[LongStaff] = $SkillBludgeoning;
-$SkillType[JusticeStaff] = $SkillBludgeoning;
-$SkillType[Knife] = $SkillPiercing;
-$SkillType[Dagger] = $SkillPiercing;
-$SkillType[ShortSword] = $SkillPiercing;
-$SkillType[Spear] = $SkillPiercing;
-$SkillType[Gladius] = $SkillPiercing;
-$SkillType[Trident] = $SkillPiercing;
-$SkillType[Rapier] = $SkillPiercing;
-$SkillType[AwlPike] = $SkillPiercing;
-$SkillType[PickAxe] = $SkillPiercing;
-$SkillType[Sling] = $SkillArchery;
-$SkillType[ShortBow] = $SkillArchery;
-$SkillType[LongBow] = $SkillArchery;
-$SkillType[ElvenBow] = $SkillArchery;
-$SkillType[CompositeBow] = $SkillArchery;
-$SkillType[LightCrossbow] = $SkillArchery;
-$SkillType[HeavyCrossbow] = $SkillArchery;
-$SkillType[RepeatingCrossbow] = $SkillArchery;
-$SkillType[SmallRock] = $SkillArchery;
-$SkillType[BasicArrow] = $SkillArchery;
-$SkillType[SheafArrow] = $SkillArchery;
-$SkillType[BladedArrow] = $SkillArchery;
-$SkillType[LightQuarrel] = $SkillArchery;
-$SkillType[HeavyQuarrel] = $SkillArchery;
-$SkillType[ShortQuarrel] = $SkillArchery;
-$SkillType[CastingBlade] = $SkillPiercing;
-$SkillType[Wand] = $SkillPiercing;
-$SkillType[KeldriniteLS] = $SkillSlashing;
-$SkillType[AeolusWing] = $SkillArchery;
-$SkillType[StoneFeather] = $SkillArchery;
-$SkillType[MetalFeather] = $SkillArchery;
-$SkillType[Talon] = $SkillArchery;
-$SkillType[CeraphumsFeather] = $SkillArchery;
-$SkillType[BoneClub] = $SkillBludgeoning;
-$SkillType[SpikedBoneClub] = $SkillBludgeoning;
-$SkillType[Tester] = $SkillSlashing;
-$SkillType[TesterBow] = $SkillArchery;
-
 $WeaponRange[Sling] = 35;
 $WeaponRange[ShortBow] = 120;
 $WeaponRange[LongBow] = 200;
@@ -364,16 +77,16 @@ $WeaponRange[TesterBow] = 400;
 
 // We have a choice... either we let weapon delay be decided by weight
 // Or we hard code it for every weapon.
-$WeaponDelay[Sling] = 1;
-$WeaponDelay[ShortBow] = 1;
-$WeaponDelay[LongBow] = 1.5;
-$WeaponDelay[ElvenBow] = 1;
-$WeaponDelay[CompositeBow] = 2;
-$WeaponDelay[LightCrossbow] = 1;
-$WeaponDelay[AeolusWing] = 1;
-$WeaponDelay[HeavyCrossbow] = 3;
-$WeaponDelay[RepeatingCrossbow] = 0.5;
-$WeaponDelay[TesterBow] = 1;
+// $WeaponDelay[Sling] = 1;
+// $WeaponDelay[ShortBow] = 1;
+// $WeaponDelay[LongBow] = 1.5;
+// $WeaponDelay[ElvenBow] = 1;
+// $WeaponDelay[CompositeBow] = 2;
+// $WeaponDelay[LightCrossbow] = 1;
+// $WeaponDelay[AeolusWing] = 1;
+// $WeaponDelay[HeavyCrossbow] = 3;
+// $WeaponDelay[RepeatingCrossbow] = 0.5;
+// $WeaponDelay[TesterBow] = 1;
 
 $ProjRestrictions[SmallRock] = ",Sling,";
 $ProjRestrictions[BasicArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,TesterBow,";
@@ -393,70 +106,6 @@ function GenerateAllWeaponCosts()
 
 	//All item costs that need to be Generated must be in a function, later called after all files have been exec'd.
 	//This function, among other similar ones, is run once only in server.cs.
-
-	$ItemCost[Hatchet] = GenerateItemCost(Hatchet);
-	$ItemCost[BroadSword] = GenerateItemCost(BroadSword);
-	$ItemCost[WarAxe] = GenerateItemCost(WarAxe);
-	$ItemCost[LongSword] = GenerateItemCost(LongSword);
-	$ItemCost[BattleAxe] = GenerateItemCost(BattleAxe);
-	$ItemCost[BastardSword] = GenerateItemCost(BastardSword);
-	$ItemCost[Halberd] = GenerateItemCost(Halberd);
-	$ItemCost[Claymore] = GenerateItemCost(Claymore);
-	$ItemCost[Club] = GenerateItemCost(Club);
-	$ItemCost[SpikedClub] = GenerateItemCost(SpikedClub);
-	$ItemCost[Mace] = GenerateItemCost(Mace);
-	$ItemCost[HammerPick] = GenerateItemCost(HammerPick);
-	$ItemCost[WarHammer] = GenerateItemCost(WarHammer);
-	$ItemCost[WarMaul] = GenerateItemCost(WarMaul);
-	$ItemCost[QuarterStaff] = GenerateItemCost(QuarterStaff);
-	$ItemCost[LongStaff] = GenerateItemCost(LongStaff);
-	$ItemCost[JusticeStaff] = GenerateItemCost(JusticeStaff);
-	$ItemCost[Knife] = GenerateItemCost(Knife);
-	$ItemCost[Dagger] = GenerateItemCost(Dagger);
-	$ItemCost[ShortSword] = GenerateItemCost(ShortSword);
-	$ItemCost[Spear] = GenerateItemCost(Spear);
-	$ItemCost[Gladius] = GenerateItemCost(Gladius);
-	$ItemCost[Trident] = GenerateItemCost(Trident);
-	$ItemCost[Rapier] = GenerateItemCost(Rapier);
-	$ItemCost[AwlPike] = GenerateItemCost(AwlPike);
-	$ItemCost[PickAxe] = GenerateItemCost(PickAxe);
-	$ItemCost[Sling] = GenerateItemCost(Sling);
-	$ItemCost[ShortBow] = GenerateItemCost(ShortBow);
-	$ItemCost[LongBow] = GenerateItemCost(LongBow);
-	$ItemCost[ElvenBow] = GenerateItemCost(ElvenBow);
-	$ItemCost[CompositeBow] = GenerateItemCost(CompositeBow);
-	$ItemCost[LightCrossbow] = GenerateItemCost(LightCrossbow);
-	$ItemCost[HeavyCrossbow] = GenerateItemCost(HeavyCrossbow);
-	$ItemCost[RepeatingCrossbow] = GenerateItemCost(RepeatingCrossbow);
-	$ItemCost[BasicArrow] = GenerateItemCost(BasicArrow);
-	$ItemCost[SheafArrow] = GenerateItemCost(SheafArrow);
-	$ItemCost[BladedArrow] = GenerateItemCost(BladedArrow);
-	$ItemCost[LightQuarrel] = GenerateItemCost(LightQuarrel);
-	$ItemCost[HeavyQuarrel] = GenerateItemCost(HeavyQuarrel);
-	$ItemCost[ShortQuarrel] = GenerateItemCost(ShortQuarrel);
-	$ItemCost[CastingBlade] = 0;
-    $ItemCost[Wand] = 0;
-	$ItemCost[KeldriniteLS] = GenerateItemCost(KeldriniteLS);
-	$ItemCost[AeolusWing] = GenerateItemCost(AeolusWing);
-	$ItemCost[StoneFeather] = GenerateItemCost(StoneFeather);
-	$ItemCost[MetalFeather] = GenerateItemCost(MetalFeather);
-	$ItemCost[Talon] = GenerateItemCost(Talon);
-	$ItemCost[CeraphumsFeather] = GenerateItemCost(CeraphumsFeather);
-	$ItemCost[BoneClub] = GenerateItemCost(BoneClub);
-	$ItemCost[SpikedBoneClub] = GenerateItemCost(SpikedBoneClub);
-
-	$ItemCost[RHatchet] = round($ItemCost[Hatchet] * $RustyCostAmp);
-	$ItemCost[RBroadSword] = round($ItemCost[BroadSword] * $RustyCostAmp);
-	$ItemCost[RLongSword] = round($ItemCost[LongSword] * $RustyCostAmp);
-	$ItemCost[RClub] = round($ItemCost[Club] * $RustyCostAmp);
-	$ItemCost[RSpikedClub] = round($ItemCost[SpikedClub] * $RustyCostAmp);
-	$ItemCost[RKnife] = round($ItemCost[Knife] * $RustyCostAmp);
-	$ItemCost[RDagger] = round($ItemCost[Dagger] * $RustyCostAmp);
-	$ItemCost[RShortSword] = round($ItemCost[ShortSword] * $RustyCostAmp);
-	$ItemCost[RPickAxe] = round($ItemCost[PickAxe] * $RustyCostAmp);
-	$ItemCost[RShortBow] = round($ItemCost[ShortBow] * $RustyCostAmp);
-	$ItemCost[RLightCrossbow] = round($ItemCost[LightCrossbow] * $RustyCostAmp);
-	$ItemCost[RWarAxe] = round($ItemCost[WarAxe] * $RustyCostAmp);
 }
 
 //****************************************************************************************************
@@ -783,6 +432,29 @@ function GenerateItemCost(%item)
 	return %f;
 }
 
+
+// WeaponDelays
+// swords historyically weighed about 3 lbs
+// the largest two handed weapons rarely weighed more than 10 lbs, so..
+// sword: firetime of 1, will weigh 3 lbs
+// two handed swords / axes: firetime of 3, weighs about 9 lbs
+$WeaponDelay[Knive] = 0.5;
+$WeaponDelay[Katana] = 0.75;
+$WeaponDelay[Sword] = 1;
+$WeaponDelay[HandAxe] = 1.25;
+$WeaponDelay[Mace] = 1.5;
+$WeaponDelay[Polearm] = 1.75;
+$WeaponDelay[Axe] = 2.0;
+$WeaponDelay[Hammer] = 2.25;
+$WeaponDelay[GreatSword] = 2.50;
+$WeaponDelay[GreatHammer] = 2.75;
+$WeaponDelay[GreatAxe] = 3.0;
+
+$WeaponDelay[CrossBow] = 3;
+$WeaponDelay[RepeatingCrossbow] = 0.5;
+$WeaponDelay[ShortBow] = 1;
+$WeaponDelay[LongBow] = 2;
+
 //****************************************************************************************************
 //   CASTING BLADE
 //****************************************************************************************************
@@ -794,7 +466,7 @@ ItemImageData CastingBladeImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(CastingBlade);
+	fireTime = $WeaponDelay[Knive];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -854,7 +526,7 @@ function CastingBladeImage::onFire(%player, %slot)
 	if(!%hasCast)
 	{
 		if(OddsAre(3))
-			MeleeAttack(%player, GetRange(Hatchet), CastingBlade);	//mimic the hatchet range
+			MeleeAttack(%player, 1, CastingBlade);	//mimic the hatchet range
 	}
 	%hasCast = "";
 }
@@ -870,7 +542,7 @@ ItemImageData WandImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Wand);
+	fireTime = $WeaponDelay[Knive];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -960,83 +632,6 @@ ItemData Quarrel
 };
 
 //===========================================================================================
-//===========================================================================================
-//===========================================================================================
-//====================================             ==========================================
-//====================================   RUSTIES   ==========================================
-//====================================             ==========================================
-//===========================================================================================
-//===========================================================================================
-//===========================================================================================
-
-//---------------------------------
-
-$AccessoryVar[RHatchet, $AccessoryType] = $AxeAccessoryType;
-$AccessoryVar[RBroadSword, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[RLongSword, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[RClub, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[RSpikedClub, $AccessoryType] = $BludgeonAccessoryType;
-$AccessoryVar[RKnife, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[RDagger, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[RShortSword, $AccessoryType] = $SwordAccessoryType;
-$AccessoryVar[RPickAxe, $AccessoryType] = $AxeAccessoryType;
-$AccessoryVar[RShortBow, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[RLightCrossbow, $AccessoryType] = $RangedAccessoryType;
-$AccessoryVar[RWarAxe, $AccessoryType] = $AxeAccessoryType;
-
-$AccessoryVar[RHatchet, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[Hatchet, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RBroadSword, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[BroadSword, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RLongSword, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[LongSword, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RClub, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[Club, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RSpikedClub, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[SpikedClub, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RKnife, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[Knife, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RDagger, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[Dagger, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RShortSword, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[ShortSword, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RPickAxe, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[PickAxe, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RShortBow, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[ShortBow, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RLightCrossbow, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[LightCrossbow, $SpecialVar], 1) * $RustyDamageAmp);
-$AccessoryVar[RWarAxe, $SpecialVar] = "6 " @ round(GetWord($AccessoryVar[WarAxe, $SpecialVar], 1) * $RustyDamageAmp);
-
-$AccessoryVar[RHatchet, $Weight] = $AccessoryVar[Hatchet, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RBroadSword, $Weight] = $AccessoryVar[BroadSword, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RLongSword, $Weight] = $AccessoryVar[LongSword, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RClub, $Weight] = $AccessoryVar[Club, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RSpikedClub, $Weight] = $AccessoryVar[SpikedClub, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RKnife, $Weight] = $AccessoryVar[Knife, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RDagger, $Weight] = $AccessoryVar[Dagger, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RShortSword, $Weight] = $AccessoryVar[ShortSword, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RPickAxe, $Weight] = $AccessoryVar[PickAxe, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RShortBow, $Weight] = $AccessoryVar[ShortBow, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RLightCrossbow, $Weight] = $AccessoryVar[LightCrossbow, $Weight] * $RustyWeightAmp;
-$AccessoryVar[RWarAxe, $Weight] = $AccessoryVar[WarAxe, $Weight] * $RustyWeightAmp;
-
-$AccessoryVar[RHatchet, $MiscInfo] = "A rusty hatchet";
-$AccessoryVar[RBroadSword, $MiscInfo] = "A rusty broad sword";
-$AccessoryVar[RLongSword, $MiscInfo] = "A rusty long sword";
-$AccessoryVar[RClub, $MiscInfo] = "A cracked club";
-$AccessoryVar[RSpikedClub, $MiscInfo] = "A cracked spiked club";
-$AccessoryVar[RKnife, $MiscInfo] = "A rusty knife";
-$AccessoryVar[RDagger, $MiscInfo] = "A rusty dagger";
-$AccessoryVar[RShortSword, $MiscInfo] = "A rusty short sword";
-$AccessoryVar[RPickAxe, $MiscInfo] = "A rusty pick axe";
-$AccessoryVar[RShortBow, $MiscInfo] = "A cracked short bow";
-$AccessoryVar[RLightCrossbow, $MiscInfo] = "A cracked light crossbow";
-$AccessoryVar[RWarAxe, $MiscInfo] = "A rusty war axe";
-
-$SkillType[RHatchet] = $SkillSlashing;
-$SkillType[RBroadSword] = $SkillSlashing;
-$SkillType[RLongSword] = $SkillSlashing;
-$SkillType[RClub] = $SkillBludgeoning;
-$SkillType[RSpikedClub] = $SkillBludgeoning;
-$SkillType[RKnife] = $SkillPiercing;
-$SkillType[RDagger] = $SkillPiercing;
-$SkillType[RShortSword] = $SkillPiercing;
-$SkillType[RPickAxe] = $SkillPiercing;
-$SkillType[RShortBow] = $SkillArchery;
-$SkillType[RLightCrossbow] = $SkillArchery;
-$SkillType[RWarAxe] = $SkillSlashing;
-
-//===========================================================================================
 //=================================                    ======================================
 //=================================   SHARED WEAPONS   ======================================
 //=================================                    ======================================
@@ -1056,7 +651,7 @@ ItemImageData SwordImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Sword];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1089,7 +684,7 @@ ItemImageData HatchetImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(Hatchet);
+	fireTime = $WeaponDelay[HandAxe];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1122,7 +717,7 @@ ItemImageData AxeImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(WarAxe);
+	fireTime = $WeaponDelay[Axe];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1155,7 +750,7 @@ ItemImageData LongswordImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(Longsword);
+	fireTime = $WeaponDelay[Sword];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1188,7 +783,7 @@ ItemImageData BattleAxeImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(BattleAxe);
+	fireTime = $WeaponDelay[GreatAxe];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1221,7 +816,7 @@ ItemImageData ElfinBladeImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(KeldriniteLS);
+	fireTime = $WeaponDelay[Katana];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1254,7 +849,7 @@ ItemImageData MaceImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(Club);
+	fireTime = $WeaponDelay[Mace];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1287,7 +882,7 @@ ItemImageData QuarterStaffImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(QuarterStaff);
+	fireTime = $WeaponDelay[Polearm];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1320,7 +915,7 @@ ItemImageData PickImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(HammerPick);
+	fireTime = 2;
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1353,7 +948,7 @@ ItemImageData LongStaffImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(LongStaff);
+	fireTime = $WeaponDelay[Polearm];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1386,7 +981,7 @@ ItemImageData HammerImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(WarHammer);
+	fireTime = $WeaponDelay[GreatHammer];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1419,7 +1014,7 @@ ItemImageData DaggerImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(Dagger);
+	fireTime = $WeaponDelay[Knive];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1452,7 +1047,7 @@ ItemImageData ShortswordImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(Shortsword);
+	fireTime = $WeaponDelay[Katana];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1485,7 +1080,7 @@ ItemImageData SpearImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(Spear);
+	fireTime = $WeaponDelay[Polearm];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1518,7 +1113,7 @@ ItemImageData TridentImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(Trident);
+	fireTime = $WeaponDelay[Polearm];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1552,7 +1147,7 @@ ItemImageData KatanaImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(Rapier);
+	fireTime = $WeaponDelay[Katana];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1588,7 +1183,7 @@ ItemImageData CrossbowImage
 	projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
-	fireTime = GetDelay(LightCrossbow);
+	fireTime = $WeaponDelay[CrossBow];
 
 	lightType = 3;  // Weapon Fire
 	lightRadius = 3;
@@ -1618,6 +1213,47 @@ function CrossbowImage::onFire(%player, %slot) {
 	ProjectileAttack(%clientId, %vel);
 }
 
+// CROSSBOW
+ItemImageData RepeatingCrossbowImage
+{
+	shapeFile = "crossbow";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	ammoType = "";
+	projectileType = NoProjectile;
+	accuFire = false;
+	reloadTime = 0;
+	fireTime = $WeaponDelay[RepeatingCrossbow];
+
+	lightType = 3;  // Weapon Fire
+	lightRadius = 3;
+	lightTime = 1;
+	lightColor = { 0.6, 1, 1.0 };
+
+	sfxFire = CrossbowShoot1;
+	sfxActivate = CrossbowSwitch1;
+	sfxReload = NoSound;
+};
+ItemData RepeatingCrossbow
+{
+	description = "Crossbow";
+	className = "Weapon";
+	shapeFile = "crossbow";
+	hudIcon = "grenade";
+	heading = "bWeapons";
+	shadowDetailMask = 4;
+	imageType = RepeatingCrossbowImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function RepeatingCrossbowImage::onFire(%player, %slot) {
+	%clientId = Player::getClient(%player);
+	%vel = 100;
+
+	ProjectileAttack(%clientId, %vel);
+}
+
 // LONGBOW
 ItemImageData LongBowImage
 {
@@ -1629,7 +1265,7 @@ ItemImageData LongBowImage
 	projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
-	fireTime = GetDelay(LongBow);
+	fireTime = $WeaponDelay[LongBow];
 
 	lightType = 3;  // Weapon Fire
 	lightRadius = 3;
@@ -1669,7 +1305,7 @@ ItemImageData CompositeBowImage
 	projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
-	fireTime = GetDelay(CompositeBow);
+	fireTime = $WeaponDelay[LongBow];
 
 	lightType = 3;  // Weapon Fire
 	lightRadius = 3;
@@ -1680,6 +1316,7 @@ ItemImageData CompositeBowImage
 	sfxActivate = CrossbowSwitch1;
 	sfxReload = NoSound;
 };
+
 ItemData CompositeBow
 {
 	description = "Composite Bow";
@@ -1699,6 +1336,48 @@ function CompositeBowImage::onFire(%player, %slot) {
 	ProjectileAttack(%clientId, %vel);
 }
 
+// COMPOSITE BOW FAST
+ItemImageData CompositeBowFastImage
+{
+	shapeFile = "comp_bow";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	ammoType = "";
+	projectileType = NoProjectile;
+	accuFire = false;
+	reloadTime = 0;
+	fireTime = $WeaponDelay[ShortBow];
+
+	lightType = 3;  // Weapon Fire
+	lightRadius = 3;
+	lightTime = 1;
+	lightColor = { 0.6, 1, 1.0 };
+
+	sfxFire = CrossbowShoot1;
+	sfxActivate = CrossbowSwitch1;
+	sfxReload = NoSound;
+};
+
+ItemData CompositeBowFast
+{
+	description = "Composite Bow";
+	className = "Weapon";
+	shapeFile = "comp_bow";
+	hudIcon = "bow";
+	heading = "bWeapons";
+	shadowDetailMask = 4;
+	imageType = CompositeBowFastImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function CompositeBowFastImage::onFire(%player, %slot) {
+	%clientId = Player::getClient(%player);
+	%vel = 100;
+
+	ProjectileAttack(%clientId, %vel);
+}
+
 // ================================
 // NEW WEAPON IMAGES
 // ================================
@@ -1711,7 +1390,7 @@ ItemImageData BroadSwordImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Sword];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1744,7 +1423,7 @@ ItemImageData GladiusImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Sword];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1777,7 +1456,7 @@ ItemImageData BattleAxeNewImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = GetDelay(BattleAxe);
+	fireTime = $WeaponDelay[BattleAxe];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1812,7 +1491,7 @@ ItemImageData GoliathSwordImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[GreatSword];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1845,7 +1524,7 @@ ItemImageData GreenSwordImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Sword];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1878,7 +1557,7 @@ ItemImageData GemSwordImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Sword];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1954,7 +1633,7 @@ ItemImageData SpikedMaceImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Mace];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1987,7 +1666,7 @@ ItemImageData BoneSwordImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Sword];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -2020,7 +1699,7 @@ ItemImageData PhensSwordImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Sword];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -2053,7 +1732,7 @@ ItemImageData SlasherImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Katana];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -2086,7 +1765,7 @@ ItemImageData JavelinImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Polearm];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -2119,7 +1798,7 @@ ItemImageData SpikedClubImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Mace];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -2152,7 +1831,7 @@ ItemImageData ClubImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Mace];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -2190,7 +1869,7 @@ ItemImageData SlingImage
 	projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
-	fireTime = GetDelay(Sling);
+	fireTime = $WeaponDelay[LongBow];
 
 	lightType = 3;  // Weapon Fire
 	lightRadius = 3;
@@ -2228,7 +1907,7 @@ ItemImageData CandyCaneImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = GetDelay(Broadsword);
+	fireTime = $WeaponDelay[Katana];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -2263,7 +1942,7 @@ ItemImageData PistolImage
 	projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
-	fireTime = GetDelay(Sling);
+	fireTime = 1;
 
 	lightType = 3;  // Weapon Fire
 	lightRadius = 3;
@@ -2301,7 +1980,7 @@ ItemImageData CyborgGunImage
 	projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
-	fireTime = GetDelay(Sling);
+	fireTime = 1;
 
 	lightType = 3;  // Weapon Fire
 	lightRadius = 3;
@@ -2313,6 +1992,7 @@ ItemImageData CyborgGunImage
 	sfxActivate = CrossbowSwitch1;
 	sfxReload = NoSound;
 };
+
 ItemData CyborgGun
 {
 	description = "CyborgGun";

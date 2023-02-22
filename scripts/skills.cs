@@ -42,6 +42,7 @@ $SkillSpellResistance = 12;    // get rid of this?
 $SkillHealing = 13;            // get rid of this?
 $SkillArchery = 14;            
 $SkillEndurance = 15;          // keep this?
+
 $SkillMining = 17;             // keep this
 $SkillSpeech = 18;             // get rid  of this
 $SkillSenseHeading = 19;       // get rid of this
@@ -87,9 +88,10 @@ $SkillDesc[R] = "Remort";
 $SkillDesc[A] = "Admin Level";
 $SkillDesc[H] = "House";
 
+//--------------
 // Squire
 //--------------
-// 
+
 
 $SkillMultiplier[Squire, $SkillSlashing] = 0.6;
 $SkillMultiplier[Squire, $SkillPiercing] = 0.7;
@@ -117,7 +119,6 @@ $EXPmultiplier[Squire] = 1.5;
 //--------------
 // Chemist
 //--------------
-// Starter caster
 
 $SkillMultiplier[Chemist, $SkillSlashing] = 1.5;
 $SkillMultiplier[Chemist, $SkillPiercing] = 0.7;
@@ -902,7 +903,6 @@ $SkillRestriction[HeavyQuarrel] = $SkillArchery @ " 0";
 $SkillRestriction[MetalFeather] = $SkillArchery @ " 0";
 $SkillRestriction[Talon] = $SkillArchery @ " 0";
 $SkillRestriction[CeraphumsFeather] = $SkillArchery @ " 0";
-
 
 $SkillRestriction[RHatchet] = $SkillRestriction[Hatchet];
 $SkillRestriction[RBroadSword] = $SkillRestriction[BroadSword];

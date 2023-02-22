@@ -628,18 +628,15 @@ function MenuBuyBeltItem(%clientid, %page)
 
 
 
-	if(%info != ""){
-		for(%i = 0; GetWord(%info, %i) != -1; %i++)
-		{
+	if(%info != "") {
+		for(%i = 0; GetWord(%info, %i) != -1; %i++) {
 			%a = GetWord(%info, %i);
 			
 			%max = $numBeltItems;
-			for(%z = 0; %z < %max; %z++)
-			{
+			for(%z = 0; %z < %max; %z++) {
 				%item = $beltItemData[%z];
 				
-				if($AccessoryVar[%item, $ShopIndex] == %a)
-				{
+				if($AccessoryVar[%item, $ShopIndex] == %a) {
 					%nf = %nf @ " " @ %item;
 				}
 			}
@@ -654,31 +651,29 @@ function MenuBuyBeltItem(%clientid, %page)
 	%lb = (%page * %l) - (%l-1);
 	%np = floor(%ns / %l);
 	%ub = %lb + (%l-1);
+
 	if(%ub > %ns)
 		%ub = %ns;
 
 	%x = %lb - 1;
 	%cnt = -1;
-	for(%i = %lb; %i <= %ub; %i++)
-	{
+
+	for(%i = %lb; %i <= %ub; %i++) {
 		%x++;
 		%item = getword(%nf,%x);
 		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%cnt++,1) @ $beltitem[%item, "Name"], %item @ " " @ %page);
 	}
 
-	if(%page == 1)
-	{
+	if(%page == 1) {
 		if(%ns > %l) Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1);
 		//Client::addMenuItem(%clientId, "xDone", "done");
 		Client::addMenuItem(%clientId, "sSell", "sell");
 	}
-	else if(%page == %np+1)
-	{
+	else if(%page == %np+1) {
 		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1);
 		Client::addMenuItem(%clientId, "sSell", "sell");
 	}
-	else
-	{
+	else {
 		Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1);
 		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1);
 	}
@@ -692,8 +687,7 @@ function processMenuSellBeltItem(%clientid, %opt)
 	%p = GetWord(%opt, 1);
 	%t = GetWord(%opt, 2);
 
-	if(%o != "page" && %o != "done")
-	{
+	if(%o != "page" && %o != "done") {
 		if(%clientId.bulkNum < 1)	%clientId.bulkNum = 1;
 		if(%clientId.bulkNum > 500)	%clientId.bulkNum = 500;
 		MenuSellBeltItemFinal(%clientid, %o, %t);
@@ -711,13 +705,11 @@ function processMenuBuyBeltItem(%clientid, %opt)
 	%o = GetWord(%opt, 0);
 	%p = GetWord(%opt, 1);
 
-	if(%o == "sell")
-	{
+	if(%o == "sell") {
 		Belt::Sell(%clientId,%clientId.beltShop, 1);
 		return;
 	}
-	if(%o != "page" && %o != "done")
-	{
+	if(%o != "page" && %o != "done") {
 		if(%clientId.bulkNum < 1)	%clientId.bulkNum = 1;
 		if(%clientId.bulkNum > 500)	%clientId.bulkNum = 500;
 		MenuBuyBeltItemFinal(%clientid, %o);
@@ -730,8 +722,7 @@ function processMenuBuyBeltItem(%clientid, %opt)
 	return;
 }
 
-function MenuSellBeltItemFinal(%clientid, %item, %type)
-{
+function MenuSellBeltItemFinal(%clientid, %item, %type) {
 	%name = $beltitem[%item, "Name"];
 	%amnt = %clientId.bulkNum;
 	%cmnt = Belt::HasThisStuff(%clientid,%item);
@@ -750,8 +741,7 @@ function MenuSellBeltItemFinal(%clientid, %item, %type)
 }
 
 
-function MenuBuyBeltItemFinal(%clientid, %item)
-{
+function MenuBuyBeltItemFinal(%clientid, %item) {
 	if($AccessoryVar[%item,$ShopIndex] == "")
 		return;
 
@@ -806,29 +796,26 @@ function MenuBuyBeltItemFinal(%clientid, %item)
 	return;
 }
 
-function processMenuBuyBeltItemFinal(%clientId, %opt)
-{
+function processMenuBuyBeltItemFinal(%clientId, %opt) {
 	%option = GetWord(%opt, 0);
 	%item = GetWord(%opt, 1);
 	%amnt = GetWord(%opt, 2);
 	%amnt = floor(%amnt);
 
-	if(%option == "done"){
+	if(%option == "done") {
 
 	}
-	else if(%option == "back"){
+	else if(%option == "back") {
 		MenuBuyBeltItem(%clientid, 1);
 		return;
 	}
-	else if(%option == "examine"){
+	else if(%option == "examine") {
 		WhatIs(%clientId, %item);
 		MenuBuyBeltItemFinal(%clientid, %item);
 		return;
 	}
-	else if(%option == "buy")
-	{
-		if(%clientId.beltShop != "")
-		{
+	else if(%option == "buy") {
+		if(%clientId.beltShop != "") {
 			%clientPos = GameBase::getPosition(%clientId);
 			%botPos = GameBase::getPosition(%clientid.beltShop);
 			%dist = Vector::getDistance(%clientPos, %botPos);
@@ -1415,8 +1402,7 @@ function Belt::GetWeightByType(%clientid, %type) {
 	return fixDecimals(%total);
 }
 
-function Belt::DropItem(%clientid,%item,%amnt,%type)
-{
+function Belt::DropItem(%clientid,%item,%amnt,%type) {
 	%chk = Belt::HasThisStuff(%clientid,%item);
 	if(%chk >= %amnt)
 	{
@@ -1426,8 +1412,7 @@ function Belt::DropItem(%clientid,%item,%amnt,%type)
 	}
 }
 
-function Belt::GetNS(%clientid, %type)
-{
+function Belt::GetNS(%clientid, %type) {
 	%bn = 0;
 	%num = $count[%type];
 	for(%i;%i<=%num;%i++)
@@ -1444,80 +1429,90 @@ function Belt::GetNS(%clientid, %type)
 	return %bn@%list;
 }
 
-function BeltItem::Add(%name, %item, %type, %weight, %cost, %image)
-{
+function BeltItem::Add(%name, %item, %type, %weight, %cost, %image) {
+	$numBeltItems++;
 	%num = $count[%type]++;
+
 	$beltItemData[$numBeltItems] = %item;
 	$beltItemNameToItem[$name] = %item;
-	$numBeltItems++;
 	$beltitem[%num, "Num", %type] = %item;
 	$beltitem[%item, "Item"] = %item;
 	$beltitem[%item, "Name"] = %name;
 	$beltitem[%item, "Type"] = %type;
 	$beltitem[%item, "Image"] = %image;
+
 	$AccessoryVar[%item, $Weight] = %weight;
+	$AccessoryVar[%item, $ShopIndex] = $numBeltItems;
 	$HardcodedItemCost[%item] = %cost;
 }
 
 function BeltItem::AddItem(%name, %item, %type, %weight, %miscInfo) {
-	// add base weapon
+	$numBeltItems++;
 	%num = $count[%type]++;
+
 	$beltItemData[$numBeltItems] = %item;
 	$beltItemNameToItem[%name] = %item;
-	$numBeltItems++;
 	$beltitem[%num, "Num", %type] = %item;
 	$beltitem[%item, "Item"] = %item;
 	$beltitem[%item, "Name"] = %name;
 	$beltitem[%item, "Type"] = %type;
 
 	$AccessoryVar[%item, $Weight] = %weight;
-	$AccessoryVar[%item, $Weight] = %miscInfo;
+	$AccessoryVar[%item, $MiscInfo] = %miscInfo;
+	$AccessoryVar[%item, $ShopIndex] = $numBeltItems;
 	$HardcodedItemCost[%item] = %cost;
 }
 
-function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image, %enchantable)
-{
+// TODO: add skill restrictions, etc
+function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image) {
 	// add base version
+	$numBeltItems++;
 	%num = $count[%type]++;
+
 	$beltItemData[$numBeltItems] = %item;
 	$beltItemNameToItem[%name] = %item;
-	$numBeltItems++;
 	$beltitem[%num, "Num", %type] = %item;
 	$beltitem[%item, "Item"] = %item;
 	$beltitem[%item, "Name"] = %name;
 	$beltitem[%item, "Type"] = %type;
 	$beltitem[%item, "Image"] = %image;
+
 	$AccessoryVar[%item, $Weight] = %weight;
+	$AccessoryVar[%item, $ShopIndex] = $numBeltItems;
 	$HardcodedItemCost[%item] = %cost;
 
 	// now add the equipped version
 	%equippedName = %name @ " " @ $equippedString;
 	%equippedItem = %item @ "0";
+
+	$numBeltItems++;
 	%num = $count[%type]++;
+
 	$beltItemData[$numBeltItems] = %equippedItem;
 	$beltItemNameToItem[%equippedName] = %equippedItem;
-	$numBeltItems++;
 	$beltitem[%num, "Num", %type] = %equippedItem;
 	$beltitem[%equippedItem, "Item"] = %equippedItem;
 	$beltitem[%equippedItem, "Name"] = %equippedName;
 	$beltitem[%equippedItem, "Type"] = %type;
 	$beltitem[%equippedItem, "Image"] = %image;
-	$AccessoryVar[%equippedItem, $Weight] = %weight;
-	$HardcodedItemCost[%equippedItem] = %cost;
 
-	// if enchantable, make all the different versions
+	$AccessoryVar[%equippedItem, $Weight] = %weight;
+	$AccessoryVar[%equippedItem, $ShopIndex] = $numBeltItems;
+	$HardcodedItemCost[%equippedItem] = %cost;
 }
 
-$shoppingIndex = 134;
-function BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction, %enchant) {
+
+function BelItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant) {
 	// copied from GetDelay() if you change that formula update it here
+	%type = "WeaponItems";
 	%a = 3.0;
-	%b = Cap(%image.imageType.fireTime * %a, 1.0, "inf");
-	%c = %b * $DelayFactorTable[%accessoryType];
-	%suggestedWeight = FixDecimals(%c);
+	%weaponDelay = %image.imageType.fireTime;
+	%suggestedWeight = FixDecimals(Cap(%weaponDelay * %a, 1.0, "inf"));
 
 	// generate belt information
+	$numBeltItems++;
 	%num = $count[%type]++;
+
 	$beltItemData[$numBeltItems] = %item;
 	$beltItemNameToItem[%name] = %item;
 	$beltitem[%num, "Num", %type] = %item;
@@ -1526,12 +1521,16 @@ function BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessory
 	$beltitem[%item, "Type"] = %type;
 	$beltitem[%item, "Image"] = %image;
 
+	// calculate special var - ATK = (DPS * Delay)
+	%delay = %image.imageType.fireTime;
+	%atk = round(%dps * %weaponDelay);
+
 	// generate weapon information
 	$AccessoryVar[%item, $Weight] = %suggestedWeight;
 	$AccessoryVar[%item, $AccessoryType] = %accessoryType;
-	$AccessoryVar[%item, $SpecialVar] = %specialVar;
+	$AccessoryVar[%item, $SpecialVar] = "6 " @ %atk;
 	$AccessoryVar[%item, $MiscInfo] = %miscInfo;
-	$AccessoryVar[%item, $ShopIndex] = $shoppingIndex;
+	$AccessoryVar[%item, $ShopIndex] = $numBeltItems;
 	$SkillType[%item] = %weaponSkill;
 	$SkillRestriction[%item] = %skillRestriction;
 
@@ -1539,10 +1538,6 @@ function BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessory
 	%cost = GenerateItemCost(%item);
 	$HardcodedItemCost[%item] = %cost;
 	$ItemCost[%item] = %cost;
-
-	// increase nums
-	$numBeltItems++;
-	$shoppingIndex++;
 
 	if (%enchant != "") {
 		$beltitem[%item, "Enchantment"] = %enchant;
@@ -1554,33 +1549,34 @@ function BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessory
 // ==============================
 
 $smithingNum = 0;
-Smith::addItem("RHatchet","RHatchet 1","Hatchet 1",$smithingNum++);
-Smith::addItem("RBroadSword","RBroadSword 1","BroadSword 1",$smithingNum++);
-Smith::addItem("RLongSword","RLongSword 1","LongSword 1",$smithingNum++);
-Smith::addItem("RClub","RClub 1","Club 1",$smithingNum++);
-Smith::addItem("RSpikedClub","RSpikedClub 1","SpikedClub 1",$smithingNum++);
-Smith::addItem("RKnife","RKnife 1","BroadSword 1",$smithingNum++);
-Smith::addItem("RDagger","RDagger 1","Dagger 1",$smithingNum++);
-Smith::addItem("RShortSword","RShortSword 1","ShortSword 1",$smithingNum++);
-Smith::addItem("RPickAxe","RPickAxe 1","PickAxe 1",$smithingNum++);
-Smith::addItem("RShortBow","RShortBow 1","ShortBow 1",$smithingNum++);
-Smith::addItem("RLightCrossbow","RLightCrossbow 1","LightCrossbow 1",$smithingNum++);
-Smith::addItem("RWarAxe","RWarAxe 1","WarAxe 1",$smithingNum++);
-Smith::addItem("KeldriniteLS","Keldrinite 1 LongSword 1","KeldriniteLS 1",$smithingNum++);
-Smith::addItem("AeolusWing","ElvenBow 1 CompositeBow 1 Quartz 3","AeolusWing 1",$smithingNum++);
-Smith::addItem("StoneFeather","SmallRock 1 Quartz 1","StoneFeather 1",$smithingNum++);
-Smith::addItem("MetalFeather","Knife 1 Quartz 1","MetalFeather 1",$smithingNum++);
-Smith::addItem("Talon","Dagger 1 Quartz 1 Granite 2","Talon 1",$smithingNum++);
-Smith::addItem("CeraphumsFeather","Dagger 2 Jade 2 Quartz 4","CeraphumsFeather 1",$smithingNum++);
-Smith::addItem("BoneClub","Club 1 SkeletonBone 1 Granite 3","BoneClub 1",$smithingNum++);
-Smith::addItem("SpikedBoneClub","SpikedClub 1 SkeletonBone 2 Granite 5","SpikedBoneClub 1",$smithingNum++);
-Smith::addItem("FineRobe","LightRobe 1 ApprenticeRobe 1 EnchantedStone 5","FineRobe 1",$smithingNum++);
-Smith::addItem("KeldrinArmor","Keldrinite 2 FullPlateArmor 1 Gold 5 Emerald 5 Diamond 5 EnchantedStone 5","KeldrinArmor 1",$smithingNum++);
-Smith::addItem("DragonMail","DragonScale 5 Diamond 5 Ruby 3","DragonMail 1",$smithingNum++);
-Smith::addItem("DragonShield","DragonScale 3 Ruby 2","DragonShield 1",$smithingNum++);
-Smith::addItem("ElvenRobe","AdvisorRobe 1 Topaz 2 EnchantedStone 4","ElvenRobe 1",$smithingNum++);
-Smith::addItem("JusticeStaff","LongStaff 1 Granite 4 Turquoise 2","JusticeStaff 1",$smithingNum++);
-Smith::addItem("JusticeStaff","LongStaff 1 Granite 4 Turquoise 2","JusticeStaff 1",$smithingNum++);
+// Smith::addItem("RHatchet","RHatchet 1","Hatchet 1", $smithingNum++);
+// Smith::addItem("RBroadSword","RBroadSword 1","BroadSword 1", $smithingNum++);
+// Smith::addItem("RLongSword","RLongSword 1","LongSword 1", $smithingNum++);
+// Smith::addItem("RClub","RClub 1","Club 1", $smithingNum++);
+// Smith::addItem("RSpikedClub","RSpikedClub 1","SpikedClub 1", $smithingNum++);
+// Smith::addItem("RKnife","RKnife 1","BroadSword 1", $smithingNum++);
+// Smith::addItem("RDagger","RDagger 1","Dagger 1", $smithingNum++);
+// Smith::addItem("RShortSword","RShortSword 1","ShortSword 1", $smithingNum++);
+// Smith::addItem("RPickAxe","RPickAxe 1","PickAxe 1", $smithingNum++);
+// Smith::addItem("RShortBow","RShortBow 1","ShortBow 1", $smithingNum++);
+// Smith::addItem("RLightCrossbow","RLightCrossbow 1","LightCrossbow 1", $smithingNum++);
+// Smith::addItem("RWarAxe","RWarAxe 1","WarAxe 1", $smithingNum++);
+
+// Smith::addItem("KeldriniteLS","Keldrinite 1 LongSword 1","KeldriniteLS 1", $smithingNum++);
+// Smith::addItem("AeolusWing","ElvenBow 1 CompositeBow 1 Quartz 3","AeolusWing 1", $smithingNum++);
+// Smith::addItem("StoneFeather","SmallRock 1 Quartz 1","StoneFeather 1", $smithingNum++);
+// Smith::addItem("MetalFeather","Knife 1 Quartz 1","MetalFeather 1", $smithingNum++);
+// Smith::addItem("Talon","Dagger 1 Quartz 1 Granite 2","Talon 1", $smithingNum++);
+// Smith::addItem("CeraphumsFeather","Dagger 2 Jade 2 Quartz 4","CeraphumsFeather 1", $smithingNum++);
+// Smith::addItem("BoneClub","Club 1 SkeletonBone 1 Granite 3","BoneClub 1", $smithingNum++);
+// Smith::addItem("SpikedBoneClub","SpikedClub 1 SkeletonBone 2 Granite 5","SpikedBoneClub 1", $smithingNum++);
+// Smith::addItem("FineRobe","LightRobe 1 ApprenticeRobe 1 EnchantedStone 5","FineRobe 1", $smithingNum++);
+// Smith::addItem("KeldrinArmor","Keldrinite 2 FullPlateArmor 1 Gold 5 Emerald 5 Diamond 5 EnchantedStone 5","KeldrinArmor 1", $smithingNum++);
+// Smith::addItem("DragonMail","DragonScale 5 Diamond 5 Ruby 3","DragonMail 1", $smithingNum++);
+// Smith::addItem("DragonShield","DragonScale 3 Ruby 2","DragonShield 1", $smithingNum++);
+// Smith::addItem("ElvenRobe","AdvisorRobe 1 Topaz 2 EnchantedStone 4","ElvenRobe 1", $smithingNum++);
+// Smith::addItem("JusticeStaff","LongStaff 1 Granite 4 Turquoise 2","JusticeStaff 1", $smithingNum++);
+// Smith::addItem("JusticeStaff","LongStaff 1 Granite 4 Turquoise 2","JusticeStaff 1", $smithingNum++);
 
 // ==============================
 // ======== ENCHANTMENTS ========
@@ -1611,34 +1607,40 @@ $enchantLevels[5] = "V";
 
 function generateEnchantsAndMateria() {
 	for(%i = 0; getWord($baseEnchants, %i) != "" && getWord($baseEnchants, %i) != -1; %i++) {
-			%baseEnchant = getWord($baseEnchants, %i);
-			%baseDamage = 4;
+		%baseEnchant = getWord($baseEnchants, %i);
+		%baseDamage = 4;
 
-			for(%x = 1; %x <= 5; %x++) {
-				%enchantLevel = $enchantLevels[%x];
-				%item = %baseEnchant@%enchantLevel;
-				%damage = %baseDamage * %x;
+		for(%x = 1; %x <= 5; %x++) {
+			%enchantLevel = $enchantLevels[%x];
+			%enchant = %baseEnchant@%enchantLevel;
+			%damage = %baseDamage * %x;
 
-				$WeaponEnchantment[%item, "name"] = %baseEnchant @ " " @ %enchantLevel;
-				$WeaponEnchantment[%item, "mod"] = "1 " @ %damage;
-				$WeaponEnchantment[%item, "action"] = $enchantDamageVerb[%baseEnchant];
-				$WeaponEnchantment[%item, "materia"] = %baseEnchant @ "Materia" @ %enchantLevel;
+			$WeaponEnchantment[%enchant, "name"] = %baseEnchant @ " " @ %enchantLevel;
+			$WeaponEnchantment[%enchant, "mod"] = "1 " @ %damage;
+			$WeaponEnchantment[%enchant, "action"] = $enchantDamageVerb[%baseEnchant];
+			$WeaponEnchantment[%enchant, "materia"] = %baseEnchant @ "Materia" @ %enchantLevel;
 
-				$WeaponEnchantments = $WeaponEnchantments @ " " @ %item;
-				// add materia
-				BeltItem::AddItem(%baseEnchant @ " Materia " @ %enchantLevel, %baseEnchant @ "Materia" @ %enchantLevel, "QuestItems", 1, $materiaMiscInfo[%baseEnchant]);
+			$WeaponEnchantments = $WeaponEnchantments @ " " @ %enchant;
+			// add materia
+			%item = %baseEnchant @ "Materia" @ %enchantLevel;
+			BeltItem::AddItem(%baseEnchant @ " Materia " @ %enchantLevel, %item, "QuestItems", 1, $materiaMiscInfo[%baseEnchant]);
+
+			// if 2 - 5, create the smithing recipe
+			if (i > 1) {
+				Smith::addItem(%item, %baseEnchant @ "Materia" @ $enchantLevels[%x-1] @ " 5", %item @ " 1", $smithingNum++);
 			}
+		}
 	}
 }
 
-function BeltItem::AddWeapon(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction) {
+function BeltItem::AddWeapon(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps) {
 	// add base weapon
-	BelItem::AddWeaponData(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction);
+	BelItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps);
 
 	// add equipped version
 	%equippedName = %name @ " " @ $equippedString;
 	%equippedItem = %item @ "0";
-	BelItem::AddWeaponData(%equippedName, %equippedItem, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction);
+	BelItem::AddWeaponData(%equippedName, %equippedItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps);
 
 	// create enchanted versions
 	for(%i = 0; getWord($WeaponEnchantments, %i) != "" && getWord($WeaponEnchantments, %i) != -1; %i++) {
@@ -1648,14 +1650,14 @@ function BeltItem::AddWeapon(%name, %item, %type, %weight, %image, %accessoryTyp
 
 		%enchantedWeaponName = %name @ " of " @ %enchantName;
 		%enchantedWeaponItem = %item @ %enchant;
-		BelItem::AddWeaponData(%enchantedWeaponName, %enchantedWeaponItem, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction, %enchant);
+		BelItem::AddWeaponData(%enchantedWeaponName, %enchantedWeaponItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant);
 
 		%equippedEnchantedName = %enchantedWeaponName @ " " @ $equippedString;
 		%equippedEnchantedItem = %enchantedWeaponItem @ "0";
-		BelItem::AddWeaponData(%equippedEnchantedName, %equippedEnchantedItem, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction, %enchant);
+		BelItem::AddWeaponData(%equippedEnchantedName, %equippedEnchantedItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant);
 
 		// add the smithing recipe for the enchant
-		// Smith::addItem(%enchantedWeaponItem, %item @ " 1 " @ %enchantMateria @ " 1", %enchantedWeaponItem @ " 1", $smithingNum++);
+		Smith::addItem(%enchantedWeaponItem, %item @ " 1 " @ %enchantMateria @ " 1", %enchantedWeaponItem @ " 1", $smithingNum++);
 	}
 }
 
@@ -1685,8 +1687,7 @@ function BeltItem::IsEquipped(%clientId, %item) {
 	return false;
 }
 
-function Belt::HasThisStuff(%clientid,%item)
-{
+function Belt::HasThisStuff(%clientid,%item) {
 	%item = $beltitem[%item, "Item"];
 	%type = $beltitem[%item, "Type"];
 	%list = fetchdata(%clientid, %type);
@@ -1694,11 +1695,10 @@ function Belt::HasThisStuff(%clientid,%item)
 	return %amnt;
 }
 
-function Belt::GiveThisStuff(%clientid, %item, %amnt, %echo)
-{
+function Belt::GiveThisStuff(%clientid, %item, %amnt, %echo) {
 	%amnt = floor(%amnt);
-	if(%amnt > 0)
-	{
+
+	if(%amnt > 0) {
 		%item = $beltitem[%item, "Item"];
 		%type = $beltitem[%item, "Type"];
 		%list = fetchdata(%clientid,%type);
@@ -1708,8 +1708,7 @@ function Belt::GiveThisStuff(%clientid, %item, %amnt, %echo)
 		if(%echo)
 			Client::sendMessage(%clientId, 0, "You received " @ %amnt @ " " @ $beltitem[%item, "Name"] @". " @ "["@getDisp($beltitem[%item, "Type"])@", have "@(%count+%amnt)@"]");
 
-		if(%count > 0)
-		{
+		if(%count > 0) {
 			%list = Belt::RemoveFromList(%list, %item@" "@%count);
 			%amnt = %amnt + %count;
 		}
@@ -1721,41 +1720,37 @@ function Belt::GiveThisStuff(%clientid, %item, %amnt, %echo)
 	}
 }
 
-function Belt::TakeThisStuff(%clientid, %item, %amnt)
-{
+function Belt::TakeThisStuff(%clientid, %item, %amnt) {
 	%amnt = floor(%amnt);
-	if(%amnt > 0)
-	{
+
+	if(%amnt > 0) {
 		%item = $beltitem[%item, "Item"];
 		%type = $beltitem[%item, "Type"];
 		%list = fetchdata(%clientid,%type);
 		%count = Belt::ItemCount(%item,%list);
 		%amnt = %count - %amnt;
-
 		%list = Belt::RemoveFromList(%list, %item@" "@%count);
+
 		if(%amnt > 0)	%list = Belt::AddToList(%list, %item@" "@%amnt);
 
 		Storedata(%clientid,%type,%list);
 	}
 }
 
-function isBeltItem(%item)
-{
+function isBeltItem(%item) {
 	%flag = false;
+
 	if((String::ICompare($beltitem[%item, "Item"], %item) == 0))
 		%flag = True;
  
 	return %flag;
 }
 
-function Belt::ItemCount(%item,%list)
-{
+function Belt::ItemCount(%item,%list) {
 	%count = 0;
 
-	for(%i=0;(%w = getword(%list,%i)) != -1;%i+=2)
-	{
-		if(%w == %item)
-		{
+	for(%i=0;(%w = getword(%list,%i)) != -1;%i+=2) {
+		if(%w == %item) {
 			%count = getword(%list,%i+1);
 			break;
 		}
@@ -1763,42 +1758,36 @@ function Belt::ItemCount(%item,%list)
 	return %count;
 }
 
-function Belt::HasItemNamed(%client, %itemName)
-{
-	
+function Belt::HasItemNamed(%client, %itemName) {
 	%count = 0;
 
-	for(%ii=0;(%type = getword($belttypelist,%ii)) != -1;%ii++)
-	{
+	for(%ii=0;(%type = getword($belttypelist,%ii)) != -1;%ii++) {
 		%list = fetchData(%client,%type);
-		for(%i=0;(%w = getword(%list,%i)) != -1;%i+=2)
-		{
-			if(string::icompare(%itemName, $beltitem[%w, "Name"]) == 0)
-			{
+
+		for(%i=0;(%w = getword(%list,%i)) != -1;%i+=2) {
+			if(string::icompare(%itemName, $beltitem[%w, "Name"]) == 0) {
 				%count = getword(%list,%i+1);
 				return %w@" "@%count;
 			}
 		}
 	}
+
 	return false;
 }
 
-function Belt::AddToList(%list, %item)
-{
+function Belt::AddToList(%list, %item) {
 	%list = %list @ %item @ " ";
 	return %list;
 }
 
-function Belt::RemoveFromList(%list, %item)
-{
+function Belt::RemoveFromList(%list, %item) {
 	%a = " " @ %list;
 	%a = String::replace(%a, " " @ %item @ " ", " ");
 	%list = String::NEWgetSubStr(%a, 1, 99999);
 	return %list;
 }
 
-function Belt::IsInList(%list, %item)
-{
+function Belt::IsInList(%list, %item) {
 	%a = " " @ %list;
 	if(String::findSubStr(%a, " " @ %item @ " ") != -1)
 		return True;
@@ -1806,11 +1795,9 @@ function Belt::IsInList(%list, %item)
 		return False;
 }
 
-function Belt::BankStorageConversion(%clientid)
-{
+function Belt::BankStorageConversion(%clientid) {
 	%bank =  fetchData(%clientId, "BankStorage");
-	for(%i=0;getword(%bank,%i)!=-1;%i++)
-	{
+	for(%i=0;getword(%bank,%i)!=-1;%i++) {
 		%a = getword(%bank,%i);
 		%b = getword(%bank,%i++);
 
@@ -1822,29 +1809,25 @@ function Belt::BankStorageConversion(%clientid)
 	storeData(%clientId, "BankStorage", " "@%banklist);
 }
 
-function Belt::BankGiveThisStuff(%clientid, %item, %amnt)
-{
-	if(%amnt > 0)
-	{
+function Belt::BankGiveThisStuff(%clientid, %item, %amnt) {
+	if(%amnt > 0) {
 		%item = $beltitem[%item, "Item"];
 		%type = $beltitem[%item, "Type"];
 		%list = fetchdata(%clientid,"Bank"@%type);
 		%count = Belt::ItemCount(%item,%list);
 
-		if(%count > 0)
-		{
+		if(%count > 0) {
 			%list = Belt::RemoveFromList(%list, %item@" "@%count);
 			%amnt = %amnt + %count;
 		}
+
 		%list = Belt::AddToList(%list, %item@" "@%amnt);
 		Storedata(%clientid,"Bank"@%type,%list);
 	}
 }
 
-function Belt::BankTakeThisStuff(%clientid,%item,%amnt)
-{
-	if(%amnt > 0)
-	{
+function Belt::BankTakeThisStuff(%clientid,%item,%amnt) {
+	if(%amnt > 0) {
 		%item = $beltitem[%item, "Item"];
 		%type = $beltitem[%item, "Type"];
 		%list = fetchdata(%clientid,"Bank"@%type);
@@ -1858,8 +1841,7 @@ function Belt::BankTakeThisStuff(%clientid,%item,%amnt)
 	}
 }
 
-function Belt::BankHasThisStuff(%clientid,%item)
-{
+function Belt::BankHasThisStuff(%clientid,%item) {
 	%item = $beltitem[%item, "Item"];
 	%type = $beltitem[%item, "Type"];
 	%list = fetchdata(%clientid,"Bank"@%type);
@@ -1867,12 +1849,10 @@ function Belt::BankHasThisStuff(%clientid,%item)
 	return %amnt;
 }
 
-function Belt::BankGetNS(%clientid,%type)
-{
+function Belt::BankGetNS(%clientid,%type) {
 	%bn = 0;
 	%num = $count[%type];
-	for(%i;%i<=%num;%i++)
-	{
+	for(%i;%i<=%num;%i++) {
 		%item = $beltitem[%i, "Num", %type];
 		%amnt = Belt::BankHasThisStuff(%clientid,%item);
 		if(%amnt > 0) {
@@ -1887,22 +1867,22 @@ function Belt::BankGetNS(%clientid,%type)
 function Belt::packgen(%clientId, %tmploot) {
 	if(Player::isAiControlled(%clientId))
 		TossLootbag(%clientId, %tmploot, 1, "*", 300);
-	else
-	{
+	else {
 		%namelist = rpg::getname(%clientId) @ ",";
+
 		if(fetchData(%clientId, "LCK") >= 0)
 			%tehLootBag = TossLootbag(%clientId, %tmploot, 5, %namelist, 0);//Cap(fetchData(%clientId, "LVL") * 300, 300, 0) //, 3600));
 		else
 			%tehLootBag = TossLootbag(%clientId, %tmploot, 5, %namelist, Cap(fetchData(%clientId, "LVL") * 0.2, 5, "inf"));
+
 		pecho("Packgen num: "@%tehLootBag);
 		pecho("Items: "@String::getSubStr(%tmploot, 0, 245));
-		for(%i=0;getword(%tmploot,%i)!=-1;%i++)
-		{
+
+		for(%i=0;getword(%tmploot,%i)!=-1;%i++) {
 			%a = getword(%tmploot,%i);
 			%b = getword(%tmploot,%i++);
 
-			if($StealProtectedItem[%a] || $playerNoDrop[%a])
-			{
+			if($StealProtectedItem[%a] || $playerNoDrop[%a]) {
 				%ba = Belt::RemoveFromList(%tmploot, %a@" "@%b);
 				%tmploot = %ba;
 				%i-=2;
@@ -1913,13 +1893,13 @@ function Belt::packgen(%clientId, %tmploot) {
 	}
 }
 
-function Belt::GetDeathItems(%clientid, %killerId)
-{
+function Belt::GetDeathItems(%clientid, %killerId) {
 	%tmploot = "";
-	if(fetchData(%clientId, "LCK") < 0)
-	{
+
+	if(fetchData(%clientId, "LCK") < 0) {
 		%AmmoItems = fetchdata(%clientid,"AmmoItems");
-		if((String::len(%tmploot) + String::len(%AmmoItems)) > 200){
+
+		if((String::len(%tmploot) + String::len(%AmmoItems)) > 200) {
 			Belt::packgen(%clientId, %tmploot);
 			%tmploot = "";
 		}
@@ -1946,27 +1926,22 @@ function Belt::GetDeathItems(%clientid, %killerId)
 		}
 		%tmploot = %tmploot @ %QuestItems;
 	}//LCK < 0 happens when the player ran out, 0 is after the last one is used to protect this pack
-	else
-	{
+	else {
 		%tmpItems = fetchdata(%clientid, "QuestItems");
-		for(%i = 0; GetWord(%tmpItems, %i) != -1; %i+=2)
-		{
+		for(%i = 0; GetWord(%tmpItems, %i) != -1; %i+=2) {
 			%a = GetWord(%tmpItems, %i);
-			if($loreitem[%a]){
+			if($loreitem[%a]) {
 				%b = GetWord(%tmpItems, %i+1);
 				%tmploot = %tmploot @ %a @ " " @ %b @ " ";
 			}
 		}
 	}
-	if(%tmploot != "")
-	{
-		for(%i=0;getword(%tmploot,%i)!=-1;%i++)
-		{
+	if(%tmploot != "") {
+		for(%i=0;getword(%tmploot,%i)!=-1;%i++) {
 			%a = getword(%tmploot,%i);
 			%b = getword(%tmploot,%i++);
 
-			if($StealProtectedItem[%a] || $playerNoDrop[%a])
-			{
+			if($StealProtectedItem[%a] || $playerNoDrop[%a]) {
 				%ba = Belt::RemoveFromList(%tmploot, %a@" "@%b);
 				%tmploot = %ba;
 				%i-=2;
@@ -2096,51 +2071,63 @@ BeltItem::Add("Crystal Energy Vial","CrystalEnergyVial","PotionItems",5,100);
 $AccessoryVar[CrystalEnergyVial, $MiscInfo] = "A crystal energy vial that provides 50 MP";
 $restoreValue[CrystalEnergyVial, MP] = 50;
 
+// $AccessoryVar[Hatchet, $SpecialVar] = "6 20";                  //12 (5)
+// $AccessoryVar[BroadSword, $SpecialVar] = "6 35";               //21 (5)
+// $AccessoryVar[WarAxe, $SpecialVar] = "6 70";                   //30 (7)
+// $AccessoryVar[LongSword, $SpecialVar] = "6 65";                //39 (5)
+// $AccessoryVar[BattleAxe, $SpecialVar] = "6 144";               //48 (9)
+// $AccessoryVar[BastardSword, $SpecialVar] = "6 133";            //57 (7)
+// $AccessoryVar[Halberd, $SpecialVar] = "6 176";                 //66 (8)
+// $AccessoryVar[Claymore, $SpecialVar] = "6 188";                //75.2 (7.5)
+// $AccessoryVar[KeldriniteLS, $SpecialVar] = "6 90";
+
 // Swords
-BeltItem::AddEquippable("Hatchet", "Hatchet", "WeaponItems", $AccessoryVar[Hatchet, $Weight], GenerateItemCost(Hatchet), "Hatchet", True);
-BeltItem::AddEquippable("Broad Sword", "BroadSword", "WeaponItems", $AccessoryVar[BroadSword, $Weight], GenerateItemCost(BroadSword), "Sword");
-BeltItem::AddEquippable("War Axe", "WarAxe", "WeaponItems", $AccessoryVar[WarAxe, $Weight], GenerateItemCost(WarAxe), "Axe");
-BeltItem::AddEquippable("Long Sword", "LongSword", "WeaponItems", $AccessoryVar[LongSword, $Weight], GenerateItemCost(LongSword), "LongSword");
-BeltItem::AddEquippable("Battle Axe", "BattleAxe", "WeaponItems", $AccessoryVar[BattleAxe, $Weight], GenerateItemCost(BattleAxe), "BattleAxe");
-BeltItem::AddEquippable("Bastard Sword", "BastardSword", "WeaponItems", $AccessoryVar[BastardSword, $Weight], GenerateItemCost(BastardSword), "Sword");
-BeltItem::AddEquippable("Halberd", "Halberd", "WeaponItems", $AccessoryVar[Halberd, $Weight], GenerateItemCost(Halberd), "Sword");
-BeltItem::AddEquippable("Claymore", "Claymore", "WeaponItems", $AccessoryVar[Claymore, $Weight], GenerateItemCost(Claymore), "Sword");
-BeltItem::AddEquippable("Keldrinite Long Sword", "KeldriniteLS", "WeaponItems", $AccessoryVar[KeldriniteLS, $Weight], GenerateItemCost(KeldriniteLS), "ElfinBlade");
+BeltItem::AddWeapon("Broadsword", "Broadsword", "Sword", $SwordAccessoryType, "A Broadsword", $SkillSlashing, $SkillSlashing @ " 20", "20");
+
+// BeltItem::AddEquippable("Hatchet", "Hatchet", "WeaponItems", $AccessoryVar[Hatchet, $Weight], GenerateItemCost(Hatchet), "Hatchet", True);
+// BeltItem::AddEquippable("Broad Sword", "BroadSword", "WeaponItems", $AccessoryVar[BroadSword, $Weight], GenerateItemCost(BroadSword), "Sword");
+// BeltItem::AddEquippable("War Axe", "WarAxe", "WeaponItems", $AccessoryVar[WarAxe, $Weight], GenerateItemCost(WarAxe), "Axe");
+// BeltItem::AddEquippable("Long Sword", "LongSword", "WeaponItems", $AccessoryVar[LongSword, $Weight], GenerateItemCost(LongSword), "LongSword");
+// BeltItem::AddEquippable("Battle Axe", "BattleAxe", "WeaponItems", $AccessoryVar[BattleAxe, $Weight], GenerateItemCost(BattleAxe), "BattleAxe");
+// BeltItem::AddEquippable("Bastard Sword", "BastardSword", "WeaponItems", $AccessoryVar[BastardSword, $Weight], GenerateItemCost(BastardSword), "Sword");
+// BeltItem::AddEquippable("Halberd", "Halberd", "WeaponItems", $AccessoryVar[Halberd, $Weight], GenerateItemCost(Halberd), "Sword");
+// BeltItem::AddEquippable("Claymore", "Claymore", "WeaponItems", $AccessoryVar[Claymore, $Weight], GenerateItemCost(Claymore), "Sword");
+// BeltItem::AddEquippable("Keldrinite Long Sword", "KeldriniteLS", "WeaponItems", $AccessoryVar[KeldriniteLS, $Weight], GenerateItemCost(KeldriniteLS), "ElfinBlade");
 
 // Axes
-BeltItem::AddEquippable("Club", "Club", "WeaponItems", $AccessoryVar[Club, $Weight], GenerateItemCost(Club), "Mace");
-BeltItem::AddEquippable("Quarter Staff", "QuarterStaff", "WeaponItems", $AccessoryVar[QuarterStaff, $Weight], GenerateItemCost(QuarterStaff), "QuarterStaff");
-BeltItem::AddEquippable("Bone Club", "BoneClub", "WeaponItems", $AccessoryVar[BoneClub, $Weight], GenerateItemCost(BoneClub), "Mace");
-BeltItem::AddEquippable("Spiked Club", "SpikedClub", "WeaponItems", $AccessoryVar[SpikedClub, $Weight], GenerateItemCost(SpikedClub), "Mace");
-BeltItem::AddEquippable("Mace", "Mace", "WeaponItems", $AccessoryVar[Mace, $Weight], GenerateItemCost(Mace), "Mace");
-BeltItem::AddEquippable("Hammer Pick", "HammerPick", "WeaponItems", $AccessoryVar[HammerPick, $Weight], GenerateItemCost(HammerPick), "Pick");
-BeltItem::AddEquippable("Spiked Bone Club", "SpikedBoneClub", "WeaponItems", $AccessoryVar[SpikedBoneClub, $Weight], GenerateItemCost(SpikedBoneClub), "Mace");
-BeltItem::AddEquippable("Long Staff", "LongStaff", "WeaponItems", $AccessoryVar[LongStaff, $Weight], GenerateItemCost(LongStaff), "LongStaff");
-BeltItem::AddEquippable("War Hammer", "WarHammer", "WeaponItems", $AccessoryVar[WarHammer, $Weight], GenerateItemCost(WarHammer), "Hammer");
-BeltItem::AddEquippable("Justice Staff", "JusticeStaff", "WeaponItems", $AccessoryVar[JusticeStaff, $Weight], GenerateItemCost(JusticeStaff), "LongStaff");
-BeltItem::AddEquippable("War Maul", "WarMaul", "WeaponItems", $AccessoryVar[WarMaul, $Weight], GenerateItemCost(WarMaul), "Hammer");
+// BeltItem::AddEquippable("Club", "Club", "WeaponItems", $AccessoryVar[Club, $Weight], GenerateItemCost(Club), "Mace");
+// BeltItem::AddEquippable("Quarter Staff", "QuarterStaff", "WeaponItems", $AccessoryVar[QuarterStaff, $Weight], GenerateItemCost(QuarterStaff), "QuarterStaff");
+// BeltItem::AddEquippable("Bone Club", "BoneClub", "WeaponItems", $AccessoryVar[BoneClub, $Weight], GenerateItemCost(BoneClub), "Mace");
+// BeltItem::AddEquippable("Spiked Club", "SpikedClub", "WeaponItems", $AccessoryVar[SpikedClub, $Weight], GenerateItemCost(SpikedClub), "Mace");
+// BeltItem::AddEquippable("Mace", "Mace", "WeaponItems", $AccessoryVar[Mace, $Weight], GenerateItemCost(Mace), "Mace");
+// BeltItem::AddEquippable("Hammer Pick", "HammerPick", "WeaponItems", $AccessoryVar[HammerPick, $Weight], GenerateItemCost(HammerPick), "Pick");
+// BeltItem::AddEquippable("Spiked Bone Club", "SpikedBoneClub", "WeaponItems", $AccessoryVar[SpikedBoneClub, $Weight], GenerateItemCost(SpikedBoneClub), "Mace");
+// BeltItem::AddEquippable("Long Staff", "LongStaff", "WeaponItems", $AccessoryVar[LongStaff, $Weight], GenerateItemCost(LongStaff), "LongStaff");
+// BeltItem::AddEquippable("War Hammer", "WarHammer", "WeaponItems", $AccessoryVar[WarHammer, $Weight], GenerateItemCost(WarHammer), "Hammer");
+// BeltItem::AddEquippable("Justice Staff", "JusticeStaff", "WeaponItems", $AccessoryVar[JusticeStaff, $Weight], GenerateItemCost(JusticeStaff), "LongStaff");
+// BeltItem::AddEquippable("War Maul", "WarMaul", "WeaponItems", $AccessoryVar[WarMaul, $Weight], GenerateItemCost(WarMaul), "Hammer");
 
 // Hammers
-BeltItem::AddEquippable("Pick Axe", "PickAxe", "WeaponItems", $AccessoryVar[PickAxe, $Weight], GenerateItemCost(PickAxe), "Pick");
-BeltItem::AddEquippable("Knife", "Knife", "WeaponItems", $AccessoryVar[Knife, $Weight], GenerateItemCost(Knife), "Dagger");
-BeltItem::AddEquippable("Dagger", "Dagger", "WeaponItems", $AccessoryVar[Dagger, $Weight], GenerateItemCost(Dagger), "Dagger");
-BeltItem::AddEquippable("Short Sword", "ShortSword", "WeaponItems", $AccessoryVar[ShortSword, $Weight], GenerateItemCost(ShortSword), "ShortSword");
-BeltItem::AddEquippable("Spear", "Spear", "WeaponItems", $AccessoryVar[Spear, $Weight], GenerateItemCost(Spear), "Spear");
-BeltItem::AddEquippable("Gladius", "Gladius", "WeaponItems", $AccessoryVar[Gladius, $Weight], GenerateItemCost(Gladius), "Sword");
-BeltItem::AddEquippable("Trident", "Trident", "WeaponItems", $AccessoryVar[Trident, $Weight], GenerateItemCost(Trident), "Trident");
-BeltItem::AddEquippable("Rapier", "Rapier", "WeaponItems", $AccessoryVar[Rapier, $Weight], GenerateItemCost(Rapier), "Katana");
-BeltItem::AddEquippable("Awl Pike", "AwlPike", "WeaponItems", $AccessoryVar[AwlPike, $Weight], GenerateItemCost(AwlPike), "Spear");
+// BeltItem::AddEquippable("Pick Axe", "PickAxe", "WeaponItems", $AccessoryVar[PickAxe, $Weight], GenerateItemCost(PickAxe), "Pick");
+// BeltItem::AddEquippable("Knife", "Knife", "WeaponItems", $AccessoryVar[Knife, $Weight], GenerateItemCost(Knife), "Dagger");
+// BeltItem::AddEquippable("Dagger", "Dagger", "WeaponItems", $AccessoryVar[Dagger, $Weight], GenerateItemCost(Dagger), "Dagger");
+// BeltItem::AddEquippable("Short Sword", "ShortSword", "WeaponItems", $AccessoryVar[ShortSword, $Weight], GenerateItemCost(ShortSword), "ShortSword");
+// BeltItem::AddEquippable("Spear", "Spear", "WeaponItems", $AccessoryVar[Spear, $Weight], GenerateItemCost(Spear), "Spear");
+// BeltItem::AddEquippable("Gladius", "Gladius", "WeaponItems", $AccessoryVar[Gladius, $Weight], GenerateItemCost(Gladius), "Sword");
+// BeltItem::AddEquippable("Trident", "Trident", "WeaponItems", $AccessoryVar[Trident, $Weight], GenerateItemCost(Trident), "Trident");
+// BeltItem::AddEquippable("Rapier", "Rapier", "WeaponItems", $AccessoryVar[Rapier, $Weight], GenerateItemCost(Rapier), "Katana");
+// BeltItem::AddEquippable("Awl Pike", "AwlPike", "WeaponItems", $AccessoryVar[AwlPike, $Weight], GenerateItemCost(AwlPike), "Spear");
 
 // Katanas
-BeltItem::AddEquippable("Sling", "Sling", "WeaponItems", $AccessoryVar[Sling, $Weight], GenerateItemCost(Sling), "Sling");
-BeltItem::AddEquippable("Short Bow", "ShortBow", "WeaponItems", $AccessoryVar[ShortBow, $Weight], GenerateItemCost(ShortBow), "LongBow");
-BeltItem::AddEquippable("Light Crossbow", "LightCrossbow", "WeaponItems", $AccessoryVar[LightCrossbow, $Weight], GenerateItemCost(LightCrossbow), "Crossbow");
-BeltItem::AddEquippable("Long Bow", "LongBow", "WeaponItems", $AccessoryVar[LongBow, $Weight], GenerateItemCost(LongBow), "LongBow");
-BeltItem::AddEquippable("Composite Bow", "CompositeBow", "WeaponItems", $AccessoryVar[CompositeBow, $Weight], GenerateItemCost(CompositeBow), "CompositeBow");
-BeltItem::AddEquippable("Repeating Crossbow", "RepeatingCrossbow", "WeaponItems", $AccessoryVar[RepeatingCrossbow, $Weight], GenerateItemCost(RepeatingCrossbow), "Crossbow");
-BeltItem::AddEquippable("Elven Bow", "ElvenBow", "WeaponItems", $AccessoryVar[ElvenBow, $Weight], GenerateItemCost(ElvenBow), "LongBow");
-BeltItem::AddEquippable("Aeolus Wing", "AeolusWing", "WeaponItems", $AccessoryVar[AeolusWing, $Weight], GenerateItemCost(AeolusWing), "CompositeBow");
-BeltItem::AddEquippable("Heavy Crossbow", "HeavyCrossbow", "WeaponItems", $AccessoryVar[HeavyCrossbow, $Weight], GenerateItemCost(HeavyCrossbow), "Crossbow");
+// BeltItem::AddEquippable("Sling", "Sling", "WeaponItems", $AccessoryVar[Sling, $Weight], GenerateItemCost(Sling), "Sling");
+// BeltItem::AddEquippable("Short Bow", "ShortBow", "WeaponItems", $AccessoryVar[ShortBow, $Weight], GenerateItemCost(ShortBow), "LongBow");
+// BeltItem::AddEquippable("Light Crossbow", "LightCrossbow", "WeaponItems", $AccessoryVar[LightCrossbow, $Weight], GenerateItemCost(LightCrossbow), "Crossbow");
+// BeltItem::AddEquippable("Long Bow", "LongBow", "WeaponItems", $AccessoryVar[LongBow, $Weight], GenerateItemCost(LongBow), "LongBow");
+// BeltItem::AddEquippable("Composite Bow", "CompositeBow", "WeaponItems", $AccessoryVar[CompositeBow, $Weight], GenerateItemCost(CompositeBow), "CompositeBow");
+// BeltItem::AddEquippable("Repeating Crossbow", "RepeatingCrossbow", "WeaponItems", $AccessoryVar[RepeatingCrossbow, $Weight], GenerateItemCost(RepeatingCrossbow), "Crossbow");
+// BeltItem::AddEquippable("Elven Bow", "ElvenBow", "WeaponItems", $AccessoryVar[ElvenBow, $Weight], GenerateItemCost(ElvenBow), "LongBow");
+// BeltItem::AddEquippable("Aeolus Wing", "AeolusWing", "WeaponItems", $AccessoryVar[AeolusWing, $Weight], GenerateItemCost(AeolusWing), "CompositeBow");
+// BeltItem::AddEquippable("Heavy Crossbow", "HeavyCrossbow", "WeaponItems", $AccessoryVar[HeavyCrossbow, $Weight], GenerateItemCost(HeavyCrossbow), "Crossbow");
 
 // Staves
 
@@ -2152,22 +2139,22 @@ BeltItem::AddEquippable("Heavy Crossbow", "HeavyCrossbow", "WeaponItems", $Acces
 // To help with this, try to set the weight of all weapons that use the same image to be the same.
 // If you specifically WANT to create a faster or slower verison if something you will need
 // to make a new ItemImage for that speed. Name it as such and use it as much as you want.
-// AddWeapon(%name, %item, %type, %weight, %image, %accessoryType, %specialVar, %miscInfo, %weaponSkill, %skillRestriction)
-BeltItem::AddWeapon("Rune Sword", "RuneSword", "WeaponItems", 10, "GemSword", $SwordAccessoryType, "6 200", "A mystical rune blade", $SkillSlashing, $SkillSlashing @ " 20");
+// AddWeapon(%name, %item, %type, %weight, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps)
+BeltItem::AddWeapon("Rune Sword", "RuneSword", "GemSword", $SwordAccessoryType, "A mystical rune blade", $SkillSlashing, $SkillSlashing @ " 20", "200");
 
 // rusties + damaged weapons
-BeltItem::AddEquippable("Rusty Hatchet", "RHatchet", "WeaponItems", $AccessoryVar[RHatchet, $Weight], $ItemCost[RHatchet], "Hatchet");
-BeltItem::AddEquippable("Rusty Broad Sword", "RBroadSword", "WeaponItems", $AccessoryVar[RBroadSword, $Weight], $ItemCost[RBroadSword], "Sword");
-BeltItem::AddEquippable("Rusty Long Sword", "RLongSword", "WeaponItems", $AccessoryVar[RLongSword, $Weight], $ItemCost[RLongSword], "LongSword");
-BeltItem::AddEquippable("Cracked Club", "RClub", "WeaponItems", $AccessoryVar[RClub, $Weight], $ItemCost[RClub], "Mace");
-BeltItem::AddEquippable("Cracked Spiked Club", "RSpikedClub", "WeaponItems", $AccessoryVar[RSpikedClub, $Weight], $ItemCost[RSpikedClub], "Mace");
-BeltItem::AddEquippable("Rusty Knife", "RKnife", "WeaponItems", $AccessoryVar[RKnife, $Weight], $ItemCost[RKnife], "Dagger");
-BeltItem::AddEquippable("Rusty Dagger", "RDagger", "WeaponItems", $AccessoryVar[RDagger, $Weight], $ItemCost[RDagger], "Dagger");
-BeltItem::AddEquippable("Rusty Short Sword", "RShortSword", "WeaponItems", $AccessoryVar[RShortSword, $Weight],$ItemCost[RShortSword], "ShortSword");
-BeltItem::AddEquippable("Rusty Pick Axe", "RPickAxe", "WeaponItems", $AccessoryVar[RPickAxe, $Weight], $ItemCost[RPickAxe], "Pick");
-BeltItem::AddEquippable("Rusty Short Bow", "RShortBow", "WeaponItems", $AccessoryVar[RShortBow, $Weight], $ItemCost[RShortBow], "LongBow");
-BeltItem::AddEquippable("Cracked Light Crossbow", "RLightCrossbow", "WeaponItems", $AccessoryVar[RLightCrossbow, $Weight], $ItemCost[RLightCrossbow], "Crossbow");
-BeltItem::AddEquippable("Rusty War Axe", "RWarAxe", "WeaponItems", $AccessoryVar[RWarAxe, $Weight], $ItemCost[RWarAxe], "Axe");
+// BeltItem::AddEquippable("Rusty Hatchet", "RHatchet", "WeaponItems", $AccessoryVar[RHatchet, $Weight], $ItemCost[RHatchet], "Hatchet");
+// BeltItem::AddEquippable("Rusty Broad Sword", "RBroadSword", "WeaponItems", $AccessoryVar[RBroadSword, $Weight], $ItemCost[RBroadSword], "Sword");
+// BeltItem::AddEquippable("Rusty Long Sword", "RLongSword", "WeaponItems", $AccessoryVar[RLongSword, $Weight], $ItemCost[RLongSword], "LongSword");
+// BeltItem::AddEquippable("Cracked Club", "RClub", "WeaponItems", $AccessoryVar[RClub, $Weight], $ItemCost[RClub], "Mace");
+// BeltItem::AddEquippable("Cracked Spiked Club", "RSpikedClub", "WeaponItems", $AccessoryVar[RSpikedClub, $Weight], $ItemCost[RSpikedClub], "Mace");
+// BeltItem::AddEquippable("Rusty Knife", "RKnife", "WeaponItems", $AccessoryVar[RKnife, $Weight], $ItemCost[RKnife], "Dagger");
+// BeltItem::AddEquippable("Rusty Dagger", "RDagger", "WeaponItems", $AccessoryVar[RDagger, $Weight], $ItemCost[RDagger], "Dagger");
+// BeltItem::AddEquippable("Rusty Short Sword", "RShortSword", "WeaponItems", $AccessoryVar[RShortSword, $Weight],$ItemCost[RShortSword], "ShortSword");
+// BeltItem::AddEquippable("Rusty Pick Axe", "RPickAxe", "WeaponItems", $AccessoryVar[RPickAxe, $Weight], $ItemCost[RPickAxe], "Pick");
+// BeltItem::AddEquippable("Rusty Short Bow", "RShortBow", "WeaponItems", $AccessoryVar[RShortBow, $Weight], $ItemCost[RShortBow], "LongBow");
+// BeltItem::AddEquippable("Cracked Light Crossbow", "RLightCrossbow", "WeaponItems", $AccessoryVar[RLightCrossbow, $Weight], $ItemCost[RLightCrossbow], "Crossbow");
+// BeltItem::AddEquippable("Rusty War Axe", "RWarAxe", "WeaponItems", $AccessoryVar[RWarAxe, $Weight], $ItemCost[RWarAxe], "Axe");
 
 // Armors
 BeltItem::AddEquippable("Padded Armor", "PaddedArmor", "ArmorItems", $AccessoryVar[PaddedArmor, $Weight], GenerateItemCost(PaddedArmor));

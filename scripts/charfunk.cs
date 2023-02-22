@@ -522,7 +522,7 @@ function LoadCharacter(%clientId)
 
 		SetAllSkills(%clientId, 0);
 
-		storeData(%clientId, "spawnStuff", "PickAxe 1 HealPotion 1 GreaterHealPotion 3 BeltItemTool 1");
+		storeData(%clientId, "spawnStuff", "HealPotion 1 GreaterHealPotion 3 BeltItemTool 1");
 	}
 
 	if(%clientId.repack >= 14)

@@ -22,14 +22,6 @@
 //This GPL does not apply to Starsiege: Tribes or any non-RPG related files included.
 //Starsiege: Tribes, including the engine, retains a proprietary license forbidding resale.
 
-
-//There are FOUR hard-coded groups:
-//-Priest
-//-Rogue
-//-Warrior
-//-Wizard
-
-//Each of these has classes.  They are specified in here.
 //Anything that does NOT have to do with visuals when it comes to classes should ALWAYS use the 0 offset in $ClassName.
 
 $initcoins[Priest] = "3d6x10";
@@ -51,43 +43,6 @@ $MinHP[Uber] = 25;
 $MinHP[Cultist] = 35;
 $MinHP[DeathKnight] = 5000;
 $MinHP[DeathKnight] = 12;
-
-// can we make FF tactics like levelling system?
-// meaning everytime you remort, yopu get to pick a new class?
-// certain special classes require a minimum of other class levels
-// Class Requirements:
-
-// (RL 0)
-// Squire: ""
-// Chemist: ""
-// (RL 2)
-// Knight:    "Squire 2"
-// Archer:    "Squire 2"
-// WhiteMage: "Chemist 2"
-// BlackMage: "Chemist 2"
-// (RL 5)
-// Monk:      "Knight 3"
-// Thief:     "Archer 3"
-// Mystic:    "WhiteMage 3"
-// TimeMage:  "BlackMage 3"
-// (RL 10)
-// Geomancer: "Monk 5"
-// Dragoon:   "Thief 5"
-// Orator:    "Mystic 5"
-// Summoner:  "TimeMage 5"
-// (RL 25)
-// Samurai:   "Geomancer 5 Orator 1"
-// Ninja:     "Dragoon 5 Summoner 1"
-// Dancer:    "Orator 5 Dragoon 1"
-// Arithmetician:  "Summoner 5 Geomancer 1"
-// (end game)
-// DarkKnight: "BlackMage 8 TimeMage 8 Geomancer 8 Dragoon 8 Ninja 8"
-// HolyKnight: "WhiteMage 8 Mystic 8 Geomancer 8 Dragoon 8 Samurai 8"
-// Ancient: "WhiteMage 8 Summoner 8 Orator 8 Arithmetician 8 Dancer 8"
-// HighSummoner: "BlackMage 8 Summoner 8 Orator 8 Arithmetician 8 Dancer 8"
-
-// OnionKnight: "DarkKnight 1 HighSummoner 1"
-
 
 // (RL 0)
 $ClassName[1] = "Squire";
@@ -132,13 +87,13 @@ $ClassName[18] = "Arithmetician";
 $ClassRequirements[18] = "Summoner 5 Geomancer 1";
 // (RL 50+ end game)
 $ClassName[19] = "HolyKnight";
-$ClassRequirements[19] = "Mystic 8 Geomancer 8 Orator 8 Samurai 8";
+$ClassRequirements[19] = "WhiteMage 8 Mystic 8 Geomancer 8 Samurai 8"; // Samurai (25), 5 wm, 3 my, 3 ge, 8 sam - 25 + 19 = RL 44 min
 $ClassName[20] = "DarkKnight";
-$ClassRequirements[20] = "TimeMage 8 Dragoon 8 Summoner 8 Ninja 8";
+$ClassRequirements[20] = "BlackMage 8 TimeMage 8 Dragoon 8 Ninja 8";   // Ninja (25)  , 5 bm, 3 tm, 3 dg, 8 nin - 25 + 19 = RL 44 min
 $ClassName[21] = "Ancient";
-$ClassRequirements[21] = "Monk 8 Orator 8 Dragoon 8 Dancer 8";
+$ClassRequirements[21] = "Archer 8 Thief 8 Orator 8 Dancer 8";         // Dancer (25) , 5 ar, 3 th, 3 or, 8 dan - 25 + 19 = RL 44 min
 $ClassName[22] = "HighSummoner";
-$ClassRequirements[22] = "Thief 8 Summoner 8 Geomancer 8 Arithmetician 8";
+$ClassRequirements[22] = "Knight 8 Monk 8 Summoner 8 Arithmetician 8"; // Arith (25)  , 5 kn, 3 mk, 3 su, 8 ari - 25 + 19 = RL 44 min
 // epic tier classes
 $ClassName[23] = "OnionKnight";
 $ClassRequirements[23] = "Squire 100";
@@ -156,6 +111,9 @@ function getFinalCLASS(%clientId)
 {
 	dbecho($dbechoMode, "getFinalCLASS(" @ %clientId @ ")");
 
+	return fetchData(%clientId, "CLASS");
+
+	// just return current class
 	for(%i = 1; $ClassName[%i] != ""; %i++)
 	{
 		if(String::ICompare($ClassName[%i], fetchData(%clientId, "CLASS")) == 0)
