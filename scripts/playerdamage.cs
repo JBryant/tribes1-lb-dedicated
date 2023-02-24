@@ -203,10 +203,20 @@ function Player::onKilled(%this)
 			}
 		}
 
-		%weapon = Player::getMountedItem(%clientId,$WeaponSlot);
+		%weapon = Player::getMountedItem(%clientId, $WeaponSlot);
 		if(%weapon != -1) {
-			Player::unMountItem(%clientId,$WeaponSlot);
+			Player::unMountItem(%clientId, $WeaponSlot);
 		}
+
+		%equippedWeapon = GetEquippedWeapon(%clientId);
+		if (%equippedWeapon != "") {
+			if (%equippedWeapon == "CastingBlade0") {
+				belt::takethisstuff(%clientId, %equippedWeapon, 1);
+			} else {
+				Belt::UnequipAccessory(%clientId, %equippedWeapon);	
+			}
+		}
+
 
 		%beltstuff = Belt::GetDeathItems(%clientid, %killerId);
 		if((String::len(%tmploot) + String::len(%beltstuff)) < 200)
@@ -852,8 +862,6 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 					//--------------------
 					//check for enchanting damage
 					//--------------------
-
-					lbecho("check for enchanting damage");
 					%enchantment = BeltItem::GetEnchant(%weapon);
 					%enchantDamage = 0;
 					

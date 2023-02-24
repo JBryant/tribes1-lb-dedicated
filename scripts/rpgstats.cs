@@ -625,8 +625,7 @@ function DistributeExpForKilling(%damagedClient)
 			}
 
 			//rank point bonus
-			if(fetchData(%listClientId, "MyHouse") != "")
-			{
+			if(fetchData(%listClientId, "MyHouse") != "") {
 				%ph = Cap(GetRankBonus(%listClientId), 1.00, 3.00);
 				%value = %value * %ph;
 			}

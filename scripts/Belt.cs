@@ -473,7 +473,7 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 		if($restoreValue[%item, MP] > 0){
 			refreshMANA(%clientId, $restoreValue[%item, MP] * -1);
 		}
-		belt::takethisstuff(%clientId,%item, 1);
+		belt::takethisstuff(%clientId, %item, 1);
 		%has--;
 		Client::sendMessage(%clientId, $MsgWhite, "You used "@$beltitem[%item, "Name"]@". [have "@%has@"]");
 		refreshAll(%clientId);
@@ -487,25 +487,26 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 }
 
 
-function belt::buildMainMenu(%clientId, %page){
+function belt::buildMainMenu(%clientId, %page) {
 	%l = 6;
 	if(%clientId.repack >= 18)
 		%l = 31;
-	%nx = 15;
 
+	%nx = 15;
 	%nf = belt::checkmenus(%clientId);
 	%ns = GetWord(%nf,0);
 
 	%np = floor(%ns / %l);
 	%lb = (%page * %l) - (%l-1);
 	%ub = %lb + (%l-1);
+
 	if(%ub > %ns)
 		%ub = %ns;
 
 	%x = %lb - 1;
 	%curItem = -1;
-	for(%i = %lb; %i <= %ub; %i++)
-	{
+
+	for(%i = %lb; %i <= %ub; %i++) {
 		%x++;
 		%type = getword(%nf,%x);
 		if(%type == -1)
@@ -514,47 +515,46 @@ function belt::buildMainMenu(%clientId, %page){
 		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ getDisp(%type) @ " ("@%num@" kinds)", %type);
 	}
 
-	if(%page == 1)
-	{
+	if(%page == 1) {
 		if(%ns > %l) Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1);
 	}
-	else if(%page == 2)
-	{
+	else if(%page == 2) {
 		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1);
 	}
 }
 
-function MenuSellBelt(%clientId, %page)
-{
-	Client::buildMenu(%clientId, "Belt sell:", "SellBelt", true);
+function MenuSellBelt(%clientId, %page) {
+	Client::buildMenu(%clientId, "Sell:", "SellBelt", true);
+
 	if(%page == "")
 		%page = 1;
 
 	belt::buildMainMenu(%clientId, %page);
-
 	Client::addMenuItem(%clientId, "bBuy", "buy");
+	Client::addMenuItem(%clientId, "xDone", "done");
+
 	return;
 }
 
-function processMenuSellBelt(%clientId, %opt)
-{
-
+function processMenuSellBelt(%clientId, %opt) {
 	%o = GetWord(%opt, 0);
 	%p = GetWord(%opt, 1);
 
-	if(%o == "page")
-	{
+	if (%o == "done") {
+		ClearCurrentShopVars(%clientId);
+	}
+
+	if(%o == "page") {
 		MenuSellBelt(%clientId, %p);
 		return;
 	}
 
-	if($count[%opt] > 0)
-	{
+	if($count[%opt] > 0) {
 		MenuSellBeltItem(%clientid, %opt, 1);
 		return;
 	}
 
-	if(%opt == "buy"){
+	if(%opt == "buy") {
 		MenuBuyBeltItem(%clientid, 1);
 		return;
 	}
@@ -565,8 +565,7 @@ function processMenuSellBelt(%clientId, %opt)
 }
 
 
-function MenuSellBeltItem(%clientid, %type, %page)
-{
+function MenuSellBeltItem(%clientid, %type, %page) {
 	%disp = getDisp(%type);
 
 	Client::buildMenu(%clientId, %disp@" sell:", "SellBeltItem", true);
@@ -579,30 +578,29 @@ function MenuSellBeltItem(%clientid, %type, %page)
 	%np = floor(%ns / %l);
 	%lb = (%page * %l) - (%l-1);
 	%ub = %lb + (%l-1);
+
 	if(%ub > %ns)
 		%ub = %ns;
 
 	%x = %lb - 1;
-	for(%i = %lb; %i <= %ub; %i++)
-	{
+	for(%i = %lb; %i <= %ub; %i++) {
 		%x++;
 		%item = getword(%nf,%x);
 		%amnt = Belt::HasThisStuff(%clientid,%item);
 		Client::addMenuItem(%clientId, %cnt++ @%amnt@" "@ $beltitem[%item, "Name"], %item @ " " @ %page @" "@%type);
 	}
 
-	if(%page == 1)
-	{
+	if(%page == 1) {
 		if(%ns > 6) Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1 @" "@%type);
+		Client::addMenuItem(%clientId, "bBack", "back");
 		Client::addMenuItem(%clientId, "xDone", "done");
 	}
-	else if(%page == %np+1)
-	{
+	else if(%page == %np+1) {
 		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1 @" "@%type);
+		Client::addMenuItem(%clientId, "bBack", "back");
 		Client::addMenuItem(%clientId, "xDone", "done");
 	}
-	else
-	{
+	else {
 		Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1 @" "@%type);
 		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1 @" "@%type);
 	}
@@ -613,7 +611,7 @@ function MenuSellBeltItem(%clientid, %type, %page)
 
 function MenuBuyBeltItem(%clientid, %page)
 {
-	Client::buildMenu(%clientId, "Belt buy:", "BuyBeltItem", true);
+	Client::buildMenu(%clientId, "Buy:", "BuyBeltItem", true);
 	%clientId.bulkNum = "";
 
 	%id = %clientId.beltShop;
@@ -625,8 +623,6 @@ function MenuBuyBeltItem(%clientid, %page)
 		%l = 31;
 
 	%info = $BotInfo[%botname, BELTSHOP];
-
-
 
 	if(%info != "") {
 		for(%i = 0; GetWord(%info, %i) != -1; %i++) {
@@ -666,8 +662,8 @@ function MenuBuyBeltItem(%clientid, %page)
 
 	if(%page == 1) {
 		if(%ns > %l) Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1);
-		//Client::addMenuItem(%clientId, "xDone", "done");
 		Client::addMenuItem(%clientId, "sSell", "sell");
+		Client::addMenuItem(%clientId, "xDone", "done");
 	}
 	else if(%page == %np+1) {
 		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1);
@@ -681,11 +677,20 @@ function MenuBuyBeltItem(%clientid, %page)
 	return;
 }
 
-function processMenuSellBeltItem(%clientid, %opt)
-{
+function processMenuSellBeltItem(%clientid, %opt) {
 	%o = GetWord(%opt, 0);
 	%p = GetWord(%opt, 1);
 	%t = GetWord(%opt, 2);
+
+	if (%o == "done") {
+		ClearCurrentShopVars(%clientId);
+		return;
+	}
+
+	if (%o == "back") {
+		MenuSellBelt(%clientId);
+		return;
+	}
 
 	if(%o != "page" && %o != "done") {
 		if(%clientId.bulkNum < 1)	%clientId.bulkNum = 1;
@@ -700,10 +705,13 @@ function processMenuSellBeltItem(%clientid, %opt)
 	return;
 }
 
-function processMenuBuyBeltItem(%clientid, %opt)
-{
+function processMenuBuyBeltItem(%clientid, %opt) {
 	%o = GetWord(%opt, 0);
 	%p = GetWord(%opt, 1);
+
+	if (%o == "done") {
+		ClearCurrentShopVars(%clientId);
+	}
 
 	if(%o == "sell") {
 		Belt::Sell(%clientId,%clientId.beltShop, 1);
@@ -732,10 +740,11 @@ function MenuSellBeltItemFinal(%clientid, %item, %type) {
 
 	Client::buildMenu(%clientId, %name@" ("@%cmnt@")", "SellBeltItemFinal", true);
 	%cost = Belt::GetSellCost(%clientid,%item);
-
 	Client::addMenuItem(%clientId, %cnt++ @ "Sell "@%amnt@" for "@(%cost * %amnt)@" coins.", %type@" sell "@%item@" "@%amnt);
+
 	if(%cmnt != %amnt)
 		Client::addMenuItem(%clientId, %cnt++ @ "Sell "@%cmnt@" (all) for "@(%cost * %cmnt)@" coins.", %type@" sellall "@%item@" "@%cmnt);
+
 	Client::addMenuItem(%clientId, "zBack", %type@" back");
 	return;
 }
@@ -774,24 +783,24 @@ function MenuBuyBeltItemFinal(%clientid, %item) {
 	%cmnt = 100;
 	if(%cmnt != %amnt)
 		Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%cmnt@" for "@(%cost * %cmnt)@" coins.", "buy "@%item@" "@%cmnt);
+
 	Client::addMenuItem(%clientId, "eExamine", "examine "@%item);
 	Client::addMenuItem(%clientId, "xCancel", "done");
 	Client::addMenuItem(%clientId, "bBack", "back");
 
-			remoteEval(%clientId, "setInfoLine", 1, %name@":");
+	remoteEval(%clientId, "setInfoLine", 1, %name@":");
 
-			%s = $SkillDesc[$SkillType[%item]];
-			if(%s != "")
-				remoteEval(%clientId, "setInfoLine", 3, "Skill Type: "@%s);
+	%s = $SkillDesc[$SkillType[%item]];
+	if(%s != "")
+		remoteEval(%clientId, "setInfoLine", 3, "Skill Type: "@%s);
 
-			%w = GetAccessoryVar(%item, $Weight);
-			if(%w == "")
-				%w = 0;
-			remoteEval(%clientId, "setInfoLine", 4, "Weight: "@fixDecimals(%w));
+	%w = GetAccessoryVar(%item, $Weight);
+	if(%w == "")
+		%w = 0;
 
-			remoteEval(%clientId, "setInfoLine", 5, "Restrictions: "@WhatSkills(%item));
-
-			remoteEval(%clientId, "setInfoLine", 6, $AccessoryVar[%item, $MiscInfo]);
+	remoteEval(%clientId, "setInfoLine", 4, "Weight: "@fixDecimals(%w));
+	remoteEval(%clientId, "setInfoLine", 5, "Restrictions: "@WhatSkills(%item));
+	remoteEval(%clientId, "setInfoLine", 6, $AccessoryVar[%item, $MiscInfo]);
 
 	return;
 }
@@ -803,7 +812,7 @@ function processMenuBuyBeltItemFinal(%clientId, %opt) {
 	%amnt = floor(%amnt);
 
 	if(%option == "done") {
-
+		ClearCurrentShopVars(%clientId);
 	}
 	else if(%option == "back") {
 		MenuBuyBeltItem(%clientid, 1);
@@ -819,22 +828,25 @@ function processMenuBuyBeltItemFinal(%clientId, %opt) {
 			%clientPos = GameBase::getPosition(%clientId);
 			%botPos = GameBase::getPosition(%clientid.beltShop);
 			%dist = Vector::getDistance(%clientPos, %botPos);
-			if(%dist > 20)
-				return;
 
+			if(%dist > 20) {
+				ClearCurrentShopVars(%clientId);
+				return;
+			}
 
 			if($AccessoryVar[%item,$ShopIndex] == "")
 				return;
 
 			%id = %clientId.beltShop;
 			%botname = %id.name;
+
 			if(String::findSubStr($BotInfo[%botname, BELTSHOP],$AccessoryVar[%item,$ShopIndex]) == -1)
 				return;
 
 			%cost = getBuyCost(%clientid,%item) * %amnt;
 			%player = Client::getOwnedObject(%clientId);
-			if(checkResources(%player,%item,%cost,%clientId.bulkNum) && !IsDead(%clientId))
-			{
+
+			if(checkResources(%player, %item, %cost, %clientId.bulkNum) && !IsDead(%clientId)) {
 				%name = $beltitem[%item, "Name"];
 				UseSkill(%clientId, $SkillHaggling, True, True);
 				storeData(%clientId, "COINS", %cost, "dec");
@@ -842,9 +854,13 @@ function processMenuBuyBeltItemFinal(%clientId, %opt) {
 				Client::SendMessage(%clientId, $MsgWhite, "You purchased "@%amnt@" "@%name@" for "@%cost@" coins.~wbuysellsound.wav");
 				RefreshAll(%clientId);
 				%clientId.bulkNum = 1;
+
+				MenuBuyBeltItem(%clientid, 1);
+				return;
 			}
 		}
 	}
+
 	%clientId.beltShop = "";
 	return;
 }
@@ -857,22 +873,23 @@ function processMenuSellBeltItemFinal(%clientId, %opt)
 	%amnt = GetWord(%opt, 3);
 	%amnt = floor(%amnt);
 
-	if(%opt == "done"){
-
+	if(%option == "done") {
+		ClearCurrentShopVars(%clientId);
 	}
-	else if(%option == "back"){
+	else if(%option == "back") {
 		MenuSellBeltItem(%clientid, %type, 1);
 		return;
 	}
-	else if(%option == "sellall")
-	{
-
+	else if(%option == "sellall") {
 		%clientPos = GameBase::getPosition(%clientId);
 		%botPos = GameBase::getPosition(%clientId.beltShop);
 		%dist = Vector::getDistance(%clientPos, %botPos);
+
 		if(%dist > 20)
 			return;
+
 		%itemCnt = belt::hasthisstuff(%clientId,%item);
+
 		if(%itemCnt != %amnt)
 			return;
 
@@ -908,47 +925,43 @@ function processMenuSellBeltItemFinal(%clientId, %opt)
 			Client::SendMessage(%clientId, $MsgWhite, "You received "@%cost@" coins.~wbuysellsound.wav");
 			RefreshAll(%clientId);
 			%clientId.bulkNum = 1;
+
+			MenuSellBeltItem(%clientid, %type, 1);
+			return;
 		}
 	}
+
 	return;
 }
 
 
 //-----------------------------------------------------------------
 
-function MenuStoreBelt(%clientId, %page)
-{
+function MenuStoreBelt(%clientId, %page) {
 	Client::buildMenu(%clientId, "Belt store:", "StoreBelt", true);
 
 	if(%page == "")
 		%page = 1;
 
 	belt::buildMainMenu(%clientId, %page);
-
 	Client::addMenuItem(%clientid, "wWithdraw","withdraw");
 }
 
-
-function processMenuStoreBelt(%clientId, %opt)
-{
-
+function processMenuStoreBelt(%clientId, %opt) {
 	%o = GetWord(%opt, 0);
 	%p = GetWord(%opt, 1);
 
-	if(%o == "page")
-	{
+	if(%o == "page") {
 		MenuStoreBelt(%clientId, %p);
 		return;
 	}
 
-	if($count[%opt] > 0)
-	{
+	if($count[%opt] > 0) {
 		MenuStoreBeltItem(%clientid, %opt, 1);
 		return;
 	}
 
-	if(%opt == "withdraw")
-	{
+	if(%opt == "withdraw") {
 		MenuWithdrawBelt(%clientId);
 		return;
 	}
@@ -958,18 +971,19 @@ function processMenuStoreBelt(%clientId, %opt)
 
 	return;
 }
-function belt::checkbankmenus(%clientId)
-{
+function belt::checkbankmenus(%clientId) {
 	%x = 0;
-	for(%i = 0; getWord($belttypelist, %i) != "" && getWord($belttypelist, %i) != -1; %i++)
-	{
+
+	for(%i = 0; getWord($belttypelist, %i) != "" && getWord($belttypelist, %i) != -1; %i++) {
 		%type = getword($belttypelist,%i);
 		%num = getword(Belt::BankGetNS(%clientid,%type),0);
+
 		if(%num > 0){
 			%x++;
 			%nf = %nf @ " " @ getWord($belttypelist, %i);
 		}
 	}
+
 	%nf = %x @ %nf;
 	return %nf;
 }
@@ -1125,7 +1139,6 @@ function MenuStoreBeltItemFinal(%clientid, %item, %type)
 		%amnt = %cmnt;
 
 	Client::buildMenu(%clientId, %name@" ("@%cmnt@")", "StoreBeltItemFinal", true);
-
 	Client::addMenuItem(%clientId, %cnt++ @ "Store "@%amnt, %type@" store "@%item@" "@%amnt);
 
 	if(%cmnt > 10)
@@ -1138,6 +1151,7 @@ function MenuStoreBeltItemFinal(%clientid, %item, %type)
 		Client::addMenuItem(%clientId, %cnt++ @ "Store 200", %type@" store "@%item@" 200");
 	if(%cmnt != %amnt)
 		Client::addMenuItem(%clientId, %cnt++ @ "Store "@%cmnt@" (all)", %type@" storeall "@%item@" "@%cmnt);
+
 	Client::addMenuItem(%clientId, "xCancel", %type@" done");
 	Client::addMenuItem(%clientId, "z<< Back", %type@" back");
 	return;
@@ -1429,7 +1443,7 @@ function Belt::GetNS(%clientid, %type) {
 	return %bn@%list;
 }
 
-function BeltItem::Add(%name, %item, %type, %weight, %cost, %image) {
+function BeltItem::Add(%name, %item, %type, %weight, %cost, %image, %shopIndex) {
 	$numBeltItems++;
 	%num = $count[%type]++;
 
@@ -1442,11 +1456,13 @@ function BeltItem::Add(%name, %item, %type, %weight, %cost, %image) {
 	$beltitem[%item, "Image"] = %image;
 
 	$AccessoryVar[%item, $Weight] = %weight;
-	$AccessoryVar[%item, $ShopIndex] = $numBeltItems;
+	if (%shopIndex != "") {
+		$AccessoryVar[%item, $ShopIndex] = %shopIndex;
+	}
 	$HardcodedItemCost[%item] = %cost;
 }
 
-function BeltItem::AddItem(%name, %item, %type, %weight, %miscInfo) {
+function BeltItem::AddItem(%name, %item, %type, %weight, %miscInfo, %shopIndex) {
 	$numBeltItems++;
 	%num = $count[%type]++;
 
@@ -1459,12 +1475,14 @@ function BeltItem::AddItem(%name, %item, %type, %weight, %miscInfo) {
 
 	$AccessoryVar[%item, $Weight] = %weight;
 	$AccessoryVar[%item, $MiscInfo] = %miscInfo;
-	$AccessoryVar[%item, $ShopIndex] = $numBeltItems;
+	if (%shopIndex != "") {
+		$AccessoryVar[%item, $ShopIndex] = %shopIndex;
+	}
 	$HardcodedItemCost[%item] = %cost;
 }
 
 // TODO: add skill restrictions, etc
-function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image) {
+function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image, %shopIndex) {
 	// add base version
 	$numBeltItems++;
 	%num = $count[%type]++;
@@ -1478,7 +1496,9 @@ function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image) {
 	$beltitem[%item, "Image"] = %image;
 
 	$AccessoryVar[%item, $Weight] = %weight;
-	$AccessoryVar[%item, $ShopIndex] = $numBeltItems;
+	if (%shopIndex != "") {
+		$AccessoryVar[%item, $ShopIndex] = %shopIndex;
+	}
 	$HardcodedItemCost[%item] = %cost;
 
 	// now add the equipped version
@@ -1497,12 +1517,12 @@ function BeltItem::AddEquippable(%name, %item, %type, %weight, %cost, %image) {
 	$beltitem[%equippedItem, "Image"] = %image;
 
 	$AccessoryVar[%equippedItem, $Weight] = %weight;
-	$AccessoryVar[%equippedItem, $ShopIndex] = $numBeltItems;
+	$AccessoryVar[%equippedItem, $ShopIndex] = %shopIndex;
 	$HardcodedItemCost[%equippedItem] = %cost;
 }
 
 
-function BelItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant) {
+function BeltItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant, %shopIndex) {
 	// copied from GetDelay() if you change that formula update it here
 	%type = "WeaponItems";
 	%a = 3.0;
@@ -1530,7 +1550,9 @@ function BelItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo,
 	$AccessoryVar[%item, $AccessoryType] = %accessoryType;
 	$AccessoryVar[%item, $SpecialVar] = "6 " @ %atk;
 	$AccessoryVar[%item, $MiscInfo] = %miscInfo;
-	$AccessoryVar[%item, $ShopIndex] = $numBeltItems;
+	if (%shopIndex != "") {
+		$AccessoryVar[%item, $ShopIndex] = %shopIndex;
+	}
 	$SkillType[%item] = %weaponSkill;
 	$SkillRestriction[%item] = %skillRestriction;
 
@@ -1633,14 +1655,14 @@ function generateEnchantsAndMateria() {
 	}
 }
 
-function BeltItem::AddWeapon(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps) {
+function BeltItem::AddWeapon(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %shopIndex) {
 	// add base weapon
-	BelItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps);
+	BeltItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, "", %shopIndex);
 
 	// add equipped version
 	%equippedName = %name @ " " @ $equippedString;
 	%equippedItem = %item @ "0";
-	BelItem::AddWeaponData(%equippedName, %equippedItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps);
+	BeltItem::AddWeaponData(%equippedName, %equippedItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps);
 
 	// create enchanted versions
 	for(%i = 0; getWord($WeaponEnchantments, %i) != "" && getWord($WeaponEnchantments, %i) != -1; %i++) {
@@ -1650,11 +1672,11 @@ function BeltItem::AddWeapon(%name, %item, %image, %accessoryType, %miscInfo, %w
 
 		%enchantedWeaponName = %name @ " of " @ %enchantName;
 		%enchantedWeaponItem = %item @ %enchant;
-		BelItem::AddWeaponData(%enchantedWeaponName, %enchantedWeaponItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant);
+		BeltItem::AddWeaponData(%enchantedWeaponName, %enchantedWeaponItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant);
 
 		%equippedEnchantedName = %enchantedWeaponName @ " " @ $equippedString;
 		%equippedEnchantedItem = %enchantedWeaponItem @ "0";
-		BelItem::AddWeaponData(%equippedEnchantedName, %equippedEnchantedItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant);
+		BeltItem::AddWeaponData(%equippedEnchantedName, %equippedEnchantedItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant);
 
 		// add the smithing recipe for the enchant
 		Smith::addItem(%enchantedWeaponItem, %item @ " 1 " @ %enchantMateria @ " 1", %enchantedWeaponItem @ " 1", $smithingNum++);
@@ -1897,6 +1919,14 @@ function Belt::GetDeathItems(%clientid, %killerId) {
 	%tmploot = "";
 
 	if(fetchData(%clientId, "LCK") < 0) {
+		%WeaponItems = fetchdata(%clientid, "WeaponItems");
+
+		if((String::len(%tmploot) + String::len(%WeaponItems)) > 200) {
+			Belt::packgen(%clientId, %tmploot);
+			%tmploot = "";
+		}
+		%tmploot = %tmploot @ %WeaponItems;
+
 		%AmmoItems = fetchdata(%clientid,"AmmoItems");
 
 		if((String::len(%tmploot) + String::len(%AmmoItems)) > 200) {
@@ -2006,18 +2036,18 @@ $numBeltItems = 0;
 generateEnchantsAndMateria();
 
 //Ammunition
-BeltItem::Add("Small Rock","SmallRock","AmmoItems",0.2,13, "SmallRock");
-BeltItem::Add("Basic Arrow","BasicArrow","AmmoItems",0.1,GenerateItemCost(BasicArrow), "Arrow");
-BeltItem::Add("Sheaf Arrow","SheafArrow","AmmoItems",0.1,GenerateItemCost(SheafArrow), "Arrow");
-BeltItem::Add("Bladed Arrow","BladedArrow","AmmoItems",0.1,GenerateItemCost(BladedArrow), "Arrow");
-BeltItem::Add("Light Quarrel","LightQuarrel","AmmoItems",0.1,GenerateItemCost(LightQuarrel), "Quarrel");
-BeltItem::Add("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.1,GenerateItemCost(HeavyQuarrel), "Quarrel");
-BeltItem::Add("Short Quarrel","ShortQuarrel","AmmoItems",0.1,GenerateItemCost(ShortQuarrel), "Quarrel");
-BeltItem::Add("Stone Feather","StoneFeather","AmmoItems",0.1,GenerateItemCost(StoneFeather), "Arrow");
-BeltItem::Add("Metal Feather","MetalFeather","AmmoItems",0.1,GenerateItemCost(MetalFeather), "Arrow");
-BeltItem::Add("Talon","Talon","AmmoItems",0.1,GenerateItemCost(Talon), "Arrow");
-BeltItem::Add("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.1,GenerateItemCost(CeraphumsFeather), "Arrow");
-BeltItem::Add("Poison Arrow", "PoisonArrow", "AmmoItems", 0.1, 200, "Arrow");
+BeltItem::Add("Small Rock","SmallRock","AmmoItems",0.2,13, "SmallRock", 1);
+BeltItem::Add("Basic Arrow","BasicArrow","AmmoItems",0.1,GenerateItemCost(BasicArrow), "Arrow", 2);
+BeltItem::Add("Sheaf Arrow","SheafArrow","AmmoItems",0.1,GenerateItemCost(SheafArrow), "Arrow", 3);
+BeltItem::Add("Bladed Arrow","BladedArrow","AmmoItems",0.1,GenerateItemCost(BladedArrow), "Arrow", 4);
+BeltItem::Add("Light Quarrel","LightQuarrel","AmmoItems",0.1,GenerateItemCost(LightQuarrel), "Quarrel", 5);
+BeltItem::Add("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.1,GenerateItemCost(HeavyQuarrel), "Quarrel", 6);
+BeltItem::Add("Short Quarrel","ShortQuarrel","AmmoItems",0.1,GenerateItemCost(ShortQuarrel), "Quarrel", 7);
+BeltItem::Add("Stone Feather","StoneFeather","AmmoItems",0.1,GenerateItemCost(StoneFeather), "Arrow", 8);
+BeltItem::Add("Metal Feather","MetalFeather","AmmoItems",0.1,GenerateItemCost(MetalFeather), "Arrow", 9);
+BeltItem::Add("Talon","Talon","AmmoItems",0.1,GenerateItemCost(Talon), "Arrow", 10);
+BeltItem::Add("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.1,GenerateItemCost(CeraphumsFeather), "Arrow", 11);
+BeltItem::Add("Poison Arrow", "PoisonArrow", "AmmoItems", 0.1, 200, "Arrow", 12);
 
 
 //Gems
@@ -2036,40 +2066,21 @@ BeltItem::Add("Keldrinite","Keldrinite","GemItems",5.0,125200);
 
 
 //Potions
-BeltItem::Add("Heal Potion","HealPotion","PotionItems", 0.5, 20);
+BeltItem::Add("Heal Potion","HealPotion","PotionItems", 0.5, 20, "", 13);
 $AccessoryVar[Healpotion, $MiscInfo] = "A potion of Light healing that heals 25 HP";
 $restoreValue[Healpotion, HP] = 25;
 
-BeltItem::Add("Greater Heal Potion","GreaterHealPotion","PotionItems", 1, 100);
+BeltItem::Add("Greater Heal Potion","GreaterHealPotion","PotionItems", 1, 100, "", 14);
 $AccessoryVar[GreaterHealPotion, $MiscInfo] = "A potion of Greater Healing that heals 80 HP";
 $restoreValue[GreaterHealPotion, HP] = 80;
 
-BeltItem::Add("Mana Potion","ManaPotion","PotionItems", 0.5, 20);
+BeltItem::Add("Mana Potion","ManaPotion","PotionItems", 0.5, 20, "", 15);
 $AccessoryVar[ManaPotion, $MiscInfo] = "A Mana Potion that provides 20 MP";
 $restoreValue[ManaPotion, MP] = 20;
 
-BeltItem::Add("Energy Potion","EnergyPotion","PotionItems", 1, 100);
+BeltItem::Add("Energy Potion","EnergyPotion","PotionItems", 1, 100, "", 16);
 $AccessoryVar[EnergyPotion, $MiscInfo] = "An Energy Potion that provides 50 MP";
 $restoreValue[EnergyPotion, MP] = 50;
-
-
-//Old potions, to carry over old inventories; it uses no resources to have these here.
-//If you have no players with these items, then they are safe to remove.
-BeltItem::Add("Blue Potion","BluePotion","PotionItems",4,15);
-$AccessoryVar[BluePotion, $MiscInfo] = "A blue potion that heals 15 HP";
-$restoreValue[BluePotion, HP] = 15;
-
-BeltItem::Add("Crystal Blue Potion","CrystalBluePotion","PotionItems",10,100);
-$AccessoryVar[CrystalBluePotion, $MiscInfo] = "A crystal blue potion that heals 60 HP";
-$restoreValue[CrystalBluePotion, HP] = 60;
-
-BeltItem::Add("Energy Vial","EnergyVial","PotionItems",2,15);
-$AccessoryVar[EnergyVial, $MiscInfo] = "An energy vial that provides 16 MP";
-$restoreValue[EnergyVial, MP] = 16;
-
-BeltItem::Add("Crystal Energy Vial","CrystalEnergyVial","PotionItems",5,100);
-$AccessoryVar[CrystalEnergyVial, $MiscInfo] = "A crystal energy vial that provides 50 MP";
-$restoreValue[CrystalEnergyVial, MP] = 50;
 
 // $AccessoryVar[Hatchet, $SpecialVar] = "6 20";                  //12 (5)
 // $AccessoryVar[BroadSword, $SpecialVar] = "6 35";               //21 (5)
@@ -2083,9 +2094,9 @@ $restoreValue[CrystalEnergyVial, MP] = 50;
 
 // Swords
 $description = "This broad-bladed sword is suited for large slashing strokes. It is inexpensive, but not particularly powerful.";
-BeltItem::AddWeapon("Broadsword", "Broadsword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
+BeltItem::AddWeapon("Broadsword", "Broadsword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20", 17); // shop item 63
 $description = "This straight and sharp double-edged blade can be used for either stabbing or slashing.";
-BeltItem::AddWeapon("Longsword", "Longsword", "LongSword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 100", "30");
+BeltItem::AddWeapon("Longsword", "Longsword", "LongSword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 100", "30", 18);
 $description = "This sword has a broad and sturdy blade, but its iron construction makes it very heavy.";
 BeltItem::AddWeapon("Iron Sword", "IronSword", "GoliathSword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 200", "40");
 $description = "A sword forged from the metal known as mythril. Its brilliantly shining blade is incredibly lightweight.";
@@ -2109,11 +2120,11 @@ BeltItem::AddWeapon("Rune Blade", "RuneBlade", "Sword", $SwordAccessoryType, $de
 $description = "A sword that glitters cruelly like a crescent moon.";
 BeltItem::AddWeapon("Moon Blade", "MoonBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1500", "180");
 $description = "A blade forged for swordsmen who have mastered every technique and achieved knighthood's most exalted rank.";
-BeltItem::AddWeapon("Onion Sword", "OnionSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 2000", "240");
+BeltItem::AddWeapon("Onion Sword", "OnionSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 2000", "240"); // shop item 46
 
 // Axes
 $description = "An inexpensive axe that is easy to wield. It is easy for new axe users, but not particularly powerful.";
-BeltItem::AddWeapon("Hand Axe", "HandAxe", "HandAxe", $AxeAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "25");
+BeltItem::AddWeapon("Hand Axe", "HandAxe", "HandAxe", $AxeAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "25"); // shop item 47
 $description = "A merdium sizes axe that is relatively common. It is most often used by woodsman, but is heavy enough to deal considerable damage.";
 BeltItem::AddWeapon("Axe", "Axe", "Axe", $AxeAccessoryType, $description, $SkillSwords, $SkillSwords @ " 100", "35");
 $description = "A battle axe with a long handle. Designed for two-handed use, it can easily chop off an enemy's limbs.";
@@ -2148,10 +2159,12 @@ BeltItem::AddWeapon("Battle Axe", "BattleAxe", "BattleAxe", $AxeAccessoryType, $
 // Staves
 
 // Bows
+$description = "A sling";
+BeltItem::AddWeapon("Sling", "Sling", "Sling", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "15");
 
 // Enemy Weapons
 $description = "A casting blade.";
-BeltItem::AddWeapon("Casting Blade", "CastingBlade", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
+BeltItem::AddWeapon("Casting Blade", "CastingBlade", "CastingBlade", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
 $description = "A chipped dagger that looks dirty and worn.";
 BeltItem::AddWeapon("Chipped Dagger", "ChippedDagger", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "10");
 $description = "A dagger that looks dirty and worn.";

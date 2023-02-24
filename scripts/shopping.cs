@@ -35,12 +35,12 @@ function SetupShop(%clientId, %botid) {
 	Client::clearItemShopping(%clientId);
 	Client::clearItemBuying(%clientId);
 
-	Client::setGuiMode(%clientId, 4);
-	if(%clientId.repack >= 20)
-		remoteEval(%clientId,InvHUD::turnOn, 3);
+	// Client::setGuiMode(%clientId, 4);
+	// if(%clientId.repack >= 20)
+	// 	remoteEval(%clientId,InvHUD::turnOn, 3);
 
-	%txt = "<f1><jc>COINS: " @ fetchData(%clientId, "COINS");
-	Client::setInventoryText(%clientId, %txt);
+	// %txt = "<f1><jc>COINS: " @ fetchData(%clientId, "COINS");
+	// Client::setInventoryText(%clientId, %txt);
 
 	%info = $BotInfo[%botid.name, SHOP];	
 
@@ -65,19 +65,19 @@ function SetupShop(%clientId, %botid) {
 		%info = %newString;
 	}
 
-	%max = getNumItems();		
-	for(%id = 0; %id < %max; %id++) {
-		%item = getItemData(%id);
+	// %max = getNumItems();		
+	// for(%id = 0; %id < %max; %id++) {
+	// 	%item = getItemData(%id);
 
-		for(%i = 0; GetWord(%info, %i) != -1; %i++) {
-			%a = GetWord(%info, %i);
+	// 	for(%i = 0; GetWord(%info, %i) != -1; %i++) {
+	// 		%a = GetWord(%info, %i);
 
-			if($AccessoryVar[%item, $ShopIndex] == %a) {
-				Client::setItemShopping(%clientId, %item);
-				Client::setItemBuying(%clientId, %item);
-			}
-		}
-	}
+	// 		if($AccessoryVar[%item, $ShopIndex] == %a) {
+	// 			Client::setItemShopping(%clientId, %item);
+	// 			Client::setItemBuying(%clientId, %item);
+	// 		}
+	// 	}
+	// }
 	if($BotInfo[%botid.name, BELTSHOP] != "") {
 		Client::setItemShopping(%clientId, BeltItemTool);
 		Client::setItemBuying(%clientId, BeltItemTool);
