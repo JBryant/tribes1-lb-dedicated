@@ -157,6 +157,7 @@ function Game::playerSpawn(%clientId, %respawn)
 		%equippedWeapon = GetEquippedWeapon(%clientId);
 		if (%equippedWeapon != "") {
 			%image = BeltItem::GetImage(%equippedWeapon);
+			
 			if (%image != "") {
 				Player::mountItem(%pl, %image, $WeaponSlot);
 			} else {

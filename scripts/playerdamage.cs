@@ -776,14 +776,16 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 					%value = -1;	//There was an LCK miss
 				else
 				{
-					if(!%noImpulse) Player::applyImpulse(%this,%mom);
+					if(!%noImpulse) Player::applyImpulse(%this, %mom);
 					%noImpulse = "";
 
 					if(%damagedCurrentArmor != "")
 						%ahs = $ArmorHitSound[%damagedCurrentArmor];
 					else
 						%ahs = SoundHitFlesh;
-					if(%skilltype == $SkillSlashing)
+
+					// add other skill type hit sounds	
+					if(%skilltype == $SkillSwords)
 						PlaySound(%ahs, %damagedClientPos);
 					else if(%skilltype == $SkillBludgeoning)
 						PlaySound(%ahs, %damagedClientPos);

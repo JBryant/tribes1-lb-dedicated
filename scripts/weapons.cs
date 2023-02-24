@@ -139,7 +139,7 @@ function MeleeAttack(%player)
 	//=======================================================
 	// I have found that calling Player::setArmor() seems to cause the spam swing
 
-	if($WeaponDelay[%weapon] != ""){
+	if($WeaponDelay[%weapon] != "") {
 		if($justmeleed[%clientId])
 			return;
 	}
@@ -434,21 +434,21 @@ function GenerateItemCost(%item)
 
 
 // WeaponDelays
-// swords historyically weighed about 3 lbs
+// swords historyically weighed about 3 - 5 lbs
 // the largest two handed weapons rarely weighed more than 10 lbs, so..
-// sword: firetime of 1, will weigh 3 lbs
+// sword: firetime of 1.5, will weigh 4.5 lbs
 // two handed swords / axes: firetime of 3, weighs about 9 lbs
-$WeaponDelay[Knive] = 0.5;
-$WeaponDelay[Katana] = 0.75;
-$WeaponDelay[Sword] = 1;
-$WeaponDelay[HandAxe] = 1.25;
-$WeaponDelay[Mace] = 1.5;
-$WeaponDelay[Polearm] = 1.75;
-$WeaponDelay[Axe] = 2.0;
-$WeaponDelay[Hammer] = 2.25;
-$WeaponDelay[GreatSword] = 2.50;
-$WeaponDelay[GreatHammer] = 2.75;
-$WeaponDelay[GreatAxe] = 3.0;
+$WeaponDelay[Dagger] = 1.0;
+$WeaponDelay[Katana] = 1.25;
+$WeaponDelay[Sword] = 1.50;
+$WeaponDelay[HandAxe] = 1.75;
+$WeaponDelay[Mace] = 2;
+$WeaponDelay[Polearm] = 2.25;
+$WeaponDelay[Axe] = 2.5;
+$WeaponDelay[Hammer] = 2.75;
+$WeaponDelay[GreatSword] = 3.0;
+$WeaponDelay[GreatHammer] = 3.25;
+$WeaponDelay[GreatAxe] = 3.5;
 
 $WeaponDelay[CrossBow] = 3;
 $WeaponDelay[RepeatingCrossbow] = 0.5;
@@ -466,7 +466,7 @@ ItemImageData CastingBladeImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = $WeaponDelay[Knive];
+	fireTime = $WeaponDelay[Dagger];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -542,7 +542,7 @@ ItemImageData WandImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = $WeaponDelay[Knive];
+	fireTime = $WeaponDelay[Dagger];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -1014,7 +1014,7 @@ ItemImageData DaggerImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = $WeaponDelay[Knive];
+	fireTime = $WeaponDelay[Dagger];
 	minEnergy = 0;
 	maxEnergy = 0;
 

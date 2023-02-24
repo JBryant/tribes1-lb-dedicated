@@ -1022,50 +1022,51 @@ function remoteSelectClient(%clientId, %selId)
 }
 
 
-function processMenuPickTeam(%clientId, %team, %adminClient)
-{
+function processMenuPickTeam(%clientId, %team, %adminClient) {
 	dbecho($dbechoMode, "processMenuPickTeam(" @ %clientId @ ", " @ %team @ ", " @ %adminClient @ ")");
 
-   if(%team != -1 && %team == Client::getTeam(%clientId))
-      return;
+    if(%team != -1 && %team == Client::getTeam(%clientId))
+    	return;
 
-   if(%clientId.observerMode == "justJoined")
-   {
-      %clientId.observerMode = "";
-      centerprint(%clientId, "");
-   }
+    if(%clientId.observerMode == "justJoined") {
+    	%clientId.observerMode = "";
+    	centerprint(%clientId, "");
+    }
 
-   if((!$matchStarted || !$Server::TourneyMode || %adminClient) && %team == -2)
-   {
-      if(Observer::enterObserverMode(%clientId))
-      {
-         %clientId.notready = "";
-         if(%adminClient == "") 
-            messageAll(0, Client::getName(%clientId) @ " became an observer.");
-         else
-            messageAll(0, Client::getName(%clientId) @ " was forced into observer mode by " @ Client::getName(%adminClient) @ ".");
-		   Game::refreshClientScore(%clientId);
+    if((!$matchStarted || !$Server::TourneyMode || %adminClient) && %team == -2) {
+    	if(Observer::enterObserverMode(%clientId)) {
+        	%clientId.notready = "";
+         	if(%adminClient == "") 
+            	messageAll(0, Client::getName(%clientId) @ " became an observer.");
+         	else
+            	messageAll(0, Client::getName(%clientId) @ " was forced into observer mode by " @ Client::getName(%adminClient) @ ".");
+		   
+		   	Game::refreshClientScore(%clientId);
 		}
-      return;
-   }
+      
+	  	return;
+    }
 
-   %player = Client::getOwnedObject(%clientId);
-   %clientId.observerMode = "";
+    %player = Client::getOwnedObject(%clientId);
+    %clientId.observerMode = "";
 
-   if(%team == -1)
-   {
-      UpdateTeam(%clientId);
-      %team = Client::getTeam(%clientId);
-   }
-   GameBase::setTeam(%clientId, %team);
-   %clientId.teamEnergy = 0;
+    if(%team == -1) {
+    	UpdateTeam(%clientId);
+      	%team = Client::getTeam(%clientId);
+    }
+
+    GameBase::setTeam(%clientId, %team);
+    %clientId.teamEnergy = 0;
 	Client::clearItemShopping(%clientId);
+
 	if(Client::getGuiMode(%clientId) != 1)
-		Client::setGuiMode(%clientId,1);		
+		Client::setGuiMode(%clientId,1);
+
 	Client::setControlObject(%clientId, -1);
 
-   Game::playerSpawn(%clientId, false);
+    Game::playerSpawn(%clientId, false);
 	%team = Client::getTeam(%clientId);
+
 	if($TeamEnergy[%team] != "Infinite")
 		$TeamEnergy[%team] += $InitialPlayerEnergy;
 }

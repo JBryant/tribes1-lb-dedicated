@@ -631,6 +631,15 @@ function DistributeExpForKilling(%damagedClient)
 				%value = %value * %ph;
 			}
 
+			// add class exp multiplier
+			%expMultiplier = $EXPmultiplier[fetchData(%listClientId, "CLASS")];
+			if (%expMultiplier != "") {
+				%value = %value * %expMultiplier;
+			}
+ 
+			%serverExpMultiplier = 5; // default to 1 but increase for server special occasions
+			%value = %value * %serverExpMultiplier;
+
 			%perc = %dCounter[%finalDamagedBy[%i]] / %total;
 			%final = Cap(round( %value * %perc ), "inf", 1000);
 
@@ -642,6 +651,7 @@ function DistributeExpForKilling(%damagedClient)
 				%pvalue = 0;
 
 			storeData(%listClientId, "EXP", %final, "inc");
+
 			if(%final > 0)
 				Client::sendMessage(%listClientId, 0, %dname @ " has died and you gained " @ %final @ " experience!");
 			else if(%final < 0)

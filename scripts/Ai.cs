@@ -465,6 +465,7 @@ function AI::SelectBestWeapon(%aiId)
 	dbecho($dbechoMode, "AI::SelectBestWeapon(" @ %aiId @ ")");
 
 	%weapon = GetBestWeapon(%aiId);
+
 	if(%weapon != -1)
 	{
 		%x = "";
@@ -478,7 +479,9 @@ function AI::SelectBestWeapon(%aiId)
 		if(%x != -1)
 		{
 			if (isBeltItem(%weapon)) {
+				Belt::EquipItem(%aiId, %weapon);
 				%image = BeltItem::GetImage(%weapon);
+
 				if (%image != "") {
 					Player::mountItem(%aiId, %image, %slot);
 				} else {
@@ -1178,7 +1181,7 @@ function HardcodeAIskills(%aiId)
 		AddSkillPoint(%aiId, %i, %a);
 
 	//==== HARDCODED SKILLS TO ENSURE CHALLENGING BOTS ============
-	$PlayerSkill[%aiId, $SkillSlashing] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
+	$PlayerSkill[%aiId, $SkillSwords] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillPiercing] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillBludgeoning] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillDodging] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);

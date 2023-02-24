@@ -27,7 +27,7 @@
 // Skills
 //######################################################################################
 
-$SkillSlashing = 1;           // SkillSwords
+$SkillSwords = 1;
 $SkillPiercing = 2;           //
 $SkillBludgeoning = 3;
 $SkillDodging = 4;
@@ -59,7 +59,7 @@ $MinRemort = "R";
 $MinAdmin = "A";
 $MinHouse = "H";
 
-$SkillDesc[1] = "Slashing";
+$SkillDesc[$SkillSwords] = "Swords";
 $SkillDesc[2] = "Piercing";
 $SkillDesc[3] = "Bludgeoning";
 $SkillDesc[4] = "Dodging";
@@ -92,13 +92,12 @@ $SkillDesc[H] = "House";
 // Squire
 //--------------
 
-
-$SkillMultiplier[Squire, $SkillSlashing] = 0.6;
-$SkillMultiplier[Squire, $SkillPiercing] = 0.7;
-$SkillMultiplier[Squire, $SkillBludgeoning] = 1.5;
-$SkillMultiplier[Squire, $SkillDodging] = 0.7;
+$SkillMultiplier[Squire, $SkillSwords] = 1.0;
+$SkillMultiplier[Squire, $SkillPiercing] = 1.0;
+$SkillMultiplier[Squire, $SkillBludgeoning] = 1.0;
+$SkillMultiplier[Squire, $SkillDodging] = 1.0;
 $SkillMultiplier[Squire, $SkillWeightCapacity] = 1.0;
-$SkillMultiplier[Squire, $SkillBashing] = 0.5;
+$SkillMultiplier[Squire, $SkillBashing] = 1.0;
 $SkillMultiplier[Squire, $SkillStealing] = 0.2;
 $SkillMultiplier[Squire, $SkillHiding] = 0.2;
 $SkillMultiplier[Squire, $SkillBackstabbing] = 0.2;
@@ -115,12 +114,13 @@ $SkillMultiplier[Squire, $SkillSenseHeading] = 1.0;
 $SkillMultiplier[Squire, $SkillEnergy] = 1.5;
 $SkillMultiplier[Squire, $SkillHaggling] = 1.0;
 $EXPmultiplier[Squire] = 1.5;
+$AllowedSkills[Squire] = $SkillSwords@ " " @
 
 //--------------
 // Chemist
 //--------------
 
-$SkillMultiplier[Chemist, $SkillSlashing] = 1.5;
+$SkillMultiplier[Chemist, $SkillSwords] = 0.5;
 $SkillMultiplier[Chemist, $SkillPiercing] = 0.7;
 $SkillMultiplier[Chemist, $SkillBludgeoning] = 0.6;
 $SkillMultiplier[Chemist, $SkillDodging] = 2.0;
@@ -148,7 +148,7 @@ $EXPmultiplier[Chemist] = 1.5;
 //--------------
 //
 
-$SkillMultiplier[Knight, $SkillSlashing] = 0.6;
+$SkillMultiplier[Knight, $SkillSwords] = 0.6;
 $SkillMultiplier[Knight, $SkillPiercing] = 1.8;
 $SkillMultiplier[Knight, $SkillBludgeoning] = 0.5;
 $SkillMultiplier[Knight, $SkillDodging] = 1.1;
@@ -175,7 +175,7 @@ $EXPmultiplier[Knight] = 1.25;
 // Archer
 //--------------
 
-$SkillMultiplier[Archer, $SkillSlashing] = 1.3;
+$SkillMultiplier[Archer, $SkillSwords] = 1.3;
 $SkillMultiplier[Archer, $SkillPiercing] = 1.5;
 $SkillMultiplier[Archer, $SkillBludgeoning] = 1.3;
 $SkillMultiplier[Archer, $SkillDodging] = 2.0;
@@ -202,7 +202,7 @@ $EXPmultiplier[Archer] = 1.25;
 // White Mage
 //--------------
 
-$SkillMultiplier[WhiteMage, $SkillSlashing] = 2.0;
+$SkillMultiplier[WhiteMage, $SkillSwords] = 2.0;
 $SkillMultiplier[WhiteMage, $SkillPiercing] = 2.0;
 $SkillMultiplier[WhiteMage, $SkillBludgeoning] = 2.0;
 $SkillMultiplier[WhiteMage, $SkillDodging] = 1.5;
@@ -230,7 +230,7 @@ $EXPmultiplier[WhiteMage] = 1.25;
 //--------------
 
 $SkillMultiplier[BlackMage, $SkillPiercing] = 1.5;
-$SkillMultiplier[BlackMage, $SkillSlashing] = 1.5;
+$SkillMultiplier[BlackMage, $SkillSwords] = 1.5;
 $SkillMultiplier[BlackMage, $SkillBludgeoning] = 1.2;
 $SkillMultiplier[BlackMage, $SkillDodging] = 1.5;
 $SkillMultiplier[BlackMage, $SkillWeightCapacity] = 1.5;
@@ -256,7 +256,7 @@ $EXPmultiplier[BlackMage] = 1.25;
 // Monk
 //--------------
 
-$SkillMultiplier[Monk, $SkillSlashing] = 1.2;
+$SkillMultiplier[Monk, $SkillSwords] = 1.2;
 $SkillMultiplier[Monk, $SkillPiercing] = 1.1;
 $SkillMultiplier[Monk, $SkillBludgeoning] = 1.2;
 $SkillMultiplier[Monk, $SkillDodging] = 1.8;
@@ -283,7 +283,7 @@ $EXPmultiplier[Monk] = 1.1;
 // Thief
 //--------------
 
-$SkillMultiplier[Thief, $SkillSlashing] = 0.3;
+$SkillMultiplier[Thief, $SkillSwords] = 0.3;
 $SkillMultiplier[Thief, $SkillPiercing] = 0.8;
 $SkillMultiplier[Thief, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Thief, $SkillDodging] = 1.2;
@@ -310,7 +310,7 @@ $EXPmultiplier[Thief] = 1.1;
 // Mystic
 //--------------
 
-$SkillMultiplier[Mystic, $SkillSlashing] = 0.3;
+$SkillMultiplier[Mystic, $SkillSwords] = 0.3;
 $SkillMultiplier[Mystic, $SkillPiercing] = 0.8;
 $SkillMultiplier[Mystic, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Mystic, $SkillDodging] = 1.2;
@@ -337,7 +337,7 @@ $EXPmultiplier[Mystic] = 1.1;
 // Mystic
 //--------------
 
-$SkillMultiplier[TimeMage, $SkillSlashing] = 0.3;
+$SkillMultiplier[TimeMage, $SkillSwords] = 0.3;
 $SkillMultiplier[TimeMage, $SkillPiercing] = 0.8;
 $SkillMultiplier[TimeMage, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[TimeMage, $SkillDodging] = 1.2;
@@ -364,7 +364,7 @@ $EXPmultiplier[TimeMage] = 1.1;
 // Geomancer
 //--------------
 
-$SkillMultiplier[Geomancer, $SkillSlashing] = 0.3;
+$SkillMultiplier[Geomancer, $SkillSwords] = 0.3;
 $SkillMultiplier[Geomancer, $SkillPiercing] = 0.8;
 $SkillMultiplier[Geomancer, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Geomancer, $SkillDodging] = 1.2;
@@ -391,7 +391,7 @@ $EXPmultiplier[Geomancer] = 1.0;
 // Dragoon
 //--------------
 
-$SkillMultiplier[Dragoon, $SkillSlashing] = 0.3;
+$SkillMultiplier[Dragoon, $SkillSwords] = 0.3;
 $SkillMultiplier[Dragoon, $SkillPiercing] = 0.8;
 $SkillMultiplier[Dragoon, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Dragoon, $SkillDodging] = 1.2;
@@ -418,7 +418,7 @@ $EXPmultiplier[Dragoon] = 1.0;
 // Orator
 //--------------
 
-$SkillMultiplier[Orator, $SkillSlashing] = 0.3;
+$SkillMultiplier[Orator, $SkillSwords] = 0.3;
 $SkillMultiplier[Orator, $SkillPiercing] = 0.8;
 $SkillMultiplier[Orator, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Orator, $SkillDodging] = 1.2;
@@ -445,7 +445,7 @@ $EXPmultiplier[Orator] = 1.0;
 // Summoner
 //--------------
 
-$SkillMultiplier[Summoner, $SkillSlashing] = 0.3;
+$SkillMultiplier[Summoner, $SkillSwords] = 0.3;
 $SkillMultiplier[Summoner, $SkillPiercing] = 0.8;
 $SkillMultiplier[Summoner, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Summoner, $SkillDodging] = 1.2;
@@ -472,7 +472,7 @@ $EXPmultiplier[Summoner] = 1.0;
 // Samurai
 //--------------
 
-$SkillMultiplier[Samurai, $SkillSlashing] = 0.3;
+$SkillMultiplier[Samurai, $SkillSwords] = 0.3;
 $SkillMultiplier[Samurai, $SkillPiercing] = 0.8;
 $SkillMultiplier[Samurai, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Samurai, $SkillDodging] = 1.2;
@@ -499,7 +499,7 @@ $EXPmultiplier[Samurai] = 0.9;
 // Ninja
 //--------------
 
-$SkillMultiplier[Ninja, $SkillSlashing] = 0.3;
+$SkillMultiplier[Ninja, $SkillSwords] = 0.3;
 $SkillMultiplier[Ninja, $SkillPiercing] = 0.8;
 $SkillMultiplier[Ninja, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Ninja, $SkillDodging] = 1.2;
@@ -526,7 +526,7 @@ $EXPmultiplier[Ninja] = 0.9;
 // Dancer
 //--------------
 
-$SkillMultiplier[Dancer, $SkillSlashing] = 0.3;
+$SkillMultiplier[Dancer, $SkillSwords] = 0.3;
 $SkillMultiplier[Dancer, $SkillPiercing] = 0.8;
 $SkillMultiplier[Dancer, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Dancer, $SkillDodging] = 1.2;
@@ -553,7 +553,7 @@ $EXPmultiplier[Dancer] = 0.9;
 // Arithmetician
 //--------------
 
-$SkillMultiplier[Arithmetician, $SkillSlashing] = 0.3;
+$SkillMultiplier[Arithmetician, $SkillSwords] = 0.3;
 $SkillMultiplier[Arithmetician, $SkillPiercing] = 0.8;
 $SkillMultiplier[Arithmetician, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Arithmetician, $SkillDodging] = 1.2;
@@ -580,7 +580,7 @@ $EXPmultiplier[Arithmetician] = 0.9;
 // HolyKnight
 //--------------
 
-$SkillMultiplier[HolyKnight, $SkillSlashing] = 0.3;
+$SkillMultiplier[HolyKnight, $SkillSwords] = 0.3;
 $SkillMultiplier[HolyKnight, $SkillPiercing] = 0.8;
 $SkillMultiplier[HolyKnight, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[HolyKnight, $SkillDodging] = 1.2;
@@ -607,7 +607,7 @@ $EXPmultiplier[HolyKnight] = 0.8;
 // DarkKnight
 //--------------
 
-$SkillMultiplier[DarkKnight, $SkillSlashing] = 0.3;
+$SkillMultiplier[DarkKnight, $SkillSwords] = 0.3;
 $SkillMultiplier[DarkKnight, $SkillPiercing] = 0.8;
 $SkillMultiplier[DarkKnight, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[DarkKnight, $SkillDodging] = 1.2;
@@ -634,7 +634,7 @@ $EXPmultiplier[DarkKnight] = 0.8;
 // Ancient
 //--------------
 
-$SkillMultiplier[Ancient, $SkillSlashing] = 0.3;
+$SkillMultiplier[Ancient, $SkillSwords] = 0.3;
 $SkillMultiplier[Ancient, $SkillPiercing] = 0.8;
 $SkillMultiplier[Ancient, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[Ancient, $SkillDodging] = 1.2;
@@ -661,7 +661,7 @@ $EXPmultiplier[Ancient] = 0.8;
 // HighSummoner
 //--------------
 
-$SkillMultiplier[HighSummoner, $SkillSlashing] = 0.3;
+$SkillMultiplier[HighSummoner, $SkillSwords] = 0.3;
 $SkillMultiplier[HighSummoner, $SkillPiercing] = 0.8;
 $SkillMultiplier[HighSummoner, $SkillBludgeoning] = 0.3;
 $SkillMultiplier[HighSummoner, $SkillDodging] = 1.2;
@@ -688,7 +688,7 @@ $EXPmultiplier[HighSummoner] = 0.8;
 // OnionKnight
 //--------------
 
-$SkillMultiplier[OnionKnight, $SkillSlashing] = 2.0;
+$SkillMultiplier[OnionKnight, $SkillSwords] = 2.0;
 $SkillMultiplier[OnionKnight, $SkillPiercing] = 2.0;
 $SkillMultiplier[OnionKnight, $SkillBludgeoning] = 2.0;
 $SkillMultiplier[OnionKnight, $SkillDodging] = 2.0;
@@ -715,7 +715,7 @@ $EXPmultiplier[OnionKnight] = 0.8;
 // Kefka
 //--------------
 
-$SkillMultiplier[Kefka, $SkillSlashing] = 2.0;
+$SkillMultiplier[Kefka, $SkillSwords] = 2.0;
 $SkillMultiplier[Kefka, $SkillPiercing] = 2.0;
 $SkillMultiplier[Kefka, $SkillBludgeoning] = 2.0;
 $SkillMultiplier[Kefka, $SkillDodging] = 2.0;
@@ -742,7 +742,7 @@ $EXPmultiplier[Kefka] = 0.8;
 // Soldier
 //--------------
 
-$SkillMultiplier[Soldier, $SkillSlashing] = 2.0;
+$SkillMultiplier[Soldier, $SkillSwords] = 2.0;
 $SkillMultiplier[Soldier, $SkillPiercing] = 2.0;
 $SkillMultiplier[Soldier, $SkillBludgeoning] = 2.0;
 $SkillMultiplier[Soldier, $SkillDodging] = 2.0;
@@ -769,7 +769,7 @@ $EXPmultiplier[Soldier] = 0.8;
 // ExSoldier
 //--------------
 
-$SkillMultiplier[ExSoldier, $SkillSlashing] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillSwords] = 2.0;
 $SkillMultiplier[ExSoldier, $SkillPiercing] = 2.0;
 $SkillMultiplier[ExSoldier, $SkillBludgeoning] = 2.0;
 $SkillMultiplier[ExSoldier, $SkillDodging] = 2.0;
@@ -848,16 +848,6 @@ $SkillRestriction[KnightShield] = $SkillEndurance @ " 140";
 $SkillRestriction[HeavenlyShield] = $SkillEndurance @ " 540 " @ $SkillEnergy @ " 850";
 $SkillRestriction[DragonShield] = $SkillEndurance @ " 715";
 
-$SkillRestriction[Tester] = $SkillSlashing @ " 0";
-$SkillRestriction[Hatchet] = $SkillSlashing @ " 0";
-$SkillRestriction[BroadSword] = $SkillSlashing @ " 20";
-$SkillRestriction[WarAxe] = $SkillSlashing @ " 60";
-$SkillRestriction[LongSword] = $SkillSlashing @ " 140";
-$SkillRestriction[BattleAxe] = $SkillSlashing @ " 300";
-$SkillRestriction[BastardSword] = $SkillSlashing @ " 620";
-$SkillRestriction[Halberd] = $SkillSlashing @ " 768";
-$SkillRestriction[Claymore] = $SkillSlashing @ " 900";
-$SkillRestriction[KeldriniteLS] = $SkillSlashing @ " 1120 " @ $MinRemort @ " 1";
 //.................................................................................
 $SkillRestriction[Club] = $SkillBludgeoning @ " 0";
 $SkillRestriction[QuarterStaff] = $SkillBludgeoning @ " 20";

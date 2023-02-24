@@ -2036,19 +2036,19 @@ BeltItem::Add("Keldrinite","Keldrinite","GemItems",5.0,125200);
 
 
 //Potions
-BeltItem::Add("Heal Potion","HealPotion","PotionItems",3,20);
+BeltItem::Add("Heal Potion","HealPotion","PotionItems", 0.5, 20);
 $AccessoryVar[Healpotion, $MiscInfo] = "A potion of Light healing that heals 25 HP";
 $restoreValue[Healpotion, HP] = 25;
 
-BeltItem::Add("Greater Heal Potion","GreaterHealPotion","PotionItems",5,100);
+BeltItem::Add("Greater Heal Potion","GreaterHealPotion","PotionItems", 1, 100);
 $AccessoryVar[GreaterHealPotion, $MiscInfo] = "A potion of Greater Healing that heals 80 HP";
 $restoreValue[GreaterHealPotion, HP] = 80;
 
-BeltItem::Add("Mana Potion","ManaPotion","PotionItems",3,20);
+BeltItem::Add("Mana Potion","ManaPotion","PotionItems", 0.5, 20);
 $AccessoryVar[ManaPotion, $MiscInfo] = "A Mana Potion that provides 20 MP";
 $restoreValue[ManaPotion, MP] = 20;
 
-BeltItem::Add("Energy Potion","EnergyPotion","PotionItems",6,100);
+BeltItem::Add("Energy Potion","EnergyPotion","PotionItems", 1, 100);
 $AccessoryVar[EnergyPotion, $MiscInfo] = "An Energy Potion that provides 50 MP";
 $restoreValue[EnergyPotion, MP] = 50;
 
@@ -2082,17 +2082,42 @@ $restoreValue[CrystalEnergyVial, MP] = 50;
 // $AccessoryVar[KeldriniteLS, $SpecialVar] = "6 90";
 
 // Swords
-BeltItem::AddWeapon("Broadsword", "Broadsword", "Sword", $SwordAccessoryType, "A Broadsword", $SkillSlashing, $SkillSlashing @ " 20", "20");
+$description = "This broad-bladed sword is suited for large slashing strokes. It is inexpensive, but not particularly powerful.";
+BeltItem::AddWeapon("Broadsword", "Broadsword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
+$description = "This straight and sharp double-edged blade can be used for either stabbing or slashing.";
+BeltItem::AddWeapon("Longsword", "Longsword", "LongSword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 100", "30");
+$description = "This sword has a broad and sturdy blade, but its iron construction makes it very heavy.";
+BeltItem::AddWeapon("Iron Sword", "IronSword", "GoliathSword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 200", "40");
+$description = "A sword forged from the metal known as mythril. Its brilliantly shining blade is incredibly lightweight.";
+BeltItem::AddWeapon("Mythril Sword", "MythrilSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 300", "50");
+$description = "The handle of this single-edged sword has been decorated with intricate coral piecework.";
+BeltItem::AddWeapon("Coral Sword", "CoralSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 400", "60");
+$description = "The blade of this sword is a deep crimson, as if it were drenched in blood. It is cruelly sharp.";
+BeltItem::AddWeapon("Blood Sword", "BloodSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 500", "70");
+$description = "A sword constructed using ancient techniques that have long since perished from the world.";
+BeltItem::AddWeapon("Ancient Sword", "AncientSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 600", "80");
+$description = "A wide-bladed sword with a midnight blue handle.";
+BeltItem::AddWeapon("Sleep Blade", "SleepBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 700", "90");
+$description = "The countless tiny diamonds embedded into this sword's blade saw into its victims, causing great damage.";
+BeltItem::AddWeapon("Diamond Sword", "DiamondSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 800", "100");
+$description = "A sword of extraplanar origin.";
+BeltItem::AddWeapon("Materia Blade", "MateriaBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 900", "110");
+$description = "A shining sword made of a lustrous white alloy of mythril and platinum. Its broad blade is wickedly sharp.";
+BeltItem::AddWeapon("Platinum Sword", "PlatinumSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1000", "120");
+$description = "A sword inscribed with ancient runes.";
+BeltItem::AddWeapon("Rune Blade", "RuneBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1200", "140");
+$description = "A sword that glitters cruelly like a crescent moon.";
+BeltItem::AddWeapon("Moon Blade", "MoonBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1500", "180");
+$description = "A blade forged for swordsmen who have mastered every technique and achieved knighthood's most exalted rank.";
+BeltItem::AddWeapon("Onion Sword", "OnionSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 2000", "240");
 
-// BeltItem::AddEquippable("Hatchet", "Hatchet", "WeaponItems", $AccessoryVar[Hatchet, $Weight], GenerateItemCost(Hatchet), "Hatchet", True);
-// BeltItem::AddEquippable("Broad Sword", "BroadSword", "WeaponItems", $AccessoryVar[BroadSword, $Weight], GenerateItemCost(BroadSword), "Sword");
-// BeltItem::AddEquippable("War Axe", "WarAxe", "WeaponItems", $AccessoryVar[WarAxe, $Weight], GenerateItemCost(WarAxe), "Axe");
-// BeltItem::AddEquippable("Long Sword", "LongSword", "WeaponItems", $AccessoryVar[LongSword, $Weight], GenerateItemCost(LongSword), "LongSword");
-// BeltItem::AddEquippable("Battle Axe", "BattleAxe", "WeaponItems", $AccessoryVar[BattleAxe, $Weight], GenerateItemCost(BattleAxe), "BattleAxe");
-// BeltItem::AddEquippable("Bastard Sword", "BastardSword", "WeaponItems", $AccessoryVar[BastardSword, $Weight], GenerateItemCost(BastardSword), "Sword");
-// BeltItem::AddEquippable("Halberd", "Halberd", "WeaponItems", $AccessoryVar[Halberd, $Weight], GenerateItemCost(Halberd), "Sword");
-// BeltItem::AddEquippable("Claymore", "Claymore", "WeaponItems", $AccessoryVar[Claymore, $Weight], GenerateItemCost(Claymore), "Sword");
-// BeltItem::AddEquippable("Keldrinite Long Sword", "KeldriniteLS", "WeaponItems", $AccessoryVar[KeldriniteLS, $Weight], GenerateItemCost(KeldriniteLS), "ElfinBlade");
+// Axes
+$description = "An inexpensive axe that is easy to wield. It is easy for new axe users, but not particularly powerful.";
+BeltItem::AddWeapon("Hand Axe", "HandAxe", "HandAxe", $AxeAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "25");
+$description = "A merdium sizes axe that is relatively common. It is most often used by woodsman, but is heavy enough to deal considerable damage.";
+BeltItem::AddWeapon("Axe", "Axe", "Axe", $AxeAccessoryType, $description, $SkillSwords, $SkillSwords @ " 100", "35");
+$description = "A battle axe with a long handle. Designed for two-handed use, it can easily chop off an enemy's limbs.";
+BeltItem::AddWeapon("Battle Axe", "BattleAxe", "BattleAxe", $AxeAccessoryType, $description, $SkillSwords, $SkillSwords @ " 200", "45");
 
 // Axes
 // BeltItem::AddEquippable("Club", "Club", "WeaponItems", $AccessoryVar[Club, $Weight], GenerateItemCost(Club), "Mace");
@@ -2119,28 +2144,25 @@ BeltItem::AddWeapon("Broadsword", "Broadsword", "Sword", $SwordAccessoryType, "A
 // BeltItem::AddEquippable("Awl Pike", "AwlPike", "WeaponItems", $AccessoryVar[AwlPike, $Weight], GenerateItemCost(AwlPike), "Spear");
 
 // Katanas
-// BeltItem::AddEquippable("Sling", "Sling", "WeaponItems", $AccessoryVar[Sling, $Weight], GenerateItemCost(Sling), "Sling");
-// BeltItem::AddEquippable("Short Bow", "ShortBow", "WeaponItems", $AccessoryVar[ShortBow, $Weight], GenerateItemCost(ShortBow), "LongBow");
-// BeltItem::AddEquippable("Light Crossbow", "LightCrossbow", "WeaponItems", $AccessoryVar[LightCrossbow, $Weight], GenerateItemCost(LightCrossbow), "Crossbow");
-// BeltItem::AddEquippable("Long Bow", "LongBow", "WeaponItems", $AccessoryVar[LongBow, $Weight], GenerateItemCost(LongBow), "LongBow");
-// BeltItem::AddEquippable("Composite Bow", "CompositeBow", "WeaponItems", $AccessoryVar[CompositeBow, $Weight], GenerateItemCost(CompositeBow), "CompositeBow");
-// BeltItem::AddEquippable("Repeating Crossbow", "RepeatingCrossbow", "WeaponItems", $AccessoryVar[RepeatingCrossbow, $Weight], GenerateItemCost(RepeatingCrossbow), "Crossbow");
-// BeltItem::AddEquippable("Elven Bow", "ElvenBow", "WeaponItems", $AccessoryVar[ElvenBow, $Weight], GenerateItemCost(ElvenBow), "LongBow");
-// BeltItem::AddEquippable("Aeolus Wing", "AeolusWing", "WeaponItems", $AccessoryVar[AeolusWing, $Weight], GenerateItemCost(AeolusWing), "CompositeBow");
-// BeltItem::AddEquippable("Heavy Crossbow", "HeavyCrossbow", "WeaponItems", $AccessoryVar[HeavyCrossbow, $Weight], GenerateItemCost(HeavyCrossbow), "Crossbow");
 
 // Staves
 
 // Bows
 
-// 
+// Enemy Weapons
+$description = "A casting blade.";
+BeltItem::AddWeapon("Casting Blade", "CastingBlade", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
+$description = "A chipped dagger that looks dirty and worn.";
+BeltItem::AddWeapon("Chipped Dagger", "ChippedDagger", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "10");
+$description = "A dagger that looks dirty and worn.";
+BeltItem::AddWeapon("Dagger", "Dagger", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
 
 // IMPORTANT: The weight of the weapon needs to match up with the Image Being used otherwise they will not be in sync.
 // To help with this, try to set the weight of all weapons that use the same image to be the same.
 // If you specifically WANT to create a faster or slower verison if something you will need
 // to make a new ItemImage for that speed. Name it as such and use it as much as you want.
 // AddWeapon(%name, %item, %type, %weight, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps)
-BeltItem::AddWeapon("Rune Sword", "RuneSword", "GemSword", $SwordAccessoryType, "A mystical rune blade", $SkillSlashing, $SkillSlashing @ " 20", "200");
+BeltItem::AddWeapon("Rune Sword", "RuneSword", "GemSword", $SwordAccessoryType, "A mystical rune blade", $SkillSwords, $SkillSwords @ " 20", "200");
 
 // rusties + damaged weapons
 // BeltItem::AddEquippable("Rusty Hatchet", "RHatchet", "WeaponItems", $AccessoryVar[RHatchet, $Weight], $ItemCost[RHatchet], "Hatchet");

@@ -171,7 +171,12 @@ function isSelectableWeapon(%clientId, %weapon)
 	{
 		//%ammo = $WeaponAmmo[%weapon];
 		//if (%ammo == "" || Player::getItemCount(%clientId,%ammo) > 0)
-			return true;
+		// if its already equipped make it not selectable
+		if (BeltItem::IsEquipped(%clientId, %weapon)) {
+			return false;
+		}
+
+		return true;
 	}
 
 	return false;
@@ -250,6 +255,7 @@ function GetBestWeapon(%clientId)
 	%bestWeapon = -1;
 
 	// if they have the casting blade, always use that
+	// switch this to check belt
 	if(Player::getItemCount(%clientId, "CastingBlade") > 0) {
 		return "CastingBlade";
 	}
@@ -264,6 +270,7 @@ function GetBestWeapon(%clientId)
 		if(isSelectableWeapon(%clientId, %weapon)) {
 			%x = "";
 			%add = 0;
+
 			if(GetAccessoryVar(%weapon, $AccessoryType) == $RangedAccessoryType)
 			{
 				%x = GetBestRangedProj(%clientId, %weapon);

@@ -136,7 +136,7 @@ function Game::initialMissionDrop(%clientId)
 	if(%clientId.IsInvalid)
 	{
 		//schedule("Net::kick(" @ %clientId @ ", \"" @ %kickMsg @ "\");", 20);
-		centerprint(%clientId, %kickMsg, 0);// @ " You will automatically be kicked within 20 seconds.  If not, please disconnect manually.", 0);
+		centerprint(%clientId, %kickMsg, 0);// @ " You will automatically be kicked within 20 seconds.  If not, please disconnect manually. ", 0);
 
 		Client::setControlObject(%clientId, Client::getObserverCamera(%clientId));
 		%camSpawn = Game::pickObserverSpawn(%clientId);
@@ -149,7 +149,7 @@ function Game::initialMissionDrop(%clientId)
 		// him/her choose stats if creating a new char)
 		//==================================================
 
-		if(%clientId.choosingClass) {
+		if(%clientId.choosingFirstClass) {
 			StartStatSelection(%clientId);
 		}
 		else {
