@@ -451,54 +451,51 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 
 			%value = (%value / $TribesDamageToNumericDamage);
 		}
-		else if(%type != $LandingDamageType)
-		{
+		else if(%type != $LandingDamageType) {
 			%multi = 1;
 
-			//Backstab
-			if(fetchData(%shooterClient, "invisible"))
-			{
-				%dRot = GetWord(GameBase::getRotation(%damagedClient), 2);
-				%sRot = GetWord(GameBase::getRotation(%shooterClient), 2);
-				%diff = %dRot - %sRot;
-				if(%diff >= -0.9 && %diff <= 0.9)
-				{
-					if(%skilltype == $SkillPiercing)
-					{
-						%multi += $PlayerSkill[%shooterClient, $SkillBackstabbing] / 175;
-						%Backstab = True;
-						%dotherdebugmsg = "\n\nyou were backstabbed";
-						%sotherdebugmsg = "\n\nyou successfully backstabbed!";
-					}
-				}
-				if(%shooterClient.adminLevel < 5)
-					UnHide(%shooterClient);
-			}
-			if(fetchData(%damagedClient, "invisible") && %damagedClient.adminLevel < 5)
-			{
-				UnHide(%damagedClient);
-			}
+			//Backstab - rethink how to add this back in
+			// if(fetchData(%shooterClient, "invisible")) {
+			// 	%dRot = GetWord(GameBase::getRotation(%damagedClient), 2);
+			// 	%sRot = GetWord(GameBase::getRotation(%shooterClient), 2);
+			// 	%diff = %dRot - %sRot;
 
-			//Bash
-			if(fetchData(%shooterClient, "NextHitBash"))
-			{
+			// 	if(%diff >= -0.9 && %diff <= 0.9) {
+			// 		if(%skilltype == $SkillPiercing) {
+			// 			%multi += $PlayerSkill[%shooterClient, $SkillBackstabbing] / 175;
+			// 			%Backstab = True;
+			// 			%dotherdebugmsg = "\n\nyou were backstabbed";
+			// 			%sotherdebugmsg = "\n\nyou successfully backstabbed!";
+			// 		}
+			// 	}
+			// 	if(%shooterClient.adminLevel < 5)
+			// 		UnHide(%shooterClient);
+			// }
+			// if(fetchData(%damagedClient, "invisible") && %damagedClient.adminLevel < 5)
+			// {
+			// 	UnHide(%damagedClient);
+			// }
 
-				%delay = 1;
-				if(%skilltype == $SkillBludgeoning)
-				{
-					%multi += $PlayerSkill[%shooterClient, $SkillBashing] / 470;
-					%shooterRotation = GameBase::getRotation(%shooterClient);
-					%c = $PlayerSkill[%shooterClient, $SkillBashing] / 15;
+			//Bash - rethink bash as well
+			// if(fetchData(%shooterClient, "NextHitBash"))
+			// {
 
-					%Bash = True;
+			// 	%delay = 1;
+			// 	if(%skilltype == $SkillBludgeoning)
+			// 	{
+			// 		%multi += $PlayerSkill[%shooterClient, $SkillBashing] / 470;
+			// 		%shooterRotation = GameBase::getRotation(%shooterClient);
+			// 		%c = $PlayerSkill[%shooterClient, $SkillBashing] / 15;
 
-					%delay = Cap(101 - fetchData(%shooterClient, "LVL"), 5, 50);
-				}
-				if(%shooterClient.repack > 33)
-					remoteEval(%shooterClient, "rpgbarhud", %delay, 7, 2, "||", 1, "Bash regen");
+			// 		%Bash = True;
 
-				schedule("storeData(" @ %shooterClient @ ", \"blockBash\", \"\");", %delay);
-				storeData(%shooterClient, "NextHitBash", "");
+			// 		%delay = Cap(101 - fetchData(%shooterClient, "LVL"), 5, 50);
+			// 	}
+			// 	if(%shooterClient.repack > 33)
+			// 		remoteEval(%shooterClient, "rpgbarhud", %delay, 7, 2, "||", 1, "Bash regen");
+
+			// 	schedule("storeData(" @ %shooterClient @ ", \"blockBash\", \"\");", %delay);
+			// 	storeData(%shooterClient, "NextHitBash", "");
 			}
 
 			if(%rweapon != "")
@@ -535,9 +532,9 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 			if(%type != $LandingDamageType && %shooterClient != %damagedClient && %shooterClient != 0)
 			{
 				if(%type == $SpellDamageType)
-					%x = (fetchData(%damagedClient, "MDEF") / 5) + $PlayerSkill[%damagedClient, $SkillSpellResistance] + 5;
+					%x = (fetchData(%damagedClient, "MDEF") / 5) + 5;
 				else
-					%x = (fetchData(%damagedClient, "DEF") / 5) + $PlayerSkill[%damagedClient, $SkillDodging] + 5;
+					%x = (fetchData(%damagedClient, "DEF") / 5) + 5;
 
 				%y = $PlayerSkill[%shooterClient, %skilltype] + 5;
 				%n = %x + %y;
@@ -743,31 +740,31 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 				{
 					UseSkill(%shooterClient, %skilltype, False, True);
 					UseSkill(%damagedClient, $SkillEndurance, True, True, 60);
-					if(%type == $SpellDamageType)
-						UseSkill(%damagedClient, $SkillSpellResistance, True, True, %base2);
-					else
-						UseSkill(%damagedClient, $SkillDodging, True, True, %base2 * (3/5));
+					// if(%type == $SpellDamageType)
+					// 	UseSkill(%damagedClient, $SkillSpellResistance, True, True, %base2);
+					// else
+					// 	UseSkill(%damagedClient, $SkillDodging, True, True, %base2 * (3/5));
 				}
 				else if(!%isMiss && %value == 0)
 				{
 					UseSkill(%shooterClient, %skilltype, False, True);
 					UseSkill(%damagedClient, $SkillEndurance, True, True, 60);
-					if(%type == $SpellDamageType)
-						UseSkill(%damagedClient, $SkillSpellResistance, True, True, %base2);
-					else
-						UseSkill(%damagedClient, $SkillDodging, True, True, %base2 * (3/5));
+					// if(%type == $SpellDamageType)
+					// 	UseSkill(%damagedClient, $SkillSpellResistance, True, True, %base2);
+					// else
+					// 	UseSkill(%damagedClient, $SkillDodging, True, True, %base2 * (3/5));
 				}
 				else
 				{
 					UseSkill(%shooterClient, %skilltype, True, True, %base1);
-					if(%type == $SpellDamageType)
-						UseSkill(%damagedClient, $SkillSpellResistance, True, True, %base2);
+					// if(%type == $SpellDamageType)
+					// 	UseSkill(%damagedClient, $SkillSpellResistance, True, True, %base2);
 				}
 
-				if(%Backstab)
-					UseSkill(%shooterClient, $SkillBackstabbing, True, True);
-				if(%Bash)
-					UseSkill(%shooterClient, $SkillBashing, True, True);
+				// if(%Backstab)
+				// 	UseSkill(%shooterClient, $SkillBackstabbing, True, True);
+				// if(%Bash)
+				// 	UseSkill(%shooterClient, $SkillBashing, True, True);
 			}
 
 			if(%value)
@@ -797,11 +794,17 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 					// add other skill type hit sounds	
 					if(%skilltype == $SkillSwords)
 						PlaySound(%ahs, %damagedClientPos);
-					else if(%skilltype == $SkillBludgeoning)
+					else if(%skilltype == $SkillAxes)
 						PlaySound(%ahs, %damagedClientPos);
-					else if(%skilltype == $SkillPiercing)
+					else if(%skilltype == $SkillHammers)
 						PlaySound(%ahs, %damagedClientPos);
-					else if(%skilltype == $SkillArchery)
+					else if(%skilltype == $SkillKatanas)
+						PlaySound(%ahs, %damagedClientPos);
+					else if(%skilltype == $SkillBows)
+						PlaySound(%ahs, %damagedClientPos);
+					else if(%skilltype == $SkillStaves)
+						PlaySound(%ahs, %damagedClientPos);			
+					else if(%skilltype == $SkillBows)
 						PlaySound(SoundArrowHit2, %damagedClientPos);
 				}
 

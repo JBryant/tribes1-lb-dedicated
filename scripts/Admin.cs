@@ -398,22 +398,21 @@ function Game::menuRequest(%clientId)
 			if(!IsDead(%clientId))
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "View your stats" , "viewstats");
 
-			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Settings..." , "settings");
-
 			if(!IsDead(%clientId)){
+				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Skill points" , "sp");
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Inventory (wt: "@Belt::GetWeight(%clientid)@")","viewbelt");
-				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Skill points..." , "sp");
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Compass" , "compass");
 			}
 
-			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Party options..." , "partyoptions");
+			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Party options" , "partyoptions");
+			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Settings" , "settings");
 
 			if($sanctionedAdmin[rpg::getname(%clientId)] > 0)
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Admin controls", "admincontrol");
 				
 			// If they have a ranged weapon, we can change this to not use GetAccessoryList in the future
 			if(GetAccessoryList(%clientId, 9, -1) != "")
-				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Ranged weapons..." , "rweapons");
+				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Ranged weapons" , "rweapons");
 		}
 	}
 }
@@ -450,15 +449,15 @@ function processMenuOptions(%clientId, %option)
 
 	else if(%opt == "compass")
 	{
-		Client::buildMenu(%clientId, "Sense heading: "@$playerSkill[%clientId,$SkillSenseHeading], "compass", true);
-		Client::addMenuItem(%clientId, %curItem++ @ "Recall (skill: 0)" , "recall");
-		Client::addMenuItem(%clientId, %curItem++ @ "Nearest town (skill: 3)" , "town");
-		Client::addMenuItem(%clientId, %curItem++ @ "Nearest dungeon (skill: 3)" , "dungeon");
-		Client::addMenuItem(%clientId, %curItem++ @ "Nearest zones list (skill: 20)" , "advcompass");
-		Client::addMenuItem(%clientId, %curItem++ @ "Track player (skill: 15)" , "track player");
-		Client::addMenuItem(%clientId, %curItem++ @ "Track AI (skill: 15)" , "track bot");
-		Client::addMenuItem(%clientId, %curItem++ @ "Track your packs (skill: 0)" , "trackpack own");
-		Client::addMenuItem(%clientId, %curItem++ @ "Track all packs (skill: 85)" , "trackpack all");
+		Client::buildMenu(%clientId, "Sense heading: ", "compass", true);
+		Client::addMenuItem(%clientId, %curItem++ @ "Recall" , "recall");
+		Client::addMenuItem(%clientId, %curItem++ @ "Nearest town" , "town");
+		Client::addMenuItem(%clientId, %curItem++ @ "Nearest dungeon" , "dungeon");
+		Client::addMenuItem(%clientId, %curItem++ @ "Nearest zones list" , "advcompass");
+		Client::addMenuItem(%clientId, %curItem++ @ "Track player" , "track player");
+		Client::addMenuItem(%clientId, %curItem++ @ "Track AI" , "track bot");
+		Client::addMenuItem(%clientId, %curItem++ @ "Track your packs" , "trackpack own");
+		Client::addMenuItem(%clientId, %curItem++ @ "Track all packs" , "trackpack all");
 		return;
 	}
 	else if(%opt == "selspell")

@@ -213,7 +213,7 @@ $spawnIndex[55] = "Doomsayer";
 
 $BotEquipment[Runt] = 		"CLASS Squire LVL 1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300";
 $BotEquipment[Thief] = 		"CLASS Squire LVL 5/50 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100";
-$BotEquipment[Wizard] = 	"CLASS Chemist LVL 9/50 COINS 5/50 LCK 0 CastingBlade 1 Turquoise 1/-500";
+$BotEquipment[Wizard] = 	"CLASS Chemist LVL 9/50 COINS 5/50 LCK 0 CastingBlade 1 PoisonMateriaI 1/-2"; // 1/-500
 $BotEquipment[Raider] = 	"CLASS Squire LVL 11/50 COINS 4/50 LCK 0 ChippedDagger 1 BlackStatue 1/-150 Jade 1/-300";
 
 $BotEquipment[Pup] = 		"CLASS Squire LVL 10/50 COINS 6/50 LCK 0 ChippedDagger 1 CrystalBluePotion 1 Ruby 1/-2000";

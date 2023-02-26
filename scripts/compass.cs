@@ -177,12 +177,9 @@ function processMenucompass(%clientId, %option)
 		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Add current zone to list (1 RP)", "addrecall");
 		return;
 	}
-	if(!SkillCanUse(%clientId, "#compass")){
-		Client::sendMessage(%clientId, $MsgBeige, "You do not have enough Sense Heading skill.");
-		return;
-	}
+
 	%pos = GameBase::getPosition(%clientId);
-	%skill = $playerSkill[%clientId,$SkillSenseHeading];
+	%skill = 1000;
 	if(%opt == "trackpack")
 	{
 		%type = getWord(%option,1);
@@ -310,7 +307,6 @@ function processMenucompass(%clientId, %option)
 	{
 		%d = GetNESW(%pos, %mpos);
 		arrowTowards(%pos, %mpos, %option);
-		//UseSkill(%clientId, $SkillSenseHeading, True, True);
 		Client::sendMessage(%clientId, 0, "The nearest " @ %option @ " is " @ %d @ " of your location.");
 	}
 	else

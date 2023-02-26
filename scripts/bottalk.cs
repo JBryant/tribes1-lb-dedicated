@@ -47,7 +47,7 @@ function NewBotMessage(%client, %closestId, %aimessage){//, %list){
 	%botPos = GameBase::getPosition(%closestId);
 	%closest = Vector::getDistance(%clientPos, %botPos);
 
-	if(%closest > ($maxAIdistVec + ($PlayerSkill[%client, $SkillSpeech] / 50)))
+	if(%closest > $maxAIdistVec)
 	{
 		$state[%closestId, %client] = "";
 		endBotTalkChoice(%client);
@@ -168,7 +168,7 @@ function processbottalk(%clientId,%TrueClientId,%message,%cropped,%w1){
 
 
 
-	if(%closest <= ($maxAIdistVec + ($PlayerSkill[%TrueClientId, $SkillSpeech] / 50)) && Client::getTeam(%TrueClientId) == GameBase::getTeam(%closestId))
+	if(%closest <= $maxAIdistVec && Client::getTeam(%TrueClientId) == GameBase::getTeam(%closestId))
 	{
 
 		//pecho(%aiName @ " " @ %closestId);

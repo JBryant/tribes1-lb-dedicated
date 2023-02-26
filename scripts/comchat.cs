@@ -259,14 +259,12 @@ function internalSay(%clientId, %team, %message, %senderName)
 					}
 				}
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You say, \"" @ %cropped @ "\"");
-				UseSkill(%TrueClientId, $SkillSpeech, True, True);
 	
 				%botTalk = True;
 			}
 			else
 			{
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You lack the necessary skills to use this command.");
-				UseSkill(%TrueClientId, $SkillSpeech, False, True);
 			}
 		}
 	
@@ -289,14 +287,12 @@ function internalSay(%clientId, %team, %message, %senderName)
 					}
 				}
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You shouted, \"" @ %cropped @ "\"");
-				UseSkill(%TrueClientId, $SkillSpeech, True, True);
 	
 				%botTalk = True;
 			}
 			else
 			{
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You lack the necessary skills to use this command.");
-				UseSkill(%TrueClientId, $SkillSpeech, False, True);
 			}
 		}
 
@@ -319,14 +315,12 @@ function internalSay(%clientId, %team, %message, %senderName)
 					}
 				}
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You whisper, \"" @ %cropped @ "\"");
-				UseSkill(%TrueClientId, $SkillSpeech, True, True);
 	
 				%botTalk = True;
 			}
 			else
 			{
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You lack the necessary skills to use this command.");
-				UseSkill(%TrueClientId, $SkillSpeech, False, True);
 			}
 		}
 	
@@ -359,7 +353,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 								Client::sendMessage(%TrueClientId, $MsgBeige, "You tell " @ %n @ ", \"" @ %final @ "\"");
 							%cl.replyTo = %TCsenderName;
 	
-							UseSkill(%TrueClientId, $SkillSpeech, True, True);
 						}
 						else
 							Client::sendMessage(%TrueClientId, $MsgRed, %n @ " has muted you.");
@@ -373,7 +366,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 			else
 			{
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You lack the necessary skills to use this command.");
-				UseSkill(%TrueClientId, $SkillSpeech, False, True);
 			}
 		}
 		if(%w1 == "#r")
@@ -397,8 +389,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 								if(%cl != %TrueClientId)
 									Client::sendMessage(%TrueClientId, $MsgBeige, "You tell " @ %name @ ", \"" @ %cropped @ "\"");
 								%cl.replyTo = %TCsenderName;
-		
-								UseSkill(%TrueClientId, $SkillSpeech, True, True);
 							}
 						}
 						else
@@ -413,7 +403,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 			else
 			{
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You lack the necessary skills to use this command.");
-				UseSkill(%TrueClientId, $SkillSpeech, False, True);
 			}
 			return;
 		}
@@ -435,7 +424,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 					else
 						Client::sendMessage(%TrueClientId, $MsgGreen, "[G] " @ %cropped);
 	
-					UseSkill(%TrueClientId, $SkillSpeech, True, True);
 				}
 				else
 			            Client::sendMessage(%TrueClientId, $MsgRed, "You can't send a Global message when ignoring other Global messages.");
@@ -443,7 +431,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 			else
 			{
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You lack the necessary skills to use this command.");
-				UseSkill(%TrueClientId, $SkillSpeech, False, True);
 			}
 			return;
 		}
@@ -463,12 +450,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 				else
 					Client::sendMessage(%TrueClientId, $MsgGreen, "[ZONE] " @ %cropped);
 	
-				UseSkill(%TrueClientId, $SkillSpeech, True, True);
 			}
 			else
 			{
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You lack the necessary skills to use this command.");
-				UseSkill(%TrueClientId, $SkillSpeech, False, True);
 			}
 			return;
 	      }
@@ -494,12 +479,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 					Client::sendMessage(%TrueClientId, $MsgBeige, string::translate2("[GRP]")@" \"" @ %cropped @ "\"");
 				else
 					Client::sendMessage(%TrueClientId, $MsgBeige, "[GRP] \"" @ %cropped @ "\"");
-				UseSkill(%TrueClientId, $SkillSpeech, True, True);
 			}
 			else
 			{
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You lack the necessary skills to use this command.");
-				UseSkill(%TrueClientId, $SkillSpeech, False, True);
 			}
 			return;
 		}
@@ -516,12 +499,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 				}
 	
 				Client::sendMessage(%TrueClientId, $MsgBeige, "[PRTY] \"" @ %cropped @ "\"");
-				UseSkill(%TrueClientId, $SkillSpeech, True, True);
 			}
 			else
 			{
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You lack the necessary skills to use this command.");
-				UseSkill(%TrueClientId, $SkillSpeech, False, True);
 			}
 			return;
 		}
@@ -823,7 +804,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 					if(%mpos != False)
 					{
 						%d = GetNESW(GameBase::getPosition(%TrueClientId), %mpos);
-						UseSkill(%TrueClientId, $SkillSenseHeading, True, True);
 	
 						Client::sendMessage(%TrueClientId, 0, "The nearest " @ %cropped @ " is " @ %d @ " of here.");
 					}
@@ -833,7 +813,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 				else
 				{
 					Client::sendMessage(%TrueClientId, $MsgWhite, "You can't use your compass because you lack the necessary skills.");
-					UseSkill(%TrueClientId, $SkillSenseHeading, False, True);
 				}
 			}
 	     		return;
@@ -960,22 +939,19 @@ function internalSay(%clientId, %team, %message, %senderName)
 						{
 							%dist = round(Vector::getDistance(%clientIdpos, %idpos));
 	
-							if(Cap($PlayerSkill[%TrueClientId, $SkillSenseHeading] * 7.5, 100, "inf") >= %dist)
+							if(500 >= %dist)
 							{
 								%d = GetNESW(%clientIdpos, %idpos);
 								Client::sendMessage(%TrueClientId, $MsgWhite, "You sense that " @ %cropped @ " is " @ %d @ " of here, " @ %dist @ " meters away.");
-								UseSkill(%TrueClientId, $SkillSenseHeading, True, True);
 							}
 							else
 							{
 								Client::sendMessage(%TrueClientId, $MsgWhite, "You have no idea where " @ %cropped @ " could be.");
-								UseSkill(%TrueClientId, $SkillSenseHeading, False, True);
 							}
 						}
 						else
 						{
 							Client::sendMessage(%TrueClientId, $MsgWhite, "You have no idea where " @ %cropped @ " could be.");
-							UseSkill(%TrueClientId, $SkillSenseHeading, False, True);
 						}
 					}
 					else
@@ -984,7 +960,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 				else
 				{
 					Client::sendMessage(%TrueClientId, $MsgWhite, "You can't track because you lack the necessary skills.");
-					UseSkill(%TrueClientId, $SkillSenseHeading, False, True);
 				}
 			}
 			return;
@@ -1023,22 +998,19 @@ function internalSay(%clientId, %team, %message, %senderName)
 						{
 							%idpos = GameBase::getPosition(%closestId);
 	
-							if(Cap($PlayerSkill[%TrueClientId, $SkillSenseHeading] * 15, 100, "inf") >= %closest)
+							if(500 >= %closest)
 							{
 								%d = GetNESW(%clientIdpos, %idpos);
 								Client::sendMessage(%TrueClientId, $MsgWhite, %cropped @ "'s nearest backpack is " @ %d @ " of here, " @ %closest @ " meters away.");
-								UseSkill(%TrueClientId, $SkillSenseHeading, True, True);
 							}
 							else
 							{
 								Client::sendMessage(%TrueClientId, $MsgWhite, %cropped @ "'s nearest backpack is too far from you to track with your current sense heading skills.");
-								UseSkill(%TrueClientId, $SkillSenseHeading, False, True);
 							}
 						}
 						else
 						{
 							Client::sendMessage(%TrueClientId, $MsgWhite, %cropped @ " doesn't have any dropped backpacks.");
-							UseSkill(%TrueClientId, $SkillSenseHeading, False, True);
 						}
 					}
 					else
@@ -1047,7 +1019,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 				else
 				{
 					Client::sendMessage(%TrueClientId, $MsgWhite, "You can't track a backpack because you lack the necessary skills.");
-					UseSkill(%TrueClientId, $SkillSenseHeading, False, True);
 				}
 			}
 			return;
@@ -1338,24 +1309,24 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
-		if(%w1 == "#bash")
-		{
-			if(!fetchData(%TrueClientId, "blockBash"))
-			{
-				if(SkillCanUse(%TrueClientId, "#bash"))
-				{
-					Client::sendMessage(%TrueClientId, $MsgBeige, "You are ready to bash!");
-					storeData(%TrueClientId, "NextHitBash", True);
-					storeData(%TrueClientId, "blockBash", True);
-				}
-				else
-				{
-					Client::sendMessage(%TrueClientId, $MsgWhite, "You can't bash because you lack the necessary skills.");
-					UseSkill(%TrueClientId, $SkillBashing, False, True);
-				}
-			}
-			return;
-		}
+		// if(%w1 == "#bash")
+		// {
+		// 	if(!fetchData(%TrueClientId, "blockBash"))
+		// 	{
+		// 		if(SkillCanUse(%TrueClientId, "#bash"))
+		// 		{
+		// 			Client::sendMessage(%TrueClientId, $MsgBeige, "You are ready to bash!");
+		// 			storeData(%TrueClientId, "NextHitBash", True);
+		// 			storeData(%TrueClientId, "blockBash", True);
+		// 		}
+		// 		else
+		// 		{
+		// 			Client::sendMessage(%TrueClientId, $MsgWhite, "You can't bash because you lack the necessary skills.");
+		// 			UseSkill(%TrueClientId, $SkillBashing, False, True);
+		// 		}
+		// 	}
+		// 	return;
+		// }
 		if(%w1 == "#shove")
 		{
 			%time = getIntegerTime(true) >> 5;
@@ -1432,7 +1403,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 			else
 			{
 				Client::sendMessage(%TrueClientId, $MsgWhite, "You can't zonelist because you lack the necessary skills.");
-				UseSkill(%TrueClientId, $SkillSenseHeading, False, True);
 			}
 			return;
 		}
@@ -1611,7 +1581,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 						%mpos = Zone::getMarker(%obj);
 	
 						%d = GetNESW(GameBase::getPosition(%TrueClientId), %mpos);
-						UseSkill(%TrueClientId, $SkillSenseHeading, True, True);
 	
 						Client::sendMessage(%TrueClientId, 0, Zone::getDesc(%obj) @ " is " @ %d @ " of here.");
 					}
@@ -1621,7 +1590,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 				else
 				{
 					Client::sendMessage(%TrueClientId, $MsgWhite, "You can't use #advcompass because you lack the necessary skills.");
-					UseSkill(%TrueClientId, $SkillSenseHeading, False, True);
 				}
 			}
 			return;

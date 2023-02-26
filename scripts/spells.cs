@@ -58,7 +58,7 @@ $Spell::endSound[1] = ExplodeLM;
 $Spell::groupListCheck[1] = False;
 $Spell::refVal[1] = 55;
 $Spell::graceDistance[1] = 2;
-$SkillType[firebomb] = $SkillOffensiveCasting;
+$SkillType[firebomb] = $SkillBlackMagick;
 
 $Spell::keyword[2] = "teleport";
 $Spell::index[teleport] = 2;
@@ -72,7 +72,7 @@ $Spell::endSound[2] = ActivateCH;
 $Spell::groupListCheck[2] = False;
 $Spell::refVal[2] = 0;
 $Spell::graceDistance[2] = 2;
-$SkillType[teleport] = $SkillNeutralCasting;
+$SkillType[teleport] = $SkillTimeMagick;
 $spell::menu[2] = True;
 
 $Spell::keyword[3] = "transport";
@@ -87,7 +87,7 @@ $Spell::endSound[3] = ActivateCH;
 $Spell::groupListCheck[3] = False;
 $Spell::refVal[3] = 0;
 $Spell::graceDistance[3] = 2;
-$SkillType[transport] = $SkillNeutralCasting;
+$SkillType[transport] = $SkillTimeMagick;
 
 $Spell::keyword[4] = "advtransport";
 $Spell::index[advtransport] = 4;
@@ -102,7 +102,7 @@ $Spell::endSound[4] = ActivateCH;
 $Spell::groupListCheck[4] = True;
 $Spell::refVal[4] = 0;
 $Spell::graceDistance[4] = 2;
-$SkillType[advtransport] = $SkillNeutralCasting;
+$SkillType[advtransport] = $SkillTimeMagick;
 
 $Spell::keyword[5] = "cloud";
 $Spell::index[cloud] = 5;
@@ -119,7 +119,7 @@ $Spell::endSound[5] = ExplodeLM;
 $Spell::groupListCheck[5] = False;
 $Spell::refVal[5] = 85;
 $Spell::graceDistance[5] = 2;
-$SkillType[cloud] = $SkillOffensiveCasting;
+$SkillType[cloud] = $SkillBlackMagick;
 
 $Spell::keyword[6] = "melt";
 $Spell::index[melt] = 6;
@@ -136,7 +136,7 @@ $Spell::endSound[6] = ExplodeLM;
 $Spell::groupListCheck[6] = False;
 $Spell::refVal[6] = 140;
 $Spell::graceDistance[6] = 2;
-$SkillType[melt] = $SkillOffensiveCasting;
+$SkillType[melt] = $SkillBlackMagick;
 
 $Spell::keyword[7] = "powercloud";
 $Spell::index[powercloud] = 7;
@@ -153,7 +153,7 @@ $Spell::endSound[7] = ExplodeLM;
 $Spell::groupListCheck[7] = False;
 $Spell::refVal[7] = 210;
 $Spell::graceDistance[7] = 2;
-$SkillType[powercloud] = $SkillOffensiveCasting;
+$SkillType[powercloud] = $SkillBlackMagick;
 
 $Spell::keyword[8] = "heal";
 $Spell::index[heal] = 8;
@@ -168,7 +168,7 @@ $Spell::endSound[8] = ActivateAR;
 $Spell::groupListCheck[8] = False;
 $Spell::refVal[8] = -6;
 $Spell::graceDistance[8] = 2;
-$SkillType[heal] = $SkillDefensiveCasting;
+$SkillType[heal] = $SkillWhiteMagick;
 
 $Spell::keyword[9] = "advheal1";
 $Spell::index[advheal1] = 9;
@@ -184,7 +184,7 @@ $Spell::endSound[9] = ActivateAR;
 $Spell::groupListCheck[9] = False;
 $Spell::refVal[9] = -10;
 $Spell::graceDistance[9] = 2;
-$SkillType[advheal1] = $SkillDefensiveCasting;
+$SkillType[advheal1] = $SkillWhiteMagick;
 
 $Spell::keyword[10] = "advheal2";
 $Spell::index[advheal2] = 10;
@@ -200,7 +200,7 @@ $Spell::endSound[10] = ActivateAR;
 $Spell::groupListCheck[10] = False;
 $Spell::refVal[10] = -15;
 $Spell::graceDistance[10] = 2;
-$SkillType[advheal2] = $SkillDefensiveCasting;
+$SkillType[advheal2] = $SkillWhiteMagick;
 
 $Spell::keyword[11] = "godlyheal";
 $Spell::index[godlyheal] = 11;
@@ -216,7 +216,7 @@ $Spell::endSound[11] = ActivateAR;
 $Spell::groupListCheck[11] = False;
 $Spell::refVal[11] = -80;
 $Spell::graceDistance[11] = 2;
-$SkillType[godlyheal] = $SkillDefensiveCasting;
+$SkillType[godlyheal] = $SkillWhiteMagick;
 
 $Spell::keyword[12] = "beam";
 $Spell::index[beam] = 12;
@@ -232,7 +232,7 @@ $Spell::endSound[12] = HitBF;
 $Spell::groupListCheck[12] = False;
 $Spell::refVal[12] = 180;
 $Spell::graceDistance[12] = 5;
-$SkillType[beam] = $SkillOffensiveCasting;
+$SkillType[beam] = $SkillBlackMagick;
 
 $Spell::keyword[13] = "thorn";
 $Spell::index[thorn] = 13;
@@ -249,7 +249,7 @@ $Spell::endSound[13] = DeflectAS;
 $Spell::groupListCheck[13] = False;
 $Spell::refVal[13] = 20;
 $Spell::graceDistance[13] = 5;
-$SkillType[thorn] = $SkillOffensiveCasting;
+$SkillType[thorn] = $SkillBlackMagick;
 
 $Spell::keyword[14] = "fireball";
 $Spell::index[fireball] = 14;
@@ -266,7 +266,7 @@ $Spell::endSound[14] = LaunchFB;
 $Spell::groupListCheck[14] = False;
 $Spell::refVal[14] = 35;
 $Spell::graceDistance[14] = 2;
-$SkillType[fireball] = $SkillOffensiveCasting;
+$SkillType[fireball] = $SkillBlackMagick;
 
 $Spell::keyword[15] = "icespike";
 $Spell::index[icespike] = 15;
@@ -283,7 +283,7 @@ $Spell::endSound[15] = HitPawnDT;
 $Spell::groupListCheck[15] = False;
 $Spell::refVal[15] = 28;
 $Spell::graceDistance[15] = 5;
-$SkillType[icespike] = $SkillOffensiveCasting;
+$SkillType[icespike] = $SkillBlackMagick;
 
 $Spell::keyword[16] = "icestorm";
 $Spell::index[icestorm] = 16;
@@ -300,7 +300,7 @@ $Spell::endSound[16] = Reflected;
 $Spell::groupListCheck[16] = False;
 $Spell::refVal[16] = 45;
 $Spell::graceDistance[16] = 2;
-$SkillType[icestorm] = $SkillOffensiveCasting;
+$SkillType[icestorm] = $SkillBlackMagick;
 
 $Spell::keyword[17] = "ironfist";
 $Spell::index[ironfist] = 17;
@@ -317,7 +317,7 @@ $Spell::endSound[17] = NoSound;
 $Spell::groupListCheck[17] = False;
 $Spell::refVal[17] = 128;
 $Spell::graceDistance[17] = 3;
-$SkillType[ironfist] = $SkillOffensiveCasting;
+$SkillType[ironfist] = $SkillBlackMagick;
 
 $Spell::keyword[18] = "hellstorm";
 $Spell::index[hellstorm] = 18;
@@ -334,7 +334,7 @@ $Spell::endSound[18] = LaunchET;
 $Spell::groupListCheck[18] = False;
 $Spell::refVal[18] = 265;
 $Spell::graceDistance[18] = 2;
-$SkillType[hellstorm] = $SkillOffensiveCasting;
+$SkillType[hellstorm] = $SkillBlackMagick;
 
 $Spell::keyword[19] = "dimensionrift";
 $Spell::index[dimensionrift] = 19;
@@ -351,7 +351,7 @@ $Spell::endSound[19] = Explode3FW;
 $Spell::groupListCheck[19] = False;
 $Spell::refVal[19] = 320;
 $Spell::graceDistance[19] = 2;
-$SkillType[dimensionrift] = $SkillOffensiveCasting;
+$SkillType[dimensionrift] = $SkillBlackMagick;
 
 $Spell::keyword[20] = "advheal3";
 $Spell::index[advheal3] = 20;
@@ -367,7 +367,7 @@ $Spell::endSound[20] = ActivateAR;
 $Spell::groupListCheck[20] = False;
 $Spell::refVal[20] = -25;
 $Spell::graceDistance[20] = 2;
-$SkillType[advheal3] = $SkillDefensiveCasting;
+$SkillType[advheal3] = $SkillWhiteMagick;
 
 $Spell::keyword[21] = "remort";
 $Spell::index[remort] = 21;
@@ -382,7 +382,7 @@ $Spell::endSound[21] = RespawnC;
 $Spell::groupListCheck[21] = False;
 $Spell::refVal[21] = 0;
 $Spell::graceDistance[21] = 2;
-$SkillType[remort] = $SkillNeutralCasting;
+$SkillType[remort] = $SkillTimeMagick;
 
 $Spell::keyword[22] = "fullheal";
 $Spell::index[fullheal] = 22;
@@ -397,7 +397,7 @@ $Spell::endSound[22] = PlaceSeal;
 $Spell::groupListCheck[22] = False;
 $Spell::refVal[22] = -9998;
 $Spell::graceDistance[22] = 2;
-$SkillType[fullheal] = $SkillDefensiveCasting;
+$SkillType[fullheal] = $SkillWhiteMagick;
 
 $Spell::keyword[23] = "massheal";
 $Spell::index[massheal] = 23;
@@ -413,7 +413,7 @@ $Spell::endSound[23] = ActivateAR;
 $Spell::groupListCheck[23] = False;
 $Spell::refVal[23] = -30;
 $Spell::graceDistance[23] = 2;
-$SkillType[massheal] = $SkillDefensiveCasting;
+$SkillType[massheal] = $SkillWhiteMagick;
 
 $Spell::keyword[24] = "massfullheal";
 $Spell::index[massfullheal] = 24;
@@ -429,7 +429,7 @@ $Spell::endSound[24] = PlaceSeal;
 $Spell::groupListCheck[24] = False;
 $Spell::refVal[24] = -9999;
 $Spell::graceDistance[24] = 2;
-$SkillType[massfullheal] = $SkillDefensiveCasting;
+$SkillType[massfullheal] = $SkillWhiteMagick;
 
 $Spell::keyword[25] = "shield";
 $Spell::index[shield] = 25;
@@ -445,7 +445,7 @@ $Spell::endSound[25] = ActivateTD;
 $Spell::groupListCheck[25] = False;
 $Spell::refVal[25] = -10;
 $Spell::graceDistance[25] = 2;
-$SkillType[shield] = $SkillDefensiveCasting;
+$SkillType[shield] = $SkillWhiteMagick;
 
 $Spell::keyword[26] = "advshield1";
 $Spell::index[advshield1] = 26;
@@ -462,7 +462,7 @@ $Spell::endSound[26] = ActivateTD;
 $Spell::groupListCheck[26] = False;
 $Spell::refVal[26] = -11;
 $Spell::graceDistance[26] = 2;
-$SkillType[advshield1] = $SkillDefensiveCasting;
+$SkillType[advshield1] = $SkillWhiteMagick;
 
 $Spell::keyword[27] = "advshield2";
 $Spell::index[advshield2] = 27;
@@ -479,7 +479,7 @@ $Spell::endSound[27] = ActivateTD;
 $Spell::groupListCheck[27] = False;
 $Spell::refVal[27] = -12;
 $Spell::graceDistance[27] = 2;
-$SkillType[advshield2] = $SkillDefensiveCasting;
+$SkillType[advshield2] = $SkillWhiteMagick;
 
 $Spell::keyword[28] = "advshield3";
 $Spell::index[advshield3] = 28;
@@ -496,7 +496,7 @@ $Spell::endSound[28] = ActivateTD;
 $Spell::groupListCheck[28] = False;
 $Spell::refVal[28] = -13;
 $Spell::graceDistance[28] = 2;
-$SkillType[advshield3] = $SkillDefensiveCasting;
+$SkillType[advshield3] = $SkillWhiteMagick;
 
 $Spell::keyword[29] = "advshield4";
 $Spell::index[advshield4] = 29;
@@ -513,7 +513,7 @@ $Spell::endSound[29] = ActivateTD;
 $Spell::groupListCheck[29] = False;
 $Spell::refVal[29] = -14;
 $Spell::graceDistance[29] = 2;
-$SkillType[advshield4] = $SkillDefensiveCasting;
+$SkillType[advshield4] = $SkillWhiteMagick;
 
 $Spell::keyword[30] = "advshield5";
 $Spell::index[advshield5] = 30;
@@ -530,7 +530,7 @@ $Spell::endSound[30] = ActivateTD;
 $Spell::groupListCheck[30] = False;
 $Spell::refVal[30] = -15;
 $Spell::graceDistance[30] = 2;
-$SkillType[advshield5] = $SkillDefensiveCasting;
+$SkillType[advshield5] = $SkillWhiteMagick;
 
 $Spell::keyword[31] = "massshield";
 $Spell::index[massshield] = 31;
@@ -547,7 +547,7 @@ $Spell::endSound[31] = ActivateTD;
 $Spell::groupListCheck[31] = False;
 $Spell::refVal[31] = -16;
 $Spell::graceDistance[31] = 2;
-$SkillType[massshield] = $SkillDefensiveCasting;
+$SkillType[massshield] = $SkillWhiteMagick;
 
 $Spell::keyword[32] = "mimic";
 $Spell::index[mimic] = 32;
@@ -563,7 +563,7 @@ $Spell::endSound[32] = AbsorbABS;
 $Spell::groupListCheck[32] = False;
 $Spell::refVal[32] = 1;
 $Spell::graceDistance[32] = 2;
-$SkillType[mimic] = $SkillNeutralCasting;
+$SkillType[mimic] = $SkillTimeMagick;
 
 $Spell::keyword[33] = "masstransport";
 $Spell::index[masstransport] = 33;
@@ -578,7 +578,7 @@ $Spell::endSound[33] = ActivateCH;
 $Spell::groupListCheck[33] = False;
 $Spell::refVal[33] = 0;
 $Spell::graceDistance[33] = 2;
-$SkillType[masstransport] = $SkillNeutralCasting;
+$SkillType[masstransport] = $SkillTimeMagick;
 
 $Spell::keyword[34] = "advheal4";
 $Spell::index[advheal4] = 34;
@@ -594,7 +594,7 @@ $Spell::endSound[34] = ActivateAR;
 $Spell::groupListCheck[34] = False;
 $Spell::refVal[34] = -35;
 $Spell::graceDistance[34] = 2;
-$SkillType[advheal4] = $SkillDefensiveCasting;
+$SkillType[advheal4] = $SkillWhiteMagick;
 
 $Spell::keyword[35] = "advheal5";
 $Spell::index[advheal5] = 35;
@@ -610,7 +610,7 @@ $Spell::endSound[35] = ActivateAR;
 $Spell::groupListCheck[35] = False;
 $Spell::refVal[35] = -50;
 $Spell::graceDistance[35] = 2;
-$SkillType[advheal5] = $SkillDefensiveCasting;
+$SkillType[advheal5] = $SkillWhiteMagick;
 
 $Spell::keyword[36] = "advheal6";
 $Spell::index[advheal6] = 36;
@@ -626,7 +626,24 @@ $Spell::endSound[36] = ActivateAR;
 $Spell::groupListCheck[36] = False;
 $Spell::refVal[36] = -60;
 $Spell::graceDistance[36] = 2;
-$SkillType[advheal6] = $SkillDefensiveCasting;
+$SkillType[advheal6] = $SkillWhiteMagick;
+
+$Spell::keyword[37] = "shadowblade";
+$Spell::index[dimensionrift] = 37;
+$Spell::name[37] = "Shadow Blade";
+$Spell::description[37] = "Casts Shadow Blade.";
+$Spell::delay[37] = 3;
+$Spell::recoveryTime[37] = 3;
+$Spell::radius[37] = 30;
+$Spell::damageValue[37] = "320";
+$Spell::LOSrange[37] = 999; // 80
+$Spell::manaCost[37] = 1;
+$Spell::startSound[37] = PlaceSeal;
+$Spell::endSound[37] = Explode3FW;
+$Spell::groupListCheck[37] = False;
+$Spell::refVal[37] = 320;
+$Spell::graceDistance[37] = 2;
+$SkillType[shadowblade] = $SkillBlackMagick;
 
 //----------------------------------------------------------------------------------------------------------------
 
@@ -678,7 +695,18 @@ function BeginCastSpell(%clientId, %keyword)
 					//recovery time is never smaller than half of the original and never bigger than the original.
 					%recovTime = Cap(%a + %c, %a, %rt);
 					storeData(%clientId, "SpellRecovTime", %recovTime);
-					if($spell::menu[%i]){						eval("casting::"@$spell::keyword[%i]@"(" @ %clientId @ ", " @ %i @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");");					}					else if($Spell::delay[%i] > 0){						if($Spell::Indicator[%i]){							spellIndicatorLoop(%clientId, $Spell::LOSrange[%i]);						}						Schedule::Add("DoCastSpell(" @ %clientId @ ", " @ %i @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");", $Spell::delay[%i], "spell"@%clientId);					}					else						DoCastSpell(%clientId, %i, GameBase::getPosition(%clientId), %losobj, %w2);
+
+					if($spell::menu[%i]){
+						eval("casting::"@$spell::keyword[%i]@"(" @ %clientId @ ", " @ %i @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");");
+					}
+					else if($Spell::delay[%i] > 0){
+						if($Spell::Indicator[%i]){
+							spellIndicatorLoop(%clientId, $Spell::LOSrange[%i]);
+						}
+						Schedule::Add("DoCastSpell(" @ %clientId @ ", " @ %i @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");", $Spell::delay[%i], "spell"@%clientId);
+					}
+					else
+						DoCastSpell(%clientId, %i, GameBase::getPosition(%clientId), %losobj, %w2);
 					//schedule("DoCastSpell(" @ %clientId @ ", " @ %i @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %lospos @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");", $Spell::delay[%i]);
 					//schedule("%retval=DoCastSpell(" @ %clientId @ ", " @ %i @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %lospos @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\"); if(%retval){refreshMANA(" @ %clientId @ ", " @ %tempManaCost @ ");}", $Spell::delay[%i]);
 		
@@ -704,7 +732,15 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 	dbecho($dbechoMode, "DoCastSpell(" @ %clientId @ ", " @ %index @ ", " @ %oldpos @ ", " @ %castPos @ ", " @ %castObj @ ", " @ %w2 @ ")");
 
 	%player = Client::getOwnedObject(%clientId);
-	if($Spell::graceDistance[%index] == "")		$Spell::graceDistance[%index] = 0.25;	$los::position = "";	if(GameBase::getLOSinfo(%player, $Spell::LOSrange[%index])){		%castPos = $los::position;		if(%castObj < 1)			%castObj = $los::object;	}
+
+	if($Spell::graceDistance[%index] == "")
+		$Spell::graceDistance[%index] = 0.25;
+	$los::position = "";
+	if(GameBase::getLOSinfo(%player, $Spell::LOSrange[%index])){
+		%castPos = $los::position;
+		if(%castObj < 1)
+			%castObj = $los::object;
+	}
 	if(Vector::getDistance(%oldpos, GameBase::getPosition(%clientId)) > $Spell::graceDistance[%index])
 	{
 		Client::sendMessage(%clientId, $MsgBeige, "Your casting was interrupted.");
@@ -778,8 +814,29 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 
 			//%castPos = SetOnGround(%clientId, 500);
 
-			%returnFlag = True;			if($Zone::ForceTeleport[%zoneId]){				%castPos = TeleportToZone(%clientId, %desc, False, True);				if(%castPos == False){					Client::sendMessage(%id, $MsgBeige, "The zone's there, but you can't reach it.");					%returnFlag = False;					%castPos = %originPos;				}			}			else {				%mpos = Zone::getMarker(%zoneId);
-				%zid = $Zone::zoneID[%zoneId];				%sizex = $Zone::Length[%zid];				%sizey = $Zone::Width[%zid];				%castPos = findGroundPos(%mpos, %sizex*0.6, %sizey*0.6);				if(%castPos != False)					GameBase::setPosition(%clientId, %castPos);				else{					Client::sendMessage(%id, $MsgBeige, "The zone's there, but you can't reach it.");					%returnFlag = False;					%castPos = %originPos;				}			}
+			%returnFlag = True;
+			if($Zone::ForceTeleport[%zoneId]){
+				%castPos = TeleportToZone(%clientId, %desc, False, True);
+				if(%castPos == False){
+					Client::sendMessage(%id, $MsgBeige, "The zone's there, but you can't reach it.");
+					%returnFlag = False;
+					%castPos = %originPos;
+				}
+			}
+			else {
+				%mpos = Zone::getMarker(%zoneId);
+				%zid = $Zone::zoneID[%zoneId];
+				%sizex = $Zone::Length[%zid];
+				%sizey = $Zone::Width[%zid];
+				%castPos = findGroundPos(%mpos, %sizex*0.6, %sizey*0.6);
+				if(%castPos != False)
+					GameBase::setPosition(%clientId, %castPos);
+				else{
+					Client::sendMessage(%id, $MsgBeige, "The zone's there, but you can't reach it.");
+					%returnFlag = False;
+					%castPos = %originPos;
+				}
+			}
 		}
 		else
 		{
@@ -1253,7 +1310,7 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 			if(getObjectType(%castObj) == "Player")
 			{
 				%skilltype = $SkillType[$Spell::keyword[%index]];
-				%troll = fetchData(%id, "LVL") + floor(getRandom() * ($PlayerSkill[%id, %skilltype] + ($PlayerSkill[%id, $SkillSpellResistance] * (1/2)) ));
+				%troll = fetchData(%id, "LVL") + floor(getRandom() * $PlayerSkill[%id, %skilltype]);
 				%yroll = fetchData(%clientId, "LVL") + floor(getRandom() * $PlayerSkill[%clientId, %skilltype]);
 
 				if(%yroll > %troll)
@@ -1323,6 +1380,84 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 			%returnFlag = False;
 		}
 	}
+	if(%index == 37)
+	{
+		// shadow blade
+		if(%castPos != "")	{
+			%xPos = getWord(%castPos, 0);
+			%yPos = getWord(%castPos, 1);
+			%zPos = getWord(%castPos, 2) + 350;
+
+			%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+
+			// %sword = newObject("", "StaticShape", Masamune, true);
+			// addToSet("MissionCleanup", %sword);
+			// GameBase::setPosition(%sword, %castPos);
+			// GameBase::setRotation(%sword, );
+
+			%sword = newObject("", InteriorShape, "masamunefinal.dis");
+			gamebase::setPosition(%sword, %newPos);
+			// gamebase::setRotation(%sword, vector::getrotation($los::normal));
+			addToSet("MissionCleanup", %sword);
+			schedule("Item::Pop(" @ %sword @ ");", 10, %sword);
+
+			%minrad = 0;
+			%maxrad = 4;
+
+			// blue lights
+			// for(%i = 0; %i <= 10; %i++)
+			// {
+			// 	%tempPos = RandomPositionXY(%minrad, %maxrad);
+
+			// 	%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
+			// 	%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
+			// 	%zPos = GetWord(%castPos, 2) + (%i / 4);
+		
+			// 	%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+
+			// 	schedule("CreateAndDetBomb(" @ %clientId @ ", \"Bomb7\", \"" @ %newPos @ "\", False, " @ %index @ ");", %i / 20, %player);
+			// }
+
+			// scatter red lights
+			for(%i = 0; %i <= 40; %i++)
+			{
+				%tempPos = RandomPositionXY(%minrad, %maxrad);
+
+				%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
+				%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
+				%zPos = GetWord(%castPos, 2) + %i;
+		
+				%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+
+				schedule("CreateAndDetBomb(" @ %clientId @ ", \"Bomb8\", \"" @ %newPos @ "\", False, " @ %index @ ");", %i / 20, %player);
+			}
+
+
+			%xPos = getWord(%castPos, 0);
+			%yPos = getWord(%castPos, 1);
+			%zPos = getWord(%castPos, 2) + 350;
+
+			for(%i = 1; %i <= 30; %i++) {
+				%t = %i * 10;
+				%newPos = %xPos @ " " @ %yPos @ " " @ %zPos - %t;
+				schedule("gamebase::setPosition(" @ %sword @ ", \"" @ %newPos @ "\");", ((%i / 100) + 2), %player);
+			}
+
+			schedule("CreateAndDetBomb(" @ %clientId @ ", \"Bomb5\", \"" @ %castPos @ "\", False, " @ %index @ ");", 2.3, %player);
+			schedule("CreateAndDetBomb(" @ %clientId @ ", \"Bomb6\", \"" @ %castPos @ "\", False, " @ %index @ ");", 2.35, %player);
+			schedule("CreateAndDetBomb(" @ %clientId @ ", \"Bomb14\", \"" @ %castPos @ "\", True, " @ %index @ ");", 2.4, %player);
+
+			%overrideEndSound = True;
+			%returnFlag = True;
+		}
+		else
+		{
+			Client::sendMessage(%clientId, $MsgBeige, "Could not find a target.");
+			%returnFlag = False;
+		}
+	}
+
+
 	return EndCast(%clientid,%overrideEndSound,%extradelay,%index,%castpos,%returnflag);
 
 //	Player::setAnimation(%clientId, 39);
@@ -1342,7 +1477,7 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 //	{
 //		storeData(%clientId, "SpellCastStep", 2);
 //
-//		if(%skilltype == $SkillNeutralCasting || %skilltype == $SkillDefensiveCasting)
+//		if(%skilltype == $SkillTimeMagick || %skilltype == $SkillWhiteMagick)
 //			UseSkill(%clientId, %skilltype, True, True);
 //		UseSkill(%clientId, $SkillEnergy, True, True);
 //
@@ -1359,8 +1494,50 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 //	}
 }
 
-function EndCast(%clientid,%overrideEndSound,%extradelay,%index,%castpos,%returnflag){	Player::setAnimation(%clientId, 39);	if(!%overrideEndSound)	{		if(%extraDelay == "")
-			playSound($Spell::endSound[%index], %castPos);		else			schedule("playSound(" @ $Spell::endSound[%index] @ ", \"" @ %castPos @ "\");", %extraDelay);	}		storeData(%clientId, "SpellCastStep", 2);	//==================================================================	%recovTime = fetchData(%clientId, "SpellRecovTime");	%skilltype = $SkillType[$Spell::keyword[%index]];	if(%returnFlag == True)	{		if(%skilltype == $SkillNeutralCasting || %skilltype == $SkillDefensiveCasting)			UseSkill(%clientId, %skilltype, True, True);		UseSkill(%clientId, $SkillEnergy, True, True);		%tempManaCost2 = $Spell::manaCost[%index] / 2;		%tempManaCost = floor($Spell::manaCost[%index] / 2);		//pecho(%tempManaCost2 @ " " @%tempManaCost);		if(%tempManaCost2 != %tempManaCost)			%tempManaCost += 1;		refreshMANA(%clientId, %tempManaCost);	}	else if(%returnFlag == False)	{		UseSkill(%clientId, %skilltype, False, True);		UseSkill(%clientId, $SkillEnergy, False, True);		%recovTime = %recovTime * 0.5;	}	if(%clientId.repack > 32){		remoteEval(%clientId, "rpgbarhud", %recovTime, 4, 2, "||");		schedule("storeData(" @ %clientId @ ", \"SpellCastStep\", \"\");", %recovTime, %clientId);	}	else		schedule("storeData(" @ %clientId @ ", \"SpellCastStep\", \"\");sendDoneRecovMsg(" @ %clientId @ ");", %recovTime);	return %returnFlag;}
+function EndCast(%clientid,%overrideEndSound,%extradelay,%index,%castpos,%returnflag)
+{
+	Player::setAnimation(%clientId, 39);
+
+	if(!%overrideEndSound)
+	{
+		if(%extraDelay == "")
+			playSound($Spell::endSound[%index], %castPos);
+		else
+			schedule("playSound(" @ $Spell::endSound[%index] @ ", \"" @ %castPos @ "\");", %extraDelay);
+	}
+	
+	storeData(%clientId, "SpellCastStep", 2);
+
+	//==================================================================
+	%recovTime = fetchData(%clientId, "SpellRecovTime");
+
+	%skilltype = $SkillType[$Spell::keyword[%index]];
+	if(%returnFlag == True)
+	{
+		if(%skilltype == $SkillTimeMagick || %skilltype == $SkillWhiteMagick)
+			UseSkill(%clientId, %skilltype, True, True);
+		UseSkill(%clientId, $SkillEnergy, True, True);
+		%tempManaCost2 = $Spell::manaCost[%index] / 2;
+		%tempManaCost = floor($Spell::manaCost[%index] / 2);
+		//pecho(%tempManaCost2 @ " " @%tempManaCost);
+		if(%tempManaCost2 != %tempManaCost)
+			%tempManaCost += 1;
+		refreshMANA(%clientId, %tempManaCost);
+	}
+	else if(%returnFlag == False)
+	{
+		UseSkill(%clientId, %skilltype, False, True);
+		UseSkill(%clientId, $SkillEnergy, False, True);
+		%recovTime = %recovTime * 0.5;
+	}
+	if(%clientId.repack > 32){
+		remoteEval(%clientId, "rpgbarhud", %recovTime, 4, 2, "||");
+		schedule("storeData(" @ %clientId @ ", \"SpellCastStep\", \"\");", %recovTime, %clientId);
+	}
+	else
+		schedule("storeData(" @ %clientId @ ", \"SpellCastStep\", \"\");sendDoneRecovMsg(" @ %clientId @ ");", %recovTime);
+	return %returnFlag;
+}
 
 function sendDoneRecovMsg(%clientId)
 {
@@ -1625,6 +1802,56 @@ function SpellCanCastNow(%clientId, %keyword)
 		}
 	}
 	return False;
-}
-function casting::teleport(%clientId, %index, %oldpos, %castObj, %w2){	%zoneId = GetNearestZone(%clientId, %w2, 3);	if(%zoneId != False)	{		Schedule::Add("DoCastSpell(" @ %clientId @ ", " @ %index @ ", \"" @ %oldpos @ "\", \"" @ %castObj @ "\", \"" @ %w2 @ "\");", $Spell::delay[%index], "spell"@%clientId);	}	else	{		disableOverrides(%clientId);		%clientId.overrideKeybinds = 2;		%clientId.keyOverride = "casting::teleportmenu_input";		%clientId.tpmenutype = "";		%clientId.castingmenuindex = %index;		casting::teleportmenu(%clientid);	}}
-function casting::teleportmenu(%clientId){	%msg = "<jc>Teleport to nearest:";	%msg = %msg @ "\n\n<f2>1:<f0> Town\n<f2>2:<f0> Dungeon";	%msg = %msg @ "\n\n<f1>0:<f0> Cancel";	rpg::longPrint(%clientId,%msg,1,0.6);	schedule::add("casting::teleportmenu("@%clientId@");",0.3,"transportmenu"@%clientId, %clientId);//should override other transport menu so you don't get both}function casting::teleportmenu_input(%clientId, %key){	%index = floor(%clientId.castingmenuindex);	if(%key == 0){		disableOverrides(%clientId);		return;	}	else{		if(%key == 1){			%clientId.tpmenutype = "town";			%chosen = True;		}		else if(%key == 2){			%clientId.tpmenutype = "dungeon";			%chosen = True;		}		if(%chosen){			Schedule::Add("DoCastSpell(" @ %clientId @ ", " @ %index @ ", \"" @ GameBase::getPosition(%clientId) @ "\", 0, \"" @ %clientId.tpmenutype @ "\");", $Spell::delay[%index], "spell"@%clientId);			%clientId.overrideKeybinds = 1;			disableOverrides(%clientId);			%chosen = True;		}	}	if(!%chosen)		client::sendmessage(%clientId, $msgRed,"That isn't on the menu.");}
+}
+
+function casting::teleport(%clientId, %index, %oldpos, %castObj, %w2)
+{
+	%zoneId = GetNearestZone(%clientId, %w2, 3);
+	if(%zoneId != False)
+	{
+		Schedule::Add("DoCastSpell(" @ %clientId @ ", " @ %index @ ", \"" @ %oldpos @ "\", \"" @ %castObj @ "\", \"" @ %w2 @ "\");", $Spell::delay[%index], "spell"@%clientId);
+	}
+	else
+	{
+		disableOverrides(%clientId);
+		%clientId.overrideKeybinds = 2;
+		%clientId.keyOverride = "casting::teleportmenu_input";
+		%clientId.tpmenutype = "";
+		%clientId.castingmenuindex = %index;
+		casting::teleportmenu(%clientid);
+	}
+}
+
+function casting::teleportmenu(%clientId){
+	%msg = "<jc>Teleport to nearest:";
+	%msg = %msg @ "\n\n<f2>1:<f0> Town\n<f2>2:<f0> Dungeon";
+	%msg = %msg @ "\n\n<f1>0:<f0> Cancel";
+	rpg::longPrint(%clientId,%msg,1,0.6);
+	schedule::add("casting::teleportmenu("@%clientId@");",0.3,"transportmenu"@%clientId, %clientId);//should override other transport menu so you don't get both
+}
+
+function casting::teleportmenu_input(%clientId, %key){
+	%index = floor(%clientId.castingmenuindex);
+	if(%key == 0){
+		disableOverrides(%clientId);
+		return;
+	}
+	else{
+		if(%key == 1){
+			%clientId.tpmenutype = "town";
+			%chosen = True;
+		}
+		else if(%key == 2){
+			%clientId.tpmenutype = "dungeon";
+			%chosen = True;
+		}
+		if(%chosen){
+			Schedule::Add("DoCastSpell(" @ %clientId @ ", " @ %index @ ", \"" @ GameBase::getPosition(%clientId) @ "\", 0, \"" @ %clientId.tpmenutype @ "\");", $Spell::delay[%index], "spell"@%clientId);
+			%clientId.overrideKeybinds = 1;
+			disableOverrides(%clientId);
+			%chosen = True;
+		}
+	}
+	if(!%chosen)
+		client::sendmessage(%clientId, $msgRed,"That isn't on the menu.");
+}

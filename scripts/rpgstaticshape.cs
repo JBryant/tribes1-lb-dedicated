@@ -781,6 +781,7 @@ StaticShapeData StaticDoorForceField
 	isTranslucent = true;
    	description = "Door Force Field";
 };
+
 function StaticDoorForceField::onCollision(%this, %object)
 {
 	%owner = $owner[%this];

@@ -385,17 +385,19 @@ function UpdateZone(%object)
 		//perhaps leave scent
 		if(!fetchData(%clientId, "invisible"))
 		{
-			if(OddsAre(floor($PlayerSkill[%clientId, $SkillSenseHeading] / 100)+1))
-			{
-				storeData(%clientId, "lastScent", GameBase::getPosition(%clientId));
-			}
+			// if(OddsAre(floor($PlayerSkill[%clientId, $SkillSenseHeading] / 100)+1))
+			// {
+			// 	storeData(%clientId, "lastScent", GameBase::getPosition(%clientId));
+			// }
 		}
-		%isai = Player::isAiControlled(%clientId);
-		if(!%isai){
-			if($isSnow)
-				setupIce(%clientId, %pos);
 
-		}
+		// ice is super annoying, remove it
+		// %isai = Player::isAiControlled(%clientId);
+		// if(!%isai){
+		// 	if($isSnow)
+		// 		setupIce(%clientId, %pos);
+
+		// }
 	}
 	%clientId.zoneLastPos = %pos;
 

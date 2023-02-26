@@ -395,7 +395,7 @@ function remoteConsider(%clientId)
 			newRotateTownBot(%clientId, %object, %clientPos, %botPos);
 			if(Client::getTeam(%clientId) != 0)
 				AI::sayLater(%clientId, %object, "Eek!", True);
-			else if(%closest <= ($maxAIdistVec + ($PlayerSkill[%clientId, $SkillSpeech] / 50))){
+			else if(%closest <= $maxAIdistVec){
 				if(%clientId.tmpbottalk != "")
 					%clientId.tmpbottalk = "";
 				endBotTalkChoice(%clientId);

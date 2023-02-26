@@ -257,6 +257,7 @@ function MenuSP(%clientId, %page)
 	
 	%lb = (%page * %l) - (%l-1);
 	%ub = %lb + (%l-1);
+
 	if(%ub > %ns)
 		%ub = %ns;
 

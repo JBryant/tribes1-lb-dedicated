@@ -1180,7 +1180,7 @@ ItemImageData CrossbowImage
 
 	weaponType = 0; // Single Shot
 	ammoType = "";
-	projectileType = NoProjectile;
+	//projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
 	fireTime = $WeaponDelay[CrossBow];
@@ -1221,7 +1221,7 @@ ItemImageData RepeatingCrossbowImage
 
 	weaponType = 0; // Single Shot
 	ammoType = "";
-	projectileType = NoProjectile;
+	//projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
 	fireTime = $WeaponDelay[RepeatingCrossbow];
@@ -1262,7 +1262,7 @@ ItemImageData LongBowImage
 
 	weaponType = 0; // Single Shot
 	ammoType = "";
-	projectileType = NoProjectile;
+	//projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
 	fireTime = $WeaponDelay[LongBow];
@@ -1302,7 +1302,7 @@ ItemImageData CompositeBowImage
 
 	weaponType = 0; // Single Shot
 	ammoType = "";
-	projectileType = NoProjectile;
+	//projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
 	fireTime = $WeaponDelay[LongBow];
@@ -1344,7 +1344,7 @@ ItemImageData CompositeBowFastImage
 
 	weaponType = 0; // Single Shot
 	ammoType = "";
-	projectileType = NoProjectile;
+	//projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
 	fireTime = $WeaponDelay[ShortBow];
@@ -1866,7 +1866,7 @@ ItemImageData SlingImage
 
 	weaponType = 0; // Single Shot
 	ammoType = "";
-	projectileType = NoProjectile;
+	//projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
 	fireTime = $WeaponDelay[LongBow];
@@ -1939,7 +1939,7 @@ ItemImageData PistolImage
 
 	weaponType = 0; // Single Shot
 	ammoType = "";
-	projectileType = NoProjectile;
+	//projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
 	fireTime = 1;
@@ -1977,7 +1977,7 @@ ItemImageData CyborgGunImage
 
 	weaponType = 0; // Single Shot
 	ammoType = "";
-	projectileType = NoProjectile;
+	//projectileType = NoProjectile;
 	accuFire = false;
 	reloadTime = 0;
 	fireTime = 1;

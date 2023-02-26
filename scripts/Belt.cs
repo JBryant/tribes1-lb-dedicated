@@ -885,8 +885,10 @@ function processMenuSellBeltItemFinal(%clientId, %opt)
 		%botPos = GameBase::getPosition(%clientId.beltShop);
 		%dist = Vector::getDistance(%clientPos, %botPos);
 
-		if(%dist > 20)
+		if(%dist > 20) {
+			ClearCurrentShopVars(%clientId);
 			return;
+		}
 
 		%itemCnt = belt::hasthisstuff(%clientId,%item);
 
@@ -909,14 +911,17 @@ function processMenuSellBeltItemFinal(%clientId, %opt)
 	}
 	else if(%option == "sell")
 	{
-		%cmnt = Belt::HasThisStuff(%clientid,%item);
+		%cmnt = Belt::HasThisStuff(%clientid, %item);
 		if(%cmnt >= %amnt)
 		{
 			%clientPos = GameBase::getPosition(%clientId);
 			%botPos = GameBase::getPosition(%clientId.beltShop);
 			%dist = Vector::getDistance(%clientPos, %botPos);
-			if(%dist > 20)
+
+			if(%dist > 20) {
+				ClearCurrentShopVars(%clientId);
 				return;
+			}
 
 			%cost = Belt::GetSellCost(%clientid,%item) * %amnt;
 			UseSkill(%clientId, $SkillHaggling, True, True);
