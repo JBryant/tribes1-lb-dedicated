@@ -252,7 +252,7 @@ function MenuSP(%clientId, %page)
 	%clientId.bulkNum = "";
 
 	%l = 6;
-	%ns = GetNumSkills();
+	%ns = GetNumSkills(); // change num skills to total
 	%np = floor(%ns / %l);
 	
 	%lb = (%page * %l) - (%l-1);

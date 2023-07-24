@@ -914,6 +914,9 @@ $SkillRestriction[advshield4] = $SkillWhiteMagick @ " 420";
 $SkillRestriction[advshield5] = $SkillWhiteMagick @ " 635";
 $SkillRestriction[massshield] = $SkillWhiteMagick @ " 680";
 
+// new spells
+$SkillRestriction[shadowblade] = "C DarkKnight L 50";
+
 //######################################################################################
 // Skill functions
 //######################################################################################

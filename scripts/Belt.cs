@@ -1610,7 +1610,7 @@ $smithingNum = 0;
 // ==============================
 
 $WeaponEnchantments = "";
-$baseEnchants = "Fire Lightning Ice Earth Poison";
+$baseEnchants = "Fire Lightning Ice Earth Poison Holy";
 
 $enchantDamageVerb["Fire"] = "burned";
 $enchantDamageVerb["Lightning"] = "shocked";
@@ -1631,15 +1631,23 @@ $enchantLevels[2] = "II";
 $enchantLevels[3] = "III";
 $enchantLevels[4] = "IV";
 $enchantLevels[5] = "V";
+$enchantLevels[6] = "VI";
+$enchantLevels[7] = "VII";
+$enchantLevels[8] = "VIII";
+$enchantLevels[9] = "IX";
+$enchantLevels[10] = "X";
 
 function generateEnchantsAndMateria() {
+	// base enchant damage
+	%baseDamage = 4;
+
 	for(%i = 0; getWord($baseEnchants, %i) != "" && getWord($baseEnchants, %i) != -1; %i++) {
 		%baseEnchant = getWord($baseEnchants, %i);
-		%baseDamage = 4;
 
-		for(%x = 1; %x <= 5; %x++) {
+		for(%x = 1; %x <= 10; %x++) {
 			%enchantLevel = $enchantLevels[%x];
 			%enchant = %baseEnchant@%enchantLevel;
+			// forumala for damage scaling eg: lvl 1 = 4 additional dmg, lvl 10 = 40 additional damage
 			%damage = %baseDamage * %x;
 
 			$WeaponEnchantment[%enchant, "name"] = %baseEnchant @ " " @ %enchantLevel;
@@ -1648,13 +1656,14 @@ function generateEnchantsAndMateria() {
 			$WeaponEnchantment[%enchant, "materia"] = %baseEnchant @ "Materia" @ %enchantLevel;
 
 			$WeaponEnchantments = $WeaponEnchantments @ " " @ %enchant;
-			// add materia
+			// add materia to belt
 			%item = %baseEnchant @ "Materia" @ %enchantLevel;
 			BeltItem::AddItem(%baseEnchant @ " Materia " @ %enchantLevel, %item, "QuestItems", 1, $materiaMiscInfo[%baseEnchant]);
 
-			// if 2 - 5, create the smithing recipe
-			if (i > 1) {
-				Smith::addItem(%item, %baseEnchant @ "Materia" @ $enchantLevels[%x-1] @ " 5", %item @ " 1", $smithingNum++);
+			// create the smithing recipes
+			if (%x > 1) {
+				%prevMateria = %baseEnchant @ "Materia" @ $enchantLevels[%x-1];
+				Smith::addItem(%prevMateria, %prevMateria @ " 5", %item @ " 1", $smithingNum++);
 			}
 		}
 	}
