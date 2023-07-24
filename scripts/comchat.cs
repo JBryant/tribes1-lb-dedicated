@@ -5133,17 +5133,19 @@ function internalSay(%clientId, %team, %message, %senderName)
 								%w2 = GetWord(%sc, %i+1) * %amt;
 								takethisstuff(%TrueClientId, %w @ " "@%w2);
 							}
+
 							%m = multiplyItemString($SmithComboResult[%smithnum], %amt);
 							givethisstuff(%trueClientId, %m);
+
 							if(isBeltItem(%item))
 								%itemname = $beltitem[%item, "Name"];
 							else
 								%itemname = %item.description;
-							Client::sendMessage(%TrueClientId, $MsgWhite, "You smithed "@%m@".");
-							for(%i=1; %i <= %amt; %i++)
-							{
-								UseSkill(%TrueClientId, $skillCrafting, True, True,35);
-							}
+							Client::sendMessage(%TrueClientId, $MsgWhite, "You smithed " @ %m);
+							// for(%i=1; %i <= %amt; %i++)
+							// {
+							// 	UseSkill(%TrueClientId, $skillCrafting, True, True,35);
+							// }
 						}
 						else
 						{

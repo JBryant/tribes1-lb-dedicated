@@ -36,8 +36,6 @@ function Smith::addItem(%item, %combo, %result, %num)
 }
 
 //The code beyond here isn't used anymore.
-
-
 function SetupBlacksmith(%clientId, %id)
 {
 	dbecho($dbechoMode, "SetupBlacksmith(" @ %clientId @ ", " @ %id @ ")");

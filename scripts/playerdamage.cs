@@ -413,7 +413,7 @@ function Player::onKilled(%this)
 	}
 }
 
-function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rweapon, %object, %weapon, %preCalcMiss)
+function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rweapon, %object, %weapon, %preCalcMiss)
 {
 	dbecho($dbechoMode2, "Player::onDamage(" @ %this @ ", " @ %type @ ", " @ %value @ ", " @ %pos @ ", " @ %vec @ ", " @ %mom @ ", " @ %vertPos @ ", " @ %rweapon @ ", " @ %object @ ", " @ %weapon @ ", " @ %preCalcMiss @ ")");
 
@@ -451,7 +451,8 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 
 			%value = (%value / $TribesDamageToNumericDamage);
 		}
-		else if(%type != $LandingDamageType) {
+		else if(%type != $LandingDamageType)
+		{
 			%multi = 1;
 
 			//Backstab - rethink how to add this back in
@@ -496,12 +497,13 @@ function Player::onDamage(%this ,%type, %value, %pos, %vec, %mom, %vertPos, %rwe
 
 			// 	schedule("storeData(" @ %shooterClient @ ", \"blockBash\", \"\");", %delay);
 			// 	storeData(%shooterClient, "NextHitBash", "");
-			}
+			// }
 
-			if(%rweapon != "")
+			if(%rweapon != "") {
 				%rweapondamage = GetRoll(GetWord(GetAccessoryVar(%rweapon, $SpecialVar), 1));
-			else
+			} else {
 				%rweapondamage = 0;
+			}
 			
 			%weapondamage = GetRoll(GetWord(GetAccessoryVar(%weapon, $SpecialVar), 1));
 			%value = round((( (%weapondamage + %rweapondamage) / 1000) * $PlayerSkill[%shooterClient, %skilltype]) * %multi);

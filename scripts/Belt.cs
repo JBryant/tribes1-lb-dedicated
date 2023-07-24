@@ -208,7 +208,7 @@ function MenuBeltGear(%clientid, %type, %page, %victim)
 	for(%i = %lb; %i <= %ub; %i++) {
 		%x++;
 		%item = getword(%nf,%x);
-		%amnt = Belt::HasThisStuff(%victim,%item);
+		%amnt = Belt::HasThisStuff(%victim, %item);
 		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%cnt++,1) @%amnt@" "@ $beltitem[%item, "Name"], %item @ " " @ %page @" "@%type@" "@%victim);
 	}
 
@@ -260,7 +260,7 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 	%victim = confirmVictim(%clientId, %victim);
 	if(%victim == -1)
 		return;
-	%cmnt = Belt::HasThisStuff(%victim,%item);
+	%cmnt = Belt::HasThisStuff(%victim, %item);
 	%name = $beltitem[%item, "Name"];
 
 	if(%victim != %clientId){
@@ -309,7 +309,12 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 		Client::addMenuItem(%clientId, %cnt++ @ "Use", %type@" use "@%item);
 	}
 	else if(%type == "WeaponItems") {
-		Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
+		// check myhere if it is equipped or not
+		if (BeltItem::isEquipped(%clientId, %item)) {
+			Client::addMenuItem(%clientId, %cnt++ @ "Unequip", %type@" equip "@%item);
+		} else {
+			Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
+		}
 	}
 	else if(%type == "ArmorItems") {
 		Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
@@ -586,7 +591,7 @@ function MenuSellBeltItem(%clientid, %type, %page) {
 	for(%i = %lb; %i <= %ub; %i++) {
 		%x++;
 		%item = getword(%nf,%x);
-		%amnt = Belt::HasThisStuff(%clientid,%item);
+		%amnt = Belt::HasThisStuff(%clientid, %item);
 		Client::addMenuItem(%clientId, %cnt++ @%amnt@" "@ $beltitem[%item, "Name"], %item @ " " @ %page @" "@%type);
 	}
 
@@ -1723,7 +1728,7 @@ function BeltItem::IsEquipped(%clientId, %item) {
 	return false;
 }
 
-function Belt::HasThisStuff(%clientid,%item) {
+function Belt::HasThisStuff(%clientid, %item) {
 	%item = $beltitem[%item, "Item"];
 	%type = $beltitem[%item, "Type"];
 	%list = fetchdata(%clientid, %type);
@@ -2012,7 +2017,11 @@ function Belt::EquipItem(%clientid, %item) {
 
 	if (%beltItemType == "WeaponItems") {
 		// swap Weapon with Weapon0
-		RPGmountItem(%clientid, %item, $WeaponSlot);
+		if (BeltItem::isEquipped(%clientId, %item)) {
+			Belt::UnequipWeapon(%clientid, %item);
+		} else {
+			RPGmountItem(%clientid, %item, $WeaponSlot);
+		}
 	}
 	else if (%beltItemType == "ArmorItems" || %beltItemType == "AccessoryItems") {
 		Item::onUse(%clientId, %item);
@@ -2023,6 +2032,15 @@ function Belt::EquipWeapon(%clientid, %item) {
 	Client::sendMessage(%clientId, $MsgBeige, "You equipped " @ BeltItem::GetName(%item) @ ".~wCrossbow_Switch1.wav");
 	Belt::TakeThisStuff(%clientId, %item, 1);
 	Belt::GiveThisStuff(%clientid, %item @ "0", 1);
+}
+
+function Belt::UnequipWeapon(%clientid, %item) {
+	%baseItem = String::getSubStr(%item, 0, String::len(%item)-1);	//remove the 0
+	Client::sendMessage(%clientId, $MsgBeige, "You unequipped " @ BeltItem::GetName(%baseItem) @ ".~wCrossbow_Switch1.wav");
+	Belt::TakeThisStuff(%clientId, %item, 1);
+	Belt::GiveThisStuff(%clientid, %baseItem, 1);
+	// need to unmount weapon somehow
+	Player::unMountItem(%clientid, $WeaponSlot);
 }
 
 function Belt::EquipAccessory(%clientid, %item) {
@@ -2112,29 +2130,29 @@ BeltItem::AddWeapon("Broadsword", "Broadsword", "Sword", $SwordAccessoryType, $d
 $description = "This straight and sharp double-edged blade can be used for either stabbing or slashing.";
 BeltItem::AddWeapon("Longsword", "Longsword", "LongSword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 100", "30", 18);
 $description = "This sword has a broad and sturdy blade, but its iron construction makes it very heavy.";
-BeltItem::AddWeapon("Iron Sword", "IronSword", "GoliathSword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 200", "40");
+BeltItem::AddWeapon("Iron Sword", "IronSword", "GoliathSword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 200", "40", 19);
 $description = "A sword forged from the metal known as mythril. Its brilliantly shining blade is incredibly lightweight.";
-BeltItem::AddWeapon("Mythril Sword", "MythrilSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 300", "50");
+BeltItem::AddWeapon("Mythril Sword", "MythrilSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 300", "50", 20);
 $description = "The handle of this single-edged sword has been decorated with intricate coral piecework.";
-BeltItem::AddWeapon("Coral Sword", "CoralSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 400", "60");
+BeltItem::AddWeapon("Coral Sword", "CoralSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 400", "60", 21);
 $description = "The blade of this sword is a deep crimson, as if it were drenched in blood. It is cruelly sharp.";
-BeltItem::AddWeapon("Blood Sword", "BloodSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 500", "70");
+BeltItem::AddWeapon("Blood Sword", "BloodSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 500", "70", 22);
 $description = "A sword constructed using ancient techniques that have long since perished from the world.";
-BeltItem::AddWeapon("Ancient Sword", "AncientSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 600", "80");
+BeltItem::AddWeapon("Ancient Sword", "AncientSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 600", "80", 23);
 $description = "A wide-bladed sword with a midnight blue handle.";
-BeltItem::AddWeapon("Sleep Blade", "SleepBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 700", "90");
+BeltItem::AddWeapon("Sleep Blade", "SleepBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 700", "90", 24);
 $description = "The countless tiny diamonds embedded into this sword's blade saw into its victims, causing great damage.";
-BeltItem::AddWeapon("Diamond Sword", "DiamondSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 800", "100");
+BeltItem::AddWeapon("Diamond Sword", "DiamondSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 800", "100", 25);
 $description = "A sword of extraplanar origin.";
-BeltItem::AddWeapon("Materia Blade", "MateriaBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 900", "110");
+BeltItem::AddWeapon("Materia Blade", "MateriaBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 900", "110", 26);
 $description = "A shining sword made of a lustrous white alloy of mythril and platinum. Its broad blade is wickedly sharp.";
-BeltItem::AddWeapon("Platinum Sword", "PlatinumSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1000", "120");
+BeltItem::AddWeapon("Platinum Sword", "PlatinumSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1000", "120", 27);
 $description = "A sword inscribed with ancient runes.";
-BeltItem::AddWeapon("Rune Blade", "RuneBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1200", "140");
+BeltItem::AddWeapon("Rune Blade", "RuneBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1200", "140", 28);
 $description = "A sword that glitters cruelly like a crescent moon.";
-BeltItem::AddWeapon("Moon Blade", "MoonBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1500", "180");
+BeltItem::AddWeapon("Moon Blade", "MoonBlade", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1500", "180", 29);
 $description = "A blade forged for swordsmen who have mastered every technique and achieved knighthood's most exalted rank.";
-BeltItem::AddWeapon("Onion Sword", "OnionSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 2000", "240"); // shop item 46
+BeltItem::AddWeapon("Onion Sword", "OnionSword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 2000", "240", 30); // shop item 46
 
 // Axes
 $description = "An inexpensive axe that is easy to wield. It is easy for new axe users, but not particularly powerful.";
