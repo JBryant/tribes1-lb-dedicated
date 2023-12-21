@@ -55,7 +55,7 @@ function fetchData(%clientId, %type)
 	}
 	else if(%type == "ATK")
 	{
-		%weapon = Player::getMountedItem(%clientId, $WeaponSlot);
+		%weapon = GetEquippedWeapon(%clientId); // Player::getMountedItem(%clientId, $WeaponSlot);
 
 		if(%weapon != -1)
 		{
@@ -66,6 +66,8 @@ function fetchData(%clientId, %type)
 
 			%b = GetRoll(GetWord(GetAccessoryVar(%weapon, $SpecialVar), 1));
 
+			lbecho(%a);
+			lbecho(%b);
 			return %a + %b;
 		}
 		else
@@ -706,6 +708,7 @@ function Game::refreshClientScore(%clientId)
 					Client::sendMessage(%clientId,0,"You have gained " @ %lvls @ " levels!");
 				Client::sendMessage(%clientId,0,"Welcome to level " @ fetchData(%clientId, "LVL"));
 				PlaySound(SoundLevelUp, GameBase::getPosition(%clientId));
+				setHP(%clientId, fetchData(%clientId, "MaxHP"));
 			}
 			else if(%lvls < 0)
 			{

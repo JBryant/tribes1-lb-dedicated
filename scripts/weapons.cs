@@ -118,7 +118,7 @@ function MeleeAttack(%player)
 	// attempt to get current weapon
 
 	// get equipped weapon
-	%weapon = getCroppedItem(GetEquippedWeapon(%clientId));
+	%weapon = GetEquippedWeapon(%clientId);
 
 	if (%weapon == "")
 		return;
@@ -170,7 +170,7 @@ function ProjectileAttack(%clientId, %vel)
 {
 	dbecho($dbechoMode, "ProjectileAttack(" @ %clientId @ ", " @ %weapon @ ", " @ %vel @ ")");
 
-	%weapon = getCroppedItem(GetEquippedWeapon(%clientId));
+	%weapon = GetEquippedWeapon(%clientId);
 
 	if (%weapon == "")
 		return;

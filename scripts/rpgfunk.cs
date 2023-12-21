@@ -2614,8 +2614,8 @@ function InitObjectives()
 	dbecho($dbechoMode, "InitObjectives()");
 
 	%num = 0;
-	Team::setObjective(0, %num++, "<jc><f8>Welcome To Tribes RPG!");
-	Team::setObjective(0, %num++, "<f5>Links:\n<f0>www.tribesrpg.org -- Tribes RPG homepage.\n<f0>www.tribeswiki.org");
+	Team::setObjective(0, %num++, "<jc><f8>Welcome To Fantasy Realms RPG!");
+	Team::setObjective(0, %num++, "<f5>Download:\n<f0>https://www.moddb.com/mods/rpgmod/downloads/tribes-rpg-repack-minimal-full-ver");
 	Team::setObjective(0, %num++, "<f5>Getting Started:");
 	//Team::setObjective(0, %num++, "<jc><f4>IT IS HIGHLY RECOMMENDED THAT YOU VISIT THE TRPG HOMEPAGE AND READ THE NEWBIE GUIDE EXTENSIVELY BEFORE ATTEMPTING TO PLAY!");
 	Team::setObjective(0, %num++, "<f1>Use the TAB key to access your skills and assign your SP (skill points) to them.");
@@ -2663,7 +2663,7 @@ function repackAlert(%clientId)
 
 	%msg = "Your repack is out of date, it is recommended you update for the best experience.";
 
-	bottomPrint(%clientId,"<jc>"@%msg@"\n\n<f2>www.tribesrpg.org",25);
+	bottomPrint(%clientId,"<jc>"@%msg@"\n\n<f2>https://www.moddb.com/mods/rpgmod/downloads/tribes-rpg-repack-minimal-full-ver",25);
 }
 
 //By phantom, tribesrpg.org
@@ -2733,7 +2733,7 @@ function rpg::eyes(%TrueClientId, %id){
 function initEscText(%clientId){
 	%num = -1;
 	remoteEval(%clientId, SetServerTextLine, %num++, "Tribes RPG");
-	remoteEval(%clientId, SetServerTextLine, %num++, "\nWelcome to the Tribes RPG Mod. Visit the web site for more information at www.tribesrpg.org");
+	remoteEval(%clientId, SetServerTextLine, %num++, "\nWelcome to the Fantasy Realms RPG!");
 	remoteEval(%clientId, SetServerTextLine, %num++, "\n<f2>If you get lost or stuck, you can return to a starting area by saying #recall");
 	remoteEval(%clientId, SetServerTextLine, %num++, "<f0>You can talk to an NPC by pressing use, which is either T or P");
 	//You can add many lines here in the same way

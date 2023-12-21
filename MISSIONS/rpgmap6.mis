@@ -3182,9 +3182,9 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 -0 0.559944";
 			};
 			instant SimGroup "NAME Kalm Merchant";
-			instant SimGroup "ITEMS CLASS Ranger LVL 2 LCK 0 Dagger 1";
+			instant SimGroup "ITEMS CLASS Chemist LVL 2 LCK 0";
 			instant SimGroup "RACE MaleHuman";
-			instant SimGroup "SHOP 1 3 18 19 20 21 36 39 40 47 48 55 56 63 64 65 73 131";
+			instant SimGroup "BELTSHOP 1 2 17 34";
 		};
 		instant SimGroup "merchant6" {
 			instant Marker "mythril mines merchant" {
@@ -3485,7 +3485,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "GIVE SP 20";
 			instant SimGroup "SAY1 If you bring me Trancephyte, I'll give you 20 SP credits.";
 			instant SimGroup "CUE1 trancephyte";
-			instant SimGroup "SAY2 Visit www.tribesrpg.org/reward";
+			instant SimGroup "SAY2 Visit www.n00b.org/reward";
 			instant SimGroup "NSAY1 I'll give you 20 SP credits for a Trancephyte.";
 			instant SimGroup "NCUE1 ok";
 			instant SimGroup "NSAY2 Thank you very much. Here is your SP!";

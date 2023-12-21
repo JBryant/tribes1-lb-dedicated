@@ -1427,6 +1427,8 @@ function GatherBotInfo(%group)
 				$BotInfo[%aiName, GIVE] = %info;
 			else if(%type == "SHOP")
 				$BotInfo[%aiName, SHOP] = %info;
+			else if(%type == "BELTSHOP")
+				$BotInfo[%aiName, BELTSHOP] = %info;
 			else if(%type == "ITEMS")
 				$BotInfo[%aiName, ITEMS] = %info;
 			else if(%type == "CSAY")

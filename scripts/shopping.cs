@@ -42,7 +42,7 @@ function SetupShop(%clientId, %botid) {
 	// %txt = "<f1><jc>COINS: " @ fetchData(%clientId, "COINS");
 	// Client::setInventoryText(%clientId, %txt);
 
-	%info = $BotInfo[%botid.name, SHOP];	
+	%info = $BotInfo[%botid.name, SHOP];
 
 	if($BotInfo[%botid.name, BeltEvaluated] == "") {
 		$BotInfo[%botid.name, BeltEvaluated] = True;
@@ -78,6 +78,7 @@ function SetupShop(%clientId, %botid) {
 	// 		}
 	// 	}
 	// }
+	
 	if($BotInfo[%botid.name, BELTSHOP] != "") {
 		Client::setItemShopping(%clientId, BeltItemTool);
 		Client::setItemBuying(%clientId, BeltItemTool);

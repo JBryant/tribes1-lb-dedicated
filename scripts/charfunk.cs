@@ -259,6 +259,8 @@ function SaveCharacter(%clientId, %silent)
 	$funk::var["[\"" @ %name @ "\", 8, 12]"] = fetchData(%clientId, "BankQuestItems");
 	$funk::var["[\"" @ %name @ "\", 8, 13]"] = fetchData(%clientId, "AccessoryItems");
 	$funk::var["[\"" @ %name @ "\", 8, 14]"] = fetchData(%clientId, "BankAccessoryItems");
+	$funk::var["[\"" @ %name @ "\", 8, 15]"] = fetchData(%clientId, "MateriaItems");
+	$funk::var["[\"" @ %name @ "\", 8, 16]"] = fetchData(%clientId, "BankMateriaItems");
 
 	%recallList = fetchData(%clientId,"recallList");
 	$funk::var["[\"" @ %name @ "\", 8, recallList]"] = %recallList;
@@ -440,6 +442,8 @@ function LoadCharacter(%clientId)
 		storeData(%clientId, "BankQuestItems", $funk::var[%name, 8, 12]);
 		storeData(%clientId, "AccessoryItems", $funk::var[%name, 8, 13]);
 		storeData(%clientId, "BankAccessoryItems", $funk::var[%name, 8, 14]);
+		storeData(%clientId, "MateriaItems", $funk::var[%name, 8, 15]);
+		storeData(%clientId, "BankMateriaItems", $funk::var[%name, 8, 16]);
 
 		%recallList = $funk::var[%name, 8, recallList];
 		storeData(%clientId,"recallList", %recallList);

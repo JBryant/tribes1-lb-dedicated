@@ -66,10 +66,10 @@ function remoteSetCLInfo(%clientId, %skin, %name, %email, %tribe, %url, %info, %
 
 	if(%rpv == ""){
 		if(%info == ""){//Reasonably certain they don't have it.
-			newKick(%clientId, "You must download RPG mod to play here. Download site: www.TribesRPG.org");
+			newKick(%clientId, "You must download a custom RPG mod to play here. Download site: https://www.moddb.com/mods/rpgmod/downloads/tribes-rpg-repack-minimal-full-ver");
 		}
 		else{
-			remoteEval(%clientId, MODInfo, "Your copy of RPG may be out of date. Please visit www.TribesRPG.org to update.");
+			remoteEval(%clientId, MODInfo, "Your copy of RPG may be out of date. Please visit https://www.moddb.com/mods/rpgmod/downloads/tribes-rpg-repack-minimal-full-ver to update.");
 		}
 	}
 	%flag = False;
@@ -175,9 +175,8 @@ function createServer(%mission, %dedicated)
 	if(!$SinglePlayer)
 		$pref::lastMission = %mission;
 
-	$MODInfo = "www.TribesRPG.org\n";
+	$MODInfo = "Tribes Repack RPG Required\n";
 	if(!$dedicated){
-		//display the "loading" screen
 		cursorOn(MainWindow);
 		GuiLoadContentCtrl(MainWindow, "gui\\Loading.gui");
 		renderCanvas(MainWindow);
@@ -269,7 +268,7 @@ function createServer(%mission, %dedicated)
 	exec(bottalk);
 	exec(belt);
 	exec(compass);
-	$Server::Info = "Running RPG Mod 6.9 - www.tribesrpg.org\n" @ $extrainfo;
+	$Server::Info = "Running Tribes Repack RPG\nDownload: https://www.moddb.com/mods/rpgmod/downloads/tribes-rpg-repack-minimal-full-ver";
 	$server::modinfo = $Server::Info;
 
 	Server::storeData();
@@ -299,9 +298,10 @@ function createServer(%mission, %dedicated)
 			InitArena();
 	}
 
-	GenerateAllWeaponCosts();
-	GenerateAllShieldCosts();
-	GenerateAllArmorCosts();
+    // now generated in belt.cs
+	// GenerateAllWeaponCosts();
+	// GenerateAllShieldCosts();
+	// GenerateAllArmorCosts();
 
 	InitObjectives();
 

@@ -161,7 +161,7 @@ function Game::playerSpawn(%clientId, %respawn)
 			if (%image != "") {
 				Player::mountItem(%pl, %image, $WeaponSlot);
 			} else {
-				Player::mountItem(%pl, getCroppedItem(%equippedWeapon), $WeaponSlot);
+				Player::mountItem(%pl, %equippedWeapon, $WeaponSlot);
 			}
 		}
 

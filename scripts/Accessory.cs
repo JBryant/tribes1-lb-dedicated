@@ -328,7 +328,7 @@ function GetEquippedArmor(%clientId) {
 }
 
 function GetEquippedWeapon(%clientId) {
-	return GetEquippedAccessoriesByBeltType(%clientId, "WeaponItems");
+	return getCroppedItem(GetEquippedAccessoriesByBeltType(%clientId, "WeaponItems"));
 }
 
 function GetEquippedAccessoriesBySpecialVar(%clientId, %specialVar) {
@@ -767,7 +767,7 @@ ItemData DragonShield0
 //============================================================================
 
 //------------------------
-$AccessoryVar[Tent, $Weight] = 40;
+$AccessoryVar[Tent, $Weight] = 20;
 $AccessoryVar[Tent, $MiscInfo] = "A tent. Use #camp to set it up, and #uncamp to disassemble it.";
 
 ItemData Tent

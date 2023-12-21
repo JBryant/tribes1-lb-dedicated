@@ -42,7 +42,7 @@ $ArenaEquipment = "Knife 1 ";
 
 //first part = chance, second part = prize
 $tmp="";
-$ArenaPrize[$tmp++] = "50000 PaddedArmor 1";
+$ArenaPrize[$tmp++] = "50000 LeatherClothing 1";
 $ArenaPrize[$tmp++] = "20000 COINS 250";
 $ArenaPrize[$tmp++] = "5000 COINS 500";
 $ArenaPrize[$tmp++] = "500 COINS 1000";

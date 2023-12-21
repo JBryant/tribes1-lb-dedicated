@@ -65,8 +65,9 @@ function RPGmountItem(%player, %item, %slot)
 	if(SkillCanUse(%clientId, %item)) {
 		// check if they already have an equipped weapon, if so unequip that weapon
 		%equippedWeapon = GetEquippedWeapon(%clientId);
+
 		if (%equippedWeapon != "") {
-			Belt::UnequipAccessory(%clientId, %equippedWeapon);
+			Belt::UnequipAccessory(%clientId, %equippedWeapon @ "0");
 		}
 
 		Belt::EquipWeapon(%clientId, %item);

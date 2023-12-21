@@ -210,10 +210,10 @@ function Player::onKilled(%this)
 
 		%equippedWeapon = GetEquippedWeapon(%clientId);
 		if (%equippedWeapon != "") {
-			if (%equippedWeapon == "CastingBlade0") {
-				belt::takethisstuff(%clientId, %equippedWeapon, 1);
+			if (%equippedWeapon == "CastingBlade") {
+				belt::takethisstuff(%clientId, %equippedWeapon @ "0", 1);
 			} else {
-				Belt::UnequipAccessory(%clientId, %equippedWeapon);	
+				Belt::UnequipAccessory(%clientId, %equippedWeapon @ "0");
 			}
 		}
 
@@ -442,12 +442,11 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 		if(%type == $SpellDamageType)
 		{
 			//For the case of SPELLS, the initial damage has already been determined before calling this function
-
 			%dmg = %value;
 			%value = round(((%dmg / 1000) * $PlayerSkill[%shooterClient, %skilltype]));
 
 			%ab = (getRandom() * (fetchData(%damagedClient, "MDEF") / 10)) + 1;
-			%value = Cap(%value - %ab, 0, "inf");
+			%value = Cap(%value - %ab, 0, "inf") + 1; // add 1 raise base damage slight and ensure damage is always done
 
 			%value = (%value / $TribesDamageToNumericDamage);
 		}
@@ -528,25 +527,26 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 			%value = (%value / $TribesDamageToNumericDamage);
 		}
 
+        // Nobody likes missing... remove it or make it so that Miss does minimal damage
 		//------------- DETERMINE MISS OR HIT -------------
-		if(%preCalcMiss == "")
-		{
-			if(%type != $LandingDamageType && %shooterClient != %damagedClient && %shooterClient != 0)
-			{
-				if(%type == $SpellDamageType)
-					%x = (fetchData(%damagedClient, "MDEF") / 5) + 5;
-				else
-					%x = (fetchData(%damagedClient, "DEF") / 5) + 5;
+		// if(%preCalcMiss == "")
+		// {
+		// 	if(%type != $LandingDamageType && %shooterClient != %damagedClient && %shooterClient != 0)
+		// 	{
+		// 		if(%type == $SpellDamageType)
+		// 			%x = (fetchData(%damagedClient, "MDEF") / 5) + 5;
+		// 		else
+		// 			%x = (fetchData(%damagedClient, "DEF") / 5) + 5;
 
-				%y = $PlayerSkill[%shooterClient, %skilltype] + 5;
-				%n = %x + %y;
-				%hitOffset = %n * 0.25;
-				%r = floor(getRandom() * %n) + 1 + %hitOffset;
+		// 		%y = $PlayerSkill[%shooterClient, %skilltype] + 5;
+		// 		%n = %x + %y;
+		// 		%hitOffset = %n * 0.25;
+		// 		%r = floor(getRandom() * %n) + 1 + %hitOffset;
 	
-				if(%r <= %x)
-					%isMiss = True;
-			}
-		}
+		// 		if(%r <= %x)
+		// 			%isMiss = True;
+		// 	}
+		// }
 
 		//=======================================|WATER CHECKS|=========================================
 		//------------------------------------
@@ -878,8 +878,11 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 	
 						// percentage increase to damage
 						if (%modId == 1) {
-							%floor = floor(%convValue * (%modValue / 100));
-							%enchantDamage = floor(%convValue * (%modValue / 100)) + 1;
+							// direct damage (5 = 5 extra damage)
+							%enchantDamage = %modValue; 
+
+							// percent damage (eg 10 = 10% of hit damage)
+							// %enchantDamage = floor(%convValue * (%modValue / 100)) + 1;
 						}
 					}
 
@@ -981,10 +984,13 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 				%flash = %prehithp;
 				%flash = %convValue / %flash;
 				%flash += 0.05;
+
 				if (%flash > 1)
 					%flash = 1;
-				Player::SetDamageFlash(%this,%flash);
+
+				Player::SetDamageFlash(%this, %flash);
 				%blood = floor(%flash*10);
+				
 				for(%i=1; %i <= %blood; %i++)
 					bloodSpray(%damagedClient);
 
