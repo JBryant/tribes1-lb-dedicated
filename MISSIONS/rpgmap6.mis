@@ -1399,22 +1399,23 @@ instant SimGroup "MissionGroup" {
 			lightParams = "0 ";
 			locked = "1";
 		};
-		instant StaticShape "TreeOne1" {
-			dataBlock = "TreeShape";
+		instant StaticShape "bigfountain" {
+			dataBlock = "fountain";
 			name = "";
-			position = "-2109.25 -664.313 227.44";
+			position = "-2407 -271.25 65";
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
 			locked = "0";
 		};
-		instant InteriorShape "barrack1" {
-			fileName = "barrack.0.dis";
-			isContainer = "1";
-			position = "-2735 -239.375 218.375";
-			rotation = "0 0 -1.06386";
-			lightParams = "1 1.000000 1 ";
-			locked = "1";
+		instant StaticShape "bigfountainw" {
+			dataBlock = "fountainwater";
+			name = "";
+			position = "-2407 -271.25 65";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+			locked = "0";
 		};
 		instant StaticShape "TreeTwo1" {
 			dataBlock = "TreeShapeTwo";
@@ -1428,7 +1429,24 @@ instant SimGroup "MissionGroup" {
 		instant StaticShape "TreeTwo1" {
 			dataBlock = "TreeShapeTwo";
 			name = "";
-			position = "-2293.5 -442.511 95.9758";
+			position = "-2293.5 -442.523 95.977";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+			locked = "0";
+		};
+		instant InteriorShape "barrack1" {
+			fileName = "barrack.0.dis";
+			isContainer = "1";
+			position = "-2735 -239.375 218.375";
+			rotation = "0 0 -1.06386";
+			lightParams = "1 1.000000 1 ";
+			locked = "1";
+		};
+		instant StaticShape "TreeOne1" {
+			dataBlock = "TreeShape";
+			name = "";
+			position = "-2109.25 -664.325 227.452";
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
