@@ -718,7 +718,6 @@ function MenuSellBeltItem(%clientid, %type, %page) {
 function MenuBuyBeltItem(%clientid, %page)
 {
 	Client::buildMenu(%clientId, "Buy:", "BuyBeltItem", true);
-	lbecho("MenuBuyBeltItem");
 
 	%clientId.bulkNum = "";
 	%id = %clientId.beltShop;
@@ -755,9 +754,6 @@ function MenuBuyBeltItem(%clientid, %page)
 	}
 	else
 		%itemList = 0;
-
-
-	lbecho("MenuBuyBeltItem: %itemList = " @ %itemList);
 
 	%ns = %i; // NUMBER OF ITEMS SOLD AT SHOP
 	%lb = (%page * %l) - (%l-1);
@@ -2113,9 +2109,9 @@ function Belt::GetDeathItems(%clientid, %killerId) {
 			%count = getword(%WeaponItems, %i+1);
 
             if (%i == 0) {
-				%unequippedWeaponItems = getCroppedItem(%w) @ " " @ %count;
+				%unequippedWeaponItems = getCroppedItem(%w) @ " " @ %count @ " ";
 			} else {
-				%unequippedWeaponItems = %unequippedWeaponItems @ " " @ getCroppedItem(%w) @ " " @ %count;
+				%unequippedWeaponItems = %unequippedWeaponItems @ " " @ getCroppedItem(%w) @ " " @ %count @ " ";
 			}
 		}
 
@@ -2123,11 +2119,11 @@ function Belt::GetDeathItems(%clientid, %killerId) {
 			Belt::packgen(%clientId, %tmploot);
 			%tmploot = "";
 		}
+		
 		// need to remove all equipped weapons trailing 0 getCroppedItem()
 		%tmploot = %tmploot @ %unequippedWeaponItems;
 
 		%AmmoItems = fetchdata(%clientid,"AmmoItems");
-
 		if((String::len(%tmploot) + String::len(%AmmoItems)) > 200) {
 			Belt::packgen(%clientId, %tmploot);
 			%tmploot = "";
@@ -2269,15 +2265,14 @@ BeltItem::Add("Talon","Talon","AmmoItems",0.1,GenerateItemCost(Talon), "Arrow", 
 BeltItem::Add("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.1,GenerateItemCost(CeraphumsFeather), "Arrow", 11);
 BeltItem::Add("Poison Arrow", "PoisonArrow", "AmmoItems", 0.1, 200, "Arrow", 12);
 
-
 //Gems
-BeltItem::Add("Quartz","Quartz","GemItems",0.2,100);
-BeltItem::Add("Granite","Granite","GemItems",0.2,180);
-BeltItem::Add("Opal","Opal","GemItems",0.2,300);
-BeltItem::Add("Jade","Jade","GemItems",0.25,550);
-BeltItem::Add("Turquoise","Turquoise","GemItems",0.3,850);
-BeltItem::Add("Ruby","Ruby","GemItems",0.3,1200);
-BeltItem::Add("Topaz","Topaz","GemItems",0.3,1604);
+BeltItem::Add("Quartz", "Quartz", "GemItems", 0.2, 100);
+BeltItem::Add("Granite", "Granite", "GemItems", 0.2, 180);
+BeltItem::Add("Opal", "Opal", "GemItems", 0.2, 300);
+BeltItem::Add("Jade", "Jade", "GemItems", 0.25, 550);
+BeltItem::Add("Turquoise", "Turquoise", "GemItems", 0.3, 850);
+BeltItem::Add("Ruby", "Ruby", "GemItems", 0.3, 1200);
+BeltItem::Add("Topaz", "Topaz", "GemItems", 0.3, 1604);
 BeltItem::Add("Sapphire","Sapphire","GemItems",0.3,2930);
 BeltItem::Add("Gold","Gold","GemItems",0.35,4680);
 BeltItem::Add("Emerald","Emerald","GemItems",0.2,9702);

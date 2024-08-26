@@ -284,8 +284,6 @@ function SaveCharacter(%clientId, %silent)
 	{
 		%s = "";
 		%max = getNumItems();
-		lbecho("---- get num items ----");
-		lbecho(%max);
 
 		for(%i = 0; %i < %max; %i++)
 		{

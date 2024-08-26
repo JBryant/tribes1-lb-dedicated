@@ -24,8 +24,7 @@
 
 
 
-function Client::onKilled(%clientId, %killerId, %damageType)
-{
+function Client::onKilled(%clientId, %killerId, %damageType) {
 	dbecho($dbechoMode, "Client::onKilled(" @ %clientId @ ", " @ %killerId @ ", " @ %damageType @ ")");
 
 	//This function is NOT an event, it must be MANUALLY CALLED!
@@ -68,8 +67,7 @@ function Client::onKilled(%clientId, %killerId, %damageType)
 	Game::clientKilled(%clientId, %killerId);
 }
 
-function Game::clientKilled(%playerId, %killerId)
-{
+function Game::clientKilled(%playerId, %killerId) {
 	dbecho($dbechoMode, "Game::clientKilled(" @ %playerId @ ", " @ %killerId @ ")");
 
 	%set = nameToID("MissionCleanup/ObjectivesSet");
@@ -77,8 +75,7 @@ function Game::clientKilled(%playerId, %killerId)
 		GameBase::virtual(%obj, "clientKilled", %playerId, %killerId);
 }
 
-function Player::onKilled(%this)
-{
+function Player::onKilled(%this) {
 	dbecho($dbechoMode, "Player::onKilled(" @ %this @ ")");
 
 	//At this point, the client can still be queried for getItemCounts, and is also still an object

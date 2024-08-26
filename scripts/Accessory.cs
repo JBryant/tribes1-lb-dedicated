@@ -796,7 +796,7 @@ ItemData Lootbag
 //===================
 //  Mining stuff
 //===================
-$AccessoryVar[Quartz, $Weight] = 0.2;
+// $AccessoryVar[Quartz, $Weight] = 0.2;
 $AccessoryVar[Granite, $Weight] = 0.2;
 $AccessoryVar[Opal, $Weight] = 0.2;
 $AccessoryVar[Jade, $Weight] = 0.25;
@@ -809,7 +809,7 @@ $AccessoryVar[Emerald, $Weight] = 0.2;
 $AccessoryVar[Diamond, $Weight] = 0.1;
 $AccessoryVar[Keldrinite, $Weight] = 5.0;
 
-$AccessoryVar[Quartz, $MiscInfo] = "Quartz";
+// $AccessoryVar[Quartz, $MiscInfo] = "Quartz";
 $AccessoryVar[Granite, $MiscInfo] = "Granite";
 $AccessoryVar[Opal, $MiscInfo] = "Opal";
 $AccessoryVar[Jade, $MiscInfo] = "Jade";
@@ -823,7 +823,7 @@ $AccessoryVar[Diamond, $MiscInfo] = "Diamond";
 $AccessoryVar[Keldrinite, $MiscInfo] = "Keldrinite is a very rare magical gem that, when in the hands of a skilled blacksmith, can give items magical properties.";
 
 $HardcodedItemCost[SmallRock] = 13;
-$HardcodedItemCost[Quartz] = 100;
+// $HardcodedItemCost[Quartz] = 100;
 $HardcodedItemCost[Granite] = 180;
 $HardcodedItemCost[Opal] = 300;
 $HardcodedItemCost[Jade] = 550;

@@ -66,8 +66,6 @@ function fetchData(%clientId, %type)
 
 			%b = GetRoll(GetWord(GetAccessoryVar(%weapon, $SpecialVar), 1));
 
-			lbecho(%a);
-			lbecho(%b);
 			return %a + %b;
 		}
 		else
