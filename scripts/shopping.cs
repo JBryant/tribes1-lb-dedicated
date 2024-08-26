@@ -23,13 +23,11 @@
 //Starsiege: Tribes, including the engine, retains a proprietary license forbidding resale.
 
 
-
 function SetupShop(%clientId, %botid) {
 	dbecho($dbechoMode, "SetupShop(" @ %clientId @ ", " @ %id @ ")");
 
 	ClearCurrentShopVars(%clientId);
 	%clientId.currentShop = %botid;
-
 	%clientId.bulkNum = "";
 
 	Client::clearItemShopping(%clientId);
@@ -42,28 +40,32 @@ function SetupShop(%clientId, %botid) {
 	// %txt = "<f1><jc>COINS: " @ fetchData(%clientId, "COINS");
 	// Client::setInventoryText(%clientId, %txt);
 
-	%info = $BotInfo[%botid.name, SHOP];
+	// %info = $BotInfo[%botid.name, SHOP];
 
-	if($BotInfo[%botid.name, BeltEvaluated] == "") {
-		$BotInfo[%botid.name, BeltEvaluated] = True;
-		%max = $numBeltItems;
-		for(%i = 0; GetWord(%info, %i) != -1; %i++) {
-			%added = False;
-			%a = GetWord(%info, %i);
-			for(%z = 0; %z < %max; %z++)
-			{
-				%item = $beltItemData[%z];
-					if($AccessoryVar[%item, $ShopIndex] == %a) {
-						%added = True;
-						$BotInfo[%botid.name, BELTSHOP] = $BotInfo[%botid.name, BELTSHOP] @ %a @ " ";
-					}
-			}
-			if(!%added)
-				%newString = %newString @ %a @ " ";
-		}
-		$BotInfo[%botid.name, SHOP] = %newString;
-		%info = %newString;
-	}
+	// if($BotInfo[%botid.name, BeltEvaluated] == "") {
+	// 	$BotInfo[%botid.name, BeltEvaluated] = True;
+	// 	%max = $numBeltItems;
+	// 	lbecho('numBeltItems: ' @ %max);
+
+	// 	for(%i = 0; GetWord(%info, %i) != -1; %i++) {
+	// 		%added = False;
+	// 		%a = GetWord(%info, %i);
+
+	// 		for(%z = 0; %z < %max; %z++) {
+	// 			%item = $beltItemData[%z];
+	// 			if($AccessoryVar[%item, $ShopIndex] == %a) {
+	// 				%added = True;
+	// 				$BotInfo[%botid.name, BELTSHOP] = $BotInfo[%botid.name, BELTSHOP] @ %a @ " ";
+	// 			}
+	// 		}
+
+	// 		if(!%added)
+	// 			%newString = %newString @ %a @ " ";
+	// 	}
+
+	// 	// $BotInfo[%botid.name, SHOP] = %newString;
+	// 	// %info = %newString;
+	// }
 
 	// %max = getNumItems();		
 	// for(%id = 0; %id < %max; %id++) {
@@ -78,15 +80,18 @@ function SetupShop(%clientId, %botid) {
 	// 		}
 	// 	}
 	// }
+
+	// if($BotInfo[%botid.name, BeltEvaluated] == "") {
+	// 	$BotInfo[%botid.name, BeltEvaluated] = True;
+	// 	$BotInfo[%botid.name, BELTSHOP] = $BotInfo[%botid.name, SHOP];
+	// }
 	
 	if($BotInfo[%botid.name, BELTSHOP] != "") {
 		Client::setItemShopping(%clientId, BeltItemTool);
 		Client::setItemBuying(%clientId, BeltItemTool);
 
-		if($BotInfo[%botid.name, SHOP] == "") {
-			%clientId.beltShop = %botid;
-			MenuBuyBeltItem(%clientId, 1);
-		}
+		%clientId.beltShop = %botid;
+		MenuBuyBeltItem(%clientId, 1);
 	}
 }
 

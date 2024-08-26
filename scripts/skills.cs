@@ -90,8 +90,8 @@ $SkillDesc[H] = "House";
 $SkillMultiplier[Squire, $SkillSwords] = 1.0;
 $SkillMultiplier[Squire, $SkillAxes] = 1.0;
 $SkillMultiplier[Squire, $SkillHammers] = 1.0;
-$SkillMultiplier[Squire, $SkillKatanas] = 1.0;
-$SkillMultiplier[Squire, $SkillBows] = 1.0;
+$SkillMultiplier[Squire, $SkillKatanas] = 0.2;
+$SkillMultiplier[Squire, $SkillBows] = 0.2;
 $SkillMultiplier[Squire, $SkillSpears] = 1.0;
 $SkillMultiplier[Squire, $SkillBlackMagick] = 0.2;
 $SkillMultiplier[Squire, $SkillWhiteMagick] = 0.2;
@@ -114,26 +114,26 @@ $AllowedSkills[Squire] = $SkillSwords@ " " @$SkillAxes@ " " @$SkillHammers@ " " 
 // Chemist
 //--------------
 
-$SkillMultiplier[Chemist, $SkillSwords] = 0.5;
-$SkillMultiplier[Chemist, $SkillAxes] = 0.7;
-$SkillMultiplier[Chemist, $SkillHammers] = 0.6;
-$SkillMultiplier[Chemist, $SkillKatanas] = 2.0;
-$SkillMultiplier[Chemist, $SkillWeightCapacity] = 2.0;
-$SkillMultiplier[Chemist, $SkillSpears] = 0.5;
-$SkillMultiplier[Chemist, $SkillStealing] = 0.2;
-$SkillMultiplier[Chemist, $SkillHiding] = 2.0;
-$SkillMultiplier[Chemist, $SkillBackstabbing] = 0.5;
-$SkillMultiplier[Chemist, $SkillBlackMagick] = 0.7;
-$SkillMultiplier[Chemist, $SkillWhiteMagick] = 0.7;
-$SkillMultiplier[Chemist, $SkillSummonMagick] = 2.0;
+$SkillMultiplier[Chemist, $SkillSwords] = 0.2;
+$SkillMultiplier[Chemist, $SkillAxes] = 0.2;
+$SkillMultiplier[Chemist, $SkillHammers] = 0.2;
+$SkillMultiplier[Chemist, $SkillKatanas] = 0.2;
+$SkillMultiplier[Chemist, $SkillBows] = 0.2;
+$SkillMultiplier[Chemist, $SkillSpears] = 0.2;
+$SkillMultiplier[Chemist, $SkillBlackMagick] = 1.0;
+$SkillMultiplier[Chemist, $SkillWhiteMagick] = 1.0;
 $SkillMultiplier[Chemist, $SkillTimeMagick] = 1.0;
-$SkillMultiplier[Chemist, $SkillHealing] = 1.3;
-$SkillMultiplier[Chemist, $SkillBows] = 0.7;
-$SkillMultiplier[Chemist, $SkillEndurance] = 0.8;
-$SkillMultiplier[Chemist, $SkillMining] = 2.0;
+$SkillMultiplier[Chemist, $SkillSummonMagick] = 1.0;
+$SkillMultiplier[Chemist, $SkillHealing] = 1.0;
+$SkillMultiplier[Chemist, $SkillEndurance] = 1.0;
+$SkillMultiplier[Chemist, $SkillEnergy] = 1.0;
 $SkillMultiplier[Chemist, $SkillMagicka] = 1.0;
-$SkillMultiplier[Chemist, $SkillEnergy] = 1.2;
-$SkillMultiplier[Chemist, $SkillHaggling] = 1.3;
+$SkillMultiplier[Chemist, $SkillWeightCapacity] = 1.0;
+$SkillMultiplier[Chemist, $SkillStealing] = 0.2;
+$SkillMultiplier[Chemist, $SkillHiding] = 0.2;
+$SkillMultiplier[Chemist, $SkillBackstabbing] = 0.2;
+$SkillMultiplier[Chemist, $SkillMining] = 1.0;
+$SkillMultiplier[Chemist, $SkillHaggling] = 1.0;
 $EXPmultiplier[Chemist] = 1.5;
 
 //--------------
