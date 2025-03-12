@@ -2131,33 +2131,33 @@ function Belt::GetDeathItems(%clientid, %killerId) {
 		%tmploot = %tmploot @ %AmmoItems;
 
 		%PotionItems = fetchdata(%clientid,"PotionItems");
-		if((String::len(%tmploot) + String::len(%PotionItems)) > 200){
+		if((String::len(%tmploot) + String::len(%PotionItems)) > 200) {
 			Belt::packgen(%clientId, %tmploot);
 			%tmploot = "";
 		}
 		%tmploot = %tmploot @ %PotionItems;
 
 		%GemItems = fetchdata(%clientid,"GemItems");
-		if((String::len(%tmploot) + String::len(%GemItems)) > 200){
+		if((String::len(%tmploot) + String::len(%GemItems)) > 200) {
 			Belt::packgen(%clientId, %tmploot);
 			%tmploot = "";
 		}
 		%tmploot = %tmploot @ %GemItems;
 
 		%QuestItems = fetchdata(%clientid,"QuestItems");
-		if((String::len(%tmploot) + String::len(%QuestItems)) > 200){
+		if((String::len(%tmploot) + String::len(%QuestItems)) > 200) {
 			Belt::packgen(%clientId, %tmploot);
 			%tmploot = "";
 		}
 		%tmploot = %tmploot @ %QuestItems;
 
 		// should materia be droppable?
-		// %MateriaItems = fetchdata(%clientid, "MateriaItems");
-		// if((String::len(%tmploot) + String::len(%MateriaItems)) > 200){
-		// 	Belt::packgen(%clientId, %tmploot);
-		// 	%tmploot = "";
-		// }
-		// %tmploot = %tmploot @ %QuestItems;
+		%MateriaItems = fetchdata(%clientid, "MateriaItems");
+		if((String::len(%tmploot) + String::len(%MateriaItems)) > 200) {
+			Belt::packgen(%clientId, %tmploot);
+			%tmploot = "";
+		}
+		%tmploot = %tmploot @ %MateriaItems;
 	}//LCK < 0 happens when the player ran out, 0 is after the last one is used to protect this pack
 	else {
 		%tmpItems = fetchdata(%clientid, "QuestItems");

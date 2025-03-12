@@ -345,6 +345,7 @@ function Player::onKilled(%this) {
 	storeData(%clientId, "noDropLootbagFlag", "");
 
 	storeData(%clientId, "SpellCastStep", "");
+	storeData(%clientId, "UseSkillStep", "");
 	%clientId.sleepMode = "";
 	refreshHPREGEN(%clientId);
 	refreshMANAREGEN(%clientId);

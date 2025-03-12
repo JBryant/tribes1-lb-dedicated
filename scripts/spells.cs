@@ -700,7 +700,8 @@ function BeginCastSpell(%clientId, %keyword)
 						eval("casting::"@$spell::keyword[%i]@"(" @ %clientId @ ", " @ %i @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");");
 					}
 					else if($Spell::delay[%i] > 0){
-						if($Spell::Indicator[%i]){
+						if($Spell::Indicator[%i]) {
+							// I think this shows the blue indicator for the spell
 							spellIndicatorLoop(%clientId, $Spell::LOSrange[%i]);
 						}
 						Schedule::Add("DoCastSpell(" @ %clientId @ ", " @ %i @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");", $Spell::delay[%i], "spell"@%clientId);
@@ -1494,7 +1495,7 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 //	}
 }
 
-function EndCast(%clientid,%overrideEndSound,%extradelay,%index,%castpos,%returnflag)
+function EndCast(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag)
 {
 	Player::setAnimation(%clientId, 39);
 
@@ -1530,7 +1531,7 @@ function EndCast(%clientid,%overrideEndSound,%extradelay,%index,%castpos,%return
 		UseSkill(%clientId, $SkillEnergy, False, True);
 		%recovTime = %recovTime * 0.5;
 	}
-	if(%clientId.repack > 32){
+	if(%clientId.repack > 32) {
 		remoteEval(%clientId, "rpgbarhud", %recovTime, 4, 2, "||");
 		schedule("storeData(" @ %clientId @ ", \"SpellCastStep\", \"\");", %recovTime, %clientId);
 	}

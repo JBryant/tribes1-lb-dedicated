@@ -26,7 +26,9 @@
 // if an argument is passed for that parameter it gets
 // assigned to the global scope, not the scope of the function
 
-function dbecho(){}
+function dbecho(%dbechoMode, %msg) {
+	// lbecho(%msg);
+}
 
 function pecho(%m)
 {
@@ -205,6 +207,7 @@ function createServer(%mission, %dedicated)
 	setWindowTitle("0/"@$server::maxplayers@" Tribes RPG server");
 
 	exec(skills);
+	exec(skills2);
 	exec(house);
 	exec(rpgarena);
 	exec(sleep);

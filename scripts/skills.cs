@@ -895,6 +895,7 @@ $SkillRestriction[remort] = $SkillTimeMagick @ " 0 " @ $MinLevel @ " 101";
 $SkillRestriction[mimic] = $SkillTimeMagick @ " 145 " @ $MinRemort @ " 2";
 $SkillRestriction[masstransport] = $SkillTimeMagick @ " 650 " @ $MinRemort @ " 1";
 
+$SkillRestriction[mend] = $SkillWhiteMagick @ " 0.2";
 $SkillRestriction[heal] = $SkillWhiteMagick @ " 10";
 $SkillRestriction[advheal1] = $SkillWhiteMagick @ " 80";
 $SkillRestriction[advheal2] = $SkillWhiteMagick @ " 110";

@@ -1529,16 +1529,18 @@ function GiveThisStuff(%clientId, %list, %echo, %multiplier)
 
 		//if there is a / in %w2, then what trails after the / is the minimum random number between 0 and 100 which
 		//is applied as a percentage to the starting number of %w2
+		// ex: 4/-300 would give a random number between 0 and 300, and subtract that from 4
 		%spos = String::findSubStr(%w2, "/");
 		if(%spos > 0)
 		{
 			%original = String::getSubStr(%w2, 0, %spos);
 			%perc = String::getSubStr(%w2, %spos+1, 99999);
 
-			%r = floor(getRandom() * (100-%perc))+%perc+1;
+			%r = floor(getRandom() * (100-%perc)) + %perc + 1;
 			if(%r > 100) %r = 100;
 
 			%w2 = round(%original * (%r/100));
+			
 			if(%w2 < 0) %w2 = 0;
 		}
 

@@ -881,10 +881,9 @@ function internalSay(%clientId, %team, %message, %senderName)
 				Client::sendMessage(%TrueClientId, $MsgRed, "You can not cast a spell when dead.");
 			else
 			{
-		            if(%cropped == "")
+		        if(%cropped == "")
 					Client::sendMessage(%TrueClientId, 0, "Specify a spell.");
-		            else
-		            {
+		        else {
 					BeginCastSpell(%TrueClientId, escapestring(%cropped));
 					if(String::findSubStr(%cropped, "\"") != -1){
 						%ip = Client::getTransportAddress(%ClientId);
@@ -895,6 +894,31 @@ function internalSay(%clientId, %team, %message, %senderName)
 					}
 				}
 			}
+			return;
+		}
+		if(%w1 == "#skill") {
+			if(fetchData(%TrueClientId, "UseSkillStep") == 1)
+				Client::sendMessage(%TrueClientId, 0, "You are already using a skill!");
+			else if(fetchData(%TrueClientId, "UseSkillStep") == 2)
+				Client::sendMessage(%TrueClientId, 0, "You are still recovering from your last skill.");
+			else if(%TrueClientId.sleepMode != "" && %TrueClientId.sleepMode != False)
+				Client::sendMessage(%TrueClientId, $MsgRed, "You can not use a skill while sleeping or meditating.");
+			else if(IsDead(%TrueClientId))
+				Client::sendMessage(%TrueClientId, $MsgRed, "You can not use a skill when dead.");
+			else if (%cropped == "")
+				Client::sendMessage(%TrueClientId, 0, "Specify a skill.");
+			else {
+				BeginUseSkill(%TrueClientId, escapestring(%cropped));
+				// Exploit detection
+				if(String::findSubStr(%cropped, "\"") != -1){
+					%ip = Client::getTransportAddress(%ClientId);
+					echo("Exploit attempt detected and blocked: " @ %trueClientId @ ", aka " @ %TCsenderName @ ", at " @ %ip @ ".");
+					echo("Exploit: " @ %message);
+					messageall(0,"Exploit attempt detected and blocked: " @ %trueClientId @ ", aka " @ %TCsenderName @ ", at " @ %ip @ ".");
+					schedule("delayedban(" @ %TrueClientId @ ");",1.0);
+				}
+			}
+
 			return;
 		}
 		if(%w1 == "#recall")
