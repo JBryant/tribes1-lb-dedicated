@@ -24,6 +24,10 @@
 
 function NewBotMessage(%client, %closestId, %aimessage){//, %list){
 	%clientId = %client;
+
+	// make the bot lopok at you (btw... this is pretty intensive and could be buggy... maybe move it to chat only?)
+	newRotateTownBot(%client, %closestId, GameBase::getPosition(%clientId), GameBase::getPosition(%closestId));
+
 	if(%client.tmpbottalk == "chat"){
 		AI::sayLater(%client, %closestId, %aimessage, True);
 		for(%i = 0; $botMenuOption[%client,%i] != ""; %i++)
@@ -78,7 +82,7 @@ function NewBotMessage(%client, %closestId, %aimessage){//, %list){
 		%msg = %msg @ %fcnt@": "@%trigger1@"\n";
 	}
 	%msg = %msg @ "\n\n0: Close menu.";
-	rpg::longPrint(%client,%msg,1,0.7);
+	rpg::longPrint(%client, %msg, 1, 0.7);
 
 	%client.curNPC = %closestId;
 	%aiMessage = escapeString(%aiMessage);
@@ -558,15 +562,17 @@ function bottalk::porter(%TrueClientId, %closestId, %initTalk, %message){
 
 function bottalk::quest(%TrueClientId, %closestId, %initTalk, %message) {
 	%aiName = %closestId.name;
-	//process quest code
-	%trigger[1] = "buy";
-	%trigger[2] = $BotInfo[%aiName, CUE, 1];
-	%trigger[3] = $BotInfo[%aiName, NCUE, 1];
-	%trigger[4] = $BotInfo[%aiName, CUE, 2];
-	%trigger[5] = $BotInfo[%aiName, NCUE, 2];
-	%trigger[6] = $BotInfo[%aiName, CUE, 3];
-	%trigger[7] = $BotInfo[%aiName, NCUE, 3];
-	%trigger[8] = $BotInfo[%aiName, CUE, 4];
+	
+	// allow dyanmic amount of talking triggers
+    %triggerCount = 0;
+    %trigger[%triggerCount++] = "buy";
+
+    %index = 1;
+    while ($BotInfo[%aiName, CUE, %index] != "") {
+        %trigger[%triggerCount++] = $BotInfo[%aiName, CUE, %index];
+        %trigger[%triggerCount++] = $BotInfo[%aiName, NCUE, %index];
+        %index++;
+    }
 	
 	%hasTheStuff = HasThisStuff(%TrueClientId, $BotInfo[%aiName, NEED]);
 
@@ -575,18 +581,17 @@ function bottalk::quest(%TrueClientId, %closestId, %initTalk, %message) {
 	if($BotInfo[%aiName, LSAY] == "" && %hasTheStuff == 667)
 		%hasTheStuff = False;
 
-	%t1 = String::findSubStr(%message, %trigger[1]);
-
-	if(%t1 != -1) {
-		if($BotInfo[%aiName, SHOP] != "" || $BotInfo[%aiName, BELTSHOP] != "") {
-			SetupShop(%TrueClientId, %closestId);
-			AI::sayLater(%TrueClientId, %closestId, "Take a look at what I have.", True);
-		}
-		else
-			NewBotMessage(%TrueClientId, %closestId, "Oh, well I have nothing to sell.");
-		$state[%closestId, %TrueClientId] = "";
-		return;
-	}
+    // if they say "buy" check if they have anything to shop (should we even show buy if they dont have anything to sell?)
+	if (String::findSubStr(%message, %trigger[1]) != -1) {
+        if ($BotInfo[%aiName, SHOP] != "" || $BotInfo[%aiName, BELTSHOP] != "") {
+            SetupShop(%TrueClientId, %closestId);
+            AI::sayLater(%TrueClientId, %closestId, "Take a look at what I have.", True);
+        } else {
+            NewBotMessage(%TrueClientId, %closestId, "Oh, well I have nothing to sell.");
+        }
+        $state[%closestId, %TrueClientId] = "";
+        return;
+    }
 
 	if(%hasTheStuff == 666 && %initTalk) { // $state[%closestId, %TrueClientId] == "")
 		NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, CSAY], True);
@@ -599,39 +604,27 @@ function bottalk::quest(%TrueClientId, %closestId, %initTalk, %message) {
 	else if(%hasTheStuff == False) {
 		if(%initTalk) {
 			$botMenuOption[%TrueClientId,0] = %trigger[2];
-			$botMenuOption[%TrueClientId,1] = "Have anything for me to buy?";
+			if ($BotInfo[%aiName, SHOP] != "" || $BotInfo[%aiName, BELTSHOP] != "") {
+				$botMenuOption[%TrueClientId,1] = "Have anything for me to buy?";
+			}
 			NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 1] @ " [" @ %trigger[2] @ "]", True);
 			$state[%closestId, %TrueClientId] = 1;
 		}
 		else if($state[%closestId, %TrueClientId] == 1) {
-			if(String::findSubStr(%message, %trigger[2]) != -1) {
-				if (%trigger[4] != "") {
-					$botMenuOption[%TrueClientId,0] = %trigger[4];
-					NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 2] @ " [" @ %trigger[4] @ "]", True);
-				} else {
-					NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 2], True);
-					$state[%closestId, %TrueClientId] = "";
-				}		
-			}
-
-			if(String::findSubStr(%message, %trigger[4]) != -1) {
-				if (%trigger[6] != "") {
-					$botMenuOption[%TrueClientId,0] = %trigger[6];
-					NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 3] @ " [" @ %trigger[6] @ "]", True);
-				} else {
-					NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 3], True);
-					$state[%closestId, %TrueClientId] = "";
-				}		
-			}
-
-			if(%trigger[4] != "" && %trigger[6] == -1 && String::findSubStr(%message, %trigger[4]) != -1) {
-				NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 3], True);
-				$state[%closestId, %TrueClientId] = "";
-			}
-
-			if(%trigger[6] != "" && String::findSubStr(%message, %trigger[6]) != -1) {
-				NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 4], True);
-				$state[%closestId, %TrueClientId] = "";
+            // LongBow: Allow even more talking... they can talk all day now if they want
+			%dialogueIndex = 1;
+			while ($BotInfo[%aiName, SAY, %dialogueIndex + 1] != "" && %trigger[%dialogueIndex * 2] != "") {
+				%triggerIdx = %dialogueIndex * 2;
+				if(String::findSubStr(%message, %trigger[%triggerIdx]) != -1) {
+					if (%trigger[%triggerIdx + 2] != "") {
+						$botMenuOption[%TrueClientId,0] = %trigger[%triggerIdx + 2];
+						NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, %dialogueIndex + 1] @ " [" @ %trigger[%triggerIdx + 2] @ "]", True);
+					} else {
+						NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, %dialogueIndex + 1], True);
+						$state[%closestId, %TrueClientId] = "";
+					}	
+				}
+				%dialogueIndex++;
 			}
 		}
 	}

@@ -3543,9 +3543,9 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "GIVE SkeletonBone 1";
 			instant SimGroup "SAY1 Welcome to Kalm! We're just a small rural town but there are plenty of jobs to be found.";
 			instant SimGroup "CUE1 jobs";
-			instant SimGroup "SAY2 Try talking to some of the other villagers around. I am sure someone will have a job for you to do.";
+			instant SimGroup "SAY2 Try talking to some of the other villagers around town. I am sure someone will have something for you to do.";
 			instant SimGroup "CUE2 thanks";
-			instant SimGroup "SAY3 Any time stranger. Brien in the other room can give you some information on that belt you have there.";
+			instant SimGroup "SAY3 Any time stranger. Brien in the other room can give you some information about that belt you have there.";
 			instant SimGroup "NSAY1 I'll give you a Skeleton Bone for those 3 Enchanted Stones you have there.";
 			instant SimGroup "NCUE1 ok";
 			instant SimGroup "NSAY2 Thanks, here's your Skeleton Bone.";
@@ -3565,9 +3565,11 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "CUE1 belt?";
 			instant SimGroup "SAY2 Yeah, that thing around your waist. It gives you the power to press TAB and view items in your Inventory.";
 			instant SimGroup "CUE2 inventory";
-			instant SimGroup "SAY3 It even organizes all your things for you. A very handy item indeed!";
-			instant SimGroup "CUE3 thanks";
-			instant SimGroup "SAY4 Tell you what, once you game some experience come and visit me again. I'll give you a nice upgrade for your belt!";
+			instant SimGroup "SAY3 It even organizes all your things for you. A very handy item indeed, right?";
+			instant SimGroup "CUE3 sure";
+			instant SimGroup "SAY4 Tell you what, once you have gained some experience, come back and visit me. I'll give you a nice upgrade for your belt!";
+			instant SimGroup "CUE4 thanks";
+			instant SimGroup "SAY5 Just make sure to help the town out while you are at it. Oh, and make sure to talk to Lance. He can tell you about Skills.";
 			instant SimGroup "NSAY1 You made it! I'm very impressed!";
 			instant SimGroup "NCUE1 thanks";
 			instant SimGroup "NSAY2 Well then, here is a gift that I hope will help you on your adventures. Good luck!";

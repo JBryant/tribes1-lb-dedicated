@@ -392,7 +392,7 @@ function remoteConsider(%clientId)
 			%closest = Vector::getDistance(%clientPos, %botPos);
 			%botz = getWord(%botPos, 2);
 			%clz = getWord(%clientPos, 2);
-			newRotateTownBot(%clientId, %object, %clientPos, %botPos);
+			// newRotateTownBot(%clientId, %object, %clientPos, %botPos);
 			if(Client::getTeam(%clientId) != 0)
 				AI::sayLater(%clientId, %object, "Eek!", True);
 			else if(%closest <= $maxAIdistVec){
