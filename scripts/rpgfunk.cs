@@ -2618,22 +2618,38 @@ function InitObjectives()
 	%num = 0;
 	Team::setObjective(0, %num++, "<jc><f8>Welcome To Fantasy Realms RPG!");
 	Team::setObjective(0, %num++, "<f5>Download:\n<f0>https://www.moddb.com/mods/rpgmod/downloads/tribes-rpg-repack-minimal-full-ver");
+
 	Team::setObjective(0, %num++, "<f5>Getting Started:");
-	//Team::setObjective(0, %num++, "<jc><f4>IT IS HIGHLY RECOMMENDED THAT YOU VISIT THE TRPG HOMEPAGE AND READ THE NEWBIE GUIDE EXTENSIVELY BEFORE ATTEMPTING TO PLAY!");
-	Team::setObjective(0, %num++, "<f1>Use the TAB key to access your skills and assign your SP (skill points) to them.");
-	Team::setObjective(0, %num++, "<f1>To find the maximum SP capability for your level, take your level #, multiply it by 10 and add 20 to the result and add another 1 for each time you've remorted.");
-	Team::setObjective(0, %num++, "<f1>Once you reach level 101, you stop gaining EXP by killing bots or players, and you can then cast the remort spell which resets your skills and sets you back to level 1 but as a stronger class with a +.1 skill multiplier.");
-	Team::setObjective(0, %num++, "<f1>To talk to an NPC, just press T while looking at one. Number keys for further responses.");
+	Team::setObjective(0, %num++, "<f1>Press the Tab key to access your inventory, class and skills menus. Use the num pad or click to navigate the different menus.");
+	Team::setObjective(0, %num++, "<f1>Click the \"Use Pack\" (T) key to interact with NPCs and objects. Dialogue options can be selected with the number keys.");
 	Team::setObjective(0, %num++, "<f1>If you ever become lost, just stand still and type '#recall'.  This command will require that you wait a period of time for it to work.  Just be patient.");
-	Team::setObjective(0, %num++, "<f1>If you ever fall off of the map, or through it, use the same '#recall' command.  Before you do, however, disconnect from the server and reconnect so that your character isn't moving in any direction other than down while falling.");
 	Team::setObjective(0, %num++, "<f1>If your LCK is set to DEATH or if you have 0 LCK, you are able to be killed.  When killed, you automatically drop all of your items in a pack.  If you had at least 1 LCK at the time of death, then your pack will be protected.");
 	Team::setObjective(0, %num++, "<f1>Only you can pick up or #sharepack one of your protected packs.  If you had 0 LCK at the time of death, your pack will be unprotected and bots or other players could take it.");
 	Team::setObjective(0, %num++, "<f1>If your LCK is set to MISS, each hit that would normally kill you instead subtracts from your LCK each time you are 'hit'.");
-	Team::setObjective(0, %num++, "<f1>Pay attention to the skills that each class specializes in.  If you're interested in spell-casting, then you won't have much luck training your spell-casting as a Fighter, because your spellcasting multipliers are too low.");
 	Team::setObjective(0, %num++, "<f1>You can always find info on items, weapons, spells, and armour with the #w command.  If you wanted to find info on Cheetaurs Paws, just type in '#w cheetaurspaws'.  Notice not to use any spaces in the name of the item/spell.");
-	//Team::setObjective(0, %num++, "<jc><f4>If you ever encounter a bug or glitch of any sort in the game, make sure you can duplicate it and then send an e-mail to beatme101@gmail.com with all of the information on the bug and instructions on how to duplicate it.");
-	//Team::setObjective(0, %num++, "<jc><f4>I may reward you appropriately depending on how severe the bug/glitch is. And if you do not exploit it on a server that is not your own.");
-	Team::setObjective(0, %num++, "<jc><f2>TIP: use a different password for each RPG mod server so people don't steal your character. Keep track of each, of course.");
+
+	Team::setObjective(0, %num++, "<f5>Classes:");
+	Team::setObjective(0, %num++, "<f1>In this version of TRPG everything revloves around Classes! Different classes will have access to different Passive Skills, Active Skills, and Spells.");
+	Team::setObjective(0, %num++, "<f1>Passive Skills are skills you spend SP to upgrade your character, Active Skills are skills you can use in real time and Spells are spells you can cast.");
+	Team::setObjective(0, %num++, "<f1>Starting classes are Squire and Chemist. Squire leads to combat oriented classes, while Chemist leads to magic oriented classes.");
+	Team::setObjective(0, %num++, "<f1>To unlock new classes you must get a certain number of Remort Levels in the various classes. Different combinations can be used to access rare and powerful classes.");
+	Team::setObjective(0, %num++, "<f1>For example, once you get two Remort Levels of Squire you will have access to the Knight and Archer classes. And for the Chemist you get access to White Mage and Black Mage.");
+	Team::setObjective(0, %num++, "<f1>There currently are 18 standard classes and 4 rare classes. To find these classes you must experiment with differnt class combinations!");
+	Team::setObjective(0, %num++, "<f1>Somewhere in the world you can find a Master of each class who can give hints on how to unlock that class, as well as teach you new skills.");
+	Team::setObjective(0, %num++, "<f1>Once you reach level 101 you can cast the remort spell which saves your current class level, resets you to level 1 and allows you to pick a new class to level.");
+	Team::setObjective(0, %num++, "<f1>As your overall remort level grows and class levels grow, your skills will slightly increase in power.");
+
+	Team::setObjective(0, %num++, "<f5>Weapons and Materia:");
+	Team::setObjective(0, %num++, "<f1>We've added a number of new weapon types and skills to the game. You can find out more about these weapons by typing #w weaponname.");
+	Team::setObjective(0, %num++, "<f1>There are 6 weapon types: Swords, Axes, Hammers, Katanas, Bows and Spears which are all useable by different classes.");
+	Team::setObjective(0, %num++, "<f1>We've also added Materia into the game. Materia are rare items that drop throughout the world and can be used to upgrade your weapons and armour.");
+	Team::setObjective(0, %num++, "<f1>Once you have found materia you can slot them into your weapons by going to your inventory and selecting the weapon you want to upgrade.");
+	Team::setObjective(0, %num++, "<f1>You will see an option to Slot materia into the weapon and then you can select the materia you want to slot in. A weapon only has 1 slot and the enchantment is ireversable, so choose wisely.");
+	Team::setObjective(0, %num++, "<f1>Once a weapon has been slotted with materia it will boost the weapons damage and give it special abilities. Higher level materia will give better bonuses.");
+	Team::setObjective(0, %num++, "<f1>You can create higher mataria by combining multiple lower level materias into a single higher level materia.  This can be done at the Materia Master in the world.");
+
+	
+    Team::setObjective(0, %num++, "<jc><f2>We hope you enjoy the game! If you have any questions or need help, please ask in the chat. We have a great community of players who are always willing to help out.");
 	Team::setObjective(0, %num++, "<jc><f2>Tribes RPG v 6.9, brought to you by tribesrpg.org");
 
 

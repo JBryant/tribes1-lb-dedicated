@@ -475,6 +475,7 @@ function processMenuchangeclass(%clientId, %className)
 	%clientId.choosingClass = "";
 
 	SaveCharacter(%clientId);
+	Game::refreshClientScore(%clientId);
 }
 
 function OldGetLevel(%ex, %clientId)

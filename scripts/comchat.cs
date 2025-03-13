@@ -2366,8 +2366,16 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 		if(%w1 == "#human")
 		{
-			if(%clientToServerAdminLevel >= 4)
+			if(%clientToServerAdminLevel >= 4) {
 				ChangeRace(%TrueClientId, "Human");
+				Game::refreshClientScore(%TrueClientId);
+			}
+			return;
+		}
+		if(%w1 == "#dk" || %w1 == "#deathknight")
+		{
+			if(%clientToServerAdminLevel >= 4)
+				ChangeRace(%TrueClientId, "DeathKnight");
 			return;
 		}
 		if(%w1 == "#loadworld")
