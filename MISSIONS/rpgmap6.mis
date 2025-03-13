@@ -3202,7 +3202,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NAME Kalm Merchant";
 			instant SimGroup "ITEMS CLASS Chemist LVL 2 LCK 0";
 			instant SimGroup "RACE MaleHuman";
-			instant SimGroup "BELTSHOP 1 2 17 18 19 20 21 22 23 24 25 26 27 28 29 30";
+			instant SimGroup "BELTSHOP 1 175 13 17 51 100 200";
 		};
 		instant SimGroup "merchant6" {
 			instant Marker "mythril mines merchant" {
@@ -3541,9 +3541,11 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NEED EnchantedStone 3";
 			instant SimGroup "TAKE EnchantedStone 3";
 			instant SimGroup "GIVE SkeletonBone 1";
-			instant SimGroup "SAY1 Welcome to Keldrin Town! I'm sure you figured out by now that talking to us is as easy as hitting use and pressing numbers.";
-			instant SimGroup "CUE1 more";
-			instant SimGroup "SAY2 If you want to address just players in your current zone, try using Team Chat (Y) instead of regular chat (P).";
+			instant SimGroup "SAY1 Welcome to Kalm! We're just a small rural town but there are plenty of jobs to be found.";
+			instant SimGroup "CUE1 jobs";
+			instant SimGroup "SAY2 Try talking to some of the other villagers around. I am sure someone will have a job for you to do.";
+			instant SimGroup "CUE2 thanks";
+			instant SimGroup "SAY3 Any time stranger. Brien in the other room can give you some information on that belt you have there.";
 			instant SimGroup "NSAY1 I'll give you a Skeleton Bone for those 3 Enchanted Stones you have there.";
 			instant SimGroup "NCUE1 ok";
 			instant SimGroup "NSAY2 Thanks, here's your Skeleton Bone.";
@@ -3555,13 +3557,17 @@ instant SimGroup "MissionGroup" {
 				position = "-2430.5 -246.25 77.593";
 				rotation = "0 -0 2.38298";
 			};
-			instant SimGroup "NAME Krennin";
+			instant SimGroup "NAME Brien";
 			instant SimGroup "RACE MaleHuman";
 			instant SimGroup "NEED CNT <1 CNTAFFECTS quest11 EXP 1000";
 			instant SimGroup "GIVE CNT +1 CNTAFFECTS quest11 ApprenticeRobe 1";
-			instant SimGroup "SAY1 To equip weapons, look at your inventory (i) and click on the weapon in question. Then click USE.";
-			instant SimGroup "CUE1 more";
-			instant SimGroup "SAY2 If you are a mage, you should learn the #cast command, such as #cast thorn. If you can reach Level 2, come back and see me.";
+			instant SimGroup "SAY1 Hey, nice belt you got there!";
+			instant SimGroup "CUE1 belt?";
+			instant SimGroup "SAY2 Yeah, that thing around your waist. It gives you the power to press TAB and view items in your Inventory.";
+			instant SimGroup "CUE2 inventory";
+			instant SimGroup "SAY3 It even organizes all your things for you. A very handy item indeed!";
+			instant SimGroup "CUE3 thanks";
+			instant SimGroup "SAY4 Tell you what, once you game some experience come and visit me again. I'll give you a nice upgrade for your belt!";
 			instant SimGroup "NSAY1 You made it! I'm very impressed!";
 			instant SimGroup "NCUE1 thanks";
 			instant SimGroup "NSAY2 Well then, here is a gift that I hope will help you on your adventures. Good luck!";

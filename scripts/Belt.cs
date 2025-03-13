@@ -2346,7 +2346,7 @@ $restoreValue[EnergyPotion, MP] = 50;
 // PhensSword - A very cool blue sword that looks magical. Very niiicceeeee.
 // Slasher - Cool sideways slasher with grooves in it for catching blades
 
-// Swords
+// Swords (17 - 49)
 $description = "This broad-bladed sword is suited for large slashing strokes. It is inexpensive, but not particularly powerful.";
 BeltItem::AddWeapon("Broadsword", "Broadsword", "Sword", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20", 17);
 $description = "This straight and sharp double-edged blade can be used for either stabbing or slashing.";
@@ -2383,58 +2383,59 @@ BeltItem::AddWeapon("Onion Sword", "OnionSword", "Sword", $SwordAccessoryType, $
 // VikingAxe - Shiny viking looking axe
 // WarAxe - New testing of battleaxe2.dts
 
-// Axes
+// Axes (50 - 99)
 $description = "An inexpensive axe that is easy to wield. It is easy for new axe users, but not particularly powerful.";
-BeltItem::AddWeapon("Hand Axe", "HandAxe", "Hatchet", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 1", "25", 31); // shop item 47
+BeltItem::AddWeapon("Hand Axe", "HandAxe", "Hatchet", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 1", "25", 51); // shop item 47
 $description = "A medium sized axe that is relatively common. It is most often used by woodsman, but is heavy enough to deal considerable damage.";
-BeltItem::AddWeapon("Axe", "Axe", "Axe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 100", "35", 32);
+BeltItem::AddWeapon("Axe", "Axe", "Axe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 100", "35", 52);
 $description = "A battle axe with a long handle. Designed for two-handed use, it can easily chop off an enemy's limbs.";
-BeltItem::AddWeapon("Battle Axe", "BattleAxe", "BattleAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 200", "45", 33);
+BeltItem::AddWeapon("Battle Axe", "BattleAxe", "BattleAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 200", "45", 53);
 $description = "A mythril axe that is light and easy to wield. It is sharp enough to cut through even the toughest armor.";
-BeltItem::AddWeapon("Mythril Axe", "MythrilAxe", "VikingAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 300", "55", 34);
+BeltItem::AddWeapon("Mythril Axe", "MythrilAxe", "VikingAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 300", "55", 54);
 $description = "An axe with a large head. Much bigger than the traditional woodman's axe, hence its name.";
-BeltItem::AddWeapon("Giant Axe", "GiantAxe", "BattleAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 400", "65", 35);
+BeltItem::AddWeapon("Giant Axe", "GiantAxe", "BattleAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 400", "65", 55);
 $description = "The blade of this axe is a deep crimson, as if it were drenched in blood. It is cruelly sharp.";
-BeltItem::AddWeapon("Blood Axe", "BloodAxe", "Hatchet", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 500", "75", 36);
+BeltItem::AddWeapon("Blood Axe", "BloodAxe", "Hatchet", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 500", "75", 56);
 $description = "A battle axe constructed using ancient techniques that have long since perished from the world.";
-BeltItem::AddWeapon("Ancient Axe", "AncientAxe", "Axe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 600", "85", 37);
+BeltItem::AddWeapon("Ancient Axe", "AncientAxe", "Axe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 600", "85", 57);
 $description = "This axe not only has impressive destructive power, but can also slow the actions of its target.";
-BeltItem::AddWeapon("Slasher", "Slasher", "Hatchet", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 700", "95", 38);
+BeltItem::AddWeapon("Slasher", "Slasher", "Hatchet", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 700", "95", 58);
 $description = "The countless tiny diamonds embedded into this axe's blade saw into its victims, causing great damage.";
-BeltItem::AddWeapon("Diamond Axe", "DiamondAxe", "VikingAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 800", "105", 39);
+BeltItem::AddWeapon("Diamond Axe", "DiamondAxe", "VikingAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 800", "105", 59);
 $description = "A axe of extraplanar origin.";
-BeltItem::AddWeapon("Materia Axe", "MateriaAxe", "BattleAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 900", "115", 40);
+BeltItem::AddWeapon("Materia Axe", "MateriaAxe", "BattleAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 900", "115", 60);
 $description = "This axe's small size belies its incredible destructive power.";
-BeltItem::AddWeapon("Francisca", "Francisca", "Hatchet", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 1000", "125", 41);
+BeltItem::AddWeapon("Francisca", "Francisca", "Hatchet", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 1000", "125", 61);
 $description = "A axe inscribed with ancient runes.";
-BeltItem::AddWeapon("Rune Axe", "RuneAxe", "Axe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 1200", "145", 42);
+BeltItem::AddWeapon("Rune Axe", "RuneAxe", "Axe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 1200", "145", 62);
 $description = "A axe that glitters cruelly like a crescent moon.";
-BeltItem::AddWeapon("Moon Axe", "MoonAxe", "BattleAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 1500", "185", 43);
+BeltItem::AddWeapon("Moon Axe", "MoonAxe", "BattleAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 1500", "185", 63);
 $description = "A axe forged for axe users who have mastered every technique and achieved knighthood's most exalted rank.";
-BeltItem::AddWeapon("Onion Axe", "OnionAxe", "VikingAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 2000", "245", 44); // shop item 48
+BeltItem::AddWeapon("Onion Axe", "OnionAxe", "VikingAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 2000", "245", 64); // shop item 48
 
-// $description = "A club is a simple weapon that is easy to use. It is inexpensive, but not particularly powerful.";
-// BeltItem:AddWeapon("Club", "Club", "Club", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1", "22", 45);
+// Hammers: (100 - 124)
+$description = "A club is a simple weapon that is easy to use. It is inexpensive, but not particularly powerful.";
+BeltItem::AddWeapon("Club", "Club", "Club", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1", "22", 100);
 // $description = "A quarterstaff is a long wooden pole that can be used to strike enemies from a distance. It is easy to use, but not particularly powerful.";
-// BeltItem:AddWeapon("Quarter Staff", "QuarterStaff", "QuarterStaff", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 100", "32", 46);
+// BeltItem::AddWeapon("Quarter Staff", "QuarterStaff", "QuarterStaff", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 100", "32", 46);
 // $description = "A club that is made with crude materials. It smells of rot and decay.";
-// BeltItem:AddWeapon("Bone Club", "BoneClub", "BoneClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 200", "42", 47);
+// BeltItem::AddWeapon("Bone Club", "BoneClub", "BoneClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 200", "42", 47);
 // $description = "A club with spikes driven into it. It is a brutal weapon that is easy to use.";
-// BeltItem:AddWeapon("Spiked Club", "SpikedClub", "SpikedClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 300", "52", 48);
+// BeltItem::AddWeapon("Spiked Club", "SpikedClub", "SpikedClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 300", "52", 48);
 // $description = "A mace is a heavy weapon that is difficult to use, but very powerful.";
-// BeltItem:AddWeapon("Mace", "Mace", "Mace", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 400", "62", 49);
+// BeltItem::AddWeapon("Mace", "Mace", "Mace", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 400", "62", 49);
 // $description = "A hammer pick is a weapon that is used to break through armor.";
-// BeltItem:AddWeapon("Hammer Pick", "HammerPick", "HammerPick", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 500", "72", 50);
+// BeltItem::AddWeapon("Hammer Pick", "HammerPick", "HammerPick", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 500", "72", 50);
 // $description = "A club made from the bones of a large creature. It is covered in spikes and is very heavy.";
-// BeltItem:AddWeapon("Spiked Bone Club", "SpikedBoneClub", "SpikedBoneClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 600", "82", 51);
+// BeltItem::AddWeapon("Spiked Bone Club", "SpikedBoneClub", "SpikedBoneClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 600", "82", 51);
 // $description = "A long staff that is used to strike enemies from a distance. It is easy to use, but not particularly powerful.";
-// BeltItem:AddWeapon("Long Staff", "LongStaff", "LongStaff", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 700", "92", 52);
+// BeltItem::AddWeapon("Long Staff", "LongStaff", "LongStaff", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 700", "92", 52);
 // $description = "A war hammer is a heavy weapon that is difficult to use, but very powerful.";
-// BeltItem:AddWeapon("War Hammer", "WarHammer", "WarHammer", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 800", "102", 53);
+// BeltItem::AddWeapon("War Hammer", "WarHammer", "WarHammer", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 800", "102", 53);
 // $description = "A staff that is used to strike enemies from a distance. It is easy to use, but not particularly powerful.";
-// BeltItem:AddWeapon("Justice Staff", "JusticeStaff", "JusticeStaff", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 900", "112", 54);
+// BeltItem::AddWeapon("Justice Staff", "JusticeStaff", "JusticeStaff", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 900", "112", 54);
 // $description = "A war maul is a heavy weapon that is difficult to use, but very powerful.";
-// BeltItem:AddWeapon("War Maul", "WarMaul", "WarMaul", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1000", "122", 55);
+// BeltItem::AddWeapon("War Maul", "WarMaul", "WarMaul", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1000", "122", 55);
 // $description = "";
 // BeltItem::AddWeapon("Rune Axe", "RuneAxe", "Axe", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1200", "145", 42);
 // $description = ";
@@ -2455,8 +2456,7 @@ BeltItem::AddWeapon("Onion Axe", "OnionAxe", "VikingAxe", $AxeAccessoryType, $de
 // BeltItem::AddEquippable("War Hammer", "WarHammer", "WeaponItems", $AccessoryVar[WarHammer, $Weight], GenerateItemCost(WarHammer), "Hammer");
 // BeltItem::AddEquippable("Justice Staff", "JusticeStaff", "WeaponItems", $AccessoryVar[JusticeStaff, $Weight], GenerateItemCost(JusticeStaff), "LongStaff");
 // BeltItem::AddEquippable("War Maul", "WarMaul", "WeaponItems", $AccessoryVar[WarMaul, $Weight], GenerateItemCost(WarMaul), "Hammer");
-
-// Hammers
+//
 // BeltItem::AddEquippable("Pick Axe", "PickAxe", "WeaponItems", $AccessoryVar[PickAxe, $Weight], GenerateItemCost(PickAxe), "Pick");
 // BeltItem::AddEquippable("Knife", "Knife", "WeaponItems", $AccessoryVar[Knife, $Weight], GenerateItemCost(Knife), "Dagger");
 // BeltItem::AddEquippable("Dagger", "Dagger", "WeaponItems", $AccessoryVar[Dagger, $Weight], GenerateItemCost(Dagger), "Dagger");
@@ -2467,43 +2467,19 @@ BeltItem::AddWeapon("Onion Axe", "OnionAxe", "VikingAxe", $AxeAccessoryType, $de
 // BeltItem::AddEquippable("Rapier", "Rapier", "WeaponItems", $AccessoryVar[Rapier, $Weight], GenerateItemCost(Rapier), "Katana");
 // BeltItem::AddEquippable("Awl Pike", "AwlPike", "WeaponItems", $AccessoryVar[AwlPike, $Weight], GenerateItemCost(AwlPike), "Spear");
 
-// Katanas
+// Katanas (125 - 149)
 
-// Staves
+// Staves (150 - 174)
 
-// Bows
+// Bows (175 - 199)
 $description = "A sling";
-BeltItem::AddWeapon("Sling", "Sling", "Sling", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "15");
+BeltItem::AddWeapon("Sling", "Sling", "Sling", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "15", 175);
 
-// Enemy Weapons
-$description = "A casting blade.";
-BeltItem::AddWeapon("Casting Blade", "CastingBlade", "CastingBlade", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
-$description = "A chipped dagger that looks dirty and worn.";
-BeltItem::AddWeapon("Chipped Dagger", "ChippedDagger", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "10");
-$description = "A dagger that looks dirty and worn.";
-BeltItem::AddWeapon("Dagger", "Dagger", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
-
-BeltItem::AddWeapon("Rune Sword", "RuneSword", "GemSword", $SwordAccessoryType, "A mystical rune blade", $SkillSwords, $SkillSwords @ " 20", "200");
-
-// rusties + damaged weapons
-// BeltItem::AddEquippable("Rusty Hatchet", "RHatchet", "WeaponItems", $AccessoryVar[RHatchet, $Weight], $ItemCost[RHatchet], "Hatchet");
-// BeltItem::AddEquippable("Rusty Broad Sword", "RBroadSword", "WeaponItems", $AccessoryVar[RBroadSword, $Weight], $ItemCost[RBroadSword], "Sword");
-// BeltItem::AddEquippable("Rusty Long Sword", "RLongSword", "WeaponItems", $AccessoryVar[RLongSword, $Weight], $ItemCost[RLongSword], "LongSword");
-// BeltItem::AddEquippable("Cracked Club", "RClub", "WeaponItems", $AccessoryVar[RClub, $Weight], $ItemCost[RClub], "Mace");
-// BeltItem::AddEquippable("Cracked Spiked Club", "RSpikedClub", "WeaponItems", $AccessoryVar[RSpikedClub, $Weight], $ItemCost[RSpikedClub], "Mace");
-// BeltItem::AddEquippable("Rusty Knife", "RKnife", "WeaponItems", $AccessoryVar[RKnife, $Weight], $ItemCost[RKnife], "Dagger");
-// BeltItem::AddEquippable("Rusty Dagger", "RDagger", "WeaponItems", $AccessoryVar[RDagger, $Weight], $ItemCost[RDagger], "Dagger");
-// BeltItem::AddEquippable("Rusty Short Sword", "RShortSword", "WeaponItems", $AccessoryVar[RShortSword, $Weight],$ItemCost[RShortSword], "ShortSword");
-// BeltItem::AddEquippable("Rusty Pick Axe", "RPickAxe", "WeaponItems", $AccessoryVar[RPickAxe, $Weight], $ItemCost[RPickAxe], "Pick");
-// BeltItem::AddEquippable("Rusty Short Bow", "RShortBow", "WeaponItems", $AccessoryVar[RShortBow, $Weight], $ItemCost[RShortBow], "LongBow");
-// BeltItem::AddEquippable("Cracked Light Crossbow", "RLightCrossbow", "WeaponItems", $AccessoryVar[RLightCrossbow, $Weight], $ItemCost[RLightCrossbow], "Crossbow");
-// BeltItem::AddEquippable("Rusty War Axe", "RWarAxe", "WeaponItems", $AccessoryVar[RWarAxe, $Weight], $ItemCost[RWarAxe], "Axe");
-
-// Medium / Heavy Armors
-// BeltItem::AddArmor(%name, %item, %armorSkin, %hitSound, %special, %weight, %miscInfo, %shopIndex)
+// Armors and Shields (200 - 299)
+// BeltItem::AddArmor(%name, %item, %armorSkin, %hitSound, %special, %weight, %skillRestriction, %miscInfo, %shopIndex)
 
 $description = "Made for use in battle, this is sturdier than normal clothing.";
-BeltItem::AddArmor("Leather Clothing", "LeatherClothing", "rpgpadded", SoundHitFlesh, "7 30 4 5","10", $SkillEndurance @ " 5", $description, 35);
+BeltItem::AddArmor("Leather Clothing", "LeatherClothing", "rpgpadded", SoundHitFlesh, "7 30 4 5", "10", $SkillEndurance @ " 5", $description, 200);
 $description = "Armor made from layers of tanned leather.";
 BeltItem::AddArmor("Leather Armor", "LeatherArmor", "rpgleather", SoundHitLeather, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Linen armor with a bronze breastplate.";
@@ -2553,7 +2529,6 @@ $description = "Padded Armor";
 BeltItem::AddRobe("Fine Robe", "FineRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
 $description = "Padded Armor";
 BeltItem::AddRobe("Elven Robe", "ElvenRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
-
 // Shields
 $description = "Padded Armor";
 BeltItem::AddShield("Knight Shield", "KnightShield", $AccessoryVar[KnightShield, $Weight]);
@@ -2562,7 +2537,8 @@ BeltItem::AddShield("Heavenly Shield", "HeavenlyShield", $AccessoryVar[HeavenlyS
 $description = "Padded Armor";
 BeltItem::AddShield("Dragon Shield", "DragonShield", $AccessoryVar[DragonShield, $Weight]);
 
-// Accessory Items
+
+// Accessory Items (300 - 499)
 BeltItem::Add("Cheetaurs Paws", "CheetaursPaws", "AccessoryItems", $AccessoryVar[CheetaursPaws, $Weight], GenerateItemCost(CheetaursPaws));
 BeltItem::Add("Cheetaurs Paws "@$equippedString, "CheetaursPaws0", "AccessoryItems", $AccessoryVar[CheetaursPaws, $Weight], GenerateItemCost(CheetaursPaws));
 BeltItem::Add("Boots of Gliding", "BootsOfGliding", "AccessoryItems", $AccessoryVar[BootsOfGliding, $Weight], GenerateItemCost(BootsOfGliding));
@@ -2571,10 +2547,18 @@ BeltItem::Add("Wind Walkers", "WindWalkers", "AccessoryItems", $AccessoryVar[Win
 BeltItem::Add("Wind Walkers "@$equippedString, "WindWalkers0", "AccessoryItems", $AccessoryVar[WindWalkers, $Weight], GenerateItemCost(WindWalkers));
 BeltItem::Add("Tent", "Tent", "AccessoryItems", $AccessoryVar[Tent, $Weight], GenerateItemCost(Tent));
 
-// Quest Items
+// Other Items (500+)
 BeltItem::Add("Black Statue", "BlackStatue", "QuestItems", $AccessoryVar[BlackStatue, $Weight], GenerateItemCost(BlackStatue));
 BeltItem::Add("Skeleton Bone", "SkeletonBone", "QuestItems", $AccessoryVar[SkeletonBone, $Weight], GenerateItemCost(SkeletonBone));
 BeltItem::Add("Enchanted Stone", "EnchantedStone", "QuestItems", $AccessoryVar[EnchantedStone, $Weight], GenerateItemCost(EnchantedStone));
 BeltItem::Add("Dragon Scale", "DragonScale", "QuestItems", $AccessoryVar[DragonScale, $Weight], GenerateItemCost(DragonScale));
 BeltItem::Add("Parchment", "Parchment", "QuestItems", $AccessoryVar[Parchment, $Weight], GenerateItemCost(Parchment));
 BeltItem::Add("Magic Dust", "MagicDust", "QuestItems", $AccessoryVar[MagicDust, $Weight], GenerateItemCost(MagicDust));
+
+// Enemy Weapons (no shop index)
+$description = "A casting blade.";
+BeltItem::AddWeapon("Casting Blade", "CastingBlade", "CastingBlade", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
+$description = "A chipped dagger that looks dirty and worn.";
+BeltItem::AddWeapon("Chipped Dagger", "ChippedDagger", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "10");
+$description = "A dagger that looks dirty and worn.";
+BeltItem::AddWeapon("Dagger", "Dagger", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");

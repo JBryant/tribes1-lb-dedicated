@@ -559,10 +559,14 @@ function bottalk::porter(%TrueClientId, %closestId, %initTalk, %message){
 function bottalk::quest(%TrueClientId, %closestId, %initTalk, %message) {
 	%aiName = %closestId.name;
 	//process quest code
+	%trigger[1] = "buy";
 	%trigger[2] = $BotInfo[%aiName, CUE, 1];
 	%trigger[3] = $BotInfo[%aiName, NCUE, 1];
-	%trigger[4] = "buy";
-	%trigger[5] = $BotInfo[%aiName, CUE, 2];
+	%trigger[4] = $BotInfo[%aiName, CUE, 2];
+	%trigger[5] = $BotInfo[%aiName, NCUE, 2];
+	%trigger[6] = $BotInfo[%aiName, CUE, 3];
+	%trigger[7] = $BotInfo[%aiName, NCUE, 3];
+	%trigger[8] = $BotInfo[%aiName, CUE, 4];
 	
 	%hasTheStuff = HasThisStuff(%TrueClientId, $BotInfo[%aiName, NEED]);
 
@@ -571,12 +575,10 @@ function bottalk::quest(%TrueClientId, %closestId, %initTalk, %message) {
 	if($BotInfo[%aiName, LSAY] == "" && %hasTheStuff == 667)
 		%hasTheStuff = False;
 
+	%t1 = String::findSubStr(%message, %trigger[1]);
 
-	%t4 = String::findSubStr(%message, %trigger[4]);
-	if(%t4 != -1)
-	{
-		if($BotInfo[%aiName, SHOP] != "" || $BotInfo[%aiName, BELTSHOP] != "")
-		{
+	if(%t1 != -1) {
+		if($BotInfo[%aiName, SHOP] != "" || $BotInfo[%aiName, BELTSHOP] != "") {
 			SetupShop(%TrueClientId, %closestId);
 			AI::sayLater(%TrueClientId, %closestId, "Take a look at what I have.", True);
 		}
@@ -586,42 +588,49 @@ function bottalk::quest(%TrueClientId, %closestId, %initTalk, %message) {
 		return;
 	}
 
-	if(%hasTheStuff == 666 && %initTalk)// $state[%closestId, %TrueClientId] == "")
-	{
+	if(%hasTheStuff == 666 && %initTalk) { // $state[%closestId, %TrueClientId] == "")
 		NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, CSAY], True);
 		$state[%closestId, %TrueClientId] = -5;
 	}
-	else if(%hasTheStuff == 667 && %initTalk)// $state[%closestId, %TrueClientId] == "")
-	{
+	else if(%hasTheStuff == 667 && %initTalk) { // $state[%closestId, %TrueClientId] == "")
 		NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, LSAY], True);
 		$state[%closestId, %TrueClientId] = -5;
 	}
-	else if(%hasTheStuff == False)
-	{
-		if(%initTalk)
-		{
+	else if(%hasTheStuff == False) {
+		if(%initTalk) {
 			$botMenuOption[%TrueClientId,0] = %trigger[2];
 			$botMenuOption[%TrueClientId,1] = "Have anything for me to buy?";
 			NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 1] @ " [" @ %trigger[2] @ "]", True);
 			$state[%closestId, %TrueClientId] = 1;
 		}
-		else if($state[%closestId, %TrueClientId] == 1)
-		{
-			if(String::findSubStr(%message, %trigger[2]) != -1)
-			{
-				if (%trigger[5] != "") {
-					$botMenuOption[%TrueClientId,0] = %trigger[5];
-					$botMenuOption[%TrueClientId,1] = "Have anything for me to buy?";
-					NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 2] @ " [" @ %trigger[5] @ "]", True);
+		else if($state[%closestId, %TrueClientId] == 1) {
+			if(String::findSubStr(%message, %trigger[2]) != -1) {
+				if (%trigger[4] != "") {
+					$botMenuOption[%TrueClientId,0] = %trigger[4];
+					NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 2] @ " [" @ %trigger[4] @ "]", True);
 				} else {
 					NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 2], True);
 					$state[%closestId, %TrueClientId] = "";
 				}		
 			}
 
-			if(%trigger[5] != "" && String::findSubStr(%message, %trigger[5]) != -1)
-			{
+			if(String::findSubStr(%message, %trigger[4]) != -1) {
+				if (%trigger[6] != "") {
+					$botMenuOption[%TrueClientId,0] = %trigger[6];
+					NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 3] @ " [" @ %trigger[6] @ "]", True);
+				} else {
+					NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 3], True);
+					$state[%closestId, %TrueClientId] = "";
+				}		
+			}
+
+			if(%trigger[4] != "" && %trigger[6] == -1 && String::findSubStr(%message, %trigger[4]) != -1) {
 				NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 3], True);
+				$state[%closestId, %TrueClientId] = "";
+			}
+
+			if(%trigger[6] != "" && String::findSubStr(%message, %trigger[6]) != -1) {
+				NewBotMessage(%TrueClientId, %closestId, $BotInfo[%aiName, SAY, 4], True);
 				$state[%closestId, %TrueClientId] = "";
 			}
 		}
