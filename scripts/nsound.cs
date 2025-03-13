@@ -1877,6 +1877,26 @@ SoundData MClip6
 	wavFileName = "mclip6.wav";
 	profile = Profile3dNear;
 };
+
+// new sounds
+SoundData AmbientScurry
+{
+	wavFileName = "ambient_scurry.wav";
+	profile = Profile3dNear;
+};
+
+SoundData MedicSpell
+{
+	wavFileName = "medicspell.wav";
+	profile = Profile3dNear;
+};
+
+SoundData AmrbroseSwordA
+{
+   wavFileName = "ambrosesworda.wav";
+   profile = Profile3dNear;
+};
+
 //================================================
 
 function InitSoundPoints()

@@ -2279,24 +2279,6 @@ BeltItem::Add("Emerald","Emerald","GemItems",0.2,9702);
 BeltItem::Add("Diamond","Diamond","GemItems",0.1,16575);
 BeltItem::Add("Keldrinite","Keldrinite","GemItems",5.0,125200);
 
-
-//Potions
-BeltItem::Add("Heal Potion","HealPotion","PotionItems", 0.5, 20, "", 13);
-$AccessoryVar[Healpotion, $MiscInfo] = "A potion of Light healing that heals 25 HP";
-$restoreValue[Healpotion, HP] = 25;
-
-BeltItem::Add("Greater Heal Potion","GreaterHealPotion","PotionItems", 1, 100, "", 14);
-$AccessoryVar[GreaterHealPotion, $MiscInfo] = "A potion of Greater Healing that heals 80 HP";
-$restoreValue[GreaterHealPotion, HP] = 80;
-
-BeltItem::Add("Mana Potion","ManaPotion","PotionItems", 0.5, 20, "", 15);
-$AccessoryVar[ManaPotion, $MiscInfo] = "A Mana Potion that provides 20 MP";
-$restoreValue[ManaPotion, MP] = 20;
-
-BeltItem::Add("Energy Potion","EnergyPotion","PotionItems", 1, 100, "", 16);
-$AccessoryVar[EnergyPotion, $MiscInfo] = "An Energy Potion that provides 50 MP";
-$restoreValue[EnergyPotion, MP] = 50;
-
 // $AccessoryVar[Hatchet, $SpecialVar] = "6 20";                  //12 (5)
 // $AccessoryVar[BroadSword, $SpecialVar] = "6 35";               //21 (5)
 // $AccessoryVar[WarAxe, $SpecialVar] = "6 70";                   //30 (7)
@@ -2538,6 +2520,7 @@ $description = "Padded Armor";
 BeltItem::AddShield("Dragon Shield", "DragonShield", $AccessoryVar[DragonShield, $Weight]);
 
 
+// function BeltItem::Add(%name, %item, %type, %weight, %cost, %image, %shopIndex) {
 // Accessory Items (300 - 499)
 BeltItem::Add("Cheetaurs Paws", "CheetaursPaws", "AccessoryItems", $AccessoryVar[CheetaursPaws, $Weight], GenerateItemCost(CheetaursPaws));
 BeltItem::Add("Cheetaurs Paws "@$equippedString, "CheetaursPaws0", "AccessoryItems", $AccessoryVar[CheetaursPaws, $Weight], GenerateItemCost(CheetaursPaws));
@@ -2548,6 +2531,27 @@ BeltItem::Add("Wind Walkers "@$equippedString, "WindWalkers0", "AccessoryItems",
 BeltItem::Add("Tent", "Tent", "AccessoryItems", $AccessoryVar[Tent, $Weight], GenerateItemCost(Tent));
 
 // Other Items (500+)
+
+//Potions
+BeltItem::Add("Heal Potion","HealPotion","PotionItems", 0.5, 20, "", 501);
+$AccessoryVar[Healpotion, $MiscInfo] = "A potion of Light healing that heals 25 HP";
+$restoreValue[Healpotion, HP] = 25;
+
+BeltItem::Add("Greater Heal Potion","GreaterHealPotion","PotionItems", 1, 100, "", 502);
+$AccessoryVar[GreaterHealPotion, $MiscInfo] = "A potion of Greater Healing that heals 80 HP";
+$restoreValue[GreaterHealPotion, HP] = 80;
+
+BeltItem::Add("Mana Potion","ManaPotion","PotionItems", 0.5, 20, "", 503);
+$AccessoryVar[ManaPotion, $MiscInfo] = "A Mana Potion that provides 20 MP";
+$restoreValue[ManaPotion, MP] = 20;
+
+BeltItem::Add("Energy Potion","EnergyPotion","PotionItems", 1, 100, "", 504);
+$AccessoryVar[EnergyPotion, $MiscInfo] = "An Energy Potion that provides 50 MP";
+$restoreValue[EnergyPotion, MP] = 50;
+
+BeltItem::Add("Healing Kit","HealingKit","QuestItems", 0.1, 5, "", 505);
+$AccessoryVar[HealingKit, $MiscInfo] = "A medical kit that that let's you mend minor wounds.";
+
 BeltItem::Add("Black Statue", "BlackStatue", "QuestItems", $AccessoryVar[BlackStatue, $Weight], GenerateItemCost(BlackStatue));
 BeltItem::Add("Skeleton Bone", "SkeletonBone", "QuestItems", $AccessoryVar[SkeletonBone, $Weight], GenerateItemCost(SkeletonBone));
 BeltItem::Add("Enchanted Stone", "EnchantedStone", "QuestItems", $AccessoryVar[EnchantedStone, $Weight], GenerateItemCost(EnchantedStone));

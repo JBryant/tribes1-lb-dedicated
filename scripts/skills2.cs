@@ -1,33 +1,38 @@
 // -------------- New Skill Systems
-
 $Skill::keyword[1] = "mend";
 $Skill::index[mend] = 1;
 $Skill::name[1] = "Mend Self or Other";
 $Skill::description[1] = "Mends the user or someone in the LOS, slightly restoring some health.";
-$Skill::delay[1] = 1.5;
-$Skill::recoveryTime[1] = 3.25;
+$Skill::actionMessage[1] = "You begin mending the wounds.";
+$Skill::delay[1] = 3;
+$Skill::recoveryTime[1] = 10;
 $Skill::damageValue[1] = -10;
 $Skill::LOSrange[1] = 80;
-$Skill::startSound[1] = DeActivateWA;
-$Skill::endSound[1] = ActivateAR;
+$Skill::startSound[1] = AmbientScurry;
+$Skill::endSound[1] = MedicSpell;
 $Skill::groupListCheck[1] = False;
 $Skill::refVal[1] = -10;
 $Skill::graceDistance[1] = 2;
+$Skill::requiredItems[1] = "HealingKit";
+$Skill::removesRequiredItems[1] = True;
 
 $Skill::keyword[2] = "cleave";
 $Skill::index[cleave] = 2;
 $Skill::name[2] = "Cleave";
-$Skill::description[2] = "A might swing that deals damage to up to two targets around you.";
+$Skill::description[2] = "A mighty swing that deals damage to up to two targets around you.";
+$Skill::actionMessage[2] = "You swing a mighty cleave.";
 $Skill::delay[2] = 0.1;
-$Skill::recoveryTime[2] = 3.25;
+$Skill::recoveryTime[2] = 5;
 // $Skill::damageValue[2] = 10;
 $Skill::radius[2] = 10;
 $Skill::LOSrange[2] = 0;
-$Skill::startSound[2] = DeActivateWA;
+$Skill::startSound[2] = AmrbroseSwordA;
 $Skill::endSound[2] = ActivateAR;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
+$SkillRestriction[$Skill::keyword[2]] = "C Squire";
+
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
@@ -46,6 +51,13 @@ function BeginUseSkill(%clientId, %keyword) {
         Client::sendMessage(%clientId, $MsgRed, "You cannot use that skill.");
         return False;
     }
+
+	// check if the skill requires any special items
+	if ($Skill::requiredItems[%skillIndex] != "" && belt::hasthisstuff(%clientId, $Skill::requiredItems[%skillIndex]) < 1) {
+		Client::sendMessage(%clientId, $MsgRed, "You do not have the required items to use "@%keyword@".");
+		return False;
+	}
+
 	
     // Client::sendMessage(%clientId, $MsgBeige, "Casting " @ $Spell::name[%i] @ ".");
 
@@ -78,6 +90,11 @@ function BeginUseSkill(%clientId, %keyword) {
     // recovery time is never smaller than half of the original and never bigger than the original.
     %recovTime = Cap(%a + %c, %a, %rt);
     storeData(%clientId, "SkillRecovTime", %recovTime);
+
+	// send action message if it exists
+	if ($Skill::actionMessage[%skillIndex] != "") {
+		Client::sendMessage(%clientId, $MsgBeige, $Skill::actionMessage[%skillIndex]);
+	}
 
     if($Skill::menu[%skillIndex]) {
         eval("useskill::"@$Skill::keyword[%skillIndex]@"(" @ %clientId @ ", " @ %skillIndex @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");");
@@ -122,18 +139,24 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %w2) {
 		return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
 	}
 
+	// check to remove any required items (only works with 1 item and 1 count for now, could enhance later)
+	if ($Skill::removesRequiredItems[%index] == True) {
+		%has = belt::hasthisstuff(%clientId, $Skill::requiredItems[%index]);
+		belt::takethisstuff(%clientId,  $Skill::requiredItems[%index], 1);
+		%has--;
+		Client::sendMessage(%clientId, $MsgWhite, "You used a Healing Kit. [have "@%has@"]");
+	}
+
     // ************************************************************************************
     // Skill Code
     // ************************************************************************************
 
     // mend
     if ($Skill::keyword[%index] == "mend") {
-        if(getObjectType(%castObj) == "Player" && !Player::isAiControlled(%clientId))
+		if(getObjectType(%castObj) == "Player" && !Player::isAiControlled(%castObj))
 			%id = Player::getClient(%castObj);
 		else
 			%id = %clientId;
-
-		Client::sendMessage(%clientId, $MsgBeige, "Mending " @ Client::getName(%id));
 
 		if(%clientId != %id)
 			Client::sendMessage(%id, $MsgBeige, Client::getName(%clientId) @ " is mending on you.");
@@ -141,10 +164,13 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %w2) {
 		%r = $Skill::damageValue[%index] / $TribesDamageToNumericDamage;
 		refreshHP(%id, %r);
 		%castPos = GameBase::getPosition(%id);
+		
+		refreshAll(%clientId);
+
 		%returnFlag = True;
     }
 
-    if ($Skill::keyword[%index] == "cleave") {        
+    if ($Skill::keyword[%index] == "cleave") {
         %b = $Skill::radius[%index] * 2;
 		%set = newObject("set", SimSet);
 		%n = containerBoxFillSet(%set, $SimPlayerObjectType, GameBase::getPosition(%clientId), %b, %b, %b, 0);
@@ -153,7 +179,6 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %w2) {
 		deleteObject(%set);
 
 		%overrideEndSound = True;
-
 		%returnFlag = True;
     }
 

@@ -211,15 +211,15 @@ $spawnIndex[55] = "Doomsayer";
 
 //------------------------------
 
-$BotEquipment[Runt] = 		"CLASS Squire LVL 1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1";
-$BotEquipment[Thief] = 		"CLASS Squire LVL 5/50 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1";
-$BotEquipment[Wizard] = 	"CLASS Chemist LVL 9/50 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-2"; // 1/-500
-$BotEquipment[Raider] = 	"CLASS Squire LVL 11/50 COINS 4/50 LCK 0 ChippedDagger 1 BlackStatue 1/-150 Jade 1/-300";
+$BotEquipment[Runt] = 		"CLASS Squire LVL 1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1/-2000";
+$BotEquipment[Thief] = 		"CLASS Squire LVL 5/50 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-2000";
+$BotEquipment[Wizard] = 	"CLASS Chemist LVL 9/50 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-2000"; // 1/-500
+$BotEquipment[Raider] = 	"CLASS Squire LVL 11/50 COINS 4/50 LCK 0 ChippedDagger 1 BlackStatue 1/-150 Jade 1/-300  FireMateriaI 1/-2000";
 
-$BotEquipment[Pup] = 		"CLASS Squire LVL 10/50 COINS 6/50 LCK 0 ChippedDagger 1 CrystalBluePotion 1 Ruby 1/-2000";
-$BotEquipment[Shaman] = 	"CLASS Chemist LVL 12/50 COINS 7/50 LCK 0 CastingBlade 1";
-$BotEquipment[Scavenger] = 	"CLASS Squire LVL 15/50 COINS 8/50 LCK 0 ChippedDagger 1 Sapphire 2/-5000";
-$BotEquipment[Hunter] = 	"CLASS Squire LVL 17/50 COINS 9/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 Topaz 3/-3000";
+$BotEquipment[Pup] = 		"CLASS Squire LVL 10/50 COINS 6/50 LCK 0 ChippedDagger 1 CrystalBluePotion 1 Ruby 1/-2000 FireMateriaI 1/-2000";
+$BotEquipment[Shaman] = 	"CLASS Chemist LVL 12/50 COINS 7/50 LCK 0 CastingBlade 1 FireMateriaI 1/-2000";
+$BotEquipment[Scavenger] = 	"CLASS Squire LVL 15/50 COINS 8/50 LCK 0 ChippedDagger 1 Sapphire 2/-5000 FireMateriaI 1/-2000";
+$BotEquipment[Hunter] = 	"CLASS Squire LVL 17/50 COINS 9/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 Topaz 3/-3000 FireMateriaI 1/-2000";
 
 $BotEquipment[Warlock] = 	"CLASS Chemist LVL 16/50 COINS 10/50 LCK 0 CastingBlade 1 Sling 1 SmallRock 20/50 EnchantedStone 1/-100";
 $BotEquipment[Berserker] = 	"CLASS Squire LVL 20/50 COINS 13/50 LCK 0 Dagger 1 Topaz 4/-500";

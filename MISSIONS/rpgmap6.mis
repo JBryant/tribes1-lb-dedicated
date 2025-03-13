@@ -3202,7 +3202,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NAME Kalm Merchant";
 			instant SimGroup "ITEMS CLASS Chemist LVL 2 LCK 0";
 			instant SimGroup "RACE MaleHuman";
-			instant SimGroup "BELTSHOP 1 175 13 17 51 100 200";
+			instant SimGroup "BELTSHOP 1 175 17 51 100 200 505";
 		};
 		instant SimGroup "merchant6" {
 			instant Marker "mythril mines merchant" {
