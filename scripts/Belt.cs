@@ -1779,7 +1779,7 @@ $smithingNum = 0;
 // ==============================
 
 $WeaponEnchantments = "";
-$baseEnchants = "Fire Lightning Ice Earth Poison Holy";
+$baseEnchants = "Fire Lightning Ice Earth Poison Holy Dark";
 
 $enchantDamageVerb["Fire"] = "burned";
 $enchantDamageVerb["Lightning"] = "shocked";
@@ -1787,6 +1787,7 @@ $enchantDamageVerb["Ice"] = "froze";
 $enchantDamageVerb["Earth"] = "smashed";
 $enchantDamageVerb["Poison"] = "poisoned";
 $enchantDamageVerb["Holy"] = "smited";
+$enchantDamageVerb["Dark"] = "obliterated";
 
 $materiaMiscInfo["Fire"] = "A small red glowing orb that gives off a warm aura. This materia is embued with the element of Fire.";
 $materiaMiscInfo["Lightning"] = "A small yellow glowing orb that crackles with energy. This materia is embued with the element of Lightning.";
@@ -1794,6 +1795,7 @@ $materiaMiscInfo["Ice"] = "A small blue glowing orb that softly swirls a cold br
 $materiaMiscInfo["Earth"] = "A small brown glowing orb that feels rock hard. This materia is embued with the element of Earth.";
 $materiaMiscInfo["Poison"] = "A small green glowing orb that emanates a sickly smell and green tint. This materia is embued with the element of Poison.";
 $materiaMiscInfo["Holy"] = "A small white glowing orb that emanates a holy aura of peace and justice. This materia is embued with the element of Holy.";
+$materiaMiscInfo["Dark"] = "A dark glowing orb that emanates an aura of death and destruction. This materia is embued with the element of Darkness.";
 
 $enchantLevels[1] = "I";
 $enchantLevels[2] = "II";
@@ -1832,7 +1834,7 @@ function generateEnchantsAndMateria() {
 			// create the smithing recipes
 			if (%x > 1) {
 				%prevMateria = %baseEnchant @ "Materia" @ $enchantLevels[%x-1];
-				Smith::addItem(%prevMateria, %prevMateria @ " 5", %item @ " 1", $smithingNum++);
+				Smith::addItem(%item, %prevMateria @ " 5", %item @ " 1", $smithingNum++);
 			}
 		}
 	}
