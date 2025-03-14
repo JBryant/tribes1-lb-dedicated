@@ -3575,8 +3575,8 @@ instant SimGroup "MissionGroup" {
 			};
 			instant SimGroup "NAME Brien";
 			instant SimGroup "RACE MaleHuman";
-			instant SimGroup "NEED CNT <1 CNTAFFECTS quest11 EXP 1000";
-			instant SimGroup "GIVE CNT +1 CNTAFFECTS quest11 HealingKit 1";
+			instant SimGroup "NEED CNT <1 CNTAFFECTS quest11 EXP 5000";
+			instant SimGroup "GIVE CNT +1 CNTAFFECTS quest11 SmallBeltPouch 1";
 			instant SimGroup "SAY1 Hey, nice belt you got there!";
 			instant SimGroup "CUE1 belt?";
 			instant SimGroup "SAY2 That thing you are wearing around your waist. It gives you the power to press TAB and view items in your Inventory.";
@@ -3588,7 +3588,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "SAY5 Just make sure to help the town out while you are at it. Oh, and make sure to talk to Lance. He can tell you about Skills.";
 			instant SimGroup "NSAY1 You made it! I'm very impressed!";
 			instant SimGroup "NCUE1 thanks";
-			instant SimGroup "NSAY2 Well then, here is a gift that I hope will help you on your adventures. Good luck!";
+			instant SimGroup "NSAY2 Take this Small Belt Pouch. It's an accessory you can equip to increase your carrying capacity!";
 		};
 		instant SimGroup "quest12" {
 			instant Marker "Marker1" {

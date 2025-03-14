@@ -112,10 +112,10 @@ function fetchData(%clientId, %type)
 	{
 		// TODO: Add bonus here for spells/items that make you lighter
 		%a = 50 + $PlayerSkill[%clientId, $SkillWeightCapacity];
-		//%b = AddPoints(%clientId, 9);
+		%b = AddPoints(%clientId, 12);
 		%c = AddBonusStatePoints(%clientId, "MaxWeight");
 
-		return FixDecimals(%a + %c);
+		return FixDecimals(%a + %b + %c);
 	}
 	else if(%type == "Weight")
 	{
