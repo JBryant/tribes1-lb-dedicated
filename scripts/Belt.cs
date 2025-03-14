@@ -414,10 +414,18 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 		}
 	}
 	else if(%type == "ArmorItems") {
-		Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
+		if (BeltItem::isEquipped(%clientId, %item)) {
+			Client::addMenuItem(%clientId, %cnt++ @ "Unequip", %type@" equip "@%item);
+		} else {
+			Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
+		}
 	}
 	else if(%type == "AccessoryItems") {
-		Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
+		if (BeltItem::isEquipped(%clientId, %item)) {
+			Client::addMenuItem(%clientId, %cnt++ @ "Unequip", %type@" equip "@%item);
+		} else {
+			Client::addMenuItem(%clientId, %cnt++ @ "Equip", %type@" equip "@%item);
+		}
 	}
 
 	if(!$playerNoDrop[%item]){
@@ -2465,7 +2473,7 @@ BeltItem::AddWeapon("Sling", "Sling", "Sling", $SwordAccessoryType, $description
 $description = "Made for use in battle, this is sturdier than normal clothing.";
 BeltItem::AddArmor("Leather Clothing", "LeatherClothing", "rpgpadded", SoundHitFlesh, "7 30 4 5", "10", $SkillEndurance @ " 5", $description, 200);
 $description = "Armor made from layers of tanned leather.";
-BeltItem::AddArmor("Leather Armor", "LeatherArmor", "rpgleather", SoundHitLeather, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Leather Armor", "LeatherArmor", "rpgleather", SoundHitLeather, "7 60 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Linen armor with a bronze breastplate.";
 BeltItem::AddArmor("Linen Cuirass", "LinenCuirass", "rpgstudleather", SoundHitLeather, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Simply fashioned bronze armor.";
@@ -2477,25 +2485,26 @@ BeltItem::AddArmor("Mythril Armor", "MythrilArmor", "rpgscalemail", SoundHitChai
 $description = "The unique design of this mythril armor greatly increases its protective qualities.";
 BeltItem::AddArmor("Plate Mail", "PlateMail", "rpgbrigandine", SoundHitChain, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Improved plate mail that has been decorated with gold.";
-BeltItem::AddArmor("Golden Armor", "GoldenArmor", "rpgchainmail", SoundHitChain, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Golden Armor", "GoldenArmor", "rpgchainmail", SoundHitChain, "7 500 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Armor that has been reinforced with incredibly hard gemstones.";
-BeltItem::AddArmor("Diamond Armor", "DiamondArmor", "rpgringmail", SoundHitChain, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Diamond Armor", "DiamondArmor", "rpgringmail", SoundHitChain, "7 550 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Brilliantly shining armor made of a lustrous white alloy of mythril and platinum.";
-BeltItem::AddArmor("Platinum Armor", "PlatinumArmor", "rpgbandedmail", SoundHitChain, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Platinum Armor", "PlatinumArmor", "rpgbandedmail", SoundHitChain, "7 600 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Thick mythril armor designed to withstand even the most intense shocks.";
-BeltItem::AddArmor("Carabineer Mail", "CarabineerMail", "rpgsplintmail", SoundHitChain, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Carabineer Mail", "CarabineerMail", "rpgsplintmail", SoundHitChain, "7 650 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Armor with the power to reflect magick used on the wearer.";
-BeltItem::AddArmor("Mirror Mail", "MirrorMail", "rpgbronzeplate", SoundHitPlate, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Mirror Mail", "MirrorMail", "rpgbronzeplate", SoundHitPlate, "7 700 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Platinum armor reinforced in places with crystalline gemstones found deep within the earth.";
-BeltItem::AddArmor("Crystal Armor", "CrystalArmor", "rpgplatemail", SoundHitPlate, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Crystal Armor", "CrystalArmor", "rpgplatemail", SoundHitPlate, "7 750 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Legendary armor given by the gods to a knight in honor of his service. Confers divine protection to the wearer.";
-BeltItem::AddArmor("Genji Armor", "GenjiArmor", "rpgfieldplate", SoundHitPlate, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Genji Armor", "GenjiArmor", "rpgfieldplate", SoundHitPlate, "7 800 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "Top-grade armor made with advanced techniques. The materials and design make it exceedingly strong.";
-BeltItem::AddArmor("Maximillian", "Maximillian", "rpgfullplate", SoundHitPlate, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Maximillian", "Maximillian", "rpgfullplate", SoundHitPlate, "7 900 4 5", "10", $SkillEndurance @ " 5", $description);
 $description = "A dark mail covered in scales of fallen Dragons.";
-BeltItem::AddArmor("Dragon Mail", "DragonMail", "rpghuman6", SoundHitPlate, "7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Dragon Mail", "DragonMail", "rpghuman6", SoundHitPlate, "7 1000 4 5", "10", $SkillEndurance @ " 5", $description);
+
 $description = "Armor forged for swordsmen who have mastered every technique and achieved knighthood's most exalted rank.";
-BeltItem::AddArmor("Onion Armor", "OnionArmor", "rpgfullplate",  SoundHitPlate,"7 30 4 5", "10", $SkillEndurance @ " 5", $description);
+BeltItem::AddArmor("Onion Armor", "OnionArmor", "rpgfullplate",  SoundHitPlate,"7 2000 4 5", "10", $SkillEndurance @ " 5", $description);
 // Light Armors / Robes
 $description = "Padded Armor";
 BeltItem::AddRobe("Light Robe", "LightRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
@@ -2524,13 +2533,17 @@ BeltItem::AddShield("Dragon Shield", "DragonShield", $AccessoryVar[DragonShield,
 
 // function BeltItem::Add(%name, %item, %type, %weight, %cost, %image, %shopIndex) {
 // Accessory Items (300 - 499)
-BeltItem::Add("Cheetaurs Paws", "CheetaursPaws", "AccessoryItems", $AccessoryVar[CheetaursPaws, $Weight], GenerateItemCost(CheetaursPaws));
-BeltItem::Add("Cheetaurs Paws "@$equippedString, "CheetaursPaws0", "AccessoryItems", $AccessoryVar[CheetaursPaws, $Weight], GenerateItemCost(CheetaursPaws));
-BeltItem::Add("Boots of Gliding", "BootsOfGliding", "AccessoryItems", $AccessoryVar[BootsOfGliding, $Weight], GenerateItemCost(BootsOfGliding));
-BeltItem::Add("Boots of Gliding "@$equippedString, "BootsOfGliding0", "AccessoryItems", $AccessoryVar[BootsOfGliding, $Weight], GenerateItemCost(BootsOfGliding));
-BeltItem::Add("Wind Walkers", "WindWalkers", "AccessoryItems", $AccessoryVar[WindWalkers, $Weight], GenerateItemCost(WindWalkers));
-BeltItem::Add("Wind Walkers "@$equippedString, "WindWalkers0", "AccessoryItems", $AccessoryVar[WindWalkers, $Weight], GenerateItemCost(WindWalkers));
-BeltItem::Add("Tent", "Tent", "AccessoryItems", $AccessoryVar[Tent, $Weight], GenerateItemCost(Tent));
+// BeltItem::Add("Cheetaurs Paws", "CheetaursPaws", "AccessoryItems", $AccessoryVar[CheetaursPaws, $Weight], GenerateItemCost(CheetaursPaws));
+// BeltItem::Add("Cheetaurs Paws "@$equippedString, "CheetaursPaws0", "AccessoryItems", $AccessoryVar[CheetaursPaws, $Weight], GenerateItemCost(CheetaursPaws));
+// BeltItem::Add("Boots of Gliding", "BootsOfGliding", "AccessoryItems", $AccessoryVar[BootsOfGliding, $Weight], GenerateItemCost(BootsOfGliding));
+// BeltItem::Add("Boots of Gliding "@$equippedString, "BootsOfGliding0", "AccessoryItems", $AccessoryVar[BootsOfGliding, $Weight], GenerateItemCost(BootsOfGliding));
+// BeltItem::Add("Wind Walkers", "WindWalkers", "AccessoryItems", $AccessoryVar[WindWalkers, $Weight], GenerateItemCost(WindWalkers));
+// BeltItem::Add("Wind Walkers "@$equippedString, "WindWalkers0", "AccessoryItems", $AccessoryVar[WindWalkers, $Weight], GenerateItemCost(WindWalkers));
+// BeltItem::Add("Tent", "Tent", "AccessoryItems", $AccessoryVar[Tent, $Weight], GenerateItemCost(Tent));
+
+// function BeltItem::AddAccessory(%name, %item, %accessoryType, %beltType, %special, %weight, %miscInfo, %shopIndex)
+BeltItem::AddAccessory("Small Belt Pouch", "SmallBeltPouch", $TalismanAccessoryType, "AccessoryItems", "12 50", 0.1, "A small belt pouch that slightly increases carrying capacity.", 300);
+
 
 // Other Items (500+)
 

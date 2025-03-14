@@ -395,8 +395,10 @@ function Game::menuRequest(%clientId)
 		else
 		{
 			%curItem = -1;
-			if(!IsDead(%clientId))
+			if(!IsDead(%clientId)) {
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "View your stats" , "viewstats");
+				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "View class levels" , "viewclasslevels");
+			}
 
 			if(!IsDead(%clientId)){
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Skill points" , "sp");
@@ -422,8 +424,6 @@ function processMenuOptions(%clientId, %option)
 
 	%opt = getWord(%option, 0);
 	%cl = floor(getWord(%option, 1));
-	
-
 
 	//**RPG
 	if(%opt == "settings")
@@ -496,8 +496,10 @@ function processMenuOptions(%clientId, %option)
 		%a[%tmp++] = "Experience: " @ fetchData(%clientId, "EXP") @ "\n";
         %a[%tmp++] = "Exp needed: " @ (GetExp(GetLevel(fetchData(%clientId, "EXP"), %clientId)+1, %clientId) - fetchData(%clientId, "EXP") @ "\n\n");
 
+		lbecho(fetchData(%clientId, "COINS"));
 		%a[%tmp++] = "Class: " @ fetchData(%clientId, "CLASS") @ "\n";
-		%a[%tmp++] = "Class Levels: " @ fetchData(%clientId, "RemortedClasses") @ "\n\n";
+		// TODO: Move to separate function since it does not fit in here
+		// %a[%tmp++] = "Class Levels: " @ fetchData(%clientId, "RemortedClasses") @ "\n\n";
 
 		%a[%tmp++] = "Coins: " @ fetchData(%clientId, "COINS") @ " - Bank: " @ fetchData(%clientId, "BANK") @ "\n";
 		%a[%tmp++] = "TOTAL $: " @ fetchData(%clientId, "COINS") + fetchData(%clientId, "BANK") @ "\n\n";
@@ -511,6 +513,15 @@ function processMenuOptions(%clientId, %option)
 		bottomprint(%clientId, %f, floor(String::len(%f) / 20));
 
 		return;
+	}
+	else if(%opt == "viewclasslevels") {
+		%a[%tmp++] = "<f1>" @ Client::getName(%clientId) @ ", LEVEL " @ fetchData(%clientId, "LVL") @ " " @ fetchData(%clientId, "RACE") @ " " @ fetchData(%clientId, "CLASS") @ "<f0>\n\n";
+		%a[%tmp++] = "Class Levels: " @ fetchData(%clientId, "RemortedClasses");
+
+		for(%i = 1; %a[%i] != ""; %i++)
+			%f = %f @ %a[%i];
+
+		bottomprint(%clientId, %f, floor(String::len(%f) / 10));
 	}
 	else if(%opt == "addgroup")
 	{

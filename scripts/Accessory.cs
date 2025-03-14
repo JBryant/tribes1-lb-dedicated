@@ -56,6 +56,7 @@ $SpecialVarDesc[8] = "[Internal]";
 $SpecialVarDesc[9] = "";
 $SpecialVarDesc[10] = "HP regen";
 $SpecialVarDesc[11] = "Mana regen";
+$SpecialVarDesc[12] = "MaxWeight";
 
 $RingAccessoryType = 1;
 $BodyAccessoryType = 2;
@@ -88,7 +89,7 @@ $maxAccessory[$BodyAccessoryType] = 1;
 $maxAccessory[$BootsAccessoryType] = 1;
 $maxAccessory[$BackAccessoryType] = 1;
 $maxAccessory[$ShieldAccessoryType] = 1;
-$maxAccessory[$TalismanAccessoryType] = 1;
+$maxAccessory[$TalismanAccessoryType] = 10;
 
 //these are used for $AccessoryVar
 $AccessoryType = 1;			//(used in item.cs)
