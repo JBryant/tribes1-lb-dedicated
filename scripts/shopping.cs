@@ -106,31 +106,39 @@ function SetupBank(%clientId, %id) {
 	Client::clearItemShopping(%clientId);
 	Client::clearItemBuying(%clientId);
 
-	if(Client::getGuiMode(%clientId) != 4) {
-		Client::setGuiMode(%clientId, 4);
+	// if(Client::getGuiMode(%clientId) != 4) {
+	// 	Client::setGuiMode(%clientId, 4);
 
-		if(%clientId.repack >= 20)
-			remoteEval(%clientId,InvHUD::turnOn, 3);
-	}
+	// 	if(%clientId.repack >= 20)
+	// 		remoteEval(%clientId,InvHUD::turnOn, 3);
+	// }
 
-	%txt = "<f1><jc>COINS: " @ fetchData(%clientId, "COINS");
-	Client::setInventoryText(%clientId, %txt);
+	// %txt = "<f1><jc>COINS: " @ fetchData(%clientId, "COINS");
+	// Client::setInventoryText(%clientId, %txt);
+	// Client::setItemShopping(%clientId, BeltItemTool);
+	// Client::setItemBuying(%clientId, BeltItemTool);
+	// %info = fetchData(%clientId, "BankStorage");
+
+	// for(%i = 0; GetWord(%info, %i) != -1; %i+=2) {
+	// 	%item = GetWord(%info, %i);
+
+	// 	if(isBeltItem(%item)) {
+	// 		%cnt = GetStuffStringCount(fetchData(%clientId, "BankStorage"), %item);
+	// 		givethisstuff(%clientId, %item@" "@%cnt, True);
+	// 	}
+	// 	else {
+	// 		Client::setItemShopping(%clientId, %item);
+	// 		Client::setItemBuying(%clientId, %item);
+	// 	}
+	// }
+
+	//if($BotInfo[%botid.name, BELTSHOP] != "") {
 	Client::setItemShopping(%clientId, BeltItemTool);
 	Client::setItemBuying(%clientId, BeltItemTool);
-	%info = fetchData(%clientId, "BankStorage");
 
-	for(%i = 0; GetWord(%info, %i) != -1; %i+=2) {
-		%item = GetWord(%info, %i);
-
-		if(isBeltItem(%item)) {
-			%cnt = GetStuffStringCount(fetchData(%clientId, "BankStorage"), %item);
-			givethisstuff(%clientId, %item@" "@%cnt, True);
-		}
-		else {
-			Client::setItemShopping(%clientId, %item);
-			Client::setItemBuying(%clientId, %item);
-		}
-	}
+	%clientId.beltShop = %id;
+	MenuStoreBelt(%clientId, 1);
+	//}
 }
 
 function SetupInvSteal(%clientId, %id) {

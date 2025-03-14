@@ -56,7 +56,7 @@ function getDisp(%type) {
 	%disp["ArmorItems"] = "Armors";
 	%disp["MateriaItems"] = "Materia";
 	%disp["QuestItems"] = "Quest Items";
-	%disp["AccessoryItems"] = "Accessory Items";
+	%disp["AccessoryItems"] = "Accessories";
 
 	return %disp[%type];
 }
@@ -479,10 +479,10 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 	}
 	else if(%option == "equip") {
 		Belt::EquipItem(%clientid, %item);
+		MenuBeltDrop(%clientid, %item, %type, %victim);
 		return;
 	}
 	else if(%option == "slot") {
-		// show slot options
 		MenuBeltMateria(%clientId, %item, 1);
 		return;
 	}
@@ -1081,7 +1081,9 @@ function MenuStoreBelt(%clientId, %page) {
 		%page = 1;
 
 	belt::buildMainMenu(%clientId, %page);
+
 	Client::addMenuItem(%clientid, "wWithdraw","withdraw");
+	Client::addMenuItem(%clientid, "xDone", "done");
 }
 
 function processMenuStoreBelt(%clientId, %opt) {
@@ -1100,6 +1102,11 @@ function processMenuStoreBelt(%clientId, %opt) {
 
 	if(%opt == "withdraw") {
 		MenuWithdrawBelt(%clientId);
+		return;
+	}
+
+	if (%opt == "done") {
+		ClearCurrentShopVars(%clientId);
 		return;
 	}
 
@@ -1162,12 +1169,15 @@ function belt::buildBankMenu(%clientId, %page){
 }
 function MenuWithdrawBelt(%clientId, %page)
 {
-	Client::buildMenu(%clientId, "Belt withdraw:", "WithdrawBelt", true);
+	Client::buildMenu(%clientId, "Belt Withdraw:", "WithdrawBelt", true);
+
 	if(%page == "")
 		%page = 1;
 
 	belt::buildBankMenu(%clientId, %page);
-	Client::addMenuItem(%clientid, "sStore","store");
+
+	Client::addMenuItem(%clientid, "sStore", "store");
+	Client::addMenuItem(%clientid, "xDone", "done");
 }
 function processMenuWithdrawBelt(%clientId, %opt)
 {
@@ -1188,6 +1198,11 @@ function processMenuWithdrawBelt(%clientId, %opt)
 	if(%opt == "store")
 	{
 		MenuStoreBelt(%clientId);
+		return;
+	}
+
+	if(%opt == "done") {
+		ClearCurrentShopVars(%clientId);
 		return;
 	}
 
@@ -1248,8 +1263,12 @@ function processMenuStoreBeltItem(%clientid, %opt)
 	%o = GetWord(%opt, 0);
 	%p = GetWord(%opt, 1);
 	%t = GetWord(%opt, 2);
-	if(%o == "done")
+
+	if(%o == "done") {
+		ClearCurrentShopVars(%clientId);
 		return;
+	}
+
 	if(%o == "back"){
 		MenuStoreBelt(%clientId);
 		return;
@@ -1303,7 +1322,8 @@ function processMenuStoreBeltItemFinal(%clientId, %opt)
 	%item = GetWord(%opt, 2);
 	%amnt = GetWord(%opt, 3);
 
-	if(%type == "done"){
+	if(%type == "done") {
+		ClearCurrentShopVars(%clientId);
 		return;
 	}
 	else if(%option == "back"){
@@ -1313,7 +1333,11 @@ function processMenuStoreBeltItemFinal(%clientId, %opt)
 	else if(%option == "storeall")
 	{
 		%cmnt = Belt::HasThisStuff(%clientid,%item);
-		if(%cmnt >= %amnt)
+		if (BeltItem::isEquipped(%clientId, %item)) {
+			Client::sendMessage(%clientId, $MsgRed, "You cannot store equipped items.");
+			MenuStoreBeltItem(%clientId, %type, 1);
+		}
+		else if(%cmnt >= %amnt)
 		{
 			Client::SendMessage(%clientid,0,"You store "@%amnt@" "@$beltitem[%item, "Name"]@".");
 			Belt::TakeThisStuff(%clientid,%item,%amnt);
@@ -1327,7 +1351,13 @@ function processMenuStoreBeltItemFinal(%clientId, %opt)
 	else if(%option == "store")
 	{
 		%cmnt = Belt::HasThisStuff(%clientid,%item);
-		if(%cmnt >= %amnt)
+
+		// check if the item is equipped
+		if (BeltItem::isEquipped(%clientId, %item)) {
+			Client::sendMessage(%clientId, $MsgRed, "You cannot store equipped items.");
+			MenuStoreBeltItem(%clientId, %type, 1);
+		}
+		else if(%cmnt >= %amnt)
 		{
 			Client::SendMessage(%clientid,0,"You store "@%amnt@" "@$beltitem[%item, "Name"]@".");
 			Belt::TakeThisStuff(%clientid,%item,%amnt);
@@ -1400,8 +1430,10 @@ function processMenuWithdrawBeltItem(%clientid, %opt)
 	%o = GetWord(%opt, 0);
 	%p = GetWord(%opt, 1);
 	%t = GetWord(%opt, 2);
-	if(%o == "done")
+	if(%o == "done") {
+		ClearCurrentShopVars(%clientId);
 		return;
+	}
 	if(%o == "back"){
 		MenuWithdrawBelt(%clientId);
 		return;
@@ -1452,12 +1484,13 @@ function processMenuWithdrawBeltItemFinal(%clientId, %opt)
 	%item = GetWord(%opt, 2);
 	%amnt = GetWord(%opt, 3);
 
-	if(%type == "done"){
+	if(%type == "done") {
+		ClearCurrentShopVars(%clientId);
 		return;
 	}
-	else if(%option == "back")
-	{
+	else if(%option == "back") {
 		MenuWithdrawBeltItem(%clientid, %type, 1);
+		return;
 	}
 	else if(%option == "withdrawall")
 	{
