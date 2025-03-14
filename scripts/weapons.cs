@@ -402,32 +402,29 @@ function GenerateItemCost(%item)
 	%b7 = AddItemSpecificPoints(%item, "7") / 6;	//DEF
 	%b3 = AddItemSpecificPoints(%item, "3") / 6;	//MDEF
 
-	%extracost = 0;
-	for(%i = 1; $SmithCombo[%i] != ""; %i++)
-	{
-		for(%j = 0; (%w = GetWord($SmithComboResult[%i], %j)) != -1; %j+=2)
-		{
-			if(String::ICompare(%item, %w) == 0)
-			{
-				%n = GetWord($SmithComboResult[%i], %j+1);
-				for(%k = 0; (%w2 = GetWord($SmithCombo[%i], %k)) != -1; %k+=2)
-				{
-					%n2 = GetWord($SmithCombo[%i], %k+1);
-					%extracost += (GenerateItemCost(%w2) * %n2);
-				}
-				%extracost *= %n;
-				break;
-			}
-		}
-		if(%extracost > 0)
-			break;
-	}
-	%extracost = %extracost * ($ResalePercentage / 100);
+	// %extracost = 0;
+	// for(%i = 1; $SmithCombo[%i] != ""; %i++) {
+	// 	for(%j = 0; (%w = GetWord($SmithComboResult[%i], %j)) != -1; %j+=2) {
+	// 		if(String::ICompare(%item, %w) == 0) {
+	// 			%n = GetWord($SmithComboResult[%i], %j+1);
+	// 			for(%k = 0; (%w2 = GetWord($SmithCombo[%i], %k)) != -1; %k+=2) {
+	// 				%n2 = GetWord($SmithCombo[%i], %k+1);
+	// 				%extracost += (GenerateItemCost(%w2) * %n2);
+	// 			}
+	// 			%extracost *= %n;
+	// 			break;
+	// 		}
+	// 	}
+	// 	if(%extracost > 0)
+	// 		break;
+	// }
+	// %extracost = %extracost * ($ResalePercentage / 100);
 	
 	%c = (%b6 + %b7 + %b3) / %a;
 	%d = Cap(0.01 * pow(%c, 3.7), 0, "inf");
 	%e = Cap(%d * %cft, 1, "inf");
-	%f = floor(%e + %extracost);
+	//%f = floor(%e + %extracost);
+	%f = floor(%e / 10) + 1;
 
 	return %f;
 }

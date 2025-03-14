@@ -31,7 +31,7 @@ $Skill::endSound[2] = ActivateAR;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
-$SkillRestriction[$Skill::keyword[2]] = "C Squire";
+$SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight";
 
 
 function BeginUseSkill(%clientId, %keyword) {

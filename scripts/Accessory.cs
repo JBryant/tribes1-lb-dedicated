@@ -595,10 +595,10 @@ $RingWeight = 1;
 //   ARMOR MODIFYING ACCESSORIES
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-$AccessoryVar[CheetaursPaws, $AccessoryType] = $BootsAccessoryType;
-$AccessoryVar[CheetaursPaws, $SpecialVar] = "8 1";
-$AccessoryVar[CheetaursPaws, $Weight] = 3;
-$AccessoryVar[CheetaursPaws, $MiscInfo] = "Cheetaur's Paws increase speed and jump power";
+// $AccessoryVar[CheetaursPaws, $AccessoryType] = $BootsAccessoryType;
+// $AccessoryVar[CheetaursPaws, $SpecialVar] = "8 1";
+// $AccessoryVar[CheetaursPaws, $Weight] = 3;
+// $AccessoryVar[CheetaursPaws, $MiscInfo] = "Cheetaur's Paws increase speed and jump power";
 
 // ItemData CheetaursPaws
 // {
@@ -618,10 +618,10 @@ $AccessoryVar[CheetaursPaws, $MiscInfo] = "Cheetaur's Paws increase speed and ju
 // 	heading = "aArmor";
 // };
 
-$AccessoryVar[BootsOfGliding, $AccessoryType] = $BootsAccessoryType;
-$AccessoryVar[BootsOfGliding, $SpecialVar] = "8 2";
-$AccessoryVar[BootsOfGliding, $Weight] = 3;
-$AccessoryVar[BootsOfGliding, $MiscInfo] = "Boots Of Gliding let you glide";
+// $AccessoryVar[BootsOfGliding, $AccessoryType] = $BootsAccessoryType;
+// $AccessoryVar[BootsOfGliding, $SpecialVar] = "8 2";
+// $AccessoryVar[BootsOfGliding, $Weight] = 3;
+// $AccessoryVar[BootsOfGliding, $MiscInfo] = "Boots Of Gliding let you glide";
 
 // ItemData BootsOfGliding
 // {
@@ -641,10 +641,10 @@ $AccessoryVar[BootsOfGliding, $MiscInfo] = "Boots Of Gliding let you glide";
 // 	heading = "aArmor";
 // };
 
-$AccessoryVar[WindWalkers, $AccessoryType] = $BootsAccessoryType;
-$AccessoryVar[WindWalkers, $SpecialVar] = "8 3";
-$AccessoryVar[WindWalkers, $Weight] = 3;
-$AccessoryVar[WindWalkers, $MiscInfo] = "Wind Walkers let you fly!";
+// $AccessoryVar[WindWalkers, $AccessoryType] = $BootsAccessoryType;
+// $AccessoryVar[WindWalkers, $SpecialVar] = "8 3";
+// $AccessoryVar[WindWalkers, $Weight] = 3;
+// $AccessoryVar[WindWalkers, $MiscInfo] = "Wind Walkers let you fly!";
 
 // ItemData WindWalkers
 // {
