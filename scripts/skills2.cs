@@ -33,6 +33,22 @@ $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
 $SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight";
 
+$Skill::keyword[3] = "harvest";
+$Skill::index[harvest] = 3;
+$Skill::name[3] = "Harvest";
+$Skill::description[3] = "Attempts to gather resources from the environment.";
+$Skill::actionMessage[3] = "You begin harvesting.";
+$Skill::delay[3] = 1; // 3
+$Skill::recoveryTime[3] = 1; // 3
+$Skill::LOSrange[3] = 1;
+$Skill::startSound[3] = AmbientScurry;
+// $Skill::endSound[1] = MedicSpell;
+$Skill::groupListCheck[3] = False;
+$Skill::refVal[3] = -10;
+$Skill::graceDistance[3] = 0.5;
+// $Skill::requiredItems[3] = "HealingKit";
+// $Skill::removesRequiredItems[3] = True;
+
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
@@ -182,8 +198,39 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %w2) {
 		%returnFlag = True;
     }
 
+	 if ($Skill::keyword[%index] == "harvest") {
+		// lbecho("---------");
+		// %player = Client::getOwnedObject(%clientId);
+		// GameBase::getLOSinfo(%clientId, 1000);
+		// lbecho($los::object);
+		// %type = getObjectType($los::object);
+		// lbecho("Type: " @ %type);
+
+		// if(getObjectType($los::object) == "Player" && !Player::isAiControlled(%id)) {
+		// 	%TrueClientId.stealType = 1;
+		// 	SetupInvSteal(%TrueClientId, %id);
+		// }
+
+		%set = newObject("set", SimSet);
+	    %num = containerBoxFillSet(%set, $StaticObjectType, GameBase::getPosition(%clientId), 4, 4, 4, 0);
+
+		Group::iterateRecursive(%set, findHarvestableObjects, %clientId, %index, %w2);
+		deleteObject(%set);
+
+		%overrideEndSound = True;
+		%returnFlag = True;
+	 }
+
     // return EndSkill
     return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
+}
+
+function findHarvestableObjects(%object, %clientId, %index, %extra) {
+	if(Object::getName(%object) == "PlantTwo1") {
+		// get low level resources
+		Client::sendMessage(%clientId, $MsgWhite, "You harvested!");
+		return;
+	}
 }
 
 function EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag) {
