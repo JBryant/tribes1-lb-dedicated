@@ -402,7 +402,7 @@ function Game::menuRequest(%clientId)
 
 			if(!IsDead(%clientId)){
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Skill points" , "sp");
-				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Inventory (wt: "@Belt::GetWeight(%clientid)@")","viewbelt");
+				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Inventory (wt: "@Belt::GetWeight(%clientid)@" / "@ fetchData(%clientId, "MaxWeight") @")", "viewbelt");
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Compass" , "compass");
 			}
 

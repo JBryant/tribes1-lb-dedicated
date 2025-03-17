@@ -261,6 +261,8 @@ function SaveCharacter(%clientId, %silent)
 	$funk::var["[\"" @ %name @ "\", 8, 14]"] = fetchData(%clientId, "BankAccessoryItems");
 	$funk::var["[\"" @ %name @ "\", 8, 15]"] = fetchData(%clientId, "MateriaItems");
 	$funk::var["[\"" @ %name @ "\", 8, 16]"] = fetchData(%clientId, "BankMateriaItems");
+	$funk::var["[\"" @ %name @ "\", 8, 17]"] = fetchData(%clientId, "MiscItems");
+	$funk::var["[\"" @ %name @ "\", 8, 18]"] = fetchData(%clientId, "BankMiscItems");
 
 	%recallList = fetchData(%clientId,"recallList");
 	$funk::var["[\"" @ %name @ "\", 8, recallList]"] = %recallList;
@@ -442,29 +444,28 @@ function LoadCharacter(%clientId)
 		storeData(%clientId, "BankAccessoryItems", $funk::var[%name, 8, 14]);
 		storeData(%clientId, "MateriaItems", $funk::var[%name, 8, 15]);
 		storeData(%clientId, "BankMateriaItems", $funk::var[%name, 8, 16]);
+		storeData(%clientId, "MiscItems", $funk::var[%name, 8, 17]);
+		storeData(%clientId, "BankMiscItems", $funk::var[%name, 8, 18]);
 
 		%recallList = $funk::var[%name, 8, recallList];
-		storeData(%clientId,"recallList", %recallList);
+		storeData(%clientId, "recallList", %recallList);
 
 		Belt::BankStorageConversion(%clientid);
 
 
 		//skill variables
 		%cnt = 0;
-		for(%i = 1; %i <= GetNumSkills(); %i++)
-		{
+		for(%i = 1; %i <= GetNumSkills(); %i++) {
 			$PlayerSkill[%clientId, %i] = $funk::var[%name, 4, %cnt++];
 			$SkillCounter[%clientId, %i] = $funk::var[%name, 4, %cnt++];
 		}
 
-		for(%i = 1; $funk::var[%name, 3, %i] != ""; %i++)
-		{
+		for(%i = 1; $funk::var[%name, 3, %i] != ""; %i++) {
 			$QuestCounter[%name, $funk::var[%name, 2, %i]] = $funk::var[%name, 3, %i];
 		}
 
 		//bonus state variables
-		for(%i = 1; %i <= $maxBonusStates; %i++)
-		{
+		for(%i = 1; %i <= $maxBonusStates; %i++) {
 			$BonusState[%clientId, %i] = $funk::var[%name, 5, %i];
 			$BonusStateCnt[%clientId, %i] = $funk::var[%name, 6, %i];
 		}
@@ -524,7 +525,7 @@ function LoadCharacter(%clientId)
 
 		SetAllSkills(%clientId, 0);
 
-		storeData(%clientId, "spawnStuff", "HealPotion 1 GreaterHealPotion 3 BeltItemTool 1");
+		storeData(%clientId, "spawnStuff", "Potion 1 HiPotion 3 BeltItemTool 1");
 	}
 
 	if(%clientId.repack >= 14)

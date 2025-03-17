@@ -89,7 +89,7 @@ $WeaponRange[TesterBow] = 400;
 // $WeaponDelay[TesterBow] = 1;
 
 $ProjRestrictions[SmallRock] = ",Sling,";
-$ProjRestrictions[BasicArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,TesterBow,";
+$ProjRestrictions[BasicArrow] = ",HuntingBow,";
 $ProjRestrictions[SheafArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,TesterBow,";		
 $ProjRestrictions[BladedArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,TesterBow,";
 $ProjRestrictions[LightQuarrel] = ",LightCrossbow,HeavyCrossbow,RLightCrossbow,";
@@ -1269,7 +1269,7 @@ ItemImageData LongBowImage
 	lightTime = 1;
 	lightColor = { 0.6, 1, 1.0 };
 
-	sfxFire = CrossbowShoot1;
+	sfxFire = SoundSwing4;
 	sfxActivate = CrossbowSwitch1;
 	sfxReload = NoSound;
 };
@@ -1287,7 +1287,7 @@ ItemData LongBow
 };
 function LongBowImage::onFire(%player, %slot) {
 	%clientId = Player::getClient(%player);
-	%vel = 100;
+	%vel = 150;
 	ProjectileAttack(%clientId, %vel);
 }
 
@@ -1309,7 +1309,7 @@ ItemImageData CompositeBowImage
 	lightTime = 1;
 	lightColor = { 0.6, 1, 1.0 };
 
-	sfxFire = CrossbowShoot1;
+	sfxFire = SoundSwing4;
 	sfxActivate = CrossbowSwitch1;
 	sfxReload = NoSound;
 };
@@ -1328,7 +1328,7 @@ ItemData CompositeBow
 };
 function CompositeBowImage::onFire(%player, %slot) {
 	%clientId = Player::getClient(%player);
-	%vel = 100;
+	%vel = 150;
 
 	ProjectileAttack(%clientId, %vel);
 }

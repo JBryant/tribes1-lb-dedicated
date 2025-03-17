@@ -53,22 +53,18 @@ MoveableData PlatformFerry
 	speed = 25;
 };
 
-function Ferry::onNewPath(%this)
-{
+function Ferry::onNewPath(%this) {
 	NextWaypoint(%this);
 }
-function Ferry::onWaypoint(%this)
-{
+function Ferry::onWaypoint(%this) {
 	NextWaypoint(%this);
 }
-function ResetFerry(%this)
-{
+function ResetFerry(%this) {
 	dbecho($dbechoMode, "ResetFerry(" @ %this @ ")");
 
 	Moveable::setWaypoint(%this, 0);
 }
-function NextWaypoint(%this)
-{
+function NextWaypoint(%this) {
 	dbecho($dbechoMode, "NextWaypoint(" @ %this @ ")");
 
 	//This function makes %this go to the next waypoint on its stack.
@@ -82,12 +78,10 @@ function NextWaypoint(%this)
 	//echo("%which: " @ %which);
 	//echo("-------------------------------");
 
-	if(%which < (Moveable::getWaypointCount(%this)-1))
-	{
+	if(%which < (Moveable::getWaypointCount(%this)-1)) {
 		schedule("Moveable::moveToWaypoint(" @ %this @ ", " @ %which+1 @ ");", 0.05+$Ferry::PauseTime[%this, %which]);
 	}
-	else if(%which == (Moveable::getWaypointCount(%this)-1))
-	{
+	else if(%which == (Moveable::getWaypointCount(%this)-1)) {
 		ResetFerry(%this);
 		schedule("NextWaypoint(" @ %this @ ");", $FerryStationWait, %this);
 	}
@@ -132,11 +126,10 @@ function InitFerry()
 
 	%group = nameToId("MissionGroup\\Ferry");
 
-	if(%group != -1)
-	{
+	if(%group != -1) {
 		%count = Group::objectCount(%group);
-		for(%i = 0; %i <= %count-1; %i++)
-		{
+
+		for(%i = 0; %i <= %count-1; %i++) {
 			%object = Group::getObject(%group, %i);
 			%system = Object::getName(%object);
 			%wferry = String::getSubStr(%system, String::len($FerryfolderNameForSystem), String::len(%system)-String::len($FerryfolderNameForSystem));
@@ -144,11 +137,13 @@ function InitFerry()
 			//find %ferry id
 			%g = nameToId("MissionGroup\\Ferry\\" @ %system);
 			%c = Group::objectCount(%g);
-			for(%k = 0; %k <= %c-1; %k++)
-			{
+
+			for(%k = 0; %k <= %c-1; %k++) {
 				%o = Group::getObject(%g, %k);
-				if(getObjectType(%o) == "Moveable")
+
+				if(getObjectType(%o) == "Moveable") {
 					%ferry = %o;
+				}
 			}
 
 			$Ferry::FolderName[%ferry] = "MissionGroup\\Ferry\\" @ %system;
@@ -156,8 +151,8 @@ function InitFerry()
 			//go thru all the markers / droppoints and perhaps do something?
 			%groupForPath = nameToId("MissionGroup\\Ferry\\" @ %system @ "\\" @ $FerryfolderNameForPath);
 			%countForPath = Group::objectCount(%groupForPath);
-			for(%j = 0; %j <= %countForPath-1; %j++)
-			{
+
+			for(%j = 0; %j <= %countForPath-1; %j++) {
 				%o1 = Group::getObject(%groupForPath, %j);
 				$Ferry::MarkerPos[%ferry, %j] = GameBase::getPosition(%o1);
 				$Ferry::PauseTime[%ferry, %j] = floor((Object::getName(%o1)) * 100) / 100;

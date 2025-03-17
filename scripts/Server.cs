@@ -292,6 +292,7 @@ function createServer(%mission, %dedicated)
 	InitZones();
 	InitFerry();
 	InitTownBots();
+	
 	if(!$NoSpawn)
 		InitSpawnPoints();
 

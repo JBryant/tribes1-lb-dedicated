@@ -57,11 +57,12 @@ function getDisp(%type) {
 	%disp["MateriaItems"] = "Materia";
 	%disp["QuestItems"] = "Quest Items";
 	%disp["AccessoryItems"] = "Accessories";
+	%disp["MiscItems"] = "Miscellaneous";
 
 	return %disp[%type];
 }
 
-$belttypelist = "AmmoItems GemItems PotionItems WeaponItems ArmorItems MateriaItems QuestItems AccessoryItems";
+$belttypelist = "AmmoItems GemItems PotionItems WeaponItems ArmorItems MateriaItems QuestItems AccessoryItems MiscItems";
 
 function belt::checkmenus(%clientId)
 {
@@ -1561,6 +1562,7 @@ function Belt::GetWeight(%clientid) {
 	%list[6] = "QuestItems";
 	%list[7] = "AccessoryItems";
 	%list[8] = "MateriaItems";
+	%list[9] = "MiscItems";
 
     // for(%s=1;%list[%s] != "";%s++)
 	// {
@@ -1815,6 +1817,31 @@ function BeltItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo
 	if (%enchant != "") {
 		$beltitem[%item, "Enchantment"] = %enchant;
 	}
+}
+
+function BeltItem::AddAmmo(%name, %item, %type, %weight, %cost, %image, %weaponSkill, %skillRestriction, %special, %shopIndex) {
+	$numBeltItems++;
+	%num = $count[%type]++;
+
+	$beltItemData[$numBeltItems] = %item;
+	$beltItemNameToItem[%name] = %item;
+	$beltitem[%num, "Num", %type] = %item;
+	$beltitem[%item, "Item"] = %item;
+	$beltitem[%item, "Name"] = %name;
+	$beltitem[%item, "Type"] = %type;
+	$beltitem[%item, "Image"] = %image;
+	$AccessoryVar[%item, $Weight] = %weight;
+	$AccessoryVar[%item, $SpecialVar] = %special;
+
+	if (%shopIndex != "") {
+		$AccessoryVar[%item, $ShopIndex] = %shopIndex;
+		$beltItemShopIndexToItem[%shopIndex] = %item;
+	}
+
+	$SkillType[%item] = %weaponSkill;
+	$SkillRestriction[%item] = %skillRestriction;
+
+	$HardcodedItemCost[%item] = %cost;
 }
 
 // ==============================
@@ -2244,6 +2271,14 @@ function Belt::GetDeathItems(%clientid, %killerId) {
 		}
 		%tmploot = %tmploot @ %QuestItems;
 
+        // drop misc items
+		%miscItems = fetchdata(%clientid, "MiscItems");
+		if((String::len(%tmploot) + String::len(%miscItems)) > 200) {
+			Belt::packgen(%clientId, %tmploot);
+			%tmploot = "";
+		}
+		%tmploot = %tmploot @ %miscItems;
+
 		// should materia be droppable?
 		%MateriaItems = fetchdata(%clientid, "MateriaItems");
 		if((String::len(%tmploot) + String::len(%MateriaItems)) > 200) {
@@ -2251,7 +2286,7 @@ function Belt::GetDeathItems(%clientid, %killerId) {
 			%tmploot = "";
 		}
 		%tmploot = %tmploot @ %MateriaItems;
-	}//LCK < 0 happens when the player ran out, 0 is after the last one is used to protect this pack
+	} //LCK < 0 happens when the player ran out, 0 is after the last one is used to protect this pack
 	else {
 		%tmpItems = fetchdata(%clientid, "QuestItems");
 		for(%i = 0; GetWord(%tmpItems, %i) != -1; %i+=2) {
@@ -2340,23 +2375,25 @@ $count["ArmorItems"] = 0;
 $count["QuestItems"] = 0;
 $count["AccessoryItems"] = 0;
 $count["MateriaItems"] = 0;
+$count["MiscItems"] = 0;
 $numBeltItems = 0;
 
 generateEnchantsAndMateria();
 
 //Ammunition
-BeltItem::Add("Small Rock","SmallRock","AmmoItems",0.2,13, "SmallRock", 1);
-BeltItem::Add("Basic Arrow","BasicArrow","AmmoItems",0.1,5, "Arrow", 2);
-BeltItem::Add("Sheaf Arrow","SheafArrow","AmmoItems",0.1,25, "Arrow", 3);
-BeltItem::Add("Bladed Arrow","BladedArrow","AmmoItems",0.1,50, "Arrow", 4);
-BeltItem::Add("Light Quarrel","LightQuarrel","AmmoItems",0.1,100, "Quarrel", 5);
-BeltItem::Add("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.1,200, "Quarrel", 6);
-BeltItem::Add("Short Quarrel","ShortQuarrel","AmmoItems",0.1,300, "Quarrel", 7);
-BeltItem::Add("Stone Feather","StoneFeather","AmmoItems",0.1,400, "Arrow", 8);
-BeltItem::Add("Metal Feather","MetalFeather","AmmoItems",0.1,500, "Arrow", 9);
-BeltItem::Add("Talon","Talon","AmmoItems",0.1,800, "Arrow", 10);
-BeltItem::Add("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.1,1000, "Arrow", 11);
-BeltItem::Add("Poison Arrow", "PoisonArrow", "AmmoItems", 0.1, 200, "Arrow", 12);
+// function BeltItem::AddAmmo(%name, %item, %type, %weight, %cost, %image, %weaponSkill, %skillRestriction, %special, %shopIndex) {
+BeltItem::Add("Small Rock", "SmallRock", "AmmoItems", 0.2, 13, "SmallRock", $SkillBows, $SkillBows @ " 1", "6 1", 1);
+BeltItem::Add("Basic Arrow", "BasicArrow", "AmmoItems", 0.1, 5, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 2);
+BeltItem::Add("Sheaf Arrow", "SheafArrow", "AmmoItems", 0.1, 25, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 3);
+BeltItem::Add("Bladed Arrow","BladedArrow","AmmoItems",0.1,50, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 4);
+BeltItem::Add("Light Quarrel","LightQuarrel","AmmoItems",0.1,100, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 1", 5);
+BeltItem::Add("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.1,200, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 1", 6);
+BeltItem::Add("Short Quarrel","ShortQuarrel","AmmoItems",0.1,300, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 1", 7);
+BeltItem::Add("Stone Feather","StoneFeather","AmmoItems",0.1,400, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 8);
+BeltItem::Add("Metal Feather","MetalFeather","AmmoItems",0.1,500, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 9);
+BeltItem::Add("Talon","Talon","AmmoItems",0.1,800, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 10);
+BeltItem::Add("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.1,1000, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 11);
+BeltItem::Add("Poison Arrow", "PoisonArrow", "AmmoItems", 0.1, 200, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 12);
 
 //Gems
 BeltItem::Add("Quartz", "Quartz", "GemItems", 0.2, 100);
@@ -2587,33 +2624,34 @@ BeltItem::AddWeapon("Gungnir", "Gungnir", "Spear", $BludgeonAccessoryType, $desc
 // Bows (175 - 199)
 // Images: Crossbow, RepeatingCrossbow, LongBow, CompositeBow, CompositeBowFast, Sling
 $description = "A simple sling used for hunting small game.";
-BeltItem::AddWeapon("Sling", "Sling", "Sling", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "20", 175);
+BeltItem::AddWeapon("Sling", "Sling", "Sling", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "40", 175);
 $description = "A lightweight bow made for rapid firing.";
-BeltItem::AddWeapon("Quickshot Bow", "QuickshotBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 150", "28", 176);
+BeltItem::AddWeapon("Quickshot Bow", "QuickshotBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 150", "65", 176);
 $description = "A handcrafted wooden bow designed for basic archery.";
-BeltItem::AddWeapon("Hunting Bow", "HuntingBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 300", "36", 177);
+BeltItem::AddWeapon("Hunting Bow", "HuntingBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 300", "90", 177);
 $description = "A well-balanced longbow with reinforced limbs for extra power.";
-BeltItem::AddWeapon("Reinforced Longbow", "ReinforcedLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 450", "48", 178);
+BeltItem::AddWeapon("Reinforced Longbow", "ReinforcedLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 450", "110", 178);
 $description = "A repeating crossbow capable of firing multiple bolts in quick succession.";
-BeltItem::AddWeapon("Repeater Crossbow", "RepeaterCrossbow", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 600", "55", 179);
+BeltItem::AddWeapon("Repeater Crossbow", "RepeaterCrossbow", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 600", "130", 179);
 $description = "A sturdy war bow favored by veteran archers.";
-BeltItem::AddWeapon("Warbow", "Warbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 750", "65", 180);
+BeltItem::AddWeapon("Warbow", "Warbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 750", "155", 180);
 $description = "A precision-crafted composite bow known for its deadly accuracy.";
-BeltItem::AddWeapon("Sharpshooter Bow", "SharpshooterBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 900", "78", 181);
+BeltItem::AddWeapon("Sharpshooter Bow", "SharpshooterBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 900", "175", 181);
 $description = "A heavy crossbow capable of piercing through armor.";
-BeltItem::AddWeapon("Siege Crossbow", "SiegeCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1050", "90", 182);
+BeltItem::AddWeapon("Siege Crossbow", "SiegeCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1050", "195", 182);
 $description = "An enchanted bow said to be blessed by the spirits of the wind.";
-BeltItem::AddWeapon("Gale Bow", "GaleBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1200", "105", 183);
+BeltItem::AddWeapon("Gale Bow", "GaleBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1200", "215", 183);
 $description = "A lightweight but durable longbow used by elven rangers.";
-BeltItem::AddWeapon("Elven Longbow", "ElvenLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1350", "118", 184);
+BeltItem::AddWeapon("Elven Longbow", "ElvenLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1350", "240", 184);
 $description = "A repeating crossbow enhanced with mechanisms for rapid-fire accuracy.";
-BeltItem::AddWeapon("Storm Repeater", "StormRepeater", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1500", "135", 185);
+BeltItem::AddWeapon("Storm Repeater", "StormRepeater", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1500", "265", 185);
 $description = "A mystical bow infused with elemental energy, increasing its power.";
-BeltItem::AddWeapon("Arcane Bow", "ArcaneBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1650", "155", 186);
+BeltItem::AddWeapon("Arcane Bow", "ArcaneBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1650", "290", 186);
 $description = "A legendary bow capable of firing arrows that never miss their mark.";
-BeltItem::AddWeapon("Hawk's Talon", "HawksTalon", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1800", "175", 187);
+BeltItem::AddWeapon("Hawk's Talon", "HawksTalon", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1800", "320", 187);
 $description = "The ultimate crossbow, forged from ancient dragonbone and enhanced by magic.";
-BeltItem::AddWeapon("Dragonbone Crossbow", "DragonboneCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 2000", "200", 188);
+BeltItem::AddWeapon("Dragonbone Crossbow", "DragonboneCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 2000", "350", 188);
+// 110, 130, 155, 175, 195, 215, 240, 265, 290, 320, 350
 
 // Armors and Shields (200 - 299)
 // BeltItem::AddArmor(%name, %item, %armorSkin, %hitSound, %special, %weight, %skillRestriction, %miscInfo, %shopIndex)
@@ -2702,25 +2740,73 @@ BeltItem::AddAccessory("Wind Walkers", "WindWalkers", $BootsAccessoryType, "Acce
 
 //Potions
 // function BeltItem::Add(%name, %item, %type, %weight, %cost, %image, %shopIndex) {
-BeltItem::Add("Heal Potion","HealPotion","PotionItems", 0.5, 20, "", 501);
-$AccessoryVar[Healpotion, $MiscInfo] = "A potion of Light healing that heals 25 HP";
-$restoreValue[Healpotion, HP] = 25;
+BeltItem::Add("Potion","Potion", "PotionItems", 0.5, 100, "", 501);
+$AccessoryVar[Potion, $MiscInfo] = "A potion of Healing that heals 25 HP";
+$restoreValue[Potion, HP] = 25;
+$AccessoryVar[Potion, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 HealingHerb 5";
 
-BeltItem::Add("Greater Heal Potion","GreaterHealPotion","PotionItems", 1, 100, "", 502);
-$AccessoryVar[GreaterHealPotion, $MiscInfo] = "A potion of Greater Healing that heals 80 HP";
-$restoreValue[GreaterHealPotion, HP] = 80;
+BeltItem::Add("Hi-Potion", "HiPotion", "PotionItems", 0.5, 1000, "", 502);
+$AccessoryVar[HiPotion, $MiscInfo] = "A potion of Healing that heals 100 HP";
+$restoreValue[HiPotion, HP] = 100;
 
-BeltItem::Add("Mana Potion","ManaPotion","PotionItems", 0.5, 20, "", 503);
-$AccessoryVar[ManaPotion, $MiscInfo] = "A Mana Potion that provides 20 MP";
-$restoreValue[ManaPotion, MP] = 20;
+BeltItem::Add("X-Potion", "XPotion", "PotionItems", 0.5, 10000, "", 503);
+$AccessoryVar[XPotion, $MiscInfo] = "A potion of Healing that heals 250 HP";
+$restoreValue[XPotion, HP] = 250;
 
-BeltItem::Add("Energy Potion","EnergyPotion","PotionItems", 1, 100, "", 504);
-$AccessoryVar[EnergyPotion, $MiscInfo] = "An Energy Potion that provides 50 MP";
-$restoreValue[EnergyPotion, MP] = 50;
+BeltItem::Add("Mega Potion", "MegaPotion", "PotionItems", 0.5, 100000, "", 504);
+$AccessoryVar[MegaPotion, $MiscInfo] = "A potion of Healing that heals 100 HP";
+$restoreValue[MegaPotion, HP] = 500;
 
-BeltItem::Add("Healing Kit","HealingKit","QuestItems", 0.1, 10, "", 505);
+BeltItem::Add("Elixir", "Elixir", "PotionItems", 0.5, 250000, "", 505);
+$AccessoryVar[Elixir, $MiscInfo] = "A rare elixir that restore HP and MP";
+$restoreValue[Elixir, HP] = 500;
+$restoreValue[Elixir, MP] = 500;
+
+// maybe make mega elixir later?
+
+BeltItem::Add("Ether", "Ether", "PotionItems", 0.5, 100, "", 506);
+$AccessoryVar[Ether, $MiscInfo] = "A potion that restores 25 MP";
+$restoreValue[Ether, MP] = 25;
+
+BeltItem::Add("Turbo Ether","TurboEther","PotionItems", 1, 1000, "", 507);
+$AccessoryVar[TurboEther, $MiscInfo] = "An potion that provides 100 MP";
+$restoreValue[TurboEther, MP] = 100;
+
+BeltItem::Add("Healing Kit", "HealingKit", "MiscItems", 0.1, 10, "", 508);
 $AccessoryVar[HealingKit, $MiscInfo] = "A medical kit that that let's you mend minor wounds.";
 
+// Alchemy Items (no shoping except for maybe Potion Bottles?)
+BeltItem::Add("Cracked Flask", "CrackedFlask", "MiscItems", 0.01, 10, "", 606);
+$AccessoryVar[CrackedFlask, $MiscInfo] = "A crude, handmade clay bottle with visible cracks. Prone to leaking and breaking easily. Used by commoners for basic tonics and weak potions.";
+BeltItem::Add("Worn Glass Vial", "WornGlassVial", "MiscItems", 0.01, 100, "", 607);
+$AccessoryVar[WornGlassVial, $MiscInfo] = "A reused glass container with scratches and imperfections. It is still usable, but the glass is thin and fragile. Used by novice alchemists and street apothecaries.";
+BeltItem::Add("Reinforced Alchemist's Bottle", "ReinforcedAlchemistsBottle", "MiscItems", 0.01, 1000, "", 608);
+$AccessoryVar[ReinforcedAlchemistsBottle, $MiscInfo] = "A sturdy glass bottle with a reinforced metal frame. It is designed to withstand high pressure and heat, making it ideal for brewing volatile potions and elixirs.";
+BeltItem::Add("Arcane Crystal Phial", "ArcaneCrystalPhial", "MiscItems", 0.01, 10000, "", 609);
+$AccessoryVar[ArcaneCrystalPhial, $MiscInfo] = "A rare and expensive crystal vial that is said to enhance the magical properties of any liquid stored within it. It is used by master alchemists and potion makers.";
+BeltItem::Add("Ethereal Stasis Flask", "EtherealStasisFlask", "MiscItems", 0.01, 100000, "", 610);
+$AccessoryVar[EtherealStasisFlask, $MiscInfo] = "A mysterious flask made of an otherworldly material that seems to defy the laws of physics. It is said to preserve the contents within it indefinitely, keeping them fresh and potent.";
+
+BeltItem::Add("Crude Clay Alembic", "CrudeClayAlembic", "MiscItems", 0.01, 500, "", 611);
+$AccessoryVar[CrudeClayAlembic, $MiscInfo] = "A basic distillation vessel made from brittle, unglazed clay. Inefficient, with high heat loss and impure extractions. Commonly used by novice potion-makers in back-alley workshops.";
+BeltItem::Add("Worn Copper Alembic", "WornCopperAlembic", "MiscItems", 0.01, 5000, "", 612);
+$AccessoryVar[WornCopperAlembic, $MiscInfo] = "A simple copper distiller with dents and discoloration. Provides decent extraction but leaves impurities in the mixture. Used by traveling merchants and budget alchemists.";
+BeltItem::Add("Reinforced Iron Alembic", "ReinforcedIronAlembic", "MiscItems", 0.01, 50000, "", 613);
+$AccessoryVar[ReinforcedIronAlembic, $MiscInfo] = "A sturdy iron apparatus with pressure control valves. Produces reliable, pure extractions, making it a staple for guild alchemists. Can handle stronger reagents without corrosion.";
+BeltItem::Add("Arcane Glass Alembic", "ArcaneGlassAlembic", "MiscItems", 0.01, 500000, "", 614);
+$AccessoryVar[ArcaneGlassAlembic, $MiscInfo] = "Crafted from mage-blown glass, reinforced with runic etchings. Allows precise temperature control for rare elemental extractions. Used by royal alchemists and high-tier potion makers.";
+BeltItem::Add("Celestial Mythril Alembic", "CelestialMythrilAlembic", "MiscItems", 0.01, 5000000, "", 615);
+$AccessoryVar[CelestialMythrilAlembic, $MiscInfo] = "A legendary alembic made from enchanted mythril, absorbing mana flow. Can distill even volatile aetheric essences without loss of potency. Used for philosopher's stones, divine elixirs, and god-tier alchemy.";
+
+// Igredients
+BeltItem::Add("Vial of Water", "VialOfWater", "MiscItems", 0.01, 1, "", 616);
+$AccessoryVar[VialOfWater, $MiscInfo] = "A vial of clean, fresh water. It is used as a base for many potions and alchemical concoctions.";
+BeltItem::Add("Healing Herb", "HealingHerb", "MiscItems", 0.01, 1, "", 617);
+$AccessoryVar[HealingHerb, $MiscInfo] = "A medicinal herb known for its healing properties. It is used in many healing potions and remedies.";
+BeltItem::Add("Mandragora Root", "MandragoraRoot", "MiscItems", 0.01, 1, "", 618);
+$AccessoryVar[MandragoraRoot, $MiscInfo] = "A screaming plant known for its hallucinogenic and harmful properties.";
+
+// Quest Items
 BeltItem::Add("Black Statue", "BlackStatue", "QuestItems", $AccessoryVar[BlackStatue, $Weight], GenerateItemCost(BlackStatue));
 BeltItem::Add("Skeleton Bone", "SkeletonBone", "QuestItems", $AccessoryVar[SkeletonBone, $Weight], GenerateItemCost(SkeletonBone));
 BeltItem::Add("Enchanted Stone", "EnchantedStone", "QuestItems", $AccessoryVar[EnchantedStone, $Weight], GenerateItemCost(EnchantedStone));
@@ -2728,7 +2814,7 @@ BeltItem::Add("Dragon Scale", "DragonScale", "QuestItems", $AccessoryVar[DragonS
 BeltItem::Add("Parchment", "Parchment", "QuestItems", $AccessoryVar[Parchment, $Weight], GenerateItemCost(Parchment));
 BeltItem::Add("Magic Dust", "MagicDust", "QuestItems", $AccessoryVar[MagicDust, $Weight], GenerateItemCost(MagicDust));
 
-// Enemy Weapons (no shop index)
+// Enemy Weapons
 $description = "A casting blade.";
 BeltItem::AddWeapon("Casting Blade", "CastingBlade", "CastingBlade", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
 
@@ -2736,13 +2822,13 @@ $description = "A chipped dagger that looks dirty and worn.";
 BeltItem::AddWeapon("Chipped Dagger", "ChippedDagger", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "10");
 
 $description = "This warped club is filled with cracks and warped in strange ways. It looks like it could fall apart at any moment.";
-BeltItem::AddWeapon("Warped Club", "WarpedClub", "Club", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1", "10", 100);
+BeltItem::AddWeapon("Warped Club", "WarpedClub", "Club", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1", "10");
 
 $description = "A staff that looks like it has seen better days.";
-BeltItem::AddWeapon("Broken Staff", "BrokenStaff", "QuarterStaff", $BludgeonAccessoryType, $description, $SkillSpears, $SkillSpears @ " 1", "10", 150);
+BeltItem::AddWeapon("Broken Staff", "BrokenStaff", "QuarterStaff", $BludgeonAccessoryType, $description, $SkillSpears, $SkillSpears @ " 1", "10");
 
 $description = "An old dagger that is covered in rust.";
 BeltItem::AddWeapon("Rusty Shank", "RustyShank", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
 
 $description = "A club filled with broken bone bits. It looks like it could fall apart at any moment.";
-BeltItem::AddWeapon("Shattered Bone Club", "ShatteredBoneClub", "SpikedClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1", "20", 101);
+BeltItem::AddWeapon("Shattered Bone Club", "ShatteredBoneClub", "SpikedClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1", "20");

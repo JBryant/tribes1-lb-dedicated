@@ -411,14 +411,10 @@ function Player::onKilled(%this) {
 	}
 }
 
-function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rweapon, %object, %weapon, %preCalcMiss)
-{
-	dbecho($dbechoMode2, "Player::onDamage(" @ %this @ ", " @ %type @ ", " @ %value @ ", " @ %pos @ ", " @ %vec @ ", " @ %mom @ ", " @ %vertPos @ ", " @ %rweapon @ ", " @ %object @ ", " @ %weapon @ ", " @ %preCalcMiss @ ")");
+function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rweapon, %object, %weapon, %preCalcMiss) {
+	dbecho($dbechoMode2, "Player::onDamage(" @ %this @ ", " @ %type @ ", " @ %value @ ", " @ %pos @ ", " @ %vec @ ", " @ %mom @ ", " @ %vertPos @ ", " @ %weapon @ ", " @ %object @ ", " @ %rweapon @ ", " @ %preCalcMiss @ ")");
 
-	%skilltype = $SkillType[%weapon];
-
-	if(Player::isExposed(%this) && %object != -1 && %type != $NullDamageType && !Player::IsDead(%this))
-	{
+	if(Player::isExposed(%this) && %object != -1 && %type != $NullDamageType && !Player::IsDead(%this)) {
 		%damagedClient = Player::getClient(%this);
 		%shooterClient = %object;
 
@@ -426,6 +422,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 		%shooterClientPos = GameBase::getPosition(%shooterClient);
 
 		%damagedCurrentArmor = GetCurrentlyWearingArmor(%damagedClient);
+		
+		%skilltype = $SkillType[%weapon] || $SkillType[%rweapon];
 
 		//==============
 		//PROCESS STATS
@@ -437,8 +435,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 		%sameTeamNull = False;
 
 		//------------- CREATE DAMAGE VALUE -------------
-		if(%type == $SpellDamageType)
-		{
+		if(%type == $SpellDamageType) {
 			//For the case of SPELLS, the initial damage has already been determined before calling this function
 			%dmg = %value;
 			%value = round(((%dmg / 1000) * $PlayerSkill[%shooterClient, %skilltype]));
@@ -448,8 +445,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 
 			%value = (%value / $TribesDamageToNumericDamage);
 		}
-		else if(%type != $LandingDamageType)
-		{
+		else if(%type != $LandingDamageType) {
+			// This is the case for main weapon damage calculations
 			%multi = 1;
 
 			//Backstab - rethink how to add this back in
@@ -496,12 +493,13 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 			// 	storeData(%shooterClient, "NextHitBash", "");
 			// }
 
+			// add back rweapon damage once we can figure out what kind of arrow it is
 			if(%rweapon != "") {
 				%rweapondamage = GetRoll(GetWord(GetAccessoryVar(%rweapon, $SpecialVar), 1));
 			} else {
 				%rweapondamage = 0;
 			}
-			
+
 			%weapondamage = GetRoll(GetWord(GetAccessoryVar(%weapon, $SpecialVar), 1));
 			%value = round((( (%weapondamage + %rweapondamage) / 1000) * $PlayerSkill[%shooterClient, %skilltype]) * %multi);
 
@@ -509,8 +507,9 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 			%value = Cap(%value - %ab, 1, "inf");
 
 			%a = (%value * 0.15);
-			%r = round((getRandom() * (%a*2)) - %a);
+			%r = round((getRandom() * (%a * 2)) - %a);
 			%value += %r;
+
 			if(%value < 1)
 				%value = 1;
 
@@ -688,29 +687,24 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 			%arenaNull = True;
 		}
 
-		if(!IsDead(%this))
-		{
+		if(!IsDead(%this)) {
 			%armor = Player::getArmor(%this);
 			storeData(%damagedClient, "tmpkillerid", %shooterClient);
-
 			%hitby = Client::getName(%shooterClient);
 			%msgcolor = "";
-
 			%hitpresent = $skillHitPresent[%skilltype];
+
 			if(%hitpresent == "")
 				%hitpresent = "hit";
 
-			if(%isMiss)
-			{
+			if(%isMiss) {
 				%msgcolor = $MsgRed;
 				%value = 0;
 			}
-			else if(!%isMiss && %value == 0 && %shooterClient != %damagedClient)
-			{
+			else if(!%isMiss && %value == 0 && %shooterClient != %damagedClient) {
 				%msgcolor = $MsgWhite;
 			}
-			if(%msgcolor != "")
-			{
+			if(%msgcolor != "") {
 				if(%type != $SpellDamageType)
 				{
 					newprintmsg(%shooterClient,"You try to "@%hitpresent@" <f1>" @ rpg::getname(%damagedClient) @ "<ff>, but miss!", %msgcolor);
@@ -732,30 +726,25 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 			//-------------------------------------------------
 			// SKILLS
 			//-------------------------------------------------
-			if(%skilltype >= 1 && !%arenaNull && !%sameTeamNull && %shooterClient != %damagedClient)
-			{
+			if(%skilltype >= 1 && !%arenaNull && !%sameTeamNull && %shooterClient != %damagedClient) {
 				%base1 = Cap(35 + (fetchData(%shooterClient, "LVL") - fetchData(%damagedClient, "LVL")), 1, "inf");
 				%base2 = Cap(35 + (fetchData(%damagedClient, "LVL") - fetchData(%shooterClient, "LVL")), 1, "inf");
-				if(%isMiss)
-				{
+
+				if(%isMiss) {
 					UseSkill(%shooterClient, %skilltype, False, True);
 					UseSkill(%damagedClient, $SkillEndurance, True, True, 60);
 					// if(%type == $SpellDamageType)
 					// 	UseSkill(%damagedClient, $SkillSpellResistance, True, True, %base2);
 					// else
 					// 	UseSkill(%damagedClient, $SkillDodging, True, True, %base2 * (3/5));
-				}
-				else if(!%isMiss && %value == 0)
-				{
+				} else if(!%isMiss && %value == 0) {
 					UseSkill(%shooterClient, %skilltype, False, True);
 					UseSkill(%damagedClient, $SkillEndurance, True, True, 60);
 					// if(%type == $SpellDamageType)
 					// 	UseSkill(%damagedClient, $SkillSpellResistance, True, True, %base2);
 					// else
 					// 	UseSkill(%damagedClient, $SkillDodging, True, True, %base2 * (3/5));
-				}
-				else
-				{
+				} else {
 					UseSkill(%shooterClient, %skilltype, True, True, %base1);
 					// if(%type == $SpellDamageType)
 					// 	UseSkill(%damagedClient, $SkillSpellResistance, True, True, %base2);
@@ -767,22 +756,18 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 				// 	UseSkill(%shooterClient, $SkillBashing, True, True);
 			}
 
-			if(%value)
-			{
+			if(%value) {
 				if(%value < 0)
 					%value = 0;
 
 				%backupValue = %value;
-
-
 				%prehithp = fetchData(%damagedClient,"HP");
-
 				%rhp = refreshHP(%damagedClient, %value);
 
-				if(%rhp == -1)
+				if(%rhp == -1) {
 					%value = -1;	//There was an LCK miss
-				else
-				{
+				}
+				else {
 					if(!%noImpulse) Player::applyImpulse(%this, %mom);
 					%noImpulse = "";
 
@@ -808,10 +793,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 						PlaySound(SoundArrowHit2, %damagedClientPos);
 				}
 
-				if(Player::isAiControlled(%damagedClient) && fetchData(%damagedClient, "SpawnBotInfo") != "")
-				{
-					if(!IsDead(%damagedClient))
-					{
+				if(Player::isAiControlled(%damagedClient) && fetchData(%damagedClient, "SpawnBotInfo") != "") {
+					if(!IsDead(%damagedClient)) {
 						if(AI::getTarget(fetchData(%damagedClient, "BotInfoAiName")) != %shooterClient)
 							AI::SelectMovement(fetchData(%damagedClient, "BotInfoAiName"));
 					}
@@ -822,10 +805,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 				//display amount of damage caused
 				%convValue = round(%value * $TribesDamageToNumericDamage);
 
-				if(%convValue > 0)
-				{
-					if(%shooterClient == %damagedClient)
-					{
+				if(%convValue > 0) {
+					if(%shooterClient == %damagedClient) {
 						if(%type == $CrushDamageType)
 							%hitby = "moving object";
 						else if(%type == $DebrisDamageType)
@@ -835,26 +816,22 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 					}
 					else if(%shooterClient == 0)
 						%hitby = "an NPC";
-					else
-					{
+					else {
 						if(fetchData(%shooterClient, "invisible"))
 							%hitby = "an unknown assailant";
 						else
 							%hitby = Client::getName(%shooterClient);
 					}
 
-					if(%Backstab)
-					{
+					if(%Backstab) {
 						%daction = "backstabbed";
 						%saction = "backstabbed";
 					}
-					else if(%Bash)
-					{
+					else if(%Bash) {
 						%daction = "bashed";
 						%saction = "bashed";
 					}
-					else
-					{
+					else {
 						%hitpast = $skillHitPast[%skilltype];
 						if(%hitpast == "")
 							%hitpast = "damaged";
@@ -907,13 +884,11 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 					//--------------------
 					//display to radius
 					//--------------------
-					if(%shooterClient == 0)
-					{
+					if(%shooterClient == 0) {
 						%sname = "An NPC";
 						%dname = Client::getName(%damagedClient);
 					}
-					else if(%shooterClient == %damagedClient)
-					{
+					else if(%shooterClient == %damagedClient) {
 						%sname = Client::getName(%shooterClient);
 						if(String::ICompare(Client::getGender(%damagedClient), "Male") == 0)
 							%dname = "himself";
@@ -922,8 +897,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 						else
 							%dname = "itself";
 					}
-					else
-					{
+					else {
 						if(fetchData(%shooterClient, "invisible"))
 							%sname = "An unknown assailant";
 						else
@@ -937,8 +911,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 
 					radiusAllExcept(%damagedClient, %shooterClient, "<f1>"@%sname @ "<ff> "@%hitpresentrad@"s " @ %dname @ " for <f2>" @ %convValue @ "<ff> points of damage!", true);
 				}
-				else if(%convValue < 0)
-				{
+				else if(%convValue < 0) {
 					//this happens when there's a LCK consequence as miss
 
 					%hitby = Client::getName(%shooterClient);
@@ -952,8 +925,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 				//-------------------------------------------
 
 				//make new entry with shooter's name
-				if( %shooterClient != 0 && !%isMiss)
-				{
+				if( %shooterClient != 0 && !%isMiss) {
 					if(%shooterClient == 0)
 						%sname = "NPC";
 					else

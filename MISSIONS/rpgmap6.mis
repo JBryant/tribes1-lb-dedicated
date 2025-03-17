@@ -2760,7 +2760,7 @@ instant SimGroup "MissionGroup" {
 			isSphere = "False";
 		};
 	};
-	instant SimGroup "ferry" {
+	instant SimGroup "Ferry" {
 		instant SimGroup "System1" {
 			instant SimPath "Path" {
 				isLooping = "False";
@@ -2768,75 +2768,83 @@ instant SimGroup "MissionGroup" {
 				instant Marker "50" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2142.75 -396.5 41.3833";
-					rotation = "0 -0 -0.75";
+					position = "-2142.75 -396.5 41.385";
+					rotation = "0 -0 2.38867";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "9";
-					position = "-2021 -294.375 41.3847";
-					rotation = "0 -0 -0.75";
+					position = "-2021 -294.375 41.3864";
+					rotation = "0 -0 2.38868";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1977.25 -194.75 41.3847";
-					rotation = "0 -0 -0.75";
+					position = "-1977.25 -194.75 41.3865";
+					rotation = "0 -0 2.38868";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1945 140.5 41.3847";
-					rotation = "0 -0 -0.75";
+					position = "-1945 140.5 41.3865";
+					rotation = "0 -0 2.38868";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1313 275.127 41.3839";
-					rotation = "0 -0 -0.75";
+					position = "-1313.05 275.143 41.3857";
+					rotation = "0 -0 2.38863";
 				};
 				instant Marker "5" {
 					dataBlock = "DropPointMarker";
 					name = "arrival";
-					position = "-1252.25 337.566 41.3805";
-					rotation = "0 -0 -0.75";
+					position = "-1252.32 337.584 41.3823";
+					rotation = "0 -0 2.38822";
 				};
 				instant Marker "15" {
 					dataBlock = "DropPointMarker";
 					name = "departure";
-					position = "-1246 344.125 41.3805";
+					position = "-1246 344.133 41.3823";
+					rotation = "0 -0 -0.749847";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-1313.06 275.144 41.3858";
+					rotation = "0 -0 -0.749984";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-1945 140.5 41.3864";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1313 275.127 41.3843";
-					rotation = "0 -0 -0.75";
-				};
-				instant Marker "0" {
-					dataBlock = "DropPointMarker";
-					name = "";
-					position = "-1945 140.5 41.3847";
-					rotation = "0 -0 -0.75";
-				};
-				instant Marker "0" {
-					dataBlock = "DropPointMarker";
-					name = "";
-					position = "-1977.25 -194.75 41.3847";
+					position = "-1977.25 -194.75 41.3864";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "9";
-					position = "-2021 -294.375 41.3844";
+					position = "-2021 -294.375 41.3863";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "10" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2142.75 -396.5 41.3833";
+					position = "-2142.75 -396.5 41.3851";
 					rotation = "0 -0 -0.75";
 				};
+			};
+			instant Moveable "PlatformFerry1" {
+				dataBlock = "PlatformFerry";
+				name = "";
+				position = "-1706.63 191.287 41.3862";
+				rotation = "0 0 -0.749993";
+				destroyable = "True";
+				deleteOnDestroy = "False";
 			};
 		};
 		instant SimGroup "System2" {
@@ -2846,56 +2854,56 @@ instant SimGroup "MissionGroup" {
 				instant Marker "15" {
 					dataBlock = "DropPointMarker";
 					name = "departure";
-					position = "-1229.75 361.032 41.3806";
-					rotation = "0 -0 2.38843";
+					position = "-1229.75 361.048 41.3824";
+					rotation = "0 -0 2.38863";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1200.25 393.75 41.3824";
-					rotation = "0 -0 2.38843";
+					position = "-1200.25 393.75 41.3842";
+					rotation = "0 -0 2.38862";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1152.25 381.875 41.3844";
-					rotation = "0 -0 2.38857";
+					position = "-1152.25 381.875 41.3863";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-641.625 687.875 41.3847";
-					rotation = "0 -0 2.38857";
+					position = "-641.625 687.875 41.3865";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-246.25 756.375 41.3844";
-					rotation = "0 -0 2.38857";
+					position = "-246.25 756.375 41.3863";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-277.25 1277.25 41.3843";
-					rotation = "0 -0 2.38857";
+					position = "-277.25 1277.25 41.3858";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-251 1434.25 41.3847";
-					rotation = "0 -0 2.38857";
+					position = "-251 1434.25 41.3865";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-105.75 1629.5 41.3853";
-					rotation = "0 -0 2.38857";
+					position = "-105.75 1629.5 41.3871";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "10" {
 					dataBlock = "DropPointMarker";
 					name = "";
 					position = "-105.75 1629.5 48";
-					rotation = "0 -0 2.38857";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "50" {
 					dataBlock = "DropPointMarker";
@@ -2906,51 +2914,59 @@ instant SimGroup "MissionGroup" {
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-105.75 1629.5 41.3853";
+					position = "-105.75 1629.5 41.3872";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-251 1434 41.3847";
+					position = "-251 1434 41.3864";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-277.375 1277.25 41.3848";
+					position = "-277.375 1277.25 41.3867";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-246.25 756.375 41.3843";
+					position = "-246.25 756.375 41.3862";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-641.625 687.875 41.3847";
+					position = "-641.625 687.875 41.3864";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1152.25 381.875 41.3843";
+					position = "-1152.25 381.875 41.3862";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1200.25 393.75 41.3825";
-					rotation = "0 -0 -0.75";
+					position = "-1200.25 393.75 41.3844";
+					rotation = "0 -0 -0.749961";
 				};
 				instant Marker "5" {
 					dataBlock = "DropPointMarker";
 					name = "arrival";
-					position = "-1222.75 368.006 41.3815";
-					rotation = "0 -0 -0.75";
+					position = "-1222.81 368.024 41.3833";
+					rotation = "0 -0 -0.749966";
 				};
+			};
+			instant Moveable "PlatformFerry2" {
+				dataBlock = "PlatformFerry";
+				name = "";
+				position = "-105.75 1629.5 48";
+				rotation = "0 0 -0.749998";
+				destroyable = "True";
+				deleteOnDestroy = "False";
 			};
 		};
 		instant SimGroup "System3" {
@@ -2960,87 +2976,95 @@ instant SimGroup "MissionGroup" {
 				instant Marker "50" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2262.25 -528 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-2262.25 -528 41.3861";
+					rotation = "0 0 0";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2323 -730.5 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-2323 -730.5 41.3872";
+					rotation = "0 0 0";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2299.75 -1181.75 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-2299.75 -1181.75 41.3872";
+					rotation = "0 0 0";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2122.75 -1470.5 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-2122.75 -1470.5 41.3872";
+					rotation = "0 0 0";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1935.75 -1971 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-1935.75 -1971 41.3872";
+					rotation = "0 0 0";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1982.25 -2290.25 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-1982.25 -2290.25 41.3872";
+					rotation = "0 0 0";
 				};
 				instant Marker "10" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2152 -2448 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-2152 -2448 41.386";
+					rotation = "0 0 0";
 				};
 				instant Marker "50" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2152 -2448 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-2152 -2448 41.3861";
+					rotation = "0 0 3.13864";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1982.25 -2290.25 41.3881";
-					rotation = "0 -0 3.13883";
+					position = "-1982.25 -2290.25 41.386";
+					rotation = "0 -0 3.1386";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1935.75 -1971 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-1935.75 -1971 41.3871";
+					rotation = "0 0 3.13873";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2122.75 -1470.5 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-2122.75 -1470.5 41.3871";
+					rotation = "0 0 3.13873";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2299.75 -1181.75 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-2299.75 -1181.75 41.3871";
+					rotation = "0 0 3.13873";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2323 -730.5 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-2323 -730.5 41.3871";
+					rotation = "0 0 3.13873";
 				};
 				instant Marker "10" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2262.25 -528 41.3881";
-					rotation = "0 0 3.13883";
+					position = "-2262.25 -528 41.3862";
+					rotation = "0 0 3.13867";
 				};
+			};
+			instant Moveable "PlatformFerry3" {
+				dataBlock = "PlatformFerry";
+				name = "";
+				position = "-2152 -2448 41.3861";
+				rotation = "0 0 3.13864";
+				destroyable = "True";
+				deleteOnDestroy = "False";
 			};
 		};
 	};
@@ -4604,7 +4628,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NAME Kalm Merchant";
 			instant SimGroup "ITEMS CLASS Chemist LVL 2 LCK 0";
 			instant SimGroup "RACE MaleHuman";
-			instant SimGroup "BELTSHOP 1 2 175 17 51 100 125 150 200 201 505";
+			instant SimGroup "BELTSHOP 1 2 175 17 51 100 125 150 200 201 508 606 611 616";
 		};
 		instant SimGroup "merchant6" {
 			instant Marker "mythril mines merchant" {
@@ -4943,7 +4967,7 @@ instant SimGroup "MissionGroup" {
 			};
 			instant SimGroup "NAME Jolline";
 			instant SimGroup "RACE FemaleHuman";
-			instant SimGroup "BELTSHOP 1 2 3 18 52 102 126 151 176 201 202 203 505";
+			instant SimGroup "BELTSHOP 1 2 3 18 52 102 126 151 176 201 202 203 508";
 		};
 		instant SimGroup "quest10" {
 			instant Marker "Marker1" {
@@ -5094,6 +5118,68 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NCUE1 indeed";
 			instant SimGroup "NSAY2 For being such a brave adventurer, here is a gift I'm sure you will appreciate.";
 			instant SimGroup "CSAY Good luck on your adventures!";
+		};
+		instant SimGroup "quest16" {
+			instant Marker "Marker1" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "-2440.37 -261.246 65.094";
+				rotation = "0 -0 -0.8758";
+			};
+			instant SimGroup "NAME Chemist Trainer";
+			instant SimGroup "RACE MaleHuman";
+			instant SimGroup "NEED HealingHerb 10";
+			instant SimGroup "TAKE HealingHerb 5";
+			instant SimGroup "GIVE CrackedFlask 1 VialOfWater 1 CrudeClayAlembic 1";
+			instant SimGroup "SAY1 Hello, are you are interested in learning more about being a Chemist?";
+			instant SimGroup "CUE1 yes";
+			instant SimGroup "SAY2 Chemists get their strength from the potions they create, from simple healing potions to life saving panaceas.";
+			instant SimGroup "CUE2 potions";
+			instant SimGroup "SAY3 While anyone can [harvest] alchemy ingredients, only a Chemist can use the alchemy skill to create new potions.";
+			instant SimGroup "CUE3 alchemy";
+			instant SimGroup "SAY4 To use the [alchemy] skill you must have the correct tools, ingredients and knowledge of what you want to make.";
+			instant SimGroup "CUE4 tools";
+			instant SimGroup "SAY5 To make potions you must have an Alembic. They are sold at many stores and you only need one of them to grind up your ingredients.";
+			instant SimGroup "CUE5 ingredients";
+			instant SimGroup "SAY6 Ingredients can be harvested from plants around Gaia and can be used for various alchemical recipes.";
+			instant SimGroup "CUE6 recipes";
+			instant SimGroup "SAY7 Tell you what. I'm always in need of more Healing Herbs. Bring me 10 and I will teach you the recipe to make a Potion.";
+			instant SimGroup "CUE7 herbs";
+			instant SimGroup "SAY8 Theres a healthy plant outside this door next to the street lamp. Get close to it and #harvest 10 herbs for me and return when you are done.";
+			instant SimGroup "NSAY1 Excellent, you have the healing herbs! Crafting a [Potion] requires 5 Healing Herbs, 1 Cracked Flask, 1 Vial of Water and of course an Alembic.";
+			instant SimGroup "NCUE1 thanks";
+			instant SimGroup "NSAY2 To craft a Potion simply type #alchemy Potion. Take my old Alembic here to get started, and make sure to stock up on more flasks and water before you head out!";
+		};
+		instant SimGroup "quest17" {
+			instant Marker "Marker1" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "-2437.81 -264.59 65.094";
+				rotation = "0 -0 -0.8758";
+			};
+			instant SimGroup "NAME Squire Trainer";
+			instant SimGroup "RACE MaleHuman";
+			instant SimGroup "NEED HealingKit 1000";
+			instant SimGroup "TAKE HealingKit 1000";
+			instant SimGroup "GIVE HealingKit 1000";
+			instant SimGroup "SAY1 Greetings Adventurer. Come to learn more about what it takes to be a Squire?";
+			instant SimGroup "CUE1 squire";
+			instant SimGroup "SAY2 A squire is a budding warrior who is prepared to train every day to improve their skills.";
+			instant SimGroup "CUE2 skills";
+			instant SimGroup "SAY3 Oh yes, Squires have lots of skills! Although, only some of them are coded-*ahem*, I mean discovered right now. Blame Ramza for that.";
+			instant SimGroup "CUE3 coded?";
+			instant SimGroup "SAY4 Forget about that. Have YOU ever thought yourself: Hey, why are Mages the only ones with cool flashy abilities?";
+			instant SimGroup "CUE4 Yes!";
+			instant SimGroup "SAY5 Or have you ever thought: Why are Mages the only ones who get to do big explosive AOE damage?";
+			instant SimGroup "CUE5 ABSOLUTELY!";
+			instant SimGroup "SAY6 Well have no fear, your trainer is here. And I am here to teach you about [cleave]!";
+			instant SimGroup "CUE6 Finally!";
+			instant SimGroup "SAY7 To use it simply type #skill cleave or just #cleave for short, and start watching your enemies falling all around you!";
+			instant SimGroup "CUE7 amazing";
+			instant SimGroup "SAY8 Enjoy it while it lasts, it's honestly a bit broken and I imagine Ramza will tinker with it in the future. But hey, it's all about having FUN right?";
+			instant SimGroup "NSAY1 Excellent, you have the healing herbs! Crafting a [Potion] requires 5 Healing Herbs, 1 Cracked Flask, 1 Vial of Water and of course an Alembic.";
+			instant SimGroup "NCUE1 thanks";
+			instant SimGroup "NSAY2 To craft a Potion simply type #alchemy Potion. Take my old Alembic here to get started, and make sure to stock up on more flasks and water before you head out!";
 		};
 	};
 	instant InteriorShape "RemorterHall1" {

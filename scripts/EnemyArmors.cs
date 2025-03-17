@@ -218,19 +218,19 @@ $BotEquipment[Thief] = 		"CLASS Squire LVL 5/50 COINS 3/50 LCK 0 ChippedDagger 1
 $BotEquipment[Wizard] = 	"CLASS Chemist LVL 9/50 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-2000"; // 1/-500
 $BotEquipment[Raider] = 	"CLASS Squire LVL 11/50 COINS 4/50 LCK 0 WarpedClub 1 BlackStatue 1/-150 Jade 1/-300  FireMateriaI 1/-2000";
 
-$BotEquipment[Pup] = 		"CLASS Squire LVL 10/50 COINS 6/50 LCK 0 ShatteredBoneClub 1 CrystalBluePotion 1 Ruby 1/-2000 FireMateriaI 1/-2000";
+$BotEquipment[Pup] = 		"CLASS Squire LVL 10/50 COINS 6/50 LCK 0 ShatteredBoneClub 1 Potion 1 Ruby 1/-2000 FireMateriaI 1/-2000";
 $BotEquipment[Shaman] = 	"CLASS Chemist LVL 12/50 COINS 7/50 LCK 0 CastingBlade 1 FireMateriaI 1/-2000";
 $BotEquipment[Scavenger] = 	"CLASS Squire LVL 15/50 COINS 8/50 LCK 0 ShatteredBoneClub 1 Sapphire 2/-5000 FireMateriaI 1/-2000";
 $BotEquipment[Hunter] = 	"CLASS Squire LVL 17/50 COINS 9/50 LCK 0 RustyShank 1 Sling 1 SmallRock 20/50 Topaz 3/-3000 FireMateriaI 1/-2000";
 
 $BotEquipment[Warlock] = 	"CLASS Chemist LVL 16/50 COINS 10/50 LCK 0 CastingBlade 1 Sling 1 SmallRock 20/50 EnchantedStone 1/-100";
 $BotEquipment[Berserker] = 	"CLASS Squire LVL 20/50 COINS 13/50 LCK 0 HandAxe 1 Topaz 4/-500";
-$BotEquipment[Ravager] = 	"CLASS Squire LVL 24/50 COINS 16/50 LCK 0 Club 1 BluePotion 3/30 Opal 4/-300";
+$BotEquipment[Ravager] = 	"CLASS Squire LVL 24/50 COINS 16/50 LCK 0 Club 1 Potion 3/30 Opal 4/-300";
 $BotEquipment[Slayer] = 	"CLASS Squire LVL 28/50 COINS 19/50 LCK 0 Broadsword 1 BasicArrow 20/50 Opal 5/-250";
 
 $BotEquipment[Ruffian] = 	"CLASS Squire LVL 22/50 COINS 20/50 LCK 0 Club 1 Quartz 8/-200";
 $BotEquipment[Destroyer] = 	"CLASS Squire LVL 27/50 COINS 23/50 LCK 0 HandAxe 1";
-$BotEquipment[Halberdier] = "CLASS Squire LVL 31/50 COINS 26/50 LCK 0 Broadsword 1 BluePotion 3/30";
+$BotEquipment[Halberdier] = "CLASS Squire LVL 31/50 COINS 26/50 LCK 0 Broadsword 1 Potion 3/30";
 $BotEquipment[Dreadnought] = "CLASS Squire LVL 36/50 COINS 29/50 LCK 1 WalkingStaff 1 BasicArrow 15/75";
 $BotEquipment[Magi] =		"CLASS Chemist LVL 42/50 COINS 50/50 LCK 1 CastingBlade 1 Emerald 1/-6000 Quartz 10/-200";
 

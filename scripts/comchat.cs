@@ -34,6 +34,33 @@ $MsgRed = 1;
 $MsgBeige = 2;
 $MsgGreen = 3;
 
+function quickSkill(%skill, %TrueClientId, %trueClientId, %TCsenderName, %message, %cropped, %missingCroppedString) {
+	if(fetchData(%TrueClientId, "UseSkillStep") == 1)
+		Client::sendMessage(%TrueClientId, 0, "You are already using a skill!");
+	else if(fetchData(%TrueClientId, "UseSkillStep") == 2)
+		Client::sendMessage(%TrueClientId, 0, "You are still recovering from your last skill.");
+	else if(%TrueClientId.sleepMode != "" && %TrueClientId.sleepMode != False)
+		Client::sendMessage(%TrueClientId, $MsgRed, "You can not use a skill while sleeping or meditating.");
+	else if(IsDead(%TrueClientId))
+		Client::sendMessage(%TrueClientId, $MsgRed, "You can not use a skill when dead.");
+	else if (%missingCroppedString != "" && %cropped == "")
+		Client::sendMessage(%TrueClientId, 0, %missingCroppedString);
+	else {
+		BeginUseSkill(%TrueClientId, %skill @" "@ escapestring(%cropped));
+
+		// Exploit detection
+		if(String::findSubStr(%cropped, "\"") != -1){
+			%ip = Client::getTransportAddress(%ClientId);
+			echo("Exploit attempt detected and blocked: " @ %trueClientId @ ", aka " @ %TCsenderName @ ", at " @ %ip @ ".");
+			echo("Exploit: " @ %message);
+			messageall(0,"Exploit attempt detected and blocked: " @ %trueClientId @ ", aka " @ %TCsenderName @ ", at " @ %ip @ ".");
+			schedule("delayedban(" @ %TrueClientId @ ");",1.0);
+		}
+	}
+
+	return;
+}
+
 function remoteSay(%clientId, %team, %message, %senderName)
 {
 	//tribesrpg.org
@@ -910,7 +937,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 			else {
 				BeginUseSkill(%TrueClientId, escapestring(%cropped));
 				// Exploit detection
-				if(String::findSubStr(%cropped, "\"") != -1){
+				if(String::findSubStr(%cropped, "\"") != -1) {
 					%ip = Client::getTransportAddress(%ClientId);
 					echo("Exploit attempt detected and blocked: " @ %trueClientId @ ", aka " @ %TCsenderName @ ", at " @ %ip @ ".");
 					echo("Exploit: " @ %message);
@@ -919,6 +946,18 @@ function internalSay(%clientId, %team, %message, %senderName)
 				}
 			}
 
+			return;
+		}
+		if (%w1 == "#alchemy") {
+			quickSkill("alchemy", %TrueClientId, %trueClientId, %TCsenderName, %message, %cropped, "Specify an item to create.");
+			return;
+		}
+		if (%w1 == "#harvest") {
+			quickSkill("harvest", %TrueClientId, %trueClientId, %TCsenderName, %message, %cropped);
+			return;
+		}
+		if (%w1 == "#cleave") {
+			quickSkill("cleave", %TrueClientId, %trueClientId, %TCsenderName, %message, %cropped);
 			return;
 		}
 		if(%w1 == "#recall")

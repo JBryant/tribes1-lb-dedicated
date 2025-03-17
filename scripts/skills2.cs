@@ -3,7 +3,7 @@ $Skill::keyword[1] = "mend";
 $Skill::index[mend] = 1;
 $Skill::name[1] = "Mend Self or Other";
 $Skill::description[1] = "Mends the user or someone in the LOS, slightly restoring some health.";
-$Skill::actionMessage[1] = "You begin mending the wounds.";
+$Skill::actionMessage[1] = "You begin mending wounds.";
 $Skill::delay[1] = 3;
 $Skill::recoveryTime[1] = 10;
 $Skill::damageValue[1] = -10;
@@ -13,8 +13,8 @@ $Skill::endSound[1] = MedicSpell;
 $Skill::groupListCheck[1] = False;
 $Skill::refVal[1] = -10;
 $Skill::graceDistance[1] = 2;
-$Skill::requiredItems[1] = "HealingKit";
-$Skill::removesRequiredItems[1] = True;
+$Skill::requiredItems[1] = "HealingKit 1";
+$Skill::removeItems[1] = "HealingKit 1";
 
 $Skill::keyword[2] = "cleave";
 $Skill::index[cleave] = 2;
@@ -38,23 +38,33 @@ $Skill::index[harvest] = 3;
 $Skill::name[3] = "Harvest";
 $Skill::description[3] = "Attempts to gather resources from the environment.";
 $Skill::actionMessage[3] = "You begin harvesting.";
-$Skill::delay[3] = 1; // 3
-$Skill::recoveryTime[3] = 1; // 3
-$Skill::LOSrange[3] = 1;
+$Skill::delay[3] = 3;
+$Skill::recoveryTime[3] = 1;
 $Skill::startSound[3] = AmbientScurry;
-// $Skill::endSound[1] = MedicSpell;
 $Skill::groupListCheck[3] = False;
 $Skill::refVal[3] = -10;
 $Skill::graceDistance[3] = 0.5;
-// $Skill::requiredItems[3] = "HealingKit";
-// $Skill::removesRequiredItems[3] = True;
 
+$Skill::keyword[4] = "alchemy";
+$Skill::index[alchemy] = 4;
+$Skill::name[4] = "Alchemy";
+$Skill::description[4] = "Alchemy allows you to attempt to create potions from gathered resources.";
+$Skill::actionMessage[4] = "You begin brewing.";
+$Skill::delay[4] = 4;
+$Skill::recoveryTime[4] = 2;
+$Skill::startSound[4] = FishWalk;
+$Skill::groupListCheck[4] = False;
+$Skill::refVal[4] = -10;
+$Skill::graceDistance[4] = 0.5;
+// $Skill::requiredItems[4] = "CrudeClayAlembic 1";
+$Skill::requireOneOfItems[4] = "CrudeClayAlembic WornCopperAlembic ReinforcedIronAlembic ArcaneGlassAlembic CelestialMythrilAlembic";
+$SkillRestriction[$Skill::keyword[4]] = "C Chemist";
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
 
 	%skillName = GetWord(%keyword, 0);
-	%rest = String::getSubStr(%keyword, String::len(%w1)+1, 99999);
+	%rest = String::getSubStr(%keyword, String::len(%skillName) + 1, 99999);
 	%skillIndex = $Skill::index[%skillName];
 
 	if (%skillIndex == "") {
@@ -68,19 +78,51 @@ function BeginUseSkill(%clientId, %keyword) {
         return False;
     }
 
-	// check if the skill requires any special items
-	if ($Skill::requiredItems[%skillIndex] != "" && belt::hasthisstuff(%clientId, $Skill::requiredItems[%skillIndex]) < 1) {
-		Client::sendMessage(%clientId, $MsgRed, "You do not have the required items to use "@%keyword@".");
-		return False;
+	// check if the skill requires any special items (In future does this belong to SkillCanUse?)
+	%requiredItems = $Skill::requiredItems[%skillIndex];
+	if (%requiredItems != "") {
+		%missingItems = False;
+		for(%idx = 0; GetWord(%requiredItems, %idx) != -1; %idx += 2) {
+			%checkItem = GetWord(%requiredItems, %idx);
+			%amnt = GetWord(%requiredItems, %idx + 1);
+			
+			if (Belt::HasThisStuff(%clientId, %checkItem) < %amnt) {
+				%missingItems = True;
+				break;
+			}
+		}
+
+		if (%missingItems) {
+			Client::sendMessage(%clientId, $MsgRed, "You do not have the required items to use "@ %keyword @".");
+			return False;
+		}
 	}
 
-	
-    // Client::sendMessage(%clientId, $MsgBeige, "Casting " @ $Spell::name[%i] @ ".");
+	// check if you just need one ofany items
+	// check if the skill requires any special items (In future does this belong to SkillCanUse?)
+	%requireOneOfItems = $Skill::requireOneOfItems[%skillIndex];
 
+	if (%requireOneOfItems != "") {
+		%hasItem = False;
+		for(%idx = 0; GetWord(%requireOneOfItems, %idx) != -1; %idx += 1) {
+			%checkItem = GetWord(%requireOneOfItems, %idx);
+			
+			if (Belt::HasThisStuff(%clientId, %checkItem) > 0) {
+				%hasItem = True;
+				break;
+			}
+		}
+
+		if (%hasItem == False) {
+			Client::sendMessage(%clientId, $MsgRed, "You do not have the required items to use "@ %keyword @".");
+			return False;
+		}
+	}
+	
     %player = Client::getOwnedObject(%clientId);
 
     if(GameBase::getLOSinfo(%player, $Skill::LOSrange[%skillIndex])) {
-        //%lospos = $los::position;
+        // %lospos = $los::position;
         %losobj = $los::object;
     } else {
         //%lospos = "";
@@ -113,25 +155,22 @@ function BeginUseSkill(%clientId, %keyword) {
 	}
 
     if($Skill::menu[%skillIndex]) {
-        eval("useskill::"@$Skill::keyword[%skillIndex]@"(" @ %clientId @ ", " @ %skillIndex @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");");
+        eval("useskill::"@$Skill::keyword[%skillIndex]@"(" @ %clientId @ ", " @ %skillIndex @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %rest @ "\");");
     } else if($Skill::delay[%skillIndex] > 0) {
         if($Skill::Indicator[%skillIndex]) {
             spellIndicatorLoop(%clientId, $Skill::LOSrange[%skillIndex]);
         }
 
-        Schedule::Add("DoUseSkill(" @ %clientId @ ", " @ %skillIndex @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");", $Skill::delay[%skillIndex], "spell"@%clientId);
+        Schedule::Add("DoUseSkill(" @ %clientId @ ", " @ %skillIndex @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %rest @ "\");", $Skill::delay[%skillIndex], "spell"@%clientId);
     } else {
-        DoUseSkill(%clientId, %skillIndex, GameBase::getPosition(%clientId), %losobj, %w2);
+        DoUseSkill(%clientId, %skillIndex, GameBase::getPosition(%clientId), %losobj, %rest);
     }
-
-    //schedule("DoCastSpell(" @ %clientId @ ", " @ %i @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %lospos @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\");", $Spell::delay[%i]);
-    //schedule("%retval=DoCastSpell(" @ %clientId @ ", " @ %i @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %lospos @ "\", \"" @ %losobj @ "\", \"" @ %w2 @ "\"); if(%retval){refreshMANA(" @ %clientId @ ", " @ %tempManaCost @ ");}", $Spell::delay[%i]);
-
+   
     return True;
 }
 
-function DoUseSkill(%clientId, %index, %oldpos, %castObj, %w2) {
-	dbecho($dbechoMode, "DoUseSkill(" @ %clientId @ ", " @ %index @ ", " @ %oldpos @ ", " @ %castPos @ ", " @ %castObj @ ", " @ %w2 @ ")");
+function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
+	dbecho($dbechoMode, "DoUseSkill(" @ %clientId @ ", " @ %index @ ", " @ %oldpos @ ", " @ %castPos @ ", " @ %castObj @ ", " @ %rest @ ")");
 
 	%player = Client::getOwnedObject(%clientId);
 
@@ -155,12 +194,37 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %w2) {
 		return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
 	}
 
-	// check to remove any required items (only works with 1 item and 1 count for now, could enhance later)
-	if ($Skill::removesRequiredItems[%index] == True) {
-		%has = belt::hasthisstuff(%clientId, $Skill::requiredItems[%index]);
-		belt::takethisstuff(%clientId,  $Skill::requiredItems[%index], 1);
-		%has--;
-		Client::sendMessage(%clientId, $MsgWhite, "You used a Healing Kit. [have "@%has@"]");
+	// check to see if they still have the items to avoid dropping items while waiting for cast time
+	%requiredItems = $Skill::requiredItems[%index];
+	if (%requiredItems != "") {
+		%missingItems = False;
+		for(%idx = 0; GetWord(%requiredItems, %idx) != -1; %idx += 2) {
+			%checkItem = GetWord(%requiredItems, %idx);
+			%amnt = GetWord(%requiredItems, %idx + 1);
+			
+			if (Belt::HasThisStuff(%clientId, %checkItem) < %amnt) {
+				%missingItems = True;
+				break;
+			}
+		}
+
+		if (%missingItems) {
+			Client::sendMessage(%clientId, $MsgRed, "You do not have the required items to use "@%keyword@".");
+			%returnFlag = True;
+			return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
+		}
+	}
+
+	// remove any required items
+	%removeItems = $Skill::removeItems[%index];
+	if (%removeItems != "") {
+		for(%idx = 0; GetWord(%removeItems, %idx) != -1; %idx += 2) {
+			%removeItem = GetWord(%removeItems, %idx);
+			%amnt = GetWord(%removeItems, %idx + 1);
+			%has = Belt::HasThisStuff(%clientId, %removeItem);
+			belt::takethisstuff(%clientId, %removeItem, %amnt);
+			Client::sendMessage(%clientId, $MsgWhite, "You used "@ %amnt @" "@ $beltitem[%removeItem, "Name"] @". [have "@ (%has - %amnt) @"]");
+		}
 	}
 
     // ************************************************************************************
@@ -191,7 +255,7 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %w2) {
 		%set = newObject("set", SimSet);
 		%n = containerBoxFillSet(%set, $SimPlayerObjectType, GameBase::getPosition(%clientId), %b, %b, %b, 0);
 
-		Group::iterateRecursive(%set, DoSkillBoxFunction, %clientId, %index, %w2);
+		Group::iterateRecursive(%set, DoSkillBoxFunction, %clientId, %index, %rest);
 		deleteObject(%set);
 
 		%overrideEndSound = True;
@@ -199,36 +263,84 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %w2) {
     }
 
 	 if ($Skill::keyword[%index] == "harvest") {
-		// lbecho("---------");
-		// %player = Client::getOwnedObject(%clientId);
-		// GameBase::getLOSinfo(%clientId, 1000);
-		// lbecho($los::object);
-		// %type = getObjectType($los::object);
-		// lbecho("Type: " @ %type);
-
-		// if(getObjectType($los::object) == "Player" && !Player::isAiControlled(%id)) {
-		// 	%TrueClientId.stealType = 1;
-		// 	SetupInvSteal(%TrueClientId, %id);
-		// }
-
 		%set = newObject("set", SimSet);
+		%losRange = $Skill::LOSrange[%index] || 4;
 	    %num = containerBoxFillSet(%set, $StaticObjectType, GameBase::getPosition(%clientId), 4, 4, 4, 0);
 
-		Group::iterateRecursive(%set, findHarvestableObjects, %clientId, %index, %w2);
+		Group::iterateRecursive(%set, findHarvestableObjects, %clientId, %index, %rest);
 		deleteObject(%set);
 
 		%overrideEndSound = True;
 		%returnFlag = True;
-	 }
+	}
 
-    // return EndSkill
+	if ($Skill::keyword[%index] == "alchemy") {
+		%item = %rest;
+		%alchemyIngredients = $AccessoryVar[%item, "AlchemyIngredients"];
+
+		if (%alchemyIngredients != "") {
+			// check if they have the ingredients to make a potion
+			%missingItems = False;
+			for(%idx = 0; GetWord(%alchemyIngredients, %idx) != -1; %idx += 2) {
+				%checkItem = GetWord(%alchemyIngredients, %idx);
+				%amnt = GetWord(%alchemyIngredients, %idx + 1);
+				if (Belt::HasThisStuff(%clientId, %checkItem) < %amnt) {
+					%missingItems = True;
+					break;
+				}
+			}
+
+			if (%missingItems) {
+				// missing some ingredients
+				Client::sendMessage(%clientId, $MsgRed, "You do not have the required ingredients to make a "@ %item @".");
+				%overrideEndSound = True;
+				%returnFlag = True;
+			} else {
+				// remove used ingredients				
+				for(%idx = 0; GetWord(%alchemyIngredients, %idx) != -1; %idx += 2) {
+					%removeItem = GetWord(%alchemyIngredients, %idx);
+					%amnt = GetWord(%alchemyIngredients, %idx + 1);
+					%has = Belt::HasThisStuff(%clientId, %removeItem);
+
+					Belt::TakeThisStuff(%clientId, %removeItem, %amnt);
+					Client::sendMessage(%clientId, $MsgWhite, "You used "@ %amnt @" "@ $beltitem[%removeItem, "Name"] @". [have "@ (%has - %amnt) @"]");
+				}
+
+				// give the item
+				Belt::GiveThisStuff(%clientId, %item, 1);
+				Client::sendMessage(%clientId, $MsgWhite, "You made a " @ $beltitem[%item, "Name"] @ "!");
+			}
+		} else {
+			Client::sendMessage(%clientId, $MsgRed, "There is no alchemical recipe to make " @ %item @ ".");
+			%overrideEndSound = True;
+			%returnFlag = True;
+		}
+	}
+
     return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
 }
 
 function findHarvestableObjects(%object, %clientId, %index, %extra) {
 	if(Object::getName(%object) == "PlantTwo1") {
-		// get low level resources
-		Client::sendMessage(%clientId, $MsgWhite, "You harvested!");
+		%roll = floor(getRandom() * 100) + 1;
+
+		%item = "";
+		%amnt = 0;
+		if (%roll > 75) {
+			%item = "MandragoraRoot";
+			%amnt = floor(getRandom() * 2) + 1;
+		} else if (%roll > 25) {
+			%item = "HealingHerb";
+			%amnt = floor(getRandom() * 4) + 1;
+		}
+
+		if (%item != "") {
+			Belt::GiveThisStuff(%clientId, %item, %amnt);
+			Client::sendMessage(%clientId, $MsgWhite, "You harvested " @ %amnt @ " " @ $beltitem[%item, "Name"] @ "!");
+		} else {
+			Client::sendMessage(%clientId, $MsgRed, "You failed to harvest anything.");
+		}
+
 		return;
 	}
 }

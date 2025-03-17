@@ -1897,6 +1897,11 @@ SoundData AmrbroseSwordA
    profile = Profile3dNear;
 };
 
+SoundData FishWalk
+{
+   wavFileName = "fishwalk.wav";
+   profile = Profile3dNear;
+};
 //================================================
 
 function InitSoundPoints()

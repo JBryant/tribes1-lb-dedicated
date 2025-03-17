@@ -780,8 +780,8 @@ $EXPmultiplier[ExSoldier] = 0.8;
 //	s = Cap((a / b) - 20), 0, "inf") * 10.0;
 //
 
-$SkillRestriction[BluePotion] = $SkillHealing @ " 0";
-$SkillRestriction[CrystalBluePotion] = $SkillHealing @ " 0";
+// $SkillRestriction[BluePotion] = $SkillHealing @ " 0";
+// $SkillRestriction[CrystalBluePotion] = $SkillHealing @ " 0";
 // $SkillRestriction[ApprenticeRobe] = $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8";
 // $SkillRestriction[LightRobe] = $SkillEndurance @ " 3 " @ $SkillEnergy @ " 80";
 // $SkillRestriction[FineRobe] = $SkillEndurance @ " 9 " @ $SkillEnergy @ " 175";
@@ -790,7 +790,7 @@ $SkillRestriction[CrystalBluePotion] = $SkillHealing @ " 0";
 // $SkillRestriction[ElvenRobe] = $SkillEndurance @ " 12 " @ $SkillEnergy @ " 620";
 // $SkillRestriction[RobeOfVenjance] = $SkillEndurance @ " 18 " @ $SkillEnergy @ " 800";
 // $SkillRestriction[PhensRobe] = $SkillEndurance @ " 20 " @ $SkillEnergy @ " 980";
-$SkillRestriction[QuestMasterRobe] = $MinAdmin @ " 3";
+// $SkillRestriction[QuestMasterRobe] = $MinAdmin @ " 3";
 
 // $SkillRestriction[PaddedArmor] = $SkillEndurance @ " 5";
 // $SkillRestriction[LeatherArmor] = $SkillEndurance @ " 40";

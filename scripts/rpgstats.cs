@@ -705,9 +705,11 @@ function Game::refreshClientScore(%clientId)
 					Client::sendMessage(%clientId,0,"You have gained a level!");		
 				else
 					Client::sendMessage(%clientId,0,"You have gained " @ %lvls @ " levels!");
+					
 				Client::sendMessage(%clientId,0,"Welcome to level " @ fetchData(%clientId, "LVL"));
 				PlaySound(SoundLevelUp, GameBase::getPosition(%clientId));
-				setHP(%clientId, fetchData(%clientId, "MaxHP"));
+
+				// setHP(%clientId, fetchData(%clientId, "MaxHP"));
 			}
 			else if(%lvls < 0)
 			{
