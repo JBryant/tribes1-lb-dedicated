@@ -754,8 +754,21 @@ function AI::helper(%aiName, %displayName, %commandIssuer, %loadout)
 	%n = getAInumber();
 
 	%newName = %aiName @ %n;
-	if(%aiName == %displayName)
-		%displayName = $NameForRace[%aiName] @ %newName;
+	%customNames = $RaceToNamesList[$NameForRace[%aiName]];
+
+	if (%customNames != "") {
+		// TODO: dynamically gert the length of words in the list somehow (or always have 100)
+		// %randName = GetWord(%customNames, (getRandom() * 100) + 1);
+		%displayName = GetWord(%customNames, (getRandom() * 100) + 1);
+		// if ($NameForClass[$NameForRace[%aiName]] != "")
+		// 	%displayName = $NameForClass[$NameForRace[%aiName]] @" "@  %randName;
+		// else
+		// 	%displayName = %aiName @" "@ %randName;
+	} else {
+		if(%aiName == %displayName)
+			%displayName = $NameForRace[%aiName] @ %newName;
+	}
+		
 	$numAI++;
 	SpawnAI(%newName, %displayName, %spawnPos, %commandIssuer, %loadout, %aiName);
 
@@ -770,8 +783,7 @@ function SpawnAI(%newName, %displayName, %aiSpawnPos, %commandIssuer, %loadout, 
 
 	%retval = createAI(%newName, %aiSpawnPos, %displayName);
 
-	if(%retval != -1)
-	{
+	if(%retval != -1) {
 		%aiId = AI::getId( %newName );
 		AI::setVar( %newName,  iq,  100 );
 		AI::setVar( %newName,  attackMode, $AIattackMode);
@@ -779,8 +791,7 @@ function SpawnAI(%newName, %displayName, %aiSpawnPos, %commandIssuer, %loadout, 
 		//AI::SetVar( %newName,  seekOff, 1);
 		AI::setAutomaticTargets( %newName );
 
-		if(GetWord(%commandIssuer, 0) == "TempSpawn")
-		{
+		if(GetWord(%commandIssuer, 0) == "TempSpawn") {
 			//the %commandIssuer is a data string
 			storeData(%aiId, "SpawnBotInfo", %commandIssuer);
 			%team = GetWord(%commandIssuer, 4);
@@ -788,8 +799,7 @@ function SpawnAI(%newName, %displayName, %aiSpawnPos, %commandIssuer, %loadout, 
 
 			AI::SetVar(%newName, spotDist, $AIspotDist);
 		}
-		else if(GetWord(%commandIssuer, 0) == "MarkerSpawn")
-		{
+		else if(GetWord(%commandIssuer, 0) == "MarkerSpawn") {
 			//the %commandIssuer is a marker
 			storeData(%aiId, "SpawnBotInfo", %commandIssuer);
 			%team = GameBase::getMapName(GetWord(%commandIssuer, 1));
@@ -798,8 +808,7 @@ function SpawnAI(%newName, %displayName, %aiSpawnPos, %commandIssuer, %loadout, 
 
 			AI::SetVar(%newName, spotDist, $AIspotDist);
 		}
-		else if(GetWord(%commandIssuer, 0) == "SpawnPoint")
-		{
+		else if(GetWord(%commandIssuer, 0) == "SpawnPoint") {
 			//the %commandIssuer is a spawn crystal
 			storeData(%aiId, "SpawnBotInfo", %commandIssuer);
 

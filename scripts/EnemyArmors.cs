@@ -23,19 +23,26 @@
 //Starsiege: Tribes, including the engine, retains a proprietary license forbidding resale.
 
 $Server::teamName[0] = "Citizen";
-$Server::teamSkin[0] = "rpgbase";
+$Server::teamSkin[0] = "rpghuman"; // rpgbase, new: rpghuman, RMSkins1
+
 $Server::teamName[1] = "Enemy";
 $Server::teamSkin[1] = "rpgbase";
+
 $Server::teamName[2] = "Greenskins";
 $Server::teamSkin[2] = "rpgorc";
+
 $Server::teamName[3] = "Gnoll";
 $Server::teamSkin[3] = "rpggnoll";
+
 $Server::teamName[4] = "Undead";
 $Server::teamSkin[4] = "undead";
+
 $Server::teamName[5] = "Elf";
 $Server::teamSkin[5] = "rpgelf";
+
 $Server::teamName[6] = "Minotaur";
 $Server::teamSkin[6] = "min";
+
 $Server::teamName[7] = "Uber";
 $Server::teamSkin[7] = "fedmonster";
 
@@ -55,10 +62,12 @@ $NameForRace[Miner] = "Traveller";
 $NameForRace[Commoner] = "Traveller";
 $NameForRace[Mercenary] = "Traveller";
 $NameForRace[Militia] = "Traveller";
-$NameForRace[Brigand] = "Traveller";
-$NameForRace[Marauder] = "Traveller";
-$NameForRace[Knight] = "Traveller";
-$NameForRace[Paladin] = "Traveller";
+
+// travellers den
+$SkinForRace[Brigand] = "RMJerkilin"; // dynamic skin rendering
+$SkinForRace[Marauder] = "RMJerkilinPlate"; // dynamic skin rendering
+$SkinForRace[Knight] = "rpgringmail"; // dynamic skin rendering
+$SkinForRace[BlackMage] = "robeblue"; // dynamic skin rendering
 
 $NameForRace[Runt] = "Goblin";
 $NameForRace[Thief] = "Goblin";
@@ -103,13 +112,10 @@ $NameForRace[Sloth] = "Uber";
 $NameForRace[Gohort] = "Uber";
 
 $NameForRace[Acolyte] = "Cultist";
+$SkinForRace[Acolyte] = "robeblack"; // dynamic skin rendering
 $NameForRace[Doomsayer] = "Cultist";
+$SkinForRace[Doomsayer] = "RMSkins3"; // dynamic skin rendering
 
-//----- dynamic skins for races
-$SkinForRace[Acolyte] = "robeblack";
-$SkinForRace[Doomsayer] = "RMSkins3";
-
-//------------------------------
 
 $ArmorTypeToRace[TravellerArmor] = "Traveller";
 $ArmorTypeToRace[GoblinArmor] = "Goblin";
@@ -138,6 +144,21 @@ $RaceToArmorType[Uber] = "UberArmor";
 $RaceToArmorType[Zombie] = "ZombieArmor";
 $RaceToArmorType[Demon] = "DemonArmor";
 $RaceToArmorType[Cultist] = "CultistArmor";
+
+$RaceToNamesList[Traveller] = "Alphonse Cedric Lucian Darius Leontius Gregor Matthias Silvain Emeric Veyron Hadrian Tobias Valens Octavian Magnus Raphael Victor Alistair Remiel Lysander Cassian Garrick Percival Thaddeus Gideon Theodric Isidore Cornelius Reginald Leofric Oswald Baldwin Edric Ronan Severin Aldous Soren Valentin Leopold Desmond Eustace Corbin Ignatius Bertram Seraphim Maximus Felix Quentin Roderic Atticus Nicodemus Zephyrus Aurelius Fabian Tiberius Evander Cormac Orion Vesper Drystan Cassius Lazarus Marcellus Gideon Tarquin Lucan Zephiel Oberon Tristam Aurelian Myron Edgar Nathaniel Augustus Hector Vespasian Sirus Caliban Damian Cyprian Theron Alaric Thelonius Ulrich Galen Phineas Anselm Varian Valmont Bastien Xavier Leoric Simeon Zephyr Darian Florian Armand Hadrianus Orestes Fenrir Gael Romulus Malachai Noctis Thalric Eamon Belisarius Callum Solon";
+$RaceToNamesList[Goblin] = "Griknak Snaggit Borgul Zrogg Ruknash Dribbik Murgul Vrogg Tazgul Skarnak Drekz Broggit Klurg Snibbit Vraggo Trognash Glubnik Grizzik Nobnash Krognar Zraggit Blornik Snaggul Throgg Klibbit Drizzik Grobnar Vraknash Trogzit Borknash Graknik Zlubb Knorvik Drizzgul Trognik Krabnash Glubzit Morzik Zorknash Broggul Tarnik Flibbit Skragnak Zriggo Krobnash Vrixik Drobbit Skrognar Blaggit Truznik Frobnash Skribbit Klorgnak Vrobnash Gribzik Traknor Zlibbit Knarzik Frozgul Skraknit Grozzik Triggan Zorblik Broggar Trogzit Kribzik Slorbag Vragbit Gronbit Trasknak Zroblik Klibzit Kragnik Blibbit Driznash Skornak Froggit Trigblik Zrumblik Krobzit Snorggul Thragbit Glibnash Skragzit Draknor Vrobbit Zrobnik Snibnash Frakgul Triznak Grobnash Blugbit Kraznik Snibzit Trombit Skrubnik Grubzit Vorblik Zlagbit Kroggul Tragnor Blornash";
+$RaceToNamesList[Gnoll] = "Grathak Vrognash Brakkan Thrognir Skrallik Droggar Vrekkul Brashnak Krallgor Zrathik Gnarzuk Throbbik Zraggul Bralkin Skorvik Trakkul Grothik Vrunzak Drallik Snorvik Krathul Vroggar Brakzul Thurnik Zlarkash Gorrik Thraggul Skrunnak Zrokkal Braskir Thalzok Drukkal Skorgrim Vrozgul Brazzik Trathgar Zrikkul Grashnok Thrubnik Drozzar Skarnul Bragnir Throzzik Skrithar Gorrak Zruknal Brathik Skrozzar Krannok Thurlik Zlabrak Skraggir Thalrik Vrugnal Brakkir Skrolgar Drognik Zralkur Gronvik Thralzak Skorrik Krathnik Thruzzal Vrathik Braknor Skralgor Zroggar Grizzar Thrazkul Skrallik Dralkor Snarlik Vrogmir Bragnok Throzzul Skrelzak Krashnal Thurlgar Zlakkir Gralzik Throkal Skrugnal Bronnak Thrandik Zlarvik Skarzuk Gruthik Thronzak Skragnor Brullik Thraznok Zlargul Skorthak Gronnak Thraknal Skrilzak Krulgor Throzgal Zrokkin Skrallak Grunvik Thrazkir Zlurkal";
+$RaceToNamesList[Orc] = "Gorgrim Thrakul Drogmar Kraghol Urzok Brokkar Varnak Gorlash Drathul Zogrim Krulgar Bralzuk Throgar Skurnak Vorgul Gralnok Druzzik Thralgor Bruknar Zurnok Grashul Throznak Vrokkar Dranlok Korgash Thragzul Skargrin Bralnok Vrognar Drakzul Thurzog Krollik Gronmak Drozgul Skarnok Bruthar Vrogzul Kragnir Thrukmar Gorzak Drannok Skrulgar Broznar Krashgul Throlgar Vruzok Drogkul Gruthmar Skolgar Bruthok Thrazzul Korrak Dromgar Skorzak Bruknal Throznik Vronzul Dralkmar Skarnul Gronnir Thalzuk Krolgar Brathok Droznik Skrallmar Vurnok Granzak Throggul Kralkmar Bruthnok Dorzak Skragnar Vrozzok Druthar Skolnok Bragnok Throlzuk Korrnal Drakkar Skornak Vurzul Gralzok Throllik Krulnok Brozmar Skrulnok Vrozgul Dralkir Skothmar Brakkal Throznir Korgnal Drogzak Skrulgor Vrolnik Druthok Skurnir Brullok Thrazgar Krashnok Brozzik Skorgrim Vrokkal Dronzik Skarnik";
+$RaceToNamesList[Ogre] = "Gulmok Brathul Vorgak Drozgar Krugnar Thromak Zogthar Brakzul Drunmok Thorgash Vrognok Gralzak Krallgor Thrumok Zarnok Grozthul Drakmok Skarnul Vrothok Brukkal Thalzok Gorvok Druzgal Skothok Bralgar Krugmok Throlzar Zograk Druthnok Gralkar Skruznak Vorgrak Bruthmok Throznal Krullgar Gronmok Skarzok Druzzak Throkkul Bragnar Skulnok Vronmak Krashgar Draknok Skruthok Bralnok Grulmar Throggar Vuznok Dorgul Skragnar Krulgar Braknok Thorzal Grullok Skrulmok Vrozmar Drakkul Skurnok Brulzar Thoggar Kroznik Brulmak Skorzak Gruthok Thrognok Krashgul Drogmok Skragnar Vrothul Dranmak Skurzak Brakkor Thoznal Kruzgar Brulkul Skolgar Groznak Thalkor Krulmar Drozgul Skurthok Vronzak Drathmok Skaggul Bruthok Thalgar Kruzmak Brulgor Skovnok Grulzak Throzzik Krozmok Druthul Skornok Bruthnar Thalzul Korgmok Dranlok Skorvok";
+$RaceToNamesList[Undead] = "";
+$RaceToNamesList[Traveller] = "";
+$RaceToNamesList[MaleElf] = "";
+$RaceToNamesList[FemaleElf] = "";
+$RaceToNamesList[Minotaur] = "";
+$RaceToNamesList[Uber] = "";
+$RaceToNamesList[Zombie] = "";
+$RaceToNamesList[Demon] = "";
+$RaceToNamesList[Cultist] = "";
 
 //------------------------------
 
@@ -188,7 +209,7 @@ $spawnIndex[38] = "Champion";
 $spawnIndex[39] = "Brigand";
 $spawnIndex[40] = "Marauder";
 $spawnIndex[41] = "Knight";
-$spawnIndex[42] = "Paladin";
+$spawnIndex[42] = "BlackMage";
 
 $spawnIndex[43] = "Civilian";
 $spawnIndex[44] = "Gladiator";
@@ -214,14 +235,14 @@ $spawnIndex[55] = "Doomsayer";
 // range looks like: RShortBow 1 BasicArrow 20/50
 
 $BotEquipment[Runt] = 		"CLASS Squire LVL 1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1/-2000";
-$BotEquipment[Thief] = 		"CLASS Squire LVL 5/50 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-2000";
-$BotEquipment[Wizard] = 	"CLASS Chemist LVL 9/50 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-2000"; // 1/-500
-$BotEquipment[Raider] = 	"CLASS Squire LVL 11/50 COINS 4/50 LCK 0 WarpedClub 1 BlackStatue 1/-150 Jade 1/-300  FireMateriaI 1/-2000";
+$BotEquipment[Thief] = 		"CLASS Squire LVL 5/50 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-1800";
+$BotEquipment[Wizard] = 	"CLASS Chemist LVL 9/50 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1650"; // 1/-500
+$BotEquipment[Raider] = 	"CLASS Squire LVL 11/50 COINS 4/50 LCK 0 WarpedClub 1 BlackStatue 1/-150 Jade 1/-300  FireMateriaI 1/-1500";
 
-$BotEquipment[Pup] = 		"CLASS Squire LVL 10/50 COINS 6/50 LCK 0 ShatteredBoneClub 1 Potion 1 Ruby 1/-2000 FireMateriaI 1/-2000";
-$BotEquipment[Shaman] = 	"CLASS Chemist LVL 12/50 COINS 7/50 LCK 0 CastingBlade 1 FireMateriaI 1/-2000";
-$BotEquipment[Scavenger] = 	"CLASS Squire LVL 15/50 COINS 8/50 LCK 0 ShatteredBoneClub 1 Sapphire 2/-5000 FireMateriaI 1/-2000";
-$BotEquipment[Hunter] = 	"CLASS Squire LVL 17/50 COINS 9/50 LCK 0 RustyShank 1 Sling 1 SmallRock 20/50 Topaz 3/-3000 FireMateriaI 1/-2000";
+$BotEquipment[Pup] = 		"CLASS Squire LVL 10/50 COINS 6/50 LCK 0 ShatteredBoneClub 1 Potion 1 Ruby 1/-2000 FireMateriaI 1/-1500";
+$BotEquipment[Shaman] = 	"CLASS Chemist LVL 12/50 COINS 7/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1400";
+$BotEquipment[Scavenger] = 	"CLASS Squire LVL 15/50 COINS 8/50 LCK 0 ShatteredBoneClub 1 Sapphire 2/-5000 FireMateriaI 1/-1250";
+$BotEquipment[Hunter] = 	"CLASS Squire LVL 17/50 COINS 9/50 LCK 0 RustyShank 1 Sling 1 SmallRock 20/50 Topaz 3/-3000 FireMateriaI 1/-1000";
 
 $BotEquipment[Warlock] = 	"CLASS Chemist LVL 16/50 COINS 10/50 LCK 0 CastingBlade 1 Sling 1 SmallRock 20/50 EnchantedStone 1/-100";
 $BotEquipment[Berserker] = 	"CLASS Squire LVL 20/50 COINS 13/50 LCK 0 HandAxe 1 Topaz 4/-500";
@@ -249,7 +270,7 @@ $BotEquipment[Conjurer] =	"CLASS Chemist LVL 70/50 COINS 32/50 LCK 0 CastingBlad
 $BotEquipment[Brigand] = 	"CLASS Squire LVL 80/50 COINS 30/50 LCK 0 MythrilAxe 1 Sapphire 2/-3000";
 $BotEquipment[Marauder] =	"CLASS Squire LVL 80/50 COINS 33/50 LCK 0 IronHammer 1 Opal 4/-300 Turquoise 1/-800";
 $BotEquipment[Knight] = 	"CLASS Squire LVL 83/50 COINS 36/50 LCK 0 MythrilSword 1  SheafArrow 40/50 Jade 2/-600";
-$BotEquipment[Paladin] = 	"CLASS Chemist LVL 87/50 COINS 39/50 LCK 1 CastingBlade 1 Topaz 1/-300";
+$BotEquipment[BlackMage] = 	"CLASS Chemist LVL 87/50 COINS 39/50 LCK 1 CastingBlade 1 Topaz 1/-300";
 
 $BotEquipment[Civilian] = 	"CLASS Squire LVL 1 COINS 5/50 LCK 0 ChippedDagger 1";
 $BotEquipment[Gladiator] =	"CLASS Squire LVL 1 LCK 0";
@@ -2555,3 +2576,5 @@ PlayerData CultistArmor
 	boxHeadBackPercentage  = 0;
 	boxHeadFrontPercentage = 1;
 };
+
+/* custom armors, some from various mods */

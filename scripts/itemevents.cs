@@ -46,6 +46,9 @@ function Item::onCollision(%this, %object)
 
 			%ownerName = GetWord($loot[%this], 0);
 			%namelist = GetWord($loot[%this], 1);
+			lbecho("loot: " @ $loot[%this]);
+			lbecho("Item::onCollision: %ownerName = " @ %ownerName @ ", %namelist = " @ %namelist);
+
 			if($loot[%this] == "")
 				%msg = "You found an empty backpack.";
 
@@ -165,8 +168,7 @@ function Item::onUnmount(%player,%item)
 {
 }
 
-function Item::onUse(%player, %item)
-{
+function Item::onUse(%player, %item) {
 	dbecho($dbechoMode, "Item::onUse(" @ %player @ ", " @ %item @ ")");
 	
 	%clientId = Player::getClient(%player);
@@ -178,8 +180,7 @@ function Item::onUse(%player, %item)
 		%isArmor = %beltItemType == "ArmorItems";
 		%isAccessory = %beltItemType == "ArmorItems" || %beltItemType == "AccessoryItems";
 		//this is how you toggle back and forth from equipped to carrying.
-		if(%isAccessory && !%isEquipped)
-		{
+		if(%isAccessory && !%isEquipped) {
 			%cnt = 0;
 			%totalItems = GetEquippedAccessoriesCountByBeltType(%clientId, %beltItemTyped);
 			%itemList = GetEquippedAccessoriesByBeltType(%clientId, %beltItemType);
