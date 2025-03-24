@@ -753,12 +753,41 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				if(%value < 0)
 					%value = 0;
 
-				%backupValue = %value;
+				//--------------------
+				//check for enchanting damage
+				//--------------------
+				%enchantment = BeltItem::GetEnchant(%weapon);
+				%enchantDamage = 0;
+				
+				if (%enchantment != "") {
+					%enchantMod = $WeaponEnchantment[%enchantment, "mod"];
+					%enchantAction = $WeaponEnchantment[%enchantment, "action"];
+					%modId = GetWord(%enchantMod, 0);
+					%modValue = GetWord(%enchantMod, 1);
+
+					// percentage increase to damage
+					if (%modId == 1) {
+						// direct damage (5 = 5 extra damage)
+						%enchantDamage = %modValue; 
+
+						// percent damage (eg 10 = 10% of hit damage)
+						// %enchantDamage = floor(%convValue * (%modValue / 100)) + 1;
+					}
+				}	
+
+				// %backupValue = %value;
+				%weaponDamage = %value;
+				%finalDamage = %weaponDamage;
+
+				if (%enchantDamage > 0) {
+					%finalDamage = %finalDamage + (%enchantDamage / $TribesDamageToNumericDamage);
+				}
+
 				%prehithp = fetchData(%damagedClient,"HP");
-				%rhp = refreshHP(%damagedClient, %value);
+				%rhp = refreshHP(%damagedClient, %finalDamage);
 
 				if(%rhp == -1) {
-					%value = -1;	//There was an LCK miss
+					%weaponDamage = -1;	//There was an LCK miss
 				}
 				else {
 					if(!%noImpulse) Player::applyImpulse(%this, %mom);
@@ -796,7 +825,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				}
 
 				//display amount of damage caused
-				%convValue = round(%value * $TribesDamageToNumericDamage);
+				%convValue = round(%weaponDamage * $TribesDamageToNumericDamage);
 
 				if(%convValue > 0) {
 					if(%shooterClient == %damagedClient) {
@@ -833,37 +862,20 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 					}
 
 					//--------------------
-					//check for enchanting damage
-					//--------------------
-					%enchantment = BeltItem::GetEnchant(%weapon);
-					%enchantDamage = 0;
-					
-					if (%enchantment != "") {
-						%enchantMod = $WeaponEnchantment[%enchantment, "mod"];
-						%enchantAction = $WeaponEnchantment[%enchantment, "action"];
-						%modId = GetWord(%enchantMod, 0);
-						%modValue = GetWord(%enchantMod, 1);
-	
-						// percentage increase to damage
-						if (%modId == 1) {
-							// direct damage (5 = 5 extra damage)
-							%enchantDamage = %modValue; 
-
-							// percent damage (eg 10 = 10% of hit damage)
-							// %enchantDamage = floor(%convValue * (%modValue / 100)) + 1;
-						}
-					}
-
-					//--------------------
 					//display to involved
 					//--------------------
 
+					// UPDATE, ALSO CALL THE remoteATKText() functions remoteATKText
+
 					// This is where we shine! Take damage modifers into account, change the damage value, and send messages to porper parties
 					if(%shooterClient != %damagedClient) {
+						%animationStyle = "redmoon";
 						newprintmsg(%shooterClient, "You " @ %saction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ %convValue @ "<f0> points", $MsgRed);
+						remoteEval(%shooterClient, ATKText, "<f1>" @ %convValue, %animationStyle);
 
 						if (%enchantDamage > 0) {
 							newprintmsg(%shooterClient, "You " @ %enchantAction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ %enchantDamage @ "<f0> points", $MsgRed);
+							remoteEval(%shooterClient, ATKText, "<f0>" @ %enchantDamage, %animationStyle);
 						}
 					}
 
@@ -934,7 +946,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 						}
 						if(%index != "")
 						{
-							$damagedBy[%dname, %index] = %sname @ " " @ %backupValue;
+							$damagedBy[%dname, %index] = %sname @ " " @ %finalDamage;
 							schedule("$damagedBy[\"" @ %dname @ "\", " @ %index @ "] = \"\";", $damagedByEraseDelay);
 						}
 						else

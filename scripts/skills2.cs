@@ -175,7 +175,7 @@ function BeginUseSkill(%clientId, %keyword) {
             spellIndicatorLoop(%clientId, $Skill::LOSrange[%skillIndex]);
         }
 
-        Schedule::Add("DoUseSkill(" @ %clientId @ ", " @ %skillIndex @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %rest @ "\");", $Skill::delay[%skillIndex], "spell"@%clientId);
+        Schedule::Add("DoUseSkill(" @ %clientId @ ", " @ %skillIndex @ ", \"" @ GameBase::getPosition(%clientId) @ "\", \"" @ %losobj @ "\", \"" @ %rest @ "\");", $Skill::delay[%skillIndex], "skill"@%clientId);
     } else {
         DoUseSkill(%clientId, %skillIndex, GameBase::getPosition(%clientId), %losobj, %rest);
     }

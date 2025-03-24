@@ -4687,7 +4687,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "RACE MaleHuman";
 		};
 		instant SimGroup "merchant2" {
-			instant Marker "ethren merchant cheap" {
+			instant Marker "ethren armour cheap" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "-2438.75 -2291.25 56.7905";
@@ -4696,7 +4696,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NAME Cole";
 			instant SimGroup "RACE MaleHuman";
 			instant SimGroup "ITEMS CLASS Ranger LVL 2 LCK 0 Dagger 1";
-			instant SimGroup "BELTSHOP 204 205 206 207 208 209";
+			instant SimGroup "BELTSHOP 303 304 305 204 205 206 207 208 209";
 		};
 		instant SimGroup "porter1" {
 			instant Marker "Marker1" {
@@ -4778,7 +4778,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "SAY2 If you bring me three Black Statues, I will give you something of mine.";
 			instant SimGroup "NSAY1 Ah, you have returned.  Hand me the statues.  Now!";
 			instant SimGroup "NCUE1 yes";
-			instant SimGroup "NSAY2 Excellent.  Here is your reward.";
+			instant SimGroup "NSAY2 Excellent. Here is your reward.";
 			instant SimGroup "SHOP 33";
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";

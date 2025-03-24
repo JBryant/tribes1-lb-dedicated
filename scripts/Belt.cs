@@ -1138,25 +1138,27 @@ function belt::buildBankMenu(%clientId, %page){
 		%l = 31;
 
 	// %nx = 15;
-
 	%nf = belt::checkbankmenus(%clientId);
-	%ns = GetWord(%nf,0);
+	%ns = GetWord(%nf, 0);
 
 	%np = floor(%ns / %l);
 	%lb = (%page * %l) - (%l-1);
 	%ub = %lb + (%l-1);
+
 	if(%ub > %ns)
 		%ub = %ns;
 
 	%x = %lb - 1;
 	%curItem = -1;
-	for(%i = %lb; %i <= %ub; %i++)
-	{
+
+	for(%i = %lb; %i <= %ub; %i++) {
 		%x++;
-		%type = getword(%nf,%x);
+		%type = getword(%nf, %x);
+
 		if(%type == -1)
 			break;
-		%num = getword(Belt::BankGetNS(%clientid,%type),0);
+
+		%num = getword(Belt::BankGetNS(%clientid, %type), 0);
 		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ getDisp(%type) @ " ("@%num@" kinds)", %type);
 	}
 
@@ -1222,6 +1224,7 @@ function MenuStoreBeltItem(%clientid, %type, %page)
 	%l = 6;
 	if(%clientId.repack >= 18)
 		%l = 30;
+
 	// %nx = $count[%type];
 	%nf = Belt::GetNS(%clientid,%type);
 	%ns = GetWord(%nf,0);
@@ -1741,6 +1744,7 @@ function BeltItem::AddAccessory(%name, %item, %accessoryType, %beltType, %specia
 	$AccessoryVar[%item, $SpecialVar] = %special;
 	$AccessoryVar[%item, $MiscInfo] = %miscInfo;
 	$AccessoryVar[%item, $AccessoryType] = %accessoryType;
+	// $SkillRestriction[CheetaursPaws] = $MinLevel @ " 8";
 
 	BeltItem::AddEquippable(%name, %item, %beltType, %weight, %shopIndex);
 }
@@ -2199,7 +2203,7 @@ function Belt::BankGetNS(%clientid, %type) {
 		}
 	}
 
-	return %bn@%list;
+	return %bn @""@ %nslist; // %bn@%list;
 }
 
 function Belt::packgen(%clientId, %tmploot) {

@@ -736,14 +736,16 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 
 	if($Spell::graceDistance[%index] == "")
 		$Spell::graceDistance[%index] = 0.25;
+
 	$los::position = "";
-	if(GameBase::getLOSinfo(%player, $Spell::LOSrange[%index])){
+
+	if(GameBase::getLOSinfo(%player, $Spell::LOSrange[%index])) {
 		%castPos = $los::position;
 		if(%castObj < 1)
 			%castObj = $los::object;
 	}
-	if(Vector::getDistance(%oldpos, GameBase::getPosition(%clientId)) > $Spell::graceDistance[%index])
-	{
+
+	if(Vector::getDistance(%oldpos, GameBase::getPosition(%clientId)) > $Spell::graceDistance[%index]) {
 		Client::sendMessage(%clientId, $MsgBeige, "Your casting was interrupted.");
 		//storeData(%clientId, "SpellCastStep", 2);
 
@@ -1535,8 +1537,9 @@ function EndCast(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %r
 		remoteEval(%clientId, "rpgbarhud", %recovTime, 4, 2, "||");
 		schedule("storeData(" @ %clientId @ ", \"SpellCastStep\", \"\");", %recovTime, %clientId);
 	}
-	else
+	else {
 		schedule("storeData(" @ %clientId @ ", \"SpellCastStep\", \"\");sendDoneRecovMsg(" @ %clientId @ ");", %recovTime);
+	}
 		
 	return %returnFlag;
 }

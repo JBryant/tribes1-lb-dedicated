@@ -1453,7 +1453,7 @@ ItemImageData BattleAxeNewImage
 
 	weaponType = 0; // Single Shot
 	reloadTime = 0;
-	fireTime = $WeaponDelay[BattleAxe];
+	fireTime = $WeaponDelay[GreatAxe];
 	minEnergy = 0;
 	maxEnergy = 0;
 
