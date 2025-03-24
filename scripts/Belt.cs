@@ -1738,34 +1738,34 @@ function BeltItem::AddEquippable(%name, %item, %type, %weight, %shopIndex) {
 }
 
 function BeltItem::AddAccessory(%name, %item, %accessoryType, %beltType, %special, %weight, %miscInfo, %shopIndex) {
-	BeltItem::AddEquippable(%name, %item, %beltType, %weight, %shopIndex);
-
 	$AccessoryVar[%item, $SpecialVar] = %special;
 	$AccessoryVar[%item, $MiscInfo] = %miscInfo;
 	$AccessoryVar[%item, $AccessoryType] = %accessoryType;
+
+	BeltItem::AddEquippable(%name, %item, %beltType, %weight, %shopIndex);
 }
 
 $armorListIndex = 1;
 function BeltItem::AddArmor(%name, %item, %skin, %hitSound, %special, %weight, %skillRestriction, %miscInfo, %shopIndex) {
-	BeltItem::AddAccessory(%name, %item, $BodyAccessoryType, "ArmorItems", %special, %weight, %miscInfo, %shopIndex);
-
 	$SkillRestriction[%item] = %skillRestriction;
 	$ArmorSkin[%item] = %skin;
 	$ArmorPlayerModel[%item] = "";
 	$ArmorHitSound[%item] = %hitSound;
 	$ArmorList[$armorListIndex] = %item;
 	$armorListIndex++;
+
+	BeltItem::AddAccessory(%name, %item, $BodyAccessoryType, "ArmorItems", %special, %weight, %miscInfo, %shopIndex);
 }
 
-function BeltItem::AddRobe(%name, %item, %skin, %special, %weight, %skillRestriction, %miscInfo, %shopIndex) {
-	BeltItem::AddAccessory(%name, %item, $BodyAccessoryType, "ArmorItems", %special, %weight, %miscInfo, %shopIndex);
-	
+function BeltItem::AddRobe(%name, %item, %skin, %special, %weight, %skillRestriction, %miscInfo, %shopIndex) {	
 	$SkillRestriction[%item] = %skillRestriction;
 	$ArmorSkin[%item] = %skin;
 	$ArmorPlayerModel[%item] = "Robed";
 	$ArmorHitSound[%item] = SoundHitFlesh;
 	$ArmorList[$armorListIndex] = %item;
 	$armorListIndex++;
+
+	BeltItem::AddAccessory(%name, %item, $BodyAccessoryType, "ArmorItems", %special, %weight, %miscInfo, %shopIndex);
 }
 
 function BeltItem::AddShield(%name, %item, %special, %weight, %miscInfo, %shopIndex) {
@@ -1819,7 +1819,7 @@ function BeltItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo
 	}
 }
 
-function BeltItem::AddAmmo(%name, %item, %type, %weight, %cost, %image, %weaponSkill, %skillRestriction, %special, %shopIndex) {
+function BeltItem::AddProjectile(%name, %item, %type, %weight, %cost, %image, %weaponSkill, %skillRestriction, %special, %shopIndex) {
 	$numBeltItems++;
 	%num = $count[%type]++;
 
@@ -1840,7 +1840,6 @@ function BeltItem::AddAmmo(%name, %item, %type, %weight, %cost, %image, %weaponS
 
 	$SkillType[%item] = %weaponSkill;
 	$SkillRestriction[%item] = %skillRestriction;
-
 	$HardcodedItemCost[%item] = %cost;
 }
 
@@ -2074,7 +2073,7 @@ function Belt::ItemCount(%item, %list) {
 function Belt::HasItemNamed(%client, %itemName) {
 	%count = 0;
 
-	for(%ii=0;(%type = getword($belttypelist,%ii)) != -1;%ii++) {
+	for(%ii=0;(%type = getword($belttypelist, %ii)) != -1;%ii++) {
 		%list = fetchData(%client,%type);
 
 		for(%i=0;(%w = getword(%list,%i)) != -1;%i+=2) {
@@ -2086,6 +2085,20 @@ function Belt::HasItemNamed(%client, %itemName) {
 	}
 
 	return false;
+}
+
+function Belt::HasItemOfType(%client, %itemName, %type) {
+	%count = 0;
+	%list = fetchData(%client, %type);
+
+	for(%i = 0; (%item = getword(%list, %i)) != -1; %i += 2) {
+		if(string::icompare(%itemName, %item) == 0) {
+			%count = getword(%list, %i + 1);
+			return %item@" "@%count;
+		}
+	}
+
+	return False;
 }
 
 function Belt::AddToList(%list, %item) {
@@ -2226,12 +2239,16 @@ function Belt::GetDeathItems(%clientid, %killerId) {
 		%unequippedWeaponItems = "";
 
 		for(%i=0; (%w = getword(%WeaponItems, %i)) != -1; %i+=2) {
-			%count = getword(%WeaponItems, %i+1);
+			%count = getword(%WeaponItems, %i + 1);
+			%weaponName = getCroppedItem(%w);
+
+			// if ($neverdropitem[%weaponName] || $playerNoDrop[%weaponName])
+			// 	continue;
 
             if (%i == 0) {
-				%unequippedWeaponItems = getCroppedItem(%w) @ " " @ %count @ " ";
+				%unequippedWeaponItems = %weaponName @ " " @ %count @ " ";
 			} else {
-				%unequippedWeaponItems = %unequippedWeaponItems @ " " @ getCroppedItem(%w) @ " " @ %count @ " ";
+				%unequippedWeaponItems = %unequippedWeaponItems @ " " @ %weaponName @ " " @ %count @ " ";
 			}
 		}
 
@@ -2297,8 +2314,9 @@ function Belt::GetDeathItems(%clientid, %killerId) {
 			}
 		}
 	}
+
 	if(%tmploot != "") {
-		for(%i=0;getword(%tmploot,%i)!=-1;%i++) {
+		for(%i=0; getword(%tmploot, %i) !=- 1; %i++) {
 			%a = getword(%tmploot,%i);
 			%b = getword(%tmploot,%i++);
 
@@ -2311,8 +2329,10 @@ function Belt::GetDeathItems(%clientid, %killerId) {
 				Belt::TakeThisStuff(%clientid, %a, %b);
 		}
 	}
+
 	if(%tmploot == "")
 		%tmploot = " ";
+
 	return %tmploot;
 }
 
@@ -2381,19 +2401,19 @@ $numBeltItems = 0;
 generateEnchantsAndMateria();
 
 //Ammunition
-// function BeltItem::AddAmmo(%name, %item, %type, %weight, %cost, %image, %weaponSkill, %skillRestriction, %special, %shopIndex) {
-BeltItem::Add("Small Rock", "SmallRock", "AmmoItems", 0.2, 13, "SmallRock", $SkillBows, $SkillBows @ " 1", "6 1", 1);
-BeltItem::Add("Basic Arrow", "BasicArrow", "AmmoItems", 0.1, 5, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 2);
-BeltItem::Add("Sheaf Arrow", "SheafArrow", "AmmoItems", 0.1, 25, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 3);
-BeltItem::Add("Bladed Arrow","BladedArrow","AmmoItems",0.1,50, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 4);
-BeltItem::Add("Light Quarrel","LightQuarrel","AmmoItems",0.1,100, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 1", 5);
-BeltItem::Add("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.1,200, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 1", 6);
-BeltItem::Add("Short Quarrel","ShortQuarrel","AmmoItems",0.1,300, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 1", 7);
-BeltItem::Add("Stone Feather","StoneFeather","AmmoItems",0.1,400, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 8);
-BeltItem::Add("Metal Feather","MetalFeather","AmmoItems",0.1,500, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 9);
-BeltItem::Add("Talon","Talon","AmmoItems",0.1,800, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 10);
-BeltItem::Add("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.1,1000, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 11);
-BeltItem::Add("Poison Arrow", "PoisonArrow", "AmmoItems", 0.1, 200, "Arrow", $SkillBows, $SkillBows @ " 1", "6 1", 12);
+// function BeltItem::AddProjectile(%name, %item, %type, %weight, %cost, %image, %weaponSkill, %skillRestriction, %special, %shopIndex)
+BeltItem::AddProjectile("Small Rock", "SmallRock", "AmmoItems", 0.2, 13, "SmallRock", $SkillBows, $SkillBows @ " 1", "6 5", 1);
+BeltItem::AddProjectile("Basic Arrow", "BasicArrow", "AmmoItems", 0.1, 5, "Arrow", $SkillBows, $SkillBows @ " 1", "6 10", 2);
+BeltItem::AddProjectile("Sheaf Arrow", "SheafArrow", "AmmoItems", 0.1, 25, "Arrow", $SkillBows, $SkillBows @ " 1", "6 20", 3);
+BeltItem::AddProjectile("Bladed Arrow","BladedArrow","AmmoItems",0.1, 50, "Arrow", $SkillBows, $SkillBows @ " 1", "6 40", 4);
+BeltItem::AddProjectile("Light Quarrel","LightQuarrel","AmmoItems",0.1 ,100, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 10", 5);
+BeltItem::AddProjectile("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.1, 200, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 20", 6);
+BeltItem::AddProjectile("Short Quarrel","ShortQuarrel","AmmoItems",0.1, 300, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 40", 7);
+BeltItem::AddProjectile("Stone Feather","StoneFeather","AmmoItems",0.1, 400, "Arrow", $SkillBows, $SkillBows @ " 1", "6 60", 8);
+BeltItem::AddProjectile("Metal Feather","MetalFeather","AmmoItems",0.1, 500, "Arrow", $SkillBows, $SkillBows @ " 1", "6 80", 9);
+BeltItem::AddProjectile("Talon", "Talon", "AmmoItems", 0.1, 800, "Arrow", $SkillBows, $SkillBows @ " 1", "6 100", 10);
+BeltItem::AddProjectile("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.1, 1000, "Arrow", $SkillBows, $SkillBows @ " 1", "6 120", 11);
+BeltItem::AddProjectile("Poison Arrow", "PoisonArrow", "AmmoItems", 0.1, 200, "Arrow", $SkillBows, $SkillBows @ " 1", "6 140", 12);
 
 //Gems
 BeltItem::Add("Quartz", "Quartz", "GemItems", 0.2, 100);
@@ -2748,6 +2768,7 @@ $AccessoryVar[Potion, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 Heal
 BeltItem::Add("Hi-Potion", "HiPotion", "PotionItems", 0.5, 1000, "", 502);
 $AccessoryVar[HiPotion, $MiscInfo] = "A potion of Healing that heals 100 HP";
 $restoreValue[HiPotion, HP] = 100;
+$AccessoryVar[HiPotion, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 HealingHerb 10 MandragoraRoot 2";
 
 BeltItem::Add("X-Potion", "XPotion", "PotionItems", 0.5, 10000, "", 503);
 $AccessoryVar[XPotion, $MiscInfo] = "A potion of Healing that heals 250 HP";

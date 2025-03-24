@@ -23,15 +23,16 @@ $Skill::description[2] = "A mighty swing that deals damage to up to two targets 
 $Skill::actionMessage[2] = "You swing a mighty cleave.";
 $Skill::delay[2] = 0.1;
 $Skill::recoveryTime[2] = 5;
+$Skill::weaponSpeedBasedRecoveryTime[2] = True;
 // $Skill::damageValue[2] = 10;
 $Skill::radius[2] = 10;
 $Skill::LOSrange[2] = 0;
-$Skill::startSound[2] = AmrbroseSwordA;
-$Skill::endSound[2] = ActivateAR;
+// $Skill::startSound[2] = AmrbroseSwordA;
+$Skill::endSound[2] = AmrbroseSwordA;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
-$SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight";
+// $SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight";
 
 $Skill::keyword[3] = "harvest";
 $Skill::index[harvest] = 3;
@@ -80,6 +81,7 @@ function BeginUseSkill(%clientId, %keyword) {
 
 	// check if the skill requires any special items (In future does this belong to SkillCanUse?)
 	%requiredItems = $Skill::requiredItems[%skillIndex];
+
 	if (%requiredItems != "") {
 		%missingItems = False;
 		for(%idx = 0; GetWord(%requiredItems, %idx) != -1; %idx += 2) {
@@ -140,7 +142,19 @@ function BeginUseSkill(%clientId, %keyword) {
     // %sk2 = %sk1 - %gsa;
     // %sk = Cap(%sk2, 0, "inf");
 
-    %rt = $Skill::recoveryTime[%skillIndex];
+	if ($Skill::weaponSpeedBasedRecoveryTime[%skillIndex] == True) {
+		%equippedWeapon = GetEquippedWeapon(%clientId);
+		%weaponImage = $beltitem[%equippedWeapon, "Image"];
+		
+		if (%equippedWeapon) {
+			%rt = $Skill::recoveryTime[%skillIndex] * %weaponImage.imageType.fireTime;
+		} else {
+			%rt = $Skill::recoveryTime[%skillIndex];
+		}
+	} else {
+		%rt = $Skill::recoveryTime[%skillIndex];
+	}
+
     %a = %rt / 2;
     %b = (1000 - %sk) / 1000;
     %c = %b * %a;
@@ -251,14 +265,13 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
     }
 
     if ($Skill::keyword[%index] == "cleave") {
-        %b = $Skill::radius[%index] * 2;
+		%b = $Skill::radius[%index] * 2;
 		%set = newObject("set", SimSet);
 		%n = containerBoxFillSet(%set, $SimPlayerObjectType, GameBase::getPosition(%clientId), %b, %b, %b, 0);
 
 		Group::iterateRecursive(%set, DoSkillBoxFunction, %clientId, %index, %rest);
 		deleteObject(%set);
 
-		%overrideEndSound = True;
 		%returnFlag = True;
     }
 
@@ -326,12 +339,12 @@ function findHarvestableObjects(%object, %clientId, %index, %extra) {
 
 		%item = "";
 		%amnt = 0;
-		if (%roll > 75) {
+		if (%roll > 80) {
 			%item = "MandragoraRoot";
-			%amnt = floor(getRandom() * 2) + 1;
-		} else if (%roll > 25) {
+			%amnt = floor(getRandom() * 5) + 1;
+		} else if (%roll > 10) {
 			%item = "HealingHerb";
-			%amnt = floor(getRandom() * 4) + 1;
+			%amnt = floor(getRandom() * 5) + 1;
 		}
 
 		if (%item != "") {

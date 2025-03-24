@@ -53,7 +53,7 @@ if($joinHouseRankPoints == "") $joinHouseRankPoints = 4;
 
 if($spawnMultiplier == "") $spawnMultiplier = "1.0";
 if($allowDuplicateIPs == "") $allowDuplicateIPs = True;
-if($recallDelay == "") $recallDelay = 300;
+if($recallDelay == "") $recallDelay = 15;
 
 if($hardcore == "") $hardcore = False;
 if($SlowdownHitDelay == "") $SlowdownHitDelay = 1.0;
@@ -138,6 +138,9 @@ $SlashingDamageType	= 1;
 $PiercingDamageType	= 2;
 $BludgeoningDamageType	= 4;
 
-
+// for old items that were in inventory (belt still is an item)
 $neverdropitem["BeltItemTool"] = True;
-$neverdropitem["CastingBlade"] = True;
+
+// for all new belt type items
+$playerNoDrop["BeltItemTool"] = True;
+$playerNoDrop["CastingBlade"] = True;

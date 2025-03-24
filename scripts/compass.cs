@@ -91,7 +91,7 @@ function processMenurecall(%clientId, %option)
 //	}
 	%zv = "Not falling; recalling normally.";
 	Client::sendMessage(%clientId, $MsgBeige, %zv);
-	%seconds = $recallDelay;
+	%seconds = 15;//$recallDelay;
 	if(Zone::getType(fetchData(%clientId, "zone")) == "PROTECTED")
 		%seconds = %seconds/10;
 	storeData(%TrueClientId, "tmprecall", True);

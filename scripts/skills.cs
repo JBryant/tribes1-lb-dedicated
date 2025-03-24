@@ -114,17 +114,17 @@ $AllowedSkills[Squire] = $SkillSwords@ " " @$SkillAxes@ " " @$SkillHammers@ " " 
 // Chemist
 //--------------
 
-$SkillMultiplier[Chemist, $SkillSwords] = 0.2;
-$SkillMultiplier[Chemist, $SkillAxes] = 0.2;
-$SkillMultiplier[Chemist, $SkillHammers] = 0.2;
-$SkillMultiplier[Chemist, $SkillKatanas] = 0.2;
-$SkillMultiplier[Chemist, $SkillBows] = 0.2;
-$SkillMultiplier[Chemist, $SkillSpears] = 0.2;
+$SkillMultiplier[Chemist, $SkillSwords] = 0.3;
+$SkillMultiplier[Chemist, $SkillAxes] = 0.5;
+$SkillMultiplier[Chemist, $SkillHammers] = 1.0;
+$SkillMultiplier[Chemist, $SkillKatanas] = 0.1;
+$SkillMultiplier[Chemist, $SkillBows] = 0.8;
+$SkillMultiplier[Chemist, $SkillSpears] = 0.9;
 $SkillMultiplier[Chemist, $SkillBlackMagick] = 1.0;
 $SkillMultiplier[Chemist, $SkillWhiteMagick] = 1.0;
-$SkillMultiplier[Chemist, $SkillTimeMagick] = 1.0;
-$SkillMultiplier[Chemist, $SkillSummonMagick] = 1.0;
-$SkillMultiplier[Chemist, $SkillHealing] = 1.0;
+$SkillMultiplier[Chemist, $SkillTimeMagick] = 0.6;
+$SkillMultiplier[Chemist, $SkillSummonMagick] = 0.6;
+$SkillMultiplier[Chemist, $SkillHealing] = 1.1;
 $SkillMultiplier[Chemist, $SkillEndurance] = 1.0;
 $SkillMultiplier[Chemist, $SkillEnergy] = 1.0;
 $SkillMultiplier[Chemist, $SkillMagicka] = 1.0;
@@ -756,7 +756,7 @@ $SkillMultiplier[ExSoldier, $SkillHealing] = 2.0;
 $SkillMultiplier[ExSoldier, $SkillBows] = 2.0;
 $SkillMultiplier[ExSoldier, $SkillEndurance] = 2.0;
 $SkillMultiplier[ExSoldier, $SkillMining] = 2.0;
-$SkillMultiplier[ExSoldier, $SkillMagicka] = 2.0;
+$SkillMultiplier[ExSoldier, $SkillMagicka] = 2.0;	
 $SkillMultiplier[ExSoldier, $SkillEnergy] = 2.0;
 $SkillMultiplier[ExSoldier, $SkillHaggling] = 2.0;
 $EXPmultiplier[ExSoldier] = 0.8;
@@ -992,8 +992,7 @@ function SetAllSkills(%clientId, %n)
 		$PlayerSkill[%clientId, %i] = %n;
 }
 
-function SkillCanUse(%clientId, %thing)
-{
+function SkillCanUse(%clientId, %thing) {
 	dbecho($dbechoMode, "SkillCanUse(" @ %clientId @ ", " @ %thing @ ")");
 
 	if(%clientId.adminLevel >= 5)
@@ -1002,62 +1001,63 @@ function SkillCanUse(%clientId, %thing)
 	%flag = 0;
 	%gc = 0;
 	%gcflag = 0;
-	for(%i = 0; GetWord($SkillRestriction[%thing], %i) != -1; %i+=2)
-	{
+
+	for(%i = 0; GetWord($SkillRestriction[%thing], %i) != -1; %i+=2) {
 		%s = GetWord($SkillRestriction[%thing], %i);
 		%n = GetWord($SkillRestriction[%thing], %i+1);
 
-		if(%s == "L")
-		{
+		if(%s == "L") {
 			if(fetchData(%clientId, "LVL") < %n)
 				%flag = 1;
 		}
-		else if(%s == "R")
-		{
+		else if(%s == "R") {
 			if(fetchData(%clientId, "RemortStep") < %n)
 				%flag = 1;
 		}
-		else if(%s == "A")
-		{
+		else if(%s == "A") {
 			if(%clientId.adminLevel < %n)
 				%flag = 1;
 		}
-		else if(%s == "G")
-		{
+		else if(%s == "G") {
 			%gcflag++;
 			if(String::ICompare(fetchData(%clientId, "GROUP"), %n) == 0)
 				%gc = 1;
 		}
-		else if(%s == "C")
-		{
+		else if(%s == "C") {
 			%gcflag++;
 			if(String::ICompare(fetchData(%clientId, "CLASS"), %n) == 0)
 				%gc = 1;
 		}
-		else if(%s == "H")
-		{
+		else if(%s == "H") {
 			%hflag++;
 			if(String::ICompare(fetchData(%clientId, "MyHouse"), %n) == 0)
 				%hh = 1;
 		}
-		else
-		{
+		else {
 			if($PlayerSkill[%clientId, %s] < %n)
 				%flag = 1;
 		}
 	}
 
 	//First, if there are any class/group restrictions, house restrictions, check these first.
-	if(%gcflag > 0)
-	{
+	if(%gcflag > 0) {
 		if(%gc == 0)
 			%flag = 1;
 	}
-	if(%hflag > 0)
-	{
+	if(%hflag > 0) {
 		if(%hh == 0)
 			%flag = 1;
 	}
+
+	// add custom restrictions here
+	// if (%thing == "cleave") {
+	// 	%weapon = GetEquippedWeapon(%clientId);
+	// 	%accessoryType =$AccessoryVar[%weapon, $AccessoryType];
+
+	// 	if(%accessoryType != $SwordAccessoryType || %accessoryType != $AxeAccessoryType || %accessoryType != $BludgeonAccessoryType) {
+	// 		%flag = 1;
+	// 	}
+	// }
 
 	
 	if(%flag != 1)
@@ -1066,8 +1066,7 @@ function SkillCanUse(%clientId, %thing)
 		return False;
 }
 
-function UseSkill(%clientId, %skilltype, %successful, %showmsg, %base, %refreshall)
-{
+function UseSkill(%clientId, %skilltype, %successful, %showmsg, %base, %refreshall) {
 	dbecho($dbechoMode, "UseSkill(" @ %clientId @ ", " @ %skilltype @ ", " @ %successful @ ", " @ %showmsg @ ", " @ %base @ ", " @ %refreshall @ ")");
 
 	if(%base == "") %base = 35;

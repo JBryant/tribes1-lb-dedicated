@@ -23,9 +23,7 @@ function Item::giveItem(%player, %item, %delta, %showmsg)
 	return %delta;
 }
 
-function Item::onCollision(%this, %object)
-{
-	
+function Item::onCollision(%this, %object) {
 	dbecho($dbechoMode, "Item::onCollision(" @ %this @ ", " @ %object @ ")");
 
 	%clientId = Player::getClient(%object);
@@ -46,8 +44,6 @@ function Item::onCollision(%this, %object)
 
 			%ownerName = GetWord($loot[%this], 0);
 			%namelist = GetWord($loot[%this], 1);
-			lbecho("loot: " @ $loot[%this]);
-			lbecho("Item::onCollision: %ownerName = " @ %ownerName @ ", %namelist = " @ %namelist);
 
 			if($loot[%this] == "")
 				%msg = "You found an empty backpack.";
@@ -114,9 +110,9 @@ function Item::onCollision(%this, %object)
 			%damagedClient = %clientId;
 			%shooterClient = %this.owner;
 
-			if(%shooterClient != "")
-			{
+			if(%shooterClient != "") {
 				%vec = Vector::getDistance("0 0 0", Item::getVelocity(%this));
+
 				if(%vec == 0 && $ProjectileDoubleCheck[%this])
 					%vec = 3.0;
 			}
@@ -125,12 +121,10 @@ function Item::onCollision(%this, %object)
 
 			$ProjectileDoubleCheck[%this] = "";
 
-			if(%vec >= 2.5)
-			{
-				GameBase::virtual(%object, "onDamage", $DamageType[%item], 1.0, "0 0 0", "0 0 0", "0 0 0", "torso", %this.weapon, %shooterClient, %item);
+			if(%vec >= 2.5) {
+				GameBase::virtual(%object, "onDamage", $DamageType[%item], 1.0, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %shooterClient, %this.weapon, %this.projectile);
 			}
-			else
-			{
+			else {
 				if(Item::giveItem(%clientId, %this.projectile, %this.delta, True)) {
 					Item::playPickupSound(%this);
 					RefreshAll(%clientId);
@@ -174,11 +168,13 @@ function Item::onUse(%player, %item) {
 	%clientId = Player::getClient(%player);
 	%beltItemType = BeltItem::GetType(%item);
 	%isEquipped = BeltItem::IsEquipped(%clientId, %item);
+	%hasEquippedItem = Belt::HasItemOfType(%clientId, %item @ "0", %beltItemType);
 
 	if(!IsDead(%clientId)) {
 		// needs to support more types (like talismans, badges, rings, etc)
 		%isArmor = %beltItemType == "ArmorItems";
 		%isAccessory = %beltItemType == "ArmorItems" || %beltItemType == "AccessoryItems";
+		
 		//this is how you toggle back and forth from equipped to carrying.
 		if(%isAccessory && !%isEquipped) {
 			%cnt = 0;
@@ -194,7 +190,10 @@ function Item::onUse(%player, %item) {
 				}
 			}
 
-			if(SkillCanUse(%clientId, %item)) {
+			if (%hasEquippedItem != False) {
+				Client::sendMessage(%clientId, $MsgRed, "You can't equip this item because you have one already equipped.~wC_BuySell.wav");
+			}
+			else if(SkillCanUse(%clientId, %item)) {
 				if(%cnt < $maxAccessory[GetAccessoryVar(%item, $AccessoryType)]) {
 					Belt::EquipAccessory(%clientId, %item);
 				}
@@ -205,7 +204,8 @@ function Item::onUse(%player, %item) {
 						
 						if  (%item @ "0" == %equippedArmor) {
 							Client::sendMessage(%clientId, $MsgRed, "You already have this item equipped.~wC_BuySell.wav");
-						} else {
+						} 
+						else {
 							Belt::UnequipAccessory(%clientId, %equippedArmor);
 							Belt::EquipAccessory(%clientId, %item);
 						}

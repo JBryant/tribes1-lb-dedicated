@@ -31,7 +31,7 @@ function Client::onKilled(%clientId, %killerId, %damageType) {
 	//At this point, the client can still be queried for getItemCounts, but is not considered an object anymore.
 
 	//we can award the other players exp
-	DistributeExpForKilling(%clientId);
+	DistributeExpForKilling(%clientId, %killerId);
 
 	//The player with the killshot gets the official "kill"
 	if(!IsInCommaList(fetchData(%killerId, "TempKillList"), Client::getName(%clientId)))
@@ -135,20 +135,18 @@ function Player::onKilled(%this) {
 
 		if(fetchData(%clientId, "COINS") > 0)
 			%tmploot = %tmploot @ "COINS " @ floor(fetchData(%clientId, "COINS")) @ " ";
+
 		storeData(%clientId, "COINS", 0);
 
 		%max = getNumItems();
-		for (%i = 0; %i < %max; %i++)
-		{
+		for (%i = 0; %i < %max; %i++) {
 			%a = getItemData(%i);
 			%itemcount = Player::getItemCount(%clientId, %a);
 
-			if(%itemcount)
-			{
+			if(%itemcount) {
 				%flag = False;
 
-				if(fetchData(%clientId, "LCK") >= 0)
-				{
+				if(fetchData(%clientId, "LCK") >= 0) {
 					//currently mounted weapon and all equipped stuff + lore items are thrown into lootbag.
 					if(Player::getMountedItem(%clientId, $WeaponSlot) == %a || %a.className == "Equipped" || $LoreItem[%a] == True)
 						%flag = True;
@@ -165,29 +163,24 @@ function Player::onKilled(%this) {
 				if($StealProtectedItem[%a])
 					%flag = False;
 
-				if(%flag)
-				{
+				if(%flag) {
 					%b = %a;
 					if(%b.className == "Equipped")
 						%b = String::getSubStr(%b, 0, String::len(%b)-1);
 
-					if(Player::getMountedItem(%clientId, $WeaponSlot) == %a)
-					{
+					if(Player::getMountedItem(%clientId, $WeaponSlot) == %a) {
 						//special handling for currently held weapon
 						%tmploot = %tmploot @ %b @ " 1 ";
 						Player::decItemCount(%clientId, %a);
 					}
-					else
-					{
+					else {
 						%tmploot = %tmploot @ %b @ " " @ Player::getItemCount(%clientId, %a) @ " ";
 						Player::setItemCount(%clientId, %a, 0);
 					}
-					if(String::len(%tmploot) > 200)
-					{
+					if(String::len(%tmploot) > 200) {
 						if(Player::isAiControlled(%clientId))
 							TossLootbag(%clientId, %tmploot, 1, "*", 300);
-						else
-						{
+						else {
 							%namelist = Client::getName(%clientId) @ ",";
 							if(fetchData(%clientId, "LCK") >= 0)
 								%tehLootBag = TossLootbag(%clientId, %tmploot, 5, %namelist, Cap(fetchData(%clientId, "LVL") * 300, 300, 3600));
@@ -411,8 +404,8 @@ function Player::onKilled(%this) {
 	}
 }
 
-function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rweapon, %object, %weapon, %preCalcMiss) {
-	dbecho($dbechoMode2, "Player::onDamage(" @ %this @ ", " @ %type @ ", " @ %value @ ", " @ %pos @ ", " @ %vec @ ", " @ %mom @ ", " @ %vertPos @ ", " @ %weapon @ ", " @ %object @ ", " @ %rweapon @ ", " @ %preCalcMiss @ ")");
+function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %quadrant, %object, %weapon, %projectile) {
+	dbecho($dbechoMode2, "Player::onDamage(" @ %this @ ", " @ %type @ ", " @ %value @ ", " @ %pos @ ", " @ %vec @ ", " @ %mom @ ", " @ %vertPos @ ", " @ %quadrant @ ", " @ %object @ ", " @ %weapon @ ", " @ %projectile @ ")");
 
 	if(Player::isExposed(%this) && %object != -1 && %type != $NullDamageType && !Player::IsDead(%this)) {
 		%damagedClient = Player::getClient(%this);
@@ -420,10 +413,9 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 
 		%damagedClientPos = GameBase::getPosition(%damagedClient);
 		%shooterClientPos = GameBase::getPosition(%shooterClient);
-
 		%damagedCurrentArmor = GetCurrentlyWearingArmor(%damagedClient);
 		
-		%skilltype = $SkillType[%weapon] || $SkillType[%rweapon];
+		%skilltype = $SkillType[%weapon];
 
 		//==============
 		//PROCESS STATS
@@ -493,9 +485,10 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %rwe
 			// 	storeData(%shooterClient, "NextHitBash", "");
 			// }
 
-			// add back rweapon damage once we can figure out what kind of arrow it is
-			if(%rweapon != "") {
-				%rweapondamage = GetRoll(GetWord(GetAccessoryVar(%rweapon, $SpecialVar), 1));
+			if(%projectile != "") {
+				// %rweapondamage = GetRoll(GetWord(GetAccessoryVar(%projectile, $SpecialVar), 1));
+				%rweaponAttack = GetWord(GetAccessoryVar(%projectile, $SpecialVar), 1);
+				%rweapondamage = floor(getRandom() * %rweaponAttack) + 1;
 			} else {
 				%rweapondamage = 0;
 			}

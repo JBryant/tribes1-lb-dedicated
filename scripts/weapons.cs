@@ -393,14 +393,14 @@ function GenerateItemCost(%item)
 		return $HardcodedItemCost[%item];
 
 	%cft = $CostFactorTable[$AccessoryVar[%item, $AccessoryType]];
-
 	%a = GetDelay(%item);
+
 	if(floor(%a) == 0)
 		%a = 1.0;
 
 	%b6 = AddItemSpecificPoints(%item, "6") * 1.2;	//ATK
-	%b7 = AddItemSpecificPoints(%item, "7") / 6;	//DEF
-	%b3 = AddItemSpecificPoints(%item, "3") / 6;	//MDEF
+	%b7 = AddItemSpecificPoints(%item, "7") / 3;	//DEF / 6
+	%b3 = AddItemSpecificPoints(%item, "3") / 3;	//MDEF / 6
 
 	// %extracost = 0;
 	// for(%i = 1; $SmithCombo[%i] != ""; %i++) {
@@ -424,7 +424,7 @@ function GenerateItemCost(%item)
 	%d = Cap(0.01 * pow(%c, 3.7), 0, "inf");
 	%e = Cap(%d * %cft, 1, "inf");
 	//%f = floor(%e + %extracost);
-	%f = floor(%e / 10) + 1;
+	%f = floor(%e / 10) + 1; // divided by 10 here (LongBow)
 
 	return %f;
 }

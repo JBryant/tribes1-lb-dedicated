@@ -4640,7 +4640,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NAME Gary";
 			instant SimGroup "ITEMS CLASS Chemist LVL 2 LCK 0 Dagger 1";
 			instant SimGroup "RACE MaleHuman";
-			instant SimGroup "SHOP 13 14 17 18";
+			instant SimGroup "BELTSHOP 1 2 175 17 18 51 52 100 101 125 126 150 151 175 176 200 201 508 606 611 616";
 		};
 		instant SimGroup "quest5" {
 			instant SimGroup "NAME Nevim";
