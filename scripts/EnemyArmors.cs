@@ -127,6 +127,26 @@ $NameForRace[BlackWidow] = "Spider";
 
 $NameForRace[Bat] = "Bat";
 
+$NameForRace[Goon] = "Shinra";
+$SkinForRace[Goon] = "SWAT";
+$NameForRace[Grunt] = "Shinra";
+$SkinForRace[Grunt] = "SWAT";
+$NameForRace[Infantry] = "Shinra";
+$SkinForRace[Infantry] = "SWAT";
+$NameForRace[Trooper] = "Shinra";
+$SkinForRace[Trooper] = "SWAT";
+$NameForRace[Officer] = "Shinra";
+$SkinForRace[Officer] = "SWAT";
+$NameForRace[Sergeant] = "Shinra";
+$SkinForRace[Sergeant] = "SWAT";
+$NameForRace[Turk] = "Shinra";
+$SkinForRace[Turk] = "SWAT"; // change this
+$NameForRace[Soldier3] = "Shinra";
+$SkinForRace[Soldier3] = "SWAT";  // change this
+$NameForRace[Soldier2] = "Shinra";  // change this
+$SkinForRace[Soldier2] = "SWAT";  // change this
+$NameForRace[Soldier1] = "Shinra";
+$SkinForRace[Soldier1] = "SWAT";  // change this
 
 $ArmorTypeToRace[TravellerArmor] = "Traveller";
 $ArmorTypeToRace[GoblinArmor] = "Goblin"; // GoblinArmor // TestArmor
@@ -142,6 +162,7 @@ $ArmorTypeToRace[ZombieArmor] = "Zombie";
 $ArmorTypeToRace[DemonArmor] = "Demon";
 $ArmorTypeToRace[CultistArmor] = "Cultist";
 $ArmorTypeToRace[SpiderArmor] = "Spider";
+$ArmorTypeToRace[ShinraArmor] = "Shinra";
 
 $RaceToArmorType[Goblin] = "GoblinArmor";
 $RaceToArmorType[Gnoll] = "GnollArmor";
@@ -157,6 +178,7 @@ $RaceToArmorType[Zombie] = "ZombieArmor";
 $RaceToArmorType[Demon] = "DemonArmor";
 $RaceToArmorType[Cultist] = "CultistArmor";
 $RaceToArmorType[Spider] = "SpiderArmor";
+$RaceToArmorType[Shinra] = "ShinraArmor";
 
 $RaceToNamesList[Traveller] = "Alphonse Cedric Lucian Darius Leontius Gregor Matthias Silvain Emeric Veyron Hadrian Tobias Valens Octavian Magnus Raphael Victor Alistair Remiel Lysander Cassian Garrick Percival Thaddeus Gideon Theodric Isidore Cornelius Reginald Leofric Oswald Baldwin Edric Ronan Severin Aldous Soren Valentin Leopold Desmond Eustace Corbin Ignatius Bertram Seraphim Maximus Felix Quentin Roderic Atticus Nicodemus Zephyrus Aurelius Fabian Tiberius Evander Cormac Orion Vesper Drystan Cassius Lazarus Marcellus Gideon Tarquin Lucan Zephiel Oberon Tristam Aurelian Myron Edgar Nathaniel Augustus Hector Vespasian Sirus Caliban Damian Cyprian Theron Alaric Thelonius Ulrich Galen Phineas Anselm Varian Valmont Bastien Xavier Leoric Simeon Zephyr Darian Florian Armand Hadrianus Orestes Fenrir Gael Romulus Malachai Noctis Thalric Eamon Belisarius Callum Solon";
 $RaceToNamesList[Goblin] = "Griknak Snaggit Borgul Zrogg Ruknash Dribbik Murgul Vrogg Tazgul Skarnak Drekz Broggit Klurg Snibbit Vraggo Trognash Glubnik Grizzik Nobnash Krognar Zraggit Blornik Snaggul Throgg Klibbit Drizzik Grobnar Vraknash Trogzit Borknash Graknik Zlubb Knorvik Drizzgul Trognik Krabnash Glubzit Morzik Zorknash Broggul Tarnik Flibbit Skragnak Zriggo Krobnash Vrixik Drobbit Skrognar Blaggit Truznik Frobnash Skribbit Klorgnak Vrobnash Gribzik Traknor Zlibbit Knarzik Frozgul Skraknit Grozzik Triggan Zorblik Broggar Trogzit Kribzik Slorbag Vragbit Gronbit Trasknak Zroblik Klibzit Kragnik Blibbit Driznash Skornak Froggit Trigblik Zrumblik Krobzit Snorggul Thragbit Glibnash Skragzit Draknor Vrobbit Zrobnik Snibnash Frakgul Triznak Grobnash Blugbit Kraznik Snibzit Trombit Skrubnik Grubzit Vorblik Zlagbit Kroggul Tragnor Blornash";
@@ -172,7 +194,8 @@ $RaceToNamesList[Uber] = "";
 $RaceToNamesList[Zombie] = "";
 $RaceToNamesList[Demon] = "";
 $RaceToNamesList[Cultist] = "";
-// $RaceToArmorType[Spider] = "";
+$RaceToNamesList[Spider] = "";
+// $RaceToNamesList[Shinra] = "Darren Kile Orvin Raxa Melven Sato Brinn Halford Jarek Tanno Durel Vesta Colby Trann Elric Marn Juno Keene Varek Brynna Corlan Redd Tanith Maldo Fenric Oren Kassel Tiv Nareen Boltz Lemar Dreev Zayn Carver Alric Jonda Tyrell Marek Finton Syra Lorne Dex Hasker Gaven Jaxen Nilo Brell Thorne Vax Jarris Kellen Tova Rellin Daxel Corra Jast Riven Nessa Garrick Kellenna Brynn Toran Melka Jastor Vilo Danner Quade Trevin Halden Serik Nolor Jennen Tavik Merrin Brenn Ralor Zander Denrik Teven Galen Sirus Kael Lodra Ferra Garrin Rolph Erven Jorik Talven Neris Dorn Kaelen Yorrick Silas Brek Marnik Dallon Vess Halik Sorra";
 
 //------------------------------
 
@@ -249,6 +272,17 @@ $spawnIndex[57] = "Huntsman";
 $spawnIndex[58] = "BrownRecluse";
 $spawnIndex[59] = "BlackWidow";
 
+$spawnIndex[60] = "Goon";
+$spawnIndex[61] = "Grunt";
+$spawnIndex[62] = "Infantry";
+$spawnIndex[63] = "Trooper";
+$spawnIndex[64] = "Officer";
+$spawnIndex[65] = "Sergeant";
+$spawnIndex[66] = "Turk";
+$spawnIndex[67] = "Soldier3";
+$spawnIndex[68] = "Soldier2";
+$spawnIndex[69] = "Soldier1";
+
 //------------------------------
 
 // range looks like: RShortBow 1 BasicArrow 20/50
@@ -308,10 +342,26 @@ $BotEquipment[Gohort] = 	"CLASS Chemist LVL 527/50 COINS 135/50 LCK 4 CastingBla
 $BotEquipment[Acolyte] = 	"CLASS Squire LVL 817/50 COINS 115/50 LCK 3 DiamondSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500";
 $BotEquipment[Doomsayer] = 	"CLASS Chemist LVL 1027/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500";
 
-$BotEquipment[Spiderling] = "CLASS Squire LVL 1 COINS 5/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
-$BotEquipment[Huntsman] = "CLASS Squire LVL 5 COINS 10/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
-$BotEquipment[BrownRecluse] = "CLASS Squire LVL 10 COINS 15/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
-$BotEquipment[BlackWidow] = "CLASS Squire LVL 15 COINS 20/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
+$BotEquipment[Spiderling] = "CLASS Squire LVL 2+1 COINS 5/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
+$BotEquipment[Huntsman] = "CLASS Squire LVL 5+2 COINS 10/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
+$BotEquipment[BrownRecluse] = "CLASS Squire LVL 9+2 COINS 15/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
+$BotEquipment[BlackWidow] = "CLASS Squire LVL 11+3 COINS 20/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
+
+// write bot equipment for each shinra type, 3 should be grouped together at a time
+// ex goose grunt infantry lvl 20 - 35, trooper officer sergeant 40 - 55, turk soldier3 soldier2 60 - 75, soldier1 shinra 80 - 90
+// the + indicates the max +/- variance in level from the base level, this should get higher as the level increases but go no larger than 15%
+$BotEquipment[Goon] = "CLASS Squire LVL 10+2 COINS 20/50 LCK 0 Club 1 FireMateriaI 1/-1500";
+$BotEquipment[Grunt] = "CLASS Squire LVL 15+3 COINS 23/50 LCK 0 HandAxe 1 FireMateriaI 1/-1500";
+$BotEquipment[Infantry] = "CLASS Squire LVL 20+3 COINS 26/50 LCK 0 Broadsword 1 FireMateriaI 1/-1500";
+
+$BotEquipment[Trooper] = "CLASS Squire LVL 65+4 COINS 29/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500";
+$BotEquipment[Officer] = "CLASS Squire LVL 70+5 COINS 32/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500";
+$BotEquipment[Sergeant] = "CLASS Squire LVL 75+6 COINS 35/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500";
+
+$BotEquipment[Turk] = "CLASS Squire LVL 50+3 COINS 38/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500";
+$BotEquipment[Soldier3] = "CLASS Squire LVL 95+7 COINS 41/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500";
+$BotEquipment[Soldier2] = "CLASS Squire LVL 100+8 COINS 44/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500";
+$BotEquipment[Soldier1] = "CLASS Squire LVL 105+10 COINS 47/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500";
 
 //------------------------------
 
@@ -329,6 +379,7 @@ $TeamForRace[Zombie] = 4;
 $TeamForRace[Demon] = 4;
 $TeamForRace[Cultist] = 1;
 $TeamForRace[Spider] = 8;
+$TeamForRace[Shinra] = 1;
 
 //------------------------------
 
@@ -429,6 +480,14 @@ $RaceSound[Cultist, Acquired, 3] = SoundTravellerAcquired3;
 $RaceSound[Cultist, Hit, 1] = SoundTravellerHit1;
 $RaceSound[Cultist, Hit, 2] = SoundTravellerHit2;
 $RaceSound[Cultist, Hit, 3] = SoundTravellerHit3;
+
+$RaceSound[Shinra, Death, 1] = SoundTravellerDeath1;
+$RaceSound[Shinra, Acquired, 1] = SoundTravellerAcquired1;
+$RaceSound[Shinra, Acquired, 2] = SoundTravellerAcquired2;
+$RaceSound[Shinra, Acquired, 3] = SoundTravellerAcquired3;
+$RaceSound[Shinra, Hit, 1] = SoundTravellerHit1;
+$RaceSound[Shinra, Hit, 2] = SoundTravellerHit2;
+$RaceSound[Shinra, Hit, 3] = SoundTravellerHit3;
 
 $RaceSound[Spider, Death, 1] = Ostrix;
 
@@ -2441,6 +2500,174 @@ PlayerData DemonArmor
 //------------------------------------------------------------------
 
 PlayerData CultistArmor
+{
+	className = "Armor";
+	shapeFile = "rpgmalehuman";
+	damageSkinData = "armorDamageSkins";
+	debrisId = playerDebris;
+	flameShapeName = "lflame";
+	shieldShapeName = "shield";
+	shadowDetailMask = 1;
+
+	visibleToSensor = True;
+	mapFilter = 1;
+	mapIcon = "M_player";
+	canCrouch = false;
+
+	maxJetSideForceFactor = 1;
+	maxJetForwardVelocity = 1.0;
+	minJetEnergy = 60;
+	jetForce = 1;
+	jetEnergyDrain = 0.0;
+
+	maxDamage = 1.0;
+	maxForwardSpeed = $spdmed;
+	maxBackwardSpeed = $spdmed * 0.8;
+	maxSideSpeed = $spdmed * 0.75;
+
+	groundForce = 75 * 9.0;
+	mass = 9.0;
+	groundTraction = 3.0;
+	maxEnergy = 60;
+	drag = 1.0;
+	density = 1.2;
+
+	minDamageSpeed = 16;
+	damageScale = $damageScale;
+
+	jumpImpulse = 75;
+	jumpSurfaceMinDot = $jumpSurfaceMinDot;
+
+	// animation data:
+	// animation name, one shot, direction, firstPerson, chaseCam, thirdPerson, signalThread
+	// movement animations:
+	animData[0]  = { "root", none, 1, true, true, true, false, 0 };
+	animData[1]  = { "run", none, 1, true, false, true, false, 3 };
+	animData[2]  = { "runback", none, 1, true, false, true, false, 3 };
+	animData[3]  = { "side left", none, 1, true, false, true, false, 3 };
+	animData[4]  = { "side left", none, -1, true, false, true, false, 3 };
+	animData[5] = { "jump stand", none, 1, true, false, true, false, 3 };
+	animData[6] = { "jump run", none, 1, true, false, true, false, 3 };
+	animData[7] = { "crouch root", none, 1, true, true, true, false, 3 };
+	animData[8] = { "crouch root", none, 1, true, true, true, false, 3 };
+	animData[9] = { "crouch root", none, -1, true, true, true, false, 3 };
+	animData[10] = { "crouch forward", none, 1, true, false, true, false, 3 };
+	animData[11] = { "crouch forward", none, -1, true, false, true, false, 3 };
+	animData[12] = { "crouch side left", none, 1, true, false, true, false, 3 };
+	animData[13] = { "crouch side left", none, -1, true, false, true, false, 3 };
+	animData[14]  = { "fall", none, 1, true, true, true, false, 3 };
+	animData[15]  = { "landing", SoundLandOnGround, 1, true, false, false, false, 3 };
+	animData[16]  = { "landing", SoundLandOnGround, 1, true, false, false, false, 3 };
+	animData[17]  = { "tumble loop", none, 1, true, false, false, false, 3 };
+	animData[18]  = { "tumble end", none, 1, true, false, false, false, 3 };
+	animData[19] = { "jet", none, 1, true, true, true, false, 3 };
+
+	// misc. animations:
+	animData[20] = { "die back", none, 1, true, false, false, false, 0 };
+	animData[21] = { "throw", none, 1, true, false, false, false, 3 };
+	animData[22] = { "flyer root", none, 1, false, false, false, false, 3 };
+	animData[23] = { "apc root", none, 1, true, true, true, false, 3 };
+	animData[24] = { "apc pilot", none, 1, false, false, false, false, 3 };
+   
+	// death animations:
+	animData[25] = { "crouch die", none, 1, false, false, false, false, 4 };
+	animData[26] = { "die chest", none, 1, false, false, false, false, 4 };
+	animData[27] = { "die head", none, 1, false, false, false, false, 4 };
+	animData[28] = { "die grab back", none, 1, false, false, false, false, 4 };
+	animData[29] = { "die right side", none, 1, false, false, false, false, 4 };
+	animData[30] = { "die left side", none, 1, false, false, false, false, 4 };
+	animData[31] = { "die leg left", none, 1, false, false, false, false, 4 };
+	animData[32] = { "die leg right", none, 1, false, false, false, false, 4 };
+	animData[33] = { "die blown back", none, 1, false, false, false, false, 4 };
+	animData[34] = { "die spin", none, 1, false, false, false, false, 4 };
+	animData[35] = { "die forward", none, 1, false, false, false, false, 4 };
+	animData[36] = { "die forward kneel", none, 1, false, false, false, false, 4 };
+	animData[37] = { "die back", none, 1, false, false, false, false, 4 };
+
+	// signal moves:
+	animData[38] = { "sign over here",  none, 1, true, false, false, false, 2 };
+	animData[39] = { "sign point", none, 1, true, false, false, false, 1 };
+	animData[40] = { "sign retreat",none, 1, true, false, false, false, 2 };
+	animData[41] = { "sign stop", none, 1, true, false, false, true, 1 };
+	animData[42] = { "sign salut", none, 1, true, false, false, true, 1 }; 
+
+	// celebration animations:
+	animData[43] = { "celebration 1",none, 1, true, false, false, false, 2 };
+	animData[44] = { "celebration 2", none, 1, true, false, false, false, 2 };
+	animData[45] = { "celebration 3", none, 1, true, false, false, false, 2 };
+ 
+	// taunt animations:
+	animData[46] = { "taunt 1", none, 1, true, false, false, false, 2 };
+	animData[47] = { "taunt 2", none, 1, true, false, false, false, 2 };
+ 
+	// poses:
+	animData[48] = { "pose kneel", none, 1, true, false, false, true, 1 };
+	animData[49] = { "pose stand", none, 1, true, false, false, true, 1 };
+
+	// Bonus wave
+	animData[50] = { "wave", none, 1, true, false, false, true, 1 };
+
+	jetSound = NoSound;
+	rFootSounds = 
+	{
+		SoundLFootRSoft,
+		SoundLFootRHard,
+		SoundLFootRSoft,
+		SoundLFootRHard,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRHard,
+		SoundLFootRSnow,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRSoft,
+		SoundLFootRSoft
+	}; 
+	lFootSounds =
+	{
+		SoundLFootLSoft,
+		SoundLFootLHard,
+		SoundLFootLSoft,
+		SoundLFootLHard,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLHard,
+		SoundLFootLSnow,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLSoft,
+		SoundLFootLSoft
+	};
+
+	footPrints = { 0, 1 };
+
+	boxWidth = 0.5;
+	boxDepth = 0.5;
+	boxNormalHeight = 2.3;
+	boxCrouchHeight = 1.8;
+
+	boxNormalHeadPercentage  = 0.83;
+	boxNormalTorsoPercentage = 0.53;
+	boxCrouchHeadPercentage  = 0.6666;
+	boxCrouchTorsoPercentage = 0.3333;
+
+	boxHeadLeftPercentage  = 0;
+	boxHeadRightPercentage = 1;
+	boxHeadBackPercentage  = 0;
+	boxHeadFrontPercentage = 1;
+};
+
+//------------------------------------------------------------------
+// Cultist armor data:	(light) (this might be unecssary with just a skin change...)
+//------------------------------------------------------------------
+
+PlayerData ShinraArmor
 {
 	className = "Armor";
 	shapeFile = "rpgmalehuman";

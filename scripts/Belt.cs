@@ -2853,19 +2853,15 @@ BeltItem::Add("Magic Dust", "MagicDust", "QuestItems", $AccessoryVar[MagicDust, 
 // Enemy Weapons
 $description = "A casting blade.";
 BeltItem::AddWeapon("Casting Blade", "CastingBlade", "CastingBlade", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
-
 $description = "A chipped dagger that looks dirty and worn.";
 BeltItem::AddWeapon("Chipped Dagger", "ChippedDagger", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "10");
-
 $description = "This warped club is filled with cracks and warped in strange ways. It looks like it could fall apart at any moment.";
 BeltItem::AddWeapon("Warped Club", "WarpedClub", "Club", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1", "10");
 
 $description = "A staff that looks like it has seen better days.";
 BeltItem::AddWeapon("Broken Staff", "BrokenStaff", "QuarterStaff", $BludgeonAccessoryType, $description, $SkillSpears, $SkillSpears @ " 1", "10");
-
 $description = "An old dagger that is covered in rust.";
 BeltItem::AddWeapon("Rusty Shank", "RustyShank", "Dagger", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "20");
-
 $description = "A club filled with broken bone bits. It looks like it could fall apart at any moment.";
 BeltItem::AddWeapon("Shattered Bone Club", "ShatteredBoneClub", "SpikedClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1", "20");
 

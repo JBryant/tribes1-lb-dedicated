@@ -2218,6 +2218,42 @@ instant SimGroup "MissionGroup" {
 			position = "-820.883 3983.5 100";
 			rotation = "0 0 0";
 		};
+		instant Marker "1.5 1 2 10 30 56" {
+			dataBlock = "PathMarker";
+			name = "burial spiderling";
+			position = "-2861.1 -1198.9 678.6";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 56 57" {
+			dataBlock = "PathMarker";
+			name = "burial spiderling and hunstman";
+			position = "-2845.1 -1179.5 678.6";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 58 59" {
+			dataBlock = "PathMarker";
+			name = "burial hunstman and recluse";
+			position = "-2825.1 -1238.9 638.6";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 60" {
+			dataBlock = "PathMarker";
+			name = "burial shinra goons";
+			position = "221.72 -733.3 5082.8";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 60 61" {
+			dataBlock = "PathMarker";
+			name = "burial shinra goons and grunts";
+			position = "166.6 -711 5082.3";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 61 62" {
+			dataBlock = "PathMarker";
+			name = "burial shinra grunts and infantry";
+			position = "183 -709 5082.3";
+			rotation = "0 0 0";
+		};
 	};
 	instant SimGroup "Burial Tree" {
 		instant StaticShape "Misc Tree S" {
@@ -3422,6 +3458,54 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "GSAY You have been teleported to the a Cultist Temple.~wPortal6.wav";
 			instant SimGroup "NSAY You need Remort Level 1 and a 500 coin donation to enter this gate.~wDeActivateDG.wav";
 		};
+		instant SimGroup "Graveyard Top to Dunega" {
+			instant SimGroup "Input" {
+				instant Trigger "GroupTrigger1" {
+					dataBlock = "GroupTrigger";
+					name = "";
+					position = "-2823.85 -1179.31 640.578";
+					rotation = "0 -0 0.819923";
+					boundingBox = "-1 -1 -1 1 1 1";
+					isSphere = "True";
+				};
+			};
+			instant SimGroup "Output" {
+				instant Marker "Marker1" {
+					dataBlock = "PathMarker";
+					name = "";
+					position = "217.615 -722.239 5140.66";
+					rotation = "0 0 -3.1";
+				};
+			};
+			instant SimGroup "NEED COINS 0";
+			instant SimGroup "TAKE COINS 0";
+			instant SimGroup "GSAY ~wnull.wav";
+			instant SimGroup "NSAY ~wnull.wav";
+		};
+		instant SimGroup "Dunega to Graveyard top" {
+			instant SimGroup "Input" {
+				instant Trigger "GroupTrigger1" {
+					dataBlock = "GroupTrigger";
+					name = "";
+					position = "224.625 -718.213 5142.93";
+					rotation = "0 -0 0.819925";
+					boundingBox = "-1 -1 -1 1 1 1";
+					isSphere = "True";
+				};
+			};
+			instant SimGroup "Output" {
+				instant Marker "Marker1" {
+					dataBlock = "PathMarker";
+					name = "";
+					position = "-2822.45 -1183.57 638.598";
+					rotation = "0 0 -3.04499";
+				};
+			};
+			instant SimGroup "NEED COINS 0";
+			instant SimGroup "TAKE COINS 0";
+			instant SimGroup "GSAY ~wnull.wav";
+			instant SimGroup "NSAY ~wnull.wav";
+		};
 		instant SimGroup "Dunega p2 to p3" {
 			instant SimGroup "Input" {
 				instant Trigger "GroupTrigger1" {
@@ -3438,7 +3522,7 @@ instant SimGroup "MissionGroup" {
 					dataBlock = "PathMarker";
 					name = "";
 					position = "176.21 -732.64 -8539.82";
-					rotation = "0 0 0";
+					rotation = "0 0 -3.129";
 				};
 			};
 			instant SimGroup "NEED COINS 0";
@@ -3462,7 +3546,7 @@ instant SimGroup "MissionGroup" {
 					dataBlock = "PathMarker";
 					name = "";
 					position = "127.877 -835.278 5042.77";
-					rotation = "0 0 0";
+					rotation = "0 0 -1.561";
 				};
 			};
 			instant SimGroup "NEED COINS 0";
@@ -3703,54 +3787,6 @@ instant SimGroup "MissionGroup" {
 					name = "";
 					position = "434.148 -428.799 210.046";
 					rotation = "0 0 0";
-				};
-			};
-			instant SimGroup "NEED COINS 0";
-			instant SimGroup "TAKE COINS 0";
-			instant SimGroup "GSAY ~wnull.wav";
-			instant SimGroup "NSAY ~wnull.wav";
-		};
-		instant SimGroup "Graveyard Top to Dunega" {
-			instant SimGroup "Input" {
-				instant Trigger "GroupTrigger1" {
-					dataBlock = "GroupTrigger";
-					name = "";
-					position = "-2823.85 -1179.31 640.578";
-					rotation = "0 -0 0.819923";
-					boundingBox = "-1 -1 -1 1 1 1";
-					isSphere = "True";
-				};
-			};
-			instant SimGroup "Output" {
-				instant Marker "Marker1" {
-					dataBlock = "PathMarker";
-					name = "";
-					position = "217.615 -722.239 5140.66";
-					rotation = "0 0 0";
-				};
-			};
-			instant SimGroup "NEED COINS 0";
-			instant SimGroup "TAKE COINS 0";
-			instant SimGroup "GSAY ~wnull.wav";
-			instant SimGroup "NSAY ~wnull.wav";
-		};
-		instant SimGroup "Dunega to Graveyard top" {
-			instant SimGroup "Input" {
-				instant Trigger "GroupTrigger1" {
-					dataBlock = "GroupTrigger";
-					name = "";
-					position = "224.625 -718.213 5142.93";
-					rotation = "0 -0 0.819925";
-					boundingBox = "-1 -1 -1 1 1 1";
-					isSphere = "True";
-				};
-			};
-			instant SimGroup "Output" {
-				instant Marker "Marker1" {
-					dataBlock = "PathMarker";
-					name = "";
-					position = "-2822.45 -1183.57 638.598";
-					rotation = "0 0 -3.04499";
 				};
 			};
 			instant SimGroup "NEED COINS 0";

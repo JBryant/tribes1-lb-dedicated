@@ -1110,6 +1110,7 @@ function TeleportToMarker(%clientId, %markergroup, %testpos, %random)
 		      %marker = Group::getObject(%group, %r);
 		
 			%worldLoc = GameBase::getPosition(%marker);
+			%worldRot = GameBase::getRotation(%marker);
 	
 			if(%testpos)
 			{
@@ -1120,12 +1121,14 @@ function TeleportToMarker(%clientId, %markergroup, %testpos, %random)
 				if(%n > 0)
 				{
 					GameBase::setPosition(%clientId, %worldLoc);
+					GameBase::setRotation(%clientId, %worldRot);
 					return %worldLoc;
 				}
 			}
 			else
 			{
 				GameBase::setPosition(%clientId, %worldLoc);
+				GameBase::setRotation(%clientId, %worldRot);
 				return %worldLoc;
 			}
 		}
@@ -1133,9 +1136,9 @@ function TeleportToMarker(%clientId, %markergroup, %testpos, %random)
 		{
 			for(%i = 0; %i <= %num-1; %i++)
 			{
-			      %marker = Group::getObject(%group, %i);
-			
+			    %marker = Group::getObject(%group, %i);
 				%worldLoc = GameBase::getPosition(%marker);
+				%worldRot = GameBase::getRotation(%marker);
 		
 				if(%testpos)
 				{
@@ -1147,12 +1150,16 @@ function TeleportToMarker(%clientId, %markergroup, %testpos, %random)
 					if(%n == 0)
 					{
 						GameBase::setPosition(%clientId, %worldLoc);
+						GameBase::setRotation(%clientId, %worldRot);
+
 						return %worldLoc;
 					}
 				}
 				else
 				{
 					GameBase::setPosition(%clientId, %worldLoc);
+					GameBase::setRotation(%clientId, %worldRot);
+					
 					return %worldLoc;
 				}
 			}
