@@ -59,7 +59,7 @@ function Jail(%clientId, %time, %jn)
 
 	%pos = GetPositionForJailNumber(%jn);
 
-	UpdateBonusState(%clientId, "Jail 1", floor(%time / 2));
+	UpdateBonusState(%clientId, "Jail 1", floor(%time / 2), "Jailed");
 
 	Item::setVelocity(%clientId, "0 0 0");
 	GameBase::setPosition(%clientId, %pos);

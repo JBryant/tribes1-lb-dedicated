@@ -136,6 +136,11 @@ function fetchData(%clientId, %type)
 		else
 			return $ClientData[%clientId, %type];
 	}
+	else if(%type == "Bonuses") {
+		%bonuses = GetBonusStatesMessage(%clientId);
+
+		return %bonuses;
+	}
 	else
 		return $ClientData[%clientId, %type];
 
@@ -601,10 +606,10 @@ function DistributeExpForKilling(%damagedClient)
 
 			if(RPG::isAiControlled(%damagedClient))
 			{
-				if(%slvl > 100)
-					%value = 0;
-				else
-				{
+				// if(%slvl > 100)
+				// 	%value = 0;
+				// else
+				// {
 					%f = (101 - %slvl) / 10;
 					if(%f < 1) %f = 1;
 
@@ -619,7 +624,7 @@ function DistributeExpForKilling(%damagedClient)
 					%c = %b + %r;
 
 					%value = %c;
-				}
+				// }
 			}
 			else
 			{

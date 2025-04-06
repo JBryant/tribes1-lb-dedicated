@@ -449,7 +449,7 @@ $SkillType[shield] = $SkillWhiteMagick;
 
 $Spell::keyword[26] = "advshield1";
 $Spell::index[advshield1] = 26;
-$Spell::name[26] = "Shield Self Or Other (1st)";
+$Spell::name[26] = "Shield I";
 $Spell::description[26] = "A magical shield that adds 80 DEF to the caster or target in LOS.";
 $Spell::delay[26] = 2.0;
 $Spell::recoveryTime[26] = 10;
@@ -466,7 +466,7 @@ $SkillType[advshield1] = $SkillWhiteMagick;
 
 $Spell::keyword[27] = "advshield2";
 $Spell::index[advshield2] = 27;
-$Spell::name[27] = "Shield Self Or Other (2nd)";
+$Spell::name[27] = "Shield II";
 $Spell::description[27] = "A magical shield that adds 70 DEF and 50 MDEF to the caster or target in LOS.";
 $Spell::delay[27] = 2.0;
 $Spell::recoveryTime[27] = 12;
@@ -483,7 +483,7 @@ $SkillType[advshield2] = $SkillWhiteMagick;
 
 $Spell::keyword[28] = "advshield3";
 $Spell::index[advshield3] = 28;
-$Spell::name[28] = "Shield Self Or Other (3rd)";
+$Spell::name[28] = "Shield III";
 $Spell::description[28] = "A magical shield that adds 120 DEF and 80 MDEF to the caster or target in LOS.";
 $Spell::delay[28] = 2.0;
 $Spell::recoveryTime[28] = 14;
@@ -500,7 +500,7 @@ $SkillType[advshield3] = $SkillWhiteMagick;
 
 $Spell::keyword[29] = "advshield4";
 $Spell::index[advshield4] = 29;
-$Spell::name[29] = "Shield Self Or Other (4th)";
+$Spell::name[29] = "Shield IV";
 $Spell::description[29] = "A magical shield that adds 170 MDEF to the caster or target in LOS.";
 $Spell::delay[29] = 2.0;
 $Spell::recoveryTime[29] = 16;
@@ -517,7 +517,7 @@ $SkillType[advshield4] = $SkillWhiteMagick;
 
 $Spell::keyword[30] = "advshield5";
 $Spell::index[advshield5] = 30;
-$Spell::name[30] = "Shield Self Or Other (5th)";
+$Spell::name[30] = "Shield V";
 $Spell::description[30] = "A magical shield that adds 150 DEF and 210 MDEF to the caster or target in LOS.";
 $Spell::delay[30] = 2.0;
 $Spell::recoveryTime[30] = 20;
@@ -1273,7 +1273,7 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 
 		Client::sendMessage(%clientId, $MsgBeige, "Shielding self");
 
-		UpdateBonusState(%clientId, $Spell::damageValue[%index], $Spell::ticks[%index]);
+		UpdateBonusState(%clientId, $Spell::damageValue[%index], $Spell::ticks[%index], $Spell::name[%index]);
 
 		%castPos = GameBase::getPosition(%clientId);
 
@@ -1292,7 +1292,7 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 		if(%clientId != %id)
 			Client::sendMessage(%id, $MsgBeige, Client::getName(%clientId) @ " is casting " @ $Spell::name[%index] @ " on you.");
 
-		UpdateBonusState(%id, $Spell::damageValue[%index], $Spell::ticks[%index]);
+		UpdateBonusState(%id, $Spell::damageValue[%index], $Spell::ticks[%index], $Spell::name[%index]);
 
 		%castPos = GameBase::getPosition(%id);
 
@@ -1737,7 +1737,7 @@ function DoBoxFunction(%object, %clientId, %index, %extra)
 			if(%clientId != %id)
 				Client::sendMessage(%id, $MsgBeige, Client::getName(%clientId) @ " is casting " @ $Spell::name[%index] @ " on you.");
 
-			UpdateBonusState(%id, $Spell::damageValue[%index], $Spell::ticks[%index]);
+			UpdateBonusState(%id, $Spell::damageValue[%index], $Spell::ticks[%index], $Spell::name[%index]);
 
 			%castPos = GameBase::getPosition(%id);
 

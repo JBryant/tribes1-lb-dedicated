@@ -1544,6 +1544,30 @@ function GiveThisStuff(%clientId, %list, %echo, %multiplier)
 			if(%w2 < 0) %w2 = 0;
 		}
 
+		%spos = String::findSubStr(%w2, "+");
+		if(%spos > 0)
+		{
+			%original = String::getSubStr(%w2, 0, %spos);
+			%variationMax = String::getSubStr(%w2, %spos+1, 99999);
+
+			%r = floor(getRandom() * %variationMax) + 1;
+
+			if (getRandom() < 0.5)
+				%isNegative = true;
+			else
+				%isNegative = false;
+
+			if (%isNegative)
+				%w2 = round(%original - %r);
+			else
+				%w2 = round(%original + %r);
+
+			// %w2 = round(%original + %r);
+			// %w2 = round(%original * (%r/100));
+			
+			if(%w2 < 0) %w2 = 0;
+		}
+
 		//if there is a d in %w2 AND it has a number on either side, then it's a dice roll
 		%dpos = String::findSubStr(%w2, "d");
 		%l1 = String::getSubStr(%w2, %dpos-1, 1);
@@ -2387,9 +2411,9 @@ function PostSteal(%clientId, %success, %type)
 	}
 
 	if(%success)
-		UpdateBonusState(%clientId, "Theft 1", 20 / 2);
+		UpdateBonusState(%clientId, "Theft 1", 20 / 2, "Theft");
 	else
-		UpdateBonusState(%clientId, "Theft 1", 120 / 2);
+		UpdateBonusState(%clientId, "Theft 1", 120 / 2, "Theft");
 }
 
 function GetTypicalTossStrength(%clientId)

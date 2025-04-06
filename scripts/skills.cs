@@ -88,13 +88,13 @@ $SkillDesc[H] = "House";
 //--------------
 
 $SkillMultiplier[Squire, $SkillSwords] = 1.0;
-$SkillMultiplier[Squire, $SkillAxes] = 1.0;
+$SkillMultiplier[Squire, $SkillAxes] = 0.8;
 $SkillMultiplier[Squire, $SkillHammers] = 1.0;
 $SkillMultiplier[Squire, $SkillKatanas] = 0.2;
-$SkillMultiplier[Squire, $SkillBows] = 0.2;
+$SkillMultiplier[Squire, $SkillBows] = 0.8;
 $SkillMultiplier[Squire, $SkillSpears] = 1.0;
-$SkillMultiplier[Squire, $SkillBlackMagick] = 0.2;
-$SkillMultiplier[Squire, $SkillWhiteMagick] = 0.2;
+$SkillMultiplier[Squire, $SkillBlackMagick] = 0.4;
+$SkillMultiplier[Squire, $SkillWhiteMagick] = 0.4;
 $SkillMultiplier[Squire, $SkillTimeMagick] = 0.2;
 $SkillMultiplier[Squire, $SkillSummonMagick] = 0.2;
 $SkillMultiplier[Squire, $SkillHealing] = 1.0;
@@ -114,7 +114,7 @@ $AllowedSkills[Squire] = $SkillSwords@ " " @$SkillAxes@ " " @$SkillHammers@ " " 
 // Chemist
 //--------------
 
-$SkillMultiplier[Chemist, $SkillSwords] = 0.3;
+$SkillMultiplier[Chemist, $SkillSwords] = 0.5;
 $SkillMultiplier[Chemist, $SkillAxes] = 0.5;
 $SkillMultiplier[Chemist, $SkillHammers] = 1.0;
 $SkillMultiplier[Chemist, $SkillKatanas] = 0.1;
@@ -141,22 +141,22 @@ $EXPmultiplier[Chemist] = 1.5;
 //--------------
 //
 
-$SkillMultiplier[Knight, $SkillSwords] = 0.6;
-$SkillMultiplier[Knight, $SkillAxes] = 1.8;
-$SkillMultiplier[Knight, $SkillHammers] = 0.5;
-$SkillMultiplier[Knight, $SkillKatanas] = 1.1;
-$SkillMultiplier[Knight, $SkillWeightCapacity] = 0.7;
-$SkillMultiplier[Knight, $SkillSpears] = 0.2;
-$SkillMultiplier[Knight, $SkillStealing] = 2.0;
-$SkillMultiplier[Knight, $SkillHiding] = 2.0;
-$SkillMultiplier[Knight, $SkillBackstabbing] = 2.0;
+$SkillMultiplier[Knight, $SkillSwords] = 1.5;
+$SkillMultiplier[Knight, $SkillAxes] = 1.2;
+$SkillMultiplier[Knight, $SkillHammers] = 1.5;
+$SkillMultiplier[Knight, $SkillKatanas] = 0.5;
+$SkillMultiplier[Knight, $SkillWeightCapacity] = 1.5;
+$SkillMultiplier[Knight, $SkillSpears] = 1.0;
+$SkillMultiplier[Knight, $SkillStealing] = 0.2;
+$SkillMultiplier[Knight, $SkillHiding] = 0.2;
+$SkillMultiplier[Knight, $SkillBackstabbing] = 0.2;
 $SkillMultiplier[Knight, $SkillBlackMagick] = 0.2;
-$SkillMultiplier[Knight, $SkillWhiteMagick] = 0.2;
+$SkillMultiplier[Knight, $SkillWhiteMagick] = 0.8;
 $SkillMultiplier[Knight, $SkillSummonMagick] = 0.2;
-$SkillMultiplier[Knight, $SkillTimeMagick] = 0.3;
-$SkillMultiplier[Knight, $SkillHealing] = 0.5;
-$SkillMultiplier[Knight, $SkillBows] = 1.6;
-$SkillMultiplier[Knight, $SkillEndurance] = 1.0;
+$SkillMultiplier[Knight, $SkillTimeMagick] = 0.2;
+$SkillMultiplier[Knight, $SkillHealing] = 1.0;
+$SkillMultiplier[Knight, $SkillBows] = 1.0;
+$SkillMultiplier[Knight, $SkillEndurance] = 1.5;
 $SkillMultiplier[Knight, $SkillMining] = 1.0;
 $SkillMultiplier[Knight, $SkillMagicka] = 1.0;
 $SkillMultiplier[Knight, $SkillEnergy] = 0.5;
@@ -167,51 +167,51 @@ $EXPmultiplier[Knight] = 1.25;
 // Archer
 //--------------
 
-$SkillMultiplier[Archer, $SkillSwords] = 1.3;
-$SkillMultiplier[Archer, $SkillAxes] = 1.5;
-$SkillMultiplier[Archer, $SkillHammers] = 1.3;
-$SkillMultiplier[Archer, $SkillKatanas] = 2.0;
-$SkillMultiplier[Archer, $SkillWeightCapacity] = 0.8;
-$SkillMultiplier[Archer, $SkillSpears] = 0.2;
+$SkillMultiplier[Archer, $SkillSwords] = 1.0;
+$SkillMultiplier[Archer, $SkillAxes] = 0.8;
+$SkillMultiplier[Archer, $SkillHammers] = 1.0;
+$SkillMultiplier[Archer, $SkillKatanas] = 0.5;
+$SkillMultiplier[Archer, $SkillWeightCapacity] = 1.2;
+$SkillMultiplier[Archer, $SkillSpears] = 1.5;
 $SkillMultiplier[Archer, $SkillStealing] = 2.0;
 $SkillMultiplier[Archer, $SkillHiding] = 1.8;
-$SkillMultiplier[Archer, $SkillBackstabbing] = 1.8;
+$SkillMultiplier[Archer, $SkillBackstabbing] = 1.2;
 $SkillMultiplier[Archer, $SkillBlackMagick] = 0.3;
-$SkillMultiplier[Archer, $SkillWhiteMagick] = 0.3;
+$SkillMultiplier[Archer, $SkillWhiteMagick] = 1.0;
 $SkillMultiplier[Archer, $SkillSummonMagick] = 0.5;
 $SkillMultiplier[Archer, $SkillTimeMagick] = 0.5;
-$SkillMultiplier[Archer, $SkillHealing] = 2.0;
-$SkillMultiplier[Archer, $SkillBows] = 1.4;
+$SkillMultiplier[Archer, $SkillHealing] = 1.4;
+$SkillMultiplier[Archer, $SkillBows] = 2.0;
 $SkillMultiplier[Archer, $SkillEndurance] = 2.0;
-$SkillMultiplier[Archer, $SkillMining] = 2.0;
+$SkillMultiplier[Archer, $SkillMining] = 0.8;
 $SkillMultiplier[Archer, $SkillMagicka] = 1.0;
-$SkillMultiplier[Archer, $SkillEnergy] = 0.6;
-$SkillMultiplier[Archer, $SkillHaggling] = 2.0;
+$SkillMultiplier[Archer, $SkillEnergy] = 1.0;
+$SkillMultiplier[Archer, $SkillHaggling] = 1.2;
 $EXPmultiplier[Archer] = 1.25;
 
 //--------------
 // White Mage
 //--------------
 
-$SkillMultiplier[WhiteMage, $SkillSwords] = 2.0;
-$SkillMultiplier[WhiteMage, $SkillAxes] = 2.0;
-$SkillMultiplier[WhiteMage, $SkillHammers] = 2.0;
-$SkillMultiplier[WhiteMage, $SkillKatanas] = 1.5;
-$SkillMultiplier[WhiteMage, $SkillWeightCapacity] = 1.5;
+$SkillMultiplier[WhiteMage, $SkillSwords] = 0.8;
+$SkillMultiplier[WhiteMage, $SkillAxes] = 0.5;
+$SkillMultiplier[WhiteMage, $SkillHammers] = 1.2;
+$SkillMultiplier[WhiteMage, $SkillKatanas] = 0.5;
+$SkillMultiplier[WhiteMage, $SkillWeightCapacity] = 1.0;
 $SkillMultiplier[WhiteMage, $SkillSpears] = 1.6;
 $SkillMultiplier[WhiteMage, $SkillStealing] = 0.2;
 $SkillMultiplier[WhiteMage, $SkillHiding] = 0.2;
 $SkillMultiplier[WhiteMage, $SkillBackstabbing] = 0.2;
-$SkillMultiplier[WhiteMage, $SkillBlackMagick] = 0.1;
-$SkillMultiplier[WhiteMage, $SkillWhiteMagick] = 0.1;
+$SkillMultiplier[WhiteMage, $SkillBlackMagick] = 0.5;
+$SkillMultiplier[WhiteMage, $SkillWhiteMagick] = 2.0;
 $SkillMultiplier[WhiteMage, $SkillSummonMagick] = 0.1;
-$SkillMultiplier[WhiteMage, $SkillTimeMagick] = 0.2;
-$SkillMultiplier[WhiteMage, $SkillHealing] = 1.2;
-$SkillMultiplier[WhiteMage, $SkillBows] = 1.6;
-$SkillMultiplier[WhiteMage, $SkillEndurance] = 1.6;
+$SkillMultiplier[WhiteMage, $SkillTimeMagick] = 0.8;
+$SkillMultiplier[WhiteMage, $SkillHealing] = 1.8;
+$SkillMultiplier[WhiteMage, $SkillBows] = 0.8;
+$SkillMultiplier[WhiteMage, $SkillEndurance] = 1.4;
 $SkillMultiplier[WhiteMage, $SkillMining] = 1.0;
-$SkillMultiplier[WhiteMage, $SkillMagicka] = 0.8;
-$SkillMultiplier[WhiteMage, $SkillEnergy] = 0.2;
+$SkillMultiplier[WhiteMage, $SkillMagicka] = 1.8;
+$SkillMultiplier[WhiteMage, $SkillEnergy] = 1.8;
 $SkillMultiplier[WhiteMage, $SkillHaggling] = 1.0;
 $EXPmultiplier[WhiteMage] = 1.25;
 
@@ -219,25 +219,25 @@ $EXPmultiplier[WhiteMage] = 1.25;
 // Black Mage
 //--------------
 
-$SkillMultiplier[BlackMage, $SkillAxes] = 1.5;
-$SkillMultiplier[BlackMage, $SkillSwords] = 1.5;
-$SkillMultiplier[BlackMage, $SkillHammers] = 1.2;
-$SkillMultiplier[BlackMage, $SkillKatanas] = 1.5;
+$SkillMultiplier[BlackMage, $SkillSwords] = 0.8;
+$SkillMultiplier[BlackMage, $SkillAxes] = 0.8;
+$SkillMultiplier[BlackMage, $SkillHammers] = 0.5;
+$SkillMultiplier[BlackMage, $SkillKatanas] = 0.2;
 $SkillMultiplier[BlackMage, $SkillWeightCapacity] = 1.5;
 $SkillMultiplier[BlackMage, $SkillSpears] = 1.5;
 $SkillMultiplier[BlackMage, $SkillStealing] = 0.3;
 $SkillMultiplier[BlackMage, $SkillHiding] = 0.3;
 $SkillMultiplier[BlackMage, $SkillBackstabbing] = 0.3;
-$SkillMultiplier[BlackMage, $SkillBlackMagick] = 0.2;
-$SkillMultiplier[BlackMage, $SkillWhiteMagick] = 1.2;
+$SkillMultiplier[BlackMage, $SkillBlackMagick] = 1.8;
+$SkillMultiplier[BlackMage, $SkillWhiteMagick] = 0.5;
 $SkillMultiplier[BlackMage, $SkillSummonMagick] = 0.3;
-$SkillMultiplier[BlackMage, $SkillTimeMagick] = 0.9;
-$SkillMultiplier[BlackMage, $SkillHealing] = 1.3;
-$SkillMultiplier[BlackMage, $SkillBows] = 1.2;
-$SkillMultiplier[BlackMage, $SkillEndurance] = 1.5;
-$SkillMultiplier[BlackMage, $SkillMining] = 1.0;
-$SkillMultiplier[BlackMage, $SkillMagicka] = 0.8;
-$SkillMultiplier[BlackMage, $SkillEnergy] = 0.9;
+$SkillMultiplier[BlackMage, $SkillTimeMagick] = 0.8;
+$SkillMultiplier[BlackMage, $SkillHealing] = 0.5;
+$SkillMultiplier[BlackMage, $SkillBows] = 0.8;
+$SkillMultiplier[BlackMage, $SkillEndurance] = 0.8;
+$SkillMultiplier[BlackMage, $SkillMining] = 0.4;
+$SkillMultiplier[BlackMage, $SkillMagicka] = 1.8;
+$SkillMultiplier[BlackMage, $SkillEnergy] = 1.8;
 $SkillMultiplier[BlackMage, $SkillHaggling] = 1.3;
 $EXPmultiplier[BlackMage] = 1.25;
 
@@ -249,8 +249,8 @@ $SkillMultiplier[Monk, $SkillSwords] = 1.2;
 $SkillMultiplier[Monk, $SkillAxes] = 1.1;
 $SkillMultiplier[Monk, $SkillHammers] = 1.2;
 $SkillMultiplier[Monk, $SkillKatanas] = 1.8;
-$SkillMultiplier[Monk, $SkillWeightCapacity] = 1.0;
-$SkillMultiplier[Monk, $SkillSpears] = 0.9;
+$SkillMultiplier[Monk, $SkillWeightCapacity] = 2.0;
+$SkillMultiplier[Monk, $SkillSpears] = 2.0;
 $SkillMultiplier[Monk, $SkillStealing] = 0.5;
 $SkillMultiplier[Monk, $SkillHiding] = 1.0;
 $SkillMultiplier[Monk, $SkillBackstabbing] = 0.4;
@@ -277,8 +277,8 @@ $SkillMultiplier[Thief, $SkillHammers] = 0.3;
 $SkillMultiplier[Thief, $SkillKatanas] = 1.2;
 $SkillMultiplier[Thief, $SkillWeightCapacity] = 0.6;
 $SkillMultiplier[Thief, $SkillSpears] = 0.2;
-$SkillMultiplier[Thief, $SkillStealing] = 0.2;
-$SkillMultiplier[Thief, $SkillHiding] = 0.2;
+$SkillMultiplier[Thief, $SkillStealing] = 2.0;
+$SkillMultiplier[Thief, $SkillHiding] = 1.5;
 $SkillMultiplier[Thief, $SkillBackstabbing] = 0.2;
 $SkillMultiplier[Thief, $SkillBlackMagick] = 2.0;
 $SkillMultiplier[Thief, $SkillWhiteMagick] = 1.0;

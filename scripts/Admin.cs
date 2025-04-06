@@ -398,6 +398,7 @@ function Game::menuRequest(%clientId)
 			if(!IsDead(%clientId)) {
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "View your stats" , "viewstats");
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "View class levels" , "viewclasslevels");
+				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "View bonuses" , "viewbonuses");
 			}
 
 			if(!IsDead(%clientId)){
@@ -484,30 +485,42 @@ function processMenuOptions(%clientId, %option)
 		%a[%tmp++] = "ATK: " @ fetchData(%clientId, "ATK") @ "\n";
 		%a[%tmp++] = "DEF: " @ fetchData(%clientId, "DEF") @ "\n";
 		%a[%tmp++] = "MDEF: " @ fetchData(%clientId, "MDEF") @ "\n";
-		%a[%tmp++] = "Hit Pts: " @ fetchData(%clientId, "HP") @ " / " @ fetchData(%clientId, "MaxHP") @ "\n";
-		%a[%tmp++] = "LCK: " @ fetchData(%clientId, "LCK") @ "\n";
+		%a[%tmp++] = "HP: " @ fetchData(%clientId, "HP") @ " / " @ fetchData(%clientId, "MaxHP") @ "\n";
+		%a[%tmp++] = "MANA: " @ fetchData(%clientId, "MANA") @ " / " @ fetchData(%clientId, "MaxMANA") @ "\n";
+		%a[%tmp++] = "LCK: " @ fetchData(%clientId, "LCK") @ "\n\n";
 
 		if(fetchData(%clientId, "MyHouse") != "")
-		{
 			%a[%tmp++] = "House: " @ fetchData(%clientId, "MyHouse") @ "\n";
-		}
-		%a[%tmp++] = "Rank Pts: " @ fetchData(%clientId, "RankPoints") @ "\n";
-
-		%a[%tmp++] = "Experience: " @ fetchData(%clientId, "EXP") @ "\n";
-        %a[%tmp++] = "Exp needed: " @ (GetExp(GetLevel(fetchData(%clientId, "EXP"), %clientId)+1, %clientId) - fetchData(%clientId, "EXP") @ "\n\n");
-
-		%a[%tmp++] = "Class: " @ fetchData(%clientId, "CLASS") @ "\n";
 
 		%a[%tmp++] = "Coins: " @ fetchData(%clientId, "COINS") @ " - Bank: " @ fetchData(%clientId, "BANK") @ "\n";
-		%a[%tmp++] = "TOTAL $: " @ fetchData(%clientId, "COINS") + fetchData(%clientId, "BANK") @ "\n\n";
-		
-		%a[%tmp++] = "Weight: " @ fetchData(%clientId, "Weight") @ " / " @ fetchData(%clientId, "MaxWeight") @ "\n";
-		%a[%tmp++] = "Mana: " @ fetchData(%clientId, "MANA") @ " / " @ fetchData(%clientId, "MaxMANA") @ "\n";
+		%a[%tmp++] = "Exp: " @ fetchData(%clientId, "EXP") @ "\n";
+        %a[%tmp++] = "Exp to next level: " @ (GetExp(GetLevel(fetchData(%clientId, "EXP"), %clientId)+1, %clientId) - fetchData(%clientId, "EXP") @ "\n\n");
+
+		%bonuses = fetchData(%clientId, "Bonuses");
+		if (%bonuses != "")
+			%a[%tmp++] = "Bonuses:\n" @ %bonuses @ "\n";
+
+		// %a[%tmp++] = "Rank Pts: " @ fetchData(%clientId, "RankPoints") @ "\n";
+		// %a[%tmp++] = "Class: " @ fetchData(%clientId, "CLASS") @ "\n";
+		// %a[%tmp++] = "TOTAL $: " @ fetchData(%clientId, "COINS") + fetchData(%clientId, "BANK") @ "\n\n";
+		// %a[%tmp++] = "Weight: " @ fetchData(%clientId, "Weight") @ " / " @ fetchData(%clientId, "MaxWeight") @ "\n";
 
 		for(%i = 1; %a[%i] != ""; %i++)
 			%f = %f @ %a[%i];
 
 		bottomprint(%clientId, %f, floor(String::len(%f) / 20));
+
+		return;
+	}
+	else if(%opt == "viewbonuses")
+	{
+		%a[%tmp++] = "<f1>Bonuses:<f0>\n\n";
+		%a[%tmp++] = fetchData(%clientId, "Bonuses");
+
+		for(%i = 1; %a[%i] != ""; %i++)
+			%f = %f @ %a[%i];
+
+		bottomprint(%clientId, %f, floor(String::len(%f) / 10));
 
 		return;
 	}
@@ -1015,15 +1028,15 @@ function processMenuOtheropt(%clientId, %option)
 	Game::menuRequest(%clientId);
 }
 
-function remoteSelectClient(%clientId, %selId)
-{
+function remoteSelectClient(%clientId, %selId) {
 	dbecho($dbechoMode, "remoteSelectClient(" @ %clientId @ ", " @ %selId @ ")");
 
-   if(%clientId.selClient != %selId)
-   {
+   if(%clientId.selClient != %selId) {
       %clientId.selClient = %selId;
+	  
       if(%clientId.menuMode == "options")
          Game::menuRequest(%clientId);
+
       remoteEval(%clientId, "setInfoLine", 1, "Player Info for " @ Client::getName(%selId) @ ":");
       remoteEval(%clientId, "setInfoLine", 2, "Real Name: " @ $Client::info[%selId, 1]);
       remoteEval(%clientId, "setInfoLine", 3, "Email Addr: " @ $Client::info[%selId, 2]);

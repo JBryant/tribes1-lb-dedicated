@@ -234,43 +234,43 @@ $spawnIndex[55] = "Doomsayer";
 
 // range looks like: RShortBow 1 BasicArrow 20/50
 
-$BotEquipment[Runt] = 		"CLASS Squire LVL 1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1/-2000";
-$BotEquipment[Thief] = 		"CLASS Squire LVL 5/50 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-1800";
-$BotEquipment[Wizard] = 	"CLASS Chemist LVL 9/50 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1650"; // 1/-500
-$BotEquipment[Raider] = 	"CLASS Squire LVL 11/50 COINS 4/50 LCK 0 WarpedClub 1 BlackStatue 1/-150 Jade 1/-300  FireMateriaI 1/-1500";
+$BotEquipment[Runt] = 		"CLASS Squire LVL 2+1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1/-2000";
+$BotEquipment[Thief] = 		"CLASS Squire LVL 5+2 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-1800";
+$BotEquipment[Wizard] = 	"CLASS Chemist LVL 9+2 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1650"; // 1/-500
+$BotEquipment[Raider] = 	"CLASS Squire LVL 11+3 COINS 4/50 LCK 0 WarpedClub 1 BlackStatue 1/-150 Jade 1/-300  FireMateriaI 1/-1500";
 
-$BotEquipment[Pup] = 		"CLASS Squire LVL 10/50 COINS 6/50 LCK 0 ShatteredBoneClub 1 Potion 1 Ruby 1/-2000 FireMateriaI 1/-1500";
-$BotEquipment[Shaman] = 	"CLASS Chemist LVL 12/50 COINS 7/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1400";
-$BotEquipment[Scavenger] = 	"CLASS Squire LVL 15/50 COINS 8/50 LCK 0 ShatteredBoneClub 1 Sapphire 2/-5000 FireMateriaI 1/-1250";
-$BotEquipment[Hunter] = 	"CLASS Squire LVL 17/50 COINS 9/50 LCK 0 RustyShank 1 Sling 1 SmallRock 20/50 Topaz 3/-3000 FireMateriaI 1/-1000";
+$BotEquipment[Pup] = 		"CLASS Squire LVL 10+3 COINS 6/50 LCK 0 ShatteredBoneClub 1 Potion 1 Ruby 1/-2000 FireMateriaI 1/-1500";
+$BotEquipment[Shaman] = 	"CLASS Chemist LVL 12+3 COINS 7/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1400";
+$BotEquipment[Scavenger] = 	"CLASS Squire LVL 15+3 COINS 8/50 LCK 0 ShatteredBoneClub 1 Sapphire 2/-5000 FireMateriaI 1/-1250";
+$BotEquipment[Hunter] = 	"CLASS Squire LVL 17+3 COINS 9/50 LCK 0 RustyShank 1 Sling 1 SmallRock 20/50 Topaz 3/-3000 FireMateriaI 1/-1000";
 
-$BotEquipment[Warlock] = 	"CLASS Chemist LVL 16/50 COINS 10/50 LCK 0 CastingBlade 1 Sling 1 SmallRock 20/50 EnchantedStone 1/-100";
-$BotEquipment[Berserker] = 	"CLASS Squire LVL 20/50 COINS 13/50 LCK 0 HandAxe 1 Topaz 4/-500";
-$BotEquipment[Ravager] = 	"CLASS Squire LVL 24/50 COINS 16/50 LCK 0 Club 1 Potion 3/30 Opal 4/-300";
-$BotEquipment[Slayer] = 	"CLASS Squire LVL 28/50 COINS 19/50 LCK 0 Broadsword 1 BasicArrow 20/50 Opal 5/-250";
+$BotEquipment[Warlock] = 	"CLASS Chemist LVL 16+3 COINS 10/50 LCK 0 CastingBlade 1 Sling 1 SmallRock 20/50 EnchantedStone 1/-100 EarthMateriaI 1/-1500";
+$BotEquipment[Berserker] = 	"CLASS Squire LVL 20+4 COINS 13/50 LCK 0 HandAxe 1 Topaz 4/-500 EarthMateriaI 1/-1500";
+$BotEquipment[Ravager] = 	"CLASS Squire LVL 24+4 COINS 16/50 LCK 0 Club 1 Potion 3/30 Opal 4/-300 EarthMateriaI 1/-1500";
+$BotEquipment[Slayer] = 	"CLASS Squire LVL 28+4 COINS 19/50 LCK 0 Broadsword 1 BasicArrow 20/50 Opal 5/-250 EarthMateriaI 1/-1500";
 
-$BotEquipment[Ruffian] = 	"CLASS Squire LVL 22/50 COINS 20/50 LCK 0 Club 1 Quartz 8/-200";
-$BotEquipment[Destroyer] = 	"CLASS Squire LVL 27/50 COINS 23/50 LCK 0 HandAxe 1";
-$BotEquipment[Halberdier] = "CLASS Squire LVL 31/50 COINS 26/50 LCK 0 Broadsword 1 Potion 3/30";
-$BotEquipment[Dreadnought] = "CLASS Squire LVL 36/50 COINS 29/50 LCK 1 WalkingStaff 1 BasicArrow 15/75";
-$BotEquipment[Magi] =		"CLASS Chemist LVL 42/50 COINS 50/50 LCK 1 CastingBlade 1 Emerald 1/-6000 Quartz 10/-200";
+$BotEquipment[Ruffian] = 	"CLASS Squire LVL 22+4 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 EarthMateriaI 1/-1500";
+$BotEquipment[Destroyer] = 	"CLASS Squire LVL 27+4 COINS 23/50 LCK 0 HandAxe 1 EarthMateriaI 1/-1500";
+$BotEquipment[Halberdier] = "CLASS Squire LVL 31+5 COINS 26/50 LCK 0 Broadsword 1 Potion 3/30 EarthMateriaI 1/-1500";
+$BotEquipment[Dreadnought] = "CLASS Squire LVL 36+5 COINS 29/50 LCK 1 WalkingStaff 1 BasicArrow 15/75 EarthMateriaI 1/-1500";
+$BotEquipment[Magi] =		"CLASS Chemist LVL 42+6 COINS 50/50 LCK 1 CastingBlade 1 Emerald 1/-6000 Quartz 10/-200 EarthMateriaI 1/-1500";
 
-$BotEquipment[Mauler] = 	"CLASS Squire LVL 45/50 COINS 20/50 LCK 0 SpikedClub 1 Granite 10/-300";
-$BotEquipment[Thrasher] =	"CLASS Squire LVL 49/50 COINS 23/50 LCK 0 Axe 1 Opal 3/-300";
-$BotEquipment[Skeleton] = 	"CLASS Squire LVL 54/50 COINS 26/50 LCK 0 Longsword 1 SkeletonBone 1/-250 Turquoise 4/-300";
-$BotEquipment[Necromancer] = "CLASS Chemist LVL 61/50 COINS 29/50 LCK 1 CastingBlade 1 Sling 1 SmallRock 20/50 Diamond 1/-3000";
-$BotEquipment[Spawn] = 		"CLASS Squire LVL 180/90 COINS 500/50 LCK 2 IronwoodStaff 1 Diamond 1/-1000 Emerald 1/-700";
+$BotEquipment[Mauler] = 	"CLASS Squire LVL 45/50 COINS 20/50 LCK 0 SpikedClub 1 Granite 10/-300 PoisonMateriaI 1/-1500";
+$BotEquipment[Thrasher] =	"CLASS Squire LVL 49/50 COINS 23/50 LCK 0 Axe 1 Opal 3/-300 PoisonMateriaI 1/-1500";
+$BotEquipment[Skeleton] = 	"CLASS Squire LVL 54/50 COINS 26/50 LCK 0 Longsword 1 SkeletonBone 1/-250 Turquoise 4/-300 PoisonMateriaI 1/-1500";
+$BotEquipment[Necromancer] = "CLASS Chemist LVL 61/50 COINS 29/50 LCK 1 CastingBlade 1 Sling 1 SmallRock 20/50 Diamond 1/-3000 PoisonMateriaI 1/-1500";
+$BotEquipment[Spawn] = 		"CLASS Squire LVL 180/90 COINS 500/50 LCK 2 IronwoodStaff 1 Diamond 1/-1000 Emerald 1/-700 PoisonMateriaI 1/-1500";
 
-$BotEquipment[Protector] = 	"CLASS Squire LVL 55/50 COINS 25/50 LCK 0 Mace 1 Ruby 2/-500";
-$BotEquipment[Peacekeeper] = "CLASS Squire LVL 57/50 COINS 28/50 LCK 0 HuntingSpear 1 SheafArrow 40/50 Jade 5/-500";
-$BotEquipment[Lord] = 		"CLASS Squire LVL 59/50 COINS 31/50 LCK 1 BattleAxe 1 RLightCrossbow 1 LightQuarrel 25/75 Emerald 1/-2800";
-$BotEquipment[Champion] = 	"CLASS Squire LVL 63/50 COINS 34/50 LCK 1 IronSword 1 RLightCrossbow 1 HeavyQuarrel 25/75 Sapphire 3/-1000";
-$BotEquipment[Conjurer] =	"CLASS Chemist LVL 70/50 COINS 32/50 LCK 0 CastingBlade 1 Topaz 2/-300";
+$BotEquipment[Protector] = 	"CLASS Squire LVL 55/50 COINS 25/50 LCK 0 Mace 1 Ruby 2/-500 LightningMateriaI 1/-1500";
+$BotEquipment[Peacekeeper] = "CLASS Squire LVL 57/50 COINS 28/50 LCK 0 HuntingSpear 1 SheafArrow 40/50 Jade 5/-500 LightningMateriaI 1/-1500";
+$BotEquipment[Lord] = 		"CLASS Squire LVL 59/50 COINS 31/50 LCK 1 BattleAxe 1 RLightCrossbow 1 LightQuarrel 25/75 Emerald 1/-2800 LightningMateriaI 1/-1500";
+$BotEquipment[Champion] = 	"CLASS Squire LVL 63/50 COINS 34/50 LCK 1 IronSword 1 RLightCrossbow 1 HeavyQuarrel 25/75 Sapphire 3/-1000 LightningMateriaI 1/-1500";
+$BotEquipment[Conjurer] =	"CLASS Chemist LVL 70/50 COINS 32/50 LCK 0 CastingBlade 1 Topaz 2/-300 LightningMateriaI 1/-1500";
 
-$BotEquipment[Brigand] = 	"CLASS Squire LVL 80/50 COINS 30/50 LCK 0 MythrilAxe 1 Sapphire 2/-3000";
-$BotEquipment[Marauder] =	"CLASS Squire LVL 80/50 COINS 33/50 LCK 0 IronHammer 1 Opal 4/-300 Turquoise 1/-800";
-$BotEquipment[Knight] = 	"CLASS Squire LVL 83/50 COINS 36/50 LCK 0 MythrilSword 1  SheafArrow 40/50 Jade 2/-600";
-$BotEquipment[BlackMage] = 	"CLASS Chemist LVL 87/50 COINS 39/50 LCK 1 CastingBlade 1 Topaz 1/-300";
+$BotEquipment[Brigand] = 	"CLASS Squire LVL 80/50 COINS 30/50 LCK 0 MythrilAxe 1 Sapphire 2/-3000 IceMateriaI 1/-1500";
+$BotEquipment[Marauder] =	"CLASS Squire LVL 80/50 COINS 33/50 LCK 0 IronHammer 1 Opal 4/-300 Turquoise 1/-800 IceMateriaI 1/-1500";
+$BotEquipment[Knight] = 	"CLASS Squire LVL 83/50 COINS 36/50 LCK 0 MythrilSword 1  SheafArrow 40/50 Jade 2/-600 IceMateriaI 1/-1500";
+$BotEquipment[BlackMage] = 	"CLASS Chemist LVL 87/50 COINS 39/50 LCK 1 CastingBlade 1 Topaz 1/-300 IceMateriaI 1/-1500";
 
 $BotEquipment[Civilian] = 	"CLASS Squire LVL 1 COINS 5/50 LCK 0 ChippedDagger 1";
 $BotEquipment[Gladiator] =	"CLASS Squire LVL 1 LCK 0";
@@ -280,14 +280,14 @@ $BotEquipment[Militia] = 	"CLASS Squire LVL 75/50 COINS 35/50 LCK 1 ChippedDagge
 $BotEquipment[Thug] = 		"CLASS Squire LVL 65/50 COINS 32/50 LCK 1 ChippedDagger 1 Jade 5/-500";
 $BotEquipment[Miner] = 		"CLASS Squire LVL 29/50 COINS 35/50 LCK 0 ChippedDagger 1 Parchment 1/-16000 Quartz 10/50 Opal 5/50 Turquoise 2/-50 Emerald 1/-1000";
 
-$BotEquipment[Goliath] = 	"CLASS Squire LVL 107/50 COINS 70/50 LCK 1 GiantAxe 1";
-$BotEquipment[Reaper] = 	"CLASS Chemist LVL 174/50 COINS 105/50 LCK 2 CastingBlade 1 Turquoise 5/-500";
+$BotEquipment[Goliath] = 	"CLASS Squire LVL 107/50 COINS 70/50 LCK 1 GiantAxe 1 DarkMateriaI 1/-1500";
+$BotEquipment[Reaper] = 	"CLASS Chemist LVL 174/50 COINS 105/50 LCK 2 CastingBlade 1 Turquoise 5/-500 DarkMateriaI 1/-1500";
 
-$BotEquipment[Sloth] = 		"CLASS Squire LVL 317/50 COINS 115/50 LCK 3 AncientSword 1 DragonScale 1/-3000 Gold 1/-1000";
-$BotEquipment[Gohort] = 	"CLASS Chemist LVL 527/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000";
+$BotEquipment[Sloth] = 		"CLASS Squire LVL 317/50 COINS 115/50 LCK 3 AncientSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500";
+$BotEquipment[Gohort] = 	"CLASS Chemist LVL 527/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500";
 
-$BotEquipment[Acolyte] = 	"CLASS Squire LVL 817/50 COINS 115/50 LCK 3 DiamondSword 1 DragonScale 1/-3000 Gold 1/-1000";
-$BotEquipment[Doomsayer] = 	"CLASS Chemist LVL 1027/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000";
+$BotEquipment[Acolyte] = 	"CLASS Squire LVL 817/50 COINS 115/50 LCK 3 DiamondSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500";
+$BotEquipment[Doomsayer] = 	"CLASS Chemist LVL 1027/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500";
 
 //------------------------------
 

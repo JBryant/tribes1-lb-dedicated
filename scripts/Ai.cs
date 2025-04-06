@@ -210,8 +210,9 @@ function AI::setWeapons(%aiName, %loadout)
 	if(%loadout == -1 || %loadout == "" || String::ICompare(%loadout, "default") == 0)
 	{
 		%items = $BotInfo[%aiName, ITEMS];
-		if(%items == "")
+		if(%items == "") {
 			GiveThisStuff(%aiId, $BotEquipment[clipTrailingNumbers(%aiName)], False);
+		}
 		else
 			GiveThisStuff(%aiId, %items, False);
 	}

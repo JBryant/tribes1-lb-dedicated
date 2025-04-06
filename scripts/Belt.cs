@@ -1740,40 +1740,41 @@ function BeltItem::AddEquippable(%name, %item, %type, %weight, %shopIndex) {
 	$HardcodedItemCost[%equippedItem] = %cost;
 }
 
-function BeltItem::AddAccessory(%name, %item, %accessoryType, %beltType, %special, %weight, %miscInfo, %shopIndex) {
+function BeltItem::AddAccessory(%name, %item, %accessoryType, %beltType, %special, %weight, %skillRestriction, %miscInfo, %shopIndex) {
 	$AccessoryVar[%item, $SpecialVar] = %special;
 	$AccessoryVar[%item, $MiscInfo] = %miscInfo;
 	$AccessoryVar[%item, $AccessoryType] = %accessoryType;
-	// $SkillRestriction[CheetaursPaws] = $MinLevel @ " 8";
+
+	if (%skillRestriction != "") {
+		$SkillRestriction[%item] = %skillRestriction;
+	}
 
 	BeltItem::AddEquippable(%name, %item, %beltType, %weight, %shopIndex);
 }
 
 $armorListIndex = 1;
 function BeltItem::AddArmor(%name, %item, %skin, %hitSound, %special, %weight, %skillRestriction, %miscInfo, %shopIndex) {
-	$SkillRestriction[%item] = %skillRestriction;
 	$ArmorSkin[%item] = %skin;
 	$ArmorPlayerModel[%item] = "";
 	$ArmorHitSound[%item] = %hitSound;
 	$ArmorList[$armorListIndex] = %item;
 	$armorListIndex++;
 
-	BeltItem::AddAccessory(%name, %item, $BodyAccessoryType, "ArmorItems", %special, %weight, %miscInfo, %shopIndex);
+	BeltItem::AddAccessory(%name, %item, $BodyAccessoryType, "ArmorItems", %special, %weight, %skillRestriction, %miscInfo, %shopIndex);
 }
 
 function BeltItem::AddRobe(%name, %item, %skin, %special, %weight, %skillRestriction, %miscInfo, %shopIndex) {	
-	$SkillRestriction[%item] = %skillRestriction;
 	$ArmorSkin[%item] = %skin;
 	$ArmorPlayerModel[%item] = "Robed";
 	$ArmorHitSound[%item] = SoundHitFlesh;
 	$ArmorList[$armorListIndex] = %item;
 	$armorListIndex++;
 
-	BeltItem::AddAccessory(%name, %item, $BodyAccessoryType, "ArmorItems", %special, %weight, %miscInfo, %shopIndex);
+	BeltItem::AddAccessory(%name, %item, $BodyAccessoryType, "ArmorItems", %special, %weight, %skillRestriction, %miscInfo, %shopIndex);
 }
 
-function BeltItem::AddShield(%name, %item, %special, %weight, %miscInfo, %shopIndex) {
-	BeltItem::AddAccessory(%name, %item, $ShieldAccessoryType, "ArmorItems", %special, %weight, %miscInfo, %shopIndex);
+function BeltItem::AddShield(%name, %item, %special, %weight, %skillRestriction, %miscInfo, %shopIndex) {
+	BeltItem::AddAccessory(%name, %item, $ShieldAccessoryType, "ArmorItems", %special, %weight, %skillRestriction, %miscInfo, %shopIndex);
 }
 
 function BeltItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant, %shopIndex) {
@@ -2732,33 +2733,34 @@ $description = "A robe said to have been worn by the legendary mage, Phens.";
 BeltItem::AddRobe("Phens Robe", "PhensRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
 $description = "A robe given to only the most dedicated and powerful mages in the land.";
 BeltItem::AddRobe("Quest Master Robe", "QuestMasterRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
-// Shields
-$description = "A knightly shield made of wood and iron.";
-BeltItem::AddShield("Knight Shield", "KnightShield", $AccessoryVar[KnightShield, $Weight]);
-$description = "A heavenly shield that radiates with divine energy.";
-BeltItem::AddShield("Heavenly Shield", "HeavenlyShield", $AccessoryVar[HeavenlyShield, $Weight]);
-$description = "A shimmering shield covered in scales of fallen Dragons.";
-BeltItem::AddShield("Dragon Shield", "DragonShield", $AccessoryVar[DragonShield, $Weight]);
 
+// Shields
+// BeltItem::AddShield(%name, %item, %special, %weight, %skillRestriction, %miscInfo, %shopIndex)
+$description = "A knightly shield made of wood and iron.";
+BeltItem::AddShield("Knight Shield", "KnightShield", "7 250", $AccessoryVar[KnightShield, $Weight]);
+$description = "A heavenly shield that radiates with divine energy.";
+BeltItem::AddShield("Heavenly Shield", "HeavenlyShield", "7 315 3 635", $AccessoryVar[HeavenlyShield, $Weight]);
+$description = "A shimmering shield covered in scales of fallen Dragons.";
+BeltItem::AddShield("Dragon Shield", "DragonShield", "7 540 4 210", $AccessoryVar[DragonShield, $Weight]);
 
 // Accessory Items (300 - 499)
 // TODO: Write the tent update code
 // BeltItem::Add("Tent", "Tent", "AccessoryItems", $AccessoryVar[Tent, $Weight], GenerateItemCost(Tent));
 
-// function BeltItem::AddAccessory(%name, %item, %accessoryType, %beltType, %special, %weight, %miscInfo, %shopIndex)
+// function BeltItem::AddAccessory(%name, %item, %accessoryType, %beltType, %special, %weight, %skillRestriction, %miscInfo, %shopIndex)
 $description = "A small belt pouch that slightly increases carrying capacity.";
-BeltItem::AddAccessory("Small Belt Pouch", "SmallBeltPouch", $TalismanAccessoryType, "AccessoryItems", "12 50", 0.1, $description, 300);
+BeltItem::AddAccessory("Small Belt Pouch", "SmallBeltPouch", $TalismanAccessoryType, "AccessoryItems", "12 50", 0.1, "", $description, 300);
 $description = "A large belt pouch that increases carrying capacity.";
-BeltItem::AddAccessory("Medium Belt Pouch", "MediumBeltPouch", $TalismanAccessoryType, "AccessoryItems", "12 100", 0.1, $description, 301);
+BeltItem::AddAccessory("Medium Belt Pouch", "MediumBeltPouch", $TalismanAccessoryType, "AccessoryItems", "12 100", 0.1, "", $description, 301);
 $description = "A large belt pouch that greatly increases carrying capacity.";
-BeltItem::AddAccessory("Large Belt Pouch", "LargeBeltPouch", $TalismanAccessoryType, "AccessoryItems", "12 150", 0.1, $description, 302);
+BeltItem::AddAccessory("Large Belt Pouch", "LargeBeltPouch", $TalismanAccessoryType, "AccessoryItems", "12 150", 0.1, "", $description, 302);
 
 $description = "Cheetaur's Paws increase speed and jump power!";
-BeltItem::AddAccessory("Cheetaurs Paws", "CheetaursPaws", $BootsAccessoryType, "AccessoryItems", "8 1", 3, $description, 303);
+BeltItem::AddAccessory("Cheetaurs Paws", "CheetaursPaws", $BootsAccessoryType, "AccessoryItems", "8 1", 3, "", $description, 303);
 $description = "Boots Of Gliding let you glide!";
-BeltItem::AddAccessory("Boots Of Gliding", "BootsOfGliding", $BootsAccessoryType, "AccessoryItems", "8 2", 3, $description, 304);
+BeltItem::AddAccessory("Boots Of Gliding", "BootsOfGliding", $BootsAccessoryType, "AccessoryItems", "8 2", 3, "", $description, 304);
 $description = "Wind Walkers let you fly!";
-BeltItem::AddAccessory("Wind Walkers", "WindWalkers", $BootsAccessoryType, "AccessoryItems", "8 3", 3, $description, 305);
+BeltItem::AddAccessory("Wind Walkers", "WindWalkers", $BootsAccessoryType, "AccessoryItems", "8 3", 3, "", $description, 305);
 
 // Other Items (500+)
 
@@ -2772,20 +2774,22 @@ $AccessoryVar[Potion, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 Heal
 BeltItem::Add("Hi-Potion", "HiPotion", "PotionItems", 0.5, 1000, "", 502);
 $AccessoryVar[HiPotion, $MiscInfo] = "A potion of Healing that heals 100 HP";
 $restoreValue[HiPotion, HP] = 100;
-$AccessoryVar[HiPotion, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 HealingHerb 10 MandragoraRoot 2";
+$AccessoryVar[HiPotion, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 HealingHerb 10 MandragoraRoot 2";
 
 BeltItem::Add("X-Potion", "XPotion", "PotionItems", 0.5, 10000, "", 503);
 $AccessoryVar[XPotion, $MiscInfo] = "A potion of Healing that heals 250 HP";
 $restoreValue[XPotion, HP] = 250;
+$AccessoryVar[XPotion, "AlchemyIngredients"] = "ReinforcedAlchemistsBottle 1 VialOfWater 1 MandragoraRoot 10 Sylphroot 2";
 
 BeltItem::Add("Mega Potion", "MegaPotion", "PotionItems", 0.5, 100000, "", 504);
 $AccessoryVar[MegaPotion, $MiscInfo] = "A potion of Healing that heals 100 HP";
 $restoreValue[MegaPotion, HP] = 500;
+$AccessoryVar[MegaPotion, "AlchemyIngredients"] = "ArcaneCrystalPhial 1 VialOfWater 1 Sylphroot 10 MaidensTear 2";
 
 BeltItem::Add("Elixir", "Elixir", "PotionItems", 0.5, 250000, "", 505);
 $AccessoryVar[Elixir, $MiscInfo] = "A rare elixir that restore HP and MP";
 $restoreValue[Elixir, HP] = 500;
-$restoreValue[Elixir, MP] = 500;
+$AccessoryVar[Elixir, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 MaidensTear 10 MandragoraRoot 2";
 
 // maybe make mega elixir later?
 
@@ -2826,10 +2830,17 @@ $AccessoryVar[CelestialMythrilAlembic, $MiscInfo] = "A legendary alembic made fr
 // Igredients
 BeltItem::Add("Vial of Water", "VialOfWater", "MiscItems", 0.01, 1, "", 616);
 $AccessoryVar[VialOfWater, $MiscInfo] = "A vial of clean, fresh water. It is used as a base for many potions and alchemical concoctions.";
-BeltItem::Add("Healing Herb", "HealingHerb", "MiscItems", 0.01, 1, "", 617);
+
+BeltItem::Add("Healing Herb", "HealingHerb", "MiscItems", 0.01, 10, "", 617);
 $AccessoryVar[HealingHerb, $MiscInfo] = "A medicinal herb known for its healing properties. It is used in many healing potions and remedies.";
-BeltItem::Add("Mandragora Root", "MandragoraRoot", "MiscItems", 0.01, 1, "", 618);
+BeltItem::Add("Mandragora Root", "MandragoraRoot", "MiscItems", 0.01, 100, "", 618);
 $AccessoryVar[MandragoraRoot, $MiscInfo] = "A screaming plant known for its hallucinogenic and harmful properties.";
+BeltItem::Add("Sylphroot", "Sylphroot", "MiscItems", 0.01, 1, "", 619);
+$AccessoryVar[Sylphroot, $MiscInfo] = "A pale-green root infused with wind magic, often found in enchanted forests.";
+BeltItem::Add("Maidens Tear", "MaidensTear", "MiscItems", 0.01, 1000, "", 620);
+$AccessoryVar[MaidensTear, $MiscInfo] = "A delicate, crystal-clear flower that grows near pure mountain springs.";
+BeltItem::Add("Chocobo Feather", "ChocoboFeather", "MiscItems", 0.01, 10000, "", 621);
+$AccessoryVar[ChocoboFeather, $MiscInfo] = "A feathery yellow-green plant that resembles a chocobo's plume.";
 
 // Quest Items
 BeltItem::Add("Black Statue", "BlackStatue", "QuestItems", $AccessoryVar[BlackStatue, $Weight], GenerateItemCost(BlackStatue));
