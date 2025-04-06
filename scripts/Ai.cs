@@ -253,6 +253,10 @@ function AI::Periodic(%aiName)
 	//comparing Rotations).  These loops will undoubtedly cause alot
 	//of CPU drain.
 	//=================================================================
+	// I wonder if it would be cheaper to just do a container search within radius
+	// and then check the distance to each object in the set? That could be more
+	// expensive that checking EVERY player, but it's hard to say. I think.
+
 
 	if(fetchData(%aiId, "SpawnBotInfo") != "")
 	{
@@ -426,6 +430,7 @@ function AI::Periodic(%aiName)
 	if(OddsAre(4))
 		AI::SelectBestWeapon(%aiId);
 }
+
 function AI::NextWeapon(%aiId)
 {
 	dbecho($dbechoMode, "AI::NextWeapon(" @ %aiId @ ")");

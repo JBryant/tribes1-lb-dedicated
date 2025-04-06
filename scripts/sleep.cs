@@ -115,6 +115,9 @@ function GroupTrigger::onTrigEnter(%object, %this)
 
 			%pos = TeleportToMarker(%clientId, "TeleportBoxes\\" @ Object::getName(%group) @ "\\Output", False, True);
 			Player::setDamageFlash(%clientId, 0.9);
+			// check in case they left zone
+			UpdateZone(Client::getOwnedObject(%clientId));
+
 			if(!fetchData(%clientId, "invisible"))
 				GameBase::startFadeIn(%clientId);
 

@@ -162,7 +162,7 @@ function DoZoneCheck(%w, %d)
 
 	//Massive zone check for entire world
 	%mset = newObject("set", SimSet);
-	%n = containerBoxFillSet(%mset, $SimPlayerObjectType, "0 0 0", 9999, 9999, 9999, 0);
+	%n = containerBoxFillSet(%mset, $SimPlayerObjectType, "0 0 0", 25000, 25000, 25000, 0);
 
 	for(%z = 1; %z <= $numZones; %z++)
 	{
@@ -187,8 +187,10 @@ function UpdateZone(%object)
 	dbecho($dbechoMode, "UpdateZone(" @ %object @ ")");
 
 	%clientId = Player::getClient(%object);
+
 	if(%clientId == -1)
 		return;
+
 	%clientId.remoteEvalSpam = "";
 	%clientId.tabMenuSpam = "";
 	%zoneflag = fetchData(%clientId, "tmpzone");
