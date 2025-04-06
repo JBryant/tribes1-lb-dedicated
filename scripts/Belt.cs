@@ -2868,3 +2868,7 @@ BeltItem::AddWeapon("Rusty Shank", "RustyShank", "Dagger", $SwordAccessoryType, 
 
 $description = "A club filled with broken bone bits. It looks like it could fall apart at any moment.";
 BeltItem::AddWeapon("Shattered Bone Club", "ShatteredBoneClub", "SpikedClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1", "20");
+
+// Enemy Weapons
+$description = "Beast Claw I";
+BeltItem::AddWeapon("Beast Claw I", "BeastClawI", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "1");

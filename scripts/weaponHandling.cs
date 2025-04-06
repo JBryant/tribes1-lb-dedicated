@@ -257,8 +257,13 @@ function GetBestWeapon(%clientId)
 
 	// if they have the casting blade, always use that
 	// switch this to check belt
-	if(Player::getItemCount(%clientId, "CastingBlade") > 0) {
+	if(Player::getItemCount(%clientId, "CastingBlade") > 0  || Belt::hasthisstuff(%clientId, "CastingBlade") > 0) {
 		return "CastingBlade";
+	}
+
+	// TODO: if they have unarmed weapons, use that... make it work for ANY unarmed weapon they have
+	if(Belt::hasthisstuff(%clientId, "BeastClawI") > 0) {
+		return "BeastClawI";
 	}
 
 	// then search through their weapon list

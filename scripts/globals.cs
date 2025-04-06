@@ -144,3 +144,5 @@ $neverdropitem["BeltItemTool"] = True;
 // for all new belt type items
 $playerNoDrop["BeltItemTool"] = True;
 $playerNoDrop["CastingBlade"] = True;
+$playerNoDrop["Unarmed"] = True;
+$playerNoDrop["BeastClawI"] = True;

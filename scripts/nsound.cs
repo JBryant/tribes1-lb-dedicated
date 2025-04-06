@@ -1902,6 +1902,50 @@ SoundData FishWalk
    wavFileName = "fishwalk.wav";
    profile = Profile3dNear;
 };
+
+// Using for spider spawn or hit or die sound (will see)
+SoundData Ostrix
+{
+   wavFileName = "ostrix.wav";
+   profile = Profile3dNear;
+};
+
+// No idea where I got these from in my Tribes RPG folder, but they are missing in the repack, so people won't hear them
+// SoundData ImpAcquired
+// {
+//    wavFileName = "imp_acquired.wav";
+//    profile = Profile3dNear;
+// };
+
+// SoundData ImpDeath
+// {
+//    wavFileName = "imp_death.wav";
+//    profile = Profile3dNear;
+// };
+
+// SoundData ImpHit1
+// {
+//    wavFileName = "imp_hit1.wav";
+//    profile = Profile3dNear;
+// };
+
+// SoundData ImpHit2
+// {
+//    wavFileName = "imp_hit2.wav";
+//    profile = Profile3dNear;
+// };
+
+// SoundData ImpIdle
+// {
+//    wavFileName = "imp_idle.wav";
+//    profile = Profile3dNear;
+// };
+
+// SoundData ImpTaunt
+// {
+//    wavFileName = "imp_taunt.wav";
+//    profile = Profile3dNear;
+// };
 //================================================
 
 function InitSoundPoints()

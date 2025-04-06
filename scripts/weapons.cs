@@ -2005,3 +2005,35 @@ ItemData CyborgGun
 function CyborgGunImage::onFire(%player, %slot) {
 	ProjectileAttack(Player::getClient(%player), 100);
 }
+
+ItemImageData UnarmedImage
+{
+	shapeFile  = "smallObject"; // blood1
+	mountPoint = 0; // 0 mouth/hand, 1 head, 2 bottom?
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = $WeaponDelay[Sword];
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5; // change this mabe?
+	sfxActivate = AxeSlash2; // change this mabe?
+};
+ItemData Unarmed
+{
+	heading = "bWeapons";
+	description = "";
+	className = "Weapon";
+	shapeFile  = "smallObject"; // blood1
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = UnarmedImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function UnarmedImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}

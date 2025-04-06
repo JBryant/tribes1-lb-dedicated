@@ -200,7 +200,8 @@ function Player::onKilled(%this) {
 
 		%equippedWeapon = GetEquippedWeapon(%clientId);
 		if (%equippedWeapon != "") {
-			if (%equippedWeapon == "CastingBlade") {
+			// TODO: Make this use a map later
+			if (%equippedWeapon == "CastingBlade" || %equippedWeapon == "BeastClawI") {
 				belt::takethisstuff(%clientId, %equippedWeapon @ "0", 1);
 			} else {
 				Belt::UnequipAccessory(%clientId, %equippedWeapon @ "0");

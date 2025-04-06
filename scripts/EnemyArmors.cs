@@ -46,6 +46,9 @@ $Server::teamSkin[6] = "min";
 $Server::teamName[7] = "Uber";
 $Server::teamSkin[7] = "fedmonster";
 
+$Server::teamName[8] = "Beasts";
+$Server::teamSkin[8] = "RMSkins3";
+
 //------------------------------
 
 $NameForRace[generic] = "MaleHuman";
@@ -116,6 +119,14 @@ $SkinForRace[Acolyte] = "robeblack"; // dynamic skin rendering
 $NameForRace[Doomsayer] = "Cultist";
 $SkinForRace[Doomsayer] = "RMSkins3"; // dynamic skin rendering
 
+// New Races
+$NameForRace[Spiderling] = "Spider";
+$NameForRace[Huntsman] = "Spider";
+$NameForRace[BrownRecluse] = "Spider";
+$NameForRace[BlackWidow] = "Spider";
+
+$NameForRace[Bat] = "Bat";
+
 
 $ArmorTypeToRace[TravellerArmor] = "Traveller";
 $ArmorTypeToRace[GoblinArmor] = "Goblin"; // GoblinArmor // TestArmor
@@ -130,6 +141,7 @@ $ArmorTypeToRace[UberArmor] = "Uber";
 $ArmorTypeToRace[ZombieArmor] = "Zombie";
 $ArmorTypeToRace[DemonArmor] = "Demon";
 $ArmorTypeToRace[CultistArmor] = "Cultist";
+$ArmorTypeToRace[SpiderArmor] = "Spider";
 
 $RaceToArmorType[Goblin] = "GoblinArmor";
 $RaceToArmorType[Gnoll] = "GnollArmor";
@@ -144,6 +156,7 @@ $RaceToArmorType[Uber] = "UberArmor";
 $RaceToArmorType[Zombie] = "ZombieArmor";
 $RaceToArmorType[Demon] = "DemonArmor";
 $RaceToArmorType[Cultist] = "CultistArmor";
+$RaceToArmorType[Spider] = "SpiderArmor";
 
 $RaceToNamesList[Traveller] = "Alphonse Cedric Lucian Darius Leontius Gregor Matthias Silvain Emeric Veyron Hadrian Tobias Valens Octavian Magnus Raphael Victor Alistair Remiel Lysander Cassian Garrick Percival Thaddeus Gideon Theodric Isidore Cornelius Reginald Leofric Oswald Baldwin Edric Ronan Severin Aldous Soren Valentin Leopold Desmond Eustace Corbin Ignatius Bertram Seraphim Maximus Felix Quentin Roderic Atticus Nicodemus Zephyrus Aurelius Fabian Tiberius Evander Cormac Orion Vesper Drystan Cassius Lazarus Marcellus Gideon Tarquin Lucan Zephiel Oberon Tristam Aurelian Myron Edgar Nathaniel Augustus Hector Vespasian Sirus Caliban Damian Cyprian Theron Alaric Thelonius Ulrich Galen Phineas Anselm Varian Valmont Bastien Xavier Leoric Simeon Zephyr Darian Florian Armand Hadrianus Orestes Fenrir Gael Romulus Malachai Noctis Thalric Eamon Belisarius Callum Solon";
 $RaceToNamesList[Goblin] = "Griknak Snaggit Borgul Zrogg Ruknash Dribbik Murgul Vrogg Tazgul Skarnak Drekz Broggit Klurg Snibbit Vraggo Trognash Glubnik Grizzik Nobnash Krognar Zraggit Blornik Snaggul Throgg Klibbit Drizzik Grobnar Vraknash Trogzit Borknash Graknik Zlubb Knorvik Drizzgul Trognik Krabnash Glubzit Morzik Zorknash Broggul Tarnik Flibbit Skragnak Zriggo Krobnash Vrixik Drobbit Skrognar Blaggit Truznik Frobnash Skribbit Klorgnak Vrobnash Gribzik Traknor Zlibbit Knarzik Frozgul Skraknit Grozzik Triggan Zorblik Broggar Trogzit Kribzik Slorbag Vragbit Gronbit Trasknak Zroblik Klibzit Kragnik Blibbit Driznash Skornak Froggit Trigblik Zrumblik Krobzit Snorggul Thragbit Glibnash Skragzit Draknor Vrobbit Zrobnik Snibnash Frakgul Triznak Grobnash Blugbit Kraznik Snibzit Trombit Skrubnik Grubzit Vorblik Zlagbit Kroggul Tragnor Blornash";
@@ -159,6 +172,7 @@ $RaceToNamesList[Uber] = "";
 $RaceToNamesList[Zombie] = "";
 $RaceToNamesList[Demon] = "";
 $RaceToNamesList[Cultist] = "";
+// $RaceToArmorType[Spider] = "";
 
 //------------------------------
 
@@ -230,6 +244,11 @@ $spawnIndex[53] = "Spawn";
 $spawnIndex[54] = "Acolyte";
 $spawnIndex[55] = "Doomsayer";
 
+$spawnIndex[56] = "Spiderling";
+$spawnIndex[57] = "Huntsman";
+$spawnIndex[58] = "BrownRecluse";
+$spawnIndex[59] = "BlackWidow";
+
 //------------------------------
 
 // range looks like: RShortBow 1 BasicArrow 20/50
@@ -289,6 +308,11 @@ $BotEquipment[Gohort] = 	"CLASS Chemist LVL 527/50 COINS 135/50 LCK 4 CastingBla
 $BotEquipment[Acolyte] = 	"CLASS Squire LVL 817/50 COINS 115/50 LCK 3 DiamondSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500";
 $BotEquipment[Doomsayer] = 	"CLASS Chemist LVL 1027/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500";
 
+$BotEquipment[Spiderling] = "CLASS Squire LVL 1 COINS 5/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
+$BotEquipment[Huntsman] = "CLASS Squire LVL 5 COINS 10/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
+$BotEquipment[BrownRecluse] = "CLASS Squire LVL 10 COINS 15/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
+$BotEquipment[BlackWidow] = "CLASS Squire LVL 15 COINS 20/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500";
+
 //------------------------------
 
 $TeamForRace[Traveller] = 1;
@@ -304,6 +328,7 @@ $TeamForRace[Uber] = 7;
 $TeamForRace[Zombie] = 4;
 $TeamForRace[Demon] = 4;
 $TeamForRace[Cultist] = 1;
+$TeamForRace[Spider] = 8;
 
 //------------------------------
 
@@ -404,6 +429,8 @@ $RaceSound[Cultist, Acquired, 3] = SoundTravellerAcquired3;
 $RaceSound[Cultist, Hit, 1] = SoundTravellerHit1;
 $RaceSound[Cultist, Hit, 2] = SoundTravellerHit2;
 $RaceSound[Cultist, Hit, 3] = SoundTravellerHit3;
+
+$RaceSound[Spider, Death, 1] = Ostrix;
 
 //------------------------------------------------------------------
 // Traveller armor data:	(light)
