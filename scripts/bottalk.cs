@@ -214,10 +214,16 @@ function processbottalk(%clientId,%TrueClientId,%message,%cropped,%w1){
 function bottalk::merchant(%TrueClientId, %closestId, %initTalk, %message){
 	//process merchant code
 	%trigger[2] = "buy";
-	if(%initTalk)
-	{
+
+	if(%initTalk) {
 		$botMenuOption[%TrueClientId,0] = "I would like to buy something.";
-		NewBotMessage(%TrueClientId, %closestId, "Did you come to see what items you can buy?");
+
+		if ($BotInfo[%closestId.name, GREETING] != "") {
+			NewBotMessage(%TrueClientId, %closestId, $BotInfo[%closestId.name, GREETING]);
+		}
+		else {
+			NewBotMessage(%TrueClientId, %closestId, "Did you come to see what items you can buy?");
+		}
 		$state[%closestId, %TrueClientId] = 1;
 	}
 	else if($state[%closestId, %TrueClientId] == 1)
@@ -225,7 +231,7 @@ function bottalk::merchant(%TrueClientId, %closestId, %initTalk, %message){
 		if(String::findSubStr(%message, %trigger[2]) != -1)
 		{
 			SetupShop(%TrueClientId, %closestId);
-			AI::sayLater(%TrueClientId, %closestId, "Take a look at what I have.", True);
+			// AI::sayLater(%TrueClientId, %closestId, "Take a look at what I have.", True);
 			$state[%closestId, %TrueClientId] = "";
 		}
 	}
@@ -253,7 +259,12 @@ function bottalk::banker(%TrueClientId, %closestId, %initTalk, %message){
 			$botMenuOption[%TrueClientId,1] = "I would like to withdraw coins.";
 			$botMenuOption[%TrueClientId,2] = "I would like to check my storage.";
 		}
-		NewBotMessage(%TrueClientId, %closestId, "I can keep your money from being stolen by thieves.  DEPOSIT, WITHDRAW or look at your STORAGE?  You are carrying " @ fetchData(%TrueClientId, "COINS") @ " coins and I have " @ fetchData(%TrueClientId, "BANK") @ " of yours.");
+		
+		if ($BotInfo[%closestId.name, GREETING] != "") {
+			NewBotMessage(%TrueClientId, %closestId, $BotInfo[%closestId.name, GREETING] @ "  DEPOSIT, WITHDRAW or look at your STORAGE?  You are carrying " @ fetchData(%TrueClientId, "COINS") @ " coins and I have " @ fetchData(%TrueClientId, "BANK") @ " of yours.");
+		} else {
+			NewBotMessage(%TrueClientId, %closestId, "I can keep your money from being stolen by thieves.  DEPOSIT, WITHDRAW or look at your STORAGE?  You are carrying " @ fetchData(%TrueClientId, "COINS") @ " coins and I have " @ fetchData(%TrueClientId, "BANK") @ " of yours.");
+		}
 		$state[%closestId, %TrueClientId] = 1;
 	}
 	else if($state[%closestId, %TrueClientId] == 1)

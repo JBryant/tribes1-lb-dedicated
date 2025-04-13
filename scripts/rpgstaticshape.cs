@@ -63,8 +63,9 @@ function StaticShape::onDamage(%this,%type,%value,%pos,%vec,%mom,%object)
 {
 	%damageLevel = GameBase::getDamageLevel(%this);
 	%dValue = %damageLevel + %value;
-   %this.lastDamageObject = %object;
-   %this.lastDamageTeam = GameBase::getTeam(%object);
+    %this.lastDamageObject = %object;
+    %this.lastDamageTeam = GameBase::getTeam(%object);
+	
 	if(GameBase::getTeam(%this) == GameBase::getTeam(%object)) {
 		%name = GameBase::getDataName(%this);
 		if(%name.className == Generator || %name.className == Station) { 

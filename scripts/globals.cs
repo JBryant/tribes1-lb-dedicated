@@ -77,7 +77,7 @@ $dayCycleHaze[4] = -600;
 $dayCycleHaze[5] = -900;
 
 if($fullCycleTime == "") $fullCycleTime = 60 * 60;
-if($nightDayCycle == "") $nightDayCycle = False;
+if($nightDayCycle == "") $nightDayCycle = True;
 //--------------------------------------
 
 $vvv = 10;

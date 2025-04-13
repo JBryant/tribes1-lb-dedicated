@@ -494,8 +494,7 @@ function NEWgetClientByName(%name)
 	dbecho($dbechoMode, "NEWgetClientByName(" @ %name @ ")");
 
 	%list = GetEveryoneIdList();
-	for(%i = 0; GetWord(%list, %i) != -1; %i++)
-	{
+	for(%i = 0; GetWord(%list, %i) != -1; %i++) {
 		%id = GetWord(%list, %i);
 		%displayName = rpg::getName(%id);
 		if(String::ICompare(%name, %displayName) == 0)

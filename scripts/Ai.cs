@@ -1345,15 +1345,14 @@ function InitTownBots()
 
 	%group = nameToId("MissionGroup/TownBots");
 
-	if(%group != -1)
-	{
+	if(%group != -1) {
 		%cnt = Group::objectCount(%group);
-		for(%i = 0; %i <= %cnt - 1; %i++)
-		{
+
+		for(%i = 0; %i <= %cnt - 1; %i++) {
 			%object = Group::getObject(%group, %i);
 			%name = Object::getName(%object);
-			if(getObjectType(%object) == "SimGroup")
-			{
+
+			if(getObjectType(%object) == "SimGroup") {
 				%marker = GatherBotInfo(%object);
 			}
 
@@ -1435,6 +1434,10 @@ function GatherBotInfo(%group)
 				$BotInfo[%aiName, LVL] = %info;
 			else if(%type == "RACE")
 				$BotInfo[%aiName, RACE] = %info;
+			else if(%type == "TEAM")
+				$BotInfo[%aiName, TEAM] = %info;
+			else if(%type == "SKIN")
+				$BotInfo[%aiName, SKIN] = %info;	
 			else if(%type == "NEED")
 				$BotInfo[%aiName, NEED] = %info;
 			else if(%type == "TAKE")
@@ -1451,6 +1454,8 @@ function GatherBotInfo(%group)
 				$BotInfo[%aiName, CSAY] = %info;
 			else if(%type == "LSAY")
 				$BotInfo[%aiName, LSAY] = %info;
+			else if(%type == "GREETING")
+				$BotInfo[%aiName, GREETING] = %info;	
 			else if(%type == "LCK")
 				$BotInfo[%aiName, LCK] = %info;
 			else if(%type == "SIMGROUP")
@@ -1464,6 +1469,7 @@ function GatherBotInfo(%group)
 				$BotInfo[%aiName, NSAY, %n] = %info;
 			else if(%type2 == "NCUE")
 				$BotInfo[%aiName, NCUE, %n] = %info;
+				
 
 			if(%n > %biggestn)
 				%biggestn = %n;

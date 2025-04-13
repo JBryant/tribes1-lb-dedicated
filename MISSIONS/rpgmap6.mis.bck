@@ -346,7 +346,7 @@ instant SimGroup "MissionGroup" {
 			visibleDistance = "1000";
 			hazeDistance = "700";
 			hazeVerticalMin = "-NAN";
-			hazeVerticalMax = "1.48534e-38";
+			hazeVerticalMax = "1.48533e-38";
 			perspectiveDistance = "100";
 			screenSize = "30";
 			contGravity = "0 0 -20";
@@ -362,8 +362,8 @@ instant SimGroup "MissionGroup" {
 			incidence = "76";
 			castShadows = "True";
 			useLensFlare = "False";
-			intensity = "0.399925 0.399925 0.399925";
-			ambient = "0.159926 0.159926 0.159926";
+			intensity = "0.399924 0.399924 0.399924";
+			ambient = "0.159925 0.159925 0.159925";
 			size = "2000";
 			distance = "11000";
 		};
@@ -397,31 +397,31 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2428.75 -267.75 77.5926";
+					position = "-2428.75 -267.75 77.5925";
 					rotation = "0 0 0";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2432.5 -268.782 77.5926";
+					position = "-2432.5 -268.782 77.5925";
 					rotation = "0 0 0";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2429 -263.757 77.5926";
+					position = "-2429 -263.756 77.5925";
 					rotation = "0 0 0";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2435.25 -263.5 77.5926";
+					position = "-2435.25 -263.5 77.5925";
 					rotation = "0 0 0";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2432 -261.75 77.5926";
+					position = "-2432 -261.75 77.5925";
 					rotation = "0 0 0";
 				};
 			};
@@ -464,49 +464,49 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1210.25 1501.5 62.0253";
+				position = "-1210.25 1501.5 62.0252";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1214.25 1507.25 61.7753";
+				position = "-1214.25 1507.25 61.7752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1227.51 1505.25 62.2753";
+				position = "-1227.51 1505.25 62.2752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1229.75 1499.02 62.2753";
+				position = "-1229.75 1499.02 62.2752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1213.75 1495.75 61.2753";
+				position = "-1213.75 1495.75 61.2752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1215.26 1511.75 61.2753";
+				position = "-1215.26 1511.75 61.2752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1228.5 1509.75 61.2753";
+				position = "-1228.5 1509.75 61.2752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1228.25 1493.75 61.2753";
+				position = "-1228.25 1493.75 61.2752";
 				rotation = "0 0 0";
 			};
 		};
@@ -514,15 +514,15 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2437.75 -272.041 77.0926";
-				rotation = "0 -0 0.899812";
+				position = "-2437.75 -272.04 77.0925";
+				rotation = "0 -0 0.899811";
 			};
 		};
 		instant SimGroup "TeleportEntranceMarkers" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1202.5 1499.5 73.2754";
+				position = "-1202.5 1499.5 73.2753";
 				rotation = "0 0 0";
 			};
 		};
@@ -530,55 +530,55 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1215.76 1499 54.7753";
+				position = "-1215.76 1499 54.7752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1213.5 1504.75 54.7753";
+				position = "-1213.5 1504.75 54.7752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1224.75 1502.5 54.7753";
+				position = "-1224.75 1502.5 54.7752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1221.28 1506 54.7753";
+				position = "-1221.28 1506 54.7752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1221.53 1498.02 54.7753";
+				position = "-1221.53 1498.02 54.7752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1224.26 1509.5 54.7753";
+				position = "-1224.26 1509.5 54.7752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1215.25 1509.25 54.7753";
+				position = "-1215.25 1509.25 54.7752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1220.75 1511.25 54.7753";
+				position = "-1220.75 1511.25 54.7752";
 				rotation = "0 0 0";
 			};
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1227.5 1506.5 54.7753";
+				position = "-1227.5 1506.5 54.7752";
 				rotation = "0 0 0";
 			};
 		};
@@ -588,7 +588,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "jring1" {
 			fileName = "jring.0.dis";
 			isContainer = "1";
-			position = "-1221.25 1502.75 56.7753";
+			position = "-1221.25 1502.75 56.7752";
 			rotation = "0 0 0";
 			lightParams = "0 ";
 			locked = "1";
@@ -599,14 +599,14 @@ instant SimGroup "MissionGroup" {
 			instant InteriorShape "watersurface10A3" {
 				fileName = "water1.0.dis";
 				isContainer = "1";
-				position = "-4940.75 -1663 40.7617";
+				position = "-4940.75 -1663 40.7616";
 				rotation = "0 0 0";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurface10A1" {
 				fileName = "water1.1.dis";
 				isContainer = "1";
-				position = "-4940.75 2433 40.7608";
+				position = "-4940.75 2433 40.7607";
 				rotation = "0 0 0";
 				lightParams = "0 ";
 			};
@@ -623,14 +623,14 @@ instant SimGroup "MissionGroup" {
 				fileName = "water1.3.dis";
 				isContainer = "1";
 				position = "-4144.75 -2559.75 40.7691";
-				rotation = "0 0 1.56906";
+				rotation = "0 0 1.56905";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurface9b" {
 				fileName = "water1.4.dis";
 				isContainer = "1";
-				position = "-4044.75 511.875 40.7687";
-				rotation = "0 0 1.56906";
+				position = "-4044.75 511.875 40.7686";
+				rotation = "0 0 1.56905";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurfaceTownB" {
@@ -643,22 +643,22 @@ instant SimGroup "MissionGroup" {
 			instant InteriorShape "watersurface9a" {
 				fileName = "water1.6.dis";
 				isContainer = "1";
-				position = "-4044.75 2559.75 40.7688";
-				rotation = "0 0 1.56906";
+				position = "-4044.75 2559.75 40.7687";
+				rotation = "0 0 1.56905";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurfaceTownA" {
 				fileName = "water1.7.dis";
 				isContainer = "1";
-				position = "-4144.75 1535.75 40.7702";
-				rotation = "0 0 1.56906";
+				position = "-4144.75 1535.75 40.7701";
+				rotation = "0 0 1.56905";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurface9c" {
 				fileName = "water1.8.dis";
 				isContainer = "1";
 				position = "-4044.75 -1534.75 40.7677";
-				rotation = "0 0 1.56906";
+				rotation = "0 0 1.56905";
 				lightParams = "0 ";
 			};
 		};
@@ -689,14 +689,14 @@ instant SimGroup "MissionGroup" {
 			instant InteriorShape "watersurfaceTownC" {
 				fileName = "water1.12.dis";
 				isContainer = "1";
-				position = "-48.75 -2559.75 40.7692";
+				position = "-48.75 -2559.75 40.7691";
 				rotation = "0 -0 1.56903";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurface9b" {
 				fileName = "water1.13.dis";
 				isContainer = "1";
-				position = "52.75 511.875 40.7688";
+				position = "52.75 511.875 40.7687";
 				rotation = "0 -0 1.56903";
 				lightParams = "0 ";
 			};
@@ -724,8 +724,8 @@ instant SimGroup "MissionGroup" {
 			instant InteriorShape "watersurface9c" {
 				fileName = "water1.17.dis";
 				isContainer = "1";
-				position = "52.75 -1536 40.7683";
-				rotation = "0 0 1.56906";
+				position = "52.75 -1536 40.7682";
+				rotation = "0 0 1.56905";
 				lightParams = "0 ";
 			};
 		};
@@ -734,42 +734,42 @@ instant SimGroup "MissionGroup" {
 				fileName = "water1.18.dis";
 				isContainer = "1";
 				position = "-2096.75 -2559.75 40.7691";
-				rotation = "0 -0 1.56906";
+				rotation = "0 -0 1.56905";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurface9c" {
 				fileName = "water1.19.dis";
 				isContainer = "1";
-				position = "-1996.5 -1535.5 40.7664";
-				rotation = "0 0 1.57031";
+				position = "-1996.5 -1535.5 40.7663";
+				rotation = "0 0 1.5703";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurfaceTownA" {
 				fileName = "water1.20.dis";
 				isContainer = "1";
 				position = "-2096.75 1535.75 40.7705";
-				rotation = "0 -0 1.56906";
+				rotation = "0 -0 1.56905";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurface9a" {
 				fileName = "water1.21.dis";
 				isContainer = "1";
-				position = "-1996.75 2560 40.7688";
-				rotation = "0 0 1.56906";
+				position = "-1996.75 2560 40.7687";
+				rotation = "0 0 1.56905";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurfaceTownB" {
 				fileName = "water1.22.dis";
 				isContainer = "1";
-				position = "-2096.75 -511.875 40.7697";
-				rotation = "0 -0 1.56906";
+				position = "-2096.75 -511.875 40.7696";
+				rotation = "0 -0 1.56905";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurface9b" {
 				fileName = "water1.23.dis";
 				isContainer = "1";
-				position = "-1996.75 512 40.7687";
-				rotation = "0 0 1.56906";
+				position = "-1996.75 512 40.7686";
+				rotation = "0 0 1.56905";
 				lightParams = "0 ";
 			};
 		};
@@ -778,7 +778,7 @@ instant SimGroup "MissionGroup" {
 				fileName = "water1.24.dis";
 				isContainer = "1";
 				position = "-588.75 -1663 40.7621";
-				rotation = "0 -0 1.56907";
+				rotation = "0 -0 1.56906";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurface10B3" {
@@ -791,8 +791,8 @@ instant SimGroup "MissionGroup" {
 			instant InteriorShape "watersurface10A2" {
 				fileName = "water1.26.dis";
 				isContainer = "1";
-				position = "-588.75 385 40.7618";
-				rotation = "0 -0 1.56907";
+				position = "-588.75 385 40.7617";
+				rotation = "0 -0 1.56906";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurface10B2" {
@@ -805,8 +805,8 @@ instant SimGroup "MissionGroup" {
 			instant InteriorShape "watersurface10A1" {
 				fileName = "water1.28.dis";
 				isContainer = "1";
-				position = "-588.75 2433 40.7618";
-				rotation = "0 -0 1.56907";
+				position = "-588.75 2433 40.7617";
+				rotation = "0 -0 1.56906";
 				lightParams = "0 ";
 			};
 			instant InteriorShape "watersurface10B1" {
@@ -821,7 +821,7 @@ instant SimGroup "MissionGroup" {
 			instant InteriorShape "watersurface10A3" {
 				fileName = "water1.30.dis";
 				isContainer = "1";
-				position = "-2634.75 -1663 40.7618";
+				position = "-2634.75 -1663 40.7617";
 				rotation = "0 0 1.56912";
 				lightParams = "0 ";
 			};
@@ -835,7 +835,7 @@ instant SimGroup "MissionGroup" {
 			instant InteriorShape "watersurface10A2" {
 				fileName = "water1.32.dis";
 				isContainer = "1";
-				position = "-2634.75 385 40.7613";
+				position = "-2634.75 385 40.7612";
 				rotation = "0 0 1.56912";
 				lightParams = "0 ";
 			};
@@ -849,7 +849,7 @@ instant SimGroup "MissionGroup" {
 			instant InteriorShape "watersurface10A1" {
 				fileName = "water1.34.dis";
 				isContainer = "1";
-				position = "-2634.75 2433 40.7617";
+				position = "-2634.75 2433 40.7616";
 				rotation = "0 0 1.56912";
 				lightParams = "0 ";
 			};
@@ -871,33 +871,33 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "2001.86 498.391 2406.09";
-					rotation = "0 -0 0.719853";
+					position = "2001.85 498.39 2406.09";
+					rotation = "0 -0 0.719852";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
 					position = "2005.3 494.54 2405.5";
-					rotation = "0 -0 0.719853";
+					rotation = "0 -0 0.719852";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "2003.75 496.434 2406.09";
-					rotation = "0 -0 0.719853";
+					position = "2003.75 496.433 2406.09";
+					rotation = "0 -0 0.719852";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "1997.8 502.964 2405.89";
-					rotation = "0 -0 0.719853";
+					position = "1997.8 502.963 2405.88";
+					rotation = "0 -0 0.719852";
 				};
 			};
 			instant SimGroup "AMBIENTSOUND area_plains.wav 10";
 			instant Marker "320 350 150 0" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2449.5 -269.125 60.5084";
+				position = "-2449.5 -269.125 60.5083";
 				rotation = "0 0 0";
 			};
 		};
@@ -908,25 +908,25 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-1786 -878.5 186.267";
+					position = "-1786 -878.5 186.266";
 					rotation = "0 0 0";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-1786.5 -874.658 186.267";
+					position = "-1786.5 -874.658 186.266";
 					rotation = "0 0 0";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-1783 -875.53 186.267";
+					position = "-1783 -875.53 186.266";
 					rotation = "0 0 0";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-1785.75 -871.786 186.267";
+					position = "-1785.75 -871.786 186.266";
 					rotation = "0 0 0";
 				};
 			};
@@ -950,7 +950,7 @@ instant SimGroup "MissionGroup" {
 					dataBlock = "PathMarker";
 					name = "";
 					position = "-2388 -2333.25 82.2982";
-					rotation = "0 -0 -0.939815";
+					rotation = "0 -0 -0.939814";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
@@ -1008,7 +1008,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "80 80 35 0" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-805.25 872.75 683.25";
+				position = "-841.852 829.51 663.19";
 				rotation = "0 0 0";
 			};
 		};
@@ -1044,7 +1044,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "120 120 100 0" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1545 -299.382 360.102";
+				position = "-1545 -299.381 360.101";
 				rotation = "0 0 0";
 			};
 		};
@@ -1108,7 +1108,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2461.25 -179.625 65.0704";
+					position = "-2461.25 -179.625 65.0703";
 					rotation = "0 0 0";
 				};
 				instant Marker "Marker1" {
@@ -1191,7 +1191,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "165 150 26 0" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1906.25 -2840.5 165.603";
+				position = "-1906.25 -2840.5 165.602";
 				rotation = "0 0 0";
 			};
 		};
@@ -1298,7 +1298,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "95 95 90 0" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1252 360.75 89.4714";
+				position = "-1252 360.75 89.4713";
 				rotation = "0 0 0";
 			};
 		};
@@ -1327,26 +1327,26 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-4431 -277.709 65.0032";
-					rotation = "0 -0 0.719853";
+					position = "-4431 -277.709 65.0031";
+					rotation = "0 -0 0.719852";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-4431 -276.709 65.0032";
-					rotation = "0 -0 0.719853";
+					position = "-4431 -276.709 65.0031";
+					rotation = "0 -0 0.719852";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-4430 -276.709 65.0032";
-					rotation = "0 -0 0.719853";
+					position = "-4430 -276.709 65.0031";
+					rotation = "0 -0 0.719852";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-4430 -276.709 65.0032";
-					rotation = "0 -0 0.719853";
+					position = "-4430 -276.709 65.0031";
+					rotation = "0 -0 0.719852";
 				};
 			};
 			instant SimGroup "AMBIENTSOUND area_plains.wav 10";
@@ -1363,25 +1363,25 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "293.205 -502.855 -2963.52";
+					position = "293.204 -502.855 -2963.52";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "293.205 -502.855 -2963.52";
+					position = "293.204 -502.855 -2963.52";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "293.205 -502.855 -2963.52";
+					position = "293.204 -502.855 -2963.52";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "293.205 -502.855 -2963.52";
+					position = "293.204 -502.855 -2963.52";
 					rotation = "0 -0 0.719868";
 				};
 			};
@@ -1389,7 +1389,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "300 300 100 1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "292.575 -487.917 -2965.02";
+				position = "292.575 -487.916 -2965.02";
 				rotation = "0 0 0";
 			};
 		};
@@ -1399,25 +1399,25 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "293.205 -502.855 -2963.52";
+					position = "293.204 -502.855 -2963.52";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "293.205 -502.855 -2963.52";
+					position = "293.204 -502.855 -2963.52";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "293.205 -502.855 -2963.52";
+					position = "293.204 -502.855 -2963.52";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "293.205 -502.855 -2963.52";
+					position = "293.204 -502.855 -2963.52";
 					rotation = "0 -0 0.719868";
 				};
 			};
@@ -1461,7 +1461,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "150 150 100 100" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2359.01 -584.49 140.25";
+				position = "-2359.01 -584.489 140.25";
 				rotation = "0 0 0";
 			};
 		};
@@ -1497,7 +1497,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "250 250 100 100" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2319.16 -555.393 1299.25";
+				position = "-2319.15 -555.393 1299.25";
 				rotation = "0 0 0";
 			};
 		};
@@ -1507,25 +1507,25 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "230.717 -772.146 1827.51";
+					position = "230.716 -772.145 1827.51";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "230.717 -772.146 1827.51";
+					position = "230.716 -772.145 1827.51";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "230.717 -772.146 1827.51";
+					position = "230.716 -772.145 1827.51";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "230.717 -772.146 1827.51";
+					position = "230.716 -772.145 1827.51";
 					rotation = "0 -0 0.719868";
 				};
 			};
@@ -1533,7 +1533,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "150 150 100 100" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "230.717 -772.146 1827.51";
+				position = "230.716 -772.145 1827.51";
 				rotation = "0 0 0";
 			};
 		};
@@ -1543,25 +1543,25 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-262.42 -62.8783 40";
+					position = "-262.42 -62.8782 40";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-262.42 -62.8783 40";
+					position = "-262.42 -62.8782 40";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-262.42 -62.8783 40";
+					position = "-262.42 -62.8782 40";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-262.42 -62.8783 40";
+					position = "-262.42 -62.8782 40";
 					rotation = "0 -0 0.719868";
 				};
 			};
@@ -1570,7 +1570,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "200 200 27 200" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-254.646 -37.3283 17.2462";
+				position = "-254.645 -37.3283 17.2462";
 				rotation = "0 0 0";
 			};
 		};
@@ -1580,26 +1580,26 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2860.24 -1194.88 694.379";
-					rotation = "0 -0 0.719867";
+					position = "-2860.23 -1194.88 694.379";
+					rotation = "0 -0 0.719866";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2859.33 -1198.36 694.179";
-					rotation = "0 -0 0.719867";
+					position = "-2859.33 -1198.35 694.179";
+					rotation = "0 -0 0.719866";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2860.95 -1193.17 693.979";
-					rotation = "0 -0 0.719867";
+					position = "-2860.94 -1193.17 693.979";
+					rotation = "0 -0 0.719866";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2859.66 -1196.71 694.179";
-					rotation = "0 -0 0.719867";
+					position = "-2859.65 -1196.7 694.179";
+					rotation = "0 -0 0.719866";
 				};
 			};
 			instant SimGroup "MUSIC rmrmus2.wav 44";
@@ -1652,25 +1652,25 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "176.08 -754.983 -8539.83";
+					position = "176.08 -754.982 -8539.83";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "176.08 -754.983 -8539.83";
+					position = "176.08 -754.982 -8539.83";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "176.08 -754.983 -8539.83";
+					position = "176.08 -754.982 -8539.83";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "176.08 -754.983 -8539.83";
+					position = "176.08 -754.982 -8539.83";
 					rotation = "0 -0 0.719868";
 				};
 			};
@@ -1678,7 +1678,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "400 400 200 200" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "124.601 -786.054 -8547.83";
+				position = "124.6 -786.054 -8547.83";
 				rotation = "0 0 0";
 			};
 		};
@@ -1724,25 +1724,25 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "377.587 -470.386 1438.03";
+					position = "377.587 -470.385 1438.03";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "377.587 -470.386 1438.03";
+					position = "377.587 -470.385 1438.03";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "377.587 -470.386 1438.03";
+					position = "377.587 -470.385 1438.03";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "377.587 -470.386 1438.03";
+					position = "377.587 -470.385 1438.03";
 					rotation = "0 -0 0.719868";
 				};
 			};
@@ -1750,7 +1750,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "400 400 200 200" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "377.587 -470.386 1438.03";
+				position = "377.587 -470.385 1438.03";
 				rotation = "0 0 0";
 			};
 		};
@@ -1760,25 +1760,25 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "438.004 -495.174 -804.218";
+					position = "438.003 -495.174 -804.218";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "438.004 -495.174 -804.218";
+					position = "438.003 -495.174 -804.218";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "438.004 -495.174 -804.218";
+					position = "438.003 -495.174 -804.218";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "438.004 -495.174 -804.218";
+					position = "438.003 -495.174 -804.218";
 					rotation = "0 -0 0.719868";
 				};
 			};
@@ -1786,7 +1786,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "500 500 500 500" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "438.004 -495.174 -804.218";
+				position = "438.003 -495.174 -804.218";
 				rotation = "0 0 0";
 			};
 		};
@@ -1796,25 +1796,25 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "343.293 -549.682 -2306.17";
+					position = "343.292 -549.682 -2306.16";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "343.293 -549.682 -2306.17";
+					position = "343.292 -549.682 -2306.16";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "343.293 -549.682 -2306.17";
+					position = "343.292 -549.682 -2306.16";
 					rotation = "0 -0 0.719868";
 				};
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "343.293 -549.682 -2306.17";
+					position = "343.292 -549.682 -2306.16";
 					rotation = "0 -0 0.719868";
 				};
 			};
@@ -1822,7 +1822,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "500 500 500 500" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "343.293 -549.682 -2306.17";
+				position = "343.292 -549.682 -2306.16";
 				rotation = "0 0 0";
 			};
 		};
@@ -1944,7 +1944,7 @@ instant SimGroup "MissionGroup" {
 		instant StaticShape "TreeOne1" {
 			dataBlock = "TreeShape";
 			name = "";
-			position = "-2171 -577.54 92.1433";
+			position = "-2171 -577.539 92.1433";
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
@@ -1953,16 +1953,16 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "npchut1" {
 			fileName = "npchut.0.dis";
 			isContainer = "1";
-			position = "-2525.75 -80.9807 107.125";
-			rotation = "0 0 0.156996";
+			position = "-2525.75 -80.9806 107.125";
+			rotation = "0 0 0.156995";
 			lightParams = "1 1.000000 1 ";
 			locked = "1";
 		};
 		instant InteriorShape "wharf1" {
 			fileName = "wharf.0.dis";
 			isContainer = "1";
-			position = "-2173.5 -368.334 39.4843";
-			rotation = "0 -0 -0.779813";
+			position = "-2173.5 -368.334 39.4842";
+			rotation = "0 -0 -0.779812";
 			lightParams = "0 ";
 			locked = "0";
 		};
@@ -1978,7 +1978,7 @@ instant SimGroup "MissionGroup" {
 		instant StaticShape "TreeTwo1" {
 			dataBlock = "TreeShapeTwo";
 			name = "";
-			position = "-2222.25 -411.375 58.7082";
+			position = "-2222.25 -411.375 58.7081";
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
@@ -1987,7 +1987,7 @@ instant SimGroup "MissionGroup" {
 		instant StaticShape "TreeTwo1" {
 			dataBlock = "TreeShapeTwo";
 			name = "";
-			position = "-2161.5 -709.783 234.435";
+			position = "-2161.5 -709.783 234.434";
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
@@ -1996,7 +1996,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "wharf1" {
 			fileName = "wharf.1.dis";
 			isContainer = "1";
-			position = "-2267.5 -487.204 39.4628";
+			position = "-2267.5 -487.204 39.4627";
 			rotation = "0 -0 -1.57945";
 			lightParams = "0 ";
 			locked = "0";
@@ -2004,8 +2004,8 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "ncity1" {
 			fileName = "ncity.0.dis";
 			isContainer = "1";
-			position = "-2403.25 -273.125 64.5926";
-			rotation = "0 -0 0.71992";
+			position = "-2403.25 -273.125 64.5925";
+			rotation = "0 -0 0.719919";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -2056,7 +2056,7 @@ instant SimGroup "MissionGroup" {
 		instant StaticShape "TreeOne1" {
 			dataBlock = "TreeShape";
 			name = "";
-			position = "-2109.25 -664.319 227.446";
+			position = "-2109.25 -664.318 227.445";
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
@@ -2101,19 +2101,19 @@ instant SimGroup "MissionGroup" {
 		instant Marker ".5 1 2 20 50 19 21" {
 			dataBlock = "PathMarker";
 			name = "gnoll pup and scav";
-			position = "-1729.25 -1035.89 233.474";
+			position = "-1729.25 -1035.89 233.473";
 			rotation = "0 0 0";
 		};
 		instant Marker ".5 1 2 20 50 22" {
 			dataBlock = "PathMarker";
 			name = "gnoll hunter";
-			position = "-1729 -1056 233.784";
+			position = "-1729 -1056 233.783";
 			rotation = "0 0 0";
 		};
 		instant Marker ".4 1 2 20 50 22" {
 			dataBlock = "PathMarker";
 			name = "gnoll hunter 2";
-			position = "-1698 -1055 229.474";
+			position = "-1698 -1055 229.473";
 			rotation = "0 0 0";
 		};
 		instant Marker ".5 1 2 20 50 19" {
@@ -2137,7 +2137,7 @@ instant SimGroup "MissionGroup" {
 		instant Marker ".5 1 2 300 600 52" {
 			dataBlock = "PathMarker";
 			name = "ogre magi";
-			position = "-1700.75 -1033.03 181.478";
+			position = "-1700.75 -1033.03 181.477";
 			rotation = "0 0 0";
 		};
 		instant Marker ".5 1 2 20 50 39 40 41 42" {
@@ -2155,25 +2155,25 @@ instant SimGroup "MissionGroup" {
 		instant Marker ".5 1 2 20 40 33 34" {
 			dataBlock = "PathMarker";
 			name = "lair skel spawn";
-			position = "-806.375 885.25 672.875";
+			position = "-845.441 847.431 662.991";
 			rotation = "0 0 0";
 		};
 		instant Marker "1.5 1 2 10 20 23 24 25 26" {
 			dataBlock = "PathMarker";
 			name = "Yolanda Orc spawn";
-			position = "-1546 -279.956 352.093";
+			position = "-1546 -279.955 352.092";
 			rotation = "0 0 0";
 		};
 		instant Marker ".4 1 2 30 50 23" {
 			dataBlock = "PathMarker";
 			name = "Yolanda Orc Wizard spawn";
-			position = "-1565.75 -300.325 352.093";
+			position = "-1565.75 -300.325 352.092";
 			rotation = "0 0 0";
 		};
 		instant Marker "1.5 5 8 10 30 31 32" {
 			dataBlock = "PathMarker";
 			name = "lair ghoul spawn";
-			position = "-805.5 875.875 684.875";
+			position = "-840.276 822.475 654.791";
 			rotation = "0 0 0";
 		};
 		instant Marker "1 1 2 10 30 35 36 37 38 51" {
@@ -2197,25 +2197,61 @@ instant SimGroup "MissionGroup" {
 		instant Marker ".5 0.5 1 40 60 47" {
 			dataBlock = "PathMarker";
 			name = "minotaur goliath spawn";
-			position = "-1901.5 -2844 161.903";
+			position = "-1901.5 -2844 161.902";
 			rotation = "0 0 0";
 		};
 		instant Marker ".5 0.5 1 50 70 48" {
 			dataBlock = "PathMarker";
 			name = "minotaur reaper spawn";
-			position = "-1904.25 -2843.75 161.883";
+			position = "-1904.25 -2843.75 161.882";
 			rotation = "0 0 0";
 		};
 		instant Marker ".8 1 2 100 160 50" {
 			dataBlock = "PathMarker";
 			name = "gohort church";
-			position = "-855.332 3965.25 108";
+			position = "-855.331 3965.25 108";
 			rotation = "0 0 0";
 		};
 		instant Marker ".8 1 2 20 40 49" {
 			dataBlock = "PathMarker";
 			name = "small maze sloth";
-			position = "-820.884 3983.5 100";
+			position = "-820.883 3983.5 100";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 56" {
+			dataBlock = "PathMarker";
+			name = "burial spiderling";
+			position = "-2861.1 -1198.9 678.6";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 56 57" {
+			dataBlock = "PathMarker";
+			name = "burial spiderling and hunstman";
+			position = "-2845.1 -1179.5 678.6";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 58 59" {
+			dataBlock = "PathMarker";
+			name = "burial hunstman and recluse";
+			position = "-2825.1 -1238.9 638.6";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 60" {
+			dataBlock = "PathMarker";
+			name = "burial shinra goons";
+			position = "221.72 -733.3 5082.8";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 60 61" {
+			dataBlock = "PathMarker";
+			name = "burial shinra goons and grunts";
+			position = "166.6 -711 5082.3";
+			rotation = "0 0 0";
+		};
+		instant Marker "1.5 1 2 10 30 61 62" {
+			dataBlock = "PathMarker";
+			name = "burial shinra grunts and infantry";
+			position = "183 -709 5082.3";
 			rotation = "0 0 0";
 		};
 	};
@@ -2223,7 +2259,7 @@ instant SimGroup "MissionGroup" {
 		instant StaticShape "Misc Tree S" {
 			dataBlock = "PhantomStrangerTree1";
 			name = "Random Tree";
-			position = "299.666 -407.149 177.368";
+			position = "299.665 -407.148 177.367";
 			rotation = "0 -0 3.0102";
 			destroyable = "False";
 			deleteOnDestroy = "False";
@@ -2232,7 +2268,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Berserker Dwelling" {
 			fileName = "keegasdwelling.dis";
 			isContainer = "0";
-			position = "217.08 -771.957 156.25";
+			position = "217.08 -771.956 156.25";
 			rotation = "0 -0 -1.57966";
 			lightParams = "0 ";
 			locked = "1";
@@ -2243,23 +2279,23 @@ instant SimGroup "MissionGroup" {
 			fileName = "cave.dis";
 			isContainer = "0";
 			position = "229.1 -714.565 92.3638";
-			rotation = "0 -0 -3.11091";
+			rotation = "0 -0 -3.1109";
 			lightParams = "0 ";
 			locked = "1";
 		};
 		instant InteriorShape "Bottom Cave" {
 			fileName = "cave.dis";
 			isContainer = "0";
-			position = "217.834 -726.06 5140.75";
-			rotation = "0.308927 -0 -1.53691";
+			position = "217.833 -726.059 5140.75";
+			rotation = "0.308926 -0 -1.53691";
 			lightParams = "0 ";
 			locked = "1";
 		};
 		instant InteriorShape "Part 1" {
 			fileName = "rmrcavernspart1btester.dis";
 			isContainer = "0";
-			position = "224 -736.698 5129.77";
-			rotation = "0 -0 -3.13951";
+			position = "224 -736.697 5129.77";
+			rotation = "0 -0 -3.1395";
 			lightParams = "2 1.000000 1 1.000000 1 ";
 			locked = "1";
 		};
@@ -2274,7 +2310,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Blocker 2" {
 			fileName = "blocker.dis";
 			isContainer = "0";
-			position = "226.307 -735.7 5144.76";
+			position = "226.307 -735.7 5144.75";
 			rotation = "0 -0 1.57901";
 			lightParams = "0 ";
 			locked = "1";
@@ -2282,15 +2318,15 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Part 2" {
 			fileName = "rmrcavernspart2.dis";
 			isContainer = "0";
-			position = "190.539 -778.089 5081.77";
-			rotation = "0 -0 -3.13921";
+			position = "190.539 -778.088 5081.77";
+			rotation = "0 -0 -3.1392";
 			lightParams = "8 1.000000 1 1.000000 1 1.000000 1 1.000000 1 1.000000 1 1.000000 1 1.000000 1 1.000000 1 ";
 			locked = "1";
 		};
 		instant InteriorShape "Part 3" {
 			fileName = "rmrcavernspart3.dis";
 			isContainer = "0";
-			position = "149.051 -778.863 -8532.84";
+			position = "149.05 -778.862 -8532.83";
 			rotation = "0 -0 -1.57946";
 			lightParams = "1 1.000000 1 ";
 			locked = "1";
@@ -2298,7 +2334,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Part 4" {
 			fileName = "rmrcavernspart4.dis";
 			isContainer = "0";
-			position = "125.385 -669.305 -8551";
+			position = "125.385 -669.304 -8551";
 			rotation = "0 -0 -1.57931";
 			lightParams = "0 ";
 			locked = "1";
@@ -2306,8 +2342,8 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Part 5" {
 			fileName = "rmrcavernspart5.dis";
 			isContainer = "0";
-			position = "2639.15 924.894 -4895.4";
-			rotation = "0 -0 -1.42327";
+			position = "2639.14 924.893 -4895.39";
+			rotation = "0 -0 -1.42326";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -2322,7 +2358,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Joining Cave 1" {
 			fileName = "cave.dis";
 			isContainer = "0";
-			position = "127.826 -835.409 5042.77";
+			position = "127.825 -835.408 5042.77";
 			rotation = "0 -0 0.00880299";
 			lightParams = "0 ";
 			locked = "1";
@@ -2330,7 +2366,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Joining Cave 2" {
 			fileName = "cave.dis";
 			isContainer = "0";
-			position = "176.179 -731.803 -8539.82";
+			position = "176.179 -731.802 -8539.82";
 			rotation = "0 -0 -1.5613";
 			lightParams = "0 ";
 			locked = "1";
@@ -2338,15 +2374,15 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Joining Cave 3" {
 			fileName = "cave.dis";
 			isContainer = "0";
-			position = "132.797 -719.028 -8603.95";
-			rotation = "0 -0 1.5588";
+			position = "132.796 -719.028 -8603.95";
+			rotation = "0 -0 1.55879";
 			lightParams = "0 ";
 			locked = "1";
 		};
 		instant InteriorShape "Joining Cave 4" {
 			fileName = "cave.dis";
 			isContainer = "0";
-			position = "2647.38 921.131 -4902.89";
+			position = "2647.37 921.13 -4902.89";
 			rotation = "0 -0 -2.99808";
 			lightParams = "0 ";
 			locked = "1";
@@ -2356,7 +2392,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Part 1" {
 			fileName = "rmrbloodanpart1.dis";
 			isContainer = "0";
-			position = "415.739 -489.728 1445.03";
+			position = "415.739 -489.727 1445.03";
 			rotation = "0 -0 2.83288";
 			lightParams = "1 1.000000 1 ";
 			locked = "1";
@@ -2364,7 +2400,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Part 2" {
 			fileName = "rmrbloodanpart2.dis";
 			isContainer = "0";
-			position = "437.785 -447.284 -797.221";
+			position = "437.785 -447.283 -797.221";
 			rotation = "0 -0 -0.282696";
 			lightParams = "0 ";
 			locked = "1";
@@ -2372,8 +2408,8 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Part 3" {
 			fileName = "rmrbloodanpart3revised.dis";
 			isContainer = "0";
-			position = "424.5 -510.386 -835.162";
-			rotation = "0 -0 -1.84637";
+			position = "424.5 -510.385 -835.161";
+			rotation = "0 -0 -1.84636";
 			lightParams = "1 1.000000 1 ";
 			locked = "1";
 		};
@@ -2382,7 +2418,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Main Part" {
 			fileName = "howlingearthp1.dis";
 			isContainer = "0";
-			position = "338.472 -550.598 -2291.18";
+			position = "338.471 -550.598 -2291.17";
 			rotation = "0 -0 0.305377";
 			lightParams = "0 ";
 			locked = "1";
@@ -2392,16 +2428,16 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "Main Gooba" {
 			fileName = "rmrgooba.dis";
 			isContainer = "0";
-			position = "290.434 -476.821 -2953.52";
-			rotation = "0 -0 -1.45361";
+			position = "290.433 -476.821 -2953.52";
+			rotation = "0 -0 -1.4536";
 			lightParams = "0 ";
 			locked = "1";
 		};
 		instant InteriorShape "Main Gooba 2" {
 			fileName = "rmrgoobap2.dis";
 			isContainer = "0";
-			position = "-448.759 -352.076 1576.29";
-			rotation = "0 -0 -1.4101";
+			position = "-448.759 -352.075 1576.29";
+			rotation = "0 -0 -1.41009";
 			lightParams = "1 1.000000 1 ";
 			locked = "1";
 		};
@@ -2431,15 +2467,15 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "marosaruinstester1" {
 			fileName = "marosaruinstester.dis";
 			isContainer = "1";
-			position = "-1638.95 2691.66 415.792";
-			rotation = "0 -0 0.779992";
+			position = "-1638.94 2691.65 415.791";
+			rotation = "0 -0 0.779991";
 			lightParams = "3 2.000000 1 1.000000 1 1.000000 1 ";
 		};
 		instant StaticShape "TreeTwo1" {
 			dataBlock = "TreeShapeTwo";
 			name = "";
-			position = "-1643.45 2679.28 400";
-			rotation = "0 -0 0.699991";
+			position = "-1643.44 2679.28 400";
+			rotation = "0 -0 0.69999";
 			destroyable = "True";
 			deleteOnDestroy = "False";
 		};
@@ -2453,14 +2489,14 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "rmrpinetrees1" {
 			fileName = "rmrpinetrees.dis";
 			isContainer = "1";
-			position = "-1610 2755.75 425.668";
+			position = "-1610 2755.75 425.667";
 			rotation = "0 -0 -3.04319";
 			lightParams = "0 ";
 		};
 		instant StaticShape "TreeOne1" {
 			dataBlock = "TreeShape";
 			name = "";
-			position = "-1686.31 2657.19 400";
+			position = "-1686.31 2657.18 400";
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
@@ -2468,7 +2504,7 @@ instant SimGroup "MissionGroup" {
 		instant StaticShape "TreeOne1" {
 			dataBlock = "TreeShape";
 			name = "";
-			position = "-1592.13 2672.12 399.995";
+			position = "-1592.13 2672.12 399.994";
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
@@ -2487,7 +2523,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "aflagcolumn.0.dis";
 			isContainer = "1";
 			position = "2757 -599 223";
-			rotation = "0 -0 -0.0799865";
+			rotation = "0 -0 -0.0799864";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -2495,7 +2531,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "aflagcolumn.1.dis";
 			isContainer = "1";
 			position = "2762.5 -579.875 221";
-			rotation = "0 -0 -0.0799858";
+			rotation = "0 -0 -0.0799857";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -2503,7 +2539,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "aflagcolumn.2.dis";
 			isContainer = "1";
 			position = "2762 -586.75 222.25";
-			rotation = "0 -0 -0.0799858";
+			rotation = "0 -0 -0.0799857";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -2527,7 +2563,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "aflagcolumn.5.dis";
 			isContainer = "1";
 			position = "2761 -595.375 222.75";
-			rotation = "0 -0 -0.0799863";
+			rotation = "0 -0 -0.0799862";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -2535,7 +2571,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "aflagcolumn.6.dis";
 			isContainer = "1";
 			position = "2760.75 -599.254 222.875";
-			rotation = "0 -0 -0.0799865";
+			rotation = "0 -0 -0.0799864";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -2546,7 +2582,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "bridge.0.dis";
 			isContainer = "1";
 			position = "-2039.5 -2574.75 153.625";
-			rotation = "0 -0 0.843035";
+			rotation = "0 -0 0.843034";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -2554,7 +2590,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "bigfort.0.dis";
 			isContainer = "1";
 			position = "-2413 -2296 65.7982";
-			rotation = "0 0 3.1409";
+			rotation = "0 0 3.14089";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -2584,20 +2620,11 @@ instant SimGroup "MissionGroup" {
 				deleteOnDestroy = "False";
 				locked = "0";
 			};
-			instant StaticShape "PlantTwo1" {
-				dataBlock = "PlantTwo";
-				name = "";
-				position = "-2328.75 -2415.25 53.9782";
-				rotation = "0 0 0";
-				destroyable = "True";
-				deleteOnDestroy = "False";
-				locked = "0";
-			};
 			instant InteriorShape "lrock61" {
 				fileName = "lrock6.1.dis";
 				isContainer = "0";
-				position = "-2182 -2400 50.5434";
-				rotation = "0 -0.899817 -0";
+				position = "-2182 -2400 50.5433";
+				rotation = "0 -0.899816 -0";
 				lightParams = "0 ";
 				locked = "1";
 			};
@@ -2621,7 +2648,7 @@ instant SimGroup "MissionGroup" {
 			instant StaticShape "TreeOne1" {
 				dataBlock = "TreeShape";
 				name = "";
-				position = "-2359.75 -2458 63.8453";
+				position = "-2359.75 -2458 63.8452";
 				rotation = "0 0 0";
 				destroyable = "True";
 				deleteOnDestroy = "False";
@@ -2630,16 +2657,7 @@ instant SimGroup "MissionGroup" {
 			instant StaticShape "TreeTwo1" {
 				dataBlock = "TreeShapeTwo";
 				name = "";
-				position = "-2236.75 -2351.75 50.2982";
-				rotation = "0 0 0";
-				destroyable = "True";
-				deleteOnDestroy = "False";
-				locked = "0";
-			};
-			instant StaticShape "PlantTwo1" {
-				dataBlock = "PlantTwo";
-				name = "";
-				position = "-2304 -2398.25 52.9375";
+				position = "-2236.75 -2351.75 50.2981";
 				rotation = "0 0 0";
 				destroyable = "True";
 				deleteOnDestroy = "False";
@@ -2649,36 +2667,18 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "keep1" {
 			fileName = "keep.0.dis";
 			isContainer = "1";
-			position = "-2413 -2296 65.7903";
-			rotation = "0 0 3.1409";
+			position = "-2413 -2296 65.7902";
+			rotation = "0 0 3.14089";
 			lightParams = "2 1.000000 1 1.000000 1 ";
 			locked = "1";
 		};
 	};
 	instant SimGroup "Jaten" {
 		instant SimGroup "Scenery" {
-			instant StaticShape "PlantTwo1" {
-				dataBlock = "PlantTwo";
-				name = "";
-				position = "-363.75 1766.5 65";
-				rotation = "0 -0 1.57734";
-				destroyable = "True";
-				deleteOnDestroy = "False";
-				locked = "0";
-			};
-			instant StaticShape "PlantTwo1" {
-				dataBlock = "PlantTwo";
-				name = "";
-				position = "-358.75 1790 65";
-				rotation = "0 -0 1.57734";
-				destroyable = "True";
-				deleteOnDestroy = "False";
-				locked = "0";
-			};
 			instant StaticShape "TreeOne1" {
 				dataBlock = "TreeShape";
 				name = "";
-				position = "-260.766 1718.75 52.6983";
+				position = "-260.765 1718.75 52.6982";
 				rotation = "0 -0 1.57734";
 				destroyable = "True";
 				deleteOnDestroy = "False";
@@ -2714,7 +2714,7 @@ instant SimGroup "MissionGroup" {
 			instant StaticShape "TreeTwo1" {
 				dataBlock = "TreeShapeTwo";
 				name = "";
-				position = "-303.375 1684.25 57.8252";
+				position = "-303.375 1684.25 57.8251";
 				rotation = "0 -0 1.57734";
 				destroyable = "True";
 				deleteOnDestroy = "False";
@@ -2741,14 +2741,14 @@ instant SimGroup "MissionGroup" {
 			fileName = "wharf.3.dis";
 			isContainer = "1";
 			position = "-155 1661.25 45.1875";
-			rotation = "0 -0 -0.719817";
+			rotation = "0 -0 -0.719816";
 			lightParams = "0 ";
 			locked = "0";
 		};
 		instant InteriorShape "arena11" {
 			fileName = "arena1.0.dis";
 			isContainer = "1";
-			position = "-198.502 1660 66.4191";
+			position = "-198.501 1660 66.419";
 			rotation = "0 -0 2.40187";
 			lightParams = "0 ";
 			locked = "1";
@@ -2767,15 +2767,15 @@ instant SimGroup "MissionGroup" {
 			dataBlock = "GroupTrigger";
 			name = "";
 			position = "-2421.25 -212 73.3625";
-			rotation = "0 -0 0.72044";
+			rotation = "0 -0 0.720439";
 			boundingBox = "-7 -5 -2 7 5 2";
 			isSphere = "True";
 		};
 		instant Trigger "GroupTrigger1" {
 			dataBlock = "GroupTrigger";
 			name = "";
-			position = "-2436.75 -2305.75 87.5984";
-			rotation = "0 -0 3.14054";
+			position = "-2436.75 -2305.75 87.5983";
+			rotation = "0 -0 3.14053";
 			boundingBox = "-4.5 -4.5 -1.5 4.5 4.5 1.5";
 			isSphere = "True";
 		};
@@ -2796,7 +2796,7 @@ instant SimGroup "MissionGroup" {
 			isSphere = "False";
 		};
 	};
-	instant SimGroup "ferry" {
+	instant SimGroup "Ferry" {
 		instant SimGroup "System1" {
 			instant SimPath "Path" {
 				isLooping = "False";
@@ -2804,75 +2804,83 @@ instant SimGroup "MissionGroup" {
 				instant Marker "50" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2142.75 -396.5 41.3834";
-					rotation = "0 -0 -0.75";
+					position = "-2142.75 -396.5 41.385";
+					rotation = "0 -0 2.38867";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "9";
-					position = "-2021 -294.375 41.3848";
-					rotation = "0 -0 -0.75";
+					position = "-2021 -294.375 41.3864";
+					rotation = "0 -0 2.38868";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1977.25 -194.75 41.3848";
-					rotation = "0 -0 -0.75";
+					position = "-1977.25 -194.75 41.3865";
+					rotation = "0 -0 2.38868";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1945 140.5 41.3848";
-					rotation = "0 -0 -0.75";
+					position = "-1945 140.5 41.3865";
+					rotation = "0 -0 2.38868";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1313 275.127 41.384";
-					rotation = "0 -0 -0.75";
+					position = "-1313.05 275.143 41.3857";
+					rotation = "0 -0 2.38863";
 				};
 				instant Marker "5" {
 					dataBlock = "DropPointMarker";
 					name = "arrival";
-					position = "-1252.25 337.567 41.3806";
-					rotation = "0 -0 -0.75";
+					position = "-1252.32 337.584 41.3823";
+					rotation = "0 -0 2.38822";
 				};
 				instant Marker "15" {
 					dataBlock = "DropPointMarker";
 					name = "departure";
-					position = "-1246 344.125 41.3806";
+					position = "-1246 344.133 41.3823";
+					rotation = "0 -0 -0.749847";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-1313.06 275.144 41.3858";
+					rotation = "0 -0 -0.749984";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-1945 140.5 41.3864";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1313 275.127 41.3843";
-					rotation = "0 -0 -0.75";
-				};
-				instant Marker "0" {
-					dataBlock = "DropPointMarker";
-					name = "";
-					position = "-1945 140.5 41.3848";
-					rotation = "0 -0 -0.75";
-				};
-				instant Marker "0" {
-					dataBlock = "DropPointMarker";
-					name = "";
-					position = "-1977.25 -194.75 41.3848";
+					position = "-1977.25 -194.75 41.3864";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "9";
-					position = "-2021 -294.375 41.3845";
+					position = "-2021 -294.375 41.3863";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "10" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2142.75 -396.5 41.3834";
+					position = "-2142.75 -396.5 41.3851";
 					rotation = "0 -0 -0.75";
 				};
+			};
+			instant Moveable "PlatformFerry1" {
+				dataBlock = "PlatformFerry";
+				name = "";
+				position = "-1706.63 191.287 41.3862";
+				rotation = "0 0 -0.749993";
+				destroyable = "True";
+				deleteOnDestroy = "False";
 			};
 		};
 		instant SimGroup "System2" {
@@ -2882,56 +2890,56 @@ instant SimGroup "MissionGroup" {
 				instant Marker "15" {
 					dataBlock = "DropPointMarker";
 					name = "departure";
-					position = "-1229.75 361.033 41.3807";
-					rotation = "0 -0 2.38844";
+					position = "-1229.75 361.048 41.3824";
+					rotation = "0 -0 2.38863";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1200.25 393.75 41.3825";
-					rotation = "0 -0 2.38843";
+					position = "-1200.25 393.75 41.3842";
+					rotation = "0 -0 2.38862";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1152.25 381.875 41.3845";
-					rotation = "0 -0 2.38857";
+					position = "-1152.25 381.875 41.3863";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-641.625 687.875 41.3848";
-					rotation = "0 -0 2.38857";
+					position = "-641.625 687.875 41.3865";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-246.25 756.375 41.3845";
-					rotation = "0 -0 2.38857";
+					position = "-246.25 756.375 41.3863";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-277.25 1277.25 41.3843";
-					rotation = "0 -0 2.38857";
+					position = "-277.25 1277.25 41.3858";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-251 1434.25 41.3848";
-					rotation = "0 -0 2.38857";
+					position = "-251 1434.25 41.3865";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-105.75 1629.5 41.3854";
-					rotation = "0 -0 2.38857";
+					position = "-105.75 1629.5 41.3871";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "10" {
 					dataBlock = "DropPointMarker";
 					name = "";
 					position = "-105.75 1629.5 48";
-					rotation = "0 -0 2.38857";
+					rotation = "0 -0 2.38876";
 				};
 				instant Marker "50" {
 					dataBlock = "DropPointMarker";
@@ -2942,51 +2950,59 @@ instant SimGroup "MissionGroup" {
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-105.75 1629.5 41.3854";
+					position = "-105.75 1629.5 41.3872";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-251 1434 41.3848";
+					position = "-251 1434 41.3864";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-277.375 1277.25 41.3849";
+					position = "-277.375 1277.25 41.3867";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-246.25 756.375 41.3844";
+					position = "-246.25 756.375 41.3862";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-641.625 687.875 41.3848";
+					position = "-641.625 687.875 41.3864";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1152.25 381.875 41.3844";
+					position = "-1152.25 381.875 41.3862";
 					rotation = "0 -0 -0.75";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1200.25 393.75 41.3826";
-					rotation = "0 -0 -0.75";
+					position = "-1200.25 393.75 41.3844";
+					rotation = "0 -0 -0.749961";
 				};
 				instant Marker "5" {
 					dataBlock = "DropPointMarker";
 					name = "arrival";
-					position = "-1222.75 368.007 41.3816";
-					rotation = "0 -0 -0.75";
+					position = "-1222.81 368.024 41.3833";
+					rotation = "0 -0 -0.749966";
 				};
+			};
+			instant Moveable "PlatformFerry2" {
+				dataBlock = "PlatformFerry";
+				name = "";
+				position = "-105.75 1629.5 48";
+				rotation = "0 0 -0.749998";
+				destroyable = "True";
+				deleteOnDestroy = "False";
 			};
 		};
 		instant SimGroup "System3" {
@@ -2996,87 +3012,95 @@ instant SimGroup "MissionGroup" {
 				instant Marker "50" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2262.25 -528 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-2262.25 -528 41.3861";
+					rotation = "0 0 0";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2323 -730.5 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-2323 -730.5 41.3872";
+					rotation = "0 0 0";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2299.75 -1181.75 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-2299.75 -1181.75 41.3872";
+					rotation = "0 0 0";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2122.75 -1470.5 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-2122.75 -1470.5 41.3872";
+					rotation = "0 0 0";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1935.75 -1971 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-1935.75 -1971 41.3872";
+					rotation = "0 0 0";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1982.25 -2290.25 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-1982.25 -2290.25 41.3872";
+					rotation = "0 0 0";
 				};
 				instant Marker "10" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2152 -2448 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-2152 -2448 41.386";
+					rotation = "0 0 0";
 				};
 				instant Marker "50" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2152 -2448 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-2152 -2448 41.3861";
+					rotation = "0 0 3.13864";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1982.25 -2290.25 41.3882";
-					rotation = "0 -0 3.13884";
+					position = "-1982.25 -2290.25 41.386";
+					rotation = "0 -0 3.1386";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-1935.75 -1971 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-1935.75 -1971 41.3871";
+					rotation = "0 0 3.13873";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2122.75 -1470.5 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-2122.75 -1470.5 41.3871";
+					rotation = "0 0 3.13873";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2299.75 -1181.75 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-2299.75 -1181.75 41.3871";
+					rotation = "0 0 3.13873";
 				};
 				instant Marker "0" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2323 -730.5 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-2323 -730.5 41.3871";
+					rotation = "0 0 3.13873";
 				};
 				instant Marker "10" {
 					dataBlock = "DropPointMarker";
 					name = "";
-					position = "-2262.25 -528 41.3882";
-					rotation = "0 0 3.13884";
+					position = "-2262.25 -528 41.3862";
+					rotation = "0 0 3.13867";
 				};
+			};
+			instant Moveable "PlatformFerry3" {
+				dataBlock = "PlatformFerry";
+				name = "";
+				position = "-2152 -2448 41.3861";
+				rotation = "0 0 3.13864";
+				destroyable = "True";
+				deleteOnDestroy = "False";
 			};
 		};
 	};
@@ -3089,8 +3113,8 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 0 0";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				esay = "Press T to enter Theora's house.";
 				landingPos = "2008.95 489.19 2300";
+				esay = "Press T to enter Theora's house.";
 			};
 		};
 		instant SimGroup "kalm house 1ex" {
@@ -3101,8 +3125,8 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 0 0";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				esay = "Press T to return to Kalm.";
 				landingPos = "-2395 -253 65";
+				esay = "Press T to return to Kalm.";
 			};
 		};
 		instant SimGroup "hfs1 en" {
@@ -3113,21 +3137,21 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 0 0";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				esay = "Press T to enter this unoccupied house.";
-				need = "AI false";
 				landingPos = "1994.3 498.99 2200";
+				need = "AI false";
+				esay = "Press T to enter this unoccupied house.";
 			};
 		};
 		instant SimGroup "hfs1 ex" {
 			instant Trigger "GroupTrigger1" {
 				dataBlock = "GroupTrigger";
 				name = "";
-				position = "1992.75 500.882 2200";
+				position = "1992.75 500.881 2200";
 				rotation = "0 0 0";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				esay = "Press T to exit this house.";
 				landingPos = "-2392.25 -297.75 65";
+				esay = "Press T to exit this house.";
 			};
 		};
 		instant SimGroup "kalm inn ente" {
@@ -3138,9 +3162,9 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 0 0";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				esay = "Press T to enter this inn.";
-				need = "AI false";
 				landingPos = "2001 494 2400";
+				need = "AI false";
+				esay = "Press T to enter this inn.";
 			};
 		};
 		instant SimGroup "kalm inn exit" {
@@ -3151,48 +3175,48 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 0 0";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				esay = "Press T to go to Kalm.";
-				need = "AI false";
 				landingPos = "-2362 -281.75 65";
+				need = "AI false";
+				esay = "Press T to go to Kalm.";
 			};
 		};
 		instant SimGroup "sb mine enter" {
 			instant Trigger "GroupTrigger1" {
 				dataBlock = "GroupTrigger";
 				name = "enter strawberry mine";
-				position = "-1702.62 -1003.06 269.969";
+				position = "-1702.61 -1003.05 269.968";
 				rotation = "0 -0 0.0799989";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				esay = "Press T to enter Mythril Mine.";
-				need = "AI false";
 				landingPos = "-1702.15 -1010.4 269.478";
+				need = "AI false";
+				esay = "Press T to enter Mythril Mine.";
 			};
 		};
 		instant SimGroup "sb mine exit" {
 			instant Trigger "GroupTrigger1" {
 				dataBlock = "GroupTrigger";
 				name = "exit strawberry mine";
-				position = "-1702.3 -1005.38 269.469";
+				position = "-1702.3 -1005.38 269.468";
 				rotation = "0 -0 -1.49992";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				esay = "Press T to exit Mytrhil Mine.";
-				need = "AI false";
 				landingPos = "-1696.2 -998.34 268.057";
+				need = "AI false";
+				esay = "Press T to exit Mytrhil Mine.";
 			};
 		};
 		instant SimGroup "rodm enter" {
 			instant Trigger "GroupTrigger1" {
 				dataBlock = "GroupTrigger";
 				name = "enter rodm";
-				position = "-3754.41 -1003.5 268.885";
+				position = "-3754.4 -1003.5 268.885";
 				rotation = "0 -0 0.0799989";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				esay = "Press T to enter.";
-				need = "AI false";
 				landingPos = "-3886.99 -1100.41 282.507";
+				need = "AI false";
+				esay = "Press T to enter.";
 			};
 		};
 		instant SimGroup "rodm exit" {
@@ -3203,9 +3227,9 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 -0 -1.49992";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				esay = "Press T to exit.";
-				need = "AI false";
 				landingPos = "-3751.37 -994.624 268.889";
+				need = "AI false";
+				esay = "Press T to exit.";
 			};
 		};
 	};
@@ -3215,8 +3239,8 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-616.5 -2479.75 57.4582";
-					rotation = "0 -0 0.819819";
+					position = "-616.5 -2479.75 57.4581";
+					rotation = "0 -0 0.819818";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
 				};
@@ -3249,7 +3273,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-1922.26 -2816 159.903";
+					position = "-1922.26 -2816 159.902";
 					rotation = "0 0 0";
 				};
 			};
@@ -3262,7 +3286,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-1918.5 -2818.5 161.903";
+					position = "-1918.5 -2818.5 161.902";
 					rotation = "0 -0 0.0401536";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3306,7 +3330,7 @@ instant SimGroup "MissionGroup" {
 				instant StaticShape "BigElectroBeam1" {
 					dataBlock = "ElectricalBeamBig";
 					name = "";
-					position = "-330.542 2358.25 429.512";
+					position = "-330.541 2358.25 429.511";
 					rotation = "0 0 0";
 					destroyable = "True";
 					deleteOnDestroy = "False";
@@ -3314,7 +3338,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-330.542 2358.25 430.375";
+					position = "-330.541 2358.25 430.375";
 					rotation = "0 0 0";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3335,7 +3359,7 @@ instant SimGroup "MissionGroup" {
 				instant StaticShape "BigElectroBeam1" {
 					dataBlock = "ElectricalBeamBig";
 					name = "";
-					position = "-1702.5 -2352 185.032";
+					position = "-1702.5 -2352 185.031";
 					rotation = "0 0 0";
 					destroyable = "True";
 					deleteOnDestroy = "False";
@@ -3353,7 +3377,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-318.5 2365.75 429.512";
+					position = "-318.5 2365.75 429.511";
 					rotation = "0 0 0";
 				};
 			};
@@ -3364,8 +3388,8 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-1116.75 -2574.5 165.933";
-					rotation = "0 -0 -0.879949";
+					position = "-1116.75 -2574.5 165.932";
+					rotation = "0 -0 -0.879948";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
 				};
@@ -3412,7 +3436,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-1119.25 -2582 166.633";
+					position = "-1119.25 -2582 166.632";
 					rotation = "0 0 0";
 				};
 			};
@@ -3425,7 +3449,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2902.54 -1197 445.563";
+					position = "-2902.54 -1197 445.562";
 					rotation = "0 0 0";
 				};
 			};
@@ -3433,6 +3457,54 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "TAKE COINS 500";
 			instant SimGroup "GSAY You have been teleported to the a Cultist Temple.~wPortal6.wav";
 			instant SimGroup "NSAY You need Remort Level 1 and a 500 coin donation to enter this gate.~wDeActivateDG.wav";
+		};
+		instant SimGroup "Graveyard Top to Dunega" {
+			instant SimGroup "Input" {
+				instant Trigger "GroupTrigger1" {
+					dataBlock = "GroupTrigger";
+					name = "";
+					position = "-2823.85 -1179.31 640.578";
+					rotation = "0 -0 0.819923";
+					boundingBox = "-1 -1 -1 1 1 1";
+					isSphere = "True";
+				};
+			};
+			instant SimGroup "Output" {
+				instant Marker "Marker1" {
+					dataBlock = "PathMarker";
+					name = "";
+					position = "217.615 -722.239 5140.66";
+					rotation = "0 0 -3.1";
+				};
+			};
+			instant SimGroup "NEED COINS 0";
+			instant SimGroup "TAKE COINS 0";
+			instant SimGroup "GSAY ~wnull.wav";
+			instant SimGroup "NSAY ~wnull.wav";
+		};
+		instant SimGroup "Dunega to Graveyard top" {
+			instant SimGroup "Input" {
+				instant Trigger "GroupTrigger1" {
+					dataBlock = "GroupTrigger";
+					name = "";
+					position = "224.625 -718.213 5142.93";
+					rotation = "0 -0 0.819925";
+					boundingBox = "-1 -1 -1 1 1 1";
+					isSphere = "True";
+				};
+			};
+			instant SimGroup "Output" {
+				instant Marker "Marker1" {
+					dataBlock = "PathMarker";
+					name = "";
+					position = "-2822.45 -1183.57 638.598";
+					rotation = "0 0 -3.04499";
+				};
+			};
+			instant SimGroup "NEED COINS 0";
+			instant SimGroup "TAKE COINS 0";
+			instant SimGroup "GSAY ~wnull.wav";
+			instant SimGroup "NSAY ~wnull.wav";
 		};
 		instant SimGroup "Dunega p2 to p3" {
 			instant SimGroup "Input" {
@@ -3450,7 +3522,7 @@ instant SimGroup "MissionGroup" {
 					dataBlock = "PathMarker";
 					name = "";
 					position = "176.21 -732.64 -8539.82";
-					rotation = "0 0 0";
+					rotation = "0 0 -3.129";
 				};
 			};
 			instant SimGroup "NEED COINS 0";
@@ -3463,7 +3535,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "180.26 -723.106 -8539.82";
+					position = "180.259 -723.106 -8539.82";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3473,8 +3545,8 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "127.878 -835.279 5042.77";
-					rotation = "0 0 0";
+					position = "127.877 -835.278 5042.77";
+					rotation = "0 0 -1.561";
 				};
 			};
 			instant SimGroup "NEED COINS 0";
@@ -3497,7 +3569,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "2647.3 920.967 -4902.89";
+					position = "2647.3 920.966 -4902.89";
 					rotation = "0 0 0";
 				};
 			};
@@ -3511,7 +3583,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "2656.38 918.971 -4902.89";
+					position = "2656.37 918.971 -4902.89";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3521,7 +3593,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "132.867 -717.881 -8603.95";
+					position = "132.867 -717.88 -8603.95";
 					rotation = "0 0 0";
 				};
 			};
@@ -3545,7 +3617,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "377.296 -470.017 1438.54";
+					position = "377.295 -470.016 1438.54";
 					rotation = "0 0 0";
 				};
 			};
@@ -3559,7 +3631,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "366.157 -467.017 1438.54";
+					position = "366.157 -467.016 1438.54";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3569,7 +3641,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "2480 961.589 -4953.75";
+					position = "2480 961.588 -4953.75";
 					rotation = "0 0 0";
 				};
 			};
@@ -3583,7 +3655,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "437.789 -447.288 1430.02";
+					position = "437.789 -447.287 1430.02";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3593,7 +3665,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "434.928 -506.405 -801.721";
+					position = "434.928 -506.404 -801.721";
 					rotation = "0 0 0";
 				};
 			};
@@ -3607,7 +3679,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "432.03 -510.069 -804.72";
+					position = "432.029 -510.069 -804.719";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3631,7 +3703,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "399.767 -529.821 1439.04";
+					position = "399.766 -529.82 1439.04";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3641,7 +3713,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-224.509 592.301 168.842";
+					position = "-224.509 592.301 168.841";
 					rotation = "0 0 0";
 				};
 			};
@@ -3665,7 +3737,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "402.154 -522.572 1438.54";
+					position = "402.153 -522.572 1438.54";
 					rotation = "0 0 0";
 				};
 			};
@@ -3679,7 +3751,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "440.781 -430.039 210.047";
+					position = "440.781 -430.039 210.046";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3689,7 +3761,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "445.895 -434.763 210.047";
+					position = "445.894 -434.763 210.046";
 					rotation = "0 0 0";
 				};
 			};
@@ -3703,7 +3775,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "442.543 -431.705 210.047";
+					position = "442.542 -431.704 210.046";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3713,56 +3785,8 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "434.148 -428.799 210.047";
+					position = "434.148 -428.799 210.046";
 					rotation = "0 0 0";
-				};
-			};
-			instant SimGroup "NEED COINS 0";
-			instant SimGroup "TAKE COINS 0";
-			instant SimGroup "GSAY ~wnull.wav";
-			instant SimGroup "NSAY ~wnull.wav";
-		};
-		instant SimGroup "Graveyard Top to Dunega" {
-			instant SimGroup "Input" {
-				instant Trigger "GroupTrigger1" {
-					dataBlock = "GroupTrigger";
-					name = "";
-					position = "-2823.85 -1179.31 640.579";
-					rotation = "0 -0 0.819924";
-					boundingBox = "-1 -1 -1 1 1 1";
-					isSphere = "True";
-				};
-			};
-			instant SimGroup "Output" {
-				instant Marker "Marker1" {
-					dataBlock = "PathMarker";
-					name = "";
-					position = "217.616 -722.239 5140.66";
-					rotation = "0 0 0";
-				};
-			};
-			instant SimGroup "NEED COINS 0";
-			instant SimGroup "TAKE COINS 0";
-			instant SimGroup "GSAY ~wnull.wav";
-			instant SimGroup "NSAY ~wnull.wav";
-		};
-		instant SimGroup "Dunega to Graveyard top" {
-			instant SimGroup "Input" {
-				instant Trigger "GroupTrigger1" {
-					dataBlock = "GroupTrigger";
-					name = "";
-					position = "224.625 -718.213 5142.94";
-					rotation = "0 -0 0.819925";
-					boundingBox = "-1 -1 -1 1 1 1";
-					isSphere = "True";
-				};
-			};
-			instant SimGroup "Output" {
-				instant Marker "Marker1" {
-					dataBlock = "PathMarker";
-					name = "";
-					position = "-2822.46 -1183.58 638.599";
-					rotation = "0 0 -3.04499";
 				};
 			};
 			instant SimGroup "NEED COINS 0";
@@ -3775,7 +3799,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "330.439 -546.198 -882.161";
+					position = "330.438 -546.197 -882.161";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3785,7 +3809,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "343.387 -552.697 -2306.18";
+					position = "343.386 -552.697 -2306.17";
 					rotation = "0 0 0";
 				};
 			};
@@ -3799,7 +3823,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "346.937 -560.762 -2306.18";
+					position = "346.937 -560.762 -2306.17";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3809,7 +3833,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "338.476 -550.602 -882.161";
+					position = "338.476 -550.601 -882.161";
 					rotation = "0 0 0";
 				};
 			};
@@ -3823,7 +3847,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "261.052 -485.231 -2318.18";
+					position = "261.052 -485.23 -2318.17";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3833,7 +3857,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "294.68 -511.501 -2963.52";
+					position = "294.679 -511.501 -2963.52";
 					rotation = "0 0 0";
 				};
 			};
@@ -3847,7 +3871,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "296.668 -531.549 -2963.51";
+					position = "296.667 -531.549 -2963.51";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3857,7 +3881,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "278.597 -478.92 -2318.17";
+					position = "278.596 -478.92 -2318.16";
 					rotation = "0 0 0";
 				};
 			};
@@ -3871,7 +3895,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "248.784 -497.751 -2963.51";
+					position = "248.783 -497.751 -2963.51";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3881,7 +3905,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-478.41 -376.399 1569.29";
+					position = "-478.41 -376.398 1569.29";
 					rotation = "0 0 0";
 				};
 			};
@@ -3895,7 +3919,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-483.46 -374.035 1569.29";
+					position = "-483.459 -374.035 1569.29";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3905,7 +3929,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "265.294 -497.231 -2963.51";
+					position = "265.294 -497.23 -2963.51";
 					rotation = "0 0 0";
 				};
 			};
@@ -3919,7 +3943,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-2370.96 -571.424 166.75";
+					position = "-2370.95 -571.424 166.75";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3929,7 +3953,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2333.4 -581.546 1299.25";
+					position = "-2333.39 -581.546 1299.25";
 					rotation = "0 0 0";
 				};
 			};
@@ -3953,7 +3977,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2370.14 -577.098 166.25";
+					position = "-2370.13 -577.098 166.25";
 					rotation = "0 0 0";
 				};
 			};
@@ -3967,7 +3991,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-2363 -571.433 166.75";
+					position = "-2363 -571.432 166.75";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -3991,7 +4015,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "210.86 -798.737 1828.01";
+					position = "210.86 -798.736 1828.01";
 					rotation = "0 -0 0.819925";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -4001,7 +4025,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2363.03 -576.746 166.25";
+					position = "-2363.03 -576.745 166.25";
 					rotation = "0 0 0";
 				};
 			};
@@ -4015,7 +4039,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "427.212 -486.093 1438.02";
+					position = "427.212 -486.092 1438.02";
 					rotation = "0 0 0";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -4025,7 +4049,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-160.608 -1700.29 55.26";
+					position = "-160.608 -1700.29 55.2599";
 					rotation = "0 0 0";
 				};
 			};
@@ -4039,7 +4063,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-393.203 -361.754 1521.28";
+					position = "-393.203 -361.753 1521.28";
 					rotation = "0 0 0";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -4049,8 +4073,8 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-312.028 -316.099 1955";
-					rotation = "0 -0 -3.12338";
+					position = "-312.028 -316.098 1955";
+					rotation = "0 -0 -3.12337";
 				};
 			};
 			instant SimGroup "NEED COINS 0";
@@ -4063,7 +4087,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-312.063 -312.437 1955";
+					position = "-312.062 -312.437 1955";
 					rotation = "0 0 0";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -4074,7 +4098,7 @@ instant SimGroup "MissionGroup" {
 					dataBlock = "PathMarker";
 					name = "";
 					position = "-387.557 -360.881 1521.28";
-					rotation = "0 -0 -1.42817";
+					rotation = "0 -0 -1.42816";
 				};
 			};
 			instant SimGroup "NEED COINS 0";
@@ -4087,7 +4111,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-242.566 -244.08 1955";
+					position = "-242.565 -244.08 1955";
 					rotation = "0 0 0";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -4097,7 +4121,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-36.1689 4.32994 2073";
+					position = "-36.1688 4.32993 2073";
 					rotation = "0 -0 0";
 				};
 			};
@@ -4111,7 +4135,7 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-36.1979 2.18179 2073";
+					position = "-36.1978 2.18179 2073";
 					rotation = "0 0 0";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
@@ -4121,7 +4145,7 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-241.974 -249.951 1955";
+					position = "-241.973 -249.951 1955";
 					rotation = "0 -0 3.10821";
 				};
 			};
@@ -4135,7 +4159,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "towerf1" {
 			fileName = "TOWERF.0.dis";
 			isContainer = "1";
-			position = "-322.125 2368.75 422.512";
+			position = "-322.125 2368.75 422.511";
 			rotation = "0 -0 -0.219539";
 			lightParams = "0 ";
 			locked = "1";
@@ -4154,7 +4178,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock1.0.dis";
 			isContainer = "0";
 			position = "-2593.75 571.125 670.625";
-			rotation = "0.0233322 -0.759156 -0.0552535";
+			rotation = "0.0233321 -0.759155 -0.0552534";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4162,7 +4186,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock2.2.dis";
 			isContainer = "1";
 			position = "-2619.75 580.125 678.25";
-			rotation = "0.109637 -0.364324 -0.279537";
+			rotation = "0.109636 -0.364324 -0.279536";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4170,7 +4194,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock3.0.dis";
 			isContainer = "1";
 			position = "-2608 567.125 664.625";
-			rotation = "0 0.0799799 0.299806";
+			rotation = "0 0.0799798 0.299805";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4178,7 +4202,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock4.2.dis";
 			isContainer = "1";
 			position = "-2610.5 574.75 663.625";
-			rotation = "0.059115 0.0701419 -1.25844";
+			rotation = "0.059115 0.0701418 -1.25844";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4186,7 +4210,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock5.1.dis";
 			isContainer = "0";
 			position = "-2613 582.375 677.25";
-			rotation = "-0.432167 1.75326 -0.438299";
+			rotation = "-0.432166 1.75326 -0.438299";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4219,43 +4243,7 @@ instant SimGroup "MissionGroup" {
 			dataBlock = "TreeShape";
 			name = "";
 			position = "-2615.75 586.375 677.125";
-			rotation = "-1.13088 -0.751281 0.857232";
-			destroyable = "True";
-			deleteOnDestroy = "False";
-			locked = "0";
-		};
-		instant StaticShape "PlantTwo1" {
-			dataBlock = "PlantTwo";
-			name = "";
-			position = "-2620.5 578.125 678.875";
-			rotation = "-0.827464 1.07603 -1.5666";
-			destroyable = "True";
-			deleteOnDestroy = "False";
-			locked = "0";
-		};
-		instant StaticShape "PlantTwo1" {
-			dataBlock = "PlantTwo";
-			name = "";
-			position = "-2613 582.625 676.625";
-			rotation = "0.0486293 -1.67074 0.497628";
-			destroyable = "True";
-			deleteOnDestroy = "False";
-			locked = "0";
-		};
-		instant StaticShape "PlantTwo1" {
-			dataBlock = "PlantTwo";
-			name = "";
-			position = "-2596 577.375 684.625";
-			rotation = "-0.945309 1.11447 -0.394489";
-			destroyable = "True";
-			deleteOnDestroy = "False";
-			locked = "0";
-		};
-		instant StaticShape "PlantTwo1" {
-			dataBlock = "PlantTwo";
-			name = "";
-			position = "-2607.75 571 670.875";
-			rotation = "0.0162118 -3.13102 -2.05813";
+			rotation = "-1.13087 -0.751281 0.857231";
 			destroyable = "True";
 			deleteOnDestroy = "False";
 			locked = "0";
@@ -4276,9 +4264,9 @@ instant SimGroup "MissionGroup" {
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
-			lastDamageTeam = "0";
-			lastDamageObject = "2049";
 			locked = "0";
+			lastDamageObject = "2049";
+			lastDamageTeam = "0";
 		};
 		instant StaticShape "TreeTwo1" {
 			dataBlock = "TreeShapeTwo";
@@ -4301,7 +4289,7 @@ instant SimGroup "MissionGroup" {
 		instant StaticShape "TreeTwo1" {
 			dataBlock = "TreeShapeTwo";
 			name = "";
-			position = "-2582.5 548.923 664.298";
+			position = "-2582.5 548.922 664.297";
 			rotation = "0 -0 -0.719928";
 			destroyable = "True";
 			deleteOnDestroy = "False";
@@ -4319,7 +4307,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock2.3.dis";
 			isContainer = "1";
 			position = "-2611 576.125 672";
-			rotation = "-0.475626 -1.3307 -1.20295";
+			rotation = "-0.475625 -1.3307 -1.20295";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4335,7 +4323,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock3.1.dis";
 			isContainer = "1";
 			position = "-2614.5 594.5 678.875";
-			rotation = "-0.314434 0.159608 -0.495534";
+			rotation = "-0.314433 0.159608 -0.495534";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4343,7 +4331,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock5.2.dis";
 			isContainer = "0";
 			position = "-2626.25 628 687.25";
-			rotation = "0 0.899833 -0.299835";
+			rotation = "0 0.899833 -0.299834";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4351,7 +4339,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock5.3.dis";
 			isContainer = "0";
 			position = "-2624 623.25 686.875";
-			rotation = "-0.041231 1.0322 2.44435";
+			rotation = "-0.0412309 1.03219 2.44435";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4367,7 +4355,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock4.4.dis";
 			isContainer = "1";
 			position = "-2600.5 601.75 676";
-			rotation = "0 -1.69836 -1.85833";
+			rotation = "0 -1.69835 -1.85833";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4375,7 +4363,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock2.4.dis";
 			isContainer = "1";
 			position = "-2621.75 613.375 690.5";
-			rotation = "-0.0505132 -1.93074 1.78125";
+			rotation = "-0.0505132 -1.93073 1.78125";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4383,7 +4371,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock3.2.dis";
 			isContainer = "1";
 			position = "-2637.75 607 684.5";
-			rotation = "-0.115525 1.18188 -2.75";
+			rotation = "-0.115524 1.18187 -2.75";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4407,7 +4395,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock2.6.dis";
 			isContainer = "1";
 			position = "-2618 603.875 686";
-			rotation = "-0.0397483 -1.81391 -1.45825";
+			rotation = "-0.0397482 -1.81391 -1.45825";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4417,7 +4405,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "EXPBRIDGE.0.dis";
 			isContainer = "1";
 			position = "-1231 2651.25 611";
-			rotation = "0.087225 0 -2.19934";
+			rotation = "0.0872249 0 -2.19934";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4425,7 +4413,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "EXPBRIDGE.1.dis";
 			isContainer = "1";
 			position = "-1538.25 2875.75 563.25";
-			rotation = "0.0697718 0 -2.19934";
+			rotation = "0.0697717 0 -2.19934";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4433,7 +4421,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "EXPBRIDGE.2.dis";
 			isContainer = "1";
 			position = "-1435.25 2800.75 575.375";
-			rotation = "0.121933 0 -2.19931";
+			rotation = "0.121932 0 -2.19931";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4449,7 +4437,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "EXPBRIDGE.4.dis";
 			isContainer = "1";
 			position = "-922.625 2427 590.75";
-			rotation = "-0.191702 -0 -2.19763";
+			rotation = "-0.191701 -0 -2.19762";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4475,7 +4463,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock5.5.dis";
 			isContainer = "0";
 			position = "-1214.5 -2618 142.375";
-			rotation = "0 -0 0.0599821";
+			rotation = "0 -0 0.059982";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4483,7 +4471,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "store1.0.dis";
 			isContainer = "1";
 			position = "-1116 -2578.5 164.875";
-			rotation = "0 -0 0.662384";
+			rotation = "0 -0 0.662383";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4500,7 +4488,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "easel.0.dis";
 			isContainer = "0";
 			position = "-1109.25 -2568 165.375";
-			rotation = "0 -0 -0.299819";
+			rotation = "0 -0 -0.299818";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4508,7 +4496,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "sign.0.dis";
 			isContainer = "1";
 			position = "-1130.25 -2580.5 169.625";
-			rotation = "0 -0 0.879353";
+			rotation = "0 -0 0.879352";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4533,7 +4521,7 @@ instant SimGroup "MissionGroup" {
 			fileName = "lrock1.3.dis";
 			isContainer = "0";
 			position = "-1107.5 -2566 162.5";
-			rotation = "-0.514551 -1.29617 -2.37011";
+			rotation = "-0.51455 -1.29616 -2.37011";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4597,7 +4585,7 @@ instant SimGroup "MissionGroup" {
 	instant InteriorShape "house11" {
 		fileName = "house1.0.dis";
 		isContainer = "1";
-		position = "-1785.75 -876.681 185.767";
+		position = "-1785.75 -876.681 185.766";
 		rotation = "0 -0 -1.49755";
 		lightParams = "0 ";
 		locked = "1";
@@ -4635,8 +4623,8 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "w64long1" {
 			fileName = "W64long.1.dis";
 			isContainer = "1";
-			position = "-1641 2450.75 466.283";
-			rotation = "-0.0111768 0.460733 0.108181";
+			position = "-1641 2450.75 466.282";
+			rotation = "-0.0111768 0.460732 0.10818";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4644,23 +4632,23 @@ instant SimGroup "MissionGroup" {
 			fileName = "W64long.2.dis";
 			isContainer = "1";
 			position = "-1791.25 2699 480.625";
-			rotation = "0 -0 1.02885";
+			rotation = "0 -0 1.02884";
 			lightParams = "0 ";
 			locked = "1";
 		};
 		instant InteriorShape "w64long1" {
 			fileName = "W64long.3.dis";
 			isContainer = "1";
-			position = "-1574 2491.5 421.304";
-			rotation = "0 -0 1.11823";
+			position = "-1574 2491.5 421.303";
+			rotation = "0 -0 1.11822";
 			lightParams = "0 ";
 			locked = "1";
 		};
 		instant InteriorShape "w64long1" {
 			fileName = "W64long.4.dis";
 			isContainer = "1";
-			position = "-1698.25 2453.5 480.283";
-			rotation = "-0.0075537 0.259828 -0.0283956";
+			position = "-1698.25 2453.5 480.282";
+			rotation = "-0.00755369 0.259828 -0.0283956";
 			lightParams = "0 ";
 			locked = "1";
 		};
@@ -4670,25 +4658,25 @@ instant SimGroup "MissionGroup" {
 			instant Marker "kalm merchant" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2403.5 -296.25 65.0926";
+				position = "-2403.5 -296.25 65.0925";
 				rotation = "0 -0 0.559939";
 			};
 			instant SimGroup "NAME Kalm Merchant";
 			instant SimGroup "ITEMS CLASS Chemist LVL 2 LCK 0";
 			instant SimGroup "RACE MaleHuman";
-			instant SimGroup "BELTSHOP 1 2 175 17 51 100 125 150 200 201 505";
+			instant SimGroup "BELTSHOP 1 2 175 17 51 100 125 150 200 201 508 606 611 616";
 		};
 		instant SimGroup "merchant6" {
 			instant Marker "mythril mines merchant" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1785.01 -883.634 186.269";
-				rotation = "0 -0 0.0612195";
+				position = "-1785.01 -883.633 186.268";
+				rotation = "0 -0 0.0612194";
 			};
 			instant SimGroup "NAME Gary";
 			instant SimGroup "ITEMS CLASS Chemist LVL 2 LCK 0 Dagger 1";
 			instant SimGroup "RACE MaleHuman";
-			instant SimGroup "SHOP 13 14 17 18";
+			instant SimGroup "BELTSHOP 1 2 175 17 18 51 52 100 101 125 126 150 151 175 176 200 201 508 606 611 616";
 		};
 		instant SimGroup "quest5" {
 			instant SimGroup "NAME Nevim";
@@ -4708,15 +4696,15 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2430 -223.67 71.5927";
-				rotation = "0 -0 0.859804";
+				position = "-2430 -223.669 71.5926";
+				rotation = "0 -0 0.859803";
 			};
 		};
 		instant SimGroup "banker1" {
 			instant Marker "kalm banker" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2410.75 -302.171 65.0926";
+				position = "-2410.75 -302.17 65.0925";
 				rotation = "0 -0 1.457";
 			};
 			instant SimGroup "NAME Kalm Banker";
@@ -4728,29 +4716,29 @@ instant SimGroup "MissionGroup" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "-402.625 1762.75 65.2403";
-				rotation = "0 -0 0.34004";
+				rotation = "0 -0 0.340039";
 			};
 			instant SimGroup "NAME Jaten Banker";
 			instant SimGroup "ITEMS CLASS Ranger LVL 2 LCK 0 Dagger 1";
 			instant SimGroup "RACE MaleHuman";
 		};
 		instant SimGroup "merchant2" {
-			instant Marker "ethren merchant cheap" {
+			instant Marker "ethren armour cheap" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2438.75 -2291.25 56.7906";
+				position = "-2438.75 -2291.25 56.7905";
 				rotation = "0 -0 -2.87804";
 			};
 			instant SimGroup "NAME Cole";
 			instant SimGroup "RACE MaleHuman";
 			instant SimGroup "ITEMS CLASS Ranger LVL 2 LCK 0 Dagger 1";
-			instant SimGroup "BELTSHOP 204 205 206 207 208 209";
+			instant SimGroup "BELTSHOP 303 304 305 204 205 206 207 208 209";
 		};
 		instant SimGroup "porter1" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2430.25 -303.881 71.5926";
+				position = "-2430.25 -303.881 71.5925";
 				rotation = "0 -0 2.23808";
 			};
 			instant SimGroup "NAME porter";
@@ -4761,7 +4749,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1198.5 1503.25 72.7754";
+				position = "-1198.5 1503.25 72.7753";
 				rotation = "0 -0 1.75976";
 			};
 			instant SimGroup "NAME manager";
@@ -4773,7 +4761,7 @@ instant SimGroup "MissionGroup" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "-375.5 1794.5 65";
-				rotation = "0 -0 -0.999801";
+				rotation = "0 -0 -0.9998";
 			};
 			instant SimGroup "NAME assassin";
 			instant SimGroup "RACE MaleHuman";
@@ -4806,8 +4794,8 @@ instant SimGroup "MissionGroup" {
 			instant Marker "ethren merchant expensive" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2438.75 -2303.5 56.7906";
-				rotation = "0 -0 0.36251";
+				position = "-2438.75 -2303.5 56.7905";
+				rotation = "0 -0 0.362509";
 			};
 			instant SimGroup "NAME Clifton";
 			instant SimGroup "RACE MaleHuman";
@@ -4826,13 +4814,13 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "SAY2 If you bring me three Black Statues, I will give you something of mine.";
 			instant SimGroup "NSAY1 Ah, you have returned.  Hand me the statues.  Now!";
 			instant SimGroup "NCUE1 yes";
-			instant SimGroup "NSAY2 Excellent.  Here is your reward.";
+			instant SimGroup "NSAY2 Excellent. Here is your reward.";
 			instant SimGroup "SHOP 33";
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "-2446 -2307.5 85.7906";
-				rotation = "0 -0 -0.322902";
+				rotation = "0 -0 -0.322901";
 				locked = "0";
 			};
 		};
@@ -4854,7 +4842,7 @@ instant SimGroup "MissionGroup" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "-2719.5 214.625 390.375";
-				rotation = "0 -0 2.07845";
+				rotation = "0 -0 2.07844";
 			};
 		};
 		instant SimGroup "quest4" {
@@ -4884,7 +4872,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2474.5 -2335.5 82.2904";
+				position = "-2474.5 -2335.5 82.2903";
 				rotation = "0 -0 -1.0784";
 			};
 			instant SimGroup "NAME Trevin";
@@ -4895,8 +4883,8 @@ instant SimGroup "MissionGroup" {
 			instant Marker "kalm blacksmith" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2393 -283.125 65.0926";
-				rotation = "0 -0 2.72189";
+				position = "-2393 -283.125 65.0925";
+				rotation = "0 -0 2.72188";
 			};
 			instant SimGroup "NAME blacksmith";
 			instant SimGroup "RACE MaleHuman";
@@ -4905,7 +4893,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2203.25 -502.137 45.8607";
+				position = "-2203.25 -502.136 45.8606";
 				rotation = "0 -0 3.00302";
 			};
 			instant SimGroup "NAME Thorin";
@@ -4926,7 +4914,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-320.512 2361.5 464.512";
+				position = "-320.511 2361.5 464.511";
 				rotation = "0 0 0";
 			};
 			instant SimGroup "NAME Hemac";
@@ -4967,8 +4955,8 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2424.5 -257.024 71.0926";
-				rotation = "0 -0 -2.72294";
+				position = "-2424.5 -257.023 71.0925";
+				rotation = "0 -0 -2.72293";
 			};
 			instant SimGroup "NAME Arlette";
 			instant SimGroup "RACE FemaleHuman";
@@ -5010,18 +4998,18 @@ instant SimGroup "MissionGroup" {
 			instant Marker "dock merchant" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-1259.5 342.779 85.4725";
+				position = "-1259.5 342.778 85.4725";
 				rotation = "0 -0 1.46437";
 			};
 			instant SimGroup "NAME Jolline";
 			instant SimGroup "RACE FemaleHuman";
-			instant SimGroup "BELTSHOP 1 2 3 18 52 102 126 151 176 201 202 203 505";
+			instant SimGroup "BELTSHOP 1 2 3 18 52 102 126 151 176 201 202 203 508";
 		};
 		instant SimGroup "quest10" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2436.75 -258.375 77.5926";
+				position = "-2436.75 -258.375 77.5925";
 				rotation = "0 -0 -2.23969";
 			};
 			instant SimGroup "NAME Johannes";
@@ -5044,7 +5032,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2430.5 -246.25 77.5926";
+				position = "-2430.5 -246.25 77.5925";
 				rotation = "0 -0 2.38294";
 			};
 			instant SimGroup "NAME Brien";
@@ -5068,7 +5056,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2421.5 -252.256 77.5926";
+				position = "-2421.5 -252.255 77.5925";
 				rotation = "0 -0 2.12294";
 			};
 			instant SimGroup "NAME Lance";
@@ -5099,7 +5087,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2414.5 -263.046 65";
+				position = "-2414.5 -263.045 65";
 				rotation = "0 -0 -1.64266";
 			};
 			instant SimGroup "NAME Esmeralda";
@@ -5118,7 +5106,7 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2434 -243.778 71.0926";
+				position = "-2434 -243.777 71.0925";
 				rotation = "0 -0 -2.7997";
 			};
 			instant SimGroup "NAME Damaris";
@@ -5167,6 +5155,68 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NSAY2 For being such a brave adventurer, here is a gift I'm sure you will appreciate.";
 			instant SimGroup "CSAY Good luck on your adventures!";
 		};
+		instant SimGroup "quest16" {
+			instant Marker "Marker1" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "-2440.37 -261.246 65.094";
+				rotation = "0 -0 -0.8758";
+			};
+			instant SimGroup "NAME Chemist Trainer";
+			instant SimGroup "RACE MaleHuman";
+			instant SimGroup "NEED HealingHerb 10";
+			instant SimGroup "TAKE HealingHerb 5";
+			instant SimGroup "GIVE CrackedFlask 1 VialOfWater 1 CrudeClayAlembic 1";
+			instant SimGroup "SAY1 Hello, are you are interested in learning more about being a Chemist?";
+			instant SimGroup "CUE1 yes";
+			instant SimGroup "SAY2 Chemists get their strength from the potions they create, from simple healing potions to life saving panaceas.";
+			instant SimGroup "CUE2 potions";
+			instant SimGroup "SAY3 While anyone can [harvest] alchemy ingredients, only a Chemist can use the alchemy skill to create new potions.";
+			instant SimGroup "CUE3 alchemy";
+			instant SimGroup "SAY4 To use the [alchemy] skill you must have the correct tools, ingredients and knowledge of what you want to make.";
+			instant SimGroup "CUE4 tools";
+			instant SimGroup "SAY5 To make potions you must have an Alembic. They are sold at many stores and you only need one of them to grind up your ingredients.";
+			instant SimGroup "CUE5 ingredients";
+			instant SimGroup "SAY6 Ingredients can be harvested from plants around Gaia and can be used for various alchemical recipes.";
+			instant SimGroup "CUE6 recipes";
+			instant SimGroup "SAY7 Tell you what. I'm always in need of more Healing Herbs. Bring me 10 and I will teach you the recipe to make a Potion.";
+			instant SimGroup "CUE7 herbs";
+			instant SimGroup "SAY8 Theres a healthy plant outside this door next to the street lamp. Get close to it and #harvest 10 herbs for me and return when you are done.";
+			instant SimGroup "NSAY1 Excellent, you have the healing herbs! Crafting a [Potion] requires 5 Healing Herbs, 1 Cracked Flask, 1 Vial of Water and of course an Alembic.";
+			instant SimGroup "NCUE1 thanks";
+			instant SimGroup "NSAY2 To craft a Potion simply type #alchemy Potion. Take my old Alembic here to get started, and make sure to stock up on more flasks and water before you head out!";
+		};
+		instant SimGroup "quest17" {
+			instant Marker "Marker1" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "-2437.81 -264.59 65.094";
+				rotation = "0 -0 -0.8758";
+			};
+			instant SimGroup "NAME Squire Trainer";
+			instant SimGroup "RACE MaleHuman";
+			instant SimGroup "NEED HealingKit 1000";
+			instant SimGroup "TAKE HealingKit 1000";
+			instant SimGroup "GIVE HealingKit 1000";
+			instant SimGroup "SAY1 Greetings Adventurer. Come to learn more about what it takes to be a Squire?";
+			instant SimGroup "CUE1 squire";
+			instant SimGroup "SAY2 A squire is a budding warrior who is prepared to train every day to improve their skills.";
+			instant SimGroup "CUE2 skills";
+			instant SimGroup "SAY3 Oh yes, Squires have lots of skills! Although, only some of them are coded-*ahem*, I mean discovered right now. Blame Ramza for that.";
+			instant SimGroup "CUE3 coded?";
+			instant SimGroup "SAY4 Forget about that. Have YOU ever thought yourself: Hey, why are Mages the only ones with cool flashy abilities?";
+			instant SimGroup "CUE4 Yes!";
+			instant SimGroup "SAY5 Or have you ever thought: Why are Mages the only ones who get to do big explosive AOE damage?";
+			instant SimGroup "CUE5 ABSOLUTELY!";
+			instant SimGroup "SAY6 Well have no fear, your trainer is here. And I am here to teach you about [cleave]!";
+			instant SimGroup "CUE6 Finally!";
+			instant SimGroup "SAY7 To use it simply type #skill cleave or just #cleave for short, and start watching your enemies falling all around you!";
+			instant SimGroup "CUE7 amazing";
+			instant SimGroup "SAY8 Enjoy it while it lasts, it's honestly a bit broken and I imagine Ramza will tinker with it in the future. But hey, it's all about having FUN right?";
+			instant SimGroup "NSAY1 Excellent, you have the healing herbs! Crafting a [Potion] requires 5 Healing Herbs, 1 Cracked Flask, 1 Vial of Water and of course an Alembic.";
+			instant SimGroup "NCUE1 thanks";
+			instant SimGroup "NSAY2 To craft a Potion simply type #alchemy Potion. Take my old Alembic here to get started, and make sure to stock up on more flasks and water before you head out!";
+		};
 	};
 	instant InteriorShape "RemorterHall1" {
 		fileName = "remorterhall.0.dis";
@@ -5180,7 +5230,7 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "jlaby1" {
 			fileName = "jlaby.0.dis";
 			isContainer = "1";
-			position = "-1904 -2848.5 159.903";
+			position = "-1904 -2848.5 159.902";
 			rotation = "0 0 0";
 			lightParams = "4 1.000000 1 1.000000 1 1.000000 1 1.000000 1 ";
 			locked = "1";
@@ -5198,7 +5248,7 @@ instant SimGroup "MissionGroup" {
 				fileName = "lrock3.5.dis";
 				isContainer = "1";
 				position = "-2042.25 -2589.25 117.625";
-				rotation = "0.375731 -0.861052 -0.285128";
+				rotation = "0.37573 -0.861051 -0.285127";
 				lightParams = "0 ";
 				locked = "1";
 			};
@@ -5206,7 +5256,7 @@ instant SimGroup "MissionGroup" {
 				fileName = "lrock3.6.dis";
 				isContainer = "1";
 				position = "-2034.75 -2603 119.5";
-				rotation = "-0.023321 -0.399173 0.075256";
+				rotation = "-0.023321 -0.399172 0.0752559";
 				lightParams = "0 ";
 				locked = "1";
 			};
@@ -5214,7 +5264,7 @@ instant SimGroup "MissionGroup" {
 				fileName = "lrock4.7.dis";
 				isContainer = "1";
 				position = "-2063.5 -2637 116.875";
-				rotation = "-1.03456e-05 -3.4659e-05 0.959725";
+				rotation = "-1.03455e-05 -3.46589e-05 0.959725";
 				lightParams = "0 ";
 				locked = "1";
 			};
@@ -5222,7 +5272,7 @@ instant SimGroup "MissionGroup" {
 				fileName = "lrock1.6.dis";
 				isContainer = "0";
 				position = "-2083 -2603 113.75";
-				rotation = "-0.271702 2.1875 -0.378317";
+				rotation = "-0.271701 2.1875 -0.378316";
 				lightParams = "0 ";
 				locked = "1";
 			};
@@ -5238,7 +5288,7 @@ instant SimGroup "MissionGroup" {
 				fileName = "lrock3.7.dis";
 				isContainer = "1";
 				position = "-2045 -2629 118.5";
-				rotation = "0.0692108 -0.375 -1.36959";
+				rotation = "0.0692107 -0.375 -1.36959";
 				lightParams = "0 ";
 				locked = "1";
 			};
@@ -5246,7 +5296,7 @@ instant SimGroup "MissionGroup" {
 				fileName = "lrock3.8.dis";
 				isContainer = "1";
 				position = "-2086.75 -2615.25 116.5";
-				rotation = "0.0297663 0.519043 0.0720683";
+				rotation = "0.0297663 0.519043 0.0720682";
 				lightParams = "0 ";
 				locked = "1";
 			};
@@ -5262,7 +5312,7 @@ instant SimGroup "MissionGroup" {
 				fileName = "lrock4.8.dis";
 				isContainer = "1";
 				position = "-2074.75 -2626 116.5";
-				rotation = "-0.0938073 -0.896288 0.0947734";
+				rotation = "-0.0938073 -0.896287 0.0947733";
 				lightParams = "0 ";
 				locked = "1";
 			};
@@ -5273,7 +5323,7 @@ instant SimGroup "MissionGroup" {
 			dataBlock = "ElectricalBeamBig";
 			name = "";
 			position = "-615.75 -2480.25 56.7887";
-			rotation = "0 -0 -0.759815";
+			rotation = "0 -0 -0.759814";
 			destroyable = "True";
 			deleteOnDestroy = "False";
 			locked = "0";
@@ -5282,7 +5332,7 @@ instant SimGroup "MissionGroup" {
 			dataBlock = "ElectricalBeamBig";
 			name = "";
 			position = "-616.375 -2479.75 56.7887";
-			rotation = "0 -0 -0.759815";
+			rotation = "0 -0 -0.759814";
 			destroyable = "True";
 			deleteOnDestroy = "False";
 			locked = "0";
@@ -5291,7 +5341,7 @@ instant SimGroup "MissionGroup" {
 			dataBlock = "ElectricalBeamBig";
 			name = "";
 			position = "-616.875 -2478.75 56.7887";
-			rotation = "0 -0 -0.759815";
+			rotation = "0 -0 -0.759814";
 			destroyable = "True";
 			deleteOnDestroy = "False";
 			locked = "0";
@@ -5308,7 +5358,7 @@ instant SimGroup "MissionGroup" {
 		instant StaticShape "BigElectroBeam1" {
 			dataBlock = "ElectricalBeamBig";
 			name = "";
-			position = "-1919 -2818.5 161.896";
+			position = "-1919 -2818.5 161.895";
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
@@ -5326,7 +5376,7 @@ instant SimGroup "MissionGroup" {
 	instant InteriorShape "ffort1" {
 		fileName = "FFORT.0.dis";
 		isContainer = "1";
-		position = "-133.446 -2526.5 536.5";
+		position = "-133.445 -2526.5 536.5";
 		rotation = "0 0 0";
 		lightParams = "0 ";
 		locked = "1";
@@ -5341,11 +5391,332 @@ instant SimGroup "MissionGroup" {
 			locked = "1";
 		};
 	};
+	instant SimGroup "HarvestFoliage" {
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2304 -2398.25 52.9375";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+			locked = "0";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2328.75 -2415.25 53.9781";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+			locked = "0";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2620.5 578.125 678.875";
+			rotation = "-0.827463 1.07603 -1.56659";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+			locked = "0";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2613 582.625 676.625";
+			rotation = "0.0486292 -1.67074 0.497628";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+			locked = "0";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2596 577.375 684.625";
+			rotation = "-0.945308 1.11447 -0.394488";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+			locked = "0";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2607.75 571 670.875";
+			rotation = "0.0162118 -3.13102 -2.05813";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+			locked = "0";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-252.553 1725.34 52.7332";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-1618.8 2688.68 400";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-1588.37 2558.88 419.333";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-878.113 2379.91 578.953";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "169.725 1212.97 221.295";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-363.75 1766.5 65";
+			rotation = "0 -0 1.57734";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+			locked = "0";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-358.75 1790 65";
+			rotation = "0 -0 1.57734";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+			locked = "0";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2446.96 -265.173 65";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2231.54 -298.939 50.2176";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-377.644 -182.015 65";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-1821.01 -768.539 243.999";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-1945.47 -829.03 246.312";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-1710.2 -940.733 241.057";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-756.734 824.92 700.999";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-1568.81 -342.573 333.005";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-1467.19 -362.036 320.927";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant InteriorShape "eyelair1" {
+			fileName = "eyelair.dis";
+			isContainer = "1";
+			position = "-843.388 839.5 669.191";
+			rotation = "0 0 0";
+			lightParams = "0 ";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-778.955 861.997 700.999";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2844.53 -1168.57 700.999";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2066.65 -2585.63 108.132";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-1138.25 -2593.1 167.833";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2837.05 845.335 700.999";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-615.124 -2458.41 60.9729";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2260.05 -2432.79 66.7252";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2404.82 -2364.64 65";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-3568.03 -313.174 330.73";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-3741.94 -974.566 254.585";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-4412.58 -304.697 65";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-4474.28 -238.709 65";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2427.19 1790.66 65";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-2416.84 1794.92 65";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "PlantTwo1" {
+			dataBlock = "PlantTwo";
+			name = "";
+			position = "-401.818 -371.724 1569.29";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+		instant StaticShape "Cactus3" {
+			dataBlock = "Cactus3";
+			name = "";
+			position = "30.4333 -10.3396 1875";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
+	};
 	instant InteriorShape "beachwharf1" {
 		fileName = "beachwharf.0.dis";
 		isContainer = "1";
 		position = "-109.5 1635.25 46.2504";
-		rotation = "0 -0 0.819824";
+		rotation = "0 -0 0.819823";
 		lightParams = "0 ";
 		locked = "0";
 	};
@@ -5361,7 +5732,7 @@ instant SimGroup "MissionGroup" {
 		instant Marker "Marker1" {
 			dataBlock = "PathMarker";
 			name = "";
-			position = "-2472.75 -2297.25 82.7905";
+			position = "-2472.75 -2297.25 82.7904";
 			rotation = "0 0 0";
 		};
 		instant SimGroup "NAMES Maximus Geronimo Avatar Necron Sephter Abacus Ternim Unther Deytuv Kessam Henry Slivat Pronimus Fennis Mortyr Vlad Xavius Tuvan";
@@ -5372,7 +5743,7 @@ instant SimGroup "MissionGroup" {
 		fileName = "anvil.0.dis";
 		isContainer = "0";
 		position = "-2393.75 -282.375 64.8924";
-		rotation = "0 -0 -2.07928";
+		rotation = "0 -0 -2.07927";
 		lightParams = "0 ";
 		locked = "1";
 	};
@@ -5380,15 +5751,15 @@ instant SimGroup "MissionGroup" {
 		fileName = "M4.0.dis";
 		isContainer = "1";
 		position = "-1649.5 -1128.75 253.125";
-		rotation = "0 0 1.57004";
+		rotation = "0 0 1.57003";
 		lightParams = "0 ";
 		locked = "1";
 	};
 	instant InteriorShape "Yol21" {
 		fileName = "YOL2.0.dis";
 		isContainer = "1";
-		position = "-1545 -299.386 352.092";
-		rotation = "0 -0 0.837734";
+		position = "-1545 -299.385 352.092";
+		rotation = "0 -0 0.837733";
 		lightParams = "0 ";
 		locked = "1";
 	};
@@ -5396,28 +5767,28 @@ instant SimGroup "MissionGroup" {
 		instant Marker "1" {
 			dataBlock = "PathMarker";
 			name = "";
-			position = "-2449.25 -2308.25 56.7903";
+			position = "-2449.25 -2308.25 56.7902";
 			rotation = "0 0 0";
 		};
 		instant Marker "2" {
 			dataBlock = "PathMarker";
 			name = "";
-			position = "-2449.25 -2311.75 56.7903";
+			position = "-2449.25 -2311.75 56.7902";
 			rotation = "0 0 0";
 		};
 	};
 	instant InteriorShape "strawberrymines1" {
 		fileName = "strawberrymines.dis";
 		isContainer = "1";
-		position = "-1700.77 -1033.07 253.47";
-		rotation = "0 -0 0.0599983";
+		position = "-1700.77 -1033.06 253.47";
+		rotation = "0 -0 0.0599982";
 		lightParams = "0 ";
 	};
 	instant InteriorShape "m21" {
 		fileName = "M2.0.dis";
 		isContainer = "1";
 		position = "-1649.5 -1128.75 253.125";
-		rotation = "0 0 1.57004";
+		rotation = "0 0 1.57003";
 		lightParams = "0 ";
 		locked = "1";
 	};
@@ -5425,7 +5796,7 @@ instant SimGroup "MissionGroup" {
 		fileName = "M3.0.dis";
 		isContainer = "1";
 		position = "-1649.5 -1128.75 253.125";
-		rotation = "0 0 1.57004";
+		rotation = "0 0 1.57003";
 		lightParams = "0 ";
 		locked = "1";
 	};
@@ -5440,8 +5811,8 @@ instant SimGroup "MissionGroup" {
 	instant InteriorShape "bbridge1" {
 		fileName = "BBRIDGE.0.dis";
 		isContainer = "1";
-		position = "-2208.5 -511.433 41.8607";
-		rotation = "0 -0 -1.1594";
+		position = "-2208.5 -511.433 41.8606";
+		rotation = "0 -0 -1.15939";
 		lightParams = "0 ";
 		locked = "1";
 	};
@@ -5449,29 +5820,29 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "rodm_11" {
 			fileName = "rodm_1.dis";
 			isContainer = "1";
-			position = "-3751.87 -996.462 268.885";
+			position = "-3751.87 -996.461 268.885";
 			rotation = "0 -0 2.79991";
 			lightParams = "0 ";
 		};
 		instant InteriorShape "rodm_21" {
 			fileName = "rodm_2.dis";
 			isContainer = "1";
-			position = "-3799.01 -1194.66 227.502";
+			position = "-3799.01 -1194.66 227.501";
 			rotation = "0 0 0";
 			lightParams = "0 ";
 		};
 	};
-	instant InteriorShape "sign1" {
-		fileName = "sign.dis";
+	instant InteriorShape "rmrburialtree1" {
+		fileName = "rmrburialtree.dis";
 		isContainer = "1";
-		position = "-2215.16 -321.244 56.3868";
-		rotation = "0 -0 -1.55994";
+		position = "-2850.5 -1187.55 717.578";
+		rotation = "0 -0 1.57076";
 		lightParams = "0 ";
 	};
 	instant InteriorShape "gdenfinal1" {
 		fileName = "gdenfinal.dis";
 		isContainer = "1";
-		position = "358.834 988.53 273.21";
+		position = "358.834 988.53 273.209";
 		rotation = "0 -0 -1.49993";
 		lightParams = "0 ";
 	};
@@ -5479,14 +5850,14 @@ instant SimGroup "MissionGroup" {
 		fileName = "DCTY.0.dis";
 		isContainer = "1";
 		position = "-1262 364.756 85.4725";
-		rotation = "0 -0 -0.759955";
+		rotation = "0 -0 -0.759954";
 		lightParams = "0 ";
 		locked = "1";
 	};
 	instant InteriorShape "bed1" {
 		fileName = "bed.0.dis";
 		isContainer = "0";
-		position = "-2432 -241.663 77.5926";
+		position = "-2432 -241.662 77.5925";
 		rotation = "0 -0 -2.41966";
 		lightParams = "0 ";
 		locked = "1";
@@ -5509,14 +5880,14 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "keldinn1" {
 			fileName = "keldinn.dis";
 			isContainer = "1";
-			position = "2255.52 240.316 2105.09";
+			position = "2255.52 240.315 2105.09";
 			rotation = "0 0 0";
 			lightParams = "4 2.000000 1 1.000000 1 1.000000 1 1.000000 1 ";
 		};
 		instant InteriorShape "keldint11" {
 			fileName = "keldint1.dis";
 			isContainer = "1";
-			position = "2251.59 275.149 2126.34";
+			position = "2251.59 275.148 2126.34";
 			rotation = "0 0 0";
 			lightParams = "1 2.000000 1 ";
 		};
@@ -5530,14 +5901,14 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "keldint11" {
 			fileName = "keldint1.dis";
 			isContainer = "1";
-			position = "2197 276.796 2125.34";
+			position = "2197 276.795 2125.34";
 			rotation = "0 0 0";
 			lightParams = "1 2.000000 1 ";
 		};
 		instant InteriorShape "keldthhm1" {
 			fileName = "keldthhm.dis";
 			isContainer = "1";
-			position = "2285.14 309.774 2139.75";
+			position = "2285.13 309.773 2139.75";
 			rotation = "0 0 0";
 			lightParams = "2 2.000000 1 2.000000 1 ";
 		};
@@ -5546,7 +5917,7 @@ instant SimGroup "MissionGroup" {
 		fileName = "keldinn.0.dis";
 		isContainer = "1";
 		position = "2000 500 2399";
-		rotation = "0 0 2.29984";
+		rotation = "0 0 2.29983";
 		lightParams = "4 2.000000 1 1.000000 1 1.000000 1 1.000000 1 ";
 		locked = "1";
 	};
@@ -5554,7 +5925,7 @@ instant SimGroup "MissionGroup" {
 		fileName = "keldabhm.0.dis";
 		isContainer = "1";
 		position = "2000 500 2199";
-		rotation = "0 0 0.709982";
+		rotation = "0 0 0.709981";
 		lightParams = "4 1.000000 1 2.000000 1 1.000000 1 1.000000 1 ";
 	};
 	instant InteriorShape "TheorasHouse" {
@@ -5568,7 +5939,7 @@ instant SimGroup "MissionGroup" {
 		fileName = "ubzn.0.dis";
 		isContainer = "0";
 		position = "-821 4000 100";
-		rotation = "0 0 2.34981";
+		rotation = "0 0 2.3498";
 		lightParams = "6 0.500000 1 0.500000 1 1.000000 1 1.000000 1 1.000000 1 1.000000 1 ";
 		locked = "1";
 	};
@@ -5584,43 +5955,43 @@ instant SimGroup "MissionGroup" {
 		instant InteriorShape "newkobarev21" {
 			fileName = "newkobarev2.0.dis";
 			isContainer = "1";
-			position = "-4464.07 -272.438 918.9";
+			position = "-4464.06 -272.437 918.9";
 			rotation = "0 0 0";
 			lightParams = "0 ";
 		};
 		instant InteriorShape "CTown1" {
 			fileName = "ctown.0.dis";
 			isContainer = "1";
-			position = "-4436.25 -306.783 72.5979";
-			rotation = "0 -0 3.11988";
+			position = "-4436.25 -306.782 72.5979";
+			rotation = "0 -0 3.11987";
 			lightParams = "2 2.000000 1 1.000000 1 ";
 		};
 		instant InteriorShape "looklook1" {
 			fileName = "looklook.0.dis";
 			isContainer = "1";
-			position = "-4333.82 -438.954 103.409";
-			rotation = "0 -0 -1.61988";
+			position = "-4333.81 -438.954 103.408";
+			rotation = "0 -0 -1.61987";
 			lightParams = "0 ";
 		};
 		instant InteriorShape "well1" {
 			fileName = "WELL.1.dis";
 			isContainer = "1";
-			position = "-4483.5 -234.338 64.5984";
+			position = "-4483.5 -234.337 64.5983";
 			rotation = "0 0 0";
 			lightParams = "0 ";
 		};
 		instant InteriorShape "bed1" {
 			fileName = "bed.1.dis";
 			isContainer = "0";
-			position = "-4430.5 -310 64.8985";
+			position = "-4430.5 -310 64.8984";
 			rotation = "0 -0 -0.0199986";
 			lightParams = "0 ";
 		};
 		instant InteriorShape "desk1" {
 			fileName = "desk.0.dis";
 			isContainer = "0";
-			position = "-4437.63 -310.468 65.0984";
-			rotation = "0 -0 -1.61989";
+			position = "-4437.62 -310.467 65.0983";
+			rotation = "0 -0 -1.61988";
 			lightParams = "0 ";
 		};
 	};
@@ -5628,36 +5999,36 @@ instant SimGroup "MissionGroup" {
 	instant InteriorShape "rmrrinvalefinal1" {
 		fileName = "rmrrinvalefinal.dis";
 		isContainer = "1";
-		position = "-349.084 -291.93 75.1991";
-		rotation = "0 -0 0.739985";
+		position = "-349.084 -291.929 75.199";
+		rotation = "0 -0 0.739984";
 		lightParams = "3 1.000000 1 1.000000 1 1.000000 1 ";
 	};
 	instant InteriorShape "jrock1" {
 		fileName = "jrock.dis";
 		isContainer = "1";
-		position = "-392.076 -237.213 65";
+		position = "-392.075 -237.212 65";
 		rotation = "0 -0 8.03364e-06";
 		lightParams = "0 ";
 	};
 	instant InteriorShape "newgpassfinal1" {
 		fileName = "newgpassfinal.dis";
 		isContainer = "1";
-		position = "-2858.75 870.501 706.59";
+		position = "-2858.75 870.5 706.59";
 		rotation = "0 0 0";
 		lightParams = "5 1.000000 1 1.000000 1 1.000000 1 1.000000 1 1.000000 1 ";
 	};
 	instant InteriorShape "CTHH1" {
 		fileName = "CTHH.dis";
 		isContainer = "1";
-		position = "-4465 1782.14 64.9994";
+		position = "-4465 1782.14 64.9993";
 		rotation = "0 -0 0.799983";
 		lightParams = "6 2.000000 1 2.000000 1 2.000000 1 2.000000 1 2.000000 1 2.000000 1 ";
 	};
 	instant InteriorShape "EVBR1" {
 		fileName = "EVBR.dis";
 		isContainer = "1";
-		position = "-3731 -934.673 267.692";
-		rotation = "0 -0 -0.319991";
+		position = "-3731 -934.672 267.691";
+		rotation = "0 -0 -0.31999";
 		lightParams = "1 1.000000 1 ";
 	};
 	instant InteriorShape "cheetempleenter1" {
@@ -5670,22 +6041,15 @@ instant SimGroup "MissionGroup" {
 	instant InteriorShape "masamunefinal1" {
 		fileName = "masamunefinal.dis";
 		isContainer = "1";
-		position = "-2438.26 1824.75 143.59";
-		rotation = "0 -0 0.299992";
+		position = "-2438.26 1824.75 143.589";
+		rotation = "0 -0 0.299991";
 		lightParams = "7 1.000000 1 1.000000 1 1.000000 1 1.000000 1 1.000000 1 1.000000 1 1.000000 1 ";
 	};
 	instant InteriorShape "haunthouse1" {
 		fileName = "haunthouse.dis";
 		isContainer = "1";
-		position = "-3574.83 -287.193 330.279";
+		position = "-3574.83 -287.192 330.278";
 		rotation = "0 -0 -0.439978";
-		lightParams = "0 ";
-	};
-	instant InteriorShape "rmrburialtree1" {
-		fileName = "rmrburialtree.dis";
-		isContainer = "1";
-		position = "-2850.5 -1187.55 717.579";
-		rotation = "0 -0 1.57076";
 		lightParams = "0 ";
 	};
 };

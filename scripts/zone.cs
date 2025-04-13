@@ -522,8 +522,7 @@ function gravWorkaround(%clientId, %method)
 	}
 }
 
-function Zone::DoEnter(%z, %clientId)
-{
+function Zone::DoEnter(%z, %clientId) {
 	dbecho($dbechoMode, "Zone::DoEnter(" @ %z @ ", " @ %clientId @ ")");
 
 	%oldZone = fetchData(%clientId, "zone");
@@ -930,8 +929,7 @@ function GetZoneByKeywords(%clientId, %keywords, %returnType)
 		return False;
 }
 
-function Zone::getNumPlayers(%z, %all)
-{
+function Zone::getNumPlayers(%z, %all) {
 	dbecho($dbechoMode, "Zone::getNumPlayers(" @ %z @ ", " @ %all @ ")");
 
 	if(%all)
@@ -940,8 +938,7 @@ function Zone::getNumPlayers(%z, %all)
 		%list = GetPlayerIdList();
 
 	%n = 0;
-	for(%i = 0; GetWord(%list, %i) != -1; %i++)
-	{
+	for(%i = 0; GetWord(%list, %i) != -1; %i++) {
 		%id = GetWord(%list, %i);
 
 		if(fetchData(%id, "zone") == %z)
@@ -951,8 +948,7 @@ function Zone::getNumPlayers(%z, %all)
 	return %n;
 }
 
-function ObjectInWhichZone(%object)
-{
+function ObjectInWhichZone(%object) {
 	dbecho($dbechoMode, "ObjectInWhichZone(" @ %object @ ")");
 
 	//not perfect but good enough
@@ -960,19 +956,19 @@ function ObjectInWhichZone(%object)
 	%fid = "";
 	%closest = 99999;
 	%objpos = GameBase::getPosition(%object);
-	for(%z = 1; %z <= $numZones; %z++)
-	{
+
+	for(%z = 1; %z <= $numZones; %z++) {
 		%rad = ($Zone::Length[%z] + $Zone::Width[%z] + $Zone::Height[%z]) / 3;
 		%dist = Vector::getDistance(%objpos, $Zone::Marker[%z]);
-		if(%dist <= %rad)
-		{
-			if(%dist < %closest)
-			{
+
+		if(%dist <= %rad) {
+			if(%dist < %closest) {
 				%closest = %dist;
 				%fid = $Zone::FolderID[%z];
 			}
 		}
 	}
+
 	return %fid;
 }
 

@@ -12,6 +12,9 @@ function InitSpawnPoints()
 			%info = Object::getName(%this);
 
 			$MarkerZone[%this] = ObjectInWhichZone(%this);
+			lbecho("--------------");
+			lbecho("info = " @ %info);
+			lbecho("MarkerZone[" @ %this @ "] = " @ $MarkerZone[%this]);
 
 			if(%info != "")
 			{
@@ -59,8 +62,11 @@ function SpawnLoop(%this)
 	%index = GetWord(%indexes, %r);
 
 	%flag = "";
-	if($SelectiveZoneBotSpawning)
-	{
+	if($SelectiveZoneBotSpawning) {
+		if (%index == "70") {
+			lbecho("SelectiveZoneBotSpawning is enabled, checking zone " @ $MarkerZone[%this]);
+			lbecho("Number of players in zone: " @ Zone::getNumPlayers($MarkerZone[%this]));
+		}
 		if(Zone::getNumPlayers($MarkerZone[%this]) > 0 || $MarkerZone[%this] == "")
 			%flag = True;
 	}
@@ -68,8 +74,10 @@ function SpawnLoop(%this)
 		%flag = True;
 
 	%maxs = Cap(round(GetWord(%info, 0) * $spawnMultiplier), 0, "inf");
-	if(%flag && $numAIperSpawnPoint[%this] < %maxs)
+	if(%flag && $numAIperSpawnPoint[%this] < %maxs) {
+		lbecho("Spawning AI at " @ %this @ " with index " @ %index);
 		%AIname = AI::helper($spawnIndex[%index], $spawnIndex[%index], "SpawnPoint " @ %this);
+	}
 
 	//always call back the spawn loop, in case a spot is freed up for a helper to spawn
       schedule("SpawnLoop(" @ %this @ ");", %delay);

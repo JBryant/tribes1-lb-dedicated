@@ -148,6 +148,11 @@ $SkinForRace[Soldier2] = "SWAT";  // change this
 $NameForRace[Soldier1] = "Shinra";
 $SkinForRace[Soldier1] = "SWAT";  // change this
 
+$NameForRace[Corpse] = "Zombie";
+$NameForRace[Walker] = "Zombie";
+$NameForRace[Rattler] = "Undead";
+$NameForRace[Magician] = "Undead";
+
 $ArmorTypeToRace[TravellerArmor] = "Traveller";
 $ArmorTypeToRace[GoblinArmor] = "Goblin"; // GoblinArmor // TestArmor
 $ArmorTypeToRace[GnollArmor] = "Gnoll";
@@ -283,6 +288,11 @@ $spawnIndex[67] = "Soldier3";
 $spawnIndex[68] = "Soldier2";
 $spawnIndex[69] = "Soldier1";
 
+$spawnIndex[70] = "Corpse";
+$spawnIndex[71] = "Walker";
+$spawnIndex[72] = "Rattler";
+$spawnIndex[73] = "Magician";
+
 //------------------------------
 
 // range looks like: RShortBow 1 BasicArrow 20/50
@@ -362,6 +372,12 @@ $BotEquipment[Turk] = "CLASS Squire LVL 50+3 COINS 38/50 LCK 0 ChippedDagger 1 F
 $BotEquipment[Soldier3] = "CLASS Squire LVL 95+7 COINS 41/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500";
 $BotEquipment[Soldier2] = "CLASS Squire LVL 100+8 COINS 44/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500";
 $BotEquipment[Soldier1] = "CLASS Squire LVL 105+10 COINS 47/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500";
+
+// dunega crypt bot equipment
+$BotEquipment[Corpse] = "CLASS Squire LVL 20+3 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 IceMateriaI 1/-1500";
+$BotEquipment[Walker] = "CLASS Squire LVL 22+4 COINS 20/50 LCK 0 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-1500";
+$BotEquipment[Rattler] = "CLASS Squire LVL 27+4 COINS 23/50 LCK 0 Broadsword 1 IceMateriaI 1/-1500";
+$BotEquipment[Magician] = "CLASS Squire LVL 31+5 COINS 26/50 LCK 0 CastingBlade 1 IceMateriaI 1/-1500";
 
 //------------------------------
 
