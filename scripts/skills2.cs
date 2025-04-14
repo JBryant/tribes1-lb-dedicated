@@ -13,8 +13,8 @@ $Skill::endSound[1] = MedicSpell;
 $Skill::groupListCheck[1] = False;
 $Skill::refVal[1] = -10;
 $Skill::graceDistance[1] = 2;
-$Skill::requiredItems[1] = "HealingKit 1";
-$Skill::removeItems[1] = "HealingKit 1";
+$Skill::requireOneOfItems[1] = "HealingKitI HealingKitII HealingKitIII HealingKitIV HealingKitV";
+$Skill::removeRequiredItem[1] = True;
 
 $Skill::keyword[2] = "cleave";
 $Skill::index[cleave] = 2;
@@ -108,8 +108,9 @@ function BeginUseSkill(%clientId, %keyword) {
 		%hasItem = False;
 		for(%idx = 0; GetWord(%requireOneOfItems, %idx) != -1; %idx += 1) {
 			%checkItem = GetWord(%requireOneOfItems, %idx);
+			%amnt = Belt::HasThisStuff(%clientId, %checkItem);
 			
-			if (Belt::HasThisStuff(%clientId, %checkItem) > 0) {
+			if (%amnt > 0) {
 				%hasItem = True;
 				break;
 			}
@@ -255,11 +256,36 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		if(%clientId != %id)
 			Client::sendMessage(%id, $MsgBeige, Client::getName(%clientId) @ " is mending on you.");
 
-		%r = $Skill::damageValue[%index] / $TribesDamageToNumericDamage;
-		refreshHP(%id, %r);
-		%castPos = GameBase::getPosition(%id);
-		
-		refreshAll(%clientId);
+		%requireOneOfItems = $Skill::requireOneOfItems[%index];
+		if (%requireOneOfItems != "") {
+			%hasItem = False;
+			for(%idx = 0; GetWord(%requireOneOfItems, %idx) != -1; %idx += 1) {
+				%checkItem = GetWord(%requireOneOfItems, %idx);
+				%amnt = Belt::HasThisStuff(%clientId, %checkItem);
+				
+				if (%amnt > 0) {
+					%hasItem = True;
+
+					if ($Skill::removeRequiredItem[%index] == True) {
+						// remove the item
+						belt::takethisstuff(%clientId, %checkItem, 1);
+						Client::sendMessage(%clientId, $MsgWhite, "You used 1 "@ $beltitem[%checkItem, "Name"] @". [have "@ (%amnt - 1) @"]");
+
+						%restoreValue = 0 - $restoreValue[%checkItem, HP];
+						%r = %restoreValue / $TribesDamageToNumericDamage;
+						refreshHP(%id, %r);
+						%castPos = GameBase::getPosition(%id);
+						
+						refreshAll(%clientId);
+					}
+				}
+			}
+
+			if (%hasItem == False) {
+				Client::sendMessage(%clientId, $MsgRed, "You do not have the required items to use "@ %keyword @".");
+				return False;
+			}
+		}	
 
 		%returnFlag = True;
     }

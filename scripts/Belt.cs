@@ -2801,8 +2801,21 @@ BeltItem::Add("Turbo Ether","TurboEther","PotionItems", 1, 1000, "", 507);
 $AccessoryVar[TurboEther, $MiscInfo] = "An potion that provides 100 MP";
 $restoreValue[TurboEther, MP] = 100;
 
-BeltItem::Add("Healing Kit", "HealingKit", "MiscItems", 0.1, 10, "", 508);
-$AccessoryVar[HealingKit, $MiscInfo] = "A medical kit that that let's you mend minor wounds.";
+BeltItem::Add("Healing Kit I", "HealingKitI", "MiscItems", 0.1, 10, "", 508);
+$AccessoryVar[HealingKitI, $MiscInfo] = "A medical kit that that let's you mend wounds. (10 HP)";
+$restoreValue[HealingKitI, HP] = 10;
+BeltItem::Add("Healing Kit II", "HealingKitII", "MiscItems", 0.1, 50, "", 509);
+$AccessoryVar[HealingKitII, $MiscInfo] = "A medical kit that that let's you mend wounds. (50 HP)";
+$restoreValue[HealingKitII, HP] = 50;
+BeltItem::Add("Healing Kit III", "HealingKitIII", "MiscItems", 0.1, 100, "", 510);
+$AccessoryVar[HealingKitIII, $MiscInfo] = "A medical kit that that let's you mend wounds. (100 HP)";
+$restoreValue[HealingKitIII, HP] = 100;
+BeltItem::Add("Healing Kit IV", "HealingKitIV", "MiscItems", 0.1, 150, "", 511);
+$AccessoryVar[HealingKitIV, $MiscInfo] = "A medical kit that that let's you mend wounds. (150 HP)";
+$restoreValue[HealingKitIV, HP] = 150;
+BeltItem::Add("Healing Kit V", "HealingKitV", "MiscItems", 0.1, 200, "", 512);
+$AccessoryVar[HealingKitV, $MiscInfo] = "A medical kit that that let's you mend wounds. (200 HP)";
+$restoreValue[HealingKitV, HP] = 200;
 
 // Alchemy Items (no shoping except for maybe Potion Bottles?)
 BeltItem::Add("Cracked Flask", "CrackedFlask", "MiscItems", 0.01, 10, "", 606);

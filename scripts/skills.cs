@@ -84,6 +84,31 @@ $SkillDesc[A] = "Admin Level";
 $SkillDesc[H] = "House";
 
 //--------------
+// Enemy - Used for AI so that they can use all weapons / skills if needed
+//--------------
+
+$SkillMultiplier[Enemy, $SkillSwords] = 1.0;
+$SkillMultiplier[Enemy, $SkillAxes] = 1.0;
+$SkillMultiplier[Enemy, $SkillHammers] = 1.0;
+$SkillMultiplier[Enemy, $SkillKatanas] = 1.0;
+$SkillMultiplier[Enemy, $SkillBows] = 1.0;
+$SkillMultiplier[Enemy, $SkillSpears] = 1.0;
+$SkillMultiplier[Enemy, $SkillBlackMagick] = 1.0;
+$SkillMultiplier[Enemy, $SkillWhiteMagick] = 1.0;
+$SkillMultiplier[Enemy, $SkillTimeMagick] = 1.0;
+$SkillMultiplier[Enemy, $SkillSummonMagick] = 1.0;
+$SkillMultiplier[Enemy, $SkillHealing] = 0.1;
+$SkillMultiplier[Enemy, $SkillEndurance] = 1.0;
+$SkillMultiplier[Enemy, $SkillEnergy] = 1.0;
+$SkillMultiplier[Enemy, $SkillMagicka] = 1.0;
+$SkillMultiplier[Enemy, $SkillWeightCapacity] = 1.0;
+$SkillMultiplier[Enemy, $SkillStealing] = 1.0;
+$SkillMultiplier[Enemy, $SkillHiding] = 1.0;
+$SkillMultiplier[Enemy, $SkillBackstabbing] = 1.0;
+$SkillMultiplier[Enemy, $SkillMining] = 1.0;
+$SkillMultiplier[Enemy, $SkillHaggling] = 1.0;
+
+//--------------
 // Squire
 //--------------
 
