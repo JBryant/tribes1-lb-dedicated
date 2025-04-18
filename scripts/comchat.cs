@@ -960,6 +960,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 			quickSkill("cleave", %TrueClientId, %trueClientId, %TCsenderName, %message, %cropped);
 			return;
 		}
+		if (%w1 == "#throw") {
+			quickSkill("throw", %TrueClientId, %trueClientId, %TCsenderName, %message, %cropped);
+			return;
+		}
 		if(%w1 == "#recall")
 		{
 				processMenucompass(%TrueClientId, "recall");

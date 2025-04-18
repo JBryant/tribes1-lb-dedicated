@@ -2718,21 +2718,21 @@ BeltItem::AddArmor("Onion Armor", "OnionArmor", "rpgfullplate",  SoundHitPlate,"
 
 // Light Armors / Robes
 $description = "A light robe that provides some protection.";
-BeltItem::AddRobe("Light Robe", "LightRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
+BeltItem::AddRobe("Light Robe", "LightRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
 $description = "A fine robe made from the finest elven silk.";
-BeltItem::AddRobe("Fine Robe", "FineRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
+BeltItem::AddRobe("Fine Robe", "FineRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
 $description = "A robe that was tailor made for mages who graduated from the academy.";
-BeltItem::AddRobe("Advisor Robe", "AdvisorRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
+BeltItem::AddRobe("Advisor Robe", "AdvisorRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
 $description = "And elvish robe that is infused with magical runes.";
-BeltItem::AddRobe("Elven Robe", "ElvenRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
+BeltItem::AddRobe("Elven Robe", "ElvenRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
 $description = "A robe that was created with the power of the vengeance in mind.";
-BeltItem::AddRobe("Robe Of Venjance", "RobeOfVenjance", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
+BeltItem::AddRobe("Robe Of Venjance", "RobeOfVenjance", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
 $description = "A bloody and tattered robe that radiates with magical energy.";
-BeltItem::AddRobe("Blood Robe", "BloodRobe","rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
+BeltItem::AddRobe("Blood Robe", "BloodRobe","rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
 $description = "A robe said to have been worn by the legendary mage, Phens.";
-BeltItem::AddRobe("Phens Robe", "PhensRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
+BeltItem::AddRobe("Phens Robe", "PhensRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
 $description = "A robe given to only the most dedicated and powerful mages in the land.";
-BeltItem::AddRobe("Quest Master Robe", "QuestMasterRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillEnergy @ " 8", $description);
+BeltItem::AddRobe("Quest Master Robe", "QuestMasterRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
 
 // Shields
 // BeltItem::AddShield(%name, %item, %special, %weight, %skillRestriction, %miscInfo, %shopIndex)
@@ -2816,6 +2816,17 @@ $restoreValue[HealingKitIV, HP] = 150;
 BeltItem::Add("Healing Kit V", "HealingKitV", "MiscItems", 0.1, 200, "", 512);
 $AccessoryVar[HealingKitV, $MiscInfo] = "A medical kit that that let's you mend wounds. (200 HP)";
 $restoreValue[HealingKitV, HP] = 200;
+
+// TODO: Maybe make a new BeltItem::AddThrowable function that takes in a damage value and type?
+
+// poisons / elemental flasks
+BeltItem::Add("Fire Flask","FireFlask", "PotionItems", 0.5, 100, "SmallPotion", 550);
+$AccessoryVar[FireFlask, $MiscInfo] = "A flask that radiates with fire energy. It can be thrown to create a small fire explosion.";
+$AccessoryVar[FireFlask, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 MandragoraRoot 1";
+$beltitem[FireFlask, "isThrowable"] = True;
+$beltitem[FireFlask, "isDetonatable"] = True;
+$beltitem[FireFlask, "spellIndex"] = 38;
+$beltitem[FireFlask, "explosion"] = "Bomb9";
 
 // Alchemy Items (no shoping except for maybe Potion Bottles?)
 BeltItem::Add("Cracked Flask", "CrackedFlask", "MiscItems", 0.01, 10, "", 606);

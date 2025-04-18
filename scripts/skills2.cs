@@ -61,6 +61,18 @@ $Skill::graceDistance[4] = 0.5;
 $Skill::requireOneOfItems[4] = "CrudeClayAlembic WornCopperAlembic ReinforcedIronAlembic ArcaneGlassAlembic CelestialMythrilAlembic";
 $SkillRestriction[$Skill::keyword[4]] = "C Chemist";
 
+$Skill::keyword[5] = "throw";
+$Skill::index[$Skill::keyword[5]] = 5;
+$Skill::name[5] = "Throw";
+$Skill::description[5] = "Allows you to throw an item at a target.";
+$Skill::delay[5] = 0.1;
+$Skill::recoveryTime[5] = 2;
+$Skill::startSound[5] = FishWalk;
+$Skill::groupListCheck[5] = False;
+$Skill::refVal[5] = -10;
+$Skill::graceDistance[5] = 10;
+$SkillRestriction[$Skill::keyword[5]] = "C Chemist";
+
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
 
@@ -301,12 +313,12 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		%returnFlag = True;
     }
 
-	 if ($Skill::keyword[%index] == "harvest") {
+	if ($Skill::keyword[%index] == "harvest") {
 		%set = newObject("set", SimSet);
 		%losRange = $Skill::LOSrange[%index] || 4;
 	    %num = containerBoxFillSet(%set, $StaticObjectType, GameBase::getPosition(%clientId), 4, 4, 4, 0);
 
-		Group::iterateRecursive(%set, findHarvestableObjects, %clientId, %index, %rest);
+		Group::iterateRecursive(%set, FindHarvestableObjects, %clientId, %index, %rest);
 		deleteObject(%set);
 
 		%overrideEndSound = True;
@@ -314,15 +326,25 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 	}
 
 	if ($Skill::keyword[%index] == "alchemy") {
-		%item = %rest;
+		%item = GetWord(%rest, 0);
+
+		if (GetWord(%rest, 1)) {
+			%itemAmnt = GetWord(%rest, 1);
+		} else {
+			%itemAmnt = 1;
+		}
+
 		%alchemyIngredients = $AccessoryVar[%item, "AlchemyIngredients"];
+		lbecho("rest: " @ %rest);
+		lbecho("item: " @ %item);
+		lbecho("itemAmnt: " @ %itemAmnt);
 
 		if (%alchemyIngredients != "") {
 			// check if they have the ingredients to make a potion
 			%missingItems = False;
 			for(%idx = 0; GetWord(%alchemyIngredients, %idx) != -1; %idx += 2) {
 				%checkItem = GetWord(%alchemyIngredients, %idx);
-				%amnt = GetWord(%alchemyIngredients, %idx + 1);
+				%amnt = GetWord(%alchemyIngredients, %idx + 1) * %itemAmnt;
 				if (Belt::HasThisStuff(%clientId, %checkItem) < %amnt) {
 					%missingItems = True;
 					break;
@@ -338,7 +360,7 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 				// remove used ingredients				
 				for(%idx = 0; GetWord(%alchemyIngredients, %idx) != -1; %idx += 2) {
 					%removeItem = GetWord(%alchemyIngredients, %idx);
-					%amnt = GetWord(%alchemyIngredients, %idx + 1);
+					%amnt = GetWord(%alchemyIngredients, %idx + 1) * %itemAmnt;
 					%has = Belt::HasThisStuff(%clientId, %removeItem);
 
 					Belt::TakeThisStuff(%clientId, %removeItem, %amnt);
@@ -346,8 +368,8 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 				}
 
 				// give the item
-				Belt::GiveThisStuff(%clientId, %item, 1);
-				Client::sendMessage(%clientId, $MsgWhite, "You made a " @ $beltitem[%item, "Name"] @ "!");
+				Belt::GiveThisStuff(%clientId, %item, %itemAmnt);
+				Client::sendMessage(%clientId, $MsgWhite, "You made "@ %itemAmnt @" " @ $beltitem[%item, "Name"] @ ".");
 			}
 		} else {
 			Client::sendMessage(%clientId, $MsgRed, "There is no alchemical recipe to make " @ %item @ ".");
@@ -356,27 +378,58 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		}
 	}
 
+	if ($Skill::keyword[%index] == "throw") {
+		%item = %rest;
+
+		if(%item == "")
+			Client::sendMessage(%clientId, $MsgRed, "Please specify an item (ex: Black Statue = BlackStatue).");
+		else if(belt::hasthisstuff(%clientId, %item) <= 0)
+			Client::sendMessage(%clientId, $MsgRed, "You do not have any " @ $beltItem[%item, "Name"] @ " in your belt.");
+		else {
+			%thrownItem = ThrowItem(%clientId, %item, 25);
+		}
+
+		%overrideEndSound = True;
+		%returnFlag = True;
+	}
+
     return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
 }
 
-function findHarvestableObjects(%object, %clientId, %index, %extra) {
+function FindHarvestableObjects(%object, %clientId, %index, %extra) {
+	%alchemySkill = $PlayerSkill[%clientId, $SkillAlchemy];
+
 	if(Object::getName(%object) == "PlantTwo1") {
-		%roll = floor(getRandom() * 100) + 1;
+		%roll = floor(getRandom() * 100) + floor(%alchemySkill / 100) + 1;
 
 		%item = "";
 		%amnt = 0;
-		if (%roll > 80) {
-			%item = "MandragoraRoot";
-			%amnt = floor(getRandom() * 5) + 1;
-		} else if (%roll > 10) {
+		%special = "";
+		%specialAmnt = 0;
+
+		// rolle for standard herb items
+		if (%roll > 10) {
 			%item = "HealingHerb";
-			%amnt = floor(getRandom() * 5) + 1;
+			%amnt = floor(getRandom() * 5) + floor(getRandom() * floor(%alchemySkill / 100)) + 1;
+		}
+
+		// roll again for special herb items
+		if (%roll > 50) {
+			%special = "MandragoraRoot";
+			%specialAmnt = floor(getRandom() * 5) + floor(getRandom() * floor(%alchemySkill / 100)) + 1;
 		}
 
 		if (%item != "") {
 			Belt::GiveThisStuff(%clientId, %item, %amnt);
-			Client::sendMessage(%clientId, $MsgWhite, "You harvested " @ %amnt @ " " @ $beltitem[%item, "Name"] @ "!");
-		} else {
+			Client::sendMessage(%clientId, $MsgWhite, "You harvested " @ %amnt @ " " @ $beltitem[%item, "Name"] @ ".");
+		}
+
+		if (%special != "") {
+			Belt::GiveThisStuff(%clientId, %special, %specialAmnt);
+			Client::sendMessage(%clientId, $MsgWhite, "You harvested " @ %specialAmnt @ " " @ $beltitem[%special, "Name"] @ ".");
+		}
+
+		if (%item == "" && %special == "") {
 			Client::sendMessage(%clientId, $MsgRed, "You failed to harvest anything.");
 		}
 
@@ -404,7 +457,7 @@ function EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %
 		// if(%skilltype == $SkillTimeMagick || %skilltype == $SkillWhiteMagick)
 		// 	UseSkill(%clientId, %skilltype, True, True);
 
-		// UseSkill(%clientId, $SkillEnergy, True, True);
+		// UseSkill(%clientId, $SkillMagicka, True, True);
 		// %tempManaCost2 = $Spell::manaCost[%index] / 2;
 		// %tempManaCost = floor($Spell::manaCost[%index] / 2);
         
@@ -416,7 +469,7 @@ function EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %
 	}
 	else if(%returnFlag == False) {
 		// UseSkill(%clientId, %skilltype, False, True);
-		// UseSkill(%clientId, $SkillEnergy, False, True);
+		// UseSkill(%clientId, $SkillMagicka, False, True);
 		%recovTime = %recovTime * 0.5;
 	}
 

@@ -53,7 +53,7 @@ function refreshMANAREGEN(%clientId)
 {
 	dbecho($dbechoMode, "refreshMANAREGEN(" @ %clientId @ ")");
 
-	%a = ($PlayerSkill[%clientId, $SkillEnergy] / 3250);
+	%a = ($PlayerSkill[%clientId, $SkillMagicka] / 3250);
 	if(%clientId.sleepMode == 1)
 		%b = 1.0 + %a;
 	else if(%clientId.sleepMode == 2)

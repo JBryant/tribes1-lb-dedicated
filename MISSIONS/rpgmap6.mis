@@ -1953,7 +1953,7 @@ instant SimGroup "MissionGroup" {
 			};
 		};
 		instant SimGroup "PROTECTED 7th Heaven" {
-			instant SimGroup "MUSIC fftown.wav 55";
+			instant SimGroup "MUSIC badtown.wav 70";
 			instant SimGroup "ENTERSOUND object_harp.wav";
 			instant SimGroup "DropPoints" {
 				instant Marker "Marker1" {

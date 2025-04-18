@@ -233,6 +233,37 @@ function ProjectileAttack(%clientId, %vel)
 	PostAttack(%clientId, %weapon);
 }
 
+function ThrowItem(%clientId, %item, %vel) {
+	dbecho($dbechoMode, "ThrowItem(" @ %clientId @ ", " @ %item @ ", " @ %vel @ ")");
+
+	if(%clientId.sleepMode > 0)
+		return;
+
+	if(belt::hasthisstuff(%clientId, %item) <= 0)
+		return;
+
+	%zoffset = 0.44; // 0.44
+	%image = BeltItem::GetImage(%item);
+	%thrownObject = newObject("", "Item", %image, 1, false);
+	%thrownObject.owner = %clientId;
+	%thrownObject.name = %item;
+
+	addToSet("MissionCleanup", %thrownObject);
+	schedule("DetonateItem(" @ %thrownObject @ ");", 3, %thrownObject);
+
+	%rot = GameBase::getRotation(%clientId);
+	%newrot = (GetWord(%rot, 0) - %zoffset) @ " " @ GetWord(%rot, 1) @ " " @ GetWord(%rot, 2);
+
+	GameBase::setRotation(%clientId, %newrot);
+	GameBase::throw(%thrownObject, Client::getOwnedObject(%clientId), %vel, false);
+	GameBase::setRotation(%thrownObject, %rot);
+	GameBase::setRotation(%clientId, %rot);
+
+	belt::takethisstuff(%clientId, %item, 1);
+
+	return %thrownObject;
+}
+
 function PickAxeSwing(%player, %length, %weapon)
 {
 	dbecho($dbechoMode, "PickAxeSwing(" @ %player @ ", " @ %length @ ")");

@@ -93,7 +93,7 @@ function fetchData(%clientId, %type)
 	}
 	else if(%type == "MaxMANA")
 	{
-		%a = 8 + round( $PlayerSkill[%clientId, $SkillEnergy] * (1/3) );
+		%a = 8 + round( $PlayerSkill[%clientId, $SkillMagicka] * (1/3) );
 		%b = AddPoints(%clientId, 5);
 		%c = AddBonusStatePoints(%clientId, "MaxMANA");
 

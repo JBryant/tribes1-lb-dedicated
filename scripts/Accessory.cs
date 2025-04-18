@@ -502,15 +502,25 @@ function GetCurrentlyWearingArmor(%clientId) {
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 //$AccessoryVar[BluePotion, $Weight] = 4;
-//ItemData BluePotion
-//{
-//	description = "Blue Potion";
-//	shapeFile = "armorKit";
-//	heading = "eMiscellany";
-//	className = "Accessory";
-//	shadowDetailMask = 4;
-//	price = 0;
-//};
+ItemData SmallPotion
+{
+	description = "SmallPotion";
+	shapeFile = "armorKit";
+	heading = "eMiscellany";
+	className = "Accessory";
+	shadowDetailMask = 4;
+	price = 0;
+};
+
+ItemData BigPotion
+{
+	description = "BigPotion";
+	shapeFile = "BigPotion";
+	heading = "eMiscellany";
+	className = "Accessory";
+	shadowDetailMask = 4;
+	price = 0;
+};
 //function BluePotion::onUse(%player,%item)
 //{
 //	%clientId = Player::getClient(%player);

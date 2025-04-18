@@ -134,7 +134,11 @@ function Item::onCollision(%this, %object) {
 			deleteObject(%this);
 		}
         else if(%item.className == "Accessory" || $LoreItem[%item] == True) {
-			if(Item::giveItem(%clientId, %item, 1, True)) {
+			%itemName = %this.name;
+			if ($beltitem[%itemName, "isDetonatable"] == True) {
+				DetonateItem(%this);
+			}
+			else if(Item::giveItem(%clientId, %item, 1, True)) {
 				Item::playPickupSound(%this);
 				RefreshAll(%clientId);
 				deleteObject(%this);
@@ -152,6 +156,17 @@ function Item::onCollision(%this, %object) {
 			}
 		}
 	}
+}
+
+function DetonateItem(%object) {
+	dbecho($dbechoMode, "DetonateItem(" @ %object @ ")");
+	
+	%pos = GameBase::getPosition(%object);
+	%explosion = $beltitem[%object.name, "explosion"];
+	%spellIndex = $beltitem[%object.name, "spellIndex"];
+
+	CreateAndDetBomb(%object.owner, %explosion, %pos, True, %spellIndex);
+	deleteObject(%object);
 }
 
 function Item::onMount(%player,%item)

@@ -645,6 +645,24 @@ $Spell::refVal[37] = 320;
 $Spell::graceDistance[37] = 2;
 $SkillType[shadowblade] = $SkillBlackMagick;
 
+// fire flask spekk
+$Spell::keyword[38] = "fireflaskbomb";
+$Spell::index[fireflaskbomb] = 38;
+$Spell::name[38] = "Fire Flask Bomb";
+$Spell::description[38] = "fire flask bomb explosion.";
+$Spell::delay[38] = 3;
+$Spell::recoveryTime[38] = 3;
+$Spell::radius[38] = 8;
+$Spell::damageValue[38] = "70";
+$Spell::LOSrange[38] = 999; // 80
+$Spell::manaCost[38] = 1;
+$Spell::startSound[38] = PlaceSeal;
+$Spell::endSound[38] = LaunchFB;
+$Spell::groupListCheck[38] = False;
+$Spell::refVal[38] = -9998;
+$Spell::graceDistance[38] = 10;
+$SkillType[fireflaskbomb] = $SkillAlchemy;
+
 //----------------------------------------------------------------------------------------------------------------
 
 function BeginCastSpell(%clientId, %keyword)
@@ -1461,7 +1479,7 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 	}
 
 
-	return EndCast(%clientid,%overrideEndSound,%extradelay,%index,%castpos,%returnflag);
+	return EndCast(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
 
 //	Player::setAnimation(%clientId, 39);
 //
@@ -1482,7 +1500,7 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 //
 //		if(%skilltype == $SkillTimeMagick || %skilltype == $SkillWhiteMagick)
 //			UseSkill(%clientId, %skilltype, True, True);
-//		UseSkill(%clientId, $SkillEnergy, True, True);
+//		UseSkill(%clientId, $SkillMagicka, True, True);
 //
 //		return True;
 //	}
@@ -1491,14 +1509,13 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 //		storeData(%clientId, "SpellCastStep", 2);
 //
 //		UseSkill(%clientId, %skilltype, False, True);
-//		UseSkill(%clientId, $SkillEnergy, False, True);
+//		UseSkill(%clientId, $SkillMagicka, False, True);
 //
 //		return False;
 //	}
 }
 
-function EndCast(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag)
-{
+function EndCast(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag) {
 	Player::setAnimation(%clientId, 39);
 
 	if(!%overrideEndSound)
@@ -1519,7 +1536,7 @@ function EndCast(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %r
 	{
 		if(%skilltype == $SkillTimeMagick || %skilltype == $SkillWhiteMagick)
 			UseSkill(%clientId, %skilltype, True, True);
-		UseSkill(%clientId, $SkillEnergy, True, True);
+		UseSkill(%clientId, $SkillMagicka, True, True);
 		%tempManaCost2 = $Spell::manaCost[%index] / 2;
 		%tempManaCost = floor($Spell::manaCost[%index] / 2);
 		//pecho(%tempManaCost2 @ " " @%tempManaCost);
@@ -1530,7 +1547,7 @@ function EndCast(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %r
 	else if(%returnFlag == False)
 	{
 		UseSkill(%clientId, %skilltype, False, True);
-		UseSkill(%clientId, $SkillEnergy, False, True);
+		UseSkill(%clientId, $SkillMagicka, False, True);
 		%recovTime = %recovTime * 0.5;
 	}
 	if(%clientId.repack > 32) {
@@ -1544,14 +1561,12 @@ function EndCast(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %r
 	return %returnFlag;
 }
 
-function sendDoneRecovMsg(%clientId)
-{
+function sendDoneRecovMsg(%clientId) {
 	//this function is here just to make the schedule command where this is called easier to read
 	Client::sendMessage(%clientId, $MsgBeige, "You are ready to cast.");
 }
 
-function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index)
-{
+function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index) {
 	dbecho($dbechoMode, "CreateAndDetBomb(" @ %clientId @ ", " @ %b @ ", " @ %castPos @ ", " @ %index @ ")");
 
 	%player = Client::getOwnedObject(%clientId);
@@ -1569,15 +1584,13 @@ function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index)
 	playSound($Spell::endSound[%index], %castPos);
 }
 
-function SpellDamage(%clientId, %targetId, %damageValue, %index)
-{
+function SpellDamage(%clientId, %targetId, %damageValue, %index) {
 	dbecho($dbechoMode, "SpellDamage(" @ %clientId @ ", " @ %targetId @ ", " @ %damageValue @ ", " @ %index @ ")");
 
 	GameBase::virtual(%targetId, "onDamage", $SpellDamageType, %damageValue, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, $Spell::keyword[%index]);
 }
 
-function SpellRadiusDamage(%clientId, %pos, %index)
-{
+function SpellRadiusDamage(%clientId, %pos, %index) {
 	dbecho($dbechoMode, "SpellRadiusDamage(" @ %clientId @ ", " @ %pos @ ", " @ %index @ ")");
 
 	%b = $Spell::radius[%index] * 2;
@@ -1587,8 +1600,7 @@ function SpellRadiusDamage(%clientId, %pos, %index)
 	Group::iterateRecursive(%set, DoSpellDamage, %clientId, %pos, %index);
 	deleteObject(%set);
 }
-function DoSpellDamage(%object, %clientId, %pos, %index)
-{
+function DoSpellDamage(%object, %clientId, %pos, %index) {
 	dbecho($dbechoMode, "DoSpellDamage(" @ %object @ ", " @ %clientId @ ", " @ %pos @ ", " @ %index @ ")");
 
 	%id = Player::getClient(%object);
@@ -1605,8 +1617,7 @@ function DoSpellDamage(%object, %clientId, %pos, %index)
 	}
 }
 
-function SpellCalcRadiusDamage(%dist, %radius, %dmg, %percMin, %percMax)
-{
+function SpellCalcRadiusDamage(%dist, %radius, %dmg, %percMin, %percMax) {
 	dbecho($dbechoMode, "SpellCalcRadiusDamage(" @ %dist @ ", " @ %radius @ ", " @ %dmg @ ", " @ %percMin @ ", " @ %percMax @ ")");
 
 	%newdmg = %dmg - (%dist * (%dmg / %radius));
@@ -1620,7 +1631,6 @@ function SpellCalcRadiusDamage(%dist, %radius, %dmg, %percMin, %percMax)
 
 	%newdmg = (%p * %dmg) / 100;
 
-	return %newdmg;
 }
 
 function GetBestSpell(%clientId, %type, %semiRandomSpell)
