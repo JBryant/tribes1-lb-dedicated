@@ -253,6 +253,8 @@ function createServer(%mission, %dedicated)
 	//exec(Turret);
 	exec(Beacon);
 	exec(rpgStaticShape);
+	// new stuff
+	exec(worldtree);
 
 	%oldrpgmap["rpgmap1"] = True;
 	%oldrpgmap["rpgmap5"] = True;

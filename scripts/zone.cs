@@ -420,66 +420,66 @@ function hailHit(%clientId){
 }
 
 //Note: Camera's getLOSInfo ray is emitted .5 game units above it's position.
-function setupIce(%client, %pos)
-{//Written by phantom, using a camera trick by Plasmatic
-	%camera = newObject("Camera","Turret",HappyStand,true);
-	addtoset("MissionCleanup", %camera);
-	GameBase::setPosition(%camera,vector::add(%pos,"0 0 290"));
-	if(GameBase::getLOSInfo(%camera,300,"-1.5708 0 0"))
-	{	
-		%cl = player::getClient($los::object);
-		if(%cl == %client)
-			%foundSky = True;
+// function setupIce(%client, %pos)
+// {//Written by phantom, using a camera trick by Plasmatic
+// 	%camera = newObject("Camera", "Turret", HappyStand, true);
+// 	addtoset("MissionCleanup", %camera);
+// 	GameBase::setPosition(%camera,vector::add(%pos,"0 0 290"));
+// 	if(GameBase::getLOSInfo(%camera,300,"-1.5708 0 0"))
+// 	{	
+// 		%cl = player::getClient($los::object);
+// 		if(%cl == %client)
+// 			%foundSky = True;
 			
-	}
-	if(!%foundSky){
-		deleteobject(%camera);
-		return false;
-	}
-	GameBase::setPosition(%camera,vector::add(%pos,"0 0 -1.2"));
-	if(GameBase::getLOSInfo(%camera,0.8,"1.5708 0 0"))
-	{
-		if(player::getClient($los::object) == %client || $personalFerry[%client] == $los::object)
-		{
-			deleteobject(%camera);
-			return false;
-		}
-		%detectedSurface = False;
-		if($los::object == 8)//all terrains are 8
-		{
-			%direction = $los::normal;
-			%playerpos = vector::add(%pos,(getWord(%direction,0)*0.1)@" "@(getWord(%direction,1)*0.1)@" "@(getWord(%direction,2)*0.1));
-			%direction = (getWord(%direction,0)*1.9)@" "@(getWord(%direction,1)*1.9)@" "@(getWord(%direction,2)*1.9);
-			%icepos = vector::sub($los::position, %direction);
-			%detectedSurface = True;
-		}
-		deleteobject(%camera);
-		if(!%detectedSurface){
-			return false;
-		}
-		%tilt = vector::getDistance($los::normal, "0 0 1");
-		if(player::getClient($los::object) == %client)
-		{
-			pecho("player ice error");
-			return false;
-		}
-		%iceType = "icexs50f.dis";
+// 	}
+// 	if(!%foundSky){
+// 		deleteobject(%camera);
+// 		return false;
+// 	}
+// 	GameBase::setPosition(%camera,vector::add(%pos,"0 0 -1.2"));
+// 	if(GameBase::getLOSInfo(%camera,0.8,"1.5708 0 0"))
+// 	{
+// 		if(player::getClient($los::object) == %client || $personalFerry[%client] == $los::object)
+// 		{
+// 			deleteobject(%camera);
+// 			return false;
+// 		}
+// 		%detectedSurface = False;
+// 		if($los::object == 8)//all terrains are 8
+// 		{
+// 			%direction = $los::normal;
+// 			%playerpos = vector::add(%pos,(getWord(%direction,0)*0.1)@" "@(getWord(%direction,1)*0.1)@" "@(getWord(%direction,2)*0.1));
+// 			%direction = (getWord(%direction,0)*1.9)@" "@(getWord(%direction,1)*1.9)@" "@(getWord(%direction,2)*1.9);
+// 			%icepos = vector::sub($los::position, %direction);
+// 			%detectedSurface = True;
+// 		}
+// 		deleteobject(%camera);
+// 		if(!%detectedSurface){
+// 			return false;
+// 		}
+// 		%tilt = vector::getDistance($los::normal, "0 0 1");
+// 		if(player::getClient($los::object) == %client)
+// 		{
+// 			pecho("player ice error");
+// 			return false;
+// 		}
+// 		%iceType = "icexs50f.dis";
 
-		if(!$los::object.isIce){
-			%object = newObject("icepad", InteriorShape, %iceType);
-			%object.isIce = True;
-			addtoset("MissionCleanup/iceBlocks", %object);
-			gamebase::setRotation(%object,vector::getrotation($los::normal));
-			gamebase::setPosition(%client,%playerpos);
+// 		if(!$los::object.isIce){
+// 			%object = newObject("icepad", InteriorShape, %iceType);
+// 			%object.isIce = True;
+// 			addtoset("MissionCleanup/iceBlocks", %object);
+// 			gamebase::setRotation(%object,vector::getrotation($los::normal));
+// 			gamebase::setPosition(%client,%playerpos);
 
-			gamebase::setposition(%object,%icepos);
-		}
-		return true;
-	}
-	else
-		deleteobject(%camera);
-	return false;	
-}
+// 			gamebase::setposition(%object,%icepos);
+// 		}
+// 		return true;
+// 	}
+// 	else
+// 		deleteobject(%camera);
+// 	return false;	
+// }
 
 function gravWorkaround(%clientId, %method)
 {

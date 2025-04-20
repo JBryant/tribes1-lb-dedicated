@@ -110,7 +110,7 @@ $ClassRequirements[19] = "WhiteMage 8 Mystic 8 Geomancer 8 Samurai 8"; // Samura
 $ClassName[20] = "DarkKnight";
 $ClassRequirements[20] = "BlackMage 8 TimeMage 8 Dragoon 8 Ninja 8";   // Ninja (25)  , 5 bm, 3 tm, 3 dg, 8 nin - 25 + 19 = RL 44 min
 
-$ClassName[21] = "Ancient";
+$ClassName[21] = "Ancient"; 
 $ClassRequirements[21] = "Archer 8 Thief 8 Orator 8 Dancer 8";         // Dancer (25) , 5 ar, 3 th, 3 or, 8 dan - 25 + 19 = RL 44 min
 
 $ClassName[22] = "HighSummoner";

@@ -2837,6 +2837,21 @@ function findGroundPos(%mpos, %sizex, %sizey)
 	return False;
 }
 
+function String::erase(%string, %gone) {
+	dbecho($dbechoMode, "String::replace(" @ %string @ ", " @ %search @ ", " @ %replace @ ")");
+
+	%are = String::findSubStr(%string, %gone);
+
+	if(%are != -1) {
+		%len = String::len(%gone);
+		%part1 = String::NEWgetSubStr(%string, 0, %are);
+		%part2 = String::NEWgetSubStr(%string, %are + %len + 1, 99999);
+		%string = %part1 @ %part2;
+	}
+
+	return %string;
+}
+
 // different echo util to keep track of my stupid echos
 function lbecho(%message) {
 	echo(%message);

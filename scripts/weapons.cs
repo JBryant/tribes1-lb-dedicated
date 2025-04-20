@@ -236,11 +236,20 @@ function ProjectileAttack(%clientId, %vel)
 function ThrowItem(%clientId, %item, %vel) {
 	dbecho($dbechoMode, "ThrowItem(" @ %clientId @ ", " @ %item @ ", " @ %vel @ ")");
 
-	if(%clientId.sleepMode > 0)
+	if($beltitem[%item, "isThrowable"] != True) {
+		Client::sendMessage(%clientId, $MsgRed, "You cannot throw that item.");
 		return;
+	}
 
-	if(belt::hasthisstuff(%clientId, %item) <= 0)
+	if(%clientId.sleepMode > 0) {
+		Client::sendMessage(%clientId, $MsgRed, "You cannot throw items while sleeping.");
 		return;
+	}
+
+	if(belt::hasthisstuff(%clientId, %item) <= 0) {
+		Client::sendMessage(%clientId, $MsgRed, "You do not have any " @ $beltItem[%item, "Name"] @ " in your belt.");
+		return;
+	}
 
 	%zoffset = 0.44; // 0.44
 	%image = BeltItem::GetImage(%item);
@@ -249,7 +258,10 @@ function ThrowItem(%clientId, %item, %vel) {
 	%thrownObject.name = %item;
 
 	addToSet("MissionCleanup", %thrownObject);
-	schedule("DetonateItem(" @ %thrownObject @ ");", 3, %thrownObject);
+
+	if ($beltitem[%item, "isDetonatable"] == True) {
+		schedule("DetonateItem(" @ %thrownObject @ ");", 3, %thrownObject);
+	}
 
 	%rot = GameBase::getRotation(%clientId);
 	%newrot = (GetWord(%rot, 0) - %zoffset) @ " " @ GetWord(%rot, 1) @ " " @ GetWord(%rot, 2);

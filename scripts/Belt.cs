@@ -1848,6 +1848,15 @@ function BeltItem::AddProjectile(%name, %item, %type, %weight, %cost, %image, %w
 	$HardcodedItemCost[%item] = %cost;
 }
 
+function BeltItem::AddSeed(%name, %item, %type, %weight, %cost, %image, %shopIndex, %miscInfo, %fruit, %fruitType) {
+	BeltItem::Add(%name, %item, %type, %weight, %cost, %image, %shopIndex);
+
+	$AccessoryVar[%item, $MiscInfo] = %miscInfo;
+	$beltitem[%item, "isThrowable"] = True;
+	$beltitem[%item, "isPlantable"] = True;
+	$beltitem[%item, %fruitType] = %fruit;
+}
+
 // ==============================
 // ========== SMITHING ==========
 // ==============================
@@ -2892,3 +2901,24 @@ BeltItem::AddWeapon("Shattered Bone Club", "ShatteredBoneClub", "SpikedClub", $B
 // Enemy Weapons
 $description = "Beast Claw I";
 BeltItem::AddWeapon("Beast Claw I", "BeastClawI", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "1");
+
+// Seed / Food Items
+// function BeltItem::AddSeed(%name, %item, %type, %weight, %cost, %image, %shopIndex, %miscInfo, %fruit, %fruitType)
+$description = "A small seed that will grow into an Apple Tree if planted in the right conditions.";
+BeltItem::AddSeed("Apple Seed", "AppleSeed", "MiscItems", 0.01, 10, "Granite", 800, $description, "Apple", "TreeFruit");
+BeltItem::Add("Apple", "Apple", "MiscItems", 0.01, 10, "Ruby");
+$AccessoryVar[Apple, $MiscInfo] = "A delicious red apple. It can be eaten to restore health.";
+
+$description = "A large seed that will grow into an Avocado Tree if planted in the right conditions.";
+BeltItem::AddSeed("Avocado Seed", "AvocadoSeed", "MiscItems", 0.01, 10, "Granite", 801, $description, "Avocado", "TreeFruit");
+BeltItem::Add("Avocado", "Avocado", "MiscItems", 0.01, 10, "Jade");
+$AccessoryVar[Avocado, $MiscInfo] = "A perfectly ripe avocado. It can be eaten to restore health.";
+
+BeltItem::Add("Wheat Seed", "WheatSeed", "MiscItems", 0.01, 10, "Bullet");
+$AccessoryVar[WheatSeed, $MiscInfo] = "A small wheat seed. It can be used to grow wheat.";
+$beltitem[WheatSeed, "isThrowable"] = True;
+$beltitem[WheatSeed, "isPlantable"] = True;
+$beltitem[WheatSeed, "BushFruit"] = "Wheat";
+BeltItem::Add("Wheat", "Wheat", "MiscItems", 0.01, 10, "Tracer");
+$AccessoryVar[Wheat, $MiscInfo] = "Wheat is a common grain used in many recipes. It can be used to make bread and other baked goods.";
+// $beltitem[Grain, "isThrowable"] = True;

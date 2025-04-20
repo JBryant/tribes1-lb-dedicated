@@ -250,3 +250,149 @@ function Item::deployShape(%player,%name,%shape,%item)
 // 	Player::decItemCount(%player,%item);
 // 	refreshHP(Player::getClient(%player), -0.1);
 // }
+
+// ============ New Re-usable Item Images ================= 
+
+// ------ gems ------
+ItemData LittleRock {
+	description = "Portalkey1";
+	className = "Accessory";
+	shapeFile = "little_rock";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Granite {
+	description = "Granite";
+	className = "Accessory";
+	shapeFile = "granite";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Quartz {
+	description = "Quartz";
+	className = "Accessory";
+	shapeFile = "quartz";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Opal {
+	description = "Opal";
+	className = "Accessory";
+	shapeFile = "opal";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Jade {
+	description = "Copper";
+	className = "Accessory";
+	shapeFile = "Jade";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Turquoise {
+	description = "Turquoise";
+	className = "Accessory";
+	shapeFile = "turquoise";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Topaz {
+	description = "Topaz";
+	className = "Accessory";
+	shapeFile = "topaz";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Saphire {
+	description = "Saphire";
+	className = "Accessory";
+	shapeFile = "saphire";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Ruby {
+	description = "Ruby";
+	className = "Accessory";
+	shapeFile = "ruby";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Gold {
+	description = "Gold";
+	className = "Accessory";
+	shapeFile = "gold";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+// ItemData Crystal {
+// 	description = "Crystal";
+// 	className = "Accessory";
+// 	shapeFile = "crystals";
+// 	heading = "eMiscellany";
+// 	shadowDetailMask = 4;
+// };
+
+ItemData Diamond {
+	description = "Diamond";
+	className = "Accessory";
+	shapeFile = "diamond";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+ItemData Keldrinite {
+	description = "Keldrinite";
+	className = "Accessory";
+	shapeFile = "keldrinite";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+// ---- misc ----
+ItemData DiscAmmo {
+	description = "Disc Ammo";
+	className = "Accessory";
+	shapeFile = "discammo";
+	heading = "eMiscellany";
+};
+
+ItemData Bullet {
+	description = "Bullet";
+	className = "Accessory";
+	shapeFile = "bullet";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Tracer {
+	description = "Tracer";
+	className = "Accessory";
+	shapeFile = "tracer";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData Stick {
+	description = "Stick";
+	className = "Accessory";
+	shapeFile = "mrtwig";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};
+
+ItemData BigTwig {
+	description = "BireWood";
+	className = "longstaff";
+	shapeFile = "bigtwig";
+	heading = "eMiscellany";
+	shadowDetailMask = 4;
+};

@@ -1084,34 +1084,34 @@ ItemData OrbOfBreath0
 
 
 //used for ice
-TurretData HappyStand 
-{	
-	className = "Turret";
-	shapeFile = "camera";
-	maxDamage = 2500;
-	maxEnergy = 10;
-	speed = 20;
-	speedModifier = 1.0;
-	range = 0.0;
-	sequenceSound[0] = { "deploy", SoundActivateMotionSensor };
-	visibleToSensor = true;
-	shadowDetailMask = 4;
-	castLOS = true;
-	supression = false;
-	supressable = false;
-	mapFilter = 2;
-	mapIcon = "M_camera";
-	debrisId = defaultDebrisSmall;
-	FOV = 0.707;
-	pinger = false;
-	explosionId = debrisExpMedium;
-	description = "HappyStand";
-};
+// TurretData HappyStand 
+// {	
+// 	className = "Turret";
+// 	shapeFile = "camera";
+// 	maxDamage = 2500;
+// 	maxEnergy = 10;
+// 	speed = 20;
+// 	speedModifier = 1.0;
+// 	range = 0.0;
+// 	sequenceSound[0] = { "deploy", SoundActivateMotionSensor };
+// 	visibleToSensor = true;
+// 	shadowDetailMask = 4;
+// 	castLOS = true;
+// 	supression = false;
+// 	supressable = false;
+// 	mapFilter = 2;
+// 	mapIcon = "M_camera";
+// 	debrisId = defaultDebrisSmall;
+// 	FOV = 0.707;
+// 	pinger = false;
+// 	explosionId = debrisExpMedium;
+// 	description = "HappyStand";
+// };
 
-function HappyStand::onDamage(%this,%type,%value,%pos,%vec,%mom,%object)
-{
-	//do nothing, no damage..
-}
+// function HappyStand::onDamage(%this,%type,%value,%pos,%vec,%mom,%object)
+// {
+// 	//do nothing, no damage..
+// }
 
 ItemData BeltItemTool
 {

@@ -1705,8 +1705,95 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 		}
 
+		// =============== New Stuff ===============
+
+		if(%w1 == "#plant") {
+			%seed = GetWord(%cropped, 0);
+			// Is there a skill requirement for this item?
+			// if ($SkillRequirement[%item] > 0) {
+				if (Belt::HasThisStuff(%clientId, %seed) > 0) {
+					// make sure they have enough farming skill
+					if ($PlayerSkill[%Clientid, $SkillFarming] >= $SkillRequirement[%seed]) {
+						// %flag = False;
+						// if it's in the list of cooking itmes, then we do something else with it?
+						// for(%i = 1; $ItemList[Cooking, %i] != ""; %i++) {
+						// 	//echo($ItemList[Cooking, %i]);
+						// 	if ( $itemList[Cooking, %i] == %item ) {
+						// 		%player.type = %i;							 
+						// 		%flag = True;
+						// 	 	break;
+						// 	}
+						// }
+						// set the %i if it is something we know
+						// if (%i == 10 && !%flag) {
+						// 	if (%item == "Grain") %i = 1;
+						// 	if (%item == "valdueberry") %i = 2;
+						// 	if (%item == "redberry") %i = 3;
+						// 	if (%item == "Redberry") %i = 3;
+						// 	if (%item == "redBerry") %i = 3;
+						// 	if (%item == "blueberry") %i = 4;
+						// 	if (%item == "strawberry") %i = 5;
+						// 	if (%item == "twigfruit") %i = 6;
+						// 	if (%item == "greenfruit") %i = 7;
+						// 	if (%item == "grape") %i = 8;
+						// 	if (%item == "eviltreefruit") %i = 9;
+						// }
+						// for all i's but 9, do this...
+						// if(%i != 9 ) {
+						// 	//echo(%player.type);
+						// 	// %item = Item::OnDrop(%player, %item);
+						// 	%item = ThrowItem(%clientid, %item, 10);
+						// 	%item.type = %i;
+						// 	%item.client = %TrueClientId;
+						// 	//echo(%item.type);
+						// 	// %time = ($SkillRequirement[%item]+(GetRandom()*200+10)/$PlayerSkill[%ClientId, $skillFarming]);
+						// 	%time = 1;
+						// 	schedule("bush::spawn(" @ %item @ ");", %time + 2, %item);
+						// 	//UseSkill(%TrueClientId, $SkillFarming, True, True);
+						// }
+						// if it's 9, it's evil... so we hate it
+						// else if(%i == 9) {
+						// 	%pos = Gamebase::getposition(%trueclientId);
+						// 	if(!zone::isin(%pos, "-2278.58 2070.64 -1572.88", "-2333.94n2011.88 -1582.88"))
+						// 	{
+						// 		echo("Evil Treefruit Planted");
+						// 		%item = Item::OnDrop(%player, $itemList[Cooking, %i]);
+						// 	    %item.type = %i;							
+						// 	    %item.client = %TrueClientId;
+						// 		%item.team = Gamebase::getTeam(%player);
+						// 		%item.per = 1;
+						// 		schedule("EvilSeed::plant("@%item@");",60,%item);
+						// 	}
+						// 	else
+						// 		Client::SendMessage(%TrueClientId,0,"Error: Evil trees can only grow in magical places");
+						// }
+
+						// check what type of item it is, and if it's a plant or a tree
+						if ($beltitem[%seed, "TreeFruit"] != "") {
+							%item = ThrowItem(%clientid, %seed, 10);
+							%item.client = %TrueClientId;
+
+							%time = 1;
+							schedule("tree::spawn(" @ %item @ ");", %time + 2, %item);
+						}
+						else if ($beltitem[%item, "BushFruit"] != "") {
+							%item = ThrowItem(%clientid, %item, 10);
+							%item.client = %TrueClientId;
+							
+							%time = 1;
+							schedule("bush::spawn(" @ %item @ ");", %time + 2, %item);
+						}
+						else
+							Client::SendMessage(%TrueClientId, 0, "Error: Item is not a plant.");
+					}
+					else
+						Client::SendMessage(%TrueClientId,0,"You do not have the required Skill to plant that item.");
+				}
+			// }
+		}
+
 		//============================
-		// LONGBOW COMMANDS ===========
+		// LONGBOW (and Others) COMMANDS
 		//============================
 
 		if (%w1 == "#mypos") {
@@ -1743,6 +1830,30 @@ function internalSay(%clientId, %team, %message, %senderName)
 					if (%cl != "") {
 						Client::setSkin(%cl, %skin);
 					}
+				}
+			}
+		}
+
+		if(%w1 == "#createtree") {
+			if(%clientToServerAdminLevel >= 5){
+				%player = Client::getOwnedObject(%TrueClientId);
+
+				if(GameBase::getLOSinfo(%player, 1000)) {
+					%pos = $los::position;
+					init::Tree(%pos);
+				}
+			}
+		}
+
+		if(%w1 == "#deletetree") {
+			if(%clientToServerAdminLevel >= 5) {
+				if(GameBase::getLOSinfo(%player, 1000)) {
+					%target = $los::object;
+					%obj = getObjectType(%target);
+					%type = GameBase::getDataName(%target);
+            		
+					if(%type == "TreeShape")
+						tree::delete(%target);
 				}
 			}
 		}

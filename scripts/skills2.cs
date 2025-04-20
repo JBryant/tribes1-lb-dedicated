@@ -335,9 +335,6 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		}
 
 		%alchemyIngredients = $AccessoryVar[%item, "AlchemyIngredients"];
-		lbecho("rest: " @ %rest);
-		lbecho("item: " @ %item);
-		lbecho("itemAmnt: " @ %itemAmnt);
 
 		if (%alchemyIngredients != "") {
 			// check if they have the ingredients to make a potion
@@ -383,11 +380,8 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 
 		if(%item == "")
 			Client::sendMessage(%clientId, $MsgRed, "Please specify an item (ex: Black Statue = BlackStatue).");
-		else if(belt::hasthisstuff(%clientId, %item) <= 0)
-			Client::sendMessage(%clientId, $MsgRed, "You do not have any " @ $beltItem[%item, "Name"] @ " in your belt.");
-		else {
+		else
 			%thrownItem = ThrowItem(%clientId, %item, 25);
-		}
 
 		%overrideEndSound = True;
 		%returnFlag = True;

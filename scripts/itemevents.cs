@@ -137,12 +137,18 @@ function Item::onCollision(%this, %object) {
 			%itemName = %this.name;
 			if ($beltitem[%itemName, "isDetonatable"] == True) {
 				DetonateItem(%this);
-			}
-			else if(Item::giveItem(%clientId, %item, 1, True)) {
+			} else {
+				Belt::GiveThisStuff(%clientId, %itemName, 1);
 				Item::playPickupSound(%this);
 				RefreshAll(%clientId);
 				deleteObject(%this);
+				Client::sendMessage(%clientId, $MsgWhite, "You picked up 1 " @ %itemName @ ".");
 			}
+			// else if(Item::giveItem(%clientId, %item, 1, True)) {
+			// 	Item::playPickupSound(%this);
+			// 	RefreshAll(%clientId);
+			// 	deleteObject(%this);
+			// }
 		}
 		else if(%item.className == "TownBot") {
 			//do nothing.
@@ -253,14 +259,62 @@ function Item::onUse(%player, %item) {
 	}
 }
 
-function Item::onDrop(%player,%item)
-{
+function Item::onDrop(%player, %item) {
 	dbecho($dbechoMode, "Item::onDrop(" @ %player @ ", " @ %item @ ")");
 
-	if($matchStarted)
-	{
-		if(%item.className != Armor)
-		{
+	if($matchStarted) {
+		// if (%item == "TreeFruit" || %item == "EvilTreeFruit" || $ItemList[Cooking, %player.type] == %item) {
+		if (%player.fruit != "") {
+			if (getObjectType(%player) == "Player") {				
+				if (Player::getItemCount(%player, %item) > 0) {
+					%delta = 1;
+					RPG::decItemCount(%player, %item, %delta);
+					%vec = 15;
+				}
+				else
+					%delta = 0;
+			}
+			else {
+				%rot2 = GameBase::GetRotation(%player);
+				%rot = "0 0 " @ GetRandom() * 3.14*4;
+				GameBase::SetRotation(%player, %rot);
+				%vec = floor(GetRandom() * 13) + 2;// max 15 min 2			
+				%delta = 1;
+			}
+
+			if (%delta > 0) {
+				%itemImage = $beltitem[%item, "Image"];
+				%obj = newObject("", "Item", %itemImage, 1, false);
+				%obj.delta = %delta;
+				%obj.name = %item;
+				%obj.owner = %player;
+
+	 			// if ($ItemList[Cooking, %player.type] == %item) {
+	 			//  	if (getObjectType(%player) == "Player" ) {
+	 			//  		%vec = 10;
+	 			//  	}
+	 			//  	else {
+				// 		%vec = 3;
+				// 		schedule("Item::pop(" @ %obj @ ");", 600, %obj);
+	 			//  	}
+	 			// }
+				// else
+	 			//  	schedule("tree::periodic(" @ %obj @ ");", 90, %obj);
+
+				schedule("Item::pop(" @ %obj @ ");", 600, %obj);
+	 			
+	 			addToSet("MissionCleanup", %obj);
+				GameBase::throw(%obj, %player, 1, false);
+
+				if (getObjectType(%player) != "Player")
+					GameBase::SetRotation(%player, %rot2);
+
+				//echo(%obj);
+				return %obj;
+			}
+		}
+
+		if(%item.className != Armor) {
 			if(%item.className == Projectile)
 				%delta = 20;
 			else
