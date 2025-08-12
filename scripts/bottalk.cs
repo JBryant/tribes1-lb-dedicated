@@ -132,7 +132,9 @@ function bottalkChoice(%client,%key){
 		$yousaid[%client] = %msg;
 		eval("bottalk::"@clipTrailingNumbers(%object.name)@"("@%client@","@%object@",False,\"#say "@%msg@"\");");
 	}
-	else{
+	else {
+		// TODO: Select from a random list of options that say something more realistic.
+		// even better if you can base it off things like race and class
 		AI::sayLater(%client, %object, "What was that? Please pick an option on the list.", True);
 	}
 }

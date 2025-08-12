@@ -354,7 +354,7 @@ function SaveWorld()
 	//echo("Save complete. "@%ii@" objects saved.");
 	%time = timestamp();
 	%stamp = string::getsubstr(%time,0,19);
-	echo("SaveWorld|"@%stamp@"|Objects:"@%ii);
+	//echo("SaveWorld|"@%stamp@"|Objects:"@%ii);
 	//messageAll(2, "SaveWorld complete.");
 
 	%list = GetPlayerIdList();
@@ -368,7 +368,7 @@ function SaveWorld()
 			//max 16 chars per name, plus each one followed by ":complete ",
 			//26 chars per character, plus about 13 at start, 247.
 			//256 is where it gets crashy.
-			echo(%echo);
+			//echo(%echo);
 			%echo = "Saved chars:";
 			%ii = 0;
 		}
@@ -384,8 +384,8 @@ function SaveWorld()
 		Client::sendMessage(%id, $MsgBeige, %msg);
 		%echo = %echo @ " " @ %curname @ ":" @ %ret;
 	}
-	if(%ii > 0)
-		echo(%echo);
+	// if(%ii > 0)
+		//echo(%echo);
 
 }
 function LoadWorld()
@@ -2646,7 +2646,7 @@ function InitObjectives()
 	dbecho($dbechoMode, "InitObjectives()");
 
 	%num = 0;
-	Team::setObjective(0, %num++, "<jc><f8>Welcome To Fantasy Realms RPG!");
+	Team::setObjective(0, %num++, "<jc><f8>Welcome To Final Fantasy Realms RPG!");
 	Team::setObjective(0, %num++, "<f5>Download:\n<f0>https://www.moddb.com/mods/rpgmod/downloads/tribes-rpg-repack-minimal-full-ver");
 
 	Team::setObjective(0, %num++, "<f5>Getting Started:");

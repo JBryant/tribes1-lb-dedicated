@@ -233,6 +233,103 @@ function ProjectileAttack(%clientId, %vel)
 	PostAttack(%clientId, %weapon);
 }
 
+function WoodAxeSwing(%player, %weapon) {
+	dbecho($dbechoMode, "PickAxeSwing(" @ %player @ ", " @ %length @ ")");
+	lbecho("woodaxe swing");
+
+	%clientId = Player::getClient(%player);
+
+	if(%clientId == "")
+		%clientId = 0;
+
+	if (%clientid.sleepMode == 1)
+		return;
+	else if (%clientid.sleepMode == 2)
+		return;
+	else if (Client::getGuiMode(%clientId) == $GuiModeInventory)
+		return;
+
+	//==== ANTI-SPAM CHECK, CAUSE FOR SPAM UNKNOWN ==========
+	%time = getIntegerTime(true) >> 5;
+	if(%time - %clientId.lastfiretime <= $WeaponDelay[%weapon]-0.2) {
+		if(%time - %clientId.lastfiretime <= $WeaponDelay[%weapon]-0.8)
+			return;
+	}
+
+	if(%time - %clientId.lastFireTime <= $fireTimeDelay)
+		return;
+
+	%clientId.lastFireTime = %time;
+	//=======================================================
+	// TODO: Look if we want to add WeaponEndurance here
+	// WeaponEndurance(%clientId, %player, %weapon);
+	$los::object = "";
+
+	%length = GetRange(%weapon);
+	if(GameBase::getLOSinfo(%player, %length)) {
+		%target = $los::object;
+		%obj = getObjectType(%target);
+		%type = GameBase::getDataName(%target);
+
+        if(%type == "TreeShape") {
+			PlaySound(SoundHitLeather, GameBase::getPosition(%clientId));
+			if(%clientid.monster) return;
+			%score = tree::chop(%clientId, %player, %target);
+
+			if(%score != "") {
+				// RPG::incItemCount(%clientId, %score, 1);
+				RefreshAll(%clientId);
+				Client::sendMessage(%clientId, 0, "You found " @ %score.description @ ".");
+
+				// %newflag = useskill(%clientId, $SkillWoodCutting, True, True);
+			}
+			// else
+				// %newflag = useskill(%clientId, $SkillWoodCutting, False, True);	
+		}
+		else if(%type == "EvilTree" || %type == "EvilTreeBig") {
+			PlaySound(SoundHitLeather, GameBase::getPosition(%clientId));
+			if(%clientid.monster) return;
+			%score = EvilTree::chop(%clientId, %player, %target);
+
+			if(%score != "") {
+				RPG::incItemCount(%clientId, %score, 1);
+				RefreshAll(%clientId);
+				Client::sendMessage(%clientId, 0, "You found " @ %score.description @ ".");
+
+				// %newflag = useskill(%clientId, $SkillWoodCutting, True, True);
+			}
+			// else
+				// %newflag = useskill(%clientId, $SkillWoodCutting, False, True);	
+		}
+		else if(%type == "Questtree") {
+			PlaySound(SoundHitLeather, GameBase::getPosition(%clientId));
+			if(%clientid.monster) return;
+			%score = tree::questchop(%clientId, %player, %target);
+
+			if(%score != "") {
+				// RPG::incItemCount(%clientId, %score, 1);
+				RefreshAll(%clientId);
+				Client::sendMessage(%clientId, 0, "You cut out a " @ %score.description @ " from the overgrown tree.");
+				%newflag = useskill(%clientId, $SkillWoodCutting, True, True);
+			}
+		}
+		else if(%type == "PlantTwo") {
+			bush::hit(%target);
+		}
+		else if($buildinglist[%target, "HP"] > 0 && $buildinglist[%target, "team"] != client::getfteam(%clientid)) {
+			building::hit(%target);
+		}
+		else if($buildinglist[%target, "HP"] > 0 && $buildinglist[%target, "team"] == client::getfteam(%clientid)) {
+			building::teamhit(%target, %clientId, "hatchet");
+		}
+
+		if(%obj == "Player")
+			GameBase::virtual(%target, "onDamage", "", 1.0, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, %weapon);
+	}
+
+	PostAttack(%clientId, %weapon);
+}
+
 function ThrowItem(%clientId, %item, %vel) {
 	dbecho($dbechoMode, "ThrowItem(" @ %clientId @ ", " @ %item @ ", " @ %vel @ ")");
 
@@ -272,6 +369,8 @@ function ThrowItem(%clientId, %item, %vel) {
 	GameBase::setRotation(%clientId, %rot);
 
 	belt::takethisstuff(%clientId, %item, 1);
+
+	Client::sendMessage(%clientId, $MsgWhite, "You throw a " @ $beltItem[%item, "Name"] @ ". [have " @ belt::hasthisstuff(%clientId, %item) @ "]");
 
 	return %thrownObject;
 }
@@ -547,18 +646,24 @@ function CastingBladeImage::onFire(%player, %slot)
 
 	%index = GetBestSpell(%clientId, 1, True);
 
+	lbecho("Spell Index found " @ %index);
+
 	%length = $Spell::LOSrange[%index]-1;
 		
 	$los::object = "";
 	if(GameBase::getLOSinfo(%player, %length) && %index != -1)
 	{
+		lbecho("found target");
 		%obj = getObjectType($los::object);
+		lbecho("Object type found " @ %obj);
 		if(%obj == "Player")
 		{
 			if(Player::isAiControlled(%clientId))
 			{
+				lbecho("New AI directive added");
 				AI::newDirectiveRemove(fetchData(%clientId, "BotInfoAiName"), 99);
 			}
+			lbecho("Casting spell " @ $Spell::keyword[%index]);
 			internalSay(%clientId, 0, "#cast " @ $Spell::keyword[%index]);
 			%hasCast = True;
 		}
@@ -747,6 +852,44 @@ ItemData Hatchet
 };
 function HatchetImage::onFire(%player, %slot) {
 	MeleeAttack(%player);
+}
+
+// WOOD AXE - Hatchet Image (hand axe)
+ItemImageData WoodAxeImage
+{
+	shapeFile  = "hatchet";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	reloadTime = 0;
+	fireTime = $WeaponDelay[HandAxe];
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing1;
+	sfxActivate = AxeSlash2;
+};
+ItemData WoodAxe
+{
+	heading = "bWeapons";
+	description = "Wood Axe";
+	className = "Weapon";
+	shapeFile  = "hatchet";
+	hudIcon = "axe";
+	shadowDetailMask = 4;
+	imageType = WoodAxeImage;
+	price = 0;
+	showWeaponBar = true;
+};
+
+function WoodAxeImage::onFire(%player, %slot)
+{
+	// %clientId = Player::getClient(%player);
+	// if(%clientId == -1)
+	// 	item::pop(%player);
+	WoodAxeSwing(%player, WoodAxe);
 }
 
 // AXE (War Axe Image)

@@ -399,7 +399,7 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 			Client::addMenuItem(%clientId, %cnt++ @ "Equip to "@%curweap, %type@" arm "@%item);
 		}
 	}
-	else if(%type == "PotionItems") {
+	else if(%type == "PotionItems" || %type == "MiscItems") {
 		Client::addMenuItem(%clientId, %cnt++ @ "Use", %type@" use "@%item);
 	}
 	else if(%type == "WeaponItems") {
@@ -579,23 +579,47 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 		%has = belt::hasthisstuff(%clientId, %item);
 		if(%has < 1)
 			return;
-		if($restoreValue[%item, HP] > 0){
-			%hp = fetchData(%clientId, "HP");
-			refreshHP(%clientId, $restoreValue[%item, HP] * -0.01);
-			if(fetchData(%clientId, "HP") != %hp)
-				UseSkill(%clientId, $SkillHealing, True, True);
+
+		if ($restoreValue[%item, HP] > 0 || $restoreValue[%item, MP] > 0 || $beltitem[%item, "targetPosition"]) {
+			// check if HP restore object
+			if ($restoreValue[%item, HP] > 0){
+				%hp = fetchData(%clientId, "HP");
+				refreshHP(%clientId, $restoreValue[%item, HP] * -0.01);
+				if(fetchData(%clientId, "HP") != %hp)
+					UseSkill(%clientId, $SkillHealing, True, True);
+			}
+			
+			// check if MP restore object
+			if ($restoreValue[%item, MP] > 0) {
+				refreshMANA(%clientId, $restoreValue[%item, MP] * -1);
+			}
+
+			// check if location change item
+			if ($beltitem[%item, "targetPosition"]) {
+				GameBase::setPosition(%clientId, $beltitem[%item, "targetPosition"]);
+
+				if ($beltitem[%item, "targetRotationZ"]) {
+					GameBase::setRotation(%clientId, "0 0 " @ $beltitem[%item, "targetRotationZ"]);
+				}
+			}
+
+			if ($beltitem[%item, "reusable"]) {
+				// If the item is reusable, we can use it without consuming it
+				Client::sendMessage(%clientId, $MsgWhite, "You used " @ $beltitem[%item, "Name"] @ ".");
+			} else {
+				belt::takethisstuff(%clientId, %item, 1);
+				%has--;
+				Client::sendMessage(%clientId, $MsgWhite, "You used " @ $beltitem[%item, "Name"] @ ". [have " @ %has @ "]");
+				refreshAll(%clientId);
+			}
+		} else {
+			Client::sendMessage(%clientId, $MsgWhite, "You cannot use " @ $beltitem[%item, "Name"] @ ".");
 		}
-		if($restoreValue[%item, MP] > 0){
-			refreshMANA(%clientId, $restoreValue[%item, MP] * -1);
-		}
-		belt::takethisstuff(%clientId, %item, 1);
-		%has--;
-		Client::sendMessage(%clientId, $MsgWhite, "You used "@$beltitem[%item, "Name"]@". [have "@%has@"]");
-		refreshAll(%clientId);
-		if(!%keybind){
-			if(%has > 0)
-				MenuBeltDrop(%clientid, %item, %type);
-		}
+		
+		// if (!%keybind) {
+		// 	if (%has > 0)
+		// 		MenuBeltDrop(%clientid, %item, %type);
+		// }
 	}
 	%clientId.bulkNum = 1;
 	return;
@@ -1074,7 +1098,6 @@ function processMenuSellBeltItemFinal(%clientId, %opt)
 
 
 //-----------------------------------------------------------------
-
 function MenuStoreBelt(%clientId, %page) {
 	Client::buildMenu(%clientId, "Belt store:", "StoreBelt", true);
 
@@ -1914,6 +1937,14 @@ $materiaMiscInfo["Poison"] = "A small green glowing orb that emanates a sickly s
 $materiaMiscInfo["Holy"] = "A small white glowing orb that emanates a holy aura of peace and justice. This materia is embued with the element of Holy.";
 $materiaMiscInfo["Dark"] = "A dark glowing orb that emanates an aura of death and destruction. This materia is embued with the element of Darkness.";
 
+$materiaElementalType["Fire"] = $ElementalFire;
+$materiaElementalType["Lightning"] = $ElementalLightning;
+$materiaElementalType["Ice"] = $ElementalIce;
+$materiaElementalType["Earth"] = $ElementalEarth;
+$materiaElementalType["Poison"] = $ElementalPoison;
+$materiaElementalType["Holy"] = $ElementalHoly;
+$materiaElementalType["Dark"] = $ElementalDark;
+
 $enchantLevels[1] = "I";
 $enchantLevels[2] = "II";
 $enchantLevels[3] = "III";
@@ -1942,6 +1973,7 @@ function generateEnchantsAndMateria() {
 			$WeaponEnchantment[%enchant, "mod"] = "1 " @ %damage;
 			$WeaponEnchantment[%enchant, "action"] = $enchantDamageVerb[%baseEnchant];
 			$WeaponEnchantment[%enchant, "materia"] = %baseEnchant @ "Materia" @ %enchantLevel;
+			$WeaponEnchantment[%enchant, "elementalType"] = $materiaElementalType[%baseEnchant];
 
 			$WeaponEnchantments = $WeaponEnchantments @ " " @ %enchant;
 			// add materia to belt
@@ -2829,13 +2861,61 @@ $restoreValue[HealingKitV, HP] = 200;
 // TODO: Maybe make a new BeltItem::AddThrowable function that takes in a damage value and type?
 
 // poisons / elemental flasks
-BeltItem::Add("Fire Flask","FireFlask", "PotionItems", 0.5, 100, "SmallPotion", 550);
+BeltItem::Add("Fire Flask","FireFlask", "PotionItems", 0.1, 100, "SmallPotion", 550);
 $AccessoryVar[FireFlask, $MiscInfo] = "A flask that radiates with fire energy. It can be thrown to create a small fire explosion.";
-$AccessoryVar[FireFlask, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 MandragoraRoot 1";
+$AccessoryVar[FireFlask, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 BombCore 1";
 $beltitem[FireFlask, "isThrowable"] = True;
 $beltitem[FireFlask, "isDetonatable"] = True;
 $beltitem[FireFlask, "spellIndex"] = 38;
 $beltitem[FireFlask, "explosion"] = "Bomb9";
+
+BeltItem::Add("Ice Flask","IceFlask", "PotionItems", 0.1, 100, "SmallPotion", 551);
+$AccessoryVar[IceFlask, $MiscInfo] = "A flask that radiates with ice energy. It can be thrown to create a small ice explosion.";
+$AccessoryVar[IceFlask, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 MaidensTear 1";
+$beltitem[IceFlask, "isThrowable"] = True;
+$beltitem[IceFlask, "isDetonatable"] = True;
+$beltitem[IceFlask, "spellIndex"] = 39;
+$beltitem[IceFlask, "explosion"] = "Bomb2";
+
+BeltItem::Add("Lightning Flask","LightningFlask", "PotionItems", 0.1, 100, "SmallPotion", 552);
+$AccessoryVar[LightningFlask, $MiscInfo] = "A flask that radiates with lightning energy. It can be thrown to create a small lightning explosion.";
+$AccessoryVar[LightningFlask, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 TonberryOil 1";
+$beltitem[LightningFlask, "isThrowable"] = True;
+$beltitem[LightningFlask, "isDetonatable"] = True;
+$beltitem[LightningFlask, "spellIndex"] = 40;
+$beltitem[LightningFlask, "explosion"] = "Bomb10";
+
+BeltItem::Add("Earth Flask","EarthFlask", "PotionItems", 0.1, 100, "SmallPotion", 553);
+$AccessoryVar[EarthFlask, $MiscInfo] = "A flask that radiates with earth energy. It can be thrown to create a small earth explosion.";
+$AccessoryVar[EarthFlask, "AlchemyIngredients"] = "ReinforcedAlchemistsBottle 1 VialOfWater 1 BehemothHornFragment 1";
+$beltitem[EarthFlask, "isThrowable"] = True;
+$beltitem[EarthFlask, "isDetonatable"] = True;
+$beltitem[EarthFlask, "spellIndex"] = 41;
+$beltitem[EarthFlask, "explosion"] = "Bomb1";
+
+BeltItem::Add("Acid Flask","AcidFlask", "PotionItems", 0.1, 100, "SmallPotion", 554);
+$AccessoryVar[AcidFlask, $MiscInfo] = "A flask that radiates with acid energy. It can be thrown to create a small acid explosion.";
+$AccessoryVar[AcidFlask, "AlchemyIngredients"] = "ArcaneCrystalPhial 1 VialOfWater 1 MalboroSporeSac 1";
+$beltitem[AcidFlask, "isThrowable"] = True;
+$beltitem[AcidFlask, "isDetonatable"] = True;
+$beltitem[AcidFlask, "spellIndex"] = 42;
+$beltitem[AcidFlask, "explosion"] = "Bomb6";
+
+BeltItem::Add("Holy Flask","HolyFlask", "PotionItems", 0.1, 100, "SmallPotion", 554);
+$AccessoryVar[HolyFlask, $MiscInfo] = "A flask that radiates with holy energy. It can be thrown to create a small holy explosion.";
+$AccessoryVar[HolyFlask, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 MalboroSporeSac 1";
+$beltitem[HolyFlask, "isThrowable"] = True;
+$beltitem[HolyFlask, "isDetonatable"] = True;
+$beltitem[HolyFlask, "spellIndex"] = 42;
+$beltitem[HolyFlask, "explosion"] = "Bomb5";
+
+BeltItem::Add("Unholy Flask","UnholyFlask", "PotionItems", 0.1, 100, "SmallPotion", 554);
+$AccessoryVar[UnholyFlask, $MiscInfo] = "A flask that radiates with unholy energy. It can be thrown to create a small unholy explosion.";
+$AccessoryVar[UnholyFlask, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 MalboroSporeSac 1";
+$beltitem[UnholyFlask, "isThrowable"] = True;
+$beltitem[UnholyFlask, "isDetonatable"] = True;
+$beltitem[UnholyFlask, "spellIndex"] = 42;
+$beltitem[UnholyFlask, "explosion"] = "Bomb14";
 
 // Alchemy Items (no shoping except for maybe Potion Bottles?)
 BeltItem::Add("Cracked Flask", "CrackedFlask", "MiscItems", 0.01, 10, "", 606);
@@ -2875,6 +2955,25 @@ $AccessoryVar[MaidensTear, $MiscInfo] = "A delicate, crystal-clear flower that g
 BeltItem::Add("Chocobo Feather", "ChocoboFeather", "MiscItems", 0.01, 10000, "", 621);
 $AccessoryVar[ChocoboFeather, $MiscInfo] = "A feathery yellow-green plant that resembles a chocobo's plume.";
 
+BeltItem::Add("Bomb Core", "BombCore", "MiscItems", 0.01, 100, "", 622);
+$AccessoryVar[BombCore, $MiscInfo] = "A core component used in bomb crafting. It contains volatile materials and is highly sought after by engineers.";
+BeltItem::Add("Malboro Spore Sac", "MalboroSporeSac", "MiscItems", 0.01, 100, "", 623);
+$AccessoryVar[MalboroSporeSac, $MiscInfo] = "A spore sac from the Malboro plant. It is known for its toxic properties and is often used in bomb crafting.";
+BeltItem::Add("Cockatrice Gizzard Stone", "CockatriceGizzardStone", "MiscItems", 0.01, 100, "", 624);
+$AccessoryVar[CockatriceGizzardStone, $MiscInfo] = "A gizzard stone from the Cockatrice. It is known for its hardiness and is often used in bomb crafting.";
+BeltItem::Add("Behemoth Horn Fragment", "BehemothHornFragment", "MiscItems", 0.01, 100, "", 625);
+$AccessoryVar[BehemothHornFragment, $MiscInfo] = "A fragment of a horn from the Behemoth. It is known for its toughness and is often used in bomb crafting.";
+BeltItem::Add("Chimera Flame Gland", "ChimeraFlameGland", "MiscItems", 0.01, 100, "", 626);
+$AccessoryVar[ChimeraFlameGland, $MiscInfo] = "A gland from the Chimera that produces a fiery substance. It is often used in bomb crafting.";
+BeltItem::Add("Tonberry Oil", "TonberryOil", "MiscItems", 0.01, 100, "", 627);
+$AccessoryVar[TonberryOil, $MiscInfo] = "An oil extracted from the Tonberry. It is known for its stealth-enhancing properties.";
+BeltItem::Add("Flan Residue", "FlanResidue", "MiscItems", 0.01, 100, "", 628);
+$AccessoryVar[FlanResidue, $MiscInfo] = "A viscous residue left behind by Flans. It is often used in bomb crafting.";
+BeltItem::Add("Skeleton Bone Powder", "SkeletonBonePowder", "MiscItems", 0.01, 100, "", 629);
+$AccessoryVar[SkeletonBonePowder, $MiscInfo] = "A fine powder made from ground skeleton bones. It is often used in bomb crafting.";
+BeltItem::Add("Ahriman Eye Lens", "AhrimanEyeLens", "MiscItems", 0.01, 100, "", 630);
+$AccessoryVar[AhrimanEyeLens, $MiscInfo] = "A lens made from the eye of an Ahriman. It is known for its ability to enhance magical properties.";
+
 // Quest Items
 BeltItem::Add("Black Statue", "BlackStatue", "QuestItems", $AccessoryVar[BlackStatue, $Weight], GenerateItemCost(BlackStatue));
 BeltItem::Add("Skeleton Bone", "SkeletonBone", "QuestItems", $AccessoryVar[SkeletonBone, $Weight], GenerateItemCost(SkeletonBone));
@@ -2882,6 +2981,10 @@ BeltItem::Add("Enchanted Stone", "EnchantedStone", "QuestItems", $AccessoryVar[E
 BeltItem::Add("Dragon Scale", "DragonScale", "QuestItems", $AccessoryVar[DragonScale, $Weight], GenerateItemCost(DragonScale));
 BeltItem::Add("Parchment", "Parchment", "QuestItems", $AccessoryVar[Parchment, $Weight], GenerateItemCost(Parchment));
 BeltItem::Add("Magic Dust", "MagicDust", "QuestItems", $AccessoryVar[MagicDust, $Weight], GenerateItemCost(MagicDust));
+BeltItem::Add("Gooba Hearthstone", "GoobaHearthstone", "MiscItems", 0.01, 10, "Ruby");
+$AccessoryVar[GoobaHearthstone, $MiscInfo] = "A magical hearthstone that teleports the user back to Upper Gooba.";
+$beltitem[GoobaHearthstone, "targetPosition"] = "259.767 -469.158 -2963.51";
+$beltitem[GoobaHearthstone, "targetRotationZ"] = "2.84465";
 
 // Enemy Weapons
 $description = "A casting blade.";
@@ -2901,6 +3004,11 @@ BeltItem::AddWeapon("Shattered Bone Club", "ShatteredBoneClub", "SpikedClub", $B
 // Enemy Weapons
 $description = "Beast Claw I";
 BeltItem::AddWeapon("Beast Claw I", "BeastClawI", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "1");
+
+// Harvesting Items
+$description = "An axe used for chopping wood.";
+// TODO: Change to woodcutting / lumberjack skill
+BeltItem::AddWeapon("Wood Axe", "WoodAxe", "WoodAxe", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 1", "35", 51); // shop item 47
 
 // Seed / Food Items
 // function BeltItem::AddSeed(%name, %item, %type, %weight, %cost, %image, %shopIndex, %miscInfo, %fruit, %fruitType)

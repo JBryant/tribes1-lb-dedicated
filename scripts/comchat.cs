@@ -665,7 +665,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 				Client::SendMessage(%TrueClientId,0,"There doesn't seem to be an item by that name.");
 		}
 
-	      if(%w1 == "#steal")
+	    if(%w1 == "#steal")
 		{
 			%time = getIntegerTime(true) >> 5;
 			if(%time - %TrueClientId.lastStealTime > $stealDelay)
@@ -745,80 +745,78 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 		if(%w1 == "#savecharacter")
 		{
-	            if(%clientToServerAdminLevel >= 4)
-	            {
-	                  if(%cropped == "")
-	                  {
-	                        %r = SaveCharacter(%TrueClientId);
-	                        Client::sendMessage(%TrueClientId, 0, "Saving self (" @ %TrueClientId @ "): success = " @ %r);
-	                  }
-	                  else
-	                  {
-	                        %id = NEWgetClientByName(%cropped);
-	                        if(%id)
-	                        {
-	                              %r = SaveCharacter(%id);
-	                              Client::sendMessage(%TrueClientId, 0, "Saving " @ Client::getName(%id) @ " (" @ %id @ "): success = " @ %r);
-	                        }
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	            }
-	            else
-	            {
+	        if(%clientToServerAdminLevel >= 4)
+			{
+				if(%cropped == "")
+				{
+					%r = SaveCharacter(%TrueClientId);
+					Client::sendMessage(%TrueClientId, 0, "Saving self (" @ %TrueClientId @ "): success = " @ %r);
+				}
+				else
+				{
+					%id = NEWgetClientByName(%cropped);
+					if(%id)
+					{
+						%r = SaveCharacter(%id);
+						Client::sendMessage(%TrueClientId, 0, "Saving " @ Client::getName(%id) @ " (" @ %id @ "): success = " @ %r);
+					}
+					else
+							Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+				}
+			}
+			else
+			{
 				%time = getIntegerTime(true) >> 5;
 				if(%time - %TrueClientId.lastSaveCharTime > 10)
 				{
 					%TrueClientId.lastSaveCharTime = %time;
 	
-		                  %r = SaveCharacter(%TrueClientId);
+					%r = SaveCharacter(%TrueClientId);
 					Client::sendMessage(%TrueClientId, 0, "Saving self (" @ %TrueClientId @ "): success = " @ %r);
 				}
-	            }
+			}
+
 			return;
-	      }
-	      if(%w1 == "#whatismyclientid")
+	    }
+	    if(%w1 == "#whatismyclientid")
 		{
-	            Client::sendMessage(%TrueClientId, 0, "Your clientId is " @ %TrueClientId);
+	        Client::sendMessage(%TrueClientId, 0, "Your clientId is " @ %TrueClientId);
 			return;
-	      }
-	      if(%w1 == "#whatismyplayerid")
+	    }
+	    if(%w1 == "#whatismyplayerid")
 		{
-	            Client::sendMessage(%TrueClientId, 0, "Your playerId is " @ Client::getOwnedObject(%TrueClientId));
+	        Client::sendMessage(%TrueClientId, 0, "Your playerId is " @ Client::getOwnedObject(%TrueClientId));
 			return;
-	      }
-	      if(%w1 == "#dropcoins")
+	    }
+	    if(%w1 == "#dropcoins")
 		{
-	            %cropped = GetWord(%cropped, 0);
-	
-	            if(%cropped == "all")
-	                  %cropped = fetchData(%TrueClientId, "COINS");
-	            else
-	                  %cropped = floor(%cropped);
-	
-	            if(fetchData(%TrueClientId, "COINS") >= %cropped || %clientToServerAdminLevel >= 4)
-	            {
-	                  if(%cropped > 0)
-	                  {
-	                        if( !(%clientToServerAdminLevel >= 4) )
+			%cropped = GetWord(%cropped, 0);
+
+			if(%cropped == "all")
+					%cropped = fetchData(%TrueClientId, "COINS");
+			else
+					%cropped = floor(%cropped);
+
+			if(fetchData(%TrueClientId, "COINS") >= %cropped || %clientToServerAdminLevel >= 4)
+			{
+				if(%cropped > 0)
+				{
+					if(!(%clientToServerAdminLevel >= 4))
 						storeData(%TrueClientId, "COINS", %cropped, "dec");
-	
+
 					%toss = GetTypicalTossStrength(%TrueClientId);
-	
-	                        TossLootbag(%TrueClientId, "COINS " @ %cropped, %toss, "*", 0);
+					TossLootbag(%TrueClientId, "COINS " @ %cropped, %toss, "*", 0);
 					RefreshAll(%TrueClientId);
-	
-	                        Client::sendMessage(%TrueClientId, 0, "You dropped " @ %cropped @ " coins.");
-	                        playSound(SoundMoney1, GameBase::getPosition(%TrueClientId));
-	                  }
-	            }
-	            else
-	            {
-	                  Client::sendMessage(%TrueClientId, 0, "You don't even have that many coins!");
-	            }
+					Client::sendMessage(%TrueClientId, 0, "You dropped " @ %cropped @ " coins.");
+					playSound(SoundMoney1, GameBase::getPosition(%TrueClientId));
+				}
+			}
+			else
+				Client::sendMessage(%TrueClientId, 0, "You don't even have that many coins!");
+
 			return;
 	      }
-	      if(%w1 == "#compass")
+	    if(%w1 == "#compass")
 		{
 			if(%cropped == "")
 				Client::sendMessage(%TrueClientId, 0, "Use #compass town or #compass dungeon. (Do not specify which, simply write town or dungeon)");
@@ -1311,26 +1309,27 @@ function internalSay(%clientId, %team, %message, %senderName)
 	
 			return;
 		}
-		if(%w1 == "#roll")
-		{
-	//		%c1 = GetWord(%cropped, 0);
-	//
-	//		if(%c1 != -1)
-	//			Client::sendMessage(%TrueClientId, 0, %c1 @ ": " @ GetRoll(%c1));
-	//		else
-	//			Client::sendMessage(%TrueClientId, 0, "Please specify a roll (example: 1d6)");
-	//
-			Client::sendMessage(%TrueClientId, 0, "Do not use this command again.");
-			if(%TrueClientId.roll == "")
-				%TrueClientId.roll = 1;
-			else
-			{
-				Jail(%TrueClientId, 300, 1);
-				messageall(0,%TCsenderName @ " has been jailed for 300 seconds for using #roll.");
-			}
+		// why was this banned by phantom? Is there something exploitive in GetRoll? (LongBow)
+		// if(%w1 == "#roll")
+		// {
+		// 	//		%c1 = GetWord(%cropped, 0);
+		// 	//
+		// 	//		if(%c1 != -1)
+		// 	//			Client::sendMessage(%TrueClientId, 0, %c1 @ ": " @ GetRoll(%c1));
+		// 	//		else
+		// 	//			Client::sendMessage(%TrueClientId, 0, "Please specify a roll (example: 1d6)");
+		// 	//
+		// 	Client::sendMessage(%TrueClientId, 0, "Do not use this command again.");
+		// 	if(%TrueClientId.roll == "")
+		// 		%TrueClientId.roll = 1;
+		// 	else
+		// 	{
+		// 		Jail(%TrueClientId, 300, 1);
+		// 		messageall(0,%TCsenderName @ " has been jailed for 300 seconds for using #roll.");
+		// 	}
 
-			return;
-		}
+		// 	return;
+		// }
 		if(%w1 == "#hide")
 		{
 			if(SkillCanUse(%TrueClientId, "#hide"))
@@ -1563,6 +1562,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 					client::sendmessage(%TrueClientId, 0, "Key "@%c1@" set to "@%rest);
 				else
 					client::sendmessage(%TrueClientId, 0, "Key "@%c1@" cleared. was: "@$numMessage[%TrueClientId, %c1]);
+
 				$numMessage[%TrueClientId, %c1] = %rest;
 			}
 			else if((string::getsubstr(%c1, 0, 6) == "numpad" && string::len(%c1) == 7) || %c1 == "numpadenter")
@@ -1573,6 +1573,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 					client::sendmessage(%TrueClientId, 0, "Key "@%c1@" set to "@%rest);
 				else
 					client::sendmessage(%TrueClientId, 0, "Key "@%c1@" cleared. was: "@$numMessage[%TrueClientId, %c1]);
+
 				$numMessage[%TrueClientId, %c1] = %rest;
 			}
 			else if(%TrueClientId.repack >= 4)
@@ -1828,6 +1829,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 					%cl = Player::getClient(%object);
 
 					if (%cl != "") {
+						lbecho("Set skin " @ %skin @ " for " @ %cl);
 						Client::setSkin(%cl, %skin);
 					}
 				}
@@ -2840,57 +2842,57 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 		if(%w1 == "#kill")
 		{
-		//Note: Doesn't take LCK, so as a result,
-		//only the equipped items and coins will drop.
-		//Even for bots. Because LCK has to temporarily be -1 to drop all items.
-	            if(%clientToServerAdminLevel >= 2)
-	            {
-	                  if(%cropped != -1)
-	                  {
-	                        %id = NEWgetClientByName(%cropped);
-		
-					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
-						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
-					else if(%id != -1)
-	                        {
-						playNextAnim(%id);
-	                              Player::Kill(%id);
-	                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, %cropped @ " (" @ %id @ ") was executed.");
-	                        }
-	                        else
-	                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
-	            }
-			return;
-	      }
-	      if(%w1 == "#clearchar")
-		{
-	            if(%clientToServerAdminLevel >= 5)
-	            {
-	                  if(%cropped != -1)
-	                  {
-	                        %id = NEWgetClientByName(%cropped);
+			//Note: Doesn't take LCK, so as a result,
+			//only the equipped items and coins will drop.
+			//Even for bots. Because LCK has to temporarily be -1 to drop all items.
+			if(%clientToServerAdminLevel >= 2)
+			{
+					if(%cropped != -1)
+					{
+						%id = NEWgetClientByName(%cropped);
 	
+				if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
+					Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
+				else if(%id != -1)
+						{
+					playNextAnim(%id);
+								Player::Kill(%id);
+								if(!%echoOff) Client::sendMessage(%TrueClientId, 0, %cropped @ " (" @ %id @ ") was executed.");
+						}
+						else
+								if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+					}
+					else
+						Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
+			}
+			return;
+	    }
+	    if(%w1 == "#clearchar")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				if(%cropped != -1)
+				{
+					%id = NEWgetClientByName(%cropped);
+
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 					else if(%id != -1)
-	                        {
+					{
 						playNextAnim(%id);
-	                              Player::Kill(%id);
+						Player::Kill(%id);
 						ResetPlayer(%id);
 						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, %cropped @ " (" @ %id @ ") profile was RESET.");
-	                        }
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
-	            }
+					}
+					else
+						Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
+			}
 			return;
-	      }
-	      if(%w1 == "#spawn")
+	    }
+	    if(%w1 == "#spawn")
 		{
 	            if(%clientToServerAdminLevel >= 3)
 	            {
@@ -3910,7 +3912,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 							if(%event != -1)
 								AddEventCommand(%pid, %senderName, "onpickup", %cmd);
 		
-		                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Spawned pack (" @ %pid @ ") at position " @ %pos @ ".");
+		                    if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Spawned pack (" @ %pid @ ") at position " @ %pos @ ".");
 						}
 						else
 							Client::sendMessage(%TrueClientId, 0, "Tagname " @ %tag @ " already exists.");
@@ -3949,12 +3951,12 @@ function internalSay(%clientId, %team, %message, %senderName)
 	            }
 			return;
 	      }
-	      if(%w1 == "#spawndis")
+	    if(%w1 == "#spawndis")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
-	                  if(%cropped != "")
-	                  {
+			if(%clientToServerAdminLevel >= 3)
+			{
+				if(%cropped != "")
+				{
 					%f = GetWord(%cropped, 0);
 					%tag = GetWord(%cropped, 1);
 					%x = GetWord(%cropped, 2);
@@ -3963,7 +3965,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 					%r1 = GetWord(%cropped, 5);
 					%r2 = GetWord(%cropped, 6);
 					%r3 = GetWord(%cropped, 7);
-	
+
 					if(%x == -1 && %y == -1 && %z == -1)
 					{
 						GameBase::getLOSinfo(Client::getOwnedObject(%TrueClientId), 50000);
@@ -3971,15 +3973,15 @@ function internalSay(%clientId, %team, %message, %senderName)
 					}
 					else
 						%pos = %x @ " " @ %y @ " " @ %z;
-	
+
 					if(%r1 == -1 && %r2 == -1 && %r3 == -1)
 						%rot = -1;
 					else
 						%rot = %r1 @ " " @ %r2 @ " " @ %r3;
-	
+
 					%fname = %f @ ".dis";
 					%object = newObject(%tag, InteriorShape, %fname);
-	
+
 					if(%object != 0 && %tag != -1)
 					{
 						if(IsInCommaList($DISlist, %tag))
@@ -3994,23 +3996,23 @@ function internalSay(%clientId, %team, %message, %senderName)
 							$DISlist = AddToCommaList($DISlist, %tag);
 							%w = "Spawned";
 						}
-	
+
 						addToSet("MissionCleanup", %object);
 						$tagToObjectId[%tag] = %object;
 						%object.tag = %tag;
-	
+
 						GameBase::setPosition(%object, %pos);
 						if(%rot != -1)
 							GameBase::setRotation(%object, %rot);
-	
+
 						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, %w @ " " @ %tag @ " (" @ %object @ ") at pos " @ %pos);
 					}
 					else
 						Client::sendMessage(%TrueClientId, 0, "Invalid DIS filename or tagname.");
 				}
-	                  else
+				else
 					Client::sendMessage(%TrueClientId, 0, "#spawndis filename tagname [x] [y] [z] [r1] [r2] [r3]. Do not specify .dis, this will automatically be added.");
-	            }
+			}
 			return;
 	      }
 	      if(%w1 == "#deldis")

@@ -303,17 +303,18 @@ function remoteConsider(%clientId)
 {
 	dbecho($dbechoMode, "remoteConsider(" @ %clientId @ ")");
 
-
-
 	%object = fetchData(%clientId, "InEnterBox");
-		if(IsJailed(%clientId))
-			return;
+	if(IsJailed(%clientId))
+		return;
+
 	if(%object != ""){
 		enterEnterBox(%clientId,%object);
 		return;
 	}
+
 	%inSleepZone = fetchData(%clientId, "InSleepZone");
-	if(%inSleepZone != ""){
+
+	if(%inSleepZone != "") {
 		if(IsDead(%clientId))
 			return;
 		if(%clientId.sleepMode == ""){
@@ -376,7 +377,13 @@ function remoteConsider(%clientId)
 		%object = $los::object;
 		%objpos = $los::position;
 		%obj = getObjectType(%object);
+		%name = GameBase::getDataName(%target);
 		%cl = Player::getClient(%object);
+
+		// lbecho("check this");
+		// lbecho("object: " @ %object);
+		// lbecho("object type: " @ %obj);
+		// lbecho("objetc name: " @ %name);
 
 		%index = GetEventCommandIndex(%object.tag, "onConsider");
 
@@ -405,6 +412,14 @@ function remoteConsider(%clientId)
 				AI::sayLater(%clientId, %object, "I can't hear you all the way over there!", True);
 			%sawsomething = True;
 		}
+		// else if (%obj == "InteriorShape") {
+		// 	lbecho("ites a shape");
+		// 	lbecho(%object.ta)
+		// 	lbecho(GameBase::getMapName(%object));
+		// 	// if (GameBase::getMapName(%object)) {
+
+		// 	// }
+		// }
 		else if(%obj == "InteriorShape" && %object.tag != "" && %clientId.adminLevel >= 1)
 		{
 			Client::sendMessage(%clientId, $MsgWhite, %object @ "'s tag name: " @ %object.tag);

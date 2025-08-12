@@ -2408,6 +2408,12 @@ instant SimGroup "MissionGroup" {
 			position = "-291.9 -282 1955";
 			rotation = "0 0 0";
 		};
+		instant Marker ".5 0 0 10 30 84" {
+			dataBlock = "PathMarker";
+			name = "center of the world dragon whelp";
+			position = "15.43 -11.08 1875.01";
+			rotation = "0 0 0";
+		};
 	};
 	instant SimGroup "Burial Tree" {
 		instant StaticShape "Misc Tree S" {
@@ -5457,9 +5463,9 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NAME Taggerung";
 			instant SimGroup "RACE MaleHuman";
 			instant SimGroup "TEAM 2";
-			instant SimGroup "NEED HealingKitI 1000";
-			instant SimGroup "TAKE HealingKitI 1000";
-			instant SimGroup "GIVE HealingKitI 1000";
+			instant SimGroup "NEED AhrimanEyeLens 1";
+			instant SimGroup "TAKE AhrimanEyeLens 1";
+			instant SimGroup "GIVE GoobaHearthstone 1";
 			instant SimGroup "SAY1 Welkom Humeen. I am Taggerung, king of the Uuags. What brings you to my town?";
 			instant SimGroup "CUE1 Heaven";
 			instant SimGroup "SAY2 Going to Heaven you say? Well plenty of monstiez to help with dat. But I have heard of dis place before.";
@@ -5468,14 +5474,14 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "CUE3 rest";
 			instant SimGroup "SAY4 We have inn in Lower Gooba and stores to trade wares. You might even meet others who know more about this Heaven.";
 			instant SimGroup "CUE4 thanks";
-			instant SimGroup "SAY5 One more thing Adventurer. On your quest if you happen to find a Thingymajig, bring it back to me.";
-			instant SimGroup "CUE5 Thingymajig";
-			instant SimGroup "SAY6 Yes, it was stolen from us by a thief long ago. Return it to me and I will reward you greatly.";
+			instant SimGroup "SAY5 One more thing Adventurer. On your quest if you happen to find a Ahriman Eye Lens, bring one back to me and I give reward.";
+			instant SimGroup "CUE5 Ahriman";
+			instant SimGroup "SAY6 Yes, it iz rare ingredient we need for our potionz. Demons snack on dem in the Maze below but we have great need for dem.";
 			instant SimGroup "CUE6 okay";
-			instant SimGroup "SAY7 Good luck on your quest and mind yourself while in Gooba.";
-			instant SimGroup "NSAY1 Excellent!";
-			instant SimGroup "NCUE1 thanks";
-			instant SimGroup "NSAY2 End";
+			instant SimGroup "SAY7 Thankee,Good luck on your quest and mind yourself while in Gooba.";
+			instant SimGroup "NSAY1 Ah! An Ahriman Eye Lens! Geeve it here.";
+			instant SimGroup "NCUE1 sure";
+			instant SimGroup "NSAY2 Thankee adventurer. Take thiz as a token of my thankz. It can bring you back to Gooba quick like!";
 		};
 		instant SimGroup "banker5" {
 			instant Marker "upper gooba banker" {
@@ -5714,6 +5720,29 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "SAY3 Screaming, yelling, roarin... death shrieks. Those kinda *bad* things...";
 			instant SimGroup "CUE3 help";
 			instant SimGroup "SAY4 Want to help? Sure thing. Just dont say I didnt warn ya.";
+			instant SimGroup "NSAY1 Excellent!";
+			instant SimGroup "NCUE1 thanks";
+			instant SimGroup "NSAY2 End";
+		};
+		instant SimGroup "quest27" {
+			instant Marker "Marker1" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "-2401.81 -357.953 65.0004";
+				rotation = "0 -0 -0.753271";
+			};
+			instant SimGroup "NAME Karthus";
+			instant SimGroup "RACE MaleHuman";
+			instant SimGroup "NEED HealingKitI 1000";
+			instant SimGroup "TAKE HealingKitI 1000";
+			instant SimGroup "GIVE HealingKitI 1000";
+			instant SimGroup "SAY1 Have you visited the haunted tree yet?";
+			instant SimGroup "CUE1 tree";
+			instant SimGroup "SAY2 There is a tree at the very top of this hill behind me. Some folks say it is haunted, other folks say it's how you get to Heaven.";
+			instant SimGroup "CUE2 heaven";
+			instant SimGroup "SAY3 I haven't got a clue what they mean by that. But it's sure a long way up just to meet your maker. ";
+			instant SimGroup "CUE3 thanks";
+			instant SimGroup "SAY4 If you plan on going, make sure to stock up on provisions in town first before you head up there.";
 			instant SimGroup "NSAY1 Excellent!";
 			instant SimGroup "NCUE1 thanks";
 			instant SimGroup "NSAY2 End";

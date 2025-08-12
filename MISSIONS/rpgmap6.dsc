@@ -1,7 +1,7 @@
 $MDESC::Desc = "RPG Map 6";
 $MDESC::Planet = "unknown";
 $MDESC::TeamCount = "7";
-$MDESC::Text = "<s3><f1>Type: <f0> RPG\n<f1>Planet: <f0> Gaia\n<f1>Weather: <f0> Clear\n<f1>Time of Day: <f0> Midday\n<f1> 2\n\n<f0>Briefing:<f1> Welcome to the Fantasy Realms RPG Mod.\nHave Fun!";
+$MDESC::Text = "<s3><f1>Type: <f0> RPG\n<f1>Planet: <f0> Gaia\n<f1>Weather: <f0> Clear\n<f1>Time of Day: <f0> Midday\n<f1> 2\n\n<f0>Briefing:<f1> Welcome to Final Fantasy Realms RPG.\nHave Fun!";
 $MDESC::TimeOfDay = "Midday";
 $MDESC::Type = "RPGMOD";
 $MDESC::Weather = "Clear";

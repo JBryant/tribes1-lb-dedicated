@@ -205,13 +205,13 @@ function tree::chop(%client, %player, %obj, %harvest) {
 			}
 		}
 		else {
-			%r2 = $PlayerSkill[%client, $SkillWoodCutting] / ( $PlayerSkill[%client, $SkillWoodCutting] + 10 )/100*getRandom()/2 + getRandom()*2;
+			%r2 = $PlayerSkill[%client, $SkillWoodCutting] / ($PlayerSkill[%client, $SkillWoodCutting] + 10 ) / 100 * getRandom() / 2 + getRandom() * 2;
 
 			if ( %r2 > 1 ) {
 				if(%obj.bonuscut >= 0)
-					%r = 1+ ($PlayerSkill[%client, $SkillWoodCutting]+%obj.bonuscut) * (1/5) * getRandom();
+					%r = 1 + ($PlayerSkill[%client, $SkillWoodCutting] + %obj.bonuscut) * (1/5) * getRandom();
 				else
-					%r = 1+ $PlayerSkill[%client, $SkillWoodCutting] * (1/5) * getRandom();
+					%r = 1 + $PlayerSkill[%client, $SkillWoodCutting] * (1/5) * getRandom();
 
 				%hit = GetWord($ItemList[WoodCutting, 1], 0);
 

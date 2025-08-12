@@ -228,6 +228,7 @@ function createServer(%mission, %dedicated)
 	exec(Mission);
 	exec(Item);
 	exec(Accessory);
+	exec(Wood);
 	exec(smithing);
 	exec(weapons); // weapons
 	exec(armors);

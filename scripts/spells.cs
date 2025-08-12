@@ -41,6 +41,15 @@ $LOSRadiusSelfType = 6;			//casts at LOS and around LOS and to self
 
 $SelfRadiusLOSRadiusType = 7;		//casts to self and around self and to LOS and around LOS
 
+// ---- Elemental Type -----
+$ElementalFire = 1;
+$ElementalLightning = 2;
+$ElementalIce = 3;
+$ElementalEarth = 4;
+$ElementalPoison = 5;
+$ElementalHoly = 6;
+$ElementalDark = 7;
+
 //-- SPELL DEFINITIONS -------------------------------------------------------------------------------------------
 
 $Spell::keyword[1] = "firebomb";
@@ -645,7 +654,7 @@ $Spell::refVal[37] = 320;
 $Spell::graceDistance[37] = 2;
 $SkillType[shadowblade] = $SkillBlackMagick;
 
-// fire flask spekk
+// fire flask spell
 $Spell::keyword[38] = "fireflaskbomb";
 $Spell::index[fireflaskbomb] = 38;
 $Spell::name[38] = "Fire Flask Bomb";
@@ -661,7 +670,84 @@ $Spell::endSound[38] = LaunchFB;
 $Spell::groupListCheck[38] = False;
 $Spell::refVal[38] = -9998;
 $Spell::graceDistance[38] = 10;
+$Spell::elementalType[38] = $ElementalFire;
 $SkillType[fireflaskbomb] = $SkillAlchemy;
+
+// ice flask spell
+$Spell::keyword[39] = "iceflaskbomb";
+$Spell::index[iceflaskbomb] = 39;
+$Spell::name[39] = "Ice Flask Bomb";
+$Spell::description[39] = "ice flask bomb explosion.";
+$Spell::delay[39] = 3;
+$Spell::recoveryTime[39] = 3;
+$Spell::radius[39] = 8;
+$Spell::damageValue[39] = "100";
+$Spell::LOSrange[39] = 999; // 80
+$Spell::manaCost[39] = 1;
+$Spell::startSound[39] = PlaceSeal;
+$Spell::endSound[39] = LaunchFB;
+$Spell::groupListCheck[39] = False;
+$Spell::refVal[39] = -9998;
+$Spell::graceDistance[39] = 10;
+$Spell::elementalType[39] = $ElementalIce;
+$SkillType[iceflaskbomb] = $SkillAlchemy;
+
+// lightning flask spell
+$Spell::keyword[40] = "lightningflaskbomb";
+$Spell::index[lightningflaskbomb] = 40;
+$Spell::name[40] = "Lightning Flask Bomb";
+$Spell::description[40] = "lightning flask bomb explosion.";
+$Spell::delay[40] = 3;
+$Spell::recoveryTime[40] = 3;
+$Spell::radius[40] = 8;
+$Spell::damageValue[40] = "130";
+$Spell::LOSrange[40] = 999; // 80
+$Spell::manaCost[40] = 1;
+$Spell::startSound[40] = PlaceSeal;
+$Spell::endSound[40] = LaunchFB;
+$Spell::groupListCheck[40] = False;
+$Spell::refVal[40] = -9998;
+$Spell::graceDistance[40] = 10;
+$Spell::elementalType[40] = $ElementalLightning;
+$SkillType[lightningflaskbomb] = $SkillAlchemy;
+
+// earth flask spell
+$Spell::keyword[41] = "earthflaskbomb";
+$Spell::index[earthflaskbomb] = 41;
+$Spell::name[41] = "Earth Flask Bomb";
+$Spell::description[41] = "earth flask bomb explosion.";
+$Spell::delay[41] = 3;
+$Spell::recoveryTime[41] = 3;
+$Spell::radius[41] = 8;
+$Spell::damageValue[41] = "160";
+$Spell::LOSrange[41] = 999; // 80
+$Spell::manaCost[41] = 1;
+$Spell::startSound[41] = PlaceSeal;
+$Spell::endSound[41] = LaunchFB;
+$Spell::groupListCheck[41] = False;
+$Spell::refVal[41] = -9998;
+$Spell::graceDistance[41] = 10;
+$Spell::elementalType[41] = $ElementalEarth;
+$SkillType[earthflaskbomb] = $SkillAlchemy;
+
+// acid flask spell
+$Spell::keyword[42] = "acidflaskbomb";
+$Spell::index[acidflaskbomb] = 42;
+$Spell::name[42] = "Acid Flask Bomb";
+$Spell::description[42] = "acid flask bomb explosion.";
+$Spell::delay[42] = 3;
+$Spell::recoveryTime[42] = 3;
+$Spell::radius[42] = 8;
+$Spell::damageValue[42] = "190";
+$Spell::LOSrange[42] = 999; // 80
+$Spell::manaCost[42] = 1;
+$Spell::startSound[42] = PlaceSeal;
+$Spell::endSound[42] = LaunchFB;
+$Spell::groupListCheck[42] = False;
+$Spell::refVal[42] = -9998;
+$Spell::graceDistance[42] = 10;
+$Spell::elementalType[42] = $ElementalPoison;
+$SkillType[acidflaskbomb] = $SkillAlchemy;
 
 //----------------------------------------------------------------------------------------------------------------
 
