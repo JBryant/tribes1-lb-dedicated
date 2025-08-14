@@ -1928,6 +1928,25 @@ SoundData RockMonsterSound2
    profile = Profile3dNear;
 };
 
+SoundData LairEnterRoar
+{
+   wavFileName = "lairenter.wav";
+   profile = Profile3dNear;
+};
+
+SoundData HeartBeat
+{
+   wavFileName = "heartbeat.wav";
+   profile = Profile3dNear;
+};
+
+SoundData GhostShort
+{
+   wavFileName = "ghost-short.wav";
+   profile = Profile3dNear;
+};
+
+
 // No idea where I got these from in my Tribes RPG folder, but they are missing in the repack, so people won't hear them
 // SoundData ImpAcquired
 // {

@@ -27,8 +27,9 @@
 function GroupTrigger::onTrigEnter(%object, %this)
 {
 	dbecho($dbechoMode, "GroupTrigger::onTrigEnter(" @ %object @ ", " @ %this @ ")");
+	lbecho("GroupTrigger::onTrigEnter");
 
-      %clientId = Player::getClient(%this);
+    %clientId = Player::getClient(%this);
 
 	%flag = "";
 	%g = Object::getName(getGroup(%object));
@@ -85,6 +86,7 @@ function GroupTrigger::onTrigEnter(%object, %this)
 	else if(String::ICompare(Object::getName(getGroup(getGroup(getGroup(%object)))), "TeleportBoxes") == 0)
 	{
 		//echo("entered teleporter box");
+		lbecho("entered teleporter box");
 		
 		%group = getGroup(getGroup(%object));
 		%count = Group::objectCount(%group);
@@ -129,11 +131,13 @@ function GroupTrigger::onTrigEnter(%object, %this)
 			Client::sendMessage(%clientId, $MsgRed, %nsay);
 	}
 }
+
 function GroupTrigger::onTrigLeave(%object, %this)
 {
 	dbecho($dbechoMode, "GroupTrigger::onTrigLeave(" @ %object @ ", " @ %this @ ")");
+	lbecho("GroupTrigger::onTrigLeave");
 
-      %clientId = Player::getClient(%this);
+    %clientId = Player::getClient(%this);
 
 	if(fetchData(%clientId, "InSleepZone") != "")
 	{

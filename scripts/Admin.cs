@@ -966,13 +966,21 @@ function processMenuselectrweapon(%clientId, %item)
 	// If they have a ranged weapon, we can change this to not use GetAccessoryList in the future
 	%list = GetAccessoryList(%clientId, 10, -1);
 
+	lbecho(%item);
+
 	Client::buildMenu(%clientId, "Projectiles:", "selectproj", true);
 	for(%i = 0; GetWord(%list, %i) != -1; %i++)
 	{
 		%proj = GetWord(%list, %i);
-
-		if(String::findSubStr($ProjRestrictions[%proj], "," @ %item @ ",") != -1)
-			Client::addMenuItem(%clientId, %curitem++ @ $beltitem[%proj, "Name"], %item @ " " @ %proj);
+		%baseWeapon = $beltitem[%item, "BaseWeapon"];
+		
+		if (%baseWeapon != "") {
+			if (String::findSubStr($ProjRestrictions[%proj], "," @ %baseWeapon @ ",") != -1)
+				Client::addMenuItem(%clientId, %curitem++ @ $beltitem[%proj, "Name"], %item @ " " @ %proj);
+		} else {
+			if (String::findSubStr($ProjRestrictions[%proj], "," @ %item @ ",") != -1)
+				Client::addMenuItem(%clientId, %curitem++ @ $beltitem[%proj, "Name"], %item @ " " @ %proj);
+		}
 	}
 	return;
 }

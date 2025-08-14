@@ -340,10 +340,14 @@ function AI::Periodic(%aiName)
 
 				if(%closest <= $AImaxRange)
 				{
-					if(%closest <= 10)
+					if(%closest <= 10) {
+						// lbecho("Scooch closer...");
 						AI::newDirectiveWaypoint(%aiName, GameBase::getPosition(%closestId), 99);
-					else
+					}
+					else {
+						// lbecho("Follow...");
 						AI::newDirectiveFollow(%aiName, %closestId, 0, 99);
+					}
 
 					PlaySound(RandomRaceSound(fetchData(%aiId, "RACE"), Acquired), GameBase::getPosition(%aiId));
 				}
@@ -540,7 +544,7 @@ function AI::moveToAttackMarker(%name, %method)
 	if(fetchData(%aiId, "dumbAIflag"))
 		return;
 
-      %tempSet = nameToID("MissionGroup\\Teams\\team1\\AIattackMarkers");
+    %tempSet = nameToID("MissionGroup\\Teams\\team1\\AIattackMarkers");
 
 	if(%tempSet != -1)
 	{

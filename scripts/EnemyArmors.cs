@@ -200,8 +200,13 @@ $SkinForRace[UberElemantalist] = "duke";
 $NameForRace[Horror] = "Daemon";
 $NameForRace[Nightmare] = "Daemon";
 
+// Humaine Society
+$NameForRace[Abomination] = "Godeye";
+$SkinForRace[Abomination] = "RMSkins2";  // change this
+
 // Center of World
-$NameForRace[DragonWhelp] = "Dragon";
+$NameForRace[Whelp] = "Dragon";
+
 
 // -------------- armor data ------------------
 
@@ -222,6 +227,7 @@ $ArmorTypeToRace[SpiderArmor] = "Spider";
 $ArmorTypeToRace[ShinraArmor] = "Shinra";
 $ArmorTypeToRace[SDaemonArmor] = "Daemon";
 $ArmorTypeToRace[DragonArmor] = "Dragon";
+$ArmorTypeToRace[GodeyeArmor] = "Godeye";
 
 $RaceToArmorType[Goblin] = "GoblinArmor";
 $RaceToArmorType[Gnoll] = "GnollArmor";
@@ -240,6 +246,7 @@ $RaceToArmorType[Spider] = "SpiderArmor";
 $RaceToArmorType[Shinra] = "ShinraArmor";
 $RaceToArmorType[Daemon] = "SDaemonArmor";
 $RaceToArmorType[Dragon] = "DragonArmor";
+$RaceToArmorType[Godeye] = "GodeyeArmor";
 
 $RaceToNamesList[Traveller] = "Alphonse Cedric Lucian Darius Leontius Gregor Matthias Silvain Emeric Veyron Hadrian Tobias Valens Octavian Magnus Raphael Victor Alistair Remiel Lysander Cassian Garrick Percival Thaddeus Gideon Theodric Isidore Cornelius Reginald Leofric Oswald Baldwin Edric Ronan Severin Aldous Soren Valentin Leopold Desmond Eustace Corbin Ignatius Bertram Seraphim Maximus Felix Quentin Roderic Atticus Nicodemus Zephyrus Aurelius Fabian Tiberius Evander Cormac Orion Vesper Drystan Cassius Lazarus Marcellus Gideon Tarquin Lucan Zephiel Oberon Tristam Aurelian Myron Edgar Nathaniel Augustus Hector Vespasian Sirus Caliban Damian Cyprian Theron Alaric Thelonius Ulrich Galen Phineas Anselm Varian Valmont Bastien Xavier Leoric Simeon Zephyr Darian Florian Armand Hadrianus Orestes Fenrir Gael Romulus Malachai Noctis Thalric Eamon Belisarius Callum Solon";
 $RaceToNamesList[Goblin] = "Griknak Snaggit Borgul Zrogg Ruknash Dribbik Murgul Vrogg Tazgul Skarnak Drekz Broggit Klurg Snibbit Vraggo Trognash Glubnik Grizzik Nobnash Krognar Zraggit Blornik Snaggul Throgg Klibbit Drizzik Grobnar Vraknash Trogzit Borknash Graknik Zlubb Knorvik Drizzgul Trognik Krabnash Glubzit Morzik Zorknash Broggul Tarnik Flibbit Skragnak Zriggo Krobnash Vrixik Drobbit Skrognar Blaggit Truznik Frobnash Skribbit Klorgnak Vrobnash Gribzik Traknor Zlibbit Knarzik Frozgul Skraknit Grozzik Triggan Zorblik Broggar Trogzit Kribzik Slorbag Vragbit Gronbit Trasknak Zroblik Klibzit Kragnik Blibbit Driznash Skornak Froggit Trigblik Zrumblik Krobzit Snorggul Thragbit Glibnash Skragzit Draknor Vrobbit Zrobnik Snibnash Frakgul Triznak Grobnash Blugbit Kraznik Snibzit Trombit Skrubnik Grubzit Vorblik Zlagbit Kroggul Tragnor Blornash";
@@ -358,7 +365,9 @@ $spawnIndex[81] = "UberElemantalist";
 $spawnIndex[82] = "Horror";
 $spawnIndex[83] = "Nightmare";
 
-$spawnIndex[84] = "DragonWhelp";
+$spawnIndex[84] = "Whelp";
+
+$spawnIndex[85] = "Abomination";
 
 //------------------------------
 
@@ -421,45 +430,47 @@ $BotEquipment[Gohort] = 	"CLASS Enemy LVL 527/50 COINS 135/50 LCK 4 CastingBlade
 $BotEquipment[Acolyte] = 	"CLASS Enemy LVL 817/50 COINS 115/50 LCK 3 DiamondSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500";
 $BotEquipment[Doomsayer] = 	"CLASS Enemy LVL 1027/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500";
 
-$BotEquipment[Spiderling] = "CLASS Enemy LVL 2+1 COINS 5/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500 FlanResidue 1/-200";
-$BotEquipment[Huntsman] = "CLASS Enemy LVL 5+2 COINS 10/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500 FlanResidue 2/-175";
-$BotEquipment[BrownRecluse] = "CLASS Enemy LVL 9+2 COINS 15/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500 FlanResidue 2/-150";
-$BotEquipment[BlackWidow] = "CLASS Enemy LVL 11+3 COINS 20/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1500 FlanResidue 4/-125";
+$BotEquipment[Spiderling] = "CLASS Enemy LVL 2+1 COINS 5/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 FlanResidue 1/-200";
+$BotEquipment[Huntsman] = "CLASS Enemy LVL 5+2 COINS 10/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 FlanResidue 2/-175";
+$BotEquipment[BrownRecluse] = "CLASS Enemy LVL 9+2 COINS 15/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 FlanResidue 2/-150";
+$BotEquipment[BlackWidow] = "CLASS Enemy LVL 11+3 COINS 20/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 FlanResidue 4/-125";
 
 // write bot equipment for each shinra type, 3 should be grouped together at a time
 // ex goose grunt infantry lvl 20 - 35, trooper officer sergeant 40 - 55, turk soldier3 soldier2 60 - 75, soldier1 shinra 80 - 90
 // the + indicates the max +/- variance in level from the base level, this should get higher as the level increases but go no larger than 15%
-$BotEquipment[Goon] = "CLASS Enemy LVL 10+2 COINS 20/50 LCK 0 Club 1 FireMateriaI 1/-1500 BombCore 1/-200";
-$BotEquipment[Grunt] = "CLASS Enemy LVL 15+3 COINS 23/50 LCK 0 HandAxe 1 FireMateriaI 1/-1500 BombCore 1/-175";
-$BotEquipment[Infantry] = "CLASS Enemy LVL 20+3 COINS 26/50 LCK 0 Broadsword 1 FireMateriaI 1/-1500 BombCore 1/-150";
+$BotEquipment[Goon] = "CLASS Enemy LVL 10+2 COINS 20/50 LCK 0 Club 1 FireMateriaI 1/-800 BombCore 1/-200";
+$BotEquipment[Grunt] = "CLASS Enemy LVL 15+3 COINS 23/50 LCK 0 HandAxe 1 FireMateriaI 1/-800 BombCore 1/-175";
+$BotEquipment[Infantry] = "CLASS Enemy LVL 20+3 COINS 26/50 LCK 0 Broadsword 1 FireMateriaI 1/-800 BombCore 1/-150";
 
-$BotEquipment[Trooper] = "CLASS Enemy LVL 41+4 COINS 29/50 LCK 0 IronHammer 1 FireMateriaI 1/-1500 BombCore 3/-125";
-$BotEquipment[Officer] = "CLASS Enemy LVL 44+5 COINS 32/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1500 BombCore 3/-100";
-$BotEquipment[Sergeant] = "CLASS Enemy LVL 48+6 COINS 35/50 LCK 0 MythrilSword 1 FireMateriaI 1/-1500 BombCore 3/-75";
+$BotEquipment[Trooper] = "CLASS Enemy LVL 41+4 COINS 29/50 LCK 0 IronHammer 1 FireMateriaI 1/-700 BombCore 3/-125";
+$BotEquipment[Officer] = "CLASS Enemy LVL 44+5 COINS 32/50 LCK 0 CastingBlade 1 FireMateriaI 1/-700 BombCore 3/-100";
+$BotEquipment[Sergeant] = "CLASS Enemy LVL 48+6 COINS 35/50 LCK 0 MythrilSword 1 FireMateriaI 1/-700 BombCore 3/-75";
 
-$BotEquipment[Turk] = "CLASS Enemy LVL 50+3 COINS 38/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500 BombCore 10/-125 TonberryOil 1/-200";
-$BotEquipment[Soldier3] = "CLASS Enemy LVL 95+7 COINS 41/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500 BombCore 10/-125 TonberryOil 1/-175";
-$BotEquipment[Soldier2] = "CLASS Enemy LVL 100+8 COINS 44/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500 BombCore 10/-125 TonberryOil 1/-125";
-$BotEquipment[Soldier1] = "CLASS Enemy LVL 105+10 COINS 47/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-1500 BombCore 10/-125 TonberryOil 1/-100";
+$BotEquipment[Turk] = "CLASS Enemy LVL 50+3 COINS 38/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-200";
+$BotEquipment[Soldier3] = "CLASS Enemy LVL 95+7 COINS 41/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-175";
+$BotEquipment[Soldier2] = "CLASS Enemy LVL 100+8 COINS 44/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-125";
+$BotEquipment[Soldier1] = "CLASS Enemy LVL 105+10 COINS 47/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-100";
 
 // dunega crypt bot equipment
-$BotEquipment[Corpse] = "CLASS Enemy LVL 20+3 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 IceMateriaI 1/-1500 SkeletonBonePowder 1/-200";
-$BotEquipment[Walker] = "CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-1500 SkeletonBonePowder 1/-175";
-$BotEquipment[Rattler] = "CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 Broadsword 1 IceMateriaI 1/-1500 SkeletonBonePowder 1/-125";
-$BotEquipment[Magician] = "CLASS Enemy LVL 31+5 COINS 26/50 LCK 0 CastingBlade 1 IceMateriaI 1/-1500 SkeletonBonePowder 1/-100";
+$BotEquipment[Corpse] = "CLASS Enemy LVL 20+3 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-200";
+$BotEquipment[Walker] = "CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-175";
+$BotEquipment[Rattler] = "CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 Broadsword 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-125";
+$BotEquipment[Magician] = "CLASS Enemy LVL 31+5 COINS 26/50 LCK 0 CastingBlade 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-100";
 
-$BotEquipment[DemonImp] = "CLASS Enemy LVL 50+5 COINS 23/50 LCK 0 Kodachi 1 Opal 3/-300 FireMateriaI 1/-1500 ChimeraFlameGland 1/-200";
-$BotEquipment[DemonRunt] = "CLASS Enemy LVL 55+5 COINS 26/50 LCK 0 MythrilSword 1 SkeletonBone 1/-250 Turquoise 4/-300 FireMateriaI 1/-1500 ChimeraFlameGland 1/-150";
-$BotEquipment[DemonCaster] = "CLASS Enemy LVL 60+5 COINS 29/50 LCK 1 CastingBlade 1 Diamond 1/-3000 FireMateriaI 1/-1500 ChimeraFlameGland 1/-100";
+$BotEquipment[DemonImp] = "CLASS Enemy LVL 50+5 COINS 23/50 LCK 0 Kodachi 1 Opal 3/-300 FireMateriaI 1/-400 ChimeraFlameGland 1/-200";
+$BotEquipment[DemonRunt] = "CLASS Enemy LVL 55+5 COINS 26/50 LCK 0 MythrilSword 1 SkeletonBone 1/-250 Turquoise 4/-300 FireMateriaI 1/-400 ChimeraFlameGland 1/-150";
+$BotEquipment[DemonCaster] = "CLASS Enemy LVL 60+5 COINS 29/50 LCK 1 CastingBlade 1 Diamond 1/-3000 FireMateriaI 1/-400 ChimeraFlameGland 1/-100";
 
-$BotEquipment[UberWhelp] = "CLASS Enemy LVL 65+5 COINS 23/50 LCK 0 CoralSword 1 Opal 3/-300 DarkMateriaI 1/-1500 BehemothHornFragment 1/-200";
-$BotEquipment[UberCrusher] = "CLASS Enemy LVL 75+6 COINS 26/50 LCK 0 GiantAxe 1 SkeletonBone 1/-250 Turquoise 4/-300 DarkMateriaI 1/-1500 BehemothHornFragment 1/-150";
-$BotEquipment[UberElemantalist] = "CLASS Enemy LVL 85+6 COINS 29/50 LCK 1 CastingBlade 1 Diamond 1/-3000 DarkMateriaI 1/-1500 BehemothHornFragment 1/-100";
+$BotEquipment[UberWhelp] = "CLASS Enemy LVL 65+5 COINS 23/50 LCK 1 CoralSword 1 Opal 3/-300 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-200";
+$BotEquipment[UberCrusher] = "CLASS Enemy LVL 75+6 COINS 26/50 LCK 1 GiantAxe 1 SkeletonBone 1/-250 Turquoise 4/-300 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-150";
+$BotEquipment[UberElemantalist] = "CLASS Enemy LVL 85+6 COINS 29/50 LCK 2 CastingBlade 1 Diamond 1/-3000 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-100";
 
-$BotEquipment[Horror] = "CLASS Enemy LVL 90+5 COINS 23/50 LCK 0 BloodSword 1 Opal 3/-300 DarkMateriaI 1/-1500 AhrimanEyeLens 1/-150";
-$BotEquipment[Nightmare] = "CLASS Enemy LVL 96+6 COINS 26/50 LCK 0 AncientAxe 1 SkeletonBone 1/-250 Turquoise 4/-300 DarkMateriaI 1/-1500 AhrimanEyeLens 1/-100";
+$BotEquipment[Horror] = "CLASS Enemy LVL 90+5 COINS 23/50 LCK 2 BloodSword 1 Opal 3/-300 DarkMateriaI 1/-250 DarkMateriaII 1/-2500 AhrimanEyeLens 1/-150";
+$BotEquipment[Nightmare] = "CLASS Enemy LVL 96+6 COINS 26/50 LCK 2 AncientAxe 1 SkeletonBone 1/-250 Turquoise 4/-250 DarkMateriaI 1/-250 DarkMateriaII 1/-2500 AhrimanEyeLens 1/-100";
 
-$BotEquipment[DragonWhelp] = "CLASS Enemy LVL 140+10 COINS 1000/50 LCK 0 CastingBlade 1 FireMateriaI 1/-200 ChimeraFlameGland 1/-100";
+$BotEquipment[Abomination] = "CLASS Enemy LVL 125+8 COINS 500/50 LCK 2 CastingBlade 1 PoisonMateriaI 1/-200 PoisonMateriaI 1/-2000 MalboroSporeSac 1/-100";
+
+$BotEquipment[Whelp] = "CLASS Enemy LVL 150+10 COINS 1000/50 LCK 3 CastingBlade 1 FireMateriaI 1/-200 FireMateriaII 1/-2000 ChimeraFlameGland 1/-100";
 
 //------------------------------
 
@@ -480,6 +491,7 @@ $TeamForRace[Spider] = 6;
 $TeamForRace[Shinra] = 1;
 $TeamForRace[Daemon] = 4;
 $TeamForRace[Dragon] = 6;
+$TeamForRace[Godeye] = 4;
 
 //------------------------------
 
@@ -596,10 +608,16 @@ $RaceSound[Daemon, Acquired, 1] = RockMonsterSound1;
 $RaceSound[Daemon, Hit, 1] = SoundMinotaurAcquired1;
 $RaceSound[Daemon, Hit, 2] = RockMonsterSound2;
 
-$RaceSound[Dragon, Death, 1] = RockMonsterDeath1;
-$RaceSound[Dragon, Acquired, 1] = RockMonsterSound1;
-$RaceSound[Dragon, Hit, 1] = SoundMinotaurAcquired1;
-$RaceSound[Dragon, Hit, 2] = RockMonsterSound2;
+$RaceSound[Dragon, Death, 1] = SoundGnollDeath1;
+$RaceSound[Dragon, Death, 2] = SoundGnollDeath2;
+$RaceSound[Dragon, Acquired, 1] = LairEnterRoar;
+$RaceSound[Dragon, Hit, 1] = SoundGnollHit1;
+$RaceSound[Dragon, Hit, 2] = SoundGnollHit2;
+$RaceSound[Dragon, Taunt, 1] = SoundGnollTaunt1;
+
+$RaceSound[Godeye, Death, 1] = RockMonsterDeath1;
+$RaceSound[Godeye, Acquired, 1] = SoundUberAcquired2;
+$RaceSound[Godeye, Hit, 1] = SoundHitFlesh;
 
 //------------------------------------------------------------------
 // Traveller armor data:	(light)
@@ -3183,19 +3201,19 @@ PlayerData GodeyeArmor
 	animData[24] = { "apc pilot", none, 1, false, false, false, false, 3 };
 
 	// death animations:
-	animData[25] = { "crouch die", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[26] = { "die chest", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[27] = { "die head", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[28] = { "die grab back", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[29] = { "die right side", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[30] = { "die left side", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[31] = { "die leg left", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[32] = { "die leg right", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[33] = { "die blown back", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[34] = { "die spin", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[35] = { "die forward", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[36] = { "die forward kneel", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[37] = { "die back", SoundPlayerDeath, 1, false, false, false, false, 4 };
+	animData[25] = { "crouch die", none, 1, false, false, false, false, 4 };
+	animData[26] = { "die chest", none, 1, false, false, false, false, 4 };
+	animData[27] = { "die head", none, 1, false, false, false, false, 4 };
+	animData[28] = { "die grab back", none, 1, false, false, false, false, 4 };
+	animData[29] = { "die right side", none, 1, false, false, false, false, 4 };
+	animData[30] = { "die left side", none, 1, false, false, false, false, 4 };
+	animData[31] = { "die leg left", none, 1, false, false, false, false, 4 };
+	animData[32] = { "die leg right", none, 1, false, false, false, false, 4 };
+	animData[33] = { "die blown back", none, 1, false, false, false, false, 4 };
+	animData[34] = { "die spin", none, 1, false, false, false, false, 4 };
+	animData[35] = { "die forward", none, 1, false, false, false, false, 4 };
+	animData[36] = { "die forward kneel", none, 1, false, false, false, false, 4 };
+	animData[37] = { "die back", none, 1, false, false, false, false, 4 };
 
 	// signal moves:
 	animData[38] = { "sign over here",  none, 1, true, false, false, false, 2 };
@@ -3349,19 +3367,19 @@ PlayerData BatArmor
 	animData[24] = { "apc pilot", none, 1, false, false, false, false, 3 };
 
 	// death animations:
-	animData[25] = { "crouch die", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[26] = { "die chest", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[27] = { "die head", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[28] = { "die grab back", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[29] = { "die right side", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[30] = { "die left side", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[31] = { "die leg left", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[32] = { "die leg right", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[33] = { "die blown back", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[34] = { "die spin", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[35] = { "die forward", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[36] = { "die forward kneel", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[37] = { "die back", SoundPlayerDeath, 1, false, false, false, false, 4 };
+	animData[25] = { "crouch die", none, 1, false, false, false, false, 4 };
+	animData[26] = { "die chest", none, 1, false, false, false, false, 4 };
+	animData[27] = { "die head", none, 1, false, false, false, false, 4 };
+	animData[28] = { "die grab back", none, 1, false, false, false, false, 4 };
+	animData[29] = { "die right side", none, 1, false, false, false, false, 4 };
+	animData[30] = { "die left side", none, 1, false, false, false, false, 4 };
+	animData[31] = { "die leg left", none, 1, false, false, false, false, 4 };
+	animData[32] = { "die leg right", none, 1, false, false, false, false, 4 };
+	animData[33] = { "die blown back", none, 1, false, false, false, false, 4 };
+	animData[34] = { "die spin", none, 1, false, false, false, false, 4 };
+	animData[35] = { "die forward", none, 1, false, false, false, false, 4 };
+	animData[36] = { "die forward kneel", none, 1, false, false, false, false, 4 };
+	animData[37] = { "die back", none, 1, false, false, false, false, 4 };
 
 	// signal moves:
 	animData[38] = { "sign over here",  none, 1, true, false, false, false, 2 };
@@ -4013,19 +4031,19 @@ PlayerData DragonArmor
 	animData[24] = { "apc pilot", none, 1, false, false, false, false, 3 };
 
 	// death animations:
-	animData[25] = { "crouch die", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[26] = { "die chest", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[27] = { "die head", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[28] = { "die grab back", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[29] = { "die right side", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[30] = { "die left side", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[31] = { "die leg left", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[32] = { "die leg right", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[33] = { "die blown back", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[34] = { "die spin", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[35] = { "die forward", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[36] = { "die forward kneel", SoundPlayerDeath, 1, false, false, false, false, 4 };
-	animData[37] = { "die back", SoundPlayerDeath, 1, false, false, false, false, 4 };
+	animData[25] = { "crouch die", none, 1, false, false, false, false, 4 };
+	animData[26] = { "die chest", none, 1, false, false, false, false, 4 };
+	animData[27] = { "die head", none, 1, false, false, false, false, 4 };
+	animData[28] = { "die grab back", none, 1, false, false, false, false, 4 };
+	animData[29] = { "die right side", none, 1, false, false, false, false, 4 };
+	animData[30] = { "die left side", none, 1, false, false, false, false, 4 };
+	animData[31] = { "die leg left", none, 1, false, false, false, false, 4 };
+	animData[32] = { "die leg right", none, 1, false, false, false, false, 4 };
+	animData[33] = { "die blown back", none, 1, false, false, false, false, 4 };
+	animData[34] = { "die spin", none, 1, false, false, false, false, 4 };
+	animData[35] = { "die forward", none, 1, false, false, false, false, 4 };
+	animData[36] = { "die forward kneel", none, 1, false, false, false, false, 4 };
+	animData[37] = { "die back", none, 1, false, false, false, false, 4 };
 
 	// signal moves:
 	animData[38] = { "sign over here",  none, 1, true, false, false, false, 2 };
@@ -4091,9 +4109,12 @@ PlayerData DragonArmor
 
 	footPrints = { 4, 5 };
 
-	boxWidth = 0.8;
-	boxDepth = 0.8;
-	boxNormalHeight = 2.6;
+	// boxWidth = 0.8;
+	// boxDepth = 0.8;
+	// boxNormalHeight = 2.6;
+	boxWidth = 4;
+	boxDepth = 2;
+	boxNormalHeight = 8.5; // goood
 
 	boxNormalHeadPercentage  = 0.70;
 	boxNormalTorsoPercentage = 0.45;

@@ -89,16 +89,17 @@ $WeaponRange[TesterBow] = 400;
 // $WeaponDelay[TesterBow] = 1;
 
 $ProjRestrictions[SmallRock] = ",Sling,";
-$ProjRestrictions[BasicArrow] = ",HuntingBow,";
-$ProjRestrictions[SheafArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,TesterBow,";		
-$ProjRestrictions[BladedArrow] = ",ShortBow,LongBow,ElvenBow,CompositeBow,RShortBow,TesterBow,";
-$ProjRestrictions[LightQuarrel] = ",LightCrossbow,HeavyCrossbow,RLightCrossbow,";
-$ProjRestrictions[HeavyQuarrel] = ",LightCrossbow,HeavyCrossbow,RLightCrossbow,";
-$ProjRestrictions[ShortQuarrel] = ",RepeatingCrossbow,";
-$ProjRestrictions[StoneFeather] = ",AeolusWing,";
-$ProjRestrictions[MetalFeather] = ",AeolusWing,";
-$ProjRestrictions[Talon] = ",AeolusWing,";
-$ProjRestrictions[CeraphumsFeather] = ",AeolusWing,";
+$ProjRestrictions[BasicArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[SheafArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[BladedArrow] = ",HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[LightQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
+$ProjRestrictions[HeavyQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
+$ProjRestrictions[ShortQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
+$ProjRestrictions[StoneFeather] = ",SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[MetalFeather] = ",SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[Talon] = ",ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[CeraphumsFeather] = ",ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[PoisonArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,";
 
 function GenerateAllWeaponCosts()
 {
@@ -166,7 +167,7 @@ function MeleeAttack(%player)
 	PostAttack(%clientId, %weapon);
 }
 
-function ProjectileAttack(%clientId, %vel)
+function ProjectileAttack(%clientId, %vel, %skipDelay)
 {
 	dbecho($dbechoMode, "ProjectileAttack(" @ %clientId @ ", " @ %weapon @ ", " @ %vel @ ")");
 
@@ -183,15 +184,21 @@ function ProjectileAttack(%clientId, %vel)
 	//=======================================================
 	if(%clientId.sleepMode > 0)
 		return;
-	if($WeaponDelay[%weapon] != ""){
-		if($justRanged[%clientId])
-			return;
-	}
-	else
-		$WeaponDelay[%weapon] = GetDelay(%weapon);
 
-	$justRanged[%clientId] = True;
-	schedule("$justRanged["@%clientId@"]=\"\";",$WeaponDelay[%weapon]-0.11);
+	if (%skipDelay == True) {
+		// do nothing is skip?
+	} else {
+		if($WeaponDelay[%weapon] != "") {
+			if($justRanged[%clientId])
+				return;
+		}
+		else
+			$WeaponDelay[%weapon] = GetDelay(%weapon);
+
+		$justRanged[%clientId] = True;
+		schedule("$justRanged["@%clientId@"]=\"\";",$WeaponDelay[%weapon]-0.11);
+	}
+
 	%loadedProjectile = fetchData(%clientId, "LoadedProjectile " @ %weapon);
 
 	if(%loadedProjectile == ""){
@@ -600,12 +607,12 @@ $WeaponDelay[LongBow] = 2;
 
 ItemImageData CastingBladeImage
 {
-	shapeFile  = "quarterstaff";
+	shapeFile  = "smallObject"; // quarterstaff / smallObject
 	mountPoint = 0;
 
 	weaponType = 0;
-	reloadTime = 0;
-	fireTime = $WeaponDelay[Dagger];
+	reloadTime = 0;	
+	fireTime = $WeaponDelay[GreatSword];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -619,7 +626,7 @@ ItemData CastingBlade
 	heading = "bWeapons";
 	description = "Casting Blade";
 	className = "Weapon";
-	shapeFile  = "quarterstaff";
+	shapeFile  = "smallObject";
 	hudIcon = "dagger";
 	shadowDetailMask = 4;
 	imageType = CastingBladeImage;
@@ -646,28 +653,30 @@ function CastingBladeImage::onFire(%player, %slot)
 
 	%index = GetBestSpell(%clientId, 1, True);
 
-	lbecho("Spell Index found " @ %index);
+	// lbecho("Spell Index found " @ %index);
 
-	%length = $Spell::LOSrange[%index]-1;
+	// %length = $Spell::LOSrange[%index]-1;
 		
-	$los::object = "";
-	if(GameBase::getLOSinfo(%player, %length) && %index != -1)
-	{
-		lbecho("found target");
-		%obj = getObjectType($los::object);
-		lbecho("Object type found " @ %obj);
-		if(%obj == "Player")
-		{
+	//$los::object = "";
+	//if(GameBase::getLOSinfo(%player, %length) && %index != -1)
+	//{
+		// lbecho("found target");
+		//%obj = getObjectType($los::object);
+		//lbecho("Object type found " @ %obj);
+		//lbecho($los::position);
+		//if(%obj == "Player")
+		//{
 			if(Player::isAiControlled(%clientId))
 			{
-				lbecho("New AI directive added");
+				// lbecho("New AI directive added");
 				AI::newDirectiveRemove(fetchData(%clientId, "BotInfoAiName"), 99);
 			}
-			lbecho("Casting spell " @ $Spell::keyword[%index]);
+			// lbecho("Casting spell " @ $Spell::keyword[%index]);
 			internalSay(%clientId, 0, "#cast " @ $Spell::keyword[%index]);
 			%hasCast = True;
-		}
-	}
+		//}
+	//}
+
 	if(!%hasCast)
 	{
 		if(OddsAre(3))
@@ -1473,7 +1482,7 @@ ItemData LongBow
 };
 function LongBowImage::onFire(%player, %slot) {
 	%clientId = Player::getClient(%player);
-	%vel = 150;
+	%vel = 100;
 	ProjectileAttack(%clientId, %vel);
 }
 
@@ -1514,7 +1523,7 @@ ItemData CompositeBow
 };
 function CompositeBowImage::onFire(%player, %slot) {
 	%clientId = Player::getClient(%player);
-	%vel = 150;
+	%vel = 100;
 
 	ProjectileAttack(%clientId, %vel);
 }

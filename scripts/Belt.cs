@@ -252,6 +252,7 @@ function processMenuBeltGear(%clientid, %opt)
 		MenuBeltDrop(%clientid, %o, %t, %victim);
 		return;
 	}
+	
 	MenuBeltGear(%clientid, %t, %p, %victim);
 
 	return;
@@ -394,7 +395,7 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 
 	if(%type == "AmmoItems"){
 		%list = GetAccessoryList(%clientId, 9, -1);
-		%curweap= player::getmounteditem(%clientId,$weaponslot);
+		%curweap= player::getmounteditem(%clientId, $weaponslot);
 		if(String::findSubStr(%list, %curweap) != -1 && String::findSubStr($ProjRestrictions[%item], "," @ %curweap @ ",") != -1){
 			Client::addMenuItem(%clientId, %cnt++ @ "Equip to "@%curweap, %type@" arm "@%item);
 		}
@@ -524,7 +525,7 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 			Client::sendMessage(%clientId, $MsgWhite, "You cannot drop equipped weapon.");
 			return;
 		}
-
+		
 		if (%type == "ArmorItems" && BeltItem::isEquipped(%clientId, %item)) {
 			Client::sendMessage(%clientId, $MsgWhite, "You cannot drop equipped armor.");
 			return;
@@ -565,7 +566,7 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 	{
 		if(%type == "AmmoItems"){
 			%list = GetAccessoryList(%clientId, 9, -1);
-			%curweap= player::getmounteditem(%clientId,$weaponslot);
+			%curweap = player::getmounteditem(%clientId,$weaponslot);
 			if(String::findSubStr(%list, %curweap) != -1 && String::findSubStr($ProjRestrictions[%item], "," @ %curweap @ ",") != -1){
 				storeData(%clientId, "LoadedProjectile " @ %curweap, %item);
 				Client::sendMessage(%clientId, $MsgBeige, rpg::EnglishItem(%item) @ " loaded as projectile for "@ %curweap @".");
@@ -583,10 +584,10 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 		if ($restoreValue[%item, HP] > 0 || $restoreValue[%item, MP] > 0 || $beltitem[%item, "targetPosition"]) {
 			// check if HP restore object
 			if ($restoreValue[%item, HP] > 0){
-				%hp = fetchData(%clientId, "HP");
+				// %hp = fetchData(%clientId, "HP");
 				refreshHP(%clientId, $restoreValue[%item, HP] * -0.01);
-				if(fetchData(%clientId, "HP") != %hp)
-					UseSkill(%clientId, $SkillHealing, True, True);
+				// if(fetchData(%clientId, "HP") != %hp)
+				// 	UseSkill(%clientId, $SkillHealing, True, True);
 			}
 			
 			// check if MP restore object
@@ -596,10 +597,13 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 
 			// check if location change item
 			if ($beltitem[%item, "targetPosition"]) {
-				GameBase::setPosition(%clientId, $beltitem[%item, "targetPosition"]);
+				// lbecho("Client::setPosition(" @ %clientId @ ", \"" @ $beltitem[%item, "targetPosition"] @ "\");")
+				schedule("gamebase::setPosition(" @ %clientId @ ", \"" @ $beltitem[%item, "targetPosition"] @ "\");", 1);
+				// GameBase::setPosition(%clientId, $beltitem[%item, "targetPosition"]);
 
 				if ($beltitem[%item, "targetRotationZ"]) {
-					GameBase::setRotation(%clientId, "0 0 " @ $beltitem[%item, "targetRotationZ"]);
+					schedule("gamebase::setRotation(" @ %clientId @ ", \"0 0 " @ $beltitem[%item, "targetRotationZ"] @ "\");", 1);
+					// GameBase::setRotation(%clientId, "0 0 " @ $beltitem[%item, "targetRotationZ"]);
 				}
 			}
 
@@ -612,6 +616,14 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 				Client::sendMessage(%clientId, $MsgWhite, "You used " @ $beltitem[%item, "Name"] @ ". [have " @ %has @ "]");
 				refreshAll(%clientId);
 			}
+
+			// play sound if it exists
+			if ($beltitem[%item, "useSound"] != "") {
+				playSound($beltitem[%item, "useSound"], GameBase::getPosition(%clientId));
+			}
+
+			MenuBeltDrop(%clientid, %item, %type, %victim);
+			return;
 		} else {
 			Client::sendMessage(%clientId, $MsgWhite, "You cannot use " @ $beltitem[%item, "Name"] @ ".");
 		}
@@ -621,6 +633,7 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 		// 		MenuBeltDrop(%clientid, %item, %type);
 		// }
 	}
+	
 	%clientId.bulkNum = 1;
 	return;
 }
@@ -1800,7 +1813,7 @@ function BeltItem::AddShield(%name, %item, %special, %weight, %skillRestriction,
 	BeltItem::AddAccessory(%name, %item, $ShieldAccessoryType, "ArmorItems", %special, %weight, %skillRestriction, %miscInfo, %shopIndex);
 }
 
-function BeltItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant, %shopIndex) {
+function BeltItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant, %shopIndex, %baseWeapon) {
 	// copied from GetDelay() if you change that formula update it here
 	%type = "WeaponItems";
 	%a = 3.0;
@@ -1818,6 +1831,10 @@ function BeltItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo
 	$beltitem[%item, "Name"] = %name;
 	$beltitem[%item, "Type"] = %type;
 	$beltitem[%item, "Image"] = %image;
+
+	if (%baseWeapon != "") {
+		$beltitem[%item, "BaseWeapon"] = %baseWeapon;
+	}
 
 	// calculate special var - ATK = (DPS * Delay)
 	%delay = %image.imageType.fireTime;
@@ -2006,11 +2023,11 @@ function BeltItem::AddWeapon(%name, %item, %image, %accessoryType, %miscInfo, %w
 
 		%enchantedWeaponName = %name @ " of " @ %enchantName;
 		%enchantedWeaponItem = %item @ %enchant;
-		BeltItem::AddWeaponData(%enchantedWeaponName, %enchantedWeaponItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant);
+		BeltItem::AddWeaponData(%enchantedWeaponName, %enchantedWeaponItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant, 0, %item);
 
 		%equippedEnchantedName = %enchantedWeaponName @ " " @ $equippedString;
 		%equippedEnchantedItem = %enchantedWeaponItem @ "0";
-		BeltItem::AddWeaponData(%equippedEnchantedName, %equippedEnchantedItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant);
+		BeltItem::AddWeaponData(%equippedEnchantedName, %equippedEnchantedItem, %image, %accessoryType, %miscInfo, %weaponSkill, %skillRestriction, %dps, %enchant, 0, %item);
 
 		// add the smithing recipe for the enchant
 		// Smith::addItem(%enchantedWeaponItem, %item @ " 1 " @ %enchantMateria @ " 1", %enchantedWeaponItem @ " 1", $smithingNum++);
@@ -2802,6 +2819,8 @@ $description = "Boots Of Gliding let you glide!";
 BeltItem::AddAccessory("Boots Of Gliding", "BootsOfGliding", $BootsAccessoryType, "AccessoryItems", "8 2", 3, "", $description, 304);
 $description = "Wind Walkers let you fly!";
 BeltItem::AddAccessory("Wind Walkers", "WindWalkers", $BootsAccessoryType, "AccessoryItems", "8 3", 3, "", $description, 305);
+$description = "A gold ring with the word LongBow written on the inside of the ring.";
+BeltItem::AddAccessory("LongBows Ring", "LongbowsRing", $RingAccessoryType, "AccessoryItems", "3 500", 0.1, "", $description, 306);
 
 // Other Items (500+)
 
@@ -2943,6 +2962,7 @@ $AccessoryVar[CelestialMythrilAlembic, $MiscInfo] = "A legendary alembic made fr
 // Igredients
 BeltItem::Add("Vial of Water", "VialOfWater", "MiscItems", 0.01, 1, "", 616);
 $AccessoryVar[VialOfWater, $MiscInfo] = "A vial of clean, fresh water. It is used as a base for many potions and alchemical concoctions.";
+$restoreValue[VialOfWater, MP] = 1;
 
 BeltItem::Add("Healing Herb", "HealingHerb", "MiscItems", 0.01, 10, "", 617);
 $AccessoryVar[HealingHerb, $MiscInfo] = "A medicinal herb known for its healing properties. It is used in many healing potions and remedies.";
@@ -2974,6 +2994,18 @@ $AccessoryVar[SkeletonBonePowder, $MiscInfo] = "A fine powder made from ground s
 BeltItem::Add("Ahriman Eye Lens", "AhrimanEyeLens", "MiscItems", 0.01, 100, "", 630);
 $AccessoryVar[AhrimanEyeLens, $MiscInfo] = "A lens made from the eye of an Ahriman. It is known for its ability to enhance magical properties.";
 
+// hearth stones
+BeltItem::Add("Gooba Hearthstone", "GoobaHearthstone", "MiscItems", 0.01, 1000, "Ruby", 700);
+$AccessoryVar[GoobaHearthstone, $MiscInfo] = "A magical hearthstone that teleports the user back to Upper Gooba.";
+$beltitem[GoobaHearthstone, "targetPosition"] = "259.767 -469.158 -2963.51";
+$beltitem[GoobaHearthstone, "targetRotationZ"] = "2.84465";
+$beltitem[GoobaHearthstone, "useSound"] = "AbsorbABS";
+BeltItem::Add("Kalm Hearthstone", "KalmHearthstone", "MiscItems", 0.01, 500, "Ruby", 701);
+$AccessoryVar[KalmHearthstone, $MiscInfo] = "A magical hearthstone that teleports the user back to Kalm.";
+$beltitem[KalmHearthstone, "targetPosition"] = "2004.24 496.11 2405.5";
+$beltitem[KalmHearthstone, "targetRotationZ"] = "0.715683";
+$beltitem[KalmHearthstone, "useSound"] = "AbsorbABS";
+
 // Quest Items
 BeltItem::Add("Black Statue", "BlackStatue", "QuestItems", $AccessoryVar[BlackStatue, $Weight], GenerateItemCost(BlackStatue));
 BeltItem::Add("Skeleton Bone", "SkeletonBone", "QuestItems", $AccessoryVar[SkeletonBone, $Weight], GenerateItemCost(SkeletonBone));
@@ -2981,10 +3013,6 @@ BeltItem::Add("Enchanted Stone", "EnchantedStone", "QuestItems", $AccessoryVar[E
 BeltItem::Add("Dragon Scale", "DragonScale", "QuestItems", $AccessoryVar[DragonScale, $Weight], GenerateItemCost(DragonScale));
 BeltItem::Add("Parchment", "Parchment", "QuestItems", $AccessoryVar[Parchment, $Weight], GenerateItemCost(Parchment));
 BeltItem::Add("Magic Dust", "MagicDust", "QuestItems", $AccessoryVar[MagicDust, $Weight], GenerateItemCost(MagicDust));
-BeltItem::Add("Gooba Hearthstone", "GoobaHearthstone", "MiscItems", 0.01, 10, "Ruby");
-$AccessoryVar[GoobaHearthstone, $MiscInfo] = "A magical hearthstone that teleports the user back to Upper Gooba.";
-$beltitem[GoobaHearthstone, "targetPosition"] = "259.767 -469.158 -2963.51";
-$beltitem[GoobaHearthstone, "targetRotationZ"] = "2.84465";
 
 // Enemy Weapons
 $description = "A casting blade.";
@@ -3012,13 +3040,18 @@ BeltItem::AddWeapon("Wood Axe", "WoodAxe", "WoodAxe", $AxeAccessoryType, $descri
 
 // Seed / Food Items
 // function BeltItem::AddSeed(%name, %item, %type, %weight, %cost, %image, %shopIndex, %miscInfo, %fruit, %fruitType)
+BeltItem::Add("Kalm Pale Ale", "KalmPaleAle", "MiscItems", 0.5, 50, "", 801);
+$AccessoryVar[KalmPaleAle, $MiscInfo] = "A refreshing Pale Ale that was brewed in Kalm.";
+$restoreValue[KalmPaleAle, MP] = 5;
+
 $description = "A small seed that will grow into an Apple Tree if planted in the right conditions.";
-BeltItem::AddSeed("Apple Seed", "AppleSeed", "MiscItems", 0.01, 10, "Granite", 800, $description, "Apple", "TreeFruit");
-BeltItem::Add("Apple", "Apple", "MiscItems", 0.01, 10, "Ruby");
+BeltItem::AddSeed("Apple Seed", "AppleSeed", "MiscItems", 0.01, 50, "Granite", 850, $description, "Apple", "TreeFruit");
+BeltItem::Add("Apple", "Apple", "MiscItems", 0.01, 10, "Ruby", 851);
 $AccessoryVar[Apple, $MiscInfo] = "A delicious red apple. It can be eaten to restore health.";
+$restoreValue[Apple, HP] = 5;
 
 $description = "A large seed that will grow into an Avocado Tree if planted in the right conditions.";
-BeltItem::AddSeed("Avocado Seed", "AvocadoSeed", "MiscItems", 0.01, 10, "Granite", 801, $description, "Avocado", "TreeFruit");
+BeltItem::AddSeed("Avocado Seed", "AvocadoSeed", "MiscItems", 0.01, 10, "Granite", 852, $description, "Avocado", "TreeFruit");
 BeltItem::Add("Avocado", "Avocado", "MiscItems", 0.01, 10, "Jade");
 $AccessoryVar[Avocado, $MiscInfo] = "A perfectly ripe avocado. It can be eaten to restore health.";
 

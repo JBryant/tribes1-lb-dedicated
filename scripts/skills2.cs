@@ -57,9 +57,8 @@ $Skill::startSound[4] = FishWalk;
 $Skill::groupListCheck[4] = False;
 $Skill::refVal[4] = -10;
 $Skill::graceDistance[4] = 0.5;
-// $Skill::requiredItems[4] = "CrudeClayAlembic 1";
 $Skill::requireOneOfItems[4] = "CrudeClayAlembic WornCopperAlembic ReinforcedIronAlembic ArcaneGlassAlembic CelestialMythrilAlembic";
-$SkillRestriction[$Skill::keyword[4]] = "C Chemist";
+// $SkillRestriction[$Skill::keyword[4]] = "C Chemist";
 
 $Skill::keyword[5] = "throw";
 $Skill::index[$Skill::keyword[5]] = 5;
@@ -71,7 +70,19 @@ $Skill::startSound[5] = FishWalk;
 $Skill::groupListCheck[5] = False;
 $Skill::refVal[5] = -10;
 $Skill::graceDistance[5] = 10;
-$SkillRestriction[$Skill::keyword[5]] = "C Chemist";
+// $SkillRestriction[$Skill::keyword[5]] = "C Chemist";
+
+$Skill::keyword[6] = "quickshot";
+$Skill::index[$Skill::keyword[6]] = 6;
+$Skill::name[6] = "Quick Shot";
+$Skill::description[6] = "A fast shot that shoots multiple arrows.";
+$Skill::delay[6] = 0.1;
+$Skill::recoveryTime[6] = 8;
+$Skill::startSound[6] = Reflected;
+$Skill::groupListCheck[6] = False;
+$Skill::refVal[6] = -10;
+$Skill::graceDistance[6] = 10;
+// $SkillRestriction[$Skill::keyword[6]] = "C Chemist";
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
@@ -386,6 +397,12 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		%overrideEndSound = True;
 		%returnFlag = True;
 	}
+
+	if ($Skill::keyword[%index] == "quickshot") {
+		schedule("ProjectileAttack(" @ %clientId @ ", 100, True);", 0.01); // 0.01
+		schedule("ProjectileAttack(" @ %clientId @ ", 100, True);", 0.25); // 0.25
+		schedule("ProjectileAttack(" @ %clientId @ ", 100, True);", 0.5); // 0.5
+    }
 
     return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
 }

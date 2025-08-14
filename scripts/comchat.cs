@@ -646,7 +646,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 					%TrueClientId.bulkNum = 1;
 					%type = $beltItem[%item, "Type"];
 
-					if(%type == "PotionItems") {
+					if(%type == "PotionItems" || %type == "MiscItems") {
 						processMenuBeltDrop(%TrueClientId, "PotionItems use "@%item@" 1", 1);
 					}
 					else if (%type == "WeaponItems") {
