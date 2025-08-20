@@ -4,10 +4,13 @@
 // the zone check.
 //======================================================================
 
-$maxBonusStates = 10;
+$maxBonusStates = 20;
 
 function DecreaseBonusStateTicks(%clientId, %b)
 {
+	// %hasParry = HasBonusState(%clientId, "Parry");
+	// lbecho("client " @ %clientId @ " has parry: " @ %hasParry);
+
 	if(%b != "") {
 		//Decrease specified tick for the player
 		$BonusStateCnt[%clientId, %b]--;
@@ -106,4 +109,15 @@ function GetBonusStatesMessage(%clientId) {
 	}
 
 	return %msg;
+}
+
+function HasBonusState(%clientId, %type) {
+	for(%i = 1; %i <= $maxBonusStates; %i++) {
+		if($BonusStateCnt[%clientId, %i] > 0) {
+			if(String::ICompare($BonusState[%clientId, %i], %type) == 0) {
+				return True;
+			}
+		}
+	}
+	return False;
 }

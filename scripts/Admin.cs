@@ -492,15 +492,15 @@ function processMenuOptions(%clientId, %option)
 		if(fetchData(%clientId, "MyHouse") != "")
 			%a[%tmp++] = "House: " @ fetchData(%clientId, "MyHouse") @ "\n";
 
+		%a[%tmp++] = "Rank Pts: " @ fetchData(%clientId, "RankPoints") @ "\n\n";
 		%a[%tmp++] = "Coins: " @ fetchData(%clientId, "COINS") @ " - Bank: " @ fetchData(%clientId, "BANK") @ "\n";
 		%a[%tmp++] = "Exp: " @ fetchData(%clientId, "EXP") @ "\n";
-        %a[%tmp++] = "Exp to next level: " @ (GetExp(GetLevel(fetchData(%clientId, "EXP"), %clientId)+1, %clientId) - fetchData(%clientId, "EXP") @ "\n\n");
+        %a[%tmp++] = "Exp to next level: " @ (GetExp(GetLevel(fetchData(%clientId, "EXP"), %clientId)+1, %clientId) - fetchData(%clientId, "EXP")) @ "\n";
 
 		%bonuses = fetchData(%clientId, "Bonuses");
 		if (%bonuses != "")
 			%a[%tmp++] = "Bonuses:\n" @ %bonuses @ "\n";
 
-		// %a[%tmp++] = "Rank Pts: " @ fetchData(%clientId, "RankPoints") @ "\n";
 		// %a[%tmp++] = "Class: " @ fetchData(%clientId, "CLASS") @ "\n";
 		// %a[%tmp++] = "TOTAL $: " @ fetchData(%clientId, "COINS") + fetchData(%clientId, "BANK") @ "\n\n";
 		// %a[%tmp++] = "Weight: " @ fetchData(%clientId, "Weight") @ " / " @ fetchData(%clientId, "MaxWeight") @ "\n";
@@ -965,8 +965,6 @@ function processMenuselectrweapon(%clientId, %item)
 {
 	// If they have a ranged weapon, we can change this to not use GetAccessoryList in the future
 	%list = GetAccessoryList(%clientId, 10, -1);
-
-	lbecho(%item);
 
 	Client::buildMenu(%clientId, "Projectiles:", "selectproj", true);
 	for(%i = 0; GetWord(%list, %i) != -1; %i++)

@@ -381,7 +381,7 @@ $SkillType[advheal3] = $SkillWhiteMagick;
 $Spell::keyword[21] = "remort";
 $Spell::index[remort] = 21;
 $Spell::name[21] = "Remort";
-$Spell::description[21] = "Remorts a level 101 character to level 1, with bonuses.";
+$Spell::description[21] = "Remorts a high level character to level 1, and allows them to choose another class.";
 $Spell::delay[21] = 3.0;
 $Spell::recoveryTime[21] = 1;
 $Spell::damageValue[21] = 0;
@@ -661,8 +661,8 @@ $Spell::name[38] = "Fire Flask Bomb";
 $Spell::description[38] = "fire flask bomb explosion.";
 $Spell::delay[38] = 3;
 $Spell::recoveryTime[38] = 3;
-$Spell::radius[38] = 8;
-$Spell::damageValue[38] = "70";
+$Spell::radius[38] = 10;
+$Spell::damageValue[38] = "100";
 $Spell::LOSrange[38] = 999; // 80
 $Spell::manaCost[38] = 1;
 $Spell::startSound[38] = PlaceSeal;
@@ -680,8 +680,8 @@ $Spell::name[39] = "Ice Flask Bomb";
 $Spell::description[39] = "ice flask bomb explosion.";
 $Spell::delay[39] = 3;
 $Spell::recoveryTime[39] = 3;
-$Spell::radius[39] = 8;
-$Spell::damageValue[39] = "100";
+$Spell::radius[39] = 10;
+$Spell::damageValue[39] = "200";
 $Spell::LOSrange[39] = 999; // 80
 $Spell::manaCost[39] = 1;
 $Spell::startSound[39] = PlaceSeal;
@@ -694,12 +694,12 @@ $SkillType[iceflaskbomb] = $SkillAlchemy;
 
 // lightning flask spell
 $Spell::keyword[40] = "lightningflaskbomb";
-$Spell::index[lightningflaskbomb] = 40;
+$Spell::index[lightningflaskbomb] = 250;
 $Spell::name[40] = "Lightning Flask Bomb";
 $Spell::description[40] = "lightning flask bomb explosion.";
 $Spell::delay[40] = 3;
 $Spell::recoveryTime[40] = 3;
-$Spell::radius[40] = 8;
+$Spell::radius[40] = 10;
 $Spell::damageValue[40] = "130";
 $Spell::LOSrange[40] = 999; // 80
 $Spell::manaCost[40] = 1;
@@ -718,8 +718,8 @@ $Spell::name[41] = "Earth Flask Bomb";
 $Spell::description[41] = "earth flask bomb explosion.";
 $Spell::delay[41] = 3;
 $Spell::recoveryTime[41] = 3;
-$Spell::radius[41] = 8;
-$Spell::damageValue[41] = "160";
+$Spell::radius[41] = 10;
+$Spell::damageValue[41] = "300";
 $Spell::LOSrange[41] = 999; // 80
 $Spell::manaCost[41] = 1;
 $Spell::startSound[41] = PlaceSeal;
@@ -737,8 +737,8 @@ $Spell::name[42] = "Acid Flask Bomb";
 $Spell::description[42] = "acid flask bomb explosion.";
 $Spell::delay[42] = 3;
 $Spell::recoveryTime[42] = 3;
-$Spell::radius[42] = 8;
-$Spell::damageValue[42] = "190";
+$Spell::radius[42] = 10;
+$Spell::damageValue[42] = "400";
 $Spell::LOSrange[42] = 999; // 80
 $Spell::manaCost[42] = 1;
 $Spell::startSound[42] = PlaceSeal;
@@ -748,6 +748,25 @@ $Spell::refVal[42] = -9998;
 $Spell::graceDistance[42] = 10;
 $Spell::elementalType[42] = $ElementalPoison;
 $SkillType[acidflaskbomb] = $SkillAlchemy;
+
+// exposive shot explosion
+$Spell::keyword[43] = "explosiveshotexplosion";
+$Spell::index[explosiveshotexplosion] = 43;
+$Spell::name[43] = "Explosive Shot";
+$Spell::description[43] = "The explosion caused by the explosive shot.";
+$Spell::delay[43] = 3;
+$Spell::recoveryTime[43] = 3;
+$Spell::radius[43] = 10;
+$Spell::damageValue[43] = "190";
+$Spell::LOSrange[43] = 999; // 80
+$Spell::manaCost[43] = 1;
+// $Spell::startSound[43] = PlaceSeal;
+// $Spell::endSound[43] = LaunchFB;
+$Spell::groupListCheck[43] = False;
+$Spell::refVal[43] = -9998;
+$Spell::graceDistance[43] = 10;
+$Spell::elementalType[43] = $ElementalFire;
+$SkillType[explosiveshotexplosion] = $SkillArchery;
 
 //----------------------------------------------------------------------------------------------------------------
 
@@ -1332,15 +1351,23 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 	}
 	if(%index == 21)
 	{
-		if(!fetchData(%clientId, "currentlyRemorting"))
-		{
-			%castPos = DoRemort(%clientId);		
+		// check if they are good to remort
+		// if their level is 100 + remort levels then they can remort
+		%requiredLevel = 100 + (fetchData(%clientId, "RemortStep") * 5);
 
-			%extraDelay = 0.22;
-			%returnFlag = True;
-		}
-		else
+		if (fetchData(%clientId, "LVL") < %requiredLevel) {
+			Client::sendMessage(%clientId, $MsgRed, "You need to be level " @ %requiredLevel @ " to remort.");
 			%returnFlag = False;
+		} else {
+			if(!fetchData(%clientId, "currentlyRemorting")) {
+				%castPos = DoRemort(%clientId);		
+
+				%extraDelay = 0.22;
+				%returnFlag = True;
+			}
+			else
+				%returnFlag = False;
+		}
 	}
 	if(%index == 22)
 	{
@@ -1652,7 +1679,7 @@ function sendDoneRecovMsg(%clientId) {
 	Client::sendMessage(%clientId, $MsgBeige, "You are ready to cast.");
 }
 
-function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index) {
+function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index, %multiplier) {
 	dbecho($dbechoMode, "CreateAndDetBomb(" @ %clientId @ ", " @ %b @ ", " @ %castPos @ ", " @ %index @ ")");
 
 	%player = Client::getOwnedObject(%clientId);
@@ -1664,16 +1691,40 @@ function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index) {
 	GameBase::Throw(%bomb, %player, 0, false);
 	GameBase::setPosition(%bomb, %castPos);
 	
-	if(%doDamage)
-		SpellRadiusDamage(%clientId, %castPos, %index);
+	if(%doDamage) {
+		if ($SkillType[$Spell::keyword[%index]] == $SkillArchery) {
+			%multi = 1.0;
+			if (%multiplier != "") {
+				%multi = %multiplier;
+			}
+			PhysicalRadiusDamage(%clientId, %castPos, $Spell::radius[%index] * 2, $Spell::name[%index], %multi);
+		} else {
+			SpellRadiusDamage(%clientId, %castPos, %index);
+		}
+	}
 
-	playSound($Spell::endSound[%index], %castPos);
+	if ($Spell::endSound[%index] != "")
+		playSound($Spell::endSound[%index], %castPos);
+}
+
+// this function is to let objects us do cool spell stuff on an object and then delete it
+// good for explosives, flasks, flame arrows etc
+function TriggerSpellEffectOnObject(%object, %spellIndex) {
+	if(%spellIndex == "43") {
+		DetonateItem(%object, "Bomb6", %spellIndex);
+	}
 }
 
 function SpellDamage(%clientId, %targetId, %damageValue, %index) {
 	dbecho($dbechoMode, "SpellDamage(" @ %clientId @ ", " @ %targetId @ ", " @ %damageValue @ ", " @ %index @ ")");
 
-	GameBase::virtual(%targetId, "onDamage", $SpellDamageType, %damageValue, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, $Spell::keyword[%index]);
+	%multi = 1.0;
+	if ($SkillType[$Spell::keyword[%index]] == $SkillAlchemy && HasBonusState(%clientId, "InfusedPotions") == True) {
+		%multi = 1.5;
+	}
+
+	%finalDamage = %damageValue * %multi;
+	GameBase::virtual(%targetId, "onDamage", $SpellDamageType, %finalDamage, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, $Spell::keyword[%index]);
 }
 
 function SpellRadiusDamage(%clientId, %pos, %index) {
@@ -1686,6 +1737,7 @@ function SpellRadiusDamage(%clientId, %pos, %index) {
 	Group::iterateRecursive(%set, DoSpellDamage, %clientId, %pos, %index);
 	deleteObject(%set);
 }
+
 function DoSpellDamage(%object, %clientId, %pos, %index) {
 	dbecho($dbechoMode, "DoSpellDamage(" @ %object @ ", " @ %clientId @ ", " @ %pos @ ", " @ %index @ ")");
 

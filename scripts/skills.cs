@@ -974,7 +974,7 @@ $SkillRestriction[dimensionrift] = $SkillBlackMagick @ " 750";
 $SkillRestriction[teleport] = $SkillTimeMagick @ " 60";
 $SkillRestriction[transport] = $SkillTimeMagick @ " 200";
 $SkillRestriction[advtransport] = $SkillTimeMagick @ " 350";
-$SkillRestriction[remort] = $SkillTimeMagick @ " 0 " @ $MinLevel @ " 101";
+$SkillRestriction[remort] = $SkillTimeMagick @ " 0"; // @ $MinLevel @ " 101";
 $SkillRestriction[mimic] = $SkillTimeMagick @ " 145 " @ $MinRemort @ " 2";
 $SkillRestriction[masstransport] = $SkillTimeMagick @ " 650 " @ $MinRemort @ " 1";
 

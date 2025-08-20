@@ -725,25 +725,26 @@ function Game::refreshClientScore(%clientId)
 				Client::sendMessage(%clientId,0,"You are now level " @ fetchData(%clientId, "LVL"));
 			}
 		}
+		
 		storeData(%clientId, "templvl", GetLevel(fetchData(%clientId, "EXP"), %clientId));
 
-		%lvl = GetLevel(fetchData(%clientId, "EXP"), %clientId);
+		//%lvl = GetLevel(fetchData(%clientId, "EXP"), %clientId);
 		//%rcheck = $ClassName[1, fetchData(%clientId, "RemortStep")+1];
-		%cr = fetchData(%clientId, "currentlyRemorting");
-		%maxlvl = 125 + fetchData(%clientId, "RemortStep");
-		if(%lvl >= %maxlvl && !%cr && !Player::isAiControlled(%clientId))
-		{
-			//FORCE REMORT!!!
+		//%cr = fetchData(%clientId, "currentlyRemorting");
+		//%maxlvl = 125 + fetchData(%clientId, "RemortStep");
+		// if(%lvl >= %maxlvl && !%cr && !Player::isAiControlled(%clientId))
+		// {
+		// 	//FORCE REMORT!!!
 
-			storeData(%clientId, "currentlyRemorting", True);
+		// 	storeData(%clientId, "currentlyRemorting", True);
 
-			for(%i = 1; %i <= 20; %i++)
-			{
-				schedule("CreateAndDetBomb(" @ %clientId @ ", \"Bomb7\", GameBase::getPosition(" @ %clientId @ "), False, 19);", %i * 3, %clientId);
-			}
+		// 	for(%i = 1; %i <= 20; %i++)
+		// 	{
+		// 		schedule("CreateAndDetBomb(" @ %clientId @ ", \"Bomb7\", GameBase::getPosition(" @ %clientId @ "), False, 19);", %i * 3, %clientId);
+		// 	}
 
-			schedule("DoRemort(" @ %clientId @ ");", 60, %clientId);
-		}
+		// 	schedule("DoRemort(" @ %clientId @ ");", 60, %clientId);
+		// }
 	}
 
 	%z = Zone::getDesc(fetchData(%clientId, "zone"));

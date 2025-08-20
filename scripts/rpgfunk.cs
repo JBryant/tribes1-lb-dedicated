@@ -2290,7 +2290,7 @@ function WhatIs(%clientId, %item)
 
 
 
-function rpg::longPrint(%clientId,%msg,%position,%time)
+function rpg::longPrint(%clientId, %msg, %position, %time)
 {
 //%position:
 //0 = Centre

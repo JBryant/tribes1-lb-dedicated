@@ -610,8 +610,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 		// (player can't use any of these while dead)
 		//=================================================
 
-
-
 		if(%w1 == "#use")
 		{
 			if(String::findSubStr(%cropped, "\"") != -1 || String::findSubStr(%cropped, "\\") != -1)
@@ -1829,18 +1827,27 @@ function internalSay(%clientId, %team, %message, %senderName)
 					%cl = Player::getClient(%object);
 
 					if (%cl != "") {
-						lbecho("Set skin " @ %skin @ " for " @ %cl);
+						// lbecho("Set skin " @ %skin @ " for " @ %cl);
 						Client::setSkin(%cl, %skin);
 					}
 				}
 			}
 		}
+		
+		if (%w1 == "#read") {
+			lbecho("read it");
+			
+			%msg = "<f2>Title\n\n";
+			%msg = %msg @ "<f1>I am reading something right now.\n";
 
-		if(%w1 == "#createtree") {
-			if(%clientToServerAdminLevel >= 5){
+			rpg::longPrint(%TrueClientId, %msg, 0, 10);
+		}
+
+		if (%w1 == "#createtree") {
+			if (%clientToServerAdminLevel >= 5) {
 				%player = Client::getOwnedObject(%TrueClientId);
 
-				if(GameBase::getLOSinfo(%player, 1000)) {
+				if (GameBase::getLOSinfo(%player, 1000)) {
 					%pos = $los::position;
 					init::Tree(%pos);
 				}

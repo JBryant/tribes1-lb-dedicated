@@ -27,7 +27,6 @@
 function GroupTrigger::onTrigEnter(%object, %this)
 {
 	dbecho($dbechoMode, "GroupTrigger::onTrigEnter(" @ %object @ ", " @ %this @ ")");
-	lbecho("GroupTrigger::onTrigEnter");
 
     %clientId = Player::getClient(%this);
 
@@ -59,34 +58,33 @@ function GroupTrigger::onTrigEnter(%object, %this)
 		%need = %object.need;
 		%esay = %object.esay;
 		%nsay = %object.nsay;
-			storeData(%clientId, "InEnterBox", %object);
+		storeData(%clientId, "InEnterBox", %object);
 
-			%h = HasThisStuff(%clientId, %need);
-			if(%h != 667 && %h != 666 && %h != False)
+		%h = HasThisStuff(%clientId, %need);
+		if(%h != 667 && %h != 666 && %h != False)
+		{
+			centerprint(%clientId, "<jc><f1>"@%esay, 8);
+		}
+		else
+		{
+			for(%i = 0; GetWord(%need, %i) != -1; %i+=2)
 			{
-				centerprint(%clientId, "<jc><f1>"@%esay, 8);
-			}
-			else
-			{
-				for(%i = 0; GetWord(%need, %i) != -1; %i+=2)
-				{
-					%w = GetWord(%need, %i);
-					%w2 = GetWord(%need, %i+1);
-					if(%w == "LVLM"){
-						%lvlm = %w2;
-						break;
-					}
+				%w = GetWord(%need, %i);
+				%w2 = GetWord(%need, %i+1);
+				if(%w == "LVLM"){
+					%lvlm = %w2;
+					break;
 				}
-				%lvlm++;
-				%lvlm = %lvlm - (fetchData(%clientId,"RemortStep") * 2);
-				%nsay = String::replace(%nsay, "<lvlm>", %lvlm);
-				centerprint(%clientId, "<jc><f0>"@%nsay, 8);
 			}
+			%lvlm++;
+			%lvlm = %lvlm - (fetchData(%clientId,"RemortStep") * 2);
+			%nsay = String::replace(%nsay, "<lvlm>", %lvlm);
+			centerprint(%clientId, "<jc><f0>"@%nsay, 8);
+		}
 	}
 	else if(String::ICompare(Object::getName(getGroup(getGroup(getGroup(%object)))), "TeleportBoxes") == 0)
 	{
 		//echo("entered teleporter box");
-		lbecho("entered teleporter box");
 		
 		%group = getGroup(getGroup(%object));
 		%count = Group::objectCount(%group);
@@ -135,7 +133,6 @@ function GroupTrigger::onTrigEnter(%object, %this)
 function GroupTrigger::onTrigLeave(%object, %this)
 {
 	dbecho($dbechoMode, "GroupTrigger::onTrigLeave(" @ %object @ ", " @ %this @ ")");
-	lbecho("GroupTrigger::onTrigLeave");
 
     %clientId = Player::getClient(%this);
 

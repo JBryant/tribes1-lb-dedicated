@@ -96,11 +96,27 @@ function sell(%desc)
 	else {
 		pecho("Unknown item \"" @ %desc @ "\"");
 	}
-}
-$weaponNameToKey["Blaster"] = 1;$weaponNameToKey["Plasma Gun"] = 2;$weaponNameToKey["Chaingun"] = 3;$weaponNameToKey["Disc Launcher"] = 4;$weaponNameToKey["Grenade Launcher"] = 5;$weaponNameToKey["Laser Rifle"] = 6;$weaponNameToKey["ELF Gun"] = 7;$weaponNameToKey["Mortar"] = 8;$weaponNameToKey["Targeting Laser"] = 9;
+}
+
+$weaponNameToKey["Blaster"] = 1;
+$weaponNameToKey["Plasma Gun"] = 2;
+$weaponNameToKey["Chaingun"] = 3;
+$weaponNameToKey["Disc Launcher"] = 4;
+$weaponNameToKey["Grenade Launcher"] = 5;
+$weaponNameToKey["Laser Rifle"] = 6;
+$weaponNameToKey["ELF Gun"] = 7;
+$weaponNameToKey["Mortar"] = 8;
+$weaponNameToKey["Targeting Laser"] = 9;
 $weaponNameToKey["Repair Kit"] = "h";
 $weaponNameToKey["Beacon"] = "b";
-$weaponNameToKey["Backpack"] = "t";function use(%desc){	if($repackKeyOverride == 2 && $weaponNameToKey[%desc] != "")	{		remoteEval(2048,rawKey,$weaponNameToKey[%desc]);		return;	}
+$weaponNameToKey["Backpack"] = "t";
+function use(%desc)
+{
+	if($repackKeyOverride == 2 && $weaponNameToKey[%desc] != "")
+	{
+		remoteEval(2048,rawKey,$weaponNameToKey[%desc]);
+		return;
+	}
 	%type = getItemType(%desc);
 	if (%type != -1) {
 		// The client useItem function will make sure the use is
@@ -254,16 +270,17 @@ function remoteITXT(%manager, %msg)
 
 function remoteCP(%manager, %msg, %timeout)
 {
-   if(%manager == 2048)
-   {
-	%timeout++;
-	%timeout--;
+   	if(%manager == 2048)
+	{
+		%timeout++;
+		%timeout--;
+		$centerPrintId++;
+		
+		if(%timeout)
+			schedule("clearCenterPrint(" @ $centerPrintId @ ");", %timeout);
 
-      $centerPrintId++;
-      if(%timeout)
-         schedule("clearCenterPrint(" @ $centerPrintId @ ");", %timeout);
-      Client::centerPrint(%msg, 0);
-   }
+      	Client::centerPrint(%msg, 0);
+   	}
 }
 
 function remoteBP(%manager, %msg, %timeout)
@@ -522,7 +539,8 @@ function remoteMODInfo(%server, %modString)
 	// if it is not "", 
 	// show it on the loading gui
 	if($ServerModInfo != "")
-	{		%msg = %modString;
+	{
+		%msg = %modString;
 		if($joiningWorlds){
 			%msg = "<jc>" @ %msg;
 			$joiningWorlds = "";

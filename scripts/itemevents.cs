@@ -130,13 +130,18 @@ function Item::onCollision(%this, %object) {
 					RefreshAll(%clientId);
 				}
 			}
+			
+			// check if projectile has an attached spell to trigger
+			if (%this.spellIndex) {
+				TriggerSpellEffectOnObject(%this, %this.spellIndex);
+			}
 
 			deleteObject(%this);
 		}
         else if(%item.className == "Accessory" || $LoreItem[%item] == True) {
 			%itemName = %this.name;
 			if ($beltitem[%itemName, "isDetonatable"] == True) {
-				DetonateItem(%this);
+				DetonateItem(%this, $beltitem[%this.name, "explosion"], $beltitem[%this.name, "spellIndex"]);
 			} else {
 				Belt::GiveThisStuff(%clientId, %itemName, 1);
 				Item::playPickupSound(%this);
@@ -164,14 +169,11 @@ function Item::onCollision(%this, %object) {
 	}
 }
 
-function DetonateItem(%object) {
-	dbecho($dbechoMode, "DetonateItem(" @ %object @ ")");
-	
-	%pos = GameBase::getPosition(%object);
-	%explosion = $beltitem[%object.name, "explosion"];
-	%spellIndex = $beltitem[%object.name, "spellIndex"];
+function DetonateItem(%object, %explosion, %spellIndex) {
+	dbecho($dbechoMode, "DetonateItem(" @ %object @ ", " @ %explosion @ ", " @ %spellIndex @ ")");
 
-	CreateAndDetBomb(%object.owner, %explosion, %pos, True, %spellIndex);
+	CreateAndDetBomb(%object.owner, %explosion, GameBase::getPosition(%object), True, %spellIndex);
+
 	deleteObject(%object);
 }
 

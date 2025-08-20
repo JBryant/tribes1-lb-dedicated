@@ -568,6 +568,7 @@ function bottomprint(%clientId, %msg, %timeout)
       %timeout = 5;
    if(%timeout == -1)
         %timeout = "";
+		
    remoteEval(%clientId, "BP", %msg, %timeout);
 }
 

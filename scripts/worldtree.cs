@@ -133,11 +133,11 @@ function tree::spawn(%seed) {
 		if (%pos != -1) {
 			// %posx = GetWord(%pos, 0);
 			// %posy = GetWord(%pos, 1);
-			%posz = GetWord(%pos, 2)-1;
-			%posz = %posz + 1;
+			//%posz = GetWord(%pos, 2)-1;
+			//%posz = %posz + 1;
 			// %pos = %posx @ " " @ %posy @ " " @ %posz;
 
-			if (%posz > 58 && %posz < 66.5) {
+			//if (%posz > 58 && %posz < 66.5) {
 				%tree = newObject("Static", "StaticShape", "TreeShape", true);
 				%tree.hp = 20;
 				%tree.fruit = $beltitem[%seed.name, "TreeFruit"];
@@ -160,7 +160,7 @@ function tree::spawn(%seed) {
 				// %z = getword(%pos, 2);
 				$treenum[%t]++;
 				%tree.nocount = 0;
-			}
+			//}
 		}
 	}
 

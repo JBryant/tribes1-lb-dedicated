@@ -42,6 +42,11 @@
 // And now, for Tribes RPG v6.0, by phantom.
 
 
+// TODO:
+// 1. Fix accessory max type checks
+// 2. Healing Kit mend uses multiple healing kits
+// 
+
 // ------------------- //
 // Menu Functions      //
 // ------------------- //
@@ -365,10 +370,10 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 			return;
 		}
 	}
-	if(%cmnt < 1){
-		Client::sendMessage(%clientId, $MsgWhite, "you don't have any "@%name);
-		return;
-	}
+	// if(%cmnt < 1){
+	// 	Client::sendMessage(%clientId, $MsgWhite, "you don't have any "@%name);
+	// 	return;
+	// }
 
 
 	if(%clientId.bulkNum == "")
@@ -394,9 +399,8 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 	}
 
 	if(%type == "AmmoItems"){
-		%list = GetAccessoryList(%clientId, 9, -1);
-		%curweap= player::getmounteditem(%clientId, $weaponslot);
-		if(String::findSubStr(%list, %curweap) != -1 && String::findSubStr($ProjRestrictions[%item], "," @ %curweap @ ",") != -1){
+		%curweap = GetEquippedWeapon(%clientId);
+		if(String::findSubStr($ProjRestrictions[%item], "," @ %curweap @ ",") != -1){
 			Client::addMenuItem(%clientId, %cnt++ @ "Equip to "@%curweap, %type@" arm "@%item);
 		}
 	}
@@ -442,8 +446,10 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 			Client::addMenuItem(%clientId, %cnt++ @ "Drop "@%cmnt, %type@" dropb "@%item@" "@%cmnt);
 		}
 	}
+
 	Client::addMenuItem(%clientId, %cnt++ @ "Examine", %type@" examine "@%item);
 	Client::addMenuItem(%clientId, "z<< Back", %type@" back");
+
 	return;
 }
 
@@ -481,7 +487,8 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 	}
 	else if(%option == "equip") {
 		Belt::EquipItem(%clientid, %item);
-		MenuBeltDrop(%clientid, %item, %type, %victim);
+		// MenuBeltDrop(%clientid, %item, %type, %victim);
+		MenuBeltGear(%clientId, %type, 1, %item);
 		return;
 	}
 	else if(%option == "slot") {
@@ -565,11 +572,11 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 	else if(%option == "arm")
 	{
 		if(%type == "AmmoItems"){
-			%list = GetAccessoryList(%clientId, 9, -1);
-			%curweap = player::getmounteditem(%clientId,$weaponslot);
-			if(String::findSubStr(%list, %curweap) != -1 && String::findSubStr($ProjRestrictions[%item], "," @ %curweap @ ",") != -1){
+			%curweap = GetEquippedWeapon(%clientId);
+			if(String::findSubStr($ProjRestrictions[%item], "," @ %curweap @ ",") != -1) {
 				storeData(%clientId, "LoadedProjectile " @ %curweap, %item);
 				Client::sendMessage(%clientId, $MsgBeige, rpg::EnglishItem(%item) @ " loaded as projectile for "@ %curweap @".");
+				playSound(SoundPickupItem, GameBase::getPosition(%clientId));
 			}
 			else
 				Client::sendMessage(%clientId, $MsgRed, "This projectile cannot be loaded into the weapon you have equipped.");
@@ -621,8 +628,8 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 			if ($beltitem[%item, "useSound"] != "") {
 				playSound($beltitem[%item, "useSound"], GameBase::getPosition(%clientId));
 			}
-
-			MenuBeltDrop(%clientid, %item, %type, %victim);
+			
+			MenuBeltDrop(%clientId, %item, %type, %victim);
 			return;
 		} else {
 			Client::sendMessage(%clientId, $MsgWhite, "You cannot use " @ $beltitem[%item, "Name"] @ ".");
@@ -2438,13 +2445,31 @@ function Belt::UnequipWeapon(%clientid, %item) {
 }
 
 function Belt::EquipAccessory(%clientid, %item) {
+	%totalItems = GetEquippedAccessoriesCountByBeltType(%clientid, "AccessoryItems");
+	%itemList = GetEquippedAccessoriesByBeltType(%clientid, "AccessoryItems");
+	%cnt = 0;
+
+	for(%i = 0; %i <= %totalItems; %i++) {
+		%checkItem = getword(%itemList, %i);
+		%baseItem = String::getSubStr(%checkItem, 0, String::len(%checkItem)-1);
+
+		if($AccessoryVar[%baseItem, $AccessoryType] == $AccessoryVar[%item, $AccessoryType]) {
+			%cnt += 1;
+		}
+	}
+
+	if (%cnt >= $maxAccessory[$AccessoryVar[%item, $AccessoryType]]) {
+		Client::sendMessage(%clientId, $MsgRed, "You have too many of these accessory types already equipped.");
+		return;
+	}
+
 	Client::sendMessage(%clientId, $MsgBeige, "You equipped " @ BeltItem::GetName(%item) @ ".~wCrossbow_Switch1.wav");
 	Belt::TakeThisStuff(%clientId, %item, 1);
 	Belt::GiveThisStuff(%clientid, %item @ "0", 1);
 }
 
 function Belt::UnequipAccessory(%clientid, %item) {
-	%baseItem = String::getSubStr(%item, 0, String::len(%item)-1);	//remove the 0
+	%baseItem = String::getSubStr(%item, 0, String::len(%item)-1);
 	Client::sendMessage(%clientId, $MsgBeige, "You unequipped " @ BeltItem::GetName(%baseItem) @ ".");
 	Belt::TakeThisStuff(%clientId, %item, 1);
 	Belt::GiveThisStuff(%clientid, %baseItem, 1);
@@ -2706,6 +2731,8 @@ BeltItem::AddWeapon("Gungnir", "Gungnir", "Spear", $BludgeonAccessoryType, $desc
 
 // Bows (175 - 199)
 // Images: Crossbow, RepeatingCrossbow, LongBow, CompositeBow, CompositeBowFast, Sling
+$description = "A small bow mostly used for practice.";
+BeltItem::AddWeapon("Practice Bow", "PracticeBow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "40", 174);
 $description = "A simple sling used for hunting small game.";
 BeltItem::AddWeapon("Sling", "Sling", "Sling", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "40", 175);
 $description = "A lightweight bow made for rapid firing.";
@@ -2740,39 +2767,39 @@ BeltItem::AddWeapon("Dragonbone Crossbow", "DragonboneCrossbow", "Crossbow", $Ra
 // BeltItem::AddArmor(%name, %item, %armorSkin, %hitSound, %special, %weight, %skillRestriction, %miscInfo, %shopIndex)
 
 $description = "Made for use in battle, this is sturdier than normal clothing.";
-BeltItem::AddArmor("Leather Clothing", "LeatherClothing", "rpgpadded", SoundHitFlesh, "7 30 4 5", "10", $SkillEndurance @ " 5", $description, 200);
+BeltItem::AddArmor("Leather Clothing", "LeatherClothing", "rpgpadded", SoundHitFlesh, "7 30 3 15", "10", $SkillEndurance @ " 5", $description, 200);
 $description = "Armor made from layers of tanned leather.";
-BeltItem::AddArmor("Leather Armor", "LeatherArmor", "rpgleather", SoundHitLeather, "7 60 4 10", "10", $SkillEndurance @ " 75", $description, 201);
+BeltItem::AddArmor("Leather Armor", "LeatherArmor", "rpgleather", SoundHitLeather, "7 60 3 30", "10", $SkillEndurance @ " 75", $description, 201);
 $description = "Linen armor with a bronze breastplate.";
-BeltItem::AddArmor("Linen Cuirass", "LinenCuirass", "rpgstudleather", SoundHitLeather, "7 90 4 15", "10", $SkillEndurance @ " 125", $description, 202);
+BeltItem::AddArmor("Linen Cuirass", "LinenCuirass", "rpgstudleather", SoundHitLeather, "7 90 3 45", "10", $SkillEndurance @ " 125", $description, 202);
 $description = "Simply fashioned bronze armor.";
-BeltItem::AddArmor("Bronze Armor", "BronzeArmor", "rpgspiked", SoundHitLeather, "7 120 4 20", "10", $SkillEndurance @ " 180", $description, 203);
+BeltItem::AddArmor("Bronze Armor", "BronzeArmor", "rpgspiked", SoundHitLeather, "7 120 3 60", "10", $SkillEndurance @ " 180", $description, 203);
 $description = "Armor fashioned from countless interlocking metal rings.";
-BeltItem::AddArmor("Chain Mail", "ChainMail", "rpgchainmail", SoundHitLeather, "7 160 4 30", "10", $SkillEndurance @ " 230", $description, 204);
+BeltItem::AddArmor("Chain Mail", "ChainMail", "rpgchainmail", SoundHitLeather, "7 160 3 80", "10", $SkillEndurance @ " 230", $description, 204);
 $description = "Armor made from the valuable metal known as mythril. It is surprisingly light and sturdy.";
-BeltItem::AddArmor("Mythril Armor", "MythrilArmor", "rpgscalemail", SoundHitChain, "7 210 4 40", "10", $SkillEndurance @ " 300", $description, 205);
+BeltItem::AddArmor("Mythril Armor", "MythrilArmor", "rpgscalemail", SoundHitChain, "7 210 3 105", "10", $SkillEndurance @ " 300", $description, 205);
 $description = "The unique design of this armor greatly increases its protective qualities.";
-BeltItem::AddArmor("Brigandine Armor", "PlateMail", "rpgbrigandine", SoundHitChain, "7 260 4 50", "10", $SkillEndurance @ " 450", $description, 206);
+BeltItem::AddArmor("Brigandine Armor", "PlateMail", "rpgbrigandine", SoundHitChain, "7 260 3 130", "10", $SkillEndurance @ " 450", $description, 206);
 $description = "Improved plate mail that has been decorated with gold.";
-BeltItem::AddArmor("Golden Armor", "GoldenArmor", "rpgchainmail", SoundHitChain, "7 320 4 65", "10", $SkillEndurance @ " 600", $description, 207);
+BeltItem::AddArmor("Golden Armor", "GoldenArmor", "rpgchainmail", SoundHitChain, "7 320 3 160", "10", $SkillEndurance @ " 600", $description, 207);
 $description = "Armor that has been reinforced with incredibly hard gemstones.";
-BeltItem::AddArmor("Diamond Armor", "DiamondArmor", "rpgringmail", SoundHitChain, "7 380 4 75", "10", $SkillEndurance @ " 750", $description, 208);
+BeltItem::AddArmor("Diamond Armor", "DiamondArmor", "rpgringmail", SoundHitChain, "7 380 3 190", "10", $SkillEndurance @ " 750", $description, 208);
 $description = "Brilliantly shining armor made of a lustrous white alloy of mythril and platinum.";
-BeltItem::AddArmor("Platinum Armor", "PlatinumArmor", "rpgbandedmail", SoundHitChain, "7 440 4 85", "10", $SkillEndurance @ " 900", $description, 209);
+BeltItem::AddArmor("Platinum Armor", "PlatinumArmor", "rpgbandedmail", SoundHitChain, "7 440 3 220", "10", $SkillEndurance @ " 900", $description, 209);
 $description = "Thick mythril armor designed to withstand even the most intense shocks.";
-BeltItem::AddArmor("Carabineer Mail", "CarabineerMail", "rpgsplintmail", SoundHitChain, "7 500 4 100", "10", $SkillEndurance @ " 1050", $description, 210);
+BeltItem::AddArmor("Carabineer Mail", "CarabineerMail", "rpgsplintmail", SoundHitChain, "7 500 3 250", "10", $SkillEndurance @ " 1050", $description, 210);
 $description = "Armor with the power to reflect magick used on the wearer.";
-BeltItem::AddArmor("Mirror Mail", "MirrorMail", "rpgbronzeplate", SoundHitPlate, "7 580 4 115", "10", $SkillEndurance @ " 1200", $description, 211);
+BeltItem::AddArmor("Mirror Mail", "MirrorMail", "rpgbronzeplate", SoundHitPlate, "7 580 3 290", "10", $SkillEndurance @ " 1200", $description, 211);
 $description = "Platinum armor reinforced in places with crystalline gemstones found deep within the earth.";
-BeltItem::AddArmor("Crystal Armor", "CrystalArmor", "rpgplatemail", SoundHitPlate, "7 650 4 130", "10", $SkillEndurance @ " 1350", $description, 212);
+BeltItem::AddArmor("Crystal Armor", "CrystalArmor", "rpgplatemail", SoundHitPlate, "7 650 3 325", "10", $SkillEndurance @ " 1350", $description, 212);
 $description = "Legendary armor given by the gods to a knight in honor of his service. Confers divine protection to the wearer.";
-BeltItem::AddArmor("Genji Armor", "GenjiArmor", "rpgfieldplate", SoundHitPlate, "7 750 4 150", "10", $SkillEndurance @ " 1500", $description, 213);
+BeltItem::AddArmor("Genji Armor", "GenjiArmor", "rpgfieldplate", SoundHitPlate, "7 750 3 375", "10", $SkillEndurance @ " 1500", $description, 213);
 $description = "Top-grade armor made with advanced techniques. The materials and design make it exceedingly strong.";
-BeltItem::AddArmor("Maximillian", "Maximillian", "rpgfullplate", SoundHitPlate, "7 850 4 175", "10", $SkillEndurance @ " 1650", $description, 214);
+BeltItem::AddArmor("Maximillian", "Maximillian", "rpgfullplate", SoundHitPlate, "7 850 3 425", "10", $SkillEndurance @ " 1650", $description, 214);
 $description = "A dark mail covered in scales of fallen Dragons.";
-BeltItem::AddArmor("Dragon Mail", "DragonMail", "rpghuman6", SoundHitPlate, "7 1000 4 200", "10", $SkillEndurance @ " 1800", $description, 215);
+BeltItem::AddArmor("Dragon Mail", "DragonMail", "rpghuman6", SoundHitPlate, "7 1000 3 500", "10", $SkillEndurance @ " 1800", $description, 215);
 $description = "Armor forged for swordsmen who have mastered every technique and achieved knighthood's most exalted rank.";
-BeltItem::AddArmor("Onion Armor", "OnionArmor", "rpgfullplate",  SoundHitPlate,"7 1200 4 250", "10", $SkillEndurance @ " 2000", $description, 216);
+BeltItem::AddArmor("Onion Armor", "OnionArmor", "rpgfullplate",  SoundHitPlate,"7 1200 3 600", "10", $SkillEndurance @ " 2000", $description, 216);
 
 // Light Armors / Robes
 $description = "A light robe that provides some protection.";
@@ -2819,8 +2846,31 @@ $description = "Boots Of Gliding let you glide!";
 BeltItem::AddAccessory("Boots Of Gliding", "BootsOfGliding", $BootsAccessoryType, "AccessoryItems", "8 2", 3, "", $description, 304);
 $description = "Wind Walkers let you fly!";
 BeltItem::AddAccessory("Wind Walkers", "WindWalkers", $BootsAccessoryType, "AccessoryItems", "8 3", 3, "", $description, 305);
-$description = "A gold ring with the word LongBow written on the inside of the ring.";
-BeltItem::AddAccessory("LongBows Ring", "LongbowsRing", $RingAccessoryType, "AccessoryItems", "3 500", 0.1, "", $description, 306);
+
+$description = "An ornate golden ring with the word LongBow written on the inside of the ring.";
+BeltItem::AddAccessory("LongBows Ring", "LongbowsRing", $RingAccessoryType, "AccessoryItems", "7 500 3 500", 0.1, "", $description, 306);
+// update the descriptons of Ring of Magical Defense 1 - 5 such that each level gets nicer descriptions, ex: ring 1 might just be a simple band
+$description = "A simple iron band that offers basic magical protection.";
+BeltItem::AddAccessory("Ring of Magical Defense +1", "RingOfMagicalDefense1", $RingAccessoryType, "AccessoryItems", "3 100", 0.1, "", $description, 307);
+$description = "A delicate silver ring that offers moderate magical protection.";
+BeltItem::AddAccessory("Ring of Magical Defense +2", "RingOfMagicalDefense2", $RingAccessoryType, "AccessoryItems", "3 200", 0.1, "", $description, 308);
+$description = "A beautifully crafted ring that offers strong magical protection.";
+BeltItem::AddAccessory("Ring of Magical Defense +3", "RingOfMagicalDefense3", $RingAccessoryType, "AccessoryItems", "3 300", 0.1, "", $description, 309);
+$description = "A radiant golden ring that offers exceptional magical protection.";
+BeltItem::AddAccessory("Ring of Magical Defense +4", "RingOfMagicalDefense4", $RingAccessoryType, "AccessoryItems", "3 400", 0.1, "", $description, 310);
+$description = "An ornate platinum ring that offers unparalleled magical protection.";
+BeltItem::AddAccessory("Ring of Magical Defense +5", "RingOfMagicalDefense5", $RingAccessoryType, "AccessoryItems", "3 500", 0.1, "", $description, 311);
+
+$description = "A simple iron band that offers basic physical protection.";
+BeltItem::AddAccessory("Ring of Defense +1", "RingOfDefense1", $RingAccessoryType, "AccessoryItems", "7 100", 0.1, "", $description, 312);
+$description = "A delicate silver ring that offers moderate physical protection.";
+BeltItem::AddAccessory("Ring of Defense +2", "RingOfDefense2", $RingAccessoryType, "AccessoryItems", "7 200", 0.1, "", $description, 313);
+$description = "A beautifully crafted ring that offers strong physical protection.";
+BeltItem::AddAccessory("Ring of Defense +3", "RingOfDefense3", $RingAccessoryType, "AccessoryItems", "7 300", 0.1, "", $description, 314);
+$description = "A radiant golden ring that offers exceptional physical protection.";
+BeltItem::AddAccessory("Ring of Defense +4", "RingOfDefense4", $RingAccessoryType, "AccessoryItems", "7 400", 0.1, "", $description, 315);
+$description = "An ornate platinum ring that offers unparalleled physical protection.";
+BeltItem::AddAccessory("Ring of Defense +5", "RingOfDefense5", $RingAccessoryType, "AccessoryItems", "7 500", 0.1, "", $description, 316);
 
 // Other Items (500+)
 
@@ -2888,7 +2938,7 @@ $beltitem[FireFlask, "isDetonatable"] = True;
 $beltitem[FireFlask, "spellIndex"] = 38;
 $beltitem[FireFlask, "explosion"] = "Bomb9";
 
-BeltItem::Add("Ice Flask","IceFlask", "PotionItems", 0.1, 100, "SmallPotion", 551);
+BeltItem::Add("Ice Flask","IceFlask", "PotionItems", 0.1, 200, "SmallPotion", 551);
 $AccessoryVar[IceFlask, $MiscInfo] = "A flask that radiates with ice energy. It can be thrown to create a small ice explosion.";
 $AccessoryVar[IceFlask, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 MaidensTear 1";
 $beltitem[IceFlask, "isThrowable"] = True;
@@ -2896,7 +2946,7 @@ $beltitem[IceFlask, "isDetonatable"] = True;
 $beltitem[IceFlask, "spellIndex"] = 39;
 $beltitem[IceFlask, "explosion"] = "Bomb2";
 
-BeltItem::Add("Lightning Flask","LightningFlask", "PotionItems", 0.1, 100, "SmallPotion", 552);
+BeltItem::Add("Lightning Flask","LightningFlask", "PotionItems", 0.1, 300, "SmallPotion", 552);
 $AccessoryVar[LightningFlask, $MiscInfo] = "A flask that radiates with lightning energy. It can be thrown to create a small lightning explosion.";
 $AccessoryVar[LightningFlask, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 TonberryOil 1";
 $beltitem[LightningFlask, "isThrowable"] = True;
@@ -2904,7 +2954,7 @@ $beltitem[LightningFlask, "isDetonatable"] = True;
 $beltitem[LightningFlask, "spellIndex"] = 40;
 $beltitem[LightningFlask, "explosion"] = "Bomb10";
 
-BeltItem::Add("Earth Flask","EarthFlask", "PotionItems", 0.1, 100, "SmallPotion", 553);
+BeltItem::Add("Earth Flask","EarthFlask", "PotionItems", 0.1, 400, "SmallPotion", 553);
 $AccessoryVar[EarthFlask, $MiscInfo] = "A flask that radiates with earth energy. It can be thrown to create a small earth explosion.";
 $AccessoryVar[EarthFlask, "AlchemyIngredients"] = "ReinforcedAlchemistsBottle 1 VialOfWater 1 BehemothHornFragment 1";
 $beltitem[EarthFlask, "isThrowable"] = True;
@@ -2912,7 +2962,7 @@ $beltitem[EarthFlask, "isDetonatable"] = True;
 $beltitem[EarthFlask, "spellIndex"] = 41;
 $beltitem[EarthFlask, "explosion"] = "Bomb1";
 
-BeltItem::Add("Acid Flask","AcidFlask", "PotionItems", 0.1, 100, "SmallPotion", 554);
+BeltItem::Add("Acid Flask","AcidFlask", "PotionItems", 0.1, 500, "SmallPotion", 554);
 $AccessoryVar[AcidFlask, $MiscInfo] = "A flask that radiates with acid energy. It can be thrown to create a small acid explosion.";
 $AccessoryVar[AcidFlask, "AlchemyIngredients"] = "ArcaneCrystalPhial 1 VialOfWater 1 MalboroSporeSac 1";
 $beltitem[AcidFlask, "isThrowable"] = True;
@@ -2920,7 +2970,7 @@ $beltitem[AcidFlask, "isDetonatable"] = True;
 $beltitem[AcidFlask, "spellIndex"] = 42;
 $beltitem[AcidFlask, "explosion"] = "Bomb6";
 
-BeltItem::Add("Holy Flask","HolyFlask", "PotionItems", 0.1, 100, "SmallPotion", 554);
+BeltItem::Add("Holy Flask","HolyFlask", "PotionItems", 0.1, 1000, "SmallPotion", 554);
 $AccessoryVar[HolyFlask, $MiscInfo] = "A flask that radiates with holy energy. It can be thrown to create a small holy explosion.";
 $AccessoryVar[HolyFlask, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 MalboroSporeSac 1";
 $beltitem[HolyFlask, "isThrowable"] = True;
@@ -2928,7 +2978,7 @@ $beltitem[HolyFlask, "isDetonatable"] = True;
 $beltitem[HolyFlask, "spellIndex"] = 42;
 $beltitem[HolyFlask, "explosion"] = "Bomb5";
 
-BeltItem::Add("Unholy Flask","UnholyFlask", "PotionItems", 0.1, 100, "SmallPotion", 554);
+BeltItem::Add("Unholy Flask","UnholyFlask", "PotionItems", 0.1, 1000, "SmallPotion", 554);
 $AccessoryVar[UnholyFlask, $MiscInfo] = "A flask that radiates with unholy energy. It can be thrown to create a small unholy explosion.";
 $AccessoryVar[UnholyFlask, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 MalboroSporeSac 1";
 $beltitem[UnholyFlask, "isThrowable"] = True;
@@ -2937,15 +2987,15 @@ $beltitem[UnholyFlask, "spellIndex"] = 42;
 $beltitem[UnholyFlask, "explosion"] = "Bomb14";
 
 // Alchemy Items (no shoping except for maybe Potion Bottles?)
-BeltItem::Add("Cracked Flask", "CrackedFlask", "MiscItems", 0.01, 10, "", 606);
+BeltItem::Add("Cracked Flask", "CrackedFlask", "MiscItems", 0.01, 1, "", 606);
 $AccessoryVar[CrackedFlask, $MiscInfo] = "A crude, handmade clay bottle with visible cracks. Prone to leaking and breaking easily. Used by commoners for basic tonics and weak potions.";
-BeltItem::Add("Worn Glass Vial", "WornGlassVial", "MiscItems", 0.01, 100, "", 607);
+BeltItem::Add("Worn Glass Vial", "WornGlassVial", "MiscItems", 0.01, 10, "", 607);
 $AccessoryVar[WornGlassVial, $MiscInfo] = "A reused glass container with scratches and imperfections. It is still usable, but the glass is thin and fragile. Used by novice alchemists and street apothecaries.";
-BeltItem::Add("Reinforced Alchemist's Bottle", "ReinforcedAlchemistsBottle", "MiscItems", 0.01, 1000, "", 608);
+BeltItem::Add("Reinforced Alchemist's Bottle", "ReinforcedAlchemistsBottle", "MiscItems", 0.01, 100, "", 608);
 $AccessoryVar[ReinforcedAlchemistsBottle, $MiscInfo] = "A sturdy glass bottle with a reinforced metal frame. It is designed to withstand high pressure and heat, making it ideal for brewing volatile potions and elixirs.";
-BeltItem::Add("Arcane Crystal Phial", "ArcaneCrystalPhial", "MiscItems", 0.01, 10000, "", 609);
+BeltItem::Add("Arcane Crystal Phial", "ArcaneCrystalPhial", "MiscItems", 0.01, 1000, "", 609);
 $AccessoryVar[ArcaneCrystalPhial, $MiscInfo] = "A rare and expensive crystal vial that is said to enhance the magical properties of any liquid stored within it. It is used by master alchemists and potion makers.";
-BeltItem::Add("Ethereal Stasis Flask", "EtherealStasisFlask", "MiscItems", 0.01, 100000, "", 610);
+BeltItem::Add("Ethereal Stasis Flask", "EtherealStasisFlask", "MiscItems", 0.01, 10000, "", 610);
 $AccessoryVar[EtherealStasisFlask, $MiscInfo] = "A mysterious flask made of an otherworldly material that seems to defy the laws of physics. It is said to preserve the contents within it indefinitely, keeping them fresh and potent.";
 
 BeltItem::Add("Crude Clay Alembic", "CrudeClayAlembic", "MiscItems", 0.01, 500, "", 611);
@@ -2966,6 +3016,7 @@ $restoreValue[VialOfWater, MP] = 1;
 
 BeltItem::Add("Healing Herb", "HealingHerb", "MiscItems", 0.01, 10, "", 617);
 $AccessoryVar[HealingHerb, $MiscInfo] = "A medicinal herb known for its healing properties. It is used in many healing potions and remedies.";
+$restoreValue[HealingHerb, MP] = 2;
 BeltItem::Add("Mandragora Root", "MandragoraRoot", "MiscItems", 0.01, 100, "", 618);
 $AccessoryVar[MandragoraRoot, $MiscInfo] = "A screaming plant known for its hallucinogenic and harmful properties.";
 BeltItem::Add("Sylphroot", "Sylphroot", "MiscItems", 0.01, 1, "", 619);
@@ -3044,16 +3095,23 @@ BeltItem::Add("Kalm Pale Ale", "KalmPaleAle", "MiscItems", 0.5, 50, "", 801);
 $AccessoryVar[KalmPaleAle, $MiscInfo] = "A refreshing Pale Ale that was brewed in Kalm.";
 $restoreValue[KalmPaleAle, MP] = 5;
 
-$description = "A small seed that will grow into an Apple Tree if planted in the right conditions.";
-BeltItem::AddSeed("Apple Seed", "AppleSeed", "MiscItems", 0.01, 50, "Granite", 850, $description, "Apple", "TreeFruit");
-BeltItem::Add("Apple", "Apple", "MiscItems", 0.01, 10, "Ruby", 851);
+BeltItem::Add("Apple", "Apple", "MiscItems", 0.01, 10, "Ruby", 850);
 $AccessoryVar[Apple, $MiscInfo] = "A delicious red apple. It can be eaten to restore health.";
 $restoreValue[Apple, HP] = 5;
+$description = "A small seed that will grow into an Apple Tree if planted in the right conditions.";
+BeltItem::AddSeed("Apple Seed", "AppleSeed", "MiscItems", 0.01, 50, "Granite", 851, $description, "Apple", "TreeFruit");
 
-$description = "A large seed that will grow into an Avocado Tree if planted in the right conditions.";
-BeltItem::AddSeed("Avocado Seed", "AvocadoSeed", "MiscItems", 0.01, 10, "Granite", 852, $description, "Avocado", "TreeFruit");
-BeltItem::Add("Avocado", "Avocado", "MiscItems", 0.01, 10, "Jade");
+BeltItem::Add("Avocado", "Avocado", "MiscItems", 0.01, 20, "Jade", 852);
 $AccessoryVar[Avocado, $MiscInfo] = "A perfectly ripe avocado. It can be eaten to restore health.";
+$restoreValue[Avocado, HP] = 10;
+$description = "A large seed that will grow into an Avocado Tree if planted in the right conditions.";
+BeltItem::AddSeed("Avocado Seed", "AvocadoSeed", "MiscItems", 0.01, 100, "Granite", 853, $description, "Avocado", "TreeFruit");
+
+BeltItem::Add("Pomegranate", "Pomegranate", "MiscItems", 0.01, 15, "Jade", 854);
+$AccessoryVar[Pomegranate, $MiscInfo] = "A juicy pomegranate. It can be eaten to restore mana.";
+$restoreValue[Pomegranate, MP] = 5;
+$description = "A large seed that will grow into a Pomegranate Tree if planted in the right conditions.";
+BeltItem::AddSeed("Pomegranate Seed", "PomegranateSeed", "MiscItems", 0.01, 100, "Granite", 855, $description, "Pomegranate", "TreeFruit");
 
 BeltItem::Add("Wheat Seed", "WheatSeed", "MiscItems", 0.01, 10, "Bullet");
 $AccessoryVar[WheatSeed, $MiscInfo] = "A small wheat seed. It can be used to grow wheat.";

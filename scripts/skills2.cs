@@ -32,7 +32,7 @@ $Skill::startSound[2] = AmrbroseSwordA;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
-// $SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight";
+$SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight";
 
 $Skill::keyword[3] = "harvest";
 $Skill::index[harvest] = 3;
@@ -58,7 +58,7 @@ $Skill::groupListCheck[4] = False;
 $Skill::refVal[4] = -10;
 $Skill::graceDistance[4] = 0.5;
 $Skill::requireOneOfItems[4] = "CrudeClayAlembic WornCopperAlembic ReinforcedIronAlembic ArcaneGlassAlembic CelestialMythrilAlembic";
-// $SkillRestriction[$Skill::keyword[4]] = "C Chemist";
+$SkillRestriction[$Skill::keyword[4]] = "C Chemist";
 
 $Skill::keyword[5] = "throw";
 $Skill::index[$Skill::keyword[5]] = 5;
@@ -70,7 +70,7 @@ $Skill::startSound[5] = FishWalk;
 $Skill::groupListCheck[5] = False;
 $Skill::refVal[5] = -10;
 $Skill::graceDistance[5] = 10;
-// $SkillRestriction[$Skill::keyword[5]] = "C Chemist";
+$SkillRestriction[$Skill::keyword[5]] = "C Chemist";
 
 $Skill::keyword[6] = "quickshot";
 $Skill::index[$Skill::keyword[6]] = 6;
@@ -82,7 +82,68 @@ $Skill::startSound[6] = Reflected;
 $Skill::groupListCheck[6] = False;
 $Skill::refVal[6] = -10;
 $Skill::graceDistance[6] = 10;
-// $SkillRestriction[$Skill::keyword[6]] = "C Chemist";
+$SkillRestriction[$Skill::keyword[6]] = "C Archer";
+
+$Skill::keyword[7] = "explosiveshot";
+$Skill::index[$Skill::keyword[7]] = 7;
+$Skill::name[7] = "Explosive Shot";
+$Skill::description[7] = "A shot that explodes on impact.";
+$Skill::delay[7] = 0.1;
+$Skill::recoveryTime[7] = 8;
+$Skill::startSound[7] = ActivateAB;
+$Skill::groupListCheck[7] = False;
+$Skill::refVal[7] = -10;
+$Skill::graceDistance[7] = 10;
+$SkillRestriction[$Skill::keyword[7]] = "C Archer";
+
+$Skill::keyword[8] = "greatcleave";
+$Skill::index[greatcleave] = 8;
+$Skill::name[8] = "Great Cleave";
+$Skill::description[8] = "A powerful swing that explodes on impact, dealing damage to all targets around you.";
+$Skill::actionMessage[8] = "You swing a great cleave.";
+$Skill::delay[8] = 0.1;
+$Skill::recoveryTime[8] = 8; // 5 original
+$Skill::weaponSpeedBasedRecoveryTime[8] = True;
+// $Skill::damageValue[8] = 10;
+$Skill::radius[8] = 12;
+$Skill::LOSrange[8] = 0;
+$Skill::startSound[8] = AmrbroseSwordA;
+// $Skill::endSound[8] = AmrbroseSwordA;
+$Skill::groupListCheck[8] = False;
+$Skill::refVal[8] = -10;
+$Skill::graceDistance[8] = 2;
+$SkillRestriction[$Skill::keyword[8]] = "C Knight";
+
+$Skill::keyword[9] = "parry";
+$Skill::index[parry] = 9;
+$Skill::name[9] = "Parry";
+$Skill::description[9] = "A defensive maneuver that reduces damage from incoming attacks.";
+$Skill::actionMessage[9] = "You prepare to parry.";
+$Skill::delay[9] = 0.1;
+$Skill::recoveryTime[9] = 10; // 5 original
+$Skill::duration[9] = 30;
+$Skill::LOSrange[9] = 0;
+$Skill::startSound[9] = AmrbroseSwordA;
+// $Skill::endSound[9] = AmrbroseSwordA;
+$Skill::groupListCheck[9] = False;
+$Skill::refVal[9] = -10;
+$Skill::graceDistance[9] = 2;
+$SkillRestriction[$Skill::keyword[9]] = "C Knight";
+
+$Skill::keyword[10] = "infusepotions";
+$Skill::index[infusepotions] = 10;
+$Skill::name[10] = "Infuse Potions";
+$Skill::description[10] = "Infuse your potions with additional effects.";
+$Skill::actionMessage[10] = "You begin to infuse your potions.";
+$Skill::delay[10] = 2;
+$Skill::recoveryTime[10] = 2;
+$Skill::duration[10] = 60;
+$Skill::LOSrange[10] = 0;
+$Skill::startSound[10] = ActivateTR;
+$Skill::groupListCheck[10] = False;
+$Skill::refVal[10] = -10;
+$Skill::graceDistance[10] = 1;
+$SkillRestriction[$Skill::keyword[10]] = "C Chemist";
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
@@ -314,13 +375,19 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
     }
 
     if ($Skill::keyword[%index] == "cleave") {
-		%b = $Skill::radius[%index] * 2;
-		%set = newObject("set", SimSet);
-		%n = containerBoxFillSet(%set, $SimPlayerObjectType, GameBase::getPosition(%clientId), %b, %b, %b, 0);
+		%multi = 1.0;
+		PhysicalRadiusDamage(%clientId, GameBase::getPosition(%clientId), $Skill::radius[%index] * 2, $Skill::name[%index], %multi);
+		%returnFlag = True;
+    }
 
-		Group::iterateRecursive(%set, DoSkillBoxFunction, %clientId, %index, %rest);
-		deleteObject(%set);
+	if ($Skill::keyword[%index] == "greatcleave") {
+		// do an explosion around the use
+		%playerPos = GameBase::getPosition(%clientId);
 
+		CreateAndDetBomb(%clientId, "Bomb5", %playerPos, False);
+		playSound(ExplodeLM, %playerPos);
+		%multi = 2.0;
+		PhysicalRadiusDamage(%clientId, %playerPos, $Skill::radius[%index] * 2, $Skill::name[%index], %multi);
 		%returnFlag = True;
     }
 
@@ -339,11 +406,10 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 	if ($Skill::keyword[%index] == "alchemy") {
 		%item = GetWord(%rest, 0);
 
-		if (GetWord(%rest, 1)) {
+		if (GetWord(%rest, 1) != -1)
 			%itemAmnt = GetWord(%rest, 1);
-		} else {
-			%itemAmnt = 1;
-		}
+		else
+			%itemAmnt = "1";
 
 		%alchemyIngredients = $AccessoryVar[%item, "AlchemyIngredients"];
 
@@ -375,9 +441,14 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 					Client::sendMessage(%clientId, $MsgWhite, "You used "@ %amnt @" "@ $beltitem[%removeItem, "Name"] @". [have "@ (%has - %amnt) @"]");
 				}
 
+				%multi = floor($PlayerSkill[%clientId, $SkillAlchemy] / 100) + 1;
+				lbecho(%itemAmnt);
+				lbecho(%multi);
+				%totalAmount = %itemAmnt * %multi;
+
 				// give the item
-				Belt::GiveThisStuff(%clientId, %item, %itemAmnt);
-				Client::sendMessage(%clientId, $MsgWhite, "You made "@ %itemAmnt @" " @ $beltitem[%item, "Name"] @ ".");
+				Belt::GiveThisStuff(%clientId, %item, %totalAmount);
+				Client::sendMessage(%clientId, $MsgWhite, "You made "@ %totalAmount @" " @ $beltitem[%item, "Name"] @ ".");
 			}
 		} else {
 			Client::sendMessage(%clientId, $MsgRed, "There is no alchemical recipe to make " @ %item @ ".");
@@ -404,7 +475,19 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		schedule("ProjectileAttack(" @ %clientId @ ", 100, True);", 0.5); // 0.5
     }
 
-    return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
+	if ($Skill::keyword[%index] == "explosiveshot") {
+		ProjectileAttack(%clientId, 100, True, "43");
+    }
+
+	if ($Skill::keyword[%index] == "parry") {
+		UpdateBonusState(%clientId, "Parry", ($Skill::duration[%index] / 2), "Parry");
+    }
+
+	if ($Skill::keyword[%index] == "infusepotions") {
+		UpdateBonusState(%clientId, "InfusedPotions", ($Skill::duration[%index] / 2), "InfusedPotions");
+	}
+
+    return EndSkill(%clientId, %overrideEndSound, %extraDelay, %index, %castPos, %returnFlag);
 }
 
 function FindHarvestableObjects(%object, %clientId, %index, %extra) {
@@ -494,11 +577,12 @@ function EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %
 	return %returnFlag;
 }
 
-function DoSkillBoxFunction(%object, %clientId, %index, %extra)
+// no longer using for cleave, maybe useful for other skills
+function DoSkillBoxFunction(%target, %clientId, %index, %extra)
 {
-	dbecho($dbechoMode, "DoSkillBoxFunction(" @ %object @ ", " @ %clientId @ ", " @ %index @ ", " @ %extra @ ")");
+	dbecho($dbechoMode, "DoSkillBoxFunction(" @ %target @ ", " @ %clientId @ ", " @ %index @ ", " @ %extra @ ")");
 
-	%id = Player::getClient(%object);
+	%id = Player::getClient(%target);
 
 	if($Skill::keyword[%index] == "cleave") {
         if(GameBase::getTeam(%clientId) != GameBase::getTeam(%id)) {
@@ -508,7 +592,7 @@ function DoSkillBoxFunction(%object, %clientId, %index, %extra)
 				Client::sendMessage(%id, $MsgBeige, "You have been cleaved by " @ Client::getName(%clientId));
 
             %weapon = GetEquippedWeapon(%clientId);
-            GameBase::virtual(%object, "onDamage", "", 1.0, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, %weapon);
+            GameBase::virtual(%target, "onDamage", "", 1.0, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, %weapon);
             // MeleeAttack(%player);
 			// %r = $Skill::damageValue[%index] / $TribesDamageToNumericDamage;
 			// refreshHP(%id, %r);
@@ -518,4 +602,27 @@ function DoSkillBoxFunction(%object, %clientId, %index, %extra)
 			//playSound($Skill::endSound[%index], %castPos);
 		}
     }
+}
+
+function DoPhysicalDamage(%target, %clientId, %actionName, %multi) {
+	%targetId = Player::getClient(%target);
+
+	if(GameBase::getTeam(%clientId) != GameBase::getTeam(%targetId)) {
+		if (%actionName != "" && %clientId != %targetId)
+			Client::sendMessage(%targetId, $MsgBeige, Client::getName(%clientId) @ " hit you with " @ %actionName);
+
+		%weapon = GetEquippedWeapon(%clientId);
+		GameBase::virtual(%target, "onDamage", "", %multi, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, %weapon);
+	}
+}
+
+function PhysicalRadiusDamage(%clientId, %pos, %radius, %actionName, %multiplier) {
+	%multi = 1.0;
+	if (%multiplier != "") {
+		%multi = %multiplier;
+	}
+	%set = newObject("set", SimSet);
+	%n = containerBoxFillSet(%set, $SimPlayerObjectType, %pos, %radius, %radius, %radius, 0);
+	Group::iterateRecursive(%set, DoPhysicalDamage, %clientId, %actionName, %multi);
+	deleteObject(%set);
 }

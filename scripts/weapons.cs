@@ -89,8 +89,8 @@ $WeaponRange[TesterBow] = 400;
 // $WeaponDelay[TesterBow] = 1;
 
 $ProjRestrictions[SmallRock] = ",Sling,";
-$ProjRestrictions[BasicArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
-$ProjRestrictions[SheafArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[BasicArrow] = ",PracticeBow,QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[SheafArrow] = ",PracticeBow,QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
 $ProjRestrictions[BladedArrow] = ",HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
 $ProjRestrictions[LightQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
 $ProjRestrictions[HeavyQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
@@ -155,9 +155,15 @@ function MeleeAttack(%player)
 	{
 		%target = $los::object;
 		%obj = getObjectType(%target);
-		if(%obj == "Player")
-		{
-			GameBase::virtual($los::object, "onDamage", "", 1.0, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, %weapon);
+
+		if(%obj == "Player") {
+			%targetClient = Player::getClient(%target);
+			if (HasBonusState(%targetClient, "Parry")) {
+				Client::sendMessage(%targetClient, $MsgBeige, "You parried the attack!");
+				Client::sendMessage(%clientId, $MsgBeige, "You attacked " @ %targetClient @ " but they parried!");
+			} else {
+				GameBase::virtual($los::object, "onDamage", "", 1.0, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, %weapon);
+			}
 		}
 		else if(%target.isIce){
 			ice::hit(%clientId,%target);
@@ -167,7 +173,7 @@ function MeleeAttack(%player)
 	PostAttack(%clientId, %weapon);
 }
 
-function ProjectileAttack(%clientId, %vel, %skipDelay)
+function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex)
 {
 	dbecho($dbechoMode, "ProjectileAttack(" @ %clientId @ ", " @ %weapon @ ", " @ %vel @ ")");
 
@@ -219,9 +225,14 @@ function ProjectileAttack(%clientId, %vel, %skipDelay)
 	%arrow.delta = 1;
 	%arrow.weapon = %weapon;
 	%arrow.projectile = %loadedProjectile;
+	%arrow.spellIndex = %spellIndex;
+
+	if (%spellIndex != "") {
+		schedule("TriggerSpellEffectOnObject(" @ %arrow @ ", \"" @ %spellIndex @ "\");", 0.8, %arrow);
+	}
 
 	addToSet("MissionCleanup", %arrow);
-  	schedule("Item::Pop(" @ %arrow @ ");", 30, %arrow);
+  	schedule("Item::Pop(" @ %arrow @ ");", 30, %arrow);	
 
 	//double-check stuff
 	$ProjectileDoubleCheck[%arrow] = True;
@@ -236,6 +247,10 @@ function ProjectileAttack(%clientId, %vel, %skipDelay)
 	GameBase::setRotation(%clientId, %rot);
 
 	belt::takethisstuff(%clientId, %loadedProjectile, 1);
+
+	// check the acount of loaded projectile, if it is less than 1 remove the LoadedProjectile
+	if(belt::hasthisstuff(%clientId, %loadedProjectile) < 1)
+		storeData(%clientId, "LoadedProjectile " @ %weapon, "");
 
 	PostAttack(%clientId, %weapon);
 }
@@ -364,7 +379,9 @@ function ThrowItem(%clientId, %item, %vel) {
 	addToSet("MissionCleanup", %thrownObject);
 
 	if ($beltitem[%item, "isDetonatable"] == True) {
-		schedule("DetonateItem(" @ %thrownObject @ ");", 3, %thrownObject);
+		%explosion = $beltitem[%thrownObject.name, "explosion"];
+		%spellIndex = $beltitem[%thrownObject.name, "spellIndex"];
+		schedule("DetonateItem(" @ %thrownObject @ ", " @ %explosion @ ", " @ %spellIndex @ ");", 3, %thrownObject);
 	}
 
 	%rot = GameBase::getRotation(%clientId);
@@ -1405,7 +1422,7 @@ function CrossbowImage::onFire(%player, %slot) {
 	ProjectileAttack(%clientId, %vel);
 }
 
-// CROSSBOW
+// REPEATING CROSSBOW
 ItemImageData RepeatingCrossbowImage
 {
 	shapeFile = "crossbow";
@@ -1758,10 +1775,10 @@ ItemImageData GemSwordImage
 	sfxFire = SoundSwing5;
 	sfxActivate = AxeSlash2;
 
-	// lightType = 2; // 2
-	// lightRadius = 5;
-	// lightTime = 1; // 1
-	// lightColor = { 0.1, 1, 0.1 }; // { 1, 0.35, 0.21 }; // { r, g, b }, and it kicks in and out unless you use liogh
+	lightType = 2; // 2
+	lightRadius = 5;
+	lightTime = 1; // 1
+	lightColor = { 0.1, 1, 0.1 }; // { 1, 0.35, 0.21 }; // { r, g, b }, and it kicks in and out unless you use liogh
 };
 ItemData GemSword
 {

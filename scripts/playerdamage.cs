@@ -441,6 +441,9 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 		else if(%type != $LandingDamageType) {
 			// This is the case for main weapon damage calculations
 			%multi = 1;
+			if (%value != "") {
+				%multi = %value;
+			}
 
 			//Backstab - rethink how to add this back in
 			// if(fetchData(%shooterClient, "invisible")) {
@@ -868,9 +871,10 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 					// UPDATE, ALSO CALL THE remoteATKText() functions remoteATKText
 
+	
+					%animationStyle = "redmoon";
 					// This is where we shine! Take damage modifers into account, change the damage value, and send messages to porper parties
 					if(%shooterClient != %damagedClient) {
-						%animationStyle = "redmoon";
 						newprintmsg(%shooterClient, "You " @ %saction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ %convValue @ "<f0> points", $MsgRed);
 						remoteEval(%shooterClient, ATKText, "<f1>" @ %convValue, %animationStyle);
 
@@ -924,6 +928,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 					newprintmsg(%shooterClient, "You try to "@%hitpresent@" <f1>" @ rpg::getname(%damagedClient) @ "<ff>, but miss! (LCK)", $MsgRed);
 					newprintmsg(%damagedClient, "<f1>"@%hitby @ "<ff> tries to "@%hitpresent@" you, but misses! (LCK)", $MsgRed);
+					remoteEval(%shooterClient, ATKText, "<f1>(LCK)", %animationStyle);
 				}
 
 				//-------------------------------------------
