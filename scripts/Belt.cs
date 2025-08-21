@@ -45,7 +45,7 @@
 // TODO:
 // 1. Fix accessory max type checks
 // 2. Healing Kit mend uses multiple healing kits
-// 
+// 3. Take off armor, weapons and accessories when u remort
 
 // ------------------- //
 // Menu Functions      //
@@ -2926,6 +2926,22 @@ $restoreValue[HealingKitIV, HP] = 150;
 BeltItem::Add("Healing Kit V", "HealingKitV", "MiscItems", 0.1, 200, "", 512);
 $AccessoryVar[HealingKitV, $MiscInfo] = "A medical kit that that let's you mend wounds. (200 HP)";
 $restoreValue[HealingKitV, HP] = 200;
+BeltItem::Add("Healing Kit VI", "HealingKitVI", "MiscItems", 0.1, 200, "", 513);
+$AccessoryVar[HealingKitVI, $MiscInfo] = "A medical kit that that let's you mend wounds. (250 HP)";
+$restoreValue[HealingKitVI, HP] = 250;
+BeltItem::Add("Healing Kit VII", "HealingKitVII", "MiscItems", 0.1, 200, "", 514);
+$AccessoryVar[HealingKitVII, $MiscInfo] = "A medical kit that that let's you mend wounds. (300 HP)";
+$restoreValue[HealingKitVII, HP] = 300;
+BeltItem::Add("Healing Kit VIII", "HealingKitVIII", "MiscItems", 0.1, 200, "", 515);
+$AccessoryVar[HealingKitVIII, $MiscInfo] = "A medical kit that that let's you mend wounds. (350 HP)";
+$restoreValue[HealingKitVIII, HP] = 350;
+BeltItem::Add("Healing Kit IX", "HealingKitIX", "MiscItems", 0.1, 200, "", 516);
+$AccessoryVar[HealingKitIX, $MiscInfo] = "A medical kit that that let's you mend wounds. (400 HP)";
+$restoreValue[HealingKitIX, HP] = 400;
+BeltItem::Add("Healing Kit X", "HealingKitX", "MiscItems", 0.1, 200, "", 517);
+$AccessoryVar[HealingKitX, $MiscInfo] = "A medical kit that that let's you mend wounds. (500 HP)";
+$restoreValue[HealingKitX, HP] = 500;
+
 
 // TODO: Maybe make a new BeltItem::AddThrowable function that takes in a damage value and type?
 
@@ -3080,9 +3096,28 @@ BeltItem::AddWeapon("Rusty Shank", "RustyShank", "Dagger", $SwordAccessoryType, 
 $description = "A club filled with broken bone bits. It looks like it could fall apart at any moment.";
 BeltItem::AddWeapon("Shattered Bone Club", "ShatteredBoneClub", "SpikedClub", $BludgeonAccessoryType, $description, $SkillHammers, $SkillHammers @ " 1", "20");
 
-// Enemy Weapons
+// Enemy Weapons (beast claw I - X)
 $description = "Beast Claw I";
-BeltItem::AddWeapon("Beast Claw I", "BeastClawI", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "1");
+BeltItem::AddWeapon("Beast Claw I", "BeastClawI", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "10");
+$description = "Beast Claw II";
+BeltItem::AddWeapon("Beast Claw II", "BeastClawII", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 100", "100");
+$description = "Beast Claw III";
+BeltItem::AddWeapon("Beast Claw III", "BeastClawIII", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 200", "200");
+$description = "Beast Claw IV";
+BeltItem::AddWeapon("Beast Claw IV", "BeastClawIV", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 300", "300");
+$description = "Beast Claw V";
+BeltItem::AddWeapon("Beast Claw V", "BeastClawV", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 400", "400");
+$description = "Beast Claw VI";
+BeltItem::AddWeapon("Beast Claw VI", "BeastClawVI", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 500", "500");
+$description = "Beast Claw VII";
+BeltItem::AddWeapon("Beast Claw VII", "BeastClawVII", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 600", "600");
+$description = "Beast Claw VIII";
+BeltItem::AddWeapon("Beast Claw VIII", "BeastClawVIII", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 700", "700");
+$description = "Beast Claw IX";
+BeltItem::AddWeapon("Beast Claw IX", "BeastClawIX", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 800", "800");
+$description = "Beast Claw X";
+BeltItem::AddWeapon("Beast Claw X", "BeastClawX", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 900", "900");
+
 
 // Harvesting Items
 $description = "An axe used for chopping wood.";

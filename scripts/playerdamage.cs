@@ -200,8 +200,8 @@ function Player::onKilled(%this) {
 
 		%equippedWeapon = GetEquippedWeapon(%clientId);
 		if (%equippedWeapon != "") {
-			// TODO: Make this use a map later
-			if (%equippedWeapon == "CastingBlade" || %equippedWeapon == "BeastClawI") {
+			// TODO: Make this use a map later 
+			if (%equippedWeapon == "CastingBlade" || %equippedWeapon == "BeastClawI" || %equippedWeapon == "BeastClawII" || %equippedWeapon == "BeastClawIII" || %equippedWeapon == "BeastClawIV" || %equippedWeapon == "BeastClawV" || %equippedWeapon == "BeastClawVI" || %equippedWeapon == "BeastClawVII" || %equippedWeapon == "BeastClawVIII" || %equippedWeapon == "BeastClawIX" || %equippedWeapon == "BeastClawX") {
 				belt::takethisstuff(%clientId, %equippedWeapon @ "0", 1);
 			} else {
 				Belt::UnequipAccessory(%clientId, %equippedWeapon @ "0");
@@ -408,6 +408,10 @@ function Player::onKilled(%this) {
 function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %quadrant, %object, %weapon, %projectile) {
 	dbecho($dbechoMode2, "Player::onDamage(" @ %this @ ", " @ %type @ ", " @ %value @ ", " @ %pos @ ", " @ %vec @ ", " @ %mom @ ", " @ %vertPos @ ", " @ %quadrant @ ", " @ %object @ ", " @ %weapon @ ", " @ %projectile @ ")");
 
+	// lbecho("============= Player::onDamage ================");
+	// lbecho("type: " @ %type);
+	// lbecho("value: " @ %value);
+
 	if(Player::isExposed(%this) && %object != -1 && %type != $NullDamageType && !Player::IsDead(%this)) {
 		%damagedClient = Player::getClient(%this);
 		%shooterClient = %object;
@@ -429,14 +433,19 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 		//------------- CREATE DAMAGE VALUE -------------
 		if(%type == $SpellDamageType) {
+			lbecho("Creating damage value for spell");
 			//For the case of SPELLS, the initial damage has already been determined before calling this function
 			%dmg = %value;
-			%value = round(((%dmg / 1000) * $PlayerSkill[%shooterClient, %skilltype]));
+			// TODO: Make the skill based off something from the object that was shot
+			%value = round(((%dmg / 1000) * $PlayerSkill[%shooterClient, $SkillBlackMagick]));
+			//lbecho("calculated value 1: " @ %value);
 
 			%ab = (getRandom() * (fetchData(%damagedClient, "MDEF") / 10)) + 1;
 			%value = Cap(%value - %ab, 0, "inf") + 1; // add 1 raise base damage slight and ensure damage is always done
+			//lbecho("calculated value 2: " @ %value);
 
 			%value = (%value / $TribesDamageToNumericDamage);
+			//lbecho("calculated value 3: " @ %value);
 		}
 		else if(%type != $LandingDamageType) {
 			// This is the case for main weapon damage calculations

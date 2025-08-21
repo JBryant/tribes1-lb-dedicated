@@ -2493,6 +2493,24 @@ instant SimGroup "MissionGroup" {
 			position = "-3585.76 -285.42 295.276";
 			rotation = "0 0 0";
 		};
+		instant Marker "1 0 0 10 30 89" {
+			dataBlock = "PathMarker";
+			name = "materia cave acid ooze 1";
+			position = "-3887 -1202 266.51";
+			rotation = "0 0 0";
+		};
+		instant Marker "1 0 0 10 30 92" {
+			dataBlock = "PathMarker";
+			name = "materia cave materia bear 1";
+			position = "-3766 -1152 256.276";
+			rotation = "0 0 0";
+		};
+		instant Marker "1 0 0 10 30 92" {
+			dataBlock = "PathMarker";
+			name = "materia cave materia bear 2";
+			position = "-3766 -1257 258";
+			rotation = "0 0 0";
+		};
 	};
 	instant SimGroup "Burial Tree" {
 		instant StaticShape "Misc Tree S" {

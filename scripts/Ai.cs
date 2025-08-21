@@ -776,7 +776,8 @@ function AI::helper(%aiName, %displayName, %commandIssuer, %loadout)
 		// 	%displayName = %aiName @" "@ %randName;
 	} else {
 		if(%aiName == %displayName)
-			%displayName = $NameForRace[%aiName] @ %newName;
+			// %displayName = $NameForRace[%aiName] @ %newName;
+			%displayName = %newName;
 	}
 		
 	$numAI++;

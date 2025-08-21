@@ -124,8 +124,8 @@ $NameForRace[Spawn] = "Demon";
 // shinra mansion
 $NameForRace[Shambler] = "Wight";
 $SkinForRace[Shambler] = "RMSkins2";
-$NameForRace[wDemon] = "Shado";
-$SkinForRace[wDemon] = "duke";
+$NameForRace[ShadowDemon] = "Shadow";
+$SkinForRace[ShadowDemon] = "duke";
 $NameForRace[Drainer] = "CacoDemon";
 $SkinForRace[Drainer] = "skquid";
 
@@ -157,7 +157,10 @@ $NameForRace[Huntsman] = "Spider";
 $NameForRace[BrownRecluse] = "Spider";
 $NameForRace[BlackWidow] = "Spider";
 
-$NameForRace[Bat] = "Bat";
+$NameForRace[CaveBat] = "Bat";
+$NameForRace[MateriaBat] = "Bat";
+
+$NameForRace[MateriaBear] = "Bear";
 
 // dunegan crypt
 $NameForRace[Corpse] = "Zombie";
@@ -215,6 +218,10 @@ $SkinForRace[Abomination] = "RMSkins2";  // change this
 // Center of World
 $NameForRace[Whelp] = "Dragon";
 
+// Materia Cave
+$NameForRace[AcidMateriaSlime] = "Slime";
+$SkinForRace[AcidMateriaSlime] = "RMSkins4";
+
 
 // -------------- armor data ------------------
 
@@ -237,8 +244,11 @@ $ArmorTypeToRace[SDaemonArmor] = "Daemon";
 $ArmorTypeToRace[DragonArmor] = "Dragon";
 $ArmorTypeToRace[GodeyeArmor] = "Godeye";
 $ArmorTypeToRace[RMZombieArmor] = "Wight";
-$ArmorTypeToRace[NewMinoArmor] = "Shado";
+$ArmorTypeToRace[NewMinoArmor] = "Shadow";
 $ArmorTypeToRace[FloatingHeadArmor] = "CacoDemon";
+$ArmorTypeToRace[BlobMonsterArmor] = "Slime";
+$ArmorTypeToRace[BatArmor] = "Bat";
+$ArmorTypeToRace[BearArmor] = "Bear";
 
 $RaceToArmorType[Goblin] = "TestArmor"; // GoblinArmor // TestArmor
 $RaceToArmorType[Gnoll] = "GnollArmor";
@@ -259,8 +269,11 @@ $RaceToArmorType[Daemon] = "SDaemonArmor";
 $RaceToArmorType[Dragon] = "DragonArmor";
 $RaceToArmorType[Godeye] = "GodeyeArmor";
 $RaceToArmorType[Wight] = "RMZombieArmor";
-$RaceToArmorType[Shado] = "NewMinoArmor";
+$RaceToArmorType[Shadow] = "NewMinoArmor";
 $RaceToArmorType[CacoDemon] = "FloatingHeadArmor";
+$RaceToArmorType[Slime] = "BlobMonsterArmor";
+$RaceToArmorType[Bat] = "BatArmor";
+$RaceToArmorType[Bear] = "BearArmor";
 
 $RaceToNamesList[Traveller] = "Alphonse Cedric Lucian Darius Leontius Gregor Matthias Silvain Emeric Veyron Hadrian Tobias Valens Octavian Magnus Raphael Victor Alistair Remiel Lysander Cassian Garrick Percival Thaddeus Gideon Theodric Isidore Cornelius Reginald Leofric Oswald Baldwin Edric Ronan Severin Aldous Soren Valentin Leopold Desmond Eustace Corbin Ignatius Bertram Seraphim Maximus Felix Quentin Roderic Atticus Nicodemus Zephyrus Aurelius Fabian Tiberius Evander Cormac Orion Vesper Drystan Cassius Lazarus Marcellus Gideon Tarquin Lucan Zephiel Oberon Tristam Aurelian Myron Edgar Nathaniel Augustus Hector Vespasian Sirus Caliban Damian Cyprian Theron Alaric Thelonius Ulrich Galen Phineas Anselm Varian Valmont Bastien Xavier Leoric Simeon Zephyr Darian Florian Armand Hadrianus Orestes Fenrir Gael Romulus Malachai Noctis Thalric Eamon Belisarius Callum Solon";
 $RaceToNamesList[Goblin] = "Griknak Snaggit Borgul Zrogg Ruknash Dribbik Murgul Vrogg Tazgul Skarnak Drekz Broggit Klurg Snibbit Vraggo Trognash Glubnik Grizzik Nobnash Krognar Zraggit Blornik Snaggul Throgg Klibbit Drizzik Grobnar Vraknash Trogzit Borknash Graknik Zlubb Knorvik Drizzgul Trognik Krabnash Glubzit Morzik Zorknash Broggul Tarnik Flibbit Skragnak Zriggo Krobnash Vrixik Drobbit Skrognar Blaggit Truznik Frobnash Skribbit Klorgnak Vrobnash Gribzik Traknor Zlibbit Knarzik Frozgul Skraknit Grozzik Triggan Zorblik Broggar Trogzit Kribzik Slorbag Vragbit Gronbit Trasknak Zroblik Klibzit Kragnik Blibbit Driznash Skornak Froggit Trigblik Zrumblik Krobzit Snorggul Thragbit Glibnash Skragzit Draknor Vrobbit Zrobnik Snibnash Frakgul Triznak Grobnash Blugbit Kraznik Snibzit Trombit Skrubnik Grubzit Vorblik Zlagbit Kroggul Tragnor Blornash";
@@ -385,9 +398,16 @@ $spawnIndex[85] = "Abomination";
 
 $spawnIndex[86] = "Shambler";
 
-$spawnIndex[87] = "wDemon";
+$spawnIndex[87] = "ShadowDemon";
 
 $spawnIndex[88] = "Drainer";
+
+$spawnIndex[89] = "AcidMateriaSlime";
+
+$spawnIndex[90] = "CaveBat";
+$spawnIndex[91] = "MateriaBat";
+
+$spawnIndex[92] = "MateriaBear";
 
 //------------------------------
 
@@ -458,8 +478,8 @@ $BotEquipment[Doomsayer] = 	"CLASS Enemy LVL 1027/50 COINS 135/50 LCK 4 CastingB
 
 $BotEquipment[Spiderling] = "CLASS Enemy LVL 2+1 COINS 5/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
 $BotEquipment[Huntsman] = "CLASS Enemy LVL 5+2 COINS 10/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
-$BotEquipment[BrownRecluse] = "CLASS Enemy LVL 9+2 COINS 15/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
-$BotEquipment[BlackWidow] = "CLASS Enemy LVL 11+3 COINS 20/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
+$BotEquipment[BrownRecluse] = "CLASS Enemy LVL 9+2 COINS 15/50 LCK 0 BeastClawV 1 PoisonMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
+$BotEquipment[BlackWidow] = "CLASS Enemy LVL 11+3 COINS 20/50 LCK 0 BeastClawV 1 PoisonMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
 
 // write bot equipment for each shinra type, 3 should be grouped together at a time
 // ex goose grunt infantry lvl 20 - 35, trooper officer sergeant 40 - 55, turk soldier3 soldier2 60 - 75, soldier1 shinra 80 - 90
@@ -500,9 +520,15 @@ $BotEquipment[Whelp] = "CLASS Enemy LVL 150+10 COINS 1000/50 LCK 3 CastingBlade 
 
 $BotEquipment[Shambler] = "CLASS Enemy LVL 200+50 COINS 115/50 LCK 2 DragonBoneClub 1 DarkMateriaII 1/-800 " @ %defaultAlchemyDropsV;
 
-$BotEquipment[wDemon] = "CLASS Enemy LVL 250+50 COINS 115/50 LCK 3 SteelJavelin 1 DarkMateriaII 1/-500 " @ %defaultAlchemyDropsV;
+$BotEquipment[ShadowDemon] = "CLASS Enemy LVL 250+50 COINS 115/50 LCK 3 SteelJavelin 1 DarkMateriaII 1/-500 " @ %defaultAlchemyDropsV;
 
 $BotEquipment[Drainer] = "CLASS Enemy LVL 350+50 COINS 115/50 LCK 3 CastingBlade 1 DarkMateriaII 1/-250 " @ %defaultAlchemyDropsV;
+
+$BotEquipment[AcidMateriaSlime] = "CLASS Enemy LVL 375+75 COINS 115/50 LCK 3 CastingBlade 1 PoisonMateriaII 1/-250 " @ %defaultAlchemyDropsV;
+
+$BotEquipment[CaveBat] = "CLASS Enemy LVL 10+3 COINS 115/50 LCK 3 BeastClawI 1 PoisonMateriaI 1/-250 " @ %defaultAlchemyDropsI;
+$BotEquipment[MateriaBat] = "CLASS Enemy LVL 400+75 COINS 115/50 LCK 3 BeastClawII 1 PoisonMateriaII 1/-250 " @ %defaultAlchemyDropsV;
+$BotEquipment[MateriaBear] = "CLASS Enemy LVL 400+75 COINS 115/50 LCK 3 BeastClawII 1 IceMateriaII 1/-250 " @ %defaultAlchemyDropsV;
 
 //------------------------------
 
@@ -525,8 +551,11 @@ $TeamForRace[Daemon] = 4;
 $TeamForRace[Dragon] = 6;
 $TeamForRace[Godeye] = 4;
 $TeamForRace[Wight] = 4;
-$TeamForRace[Shado] = 4;
+$TeamForRace[Shadow] = 4;
 $TeamForRace[CacoDemon] = 4;
+$TeamForRace[Slime] = 6;
+$TeamForRace[Bat] = 6;
+$TeamForRace[Bear] = 6;
 
 //------------------------------
 
@@ -547,12 +576,12 @@ $RaceSound[Undead, Hit, 2] = SoundUndeadHit2;
 $RaceSound[Undead, Taunt, 1] = SoundUndeadTaunt1;
 $RaceSound[Undead, RandomWait, 1] = SoundUndeadRandom1;
 
-$RaceSound[Shado, Death, 1] = SoundUndeadDeath1;
-$RaceSound[Shado, Acquired, 1] = SoundUndeadAcquired1;
-$RaceSound[Shado, Hit, 1] = SoundUndeadHit1;
-$RaceSound[Shado, Hit, 2] = SoundUndeadHit2;
-$RaceSound[Shado, Taunt, 1] = SoundUndeadTaunt1;
-$RaceSound[Shado, RandomWait, 1] = SoundUndeadRandom1;
+$RaceSound[Shadow, Death, 1] = SoundUndeadDeath1;
+$RaceSound[Shadow, Acquired, 1] = SoundUndeadAcquired1;
+$RaceSound[Shadow, Hit, 1] = SoundUndeadHit1;
+$RaceSound[Shadow, Hit, 2] = SoundUndeadHit2;
+$RaceSound[Shadow, Taunt, 1] = SoundUndeadTaunt1;
+$RaceSound[Shadow, RandomWait, 1] = SoundUndeadRandom1;
 
 $RaceSound[CacoDemon, Death, 1] = SoundUndeadDeath1;
 $RaceSound[CacoDemon, Acquired, 1] = SoundUndeadAcquired1;
@@ -658,6 +687,8 @@ $RaceSound[Shinra, Hit, 2] = SoundTravellerHit2;
 $RaceSound[Shinra, Hit, 3] = SoundTravellerHit3;
 
 $RaceSound[Spider, Death, 1] = Ostrix;
+$RaceSound[Slime, Death, 1] = Ostrix;
+$RaceSound[Bat, Death, 1] = Ostrix;
 
 $RaceSound[Daemon, Death, 1] = RockMonsterDeath1;
 $RaceSound[Daemon, Acquired, 1] = RockMonsterSound1;
@@ -3876,8 +3907,8 @@ PlayerData BlobMonsterArmor
 
 	maxDamage = 1.0;
 	maxForwardSpeed = 30;
-	maxBackwardSpeed = $spdhigher-1;
-	maxSideSpeed = $spdhigher-1;
+	maxBackwardSpeed = $spdlow-1;
+	maxSideSpeed = $spdlow-1;
 	groundForce = 75 * 9.0;
 	mass = 9.0;
 	groundTraction = 3.0;
@@ -4351,7 +4382,7 @@ PlayerData WalkSkeleArmor
 };
 
 //------------------------------------------------------------------
-// RMSkins1 - Orange weird headed gobllin, RMSKins2 - Pure black oakish looking demon thing?
+// RMRUuagArmor - Orange weird headed gobllin, RMSKins2 - Pure black oakish looking demon thing?
 //------------------------------------------------------------------
 
 PlayerData RMRUuagArmor
@@ -4543,8 +4574,8 @@ PlayerData BearArmor
 
 	maxDamage = 1.0;
 	maxForwardSpeed = 30;
-	maxBackwardSpeed = $spdhigher-1;
-	maxSideSpeed = $spdhigher-1;
+	maxBackwardSpeed = $spdmed-1;
+	maxSideSpeed = $spdmed-1;
 	groundForce = 75 * 9.0;
 	mass = 9.0;
 	groundTraction = 3.0;

@@ -232,7 +232,7 @@ $Spell::index[beam] = 12;
 $Spell::name[12] = "Beam";
 $Spell::description[12] = "Light gathers into a concentrated beam and causes intense damage to the target.";
 $Spell::delay[12] = 0.0;
-$Spell::recoveryTime[12] = 15;
+$Spell::recoveryTime[12] = 1;
 $Spell::damageValue[12] = "180";
 $Spell::LOSrange[12] = 1000;
 $Spell::manaCost[12] = 30;
@@ -260,10 +260,10 @@ $Spell::refVal[13] = 20;
 $Spell::graceDistance[13] = 5;
 $SkillType[thorn] = $SkillBlackMagick;
 
-$Spell::keyword[14] = "fireball";
-$Spell::index[fireball] = 14;
-$Spell::name[14] = "Fireball";
-$Spell::description[14] = "Casts a fireball.";
+$Spell::keyword[14] = "fire";
+$Spell::index[fire] = 14;
+$Spell::name[14] = "Fire";
+$Spell::description[14] = "Casts a fire spell.";
 $Spell::delay[14] = 1;
 $Spell::recoveryTime[14] = 1.5;
 $Spell::radius[14] = 8;
@@ -275,7 +275,7 @@ $Spell::endSound[14] = LaunchFB;
 $Spell::groupListCheck[14] = False;
 $Spell::refVal[14] = 35;
 $Spell::graceDistance[14] = 2;
-$SkillType[fireball] = $SkillBlackMagick;
+$SkillType[fire] = $SkillBlackMagick;
 
 $Spell::keyword[15] = "icespike";
 $Spell::index[icespike] = 15;
@@ -1162,7 +1162,19 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 			Player::applyImpulse(%id, %mom2);
 		}
 
-		%castPos = GameBase::getPosition(%clientId);
+		// %castPos = GameBase::getPosition(%clientId);
+
+		// testing testing
+
+		// %player = Client::getOwnedObject(%clientId);
+		// // if(!Player::isAiControlled(%Client))
+		// // 	Player::unmountItem(%player, $WeaponSlot);
+
+		// // $ClientData[%Client, UsingWeapon] = "-1";
+		// %trans = GameBase::getMuzzleTransform(%player);
+		// %vel = Item::getVelocity(%player);
+		// Player::setAnimation(%clientId, 41);
+		// Projectile::spawnProjectile("waterfinal", %trans, %player, %vel);
 
 		%returnFlag = True;
 	}
@@ -1182,21 +1194,26 @@ function DoCastSpell(%clientId, %index, %oldpos, %castObj, %w2)
 			%returnFlag = False;
 		}
 	}
-
+	// Fire
 	if(%index == 14)
 	{
-		if(%castPos != "")
-		{
-			CreateAndDetBomb(%clientId, "Bomb9", %castPos, True, %index);
+		// if(%castPos != "")
+		// {
+		// 	CreateAndDetBomb(%clientId, "Bomb9", %castPos, True, %index);
 
-			%overrideEndSound = True;
-			%returnFlag = True;
-		}
-		else
-		{
-			Client::sendMessage(%clientId, $MsgBeige, "Could not find a target.");
-			%returnFlag = False;
-		}
+		// 	%overrideEndSound = True;
+		// 	%returnFlag = True;
+		// }
+		// else
+		// {
+		// 	Client::sendMessage(%clientId, $MsgBeige, "Could not find a target.");
+		// 	%returnFlag = False;
+		// }
+		%player = Client::getOwnedObject(%clientId);
+		%trans = GameBase::getMuzzleTransform(%player);
+		%vel = Item::getVelocity(%player);
+		Player::setAnimation(%clientId, 41);
+		Projectile::spawnProjectile("FireBolt", %trans, %player, %vel);
 	}
 
 	if(%index == 15)
