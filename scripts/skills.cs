@@ -140,7 +140,7 @@ $SkillMultiplier[Squire, $SkillMining] = 1.0;
 $SkillMultiplier[Squire, $SkillHaggling] = 1.0;
 $SkillMultiplier[Squire, $SkillWoodCutting] = 1.0;
 $SkillMultiplier[Squire, $SkillFarming] = 1.0;
-$EXPmultiplier[Squire] = 1.5;
+$EXPmultiplier[Squire] = 2;
 $AllowedSkills[Squire] = $SkillSwords@ " " @$SkillAxes@ " " @$SkillHammers@ " " @$SkillHealing@ " " @$SkillEndurance@ " " @$SkillWeightCapacity@ " " @$SkillMining@ " " @$SkillHaggling;
 
 //--------------
@@ -169,7 +169,7 @@ $SkillMultiplier[Chemist, $SkillMining] = 1.0;
 $SkillMultiplier[Chemist, $SkillHaggling] = 1.0;
 $SkillMultiplier[Chemist, $SkillWoodCutting] = 1.0;
 $SkillMultiplier[Chemist, $SkillFarming] = 1.0;
-$EXPmultiplier[Chemist] = 1.5;
+$EXPmultiplier[Chemist] = 2;
 
 //--------------
 // Knight
@@ -198,7 +198,7 @@ $SkillMultiplier[Knight, $SkillAlchemy] = 0.5;
 $SkillMultiplier[Knight, $SkillHaggling] = 1.5;
 $SkillMultiplier[Knight, $SkillWoodCutting] = 1.0;
 $SkillMultiplier[Knight, $SkillFarming] = 1.0;
-$EXPmultiplier[Knight] = 1.25;
+$EXPmultiplier[Knight] = 1.5;
 
 //--------------
 // Archer
@@ -226,7 +226,7 @@ $SkillMultiplier[Archer, $SkillAlchemy] = 1.0;
 $SkillMultiplier[Archer, $SkillHaggling] = 1.2;
 $SkillMultiplier[Archer, $SkillWoodCutting] = 1.0;
 $SkillMultiplier[Archer, $SkillFarming] = 1.0;
-$EXPmultiplier[Archer] = 1.25;
+$EXPmultiplier[Archer] = 1.5;
 
 //--------------
 // White Mage
@@ -236,7 +236,7 @@ $SkillMultiplier[WhiteMage, $SkillSwords] = 0.8;
 $SkillMultiplier[WhiteMage, $SkillAxes] = 0.5;
 $SkillMultiplier[WhiteMage, $SkillHammers] = 1.2;
 $SkillMultiplier[WhiteMage, $SkillKatanas] = 0.5;
-$SkillMultiplier[WhiteMage, $SkillWeightCapacity] = 1.0;
+$SkillMultiplier[WhiteMage, $SkillWeightCapacity] = 1.2;
 $SkillMultiplier[WhiteMage, $SkillSpears] = 1.6;
 $SkillMultiplier[WhiteMage, $SkillStealing] = 0.2;
 $SkillMultiplier[WhiteMage, $SkillHiding] = 0.2;
@@ -254,7 +254,7 @@ $SkillMultiplier[WhiteMage, $SkillAlchemy] = 1.8;
 $SkillMultiplier[WhiteMage, $SkillHaggling] = 1.0;
 $SkillMultiplier[WhiteMage, $SkillWoodCutting] = 1.0;
 $SkillMultiplier[WhiteMage, $SkillFarming] = 1.0;
-$EXPmultiplier[WhiteMage] = 1.25;
+$EXPmultiplier[WhiteMage] = 1.5;
 
 //--------------
 // Black Mage
@@ -264,7 +264,7 @@ $SkillMultiplier[BlackMage, $SkillSwords] = 0.8;
 $SkillMultiplier[BlackMage, $SkillAxes] = 0.8;
 $SkillMultiplier[BlackMage, $SkillHammers] = 0.5;
 $SkillMultiplier[BlackMage, $SkillKatanas] = 0.2;
-$SkillMultiplier[BlackMage, $SkillWeightCapacity] = 1.5;
+$SkillMultiplier[BlackMage, $SkillWeightCapacity] = 1.2;
 $SkillMultiplier[BlackMage, $SkillSpears] = 1.5;
 $SkillMultiplier[BlackMage, $SkillStealing] = 0.3;
 $SkillMultiplier[BlackMage, $SkillHiding] = 0.3;
@@ -282,7 +282,7 @@ $SkillMultiplier[BlackMage, $SkillAlchemy] = 1.8;
 $SkillMultiplier[BlackMage, $SkillHaggling] = 1.3;
 $SkillMultiplier[BlackMage, $SkillWoodCutting] = 1.0;
 $SkillMultiplier[BlackMage, $SkillFarming] = 1.0;
-$EXPmultiplier[BlackMage] = 1.25;
+$EXPmultiplier[BlackMage] = 1.5;
 
 //--------------
 // Monk
@@ -1149,6 +1149,69 @@ function SkillCanUse(%clientId, %thing) {
 		return False;
 }
 
+function SkillCanUseSpell(%clientId, %index, %echo) {
+	if(%clientId.adminLevel >= 5 || Player::isAiControlled(%clientId)) {
+		return True;
+	}
+
+	if(getMANA(%clientId) < $Spell::manaCost[%index]) {
+		if(%echo) Client::sendMessage(%clientId, $MsgBeige, "Insufficient mana to cast this spell.");
+		return False;
+	}
+
+	%class = fetchData(%clientId, "CLASS");
+	%minLevel = $Spell::minLevel[%index];
+	lbecho("Min Level: " @ %minLevel);
+	lbecho("Current Level: " @ getFinalLVL(%clientId));
+
+	if($Spell::classRestrictions[%index] != "" && String::findSubStr($Spell::classRestrictions[%index], "," @ %class @ ",") == -1) {
+		if(%echo) Client::sendMessage(%clientId, 1, "You can't cast this spell because of your class.~wC_BuySell.wav");
+		return False;
+	}
+
+	if(%minLevel != "" && getFinalLVL(%clientId) < %minLevel) {
+		if(%echo) Client::sendMessage(%clientId, 1, "Your level is to low to cast this spell.~wC_BuySell.wav");
+		return False;
+	}
+
+	for(%i = 0; (%s = GetWord($Spell::ToUseSkill[%index], %i)) != -1; %i++) { %i++;
+		%n = GetWord($Spell::ToUseSkill[%index], %i);
+
+		if(%s == "LVL") {
+			if(getFinalLVL(%clientId) < %n) {
+				if(%echo) Client::sendMessage(%clientId, 1, "Your level is to low to cast this spell.~wC_BuySell.wav");
+				return False;
+			}
+		}
+		else if(%s == "A") {
+			if(%Client.adminLevel < %n) {
+				if(%echo) Client::sendMessage(%clientId, 1, "Only admins may cast this spell.~wC_BuySell.wav");
+				return False;
+			}
+		}
+		else if(%s == "CLASS") {
+			if(String::findSubStr(%n, ","@ %class @",") == -1) {
+				if(%echo) Client::sendMessage(%clientId, 1, "You can't cast this spell because of your class.~wC_BuySell.wav");
+				return False;
+			}
+		}
+		else if(%s == "GROUP") {
+			if(String::findSubStr(%n, ","@$GROUP[%clientId]@",") == -1) {
+				if(%echo) Client::sendMessage(%clientId, 1, "You can't cast this spell because of your class.~wC_BuySell.wav");
+				return False;
+			}
+		}
+		else {
+			%ap = Eval("getFinal"@%s@"(%clientId);");
+			if(%ap < %n) {
+				if(%echo) Client::sendMessage(%clientId, 1, "You need more "@%s@" to cast this spell.~wC_BuySell.wav");
+				return False;
+			}
+		}
+	}
+	return True;
+}
+
 function UseSkill(%clientId, %skilltype, %successful, %showmsg, %base, %refreshall) {
 	dbecho($dbechoMode, "UseSkill(" @ %clientId @ ", " @ %skilltype @ ", " @ %successful @ ", " @ %showmsg @ ", " @ %base @ ", " @ %refreshall @ ")");
 
@@ -1190,9 +1253,21 @@ function WhatSkills(%thing)
 	{
 		%s = GetWord($SkillRestriction[%thing], %i);
 		%n = GetWord($SkillRestriction[%thing], %i+1);
-
 		%t = %t @ $SkillDesc[%s] @ ": " @ %n @ ", ";
 	}
+
+	if ($Spell::index[%thing] != "") {
+		// show spell class restrictions and level restrictions
+		%spellIndex = $Spell::index[%thing];
+		if ($Spell::classRestrictions[%spellIndex] != "") {
+			%t = %t @ "CLASSES: " @ $Spell::classRestrictions[%spellIndex] @ " ";
+		}
+
+		if ($Spell::minLevel[%spellIndex] != "") {
+			%t = %t @ "MIN LEVEL: " @ $Spell::minLevel[%spellIndex] @ ", ";
+		}
+	}
+
 	if(%t == "")
 		%t = "None";
 	else
@@ -1213,4 +1288,8 @@ function GetSkillAmount(%thing, %skill)
 			return GetWord($SkillRestriction[%thing], %i+1);
 	}
 	return 0;
+}
+
+function GetMANA(%clientId) {
+	return fetchData(%clientId, "MANA");
 }

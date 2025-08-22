@@ -1946,6 +1946,93 @@ SoundData GhostShort
    profile = Profile3dNear;
 };
 
+SoundData ultimathunder {
+   wavFileName = "LaunchLS.wav";
+   profile = Profile3dNear;
+};
+SoundData mmsound {
+   wavFileName = "HitLevelDT.wav";
+   profile = Profile3dNear;
+};
+SoundData spellstart {
+   wavFileName = "spellcast.wav";
+   profile = Profile3dNear;
+};
+SoundData thunderlight {
+   wavFileName = "LoopLS.wav";
+   profile = Profile3dNear;
+};
+SoundData cheespellsound {
+   wavFileName = "spellcast.wav";
+   profile = Profile3dNear;
+};
+//SoundData grunt{   wavFileName = "OgreTaunt2.wav";   profile = Profile3dNear;};
+//SoundData grunt2{   wavFileName = "OgreTaunt1.wav";   profile = Profile3dNear;};
+SoundData lilheal {
+   wavFileName = "medicspell.wav";
+   profile = Profile3dNear;
+};
+SoundData bigheal {
+   wavFileName = "medic4spell.wav";
+   profile = Profile3dNear;
+};
+SoundData bigfire {
+   wavFileName = "LaunchET.wav";
+   profile = Profile3dNear;
+};
+SoundData spooky {
+   wavFileName = "UndeadAcquired1.wav";
+   profile = Profile3dNear;
+};
+SoundData stop {
+   wavFileName = "ActivateAS.wav";
+   profile = Profile3dNear;
+};
+SoundData absorb {
+   wavFileName = "heartbeat.wav";
+   profile = Profile3dNear;
+};
+SoundData heavyswing1 {
+   wavFileName = "swish6.wav";
+   profile = Profile3dNear;
+};
+SoundData watershotstart {
+   wavFileName = "ActivateTD.wav";
+   profile = Profile3dNear;
+};
+SoundData watersplash {
+   wavFileName = "Water3.wav";
+   profile = Profile3dNear;
+};
+//SoundData newswordactivate{   wavFileName = "UndeadAquired1.wav";   profile = Profile3dNear;};
+//SoundData newswordswing{   wavFileName = "MinotaurAquired1.wav";   profile = Profile3dNear;};
+//SoundData makogunfire{   wavFileName = "ActivateDE.wav";   profile = Profile3dNear;};
+SoundData Ssssoo {
+   wavFileName = "shieldhit.wav";
+   profile = Profile3dMedium;
+};
+SoundData kapsshh {
+   wavFileName = "explo3.wav";
+   profile = Profile3dLudicrouslyFar;
+};
+SoundData SoundFountain {
+   wavFileName = "fountain.wav";
+   profile = Profile3dNear;
+};
+//SoundData SoundKeldrin{   wavFileName = "KeldrinTown.wav";   profile = Profile3dLudicrouslyFar;};
+SoundData SoundCheeShot {
+   wavFileName = "PortalLoop3.wav";
+   profile = Profile3dNear;
+};
+//SoundData SoundCheeBowFire{   wavFileName = "swish7.wav";   profile = Profile3dNear;};
+SoundData Summonchant {
+   wavFileName = "loopSP.wav";
+   profile = Profile3dNear;
+};
+//SoundData hadesgrr{   wavFileName = "UndeadDeath1.wav";   profile = Profile3dLudicrouslyFar;};
+//SoundData mypack{   wavFileName = "drums.wav";   profile = Profile3dLudicrouslyFar;};
+
+
 
 // No idea where I got these from in my Tribes RPG folder, but they are missing in the repack, so people won't hear them
 // SoundData ImpAcquired

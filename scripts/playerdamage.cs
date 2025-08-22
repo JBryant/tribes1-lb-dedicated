@@ -409,8 +409,19 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 	dbecho($dbechoMode2, "Player::onDamage(" @ %this @ ", " @ %type @ ", " @ %value @ ", " @ %pos @ ", " @ %vec @ ", " @ %mom @ ", " @ %vertPos @ ", " @ %quadrant @ ", " @ %object @ ", " @ %weapon @ ", " @ %projectile @ ")");
 
 	// lbecho("============= Player::onDamage ================");
+	// lbecho("this: " @ %this);
+	// lbecho("objectType: " @ getObjectType(%this));
 	// lbecho("type: " @ %type);
 	// lbecho("value: " @ %value);
+	// lbecho("pos: " @ %pos);
+	// lbecho("vec: " @ %vec);
+	// lbecho("mom: " @ %mom);
+	// lbecho("vertPos: " @ %vertPos);
+	// lbecho("quadrant: " @ %quadrant);
+	// lbecho("object: " @ %object);
+	// lbecho("objectType: " @ getObjectType(%object));
+	// lbecho("weapon: " @ %weapon);
+	// lbecho("projectile: " @ %projectile);
 
 	if(Player::isExposed(%this) && %object != -1 && %type != $NullDamageType && !Player::IsDead(%this)) {
 		%damagedClient = Player::getClient(%this);
@@ -433,12 +444,28 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 		//------------- CREATE DAMAGE VALUE -------------
 		if(%type == $SpellDamageType) {
-			lbecho("Creating damage value for spell");
+			// lbecho("Creating damage value for spell");
+			%lastSpell = fetchData(%shooterClient, "LastCastSpell");
+			%spellIndex = $Spell::index[%lastSpell];
+			%spellSkillType = $SkillType[%lastSpell];
+			%spellDamage = $Spell::damageValue[%spellIndex];
+
+			// lbecho("Spell Damage: " @ %spellDamage);
+
 			//For the case of SPELLS, the initial damage has already been determined before calling this function
 			%dmg = %value;
+			%multiplier = 1;
+			
+			if (Player::isAiControlled(%shooterClient)) {
+				%multiplier = 0.5;
+			}
+			
 			// TODO: Make the skill based off something from the object that was shot
-			%value = round(((%dmg / 1000) * $PlayerSkill[%shooterClient, $SkillBlackMagick]));
+			// OLD: %value = round(((%dmg / 1000) * $PlayerSkill[%shooterClient, $SkillBlackMagick]));
+			%value = round((%spellDamage / 100) * $PlayerSkill[%shooterClient, %spellSkillType] * %multiplier) + 1;
+			%extraDamage = round(getRandom() * floor((%value * 0.10) + 1));
 			//lbecho("calculated value 1: " @ %value);
+			%value = (%value + %extraDamage);
 
 			%ab = (getRandom() * (fetchData(%damagedClient, "MDEF") / 10)) + 1;
 			%value = Cap(%value - %ab, 0, "inf") + 1; // add 1 raise base damage slight and ensure damage is always done

@@ -217,6 +217,7 @@ function createServer(%mission, %dedicated)
 	exec(Trigger);
 	exec(zone);
 	exec(spells);
+	exec(spells2);
 	exec(classes);
 	exec(party);
 	exec(jail);

@@ -93,33 +93,33 @@ $SkinForRace[Marauder] = "RMJerkilinPlate"; // dynamic skin rendering
 $SkinForRace[Knight] = "rpgringmail"; // dynamic skin rendering
 $SkinForRace[BlackMage] = "robeblue"; // dynamic skin rendering
 
-$NameForRace[Runt] = "Goblin";
-$NameForRace[Thief] = "Goblin";
-$NameForRace[Wizard] = "Goblin";
-$NameForRace[Raider] = "Goblin";
+$NameForRace[GoblinRunt] = "Goblin";
+$NameForRace[GoblinThief] = "Goblin";
+$NameForRace[GoblinWizard] = "Goblin";
+$NameForRace[GoblinRaider] = "Goblin";
 
-$NameForRace[Pup] = "Gnoll";
-$NameForRace[Shaman] = "Gnoll";
-$NameForRace[Scavenger] = "Gnoll";
-$NameForRace[Hunter] = "Gnoll";
+$NameForRace[GnollPup] = "Gnoll";
+$NameForRace[GnollShaman] = "Gnoll";
+$NameForRace[GnollScavenger] = "Gnoll";
+$NameForRace[GnollHunter] = "Gnoll";
 
-$NameForRace[Warlock] = "Orc";
-$NameForRace[Berserker] = "Orc";
-$NameForRace[Ravager] = "Orc";
-$NameForRace[Slayer] = "Orc";
+$NameForRace[OrcWarlock] = "Orc";
+$NameForRace[OrcBerserker] = "Orc";
+$NameForRace[OrcRavager] = "Orc";
+$NameForRace[OrcSlayer] = "Orc";
 
 // mythril mines
-$NameForRace[Ruffian] = "Ogre";
-$NameForRace[Destroyer] = "Ogre";
-$NameForRace[Halberdier] = "Ogre";
-$NameForRace[Dreadnought] = "Ogre";
-$NameForRace[Magi] = "Ogre";
+$NameForRace[OgreRuffian] = "Ogre";
+$NameForRace[OgreDestroyer] = "Ogre";
+$NameForRace[OgreHalberdier] = "Ogre";
+$NameForRace[OgreDreadnought] = "Ogre";
+$NameForRace[OgreMagi] = "Ogre";
 
-$NameForRace[Mauler] = "Zombie";
-$NameForRace[Thrasher] = "Zombie";
-$NameForRace[Skeleton] = "Undead";
-$NameForRace[Necromancer] = "Undead";
-$NameForRace[Spawn] = "Demon";
+$NameForRace[ZombieMauler] = "Zombie";
+$NameForRace[ZombieThrasher] = "Zombie";
+$NameForRace[UndeadSkeleton] = "Undead";
+$NameForRace[UndeadNecromancer] = "Undead";
+$NameForRace[DemonSpawn] = "Demon";
 
 // shinra mansion
 $NameForRace[Shambler] = "Wight";
@@ -163,36 +163,36 @@ $NameForRace[MateriaBat] = "Bat";
 $NameForRace[MateriaBear] = "Bear";
 
 // dunegan crypt
-$NameForRace[Corpse] = "Zombie";
-$NameForRace[Walker] = "Zombie";
-$NameForRace[Rattler] = "Undead";
-$NameForRace[Magician] = "Undead";
+$NameForRace[ZombieCorpse] = "Zombie";
+$NameForRace[ZombieWalker] = "Zombie";
+$NameForRace[UndeadRattler] = "Undead";
+$NameForRace[UndeadMagician] = "Undead";
 
 // upper dunegan
-$NameForRace[Goon] = "Shinra";
-$SkinForRace[Goon] = "SWAT";
-$NameForRace[Grunt] = "Shinra";
-$SkinForRace[Grunt] = "SWAT";
-$NameForRace[Infantry] = "Shinra";
-$SkinForRace[Infantry] = "SWAT";
+$NameForRace[ShinraGoon] = "Shinra";
+$SkinForRace[ShinraGoon] = "SWAT";
+$NameForRace[ShinraGrunt] = "Shinra";
+$SkinForRace[ShinraGrunt] = "SWAT";
+$NameForRace[ShinraInfantry] = "Shinra";
+$SkinForRace[ShinraInfantry] = "SWAT";
 
 // Bloodan Stratum
-$NameForRace[Trooper] = "Shinra";
-$SkinForRace[Trooper] = "SWAT";
-$NameForRace[Officer] = "Shinra";
-$SkinForRace[Officer] = "SWAT";
-$NameForRace[Sergeant] = "Shinra";
-$SkinForRace[Sergeant] = "SWAT";
+$NameForRace[ShinraTrooper] = "Shinra";
+$SkinForRace[ShinraTrooper] = "SWAT";
+$NameForRace[ShinraOfficer] = "Shinra";
+$SkinForRace[ShinraOfficer] = "SWAT";
+$NameForRace[ShinraSergeant] = "Shinra";
+$SkinForRace[ShinraSergeant] = "SWAT";
 
 // TBD
-$NameForRace[Turk] = "Shinra";
-$SkinForRace[Turk] = "SWAT"; // change this
-$NameForRace[Soldier3] = "Shinra";
-$SkinForRace[Soldier3] = "SWAT";  // change this
-$NameForRace[Soldier2] = "Shinra";  // change this
-$SkinForRace[Soldier2] = "SWAT";  // change this
-$NameForRace[Soldier1] = "Shinra";
-$SkinForRace[Soldier1] = "SWAT";  // change this
+$NameForRace[ShinraTurk] = "Shinra";
+$SkinForRace[ShinraTurk] = "SWAT"; // change this
+$NameForRace[ShinraSoldier3] = "Shinra";
+$SkinForRace[ShinraSoldier3] = "SWAT";  // change this
+$NameForRace[ShinraSoldier2] = "Shinra";  // change this
+$SkinForRace[ShinraSoldier2] = "SWAT";  // change this
+$NameForRace[ShinraSoldier1] = "Shinra";
+$SkinForRace[ShinraSoldier1] = "SWAT";  // change this
 
 // lower stratum
 $NameForRace[DemonImp] = "Demon";
@@ -208,8 +208,8 @@ $NameForRace[UberElemantalist] = "Uber";
 $SkinForRace[UberElemantalist] = "duke";
 
 // catacombs
-$NameForRace[Horror] = "Daemon";
-$NameForRace[Nightmare] = "Daemon";
+$NameForRace[HorrorDemon] = "Daemon";
+$NameForRace[NightmareDemon] = "Daemon";
 
 // Humaine Society
 $NameForRace[Abomination] = "Godeye";
@@ -226,7 +226,7 @@ $SkinForRace[AcidMateriaSlime] = "RMSkins4";
 // -------------- armor data ------------------
 
 $ArmorTypeToRace[TravellerArmor] = "Traveller";
-$ArmorTypeToRace[TestArmor] = "Goblin"; // GoblinArmor // TestArmor
+$ArmorTypeToRace[GoblinArmor] = "Goblin"; // GoblinArmor // TestArmor
 $ArmorTypeToRace[GnollArmor] = "Gnoll";
 $ArmorTypeToRace[OrcArmor] = "Orc";
 $ArmorTypeToRace[OgreArmor] = "Ogre";
@@ -250,7 +250,7 @@ $ArmorTypeToRace[BlobMonsterArmor] = "Slime";
 $ArmorTypeToRace[BatArmor] = "Bat";
 $ArmorTypeToRace[BearArmor] = "Bear";
 
-$RaceToArmorType[Goblin] = "TestArmor"; // GoblinArmor // TestArmor
+$RaceToArmorType[Goblin] = "GoblinArmor"; // GoblinArmor // TestArmor
 $RaceToArmorType[Gnoll] = "GnollArmor";
 $RaceToArmorType[Orc] = "OrcArmor";
 $RaceToArmorType[Ogre] = "OgreArmor";
@@ -289,6 +289,7 @@ $RaceToNamesList[Zombie] = "";
 $RaceToNamesList[Demon] = "Azgorth Malphas Vezreth Drokan Ygzor Kelvax Thamior Brakzul Onreth Skarvox Durnak Xelmor Ravzek Trigor Valthor Zarneth Quoril Nazgoth Umbrak Krymzor Balzor Ignaroth Zulketh Morgash Felbrak Gorthax Dravun Helkor Kurneth Zethar Vornak Thrakul Dalgor Belzrak Xurvon Nemtar Dravok Jolzeth Arkamon Valmorth Nexigar Zulthar Orgrak Kraznor Flamgoth Urmoth Ralkesh Zorvak Tremoth Yalgrun Makzor Kroval Duzgar Belneth Falthor Xarvek Gralnax Izkarn Vezmor Quarnak Mordeth Glavorn Zalgrim Bryzok Kurnath Dorvax Zulmor Klaveth Ravnok Blazgul Korgash Ulgor Morgrak Truzeth Dalkor Ignarth Skelvor Branthor Duzvek Valthak Azroth Helgar Zulgron Malvek Gravor Torkhul Krethor Xalthor Drakzor Kraveth Jolgar Vurzok Grenthul Flamvor Ralzeth Ulgarth Nexzor Zolmok Volgrun Graveth Skornak Droxun Tarnoth Krevak Malgar Blazkor Grallor Velzeth";
 $RaceToNamesList[Cultist] = "";
 $RaceToNamesList[Spider] = "";
+
 // $RaceToNamesList[Dragon] = "Emberwing Frostscale Nightflame Stormclaw Shadowfire Blazeclaw Thunderwing";
 $spawnIndex[2] = "banker";
 $spawnIndex[3] = "assassin";
@@ -303,30 +304,30 @@ $spawnIndex[12] = "Monk";
 $spawnIndex[13] = "Miner";
 $spawnIndex[14] = "Commoner";
 
-$spawnIndex[15] = "Runt";
-$spawnIndex[16] = "Thief";
-$spawnIndex[17] = "Wizard";
-$spawnIndex[18] = "Raider";
+$spawnIndex[15] = "GoblinRunt";
+$spawnIndex[16] = "GoblinThief";
+$spawnIndex[17] = "GoblinWizard";
+$spawnIndex[18] = "GoblinRaider";
 
-$spawnIndex[19] = "Pup";
-$spawnIndex[20] = "Shaman";
-$spawnIndex[21] = "Scavenger";
-$spawnIndex[22] = "Hunter";
+$spawnIndex[19] = "GnollPup";
+$spawnIndex[20] = "GnollShaman";
+$spawnIndex[21] = "GnollScavenger";
+$spawnIndex[22] = "GnollHunter";
 
-$spawnIndex[23] = "Warlock";
-$spawnIndex[24] = "Berserker";
-$spawnIndex[25] = "Ravager";
-$spawnIndex[26] = "Slayer";
+$spawnIndex[23] = "OrcWarlock";
+$spawnIndex[24] = "OrcBerserker";
+$spawnIndex[25] = "OrcRavager";
+$spawnIndex[26] = "OrcSlayer";
 
-$spawnIndex[27] = "Ruffian";
-$spawnIndex[28] = "Destroyer";
-$spawnIndex[29] = "Halberdier";
-$spawnIndex[30] = "Dreadnought";
+$spawnIndex[27] = "OgreRuffian";
+$spawnIndex[28] = "OgreDestroyer";
+$spawnIndex[29] = "OgreHalberdier";
+$spawnIndex[30] = "OgreDreadnought";
 
-$spawnIndex[31] = "Mauler";
-$spawnIndex[32] = "Thrasher";
-$spawnIndex[33] = "Skeleton";
-$spawnIndex[34] = "Necromancer";
+$spawnIndex[31] = "ZombieMauler";
+$spawnIndex[32] = "ZombieThrasher";
+$spawnIndex[33] = "UndeadSkeleton";
+$spawnIndex[34] = "UndeadNecromancer";
 
 $spawnIndex[35] = "Protector";
 $spawnIndex[36] = "Peacekeeper";
@@ -350,9 +351,9 @@ $spawnIndex[49] = "Sloth";
 $spawnIndex[50] = "Gohort";
 
 $spawnIndex[51] = "Conjurer";
-$spawnIndex[52] = "Magi";
+$spawnIndex[52] = "OgreMagi";
 
-$spawnIndex[53] = "Spawn";
+$spawnIndex[53] = "DemonSpawn";
 
 $spawnIndex[54] = "Acolyte";
 $spawnIndex[55] = "Doomsayer";
@@ -362,21 +363,21 @@ $spawnIndex[57] = "Huntsman";
 $spawnIndex[58] = "BrownRecluse";
 $spawnIndex[59] = "BlackWidow";
 
-$spawnIndex[60] = "Goon";
-$spawnIndex[61] = "Grunt";
-$spawnIndex[62] = "Infantry";
-$spawnIndex[63] = "Trooper";
-$spawnIndex[64] = "Officer";
-$spawnIndex[65] = "Sergeant";
-$spawnIndex[66] = "Turk";
-$spawnIndex[67] = "Soldier3";
-$spawnIndex[68] = "Soldier2";
-$spawnIndex[69] = "Soldier1";
+$spawnIndex[60] = "ShinraGoon";
+$spawnIndex[61] = "ShinraGrunt";
+$spawnIndex[62] = "ShinraInfantry";
+$spawnIndex[63] = "ShinraTrooper";
+$spawnIndex[64] = "ShinraOfficer";
+$spawnIndex[65] = "ShinraSergeant";
+$spawnIndex[66] = "ShinraTurk";
+$spawnIndex[67] = "ShinraSoldier3";
+$spawnIndex[68] = "ShinraSoldier2";
+$spawnIndex[69] = "ShinraSoldier1";
 
-$spawnIndex[70] = "Corpse";
-$spawnIndex[71] = "Walker";
-$spawnIndex[72] = "Rattler";
-$spawnIndex[73] = "Magician";
+$spawnIndex[70] = "ZombieCorpse";
+$spawnIndex[71] = "ZombieWalker";
+$spawnIndex[72] = "UndeadRattler";
+$spawnIndex[73] = "UndeadMagician";
 
 $spawnIndex[74] = "Charger";
 $spawnIndex[75] = "Smasher";
@@ -389,8 +390,8 @@ $spawnIndex[79] = "UberWhelp";
 $spawnIndex[80] = "UberCrusher";
 $spawnIndex[81] = "UberElemantalist";
 
-$spawnIndex[82] = "Horror";
-$spawnIndex[83] = "Nightmare";
+$spawnIndex[82] = "HorrorDemon";
+$spawnIndex[83] = "NightmareDemon";
 
 $spawnIndex[84] = "Whelp";
 
@@ -419,32 +420,32 @@ $spawnIndex[92] = "MateriaBear";
 %defaultAlchemyDropsIV = "HealingHerb 5/-200 VialOfWater 3/-200 MalboroSporeSac 3/-200 ArcaneCrystalPhial 3/-200";
 %defaultAlchemyDropsV = "HealingHerb 5/-200 VialOfWater 3/-200 MalboroSporeSac 3/-200 EtherealStasisFlask 3/-200";
 
-$BotEquipment[Runt] = 		"CLASS Enemy LVL 2+1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1/-2000 " @ %defaultAlchemyDropsI;
-$BotEquipment[Thief] = 		"CLASS Enemy LVL 5+2 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-1800 " @ %defaultAlchemyDropsI;
-$BotEquipment[Wizard] = 	"CLASS Enemy LVL 9+2 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1650 "  @ %defaultAlchemyDropsI; // 1/-500
-$BotEquipment[Raider] = 	"CLASS Enemy LVL 11+3 COINS 4/50 LCK 0 WarpedClub 1 BlackStatue 1/-150 Jade 1/-300 FireMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[GoblinRunt] = 	"CLASS Enemy LVL 2+1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1/-2000 " @ %defaultAlchemyDropsI;
+$BotEquipment[GoblinThief] = 	"CLASS Enemy LVL 5+2 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-1800 " @ %defaultAlchemyDropsI;
+$BotEquipment[GoblinWizard] = 	"CLASS Enemy LVL 9+2 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1650 "  @ %defaultAlchemyDropsI; // 1/-500
+$BotEquipment[GoblinRaider] = 	"CLASS Enemy LVL 11+3 COINS 4/50 LCK 0 WarpedClub 1 BlackStatue 1/-150 Jade 1/-300 FireMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
 
-$BotEquipment[Pup] = 		"CLASS Enemy LVL 10+3 COINS 6/50 LCK 0 ShatteredBoneClub 1 Potion 1 Ruby 1/-2000 FireMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
-$BotEquipment[Shaman] = 	"CLASS Enemy LVL 12+3 COINS 7/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1400 " @ %defaultAlchemyDropsI;
-$BotEquipment[Scavenger] = 	"CLASS Enemy LVL 15+3 COINS 8/50 LCK 0 ShatteredBoneClub 1 Sapphire 2/-5000 FireMateriaI 1/-1250 " @ %defaultAlchemyDropsI;
-$BotEquipment[Hunter] = 	"CLASS Enemy LVL 17+3 COINS 9/50 LCK 0 RustyShank 1 Sling 1 SmallRock 20/50 Topaz 3/-3000 FireMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
+$BotEquipment[GnollPup] = 		"CLASS Enemy LVL 10+3 COINS 6/50 LCK 0 ShatteredBoneClub 1 Potion 1 Ruby 1/-2000 FireMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[GnollShaman] = 	"CLASS Enemy LVL 12+3 COINS 7/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1400 " @ %defaultAlchemyDropsI;
+$BotEquipment[GnollScavenger] = 	"CLASS Enemy LVL 15+3 COINS 8/50 LCK 0 ShatteredBoneClub 1 Sapphire 2/-5000 FireMateriaI 1/-1250 " @ %defaultAlchemyDropsI;
+$BotEquipment[GnollHunter] = 	"CLASS Enemy LVL 17+3 COINS 9/50 LCK 0 RustyShank 1 Sling 1 SmallRock 20/50 Topaz 3/-3000 FireMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
 
-$BotEquipment[Warlock] = 	"CLASS Enemy LVL 16+3 COINS 10/50 LCK 0 CastingBlade 1 Sling 1 SmallRock 20/50 EnchantedStone 1/-100 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
-$BotEquipment[Berserker] = 	"CLASS Enemy LVL 20+4 COINS 13/50 LCK 0 HandAxe 1 Topaz 4/-500 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
-$BotEquipment[Ravager] = 	"CLASS Enemy LVL 24+4 COINS 16/50 LCK 0 Club 1 Potion 3/30 Opal 4/-300 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
-$BotEquipment[Slayer] = 	"CLASS Enemy LVL 28+4 COINS 19/50 LCK 0 Broadsword 1 BasicArrow 20/50 Opal 5/-250 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[OrcWarlock] = 	"CLASS Enemy LVL 16+3 COINS 10/50 LCK 0 CastingBlade 1 Sling 1 SmallRock 20/50 EnchantedStone 1/-100 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[OrcBerserker] = 	"CLASS Enemy LVL 20+4 COINS 13/50 LCK 0 HandAxe 1 Topaz 4/-500 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[OrcRavager] = 	"CLASS Enemy LVL 24+4 COINS 16/50 LCK 0 Club 1 Potion 3/30 Opal 4/-300 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[OrcSlayer] = 	"CLASS Enemy LVL 28+4 COINS 19/50 LCK 0 Broadsword 1 BasicArrow 20/50 Opal 5/-250 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
 
-$BotEquipment[Ruffian] = 	"CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
-$BotEquipment[Destroyer] = 	"CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 HandAxe 1 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
-$BotEquipment[Halberdier] = "CLASS Enemy LVL 31+5 COINS 26/50 LCK 0 Broadsword 1 Potion 3/30 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
-$BotEquipment[Dreadnought] = "CLASS Enemy LVL 36+5 COINS 29/50 LCK 1 WalkingStaff 1 BasicArrow 15/75 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
-$BotEquipment[Magi] =		"CLASS Enemy LVL 42+6 COINS 50/50 LCK 1 CastingBlade 1 Emerald 1/-6000 Quartz 10/-200 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[OgreRuffian] = 	"CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[OgreDestroyer] = 	"CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 HandAxe 1 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[OgreHalberdier] = "CLASS Enemy LVL 31+5 COINS 26/50 LCK 0 Broadsword 1 Potion 3/30 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[OgreDreadnought] = "CLASS Enemy LVL 36+5 COINS 29/50 LCK 1 WalkingStaff 1 BasicArrow 15/75 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[OgreMagi] =		"CLASS Enemy LVL 42+6 COINS 50/50 LCK 1 CastingBlade 1 Emerald 1/-6000 Quartz 10/-200 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
 
-$BotEquipment[Mauler] = 	"CLASS Enemy LVL 45/50 COINS 20/50 LCK 0 SpikedClub 1 Granite 10/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
-$BotEquipment[Thrasher] =	"CLASS Enemy LVL 49/50 COINS 23/50 LCK 0 Axe 1 Opal 3/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
-$BotEquipment[Skeleton] = 	"CLASS Enemy LVL 54/50 COINS 26/50 LCK 0 Longsword 1 SkeletonBone 1/-250 Turquoise 4/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
-$BotEquipment[Necromancer] = "CLASS Enemy LVL 61/50 COINS 29/50 LCK 1 CastingBlade 1 Sling 1 SmallRock 20/50 Diamond 1/-3000 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
-$BotEquipment[Spawn] = 		"CLASS Enemy LVL 180/90 COINS 500/50 LCK 2 IronwoodStaff 1 Diamond 1/-1000 Emerald 1/-700 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[ZombieMauler] = 	"CLASS Enemy LVL 45/50 COINS 20/50 LCK 0 SpikedClub 1 Granite 10/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[ZombieThrasher] =	"CLASS Enemy LVL 49/50 COINS 23/50 LCK 0 Axe 1 Opal 3/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[UndeadSkeleton] = 	"CLASS Enemy LVL 54/50 COINS 26/50 LCK 0 Longsword 1 SkeletonBone 1/-250 Turquoise 4/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[UndeadNecromancer] = "CLASS Enemy LVL 61/50 COINS 29/50 LCK 1 CastingBlade 1 Sling 1 SmallRock 20/50 Diamond 1/-3000 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[DemonSpawn] = 		"CLASS Enemy LVL 180/90 COINS 500/50 LCK 2 IronwoodStaff 1 Diamond 1/-1000 Emerald 1/-700 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
 
 $BotEquipment[Protector] = 	"CLASS Enemy LVL 55/50 COINS 25/50 LCK 0 Mace 1 Ruby 2/-500 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
 $BotEquipment[Peacekeeper] = "CLASS Enemy LVL 57/50 COINS 28/50 LCK 0 HuntingSpear 1 SheafArrow 40/50 Jade 5/-500 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
@@ -484,24 +485,24 @@ $BotEquipment[BlackWidow] = "CLASS Enemy LVL 11+3 COINS 20/50 LCK 0 BeastClawV 1
 // write bot equipment for each shinra type, 3 should be grouped together at a time
 // ex goose grunt infantry lvl 20 - 35, trooper officer sergeant 40 - 55, turk soldier3 soldier2 60 - 75, soldier1 shinra 80 - 90
 // the + indicates the max +/- variance in level from the base level, this should get higher as the level increases but go no larger than 15%
-$BotEquipment[Goon] = "CLASS Enemy LVL 10+2 COINS 20/50 LCK 0 Club 1 FireMateriaI 1/-800 " @ %defaultAlchemyDropsI;
-$BotEquipment[Grunt] = "CLASS Enemy LVL 15+3 COINS 23/50 LCK 0 HandAxe 1 FireMateriaI 1/-800 " @ %defaultAlchemyDropsI;
-$BotEquipment[Infantry] = "CLASS Enemy LVL 20+3 COINS 26/50 LCK 0 Broadsword 1 FireMateriaI 1/-800 " @ %defaultAlchemyDropsI;
+$BotEquipment[ShinraGoon] = "CLASS Enemy LVL 10+2 COINS 20/50 LCK 0 Club 1 FireMateriaI 1/-800 " @ %defaultAlchemyDropsI;
+$BotEquipment[ShinraGrunt] = "CLASS Enemy LVL 15+3 COINS 23/50 LCK 0 HandAxe 1 FireMateriaI 1/-800 " @ %defaultAlchemyDropsI;
+$BotEquipment[ShinraInfantry] = "CLASS Enemy LVL 20+3 COINS 26/50 LCK 0 Broadsword 1 FireMateriaI 1/-800 " @ %defaultAlchemyDropsI;
 
-$BotEquipment[Trooper] = "CLASS Enemy LVL 41+4 COINS 29/50 LCK 0 IronHammer 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
-$BotEquipment[Officer] = "CLASS Enemy LVL 44+5 COINS 32/50 LCK 0 CastingBlade 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
-$BotEquipment[Sergeant] = "CLASS Enemy LVL 48+6 COINS 35/50 LCK 0 MythrilSword 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
+$BotEquipment[ShinraTrooper] = "CLASS Enemy LVL 41+4 COINS 29/50 LCK 0 IronHammer 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
+$BotEquipment[ShinraOfficer] = "CLASS Enemy LVL 44+5 COINS 32/50 LCK 0 CastingBlade 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
+$BotEquipment[ShinraSergeant] = "CLASS Enemy LVL 48+6 COINS 35/50 LCK 0 MythrilSword 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
 
-$BotEquipment[Turk] = "CLASS Enemy LVL 50+3 COINS 38/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-200 " @ %defaultAlchemyDropsIII;
-$BotEquipment[Soldier3] = "CLASS Enemy LVL 95+7 COINS 41/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-175 " @ %defaultAlchemyDropsIV;
-$BotEquipment[Soldier2] = "CLASS Enemy LVL 100+8 COINS 44/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-125 " @ %defaultAlchemyDropsIV;
-$BotEquipment[Soldier1] = "CLASS Enemy LVL 105+10 COINS 47/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-100 " @ %defaultAlchemyDropsV;
+$BotEquipment[ShinraTurk] = "CLASS Enemy LVL 50+3 COINS 38/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-200 " @ %defaultAlchemyDropsIII;
+$BotEquipment[ShinraSoldier3] = "CLASS Enemy LVL 95+7 COINS 41/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-175 " @ %defaultAlchemyDropsIV;
+$BotEquipment[ShinraSoldier2] = "CLASS Enemy LVL 100+8 COINS 44/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-125 " @ %defaultAlchemyDropsIV;
+$BotEquipment[ShinraSoldier1] = "CLASS Enemy LVL 105+10 COINS 47/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-100 " @ %defaultAlchemyDropsV;
 
 // dunega crypt bot equipment
-$BotEquipment[Corpse] = "CLASS Enemy LVL 20+3 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-200 " @ %defaultAlchemyDropsI;
-$BotEquipment[Walker] = "CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-175 " @ %defaultAlchemyDropsI;
-$BotEquipment[Rattler] = "CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 Broadsword 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-125 " @ %defaultAlchemyDropsII;
-$BotEquipment[Magician] = "CLASS Enemy LVL 31+5 COINS 26/50 LCK 0 CastingBlade 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-100 " @ %defaultAlchemyDropsII;
+$BotEquipment[ZombieCorpse] = "CLASS Enemy LVL 20+3 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-200 " @ %defaultAlchemyDropsI;
+$BotEquipment[ZombieWalker] = "CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-175 " @ %defaultAlchemyDropsI;
+$BotEquipment[UndeadRattler] = "CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 Broadsword 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-125 " @ %defaultAlchemyDropsII;
+$BotEquipment[UndeadMagician] = "CLASS Enemy LVL 31+5 COINS 26/50 LCK 0 CastingBlade 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-100 " @ %defaultAlchemyDropsII;
 
 $BotEquipment[DemonImp] = "CLASS Enemy LVL 50+5 COINS 23/50 LCK 0 Kodachi 1 Opal 3/-300 FireMateriaI 1/-400 ChimeraFlameGland 1/-200 " @ %defaultAlchemyDropsIII;
 $BotEquipment[DemonRunt] = "CLASS Enemy LVL 55+5 COINS 26/50 LCK 0 MythrilSword 1 SkeletonBone 1/-250 Turquoise 4/-300 FireMateriaI 1/-400 ChimeraFlameGland 1/-150 " @ %defaultAlchemyDropsIII;
@@ -511,8 +512,8 @@ $BotEquipment[UberWhelp] = "CLASS Enemy LVL 65+5 COINS 23/50 LCK 1 CoralSword 1 
 $BotEquipment[UberCrusher] = "CLASS Enemy LVL 75+6 COINS 26/50 LCK 1 GiantAxe 1 SkeletonBone 1/-250 Turquoise 4/-300 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-150 " @ %defaultAlchemyDropsIV;
 $BotEquipment[UberElemantalist] = "CLASS Enemy LVL 85+6 COINS 29/50 LCK 2 CastingBlade 1 Diamond 1/-3000 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-100 " @ %defaultAlchemyDropsIV;
 
-$BotEquipment[Horror] = "CLASS Enemy LVL 90+5 COINS 23/50 LCK 2 BloodSword 1 Opal 3/-300 DarkMateriaI 1/-250 DarkMateriaII 1/-2500 AhrimanEyeLens 1/-150 " @ %defaultAlchemyDropsIV;
-$BotEquipment[Nightmare] = "CLASS Enemy LVL 96+6 COINS 26/50 LCK 2 AncientAxe 1 SkeletonBone 1/-250 Turquoise 4/-250 DarkMateriaI 1/-250 DarkMateriaII 1/-2500 AhrimanEyeLens 1/-100 " @ %defaultAlchemyDropsIV;
+$BotEquipment[HorrorDemon] = "CLASS Enemy LVL 90+5 COINS 23/50 LCK 2 BloodSword 1 Opal 3/-300 DarkMateriaI 1/-250 DarkMateriaII 1/-2500 AhrimanEyeLens 1/-150 " @ %defaultAlchemyDropsIV;
+$BotEquipment[NightmareDemon] = "CLASS Enemy LVL 96+6 COINS 26/50 LCK 2 AncientAxe 1 SkeletonBone 1/-250 Turquoise 4/-250 DarkMateriaI 1/-250 DarkMateriaII 1/-2500 AhrimanEyeLens 1/-100 " @ %defaultAlchemyDropsIV;
 
 $BotEquipment[Abomination] = "CLASS Enemy LVL 125+8 COINS 500/50 LCK 2 CastingBlade 1 PoisonMateriaI 1/-200 PoisonMateriaI 1/-2000 MalboroSporeSac 1/-100 " @ %defaultAlchemyDropsV;
 
@@ -3906,7 +3907,7 @@ PlayerData BlobMonsterArmor
 	jetEnergyDrain = 100.0;
 
 	maxDamage = 1.0;
-	maxForwardSpeed = 30;
+	maxForwardSpeed = $spdlow;
 	maxBackwardSpeed = $spdlow-1;
 	maxSideSpeed = $spdlow-1;
 	groundForce = 75 * 9.0;
@@ -4573,9 +4574,9 @@ PlayerData BearArmor
 	jetEnergyDrain = 100.0;
 
 	maxDamage = 1.0;
-	maxForwardSpeed = 30;
-	maxBackwardSpeed = $spdmed-1;
-	maxSideSpeed = $spdmed-1;
+	maxForwardSpeed = $spdmed;
+	maxBackwardSpeed = $spdmed-5;
+	maxSideSpeed = $spdmed-5;
 	groundForce = 75 * 9.0;
 	mass = 9.0;
 	groundTraction = 3.0;

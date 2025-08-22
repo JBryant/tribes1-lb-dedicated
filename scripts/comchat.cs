@@ -1843,6 +1843,83 @@ function internalSay(%clientId, %team, %message, %senderName)
 			rpg::longPrint(%TrueClientId, %msg, 0, 10);
 		}
 
+		if (%w1 == "#spells") {
+			%msg = "<f2>Spells\n\n";
+			%msg = %msg @ "<f1>Fire Magick:        <f0>Fire, Fira, Firaga, Flare\n";
+			%msg = %msg @ "<f1>Ice Magick:         <f0>Blizzard, Blizza, Blizzaga, Avalanche\n";
+			%msg = %msg @ "<f1>Lightning Magick:  <f0>Thunder, Thundera, Thunderaga, Thunderstorm\n";
+			%msg = %msg @ "<f1>Water Magick:     <f0>Aqua, Aquara, Aquaga, Tsunami\n";
+			%msg = %msg @ "<f1>Earth Magick:      <f0>Tremor, Quake, Earthquake, Cataclysm\n";
+			%msg = %msg @ "<f1>Wind Magick:      <f0>Aero, Aerora, Aeroga, Tornado\n";
+			%msg = %msg @ "<f1>Healing Magick:   <f0>Medic, Medic2, Medic3, Medic4, Medic5\n";
+			%msg = %msg @ "<f1>Light Magick:      <f0>Spike, Wound, Fist, Missile, Cannon, Bomb, Star\n";
+			%msg = %msg @ "<f1>Dark Magick:      <f0>DarkSpike, DarkShot, Surge\n";
+			%msg = %msg @ "<f1>Status Magick:    <f0>Confusion, Remove, MindControl\n";
+			%msg = %msg @ "<f1>Utility Magick:   <f0>blockfront, blockback, light\n";
+			%msg = %msg @ "<f1>Summoning Magick: <f0>rock, blizzard, battle, sapper, death\n";
+
+			// other random spells
+			// teleportd, advtransportd, redredwine, pem315, doppelgang
+
+			// White Magic: spike, wound, Fist, Missile, Cannon, bomb, Star
+
+			rpg::longPrint(%TrueClientId, %msg, 0, 10);
+		}
+
+		if (%w1 == "#bestmagick" || %w1 == "#bestblackmagic" || %w1 == "#bestspell") {
+			// loop through all spells to find the best one for their level
+			%currentBestSpell = "";
+			%currentBestSpellLevel = 0;
+			for (%i = 0; %i < 69; %i++) {
+				if (SkillCanUseSpell(%clientId, %i, 0) && $Spell::minLevel[%i] > %currentBestSpellLevel && $Spell::damageValue[%i] > %currentBestSpellDamage) {
+					%currentBestSpell = $Spell::keyword[%i];
+					%currentBestSpellLevel = $Spell::minLevel[%i];
+				}
+			}
+
+			if (%currentBestSpell != "") {
+				Client::sendMessage(%clientId, $MsgGreen, "Your best spell is: " @ %currentBestSpell @ " (Level " @ %currentBestSpellLevel @ ")");
+			} else {
+				Client::sendMessage(%clientId, $MsgRed, "You do not have any spells.");
+			}
+		}
+
+		if (%w1 == "#castbest") {
+			%currentBestSpell = "";
+			%currentBestSpellLevel = 0;
+			%currentBestSpellDamage = 0;
+			for (%i = 0; %i < 69; %i++) {
+				if (SkillCanUseSpell(%clientId, %i, 0) && $Spell::minLevel[%i] > %currentBestSpellLevel && $Spell::damageValue[%i] > %currentBestSpellDamage) {
+					%currentBestSpell = $Spell::keyword[%i];
+					%currentBestSpellLevel = $Spell::minLevel[%i];
+					%currentBestSpellDamage = $Spell::damageValue[%i];
+				}
+			}
+
+			if (%currentBestSpell != "") {
+				if(fetchData(%TrueClientId, "SpellCastStep") == 1)
+					Client::sendMessage(%TrueClientId, 0, "You are already casting a spell!");
+				else if(fetchData(%TrueClientId, "SpellCastStep") == 2)
+					Client::sendMessage(%TrueClientId, 0, "You are still recovering from your last spell cast.");
+				else if(%TrueClientId.sleepMode != "" && %TrueClientId.sleepMode != False)
+					Client::sendMessage(%TrueClientId, $MsgRed, "You can not cast a spell while sleeping or meditating.");
+				else if(IsDead(%TrueClientId))
+					Client::sendMessage(%TrueClientId, $MsgRed, "You can not cast a spell when dead.");
+				else
+				{
+					BeginCastSpell(%TrueClientId, escapestring(%currentBestSpell));
+					if(String::findSubStr(%currentBestSpell, "\"") != -1){
+						%ip = Client::getTransportAddress(%clientId);
+						echo("Exploit attempt detected and blocked: " @ %trueClientId @ ", aka " @ %TCsenderName @ ", at " @ %ip @ ".");
+						echo("Exploit: " @ %message);
+						messageall(0,"Exploit attempt detected and blocked: " @ %trueClientId @ ", aka " @ %TCsenderName @ ", at " @ %ip @ ".");
+						schedule("delayedban(" @ %TrueClientId @ ");",1.0);
+					}
+				}
+				return;
+			}
+		}
+
 		if (%w1 == "#createtree") {
 			if (%clientToServerAdminLevel >= 5) {
 				%player = Client::getOwnedObject(%TrueClientId);

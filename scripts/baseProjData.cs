@@ -305,7 +305,7 @@ RocketData blizzardsummonboltfake
   mass = 2.0;
   damageClass = 1;
   damageValue = 1.0;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 0.0;
   kickBackStrength = 80.0;
   muzzleVelocity = 20.0;
@@ -359,7 +359,7 @@ RocketData lightrocket
   mass = 2.0;
   damageClass = 1;
   damageValue = 1.80;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = $SmallArea;
   kickBackStrength = 0.1;
   muzzleVelocity = 1.0;
@@ -386,7 +386,7 @@ RocketData FireFlames
   mass = 2.0;
   damageClass = 1;
   damageValue = 1.80;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 25.0;
   kickBackStrength = 0.1;
   muzzleVelocity = 50.0;
@@ -413,7 +413,7 @@ RocketData FireBlue
   mass = 2.0;
   damageClass = 1;
   damageValue = 1.80;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 25.0;
   kickBackStrength = 0.1;
   muzzleVelocity = 50.0;
@@ -482,7 +482,7 @@ LaserData avabolt1
    hitName           = "dustplume.dts";
 
    damageConversion  = 0.0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
 
    beamTime          = 1.0;
 
@@ -525,7 +525,7 @@ LaserData brimBolt1
    hitName           = "breath.dts";
 
    damageConversion  = 0.0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
 
    beamTime          = 1.0;
 
@@ -544,7 +544,7 @@ LaserData brimBolt2
    hitName           = "breath.dts";
 
    damageConversion  = 0.0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
 
    beamTime          = 1.0;
 
@@ -625,7 +625,7 @@ BulletData combatbowshot
    damageType        = 0;
    damageValue       = 3.50;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.000;
    liveTime          = 3.0;
@@ -649,7 +649,7 @@ BulletData icestaffshot
    damageType        = 0;
    damageValue       = 1.0;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.000;
    liveTime          = 2.0;
@@ -673,7 +673,7 @@ BulletData doublebladeshot
    damageType        = 0;
    damageValue       = 0.80;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.000;
    liveTime          = 0.5;
@@ -697,7 +697,7 @@ BulletData icestaffbolt
    damageType        = 0;
    damageValue       = 0.80;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.000;
    liveTime          = 0.4;
@@ -721,7 +721,7 @@ BulletData firestaffshot
    damageType        = 0;
    damageValue       = 0.80;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.000;
    liveTime          = 0.4;
@@ -745,7 +745,7 @@ BulletData longbowshot
    damageType        = 0;
    damageValue       = 1.40;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.000;
    liveTime          = 1.0;
@@ -769,7 +769,7 @@ BulletData shortbowshot
    damageType        = 0;
    damageValue       = 0.80;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.000;
    liveTime          = 0.8;
@@ -793,7 +793,7 @@ BulletData splintstaffshot
    damageType        = 0;
    damageValue       = 0.30;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.002;
    liveTime          = 0.4;
@@ -817,7 +817,7 @@ BulletData crossbowshot
    damageType        = 0;
    damageValue       = 0.40;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.002;
    liveTime          = 0.4;
@@ -841,7 +841,7 @@ RocketData combustiblebolt
   mass = 2.0;
   damageClass = 1;
   damageValue = 4.0;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 5.0;
   kickBackStrength = 40.0;
   muzzleVelocity = 50.0;
@@ -868,7 +868,7 @@ RocketData fspearshot
   mass = 2.0;
   damageClass = 1;
   damageValue = 0.80;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 5.0;
   kickBackStrength = 40.0;
   muzzleVelocity = 50.0;
@@ -895,7 +895,7 @@ RocketData screechbolt
   mass = 2.0;
   damageClass = 1;
   damageValue = 0.8;
-  baseDamageType = $LandingDamageType;
+  damageType = $LandingDamageType;
   explosionRadius = 5.0;
   kickBackStrength = 5.0;
   muzzleVelocity = 10.0;
@@ -920,7 +920,7 @@ LaserData lasercutter
    hitName           = "laserhit.dts";
 
    damageValue       = 1.50;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
 
    beamTime          = 0.2;
 
@@ -941,7 +941,7 @@ RocketData esrockets2
   mass = 2.0;
   damageClass = 1;
   damageValue = 2.50;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 25.0;
   kickBackStrength = 4.0;
   muzzleVelocity = 50.0;
@@ -968,7 +968,7 @@ RocketData esrockets
   mass = 2.0;
   damageClass = 1;
   damageValue = 2.0;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 25.0;
   kickBackStrength = 5.0;
   muzzleVelocity = 50.0;
@@ -995,7 +995,7 @@ BulletData voodooshot
    damageType        = 0;
    damageValue       = 2.50;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.002;
    liveTime          = 0.4;
@@ -1019,7 +1019,7 @@ BulletData buntlineshot
    damageType        = 0;
    damageValue       = 0.70;
    bulletholeIndex   = 0;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.002;
    liveTime          = 0.4;
@@ -1043,7 +1043,7 @@ RocketData CheeBowShot
   mass = 2.0;
   damageClass = 1;
   damageValue = 2.0;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 30.0;
   kickBackStrength = 2.0;
   muzzleVelocity = 100.0;
@@ -1093,7 +1093,7 @@ LaserData sniperLaser
 	hitName           = "hitter.dts";
 
 	damageConversion  = 0.0;
-	baseDamageType    = $SpellDamageType;
+	damageType    = $SpellDamageType;
 
  	beamTime          = 20.0;
 
@@ -1172,7 +1172,7 @@ RocketData makoshot
   mass = 2.0;
   damageClass = 1;
   damageValue = 1.50;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 25.0;
   kickBackStrength = 80.0;
   muzzleVelocity = 200.0;
@@ -1253,7 +1253,7 @@ RocketData waterfinal
   mass = 2.0;
   damageClass = 1;
   damageValue = 1.0;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 25.0;
   kickBackStrength = 80.0;
   muzzleVelocity = 50.0;
@@ -1281,7 +1281,7 @@ RocketData watershottwo
    mass            = 2.0;
 
    damageClass      = 1;       // 0 impact, 1, radius
-   damageValue      = 0.50;
+   damageValue      = 0.60;
    damageType       = $SpellDamageType;
 
    explosionRadius  = 7.5;
@@ -1398,7 +1398,7 @@ RocketData flare
   mass = 2.0;
   damageClass = 1;
   damageValue = 0.20;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 25.0;
   kickBackStrength = 0.0;
   muzzleVelocity = 50.0;
@@ -1414,6 +1414,27 @@ RocketData flare
   smokeDist = 2.8;
   soundId = NoSound;
 };
+
+  // bulletShapeName = "spikeshot.dts";
+  // explosionTag = plasmaExp;
+  // collisionRadius = 0.0;
+  // mass = 2.0;
+  // damageClass = 1;
+  // damageValue = 0.40; // 0.40 / 175
+  // damageType = $SpellDamageType;
+  // explosionRadius = 10; // 5.5
+  // kickBackStrength = 0.0;
+  // muzzleVelocity = 130.0;
+  // terminalVelocity = 130.0;
+  // acceleration = 5.0;
+  // totalTime = 6.5;
+  // liveTime = 10.0;
+  // lightRange = 5.0;
+  // lightColor = { 5.20, 6.7, 1.5 };
+  // inheritedVelocityScale = 0.0;
+  // trailType = 2;
+  // trailString = "plasmatrail.dts";
+  // smokeDist = 4;
 //--------------------------------------
 // small blue start proj, medium blue explosion
 //--------------------------------------
@@ -1655,7 +1676,7 @@ RocketData showshockwave
   mass = 2.0;
   damageClass = 1;
   damageValue = 0.0;
-  baseDamageType = $SpellDamageType;
+  damageType = $SpellDamageType;
   explosionRadius = 40.0;
   kickBackStrength = 0.0;
   muzzleVelocity = 100.0;
@@ -1729,7 +1750,7 @@ RocketData FireBolt
   collisionRadius = 0.0;
   mass = 2.0;
   damageClass = 1;
-  damageValue = 175; // 0.40
+  damageValue = 0.40; // 0.40 / 175
   damageType = $SpellDamageType;
   explosionRadius = 10; // 5.5
   kickBackStrength = 0.0;
@@ -1864,7 +1885,7 @@ LaserData MagicLaser
 
    damageConversion  = 100;
    damageValue        = 0.1;
-   baseDamageType    = $SpellDamageType;
+   damageType    = $SpellDamageType;
 
    beamTime          = 0.5;
 

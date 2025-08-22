@@ -5956,6 +5956,31 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NCUE1 thanks";
 			instant SimGroup "NSAY2 End";
 		};
+		instant SimGroup "quest28" {
+			instant Marker "Marker1" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "-2435.63 -267.282 65.09";
+				rotation = "0 -0 -0.861";
+			};
+			instant SimGroup "NAME Black Mage Trainer";
+			instant SimGroup "RACE MaleHuman";
+			instant SimGroup "NEED HealingKitI 1000";
+			instant SimGroup "TAKE HealingKitI 1000";
+			instant SimGroup "GIVE HealingKitI 1000";
+			instant SimGroup "SAY1 Ahh, a new scholar in training. Come to learn what you can about becoming a Black Mage?";
+			instant SimGroup "CUE1 mage";
+			instant SimGroup "SAY2 To become a Mage you must first train as a Chemist. After 2 remorts in the Chemist class you will learn about spells.";
+			instant SimGroup "CUE2 spells";
+			instant SimGroup "SAY3 Here, take this tome. If you want to read up on all the spells that exist across all schools just type #spells.";
+			instant SimGroup "CUE3 schools";
+			instant SimGroup "SAY4 There are many spells across different schools and disciplines. You can also use this tome to find your best spell.";
+			instant SimGroup "CUE4 best";
+			instant SimGroup "SAY5 If you type #bestspell the Tome will show you the best spell you are capable of at that moment.";
+			instant SimGroup "NSAY1 Excellent!";
+			instant SimGroup "NCUE1 thanks";
+			instant SimGroup "NSAY2 End";
+		};
 	};
 	instant InteriorShape "RemorterHall1" {
 		fileName = "remorterhall.0.dis";

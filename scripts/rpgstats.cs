@@ -824,3 +824,13 @@ function GetRankBonus(%clientId)
 
 	return 1 + ( fetchData(%clientId, "RankPoints") / 100 );
 }
+
+function getFinalLVL(%clientId) {
+	// if($templvl[%clientId] == "")
+	// 	%a = GetLevel(getFixedExp(%clientId));
+	// else
+	// 	%a = $templvl[%clientId];
+
+	// return Cap(%a, 1, 999);
+	return fetchData(%clientId, "LVL");
+}

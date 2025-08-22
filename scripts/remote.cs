@@ -486,7 +486,7 @@ function disableOverrides(%client){
 	schedule::cancel("transportmenu"@%client);
 	if(%client.overrideKeybinds == 2){
 		%index = floor(%client.castingmenuindex);
-		EndCast(%client,False,0,%index,gamebase::getposition(%client),False);
+		//EndCast(%client,False,0,%index,gamebase::getposition(%client),False);
 	}
 	%client.keyOverride = "";
 	%client.overrideKeybinds = "";

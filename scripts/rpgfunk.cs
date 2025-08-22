@@ -2678,6 +2678,49 @@ function InitObjectives()
 	Team::setObjective(0, %num++, "<f1>Once a weapon has been slotted with materia it will boost the weapons damage and give it special abilities. Higher level materia will give better bonuses.");
 	Team::setObjective(0, %num++, "<f1>You can create higher mataria by combining multiple lower level materias into a single higher level materia.  This can be done at the Materia Master in the world.");
 
+	// change codew below nto Team::setObjective, at num, like above
+	Team::setObjective(0, %num++, "<f5>Spells:");
+	Team::setObjective(0, %num++, "<f1>Light");
+	Team::setObjective(0, %num++, "<f1>Mage Spells<f1>");
+	Team::setObjective(0, %num++, "<f1>FIRE ELEMENTAL");
+	Team::setObjective(0, %num++, "<f1>Flash");
+	Team::setObjective(0, %num++, "<f0>Flash2<f0>");
+	Team::setObjective(0, %num++, "<f0>Flash3<f0>");
+	Team::setObjective(0, %num++, "<f0>Flash4<f0>");
+	Team::setObjective(0, %num++, "<f0>ICE ELEMENTAL<f0>");
+	Team::setObjective(0, %num++, "<f0>Cold<f0>");
+	Team::setObjective(0, %num++, "<f0>Cold2<f0>");
+	Team::setObjective(0, %num++, "<f0>Cold3<f0>");
+	Team::setObjective(0, %num++, "<f0>Cold4<f0>");
+	Team::setObjective(0, %num++, "<f0>LIGHTNING ELEMENTAL<f0>");
+	Team::setObjective(0, %num++, "<f0>Storm<f0>");	
+	Team::setObjective(0, %num++, "<f0>Storm2<f0>");
+	Team::setObjective(0, %num++, "<f0>Storm3<f0>");
+	Team::setObjective(0, %num++, "<f0>Storm4<f0>");
+	Team::setObjective(0, %num++, "<f0>WATER ELEMENTAL<f0>");
+	Team::setObjective(0, %num++, "<f0>Aqua<f0>");
+	Team::setObjective(0, %num++, "<f0>Aqua2<f0>");
+	Team::setObjective(0, %num++, "<f0>Aqua3<f0>");
+	Team::setObjective(0, %num++, "<f0>Aqua4<f0>");
+	Team::setObjective(0, %num++, "<f0>EARTH ELEMENTAL<f0>");
+	Team::setObjective(0, %num++, "<f0>Shatter<f0>");
+	Team::setObjective(0, %num++, "<f0>Shatter2<f0>");
+	Team::setObjective(0, %num++, "<f0>Shatter3<f0>");
+	Team::setObjective(0, %num++, "<f0>Shatter4<f0>");
+	Team::setObjective(0, %num++, "<f0>WIND ELEMENTAL<f0>");
+	Team::setObjective(0, %num++, "<f0>Gale<f0>");
+	Team::setObjective(0, %num++, "<f0>Gale2<f0>");
+	Team::setObjective(0, %num++, "<f0>Gale3<f0>");
+	Team::setObjective(0, %num++, "<f0>Gale4<f0>");
+	Team::setObjective(0, %num++, "<f0>BLACK MAGIC<f0>");
+	Team::setObjective(0, %num++, "<f0>DarkSpike<f0>");
+	Team::setObjective(0, %num++, "<f0>DarkShot<f0>");
+	Team::setObjective(0, %num++, "<f0>Surge<f0>");
+	Team::setObjective(0, %num++, "<f0>STATUS MAGIC<f0>");
+	Team::setObjective(0, %num++, "<f0>Confusion<f0>");
+	Team::setObjective(0, %num++, "<f0>Remove<f0>");
+	Team::setObjective(0, %num++, "<f0>MindControl<f0>");
+
 	
     Team::setObjective(0, %num++, "<jc><f2>We hope you enjoy the game! If you have any questions or need help, please ask in the chat. We have a great community of players who are always willing to help out.");
 	Team::setObjective(0, %num++, "<jc><f2>Tribes RPG v 6.9, brought to you by tribesrpg.org");
