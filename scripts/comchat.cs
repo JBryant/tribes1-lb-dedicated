@@ -1797,7 +1797,9 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 		if (%w1 == "#mypos") {
 			Client::sendMessage(%TrueClientId, 0, GameBase::getPosition(%TrueClientId));
+			lbecho("pos: " @ GameBase::getPosition(%TrueClientId));
 			Client::sendMessage(%TrueClientId, 0 , GameBase::getRotation(%TrueClientId));
+			lbecho("rot: " @ GameBase::getRotation(%TrueClientId));
 		}
 
 		if (%w1 == "#equip") {
@@ -1827,7 +1829,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 					%cl = Player::getClient(%object);
 
 					if (%cl != "") {
-						// lbecho("Set skin " @ %skin @ " for " @ %cl);
+						lbecho("Set skin " @ %skin @ " for " @ %cl);
 						Client::setSkin(%cl, %skin);
 					}
 				}

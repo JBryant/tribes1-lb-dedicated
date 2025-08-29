@@ -1766,6 +1766,7 @@ RocketData FireBolt
   trailString = "plasmatrail.dts";
   smokeDist = 4;
 };
+
 //--------------------------------------
 // also small but a little bigger fire bolt
 //--------------------------------------

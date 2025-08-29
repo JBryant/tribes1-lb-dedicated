@@ -252,12 +252,22 @@ function enterEnterBox(%clientId, %object) {
 		Item::setVelocity(%clientId, "0 0 0");
 		GameBase::setPosition(%clientId, %landingPos);
 
+		if (%object.landingRot != "")
+			GameBase::setRotation(%clientId, %object.landingRot);
+
 		if(!fetchData(%clientId, "invisible"))
 			GameBase::startFadeIn(%clientId);
 		
 		RefreshAll(%clientId);
-		
-		Client::sendMessage(%clientId, 0, "~wclosedoor.wav");
+
+		if (%object.enterSound != "") {
+			%sound = "~w" @ %object.enterSound;
+			Client::sendMessage(%clientId, 0, %sound);
+		} else {
+			Client::sendMessage(%clientId, 0, "~wclosedoor.wav");
+		}
+
+		// Client::sendMessage(%clientId, 0, "~wclosedoor.wav");
 		schedule("Client::sendMessage(" @ %clientId @ ", $MsgBeige, \"" @ %gsay @ "\");", 0.22);
 	}
 	else

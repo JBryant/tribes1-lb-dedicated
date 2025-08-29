@@ -213,6 +213,55 @@ function Bomb5::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+MineData Bomb6
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = rocketExp;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb6::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+MineData Bomb7
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = energyExp;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb7::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+
 //Chee
 MineData Bomb40
 {
@@ -682,6 +731,246 @@ function shower(%this, %count)
 		//%count -= 1;
 		//schedule("DeployDisc(" @ %this @ " , " @ %count @ ");",0.5,%this);
 	}
+}
+
+MineData Bomb8
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = blasterExp;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb8::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+MineData Bomb9
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = plasmaExp;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb9::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+MineData Bomb10
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = turretExp;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb10::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+MineData Bomb11
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = bulletExp0;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb11::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+MineData Bomb12
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = debrisExpSmall;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb12::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+MineData Bomb13
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = debrisExpMedium;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb13::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+MineData Bomb14
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = debrisExpLarge;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb14::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+MineData Bomb15
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = flashExpSmall;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb15::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+MineData Bomb16
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = flashExpMedium;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb16::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
+}
+
+MineData Bomb17
+{
+	mass = 0.3;
+	drag = 1.0;
+	density = 2.0;
+	elasticity = 0.15;
+	friction = 1.0;
+	className = "Handgrenade";
+	description = "Handgrenade";
+	shapeFile = "smoke";
+	shadowDetailMask = 4;
+	explosionId = flashExpLarge;
+	explosionRadius = 10.0;
+	damageValue = 1.0;
+	damageType = $SpellDamageType;
+	kickBackStrength = 0;
+	triggerRadius = 0.5;
+	maxDamage = 1.0;
+};
+function Bomb17::onAdd(%this)
+{
+	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
 MineData bomb951

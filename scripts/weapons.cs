@@ -89,16 +89,16 @@ $WeaponRange[TesterBow] = 400;
 // $WeaponDelay[TesterBow] = 1;
 
 $ProjRestrictions[SmallRock] = ",Sling,";
-$ProjRestrictions[BasicArrow] = ",PracticeBow,QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
-$ProjRestrictions[SheafArrow] = ",PracticeBow,QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
-$ProjRestrictions[BladedArrow] = ",HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[BasicArrow] = ",PracticeBow,QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[SheafArrow] = ",PracticeBow,QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[BladedArrow] = ",HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[LightQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
 $ProjRestrictions[HeavyQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
 $ProjRestrictions[ShortQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
-$ProjRestrictions[StoneFeather] = ",SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
-$ProjRestrictions[MetalFeather] = ",SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,";
-$ProjRestrictions[Talon] = ",ElvenLongbow,ArcaneBow,HawksTalon,";
-$ProjRestrictions[CeraphumsFeather] = ",ElvenLongbow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[StoneFeather] = ",SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[MetalFeather] = ",SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[Talon] = ",ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[CeraphumsFeather] = ",ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[PoisonArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,";
 
 function GenerateAllWeaponCosts()
@@ -668,31 +668,55 @@ function CastingBladeImage::onFire(%player, %slot)
 //		%index = GetBestSpell(%clientId, -1, True);
 //	else
 
-	%index = GetBestSpell(%clientId, 1, True);
+	// %index = GetBestSpell(%clientId, 1, True);
+	%index = GetBestSpellNew(%clientId);
+	//lbecho("Best spell: " @ $Spell::keyword[%index]);
 
 	// lbecho("Spell Index found " @ %index);
 
-	// %length = $Spell::LOSrange[%index]-1;
-		
-	//$los::object = "";
-	//if(GameBase::getLOSinfo(%player, %length) && %index != -1)
-	//{
+	%length = $Spell::LOSrange[%index] - 1;
+
+	$los::object = "";
+	if(GameBase::getLOSinfo(%player, %length) && %index != -1 && fetchData(%clientId, "SpellCastStep") == "") {
+		%closest = 500000;
+		%b = $AImaxRange * 2;
+		%set = newObject("set", SimSet);
+		%n = containerBoxFillSet(%set, $SimPlayerObjectType, $los::position, %b, %b, %b, 0);
+
+		for(%i = 0; %i < Group::objectCount(%set); %i++) {
+			%id = Player::getClient(Group::getObject(%set, %i));
+
+			if(GameBase::getTeam(%id) != %aiTeam && !fetchData(%id, "invisible") && %id != %clientId) {
+				%dist = Vector::getDistance($los::position, GameBase::getPosition(%id));
+
+				if(%dist < %closest) {
+					%closest = %dist;
+					%closestId = %id;
+				}
+			}
+		}
+
+		deleteObject(%set);
+
 		// lbecho("found target");
 		//%obj = getObjectType($los::object);
 		//lbecho("Object type found " @ %obj);
 		//lbecho($los::position);
 		//if(%obj == "Player")
 		//{
-			if(Player::isAiControlled(%clientId))
-			{
+			if(Player::isAiControlled(%clientId)) {
 				// lbecho("New AI directive added");
 				AI::newDirectiveRemove(fetchData(%clientId, "BotInfoAiName"), 99);
 			}
 			// lbecho("Casting spell " @ $Spell::keyword[%index]);
+			// lbecho("AI is casting " @ $Spell::keyword[%index]);
+			//Client::sendMessage(%closestId, $MsgRed, "AI is casting " @ $Spell::keyword[%index] @ " on you.");
 			internalSay(%clientId, 0, "#cast " @ $Spell::keyword[%index]);
+			// lbecho("set bot shooting at " @ %closestId @ " to " @ %clientId);
+			$BotShootingAt_WithId[%closestId] = %clientId;
 			%hasCast = True;
 		//}
-	//}
+	}
 
 	if(!%hasCast)
 	{
@@ -2225,7 +2249,7 @@ ItemImageData UnarmedImage
 
 	weaponType = 0;
 	reloadTime = 0;
-	fireTime = $WeaponDelay[Sword];
+	fireTime = $WeaponDelay[Dagger];
 	minEnergy = 0;
 	maxEnergy = 0;
 
@@ -2247,5 +2271,37 @@ ItemData Unarmed
 	showWeaponBar = true;
 };
 function UnarmedImage::onFire(%player, %slot) {
+	MeleeAttack(%player);
+}
+
+ItemImageData UnarmedFastImage
+{
+	shapeFile  = "smallObject"; // blood1
+	mountPoint = 0; // 0 mouth/hand, 1 head, 2 bottom?
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = $WeaponDelay[Dagger];
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5; // change this mabe?
+	sfxActivate = AxeSlash2; // change this mabe?
+};
+ItemData UnarmedFast
+{
+	heading = "bWeapons";
+	description = "";
+	className = "Weapon";
+	shapeFile  = "smallObject"; // blood1
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = UnarmedFastImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function UnarmedFastImage::onFire(%player, %slot) {
 	MeleeAttack(%player);
 }

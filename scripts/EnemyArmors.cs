@@ -29,7 +29,7 @@ $Server::teamName[1] = "Enemy";
 $Server::teamSkin[1] = "RMSkins2";
 
 $Server::teamName[2] = "Greenskins";
-$Server::teamSkin[2] = "RMSkins1"; // RMSkins3 - RMSkins2 - rpgorc
+$Server::teamSkin[2] = "RMSkins1"; // RMSkins3 - RMSkins2 - rpgorc (was RMSkins1)
 
 $Server::teamName[3] = "Gnoll";
 $Server::teamSkin[3] = "rpggnoll";
@@ -41,7 +41,7 @@ $Server::teamName[5] = "Elf";
 $Server::teamSkin[5] = "rpgelf";
 
 $Server::teamName[6] = "Magical Beasts"; // Minotaur
-$Server::teamSkin[6] = "min";
+$Server::teamSkin[6] = "RMSkins3";
 
 $Server::teamName[7] = "Uber";
 $Server::teamSkin[7] = "fedmonster";
@@ -54,7 +54,7 @@ $Server::teamSkin[7] = "fedmonster";
 // GreenGnoll (Pink/Red/Yellow) - Gnoll skin with green (color) shirt
 // RedDemon - Read skin with less facial detail
 // XenoDemon - Purple skin with less facial detail
-// undead - Orange skin with good facial detail
+// undeatd - Orange skin with good facial detail
 // RMSkins1 - gnoll
 // RMSkins2 - mole looking weird thing
 // RMSkins3 - creepy stone demon? or cyborg? (metal / stone)
@@ -68,6 +68,18 @@ $Server::teamSkin[7] = "fedmonster";
 // RMSkins4 - Brown earthy but broken looking
 // Duke - Cool looking DOOM like monster
 // skquid - Dark black with white trim metal monster with anarchy sign on chest
+
+// spawn - looks like Spawn the demon hero
+// TEF - Green cyborg thing (almost boba fett like)
+// TEF2 - Yellow version of TEF
+// templar - White and Black knight with red head
+// tkk - Blue golem monster kinda cyborgish
+// widomaker - creepy dark cyborg with red symbol on chest
+// southpark - Cartman
+// predator - Dark black with white mask
+// deathinc - same as skquid, dark black body with skull
+// death - same as skquid but lighter gray, good for diff variations
+// CoK - kind of a big zombier knight thing
 
 
 //------------------------------
@@ -110,10 +122,21 @@ $NameForRace[OrcSlayer] = "Orc";
 
 // mythril mines
 $NameForRace[OgreRuffian] = "Ogre";
+$SkinForRace[DraOgreRuffianiner] = "undead";
 $NameForRace[OgreDestroyer] = "Ogre";
+$SkinForRace[OgreDestroyer] = "undead";
 $NameForRace[OgreHalberdier] = "Ogre";
+$SkinForRace[OgreHalberdier] = "undead";
 $NameForRace[OgreDreadnought] = "Ogre";
+$SkinForRace[OgreDreadnought] = "undead";
 $NameForRace[OgreMagi] = "Ogre";
+$SkinForRace[OgreMagi] = "undead";
+$NameForRace[OgreHellion] = "Ogre";
+$SkinForRace[OgreHellion] = "death";
+$NameForRace[OgreDemon] = "Ogre";
+$SkinForRace[OgreDemon] = "death";
+$NameForRace[OgreNecromancer] = "Ogre";
+$SkinForRace[OgreNecromancer] = "death";
 
 $NameForRace[ZombieMauler] = "Zombie";
 $NameForRace[ZombieThrasher] = "Zombie";
@@ -126,6 +149,8 @@ $NameForRace[Shambler] = "Wight";
 $SkinForRace[Shambler] = "RMSkins2";
 $NameForRace[ShadowDemon] = "Shadow";
 $SkinForRace[ShadowDemon] = "duke";
+$NameForRace[ShadowFiend] = "Shadow";
+$SkinForRace[ShadowFiend] = "duke";
 $NameForRace[Drainer] = "CacoDemon";
 $SkinForRace[Drainer] = "skquid";
 
@@ -139,9 +164,13 @@ $NameForRace[Civilian] = "MaleHuman";
 $NameForRace[Gladiator] = "MaleHuman";
 
 $NameForRace[Goliath] = "Minotaur";
+$SkinForRace[Goliath] = "RMSkins2";
 $NameForRace[Reaper] = "Minotaur";
+$SkinForRace[Reaper] = "RMSkins2";
 $NameForRace[Charger] = "Minotaur";
+$SkinForRace[Charger] = "RMSkins2";
 $NameForRace[Smasher] = "Minotaur";
+$SkinForRace[Smasher] = "RMSkins2";
 
 $NameForRace[Sloth] = "Uber";
 $NameForRace[Gohort] = "Uber";
@@ -222,6 +251,16 @@ $NameForRace[Whelp] = "Dragon";
 $NameForRace[AcidMateriaSlime] = "Slime";
 $SkinForRace[AcidMateriaSlime] = "RMSkins4";
 
+// Lower Heaven
+$NameForRace[OgreMagi] = "Ogre";
+
+// Lower Obsidian Mines
+$NameForRace[CyclopsAbomination] = "Cyclops";
+$SkinForRace[CyclopsAbomination] = "RMSkins2";
+
+$NameForRace[CyclopsObscenity] = "Cyclops";
+$SkinForRace[CyclopsObscenity] = "RMSkins3";
+
 
 // -------------- armor data ------------------
 
@@ -233,7 +272,7 @@ $ArmorTypeToRace[OgreArmor] = "Ogre";
 $ArmorTypeToRace[UndeadArmor] = "Undead";
 $ArmorTypeToRace[MaleElfArmor] = "MaleElf";
 $ArmorTypeToRace[FemaleElfArmor] = "FemaleElf";
-$ArmorTypeToRace[MinotaurArmor] = "Minotaur";
+$ArmorTypeToRace[NewMinoArmor] = "Minotaur"; // MinotaurArmor
 $ArmorTypeToRace[UberArmor] = "Uber";
 $ArmorTypeToRace[ZombieArmor] = "Zombie";
 $ArmorTypeToRace[DemonArmor] = "Demon";
@@ -258,7 +297,7 @@ $RaceToArmorType[Undead] = "UndeadArmor";
 $RaceToArmorType[Traveller] = "TravellerArmor";
 $RaceToArmorType[MaleElf] = "MaleElfArmor";
 $RaceToArmorType[FemaleElf] = "FemaleElfArmor";
-$RaceToArmorType[Minotaur] = "MinotaurArmor";
+$RaceToArmorType[Minotaur] = "NewMinoArmor";
 $RaceToArmorType[Uber] = "UberArmor";
 $RaceToArmorType[Zombie] = "ZombieArmor";
 $RaceToArmorType[Demon] = "DemonArmor";
@@ -274,6 +313,7 @@ $RaceToArmorType[CacoDemon] = "FloatingHeadArmor";
 $RaceToArmorType[Slime] = "BlobMonsterArmor";
 $RaceToArmorType[Bat] = "BatArmor";
 $RaceToArmorType[Bear] = "BearArmor";
+$RaceToArmorType[Cyclops] = "OgreArmor";
 
 $RaceToNamesList[Traveller] = "Alphonse Cedric Lucian Darius Leontius Gregor Matthias Silvain Emeric Veyron Hadrian Tobias Valens Octavian Magnus Raphael Victor Alistair Remiel Lysander Cassian Garrick Percival Thaddeus Gideon Theodric Isidore Cornelius Reginald Leofric Oswald Baldwin Edric Ronan Severin Aldous Soren Valentin Leopold Desmond Eustace Corbin Ignatius Bertram Seraphim Maximus Felix Quentin Roderic Atticus Nicodemus Zephyrus Aurelius Fabian Tiberius Evander Cormac Orion Vesper Drystan Cassius Lazarus Marcellus Gideon Tarquin Lucan Zephiel Oberon Tristam Aurelian Myron Edgar Nathaniel Augustus Hector Vespasian Sirus Caliban Damian Cyprian Theron Alaric Thelonius Ulrich Galen Phineas Anselm Varian Valmont Bastien Xavier Leoric Simeon Zephyr Darian Florian Armand Hadrianus Orestes Fenrir Gael Romulus Malachai Noctis Thalric Eamon Belisarius Callum Solon";
 $RaceToNamesList[Goblin] = "Griknak Snaggit Borgul Zrogg Ruknash Dribbik Murgul Vrogg Tazgul Skarnak Drekz Broggit Klurg Snibbit Vraggo Trognash Glubnik Grizzik Nobnash Krognar Zraggit Blornik Snaggul Throgg Klibbit Drizzik Grobnar Vraknash Trogzit Borknash Graknik Zlubb Knorvik Drizzgul Trognik Krabnash Glubzit Morzik Zorknash Broggul Tarnik Flibbit Skragnak Zriggo Krobnash Vrixik Drobbit Skrognar Blaggit Truznik Frobnash Skribbit Klorgnak Vrobnash Gribzik Traknor Zlibbit Knarzik Frozgul Skraknit Grozzik Triggan Zorblik Broggar Trogzit Kribzik Slorbag Vragbit Gronbit Trasknak Zroblik Klibzit Kragnik Blibbit Driznash Skornak Froggit Trigblik Zrumblik Krobzit Snorggul Thragbit Glibnash Skragzit Draknor Vrobbit Zrobnik Snibnash Frakgul Triznak Grobnash Blugbit Kraznik Snibzit Trombit Skrubnik Grubzit Vorblik Zlagbit Kroggul Tragnor Blornash";
@@ -410,6 +450,14 @@ $spawnIndex[91] = "MateriaBat";
 
 $spawnIndex[92] = "MateriaBear";
 
+$spawnIndex[93] = "OgreHellion";
+$spawnIndex[94] = "OgreDemon";
+$spawnIndex[95] = "OgreNecromancer";
+
+$spawnIndex[96] = "ShadowFiend";
+
+$spawnIndex[97] = "CyclopsAbomination";
+$spawnIndex[98] = "CyclopsObscenity";
 //------------------------------
 
 // range looks like: RShortBow 1 BasicArrow 20/50
@@ -522,6 +570,7 @@ $BotEquipment[Whelp] = "CLASS Enemy LVL 150+10 COINS 1000/50 LCK 3 CastingBlade 
 $BotEquipment[Shambler] = "CLASS Enemy LVL 200+50 COINS 115/50 LCK 2 DragonBoneClub 1 DarkMateriaII 1/-800 " @ %defaultAlchemyDropsV;
 
 $BotEquipment[ShadowDemon] = "CLASS Enemy LVL 250+50 COINS 115/50 LCK 3 SteelJavelin 1 DarkMateriaII 1/-500 " @ %defaultAlchemyDropsV;
+$BotEquipment[ShadowFiend] = "CLASS Enemy LVL 300+50 COINS 115/50 LCK 3 CastingBlade 1 DarkMateriaII 1/-500 " @ %defaultAlchemyDropsV;
 
 $BotEquipment[Drainer] = "CLASS Enemy LVL 350+50 COINS 115/50 LCK 3 CastingBlade 1 DarkMateriaII 1/-250 " @ %defaultAlchemyDropsV;
 
@@ -530,6 +579,14 @@ $BotEquipment[AcidMateriaSlime] = "CLASS Enemy LVL 375+75 COINS 115/50 LCK 3 Cas
 $BotEquipment[CaveBat] = "CLASS Enemy LVL 10+3 COINS 115/50 LCK 3 BeastClawI 1 PoisonMateriaI 1/-250 " @ %defaultAlchemyDropsI;
 $BotEquipment[MateriaBat] = "CLASS Enemy LVL 400+75 COINS 115/50 LCK 3 BeastClawII 1 PoisonMateriaII 1/-250 " @ %defaultAlchemyDropsV;
 $BotEquipment[MateriaBear] = "CLASS Enemy LVL 400+75 COINS 115/50 LCK 3 BeastClawII 1 IceMateriaII 1/-250 " @ %defaultAlchemyDropsV;
+
+$BotEquipment[OgreHellion] = "CLASS Enemy LVL 175+60 COINS 115/50 LCK 2 DragonBoneClub 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[OgreDemon] = "CLASS Enemy LVL 225+60 COINS 115/50 LCK 2 AncientSword 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[OgreNecromancer] = "CLASS Enemy LVL 200+60 COINS 115/50 LCK 2 CastingBlade 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+
+// lower obsidan mines (lvl 350 - 450)
+$BotEquipment[CyclopsAbomination] = "CLASS Enemy LVL 375+60 COINS 115/50 LCK 2 MateriaAxe 1 FireMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[CyclopsObscenity] = "CLASS Enemy LVL 375+60 COINS 115/50 LCK 2 CastingBlade 1 FireMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 
 //------------------------------
 
@@ -557,6 +614,7 @@ $TeamForRace[CacoDemon] = 4;
 $TeamForRace[Slime] = 6;
 $TeamForRace[Bat] = 6;
 $TeamForRace[Bear] = 6;
+$TeamForRace[Cyclops] = 2;
 
 //------------------------------
 
@@ -569,6 +627,16 @@ $RaceSound[Ogre, Taunt, 1] = SoundOgreTaunt1;
 $RaceSound[Ogre, Taunt, 2] = SoundOgreTaunt2;
 $RaceSound[Ogre, RandomWait, 1] = SoundOgreRandom1;
 $RaceSound[Ogre, RandomWait, 2] = SoundOgreRandom2;
+
+$RaceSound[Cyclops, Death, 1] = SoundOgreDeath1;
+$RaceSound[Cyclops, Acquired, 1] = SoundOgreAcquired1;
+$RaceSound[Cyclops, Acquired, 2] = SoundOgreAcquired2;
+$RaceSound[Cyclops, Hit, 1] = SoundOgreHit1;
+$RaceSound[OgCyclopsre, Hit, 2] = SoundOgreHit2;
+$RaceSound[Cyclops, Taunt, 1] = SoundOgreTaunt1;
+$RaceSound[Cyclops, Taunt, 2] = SoundOgreTaunt2;
+$RaceSound[Cyclops, RandomWait, 1] = SoundOgreRandom1;
+$RaceSound[Cyclops, RandomWait, 2] = SoundOgreRandom2;
 
 $RaceSound[Undead, Death, 1] = SoundUndeadDeath1;
 $RaceSound[Undead, Acquired, 1] = SoundUndeadAcquired1;

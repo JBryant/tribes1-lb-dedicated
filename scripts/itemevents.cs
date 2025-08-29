@@ -172,6 +172,7 @@ function Item::onCollision(%this, %object) {
 function DetonateItem(%object, %explosion, %spellIndex) {
 	dbecho($dbechoMode, "DetonateItem(" @ %object @ ", " @ %explosion @ ", " @ %spellIndex @ ")");
 
+	// lbecho("Detonating item: " @ %object);
 	CreateAndDetBomb(%object.owner, %explosion, GameBase::getPosition(%object), True, %spellIndex);
 
 	deleteObject(%object);

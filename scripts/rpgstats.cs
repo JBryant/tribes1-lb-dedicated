@@ -631,12 +631,6 @@ function DistributeExpForKilling(%damagedClient)
 				%value = 0;
 			}
 
-			//rank point bonus
-			if(fetchData(%listClientId, "MyHouse") != "") {
-				%ph = Cap(GetRankBonus(%listClientId), 1.00, 3.00);
-				%value = %value * %ph;
-			}
-
 			// add class exp multiplier
 			%expMultiplier = $EXPmultiplier[fetchData(%listClientId, "CLASS")];
 			if (%expMultiplier != "") {
@@ -647,7 +641,13 @@ function DistributeExpForKilling(%damagedClient)
 			%value = %value * %serverExpMultiplier;
 
 			%perc = %dCounter[%finalDamagedBy[%i]] / %total;
-			%final = Cap(round( %value * %perc ), "inf", 1000);
+			%final = Cap(round(%value * %perc), "inf", 1000);
+
+			//rank point bonus
+			if(fetchData(%listClientId, "MyHouse") != "") {
+				%ph = Cap(GetRankBonus(%listClientId), 1.00, 5.00);
+				%final = round(%final * %ph);
+			}
 
 			//determine party exp
 			%pf = %partyFactor[%finalDamagedBy[%i]];
@@ -770,6 +770,9 @@ function DoRemort(%clientId)
 	storeData(%clientId, "LCK", $initLCK, "inc");
 	storeData(%clientId, "SPcredits", $initSPcredits, "inc");
 	storeData(%clientId, "currentlyRemorting", "");
+	if(fetchData(%clientId, "MyHouse") != "") {
+		storeData(%clientId, "RankPoints", 2, "inc");
+	}
 
 	//skill variables
 	%cnt = 0;
@@ -814,6 +817,10 @@ function DoRemort(%clientId)
 	RefreshAll(%clientId);
 
 	Client::sendMessage(%clientId, $MsgBeige, "Welcome to Remort Level " @ fetchData(%clientId, "RemortStep") @ "!");
+
+	if(fetchData(%clientId, "MyHouse") != "") {
+		Client::sendMessage(%clientId, $MsgBeige, "You gained 2 Rank Points!");
+	}
 
 	return %pos;
 }

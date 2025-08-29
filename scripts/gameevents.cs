@@ -30,7 +30,7 @@ function Mission::init()
 	if($displayPingAndPL)
 		setClientScoreHeading("Name\t\x50Zone\t\xBFLVL\t\xDFPing\t\xFFPL");
 	else
-		setClientScoreHeading("Name\t\x50Zone\t\xA2LVL\t\xC2Class"); // setClientScoreHeading("Name\t\x50Zone\t\xB2LVL\t\xD2Class\t\xFFPL");
+		setClientScoreHeading("Name\t\x50Zone\t\xB2LVL\t\xD2Class"); // setClientScoreHeading("Name\t\x50Zone\t\xB2LVL\t\xD2Class\t\xFFPL"); setClientScoreHeading("Name\t\x50Zone\t\xA2LVL\t\xC2Class");
 
 	if(!$NoSpawn)
 		AI::setupAI();

@@ -863,6 +863,31 @@ StaticShapeData WavyWater16
 	isTranslucent = "True";
 };
 
+// rpgmaledwarf, rmoonfemale, rpgmalegiant, uuag
+StaticShapeData TestTownBot
+{
+	debrisId = defaultDebrisSmall;
+	maxDamage = 9999.0;
+	description = "Male Town Bot";
+	className = "TownBot";
+	shapeFile = "magemale";
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};
+
+StaticShapeData MaleMageTownBot
+{
+	debrisId = defaultDebrisSmall;
+	maxDamage = 9999.0;
+	description = "Male Town Bot";
+	className = "TownBot";
+	shapeFile = "magemale";
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};
+
 
 StaticShapeData MaleHumanTownBot
 {

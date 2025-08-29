@@ -26,6 +26,41 @@
 //Starsiege: Tribes, including the engine, retains a proprietary license forbidding resale.
 
 
-StaticShapeData fountain{	shapeFile = "fountain";	debrisId = defaultDebrisSmall;	maxDamage = 10000.0;};StaticShapeData fountainwater{	shapeFile = "fountain_water";	debrisId = defaultDebrisSmall;	maxDamage = 10000.0;	disableCollision = true;	isTranslucent = "True";};
 
-StaticShapeData BloodSpot{	shapeFile = "blood1";	maxDamage = 999.0;	isTranslucent = "True";	disableCollision = true;};
+StaticShapeData fountain
+{
+	shapeFile = "fountain";
+	debrisId = defaultDebrisSmall;
+	maxDamage = 10000.0;
+};
+
+StaticShapeData fountainwater
+{
+	shapeFile = "fountain_water";
+	debrisId = defaultDebrisSmall;
+	maxDamage = 10000.0;
+	disableCollision = true;
+	isTranslucent = "True";
+};
+
+StaticShapeData BloodSpot
+{
+	shapeFile = "blood1";
+	maxDamage = 999.0;
+	isTranslucent = "True";
+	disableCollision = true;
+};
+
+StaticShapeData Tiara
+{
+	shapeFile = "tiara";
+	debrisId = flashDebrisSmall;
+	maxDamage = 10000.0;
+};
+
+StaticShapeData TiaraS
+{
+	shapeFile = "tiara_s";
+	debrisId = flashDebrisSmall;
+	maxDamage = 10000.0;
+};

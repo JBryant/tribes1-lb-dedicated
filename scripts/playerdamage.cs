@@ -420,11 +420,15 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 	// lbecho("quadrant: " @ %quadrant);
 	// lbecho("object: " @ %object);
 	// lbecho("objectType: " @ getObjectType(%object));
-	// lbecho("weapon: " @ %weapon);
-	// lbecho("projectile: " @ %projectile);
 
 	if(Player::isExposed(%this) && %object != -1 && %type != $NullDamageType && !Player::IsDead(%this)) {
 		%damagedClient = Player::getClient(%this);
+
+		if ($BotShootingAt_WithId[%damagedClient] != "" && %object == 0) {
+			%object = $BotShootingAt_WithId[%damagedClient];
+			$BotShootingAt_WithId[%damagedClient] = "";
+		}
+
 		%shooterClient = %object;
 
 		%damagedClientPos = GameBase::getPosition(%damagedClient);
@@ -444,28 +448,42 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 		//------------- CREATE DAMAGE VALUE -------------
 		if(%type == $SpellDamageType) {
-			// lbecho("Creating damage value for spell");
+			// lbecho("----- create spell damage -----");
 			%lastSpell = fetchData(%shooterClient, "LastCastSpell");
+			// lbecho("lastSpell: " @ %lastSpell);
+
+			if (%weapon != "") {
+				%lastSpell = %weapon;
+			}
+
 			%spellIndex = $Spell::index[%lastSpell];
 			%spellSkillType = $SkillType[%lastSpell];
 			%spellDamage = $Spell::damageValue[%spellIndex];
+			// lbecho("spellIndex: " @ %spellIndex);
+			// lbecho("spellSkillType: " @ %spellSkillType);
+			// lbecho("spellDamage: " @ %spellDamage);
 
-			// lbecho("Spell Damage: " @ %spellDamage);
+			if (%spellIndex == "") {
+				return;
+			}
 
 			//For the case of SPELLS, the initial damage has already been determined before calling this function
-			%dmg = %value;
+			%dmg = %spellDamage; // % value
 			%multiplier = 1;
 			
 			if (Player::isAiControlled(%shooterClient)) {
-				%multiplier = 0.5;
+				%multiplier = 0.25;
 			}
 			
+			// lbecho("shooters skill level: " @ $PlayerSkill[%shooterClient, %spellSkillType]);
 			// TODO: Make the skill based off something from the object that was shot
 			// OLD: %value = round(((%dmg / 1000) * $PlayerSkill[%shooterClient, $SkillBlackMagick]));
-			%value = round((%spellDamage / 100) * $PlayerSkill[%shooterClient, %spellSkillType] * %multiplier) + 1;
+			%value = round((%dmg / 100) * $PlayerSkill[%shooterClient, %spellSkillType] * %multiplier) + 1;
+			// lbecho("calculated value 1: " @ %value);
 			%extraDamage = round(getRandom() * floor((%value * 0.10) + 1));
-			//lbecho("calculated value 1: " @ %value);
+			// lbecho("extra damage: " @ %extraDamage);	
 			%value = (%value + %extraDamage);
+			// lbecho("value after extra damage: " @ %value);
 
 			%ab = (getRandom() * (fetchData(%damagedClient, "MDEF") / 10)) + 1;
 			%value = Cap(%value - %ab, 0, "inf") + 1; // add 1 raise base damage slight and ensure damage is always done
@@ -534,7 +552,13 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			}
 
 			%weapondamage = GetRoll(GetWord(GetAccessoryVar(%weapon, $SpecialVar), 1));
-			%value = round((( (%weapondamage + %rweapondamage) / 1000) * $PlayerSkill[%shooterClient, %skilltype]) * %multi);
+
+			if (%weapon == "PugilistsGlove") {
+				//%value = round((( (%weapondamage + %rweapondamage) / 1000) * $PlayerSkill[%shooterClient, %skilltype]) * %multi);
+				%value = fetchData(%shooterClient, "LVL") * 2 * %multi;
+			} else {
+				%value = round((( (%weapondamage + %rweapondamage) / 1000) * $PlayerSkill[%shooterClient, %skilltype]) * %multi);
+			}
 
 			%ab = (getRandom() * (fetchData(%damagedClient, "DEF") / 10)) + 1;
 			%value = Cap(%value - %ab, 1, "inf");

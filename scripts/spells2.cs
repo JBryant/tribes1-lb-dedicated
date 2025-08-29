@@ -2,9 +2,6 @@
 function cast_summonswordone(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -13,9 +10,6 @@ function cast_summonswordone(%Client)
 function cast_summonswordtwo(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -24,9 +18,6 @@ function cast_summonswordtwo(%Client)
 function cast_summonswordthree(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -35,9 +26,6 @@ function cast_summonswordthree(%Client)
 function cast_summonswordfour(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -46,9 +34,6 @@ function cast_summonswordfour(%Client)
 function cast_blizzardblizzardboltreal(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -57,9 +42,6 @@ function cast_blizzardblizzardboltreal(%Client)
 function cast_blizzardblizzardboltfake(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -68,9 +50,6 @@ function cast_blizzardblizzardboltfake(%Client)
 function cast_truelight(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -79,9 +58,6 @@ function cast_truelight(%Client)
 function cast_rocksummon(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -90,9 +66,6 @@ function cast_rocksummon(%Client)
 function cast_surge(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -101,9 +74,6 @@ function cast_surge(%Client)
 function cast_waverly(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -113,9 +83,6 @@ function cast_waverly(%Client)
 function cast_cheemeyes(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -124,9 +91,6 @@ function cast_cheemeyes(%Client)
 function cast_bioone(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -135,9 +99,6 @@ function cast_bioone(%Client)
 function cast_abeam(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -146,9 +107,6 @@ function cast_abeam(%Client)
 function cast_waterwaterwater(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -157,9 +115,6 @@ function cast_waterwaterwater(%Client)
 function cast_waterwater(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -169,9 +124,6 @@ function cast_waterwater(%Client)
 function cast_rangerwind(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -181,9 +133,6 @@ function cast_rangerwind(%Client)
 function cast_rangerfire(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -193,9 +142,6 @@ function cast_rangerfire(%Client)
 function cast_rangerice(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
@@ -205,9 +151,6 @@ function cast_rangerice(%Client)
 function cast_blastmeta(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,37);
@@ -217,9 +160,6 @@ function cast_blastmeta(%Client)
 function cast_aqua(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -229,9 +169,6 @@ function cast_aqua(%Client)
 function cast_fc(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -242,9 +179,6 @@ function cast_fc(%Client)
 function cast_flare(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,40);
@@ -254,9 +188,6 @@ function cast_flare(%Client)
 function cast_death(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -266,9 +197,6 @@ function cast_death(%Client)
 function cast_bliz(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -278,9 +206,6 @@ function cast_bliz(%Client)
 function cast_gravity(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,40);
@@ -290,9 +215,6 @@ function cast_gravity(%Client)
 function cast_show(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,40);
@@ -302,9 +224,6 @@ function cast_show(%Client)
 function cast_shocklvone(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,40);
@@ -314,9 +233,6 @@ function cast_shocklvone(%Client)
 function cast_shocklvtwo(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,40);
@@ -326,9 +242,6 @@ function cast_shocklvtwo(%Client)
 function cast_shocklvthree(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,40);
@@ -339,9 +252,6 @@ function cast_shocklvthree(%Client)
 function cast_painbolt(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -351,9 +261,6 @@ function cast_painbolt(%Client)
 function cast_tech(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,42);
@@ -363,46 +270,53 @@ function cast_tech(%Client)
 function cast_tfist(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,38);
 	Projectile::spawnProjectile("roguefist",%trans,%player,%vel);
 }
 
+function cast_tornado(%Client, %castPos, %index) {
+	%player = Client::getOwnedObject(%Client);
+	%xPos = GetWord(%castPos, 0);
+	%yPos = GetWord(%castPos, 1);
+	%zPos = GetWord(%castPos, 2);
+
+	%count = 0;
+	for(%i = 1; %i <= 3; %i++) {
+		for(%j = 1; %j <= 10; %j++) {
+			%count += 1;
+			%newPos = %xPos @ " " @ %yPos @ " " @ (%zPos + %j);
+			%delay = %count * 0.1;
+
+			schedule("CreateAndDetBomb(\""@%Client@"\", \"Bomb5\", \""@%newPos@"\", True, \""@%index@"\");", %delay , %player);
+		}
+	}
+}
+
 
 function cast_fireball(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
-	Player::setAnimation(%Client,39);
-	Projectile::spawnProjectile("FireBolt",%trans, %player, %vel);
+	Player::setAnimation(%Client, 39);
+
+	%projectile = Projectile::spawnProjectile("FireBolt", %trans, %player, %vel);
 }
 
 function cast_flame(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
-	Projectile::spawnProjectile("FlameBolt",%trans,%player,%vel);
+	Projectile::spawnProjectile("FlameBolt", %trans, %player, %vel);
 }
 
 function cast_iceball(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -412,9 +326,6 @@ function cast_iceball(%Client)
 function cast_ice(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -424,9 +335,6 @@ function cast_ice(%Client)
 function cast_missile(%Client)//,%id)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -436,9 +344,6 @@ function cast_missile(%Client)//,%id)
 function cast_laser(%Client)//,%id)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -448,9 +353,6 @@ function cast_laser(%Client)//,%id)
 function cast_zap(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -460,9 +362,6 @@ function cast_zap(%Client)
 function cast_mortar(%Client)
 {
 	%player = Client::getOwnedObject(%Client);
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-	$ClientData[%Client, UsingWeapon] = "-1";
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
@@ -509,9 +408,6 @@ function BeginCastSpell(%Client, %keyword) { //--1 is casted--0 is scroll
 		}
 
 		playSound($Spell::startSound[%i], GameBase::getPosition(%Client));
-		
-		if(!Player::isAiControlled(%Client))
-			Player::unmountItem(%player, $WeaponSlot);
 
 		// shows some casting animation stuff
 		ooo(%Client, %i);
@@ -561,9 +457,6 @@ function DoCastSpell(%Client, %index, %oldpos, %castPos, %castObj, %w2, %tempMan
 	$ClientData[%Client, SpellType] = $Spell::Type[%index];
 	$ClientData[%Client, SpellDmg] = $Spell::damageValue[%index];
 
-	if(!Player::isAiControlled(%Client))
-		Player::unmountItem(%player, $WeaponSlot);
-
 	%info = eval("SpellNum"@%index@"("@%Client@", \""@%castObj@"\", \""@%castPos@"\", \""@%w2@"\");");
 
 	if(String::findSubStr(%info, "reflection 1") != -1)
@@ -594,7 +487,7 @@ function DoCastSpell(%Client, %index, %oldpos, %castPos, %castObj, %w2, %tempMan
 	if(String::findSubStr(%info, "returnFlag 1") != -1) {
 		//$SpellCastStep[%Client] = 2;
 		storeData(%Client, "SpellCastStep", 2);
-		schedule("SayReadyToCast("@%Client@");", %recovTime); // $Spell::recoveryTime[%index]
+		schedule("SayReadyToCast("@%Client@");", %recovTime);
 		return True;
 	}
 	else {
@@ -607,6 +500,7 @@ function SayReadyToCast(%Client) {
 	Client::sendMessage(%Client, 0, "You are ready to cast.");
 	//$SpellCastStep[%Client] = "";
 	storeData(%Client, "SpellCastStep", "");
+	storeData(%Client, "LastCastSpell", "");
 }
 
 // looks like some fancy looking spells
@@ -650,6 +544,7 @@ function ooo(%Client, %i) {
 }
 
 function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index, %multiplier) {
+	// lbecho("CreateAndDetBomb(" @ %clientId @ ", " @ %b @ ", " @ %castPos @ ", " @ %doDamage @ ", " @ %index @ ", " @ %multiplier @ ");");
 	%player = Client::getOwnedObject(%clientId);
 	%bomb = newObject("", "Mine", %b);
 
@@ -674,11 +569,10 @@ function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index, %multiplie
 }
 
 function SpellDamage(%Client, %targetId, %index) {
-	GameBase::virtual(%targetId, "onDamage", $SpellDamageType, $Spell::damageValue[%index], "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client);
+	GameBase::virtual(%targetId, "onDamage", $SpellDamageType, $Spell::damageValue[%index], "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client, $Spell::keyword[%index]);
 }
 
 function SpellRadiusDamage(%Client, %pos, %index) {
-
 	%percMin = 5;
 	%percMax = 100;
 
@@ -691,19 +585,16 @@ function SpellRadiusDamage(%Client, %pos, %index) {
 
 		if(%dist <= $Spell::radius[%index]) {
 			%newDamage = SpellCalcRadiusDamage(%dist, $Spell::radius[%index], $Spell::damageValue[%index], %percMin, %percMax);
-
-			GameBase::virtual(%id, "onDamage", $SpellDamageType, %newDamage, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client);
+			GameBase::virtual(%id, "onDamage", $SpellDamageType, %newDamage, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client, $Spell::keyword[%index]);
 		}
 	}
 }
 
 function SpellCalcRadiusDamage(%dist, %radius, %dmg, %percMin, %percMax) {
-
 	if(%radius == "")
 		%radius = 10;
 
 	%newdmg = %dmg - (%dist * (%dmg / %radius));
-
 	%p = (%newdmg * 100) / %dmg;
 
 	if(%p < %percMin)
@@ -830,55 +721,55 @@ function BestChiefSpell(%Client, %type, %semiRandomSpell)
 	}
 	return %bestSpell;
 }
-function GetBestSpell(%Client, %type, %semiRandomSpell)
-{
+// function GetBestSpell(%Client, %type, %semiRandomSpell)
+// {
 
-	%wdelay = 10;	//weights
-	%wrecov = 0.5;
+// 	%wdelay = 10;	//weights
+// 	%wrecov = 0.5;
 
-	%bestSpell = -1;
-	%backupSpell = "";
-	%highest = 0.1;
+// 	%bestSpell = -1;
+// 	%backupSpell = "";
+// 	%highest = 0.1;
 
-	for(%i = 1; $Spell::keyword[%i] != ""; %i++)
-	{
-		if(getFinalLVL(%Client) >= $Spell::minLevel[%i])
-		{
-			if($MANA[%Client] >= $Spell::manaCost[%i])
-			{
-				%d = ( ($Spell::delay[%i] / %wdelay) + ($Spell::recoveryTime[%i] / %wrecov) );
-				%x = (100 / %d) * $Spell::refVal[%i];
-				%v =  %x * %type;
+// 	for(%i = 1; $Spell::keyword[%i] != ""; %i++)
+// 	{
+// 		if(getFinalLVL(%Client) >= $Spell::minLevel[%i])
+// 		{
+// 			if($MANA[%Client] >= $Spell::manaCost[%i])
+// 			{
+// 				%d = ( ($Spell::delay[%i] / %wdelay) + ($Spell::recoveryTime[%i] / %wrecov) );
+// 				%x = (100 / %d) * $Spell::refVal[%i];
+// 				%v =  %x * %type;
 
-				if(%semiRandomSpell)
-				{
-					%r = getRandom() * 100;
-					%rr = getRandom() * 100;
-				}
-				else
-				{
-					%r = 1;
-					%rr = 0;
-				}
+// 				if(%semiRandomSpell)
+// 				{
+// 					%r = getRandom() * 100;
+// 					%rr = getRandom() * 100;
+// 				}
+// 				else
+// 				{
+// 					%r = 1;
+// 					%rr = 0;
+// 				}
 
-				if(%v > %highest)
-				{
-					if(%r > %rr)
-					{
-						%bestSpell = %i;
-						%highest = %v;
-					}
-					else
-						%backupSpell = %i;
-				}
-			}
-		}
-	}
-	if(%bestSpell == -1 && %backupSpell != "")
-		%bestSpell = %backupSpell;
+// 				if(%v > %highest)
+// 				{
+// 					if(%r > %rr)
+// 					{
+// 						%bestSpell = %i;
+// 						%highest = %v;
+// 					}
+// 					else
+// 						%backupSpell = %i;
+// 				}
+// 			}
+// 		}
+// 	}
+// 	if(%bestSpell == -1 && %backupSpell != "")
+// 		%bestSpell = %backupSpell;
 
-	return %bestSpell;
-}
+// 	return %bestSpell;
+// }
 
 // this function is to let objects us do cool spell stuff on an object and then delete it
 // good for explosives, flasks, flame arrows etc
@@ -886,4 +777,84 @@ function TriggerSpellEffectOnObject(%object, %spellIndex) {
 	if(%spellIndex == "43") {
 		DetonateItem(%object, "Bomb6", %spellIndex);
 	}
+}
+
+function GetBestSpellNew(%clientId) {
+	%currentLevel = getFinalLVL(%clientId);
+
+	if (%currentLevel < 3) {
+		return $Spell::index["fire"];
+	} else if (%currentLevel < 15) {
+		%spells = "fire blizzard";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 2))];
+	} else if (%currentLevel < 25) {
+		%spells = "fire blizzard aero";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 3))];
+	} else if (%currentLevel < 30) {
+		%spells = "blizzard aero fira";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 3))];
+	} else if (%currentLevel < 40) {
+		%spells = "thunder tremor fira";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 3))];
+	} else if (%currentLevel < 50) {
+		%spells = "thunder tremor blizzara";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 3))];
+	} else if (%currentLevel < 60) {
+		%spells = "aquara aeroga blizzara";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 3))];
+	} else if (%currentLevel < 70) {
+		%spells = "quake aeroga aquara";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 3))];
+	} else if (%currentLevel < 100) {
+		%spells = "quake thundaga aeroga aquara";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 4))];
+	} else if (%currentLevel < 150) {
+		%spells = "aquaga firaga thundaga";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 3))];
+	} else if (%currentLevel < 200) {
+		%spells = "tornado thunderstorm aquaga firaga";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 4))];
+	} else if (%currentLevel < 230) {
+		%spells = "tsunami avalanche flare tornado thunderstorm";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 5))];
+	} else {
+		%spells = "tsunami avalanche flare tornado thunderstorm cataclysm";
+		return $Spell::index[GetWord(%spells, floor(getRandom() * 6))];
+	}
+
+	// %currentBestSpell = "";
+	// %currentBestSpellLevel = 0;
+	// %currentBestSpellDamage = 0;
+
+	// for (%i = 0; %i < 69; %i++) {
+	// 	if (SkillCanUseSpell(%clientId, %i, 0) && $Spell::minLevel[%i] > %currentBestSpellLevel && $Spell::damageValue[%i] > %currentBestSpellDamage) {
+	// 		%currentBestSpell = $Spell::keyword[%i];
+	// 		%currentBestSpellLevel = $Spell::minLevel[%i];
+	// 		%currentBestSpellDamage = $Spell::damageValue[%i];
+	// 	}
+	// }
+
+	// return $Spell::index[%currentBestSpell];
+
+	return "11";
+}
+
+function GetRandomSpell(%clientId) {
+	%randomSpell = "";
+	%cap = 0;
+
+	while (%randomSpell == "") {
+		if (%cap > 100)
+			return "11";
+
+		%cap += 1;
+		%randomSpellIndex = floor(getRandom() * 69) + 1;
+
+		if (SkillCanUseSpell(%clientId, %randomSpellIndex, 0)) {
+			%randomSpell = %randomSpellIndex;
+		}
+	}
+
+
+	return %randomSpell;
 }

@@ -32,7 +32,7 @@ $Skill::startSound[2] = AmrbroseSwordA;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
-$SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight";
+$SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight C Monk";
 
 $Skill::keyword[3] = "harvest";
 $Skill::index[harvest] = 3;
@@ -58,7 +58,7 @@ $Skill::groupListCheck[4] = False;
 $Skill::refVal[4] = -10;
 $Skill::graceDistance[4] = 0.5;
 $Skill::requireOneOfItems[4] = "CrudeClayAlembic WornCopperAlembic ReinforcedIronAlembic ArcaneGlassAlembic CelestialMythrilAlembic";
-$SkillRestriction[$Skill::keyword[4]] = "C Chemist";
+$SkillRestriction[$Skill::keyword[4]] = "C Chemist C BlackMage C WhiteMage C Mystic C TimeMage";
 
 $Skill::keyword[5] = "throw";
 $Skill::index[$Skill::keyword[5]] = 5;
@@ -70,7 +70,7 @@ $Skill::startSound[5] = FishWalk;
 $Skill::groupListCheck[5] = False;
 $Skill::refVal[5] = -10;
 $Skill::graceDistance[5] = 10;
-$SkillRestriction[$Skill::keyword[5]] = "C Chemist";
+$SkillRestriction[$Skill::keyword[5]] = "C Chemist C BlackMage C WhiteMage C Mystic C TimeMage";
 
 $Skill::keyword[6] = "quickshot";
 $Skill::index[$Skill::keyword[6]] = 6;
@@ -112,7 +112,7 @@ $Skill::startSound[8] = AmrbroseSwordA;
 $Skill::groupListCheck[8] = False;
 $Skill::refVal[8] = -10;
 $Skill::graceDistance[8] = 2;
-$SkillRestriction[$Skill::keyword[8]] = "C Knight";
+$SkillRestriction[$Skill::keyword[8]] = "C Knight C Monk";
 
 $Skill::keyword[9] = "parry";
 $Skill::index[parry] = 9;
@@ -144,6 +144,21 @@ $Skill::groupListCheck[10] = False;
 $Skill::refVal[10] = -10;
 $Skill::graceDistance[10] = 1;
 $SkillRestriction[$Skill::keyword[10]] = "C Chemist";
+
+$Skill::keyword[11] = "whirlwind";
+$Skill::index[whirlwind] = 11;
+$Skill::name[11] = "Whirlwind";
+$Skill::description[11] = "A spinning attack that hits all nearby enemies multiple times.";
+$Skill::actionMessage[11] = "You spin around in a whirlwind of attacks.";
+$Skill::delay[11] = 0.1;
+$Skill::recoveryTime[11] = 15;
+$Skill::radius[11] = 12;
+$Skill::LOSrange[11] = 0;
+$Skill::startSound[11] = AmrbroseSwordA;
+$Skill::groupListCheck[11] = False;
+$Skill::refVal[11] = -10;
+$Skill::graceDistance[11] = 2;
+$SkillRestriction[$Skill::keyword[11]] = "C Monk";
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
@@ -386,8 +401,24 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 
 		CreateAndDetBomb(%clientId, "Bomb5", %playerPos, False);
 		playSound(ExplodeLM, %playerPos);
-		%multi = 2.0;
+		%multi = 1.5;
 		PhysicalRadiusDamage(%clientId, %playerPos, $Skill::radius[%index] * 2, $Skill::name[%index], %multi);
+		%returnFlag = True;
+    }
+
+	if ($Skill::keyword[%index] == "whirlwind") {
+		// do an explosion around the use
+		%playerPos = GameBase::getPosition(%clientId);
+
+		CreateAndDetBomb(%clientId, "Bomb5", %playerPos, False);
+		playSound(ExplodeLM, %playerPos);
+		%multi = 1.5;
+		PhysicalRadiusDamage(%clientId, %playerPos, $Skill::radius[%index] * 2, $Skill::name[%index], %multi);
+
+		// schedule("CreateAndDetBomb(" @ %clientId @ ", \"Bomb5\", \"" @ %playerPos @ "\", False);", 0.5);
+		// schedule("playSound(ExplodeLM, " @ %playerPos @ ");", 0.5);
+		schedule("PhysicalRadiusDamage(" @ %clientId @ ", \"" @ %playerPos @ "\", \"" @ ($Skill::radius[%index] * 2) @ "\", \"" @ $Skill::name[%index] @ "\", 1.5);", 0.75);
+
 		%returnFlag = True;
     }
 
@@ -442,8 +473,8 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 				}
 
 				%multi = floor($PlayerSkill[%clientId, $SkillAlchemy] / 100) + 1;
-				lbecho(%itemAmnt);
-				lbecho(%multi);
+				// lbecho(%itemAmnt);
+				// lbecho(%multi);
 				%totalAmount = %itemAmnt * %multi;
 
 				// give the item

@@ -767,9 +767,9 @@ function AI::helper(%aiName, %displayName, %commandIssuer, %loadout)
 	%customNames = $RaceToNamesList[$NameForRace[%aiName]];
 
 	if (%customNames != "") {
-		// TODO: dynamically gert the length of words in the list somehow (or always have 100)
-		// %randName = GetWord(%customNames, (getRandom() * 100) + 1);
-		%displayName = GetWord(%customNames, (getRandom() * 100) + 1);
+		// TODO: dynamically get the length of words in the list somehow (or always have 100)
+		// %randName = GetWord(%customNames, (getRandom() * 100));
+		%displayName = $NameForRace[%aiName] @ "" @ GetWord(%customNames, (getRandom() * 100));
 		// if ($NameForClass[$NameForRace[%aiName]] != "")
 		// 	%displayName = $NameForClass[$NameForRace[%aiName]] @" "@  %randName;
 		// else
@@ -1372,6 +1372,7 @@ function InitTownBots()
 			GameBase::setRotation(%townbot, GameBase::getRotation(%marker));
 			GameBase::setTeam(%townbot, $BotInfo[%name, TEAM]);
 			GameBase::playSequence(%townbot, 0, "root");	//thanks Adger!!
+			Client::setSkin(%townbot, "RMSkins1");
 			%townbot.name = %name;
 
 			$TownBotList = $TownBotList @ %townbot @ " ";

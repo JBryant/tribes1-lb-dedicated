@@ -629,7 +629,7 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 				playSound($beltitem[%item, "useSound"], GameBase::getPosition(%clientId));
 			}
 			
-			MenuBeltDrop(%clientId, %item, %type, %victim);
+			//MenuBeltDrop(%clientId, %item, %type, %victim);
 			return;
 		} else {
 			Client::sendMessage(%clientId, $MsgWhite, "You cannot use " @ $beltitem[%item, "Name"] @ ".");
@@ -2728,6 +2728,9 @@ BeltItem::AddWeapon("Celestial Staff", "CelestialStaff", "LongStaff", $BludgeonA
 $description = "The ultimate spear, said to pierce even the heavens.";
 BeltItem::AddWeapon("Gungnir", "Gungnir", "Spear", $BludgeonAccessoryType, $description, $SkillSpears, $SkillSpears @ " 2000", "200", 164);
 
+$description = "Pugilist's Glove";
+BeltItem::AddWeapon("Pugilist's Glove", "PugilistsGlove", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "1");
+
 
 // Bows (175 - 199)
 // Images: Crossbow, RepeatingCrossbow, LongBow, CompositeBow, CompositeBowFast, Sling
@@ -2761,6 +2764,8 @@ $description = "A legendary bow capable of firing arrows that never miss their m
 BeltItem::AddWeapon("Hawk's Talon", "HawksTalon", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1800", "320", 187);
 $description = "The ultimate crossbow, forged from ancient dragonbone and enhanced by magic.";
 BeltItem::AddWeapon("Dragonbone Crossbow", "DragonboneCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 2000", "350", 188);
+BeltItem::AddWeapon("Longbow's Bow", "LongbowsBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 5000", "1000", 189);
+$description = "Longbow's Legendary Bow.";
 // 110, 130, 155, 175, 195, 215, 240, 265, 290, 320, 350
 
 // Armors and Shields (200 - 299)
@@ -2801,23 +2806,54 @@ BeltItem::AddArmor("Dragon Mail", "DragonMail", "rpghuman6", SoundHitPlate, "7 1
 $description = "Armor forged for swordsmen who have mastered every technique and achieved knighthood's most exalted rank.";
 BeltItem::AddArmor("Onion Armor", "OnionArmor", "rpgfullplate",  SoundHitPlate,"7 1200 3 600", "10", $SkillEndurance @ " 2000", $description, 216);
 
-// Light Armors / Robes
-$description = "A light robe that provides some protection.";
-BeltItem::AddRobe("Light Robe", "LightRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
-$description = "A fine robe made from the finest elven silk.";
-BeltItem::AddRobe("Fine Robe", "FineRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
-$description = "A robe that was tailor made for mages who graduated from the academy.";
-BeltItem::AddRobe("Advisor Robe", "AdvisorRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
-$description = "And elvish robe that is infused with magical runes.";
-BeltItem::AddRobe("Elven Robe", "ElvenRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
-$description = "A robe that was created with the power of the vengeance in mind.";
-BeltItem::AddRobe("Robe Of Venjance", "RobeOfVenjance", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
-$description = "A bloody and tattered robe that radiates with magical energy.";
-BeltItem::AddRobe("Blood Robe", "BloodRobe","rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
-$description = "A robe said to have been worn by the legendary mage, Phens.";
-BeltItem::AddRobe("Phens Robe", "PhensRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
-$description = "A robe given to only the most dedicated and powerful mages in the land.";
-BeltItem::AddRobe("Quest Master Robe", "QuestMasterRobe", "rpgpadded", "7 30 4 5", "10", $SkillEndurance @ " 0 " @ $SkillMagicka @ " 8", $description);
+$description = "A simple weave favored by new adventurers; light and supple, it barely whispers when you move.";
+BeltItem::AddRobe("Novice Acolyte Robe", "NoviceAcolyteRobe", "robepink", "3 30 7 15 11 1", "1", $SkillMagicka @ " 5", $description, 250);
+$description = "Traditional garb of healing orders; threads are blessed to soothe the wearer in battle.";
+BeltItem::AddRobe("White Mage Vestment", "WhiteMageVestment", "robepurple", "3 108 7 54 11 8", "1", $SkillMagicka @ " 138", $description, 251);
+$description = "Robe patterned after a notorious magus; its lining hums with unstable aether.";
+BeltItem::AddRobe("Black Waltz Robe", "BlackWaltzRobe", "robered", "3 186 7 93 11 14", "1", $SkillMagicka @ " 271", $description, 252);
+$description = "A mantle stitched with runes that bend seconds into strands—perfect for time magicks.";
+BeltItem::AddRobe("Timeweaver Mantle", "TimeweaverMantle", "robeblue", "3 264 7 132 11 21", "1", $SkillMagicka @ " 404", $description, 253);
+$description = "Earth-touched kesa worn by geomancers; soil never stains it, stones seem to soften underfoot.";
+BeltItem::AddRobe("Geomancer's Kesa", "GeomancersKesa", "robeblack", "3 342 7 171 11 27", "1", $SkillMagicka @ " 537", $description, 254);
+$description = "A sea-blessed wrap that carries the hush of tides; water spells flow like currents.";
+BeltItem::AddRobe("Oracle of Tides Robe", "OracleOfTidesRobe", "robewhite", "3 420 7 210 11 34", "1", $SkillMagicka @ " 670", $description, 255);
+$description = "A celebrant's stole from draconic rites; scales sewn within lend surprising resilience.";
+BeltItem::AddRobe("Dragonsong Stole", "DragonsongStole", "robeorange", "3 498 7 249 11 41", "1", $SkillMagicka @ " 803", $description, 256);
+$description = "Shadow-steeped shroud that veils the wearer like moonless fog; eyes slip past you.";
+BeltItem::AddRobe("Voidwitch Shroud", "VoidwitchShroud", "robebrown", "3 576 7 288 11 47", "1", $SkillMagicka @ " 936", $description, 257);
+$description = "Star-mapped weave used by astrologians; constellations flare when fate is read.";
+BeltItem::AddRobe("Astrologian Starweave", "AstrologianStarweave", "robegreen", "3 654 7 327 11 54", "1", $SkillMagicka @ " 1069", $description, 258);
+$description = "Ceremonial garb wreathed in ember-charms; warmth radiates without burning.";
+BeltItem::AddRobe("Ifritfire Ceremonial Robe", "IfritfireCeremonialRobe", "robeblack", "3 732 7 366 11 60", "1", $SkillMagicka @ " 1202", $description, 259);
+$description = "Frost-kissed robe that never thaws; chilling calm sharpens the mind's focus.";
+BeltItem::AddRobe("Shiva Frostweave", "ShivaFrostweave", "robewhite", "3 810 7 405 11 67", "1", $SkillMagicka @ " 1335", $description, 260);
+$description = "Thunder-sigiled cloak; each step crackles faintly as air gathers to your call.";
+BeltItem::AddRobe("Ramuh Levincloak", "RamuhLevincloak", "robered", "3 888 7 444 11 74", "1", $SkillMagicka @ " 1468", $description, 261);
+$description = "Stone-anchored vestment; grounding cords steady stance and will alike.";
+BeltItem::AddRobe("Titan Earthward Robe", "TitanEarthwardRobe", "robegreen", "3 966 7 483 11 80", "1", $SkillMagicka @ " 1601", $description, 262);
+$description = "A torrent-warded wrap; hems ripple as if in unseen tides, quickening spellcraft.";
+BeltItem::AddRobe("Leviathan Stormwrap", "LeviathanStormwrap", "robepurple", "3 1044 7 522 11 87", "1", $SkillMagicka @ " 1734", $description, 263);
+$description = "An umbral vestment for archmagi; the void at the hem drinks stray mana.";
+BeltItem::AddRobe("Umbral Archmage Robe", "UmbralArchmageRobe", "robebrown", "3 1122 7 561 11 93", "1", $SkillMagicka @ " 1867", $description, 264);
+$description = "A grand robe bound with zodiac plats; its pages and pleats record destinies.";
+BeltItem::AddRobe("Zodiac Grand Grimoire", "ZodiacGrandGrimoire", "robeblue", "3 1200 7 600 11 100", "1", $SkillMagicka @ " 2000", $description, 265);
+
+
+// $description = "A fine robe made from the finest elven silk.";
+// BeltItem::AddRobe("Fine Robe", "FineRobe", "rpgpadded", "7 30 4 5", "10", $SkillMagicka @ " 8", $description);
+// $description = "A robe that was tailor made for mages who graduated from the academy.";
+// BeltItem::AddRobe("Advisor Robe", "AdvisorRobe", "rpgpadded", "7 30 4 5", "10", $SkillMagicka @ " 8", $description);
+// $description = "And elvish robe that is infused with magical runes.";
+// BeltItem::AddRobe("Elven Robe", "ElvenRobe", "rpgpadded", "7 30 4 5", "10", $SkillMagicka @ " 8", $description);
+// $description = "A robe that was created with the power of the vengeance in mind.";
+// BeltItem::AddRobe("Robe Of Venjance", "RobeOfVenjance", "rpgpadded", "7 30 4 5", "10", $SkillMagicka @ " 8", $description);
+// $description = "A bloody and tattered robe that radiates with magical energy.";
+// BeltItem::AddRobe("Blood Robe", "BloodRobe","rpgpadded", "7 30 4 5", "10", $SkillMagicka @ " 8", $description);
+// $description = "A robe said to have been worn by the legendary mage, Phens.";
+// BeltItem::AddRobe("Phens Robe", "PhensRobe", "rpgpadded", "7 30 4 5", "10", $SkillMagicka @ " 8", $description);
+// $description = "A robe given to only the most dedicated and powerful mages in the land.";
+// BeltItem::AddRobe("Quest Master Robe", "QuestMasterRobe", "rpgpadded", "7 30 4 5", "10", $SkillMagicka @ " 8", $description);
 
 // Shields
 // BeltItem::AddShield(%name, %item, %special, %weight, %skillRestriction, %miscInfo, %shopIndex)
@@ -2891,14 +2927,14 @@ $AccessoryVar[XPotion, $MiscInfo] = "A potion of Healing that heals 250 HP";
 $restoreValue[XPotion, HP] = 250;
 $AccessoryVar[XPotion, "AlchemyIngredients"] = "ReinforcedAlchemistsBottle 1 VialOfWater 1 MandragoraRoot 10 Sylphroot 2";
 
-BeltItem::Add("Mega Potion", "MegaPotion", "PotionItems", 0.5, 100000, "", 504);
-$AccessoryVar[MegaPotion, $MiscInfo] = "A potion of Healing that heals 100 HP";
+BeltItem::Add("Mega Potion", "MegaPotion", "PotionItems", 0.5, 25000, "", 504);
+$AccessoryVar[MegaPotion, $MiscInfo] = "A potion of Healing that heals 500 HP";
 $restoreValue[MegaPotion, HP] = 500;
 $AccessoryVar[MegaPotion, "AlchemyIngredients"] = "ArcaneCrystalPhial 1 VialOfWater 1 Sylphroot 10 MaidensTear 2";
 
-BeltItem::Add("Elixir", "Elixir", "PotionItems", 0.5, 250000, "", 505);
+BeltItem::Add("Elixir", "Elixir", "PotionItems", 0.5, 100000, "", 505);
 $AccessoryVar[Elixir, $MiscInfo] = "A rare elixir that restore HP and MP";
-$restoreValue[Elixir, HP] = 500;
+$restoreValue[Elixir, HP] = 1000;
 $AccessoryVar[Elixir, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 MaidensTear 10 MandragoraRoot 2";
 
 // maybe make mega elixir later?
@@ -2951,7 +2987,7 @@ $AccessoryVar[FireFlask, $MiscInfo] = "A flask that radiates with fire energy. I
 $AccessoryVar[FireFlask, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 BombCore 1";
 $beltitem[FireFlask, "isThrowable"] = True;
 $beltitem[FireFlask, "isDetonatable"] = True;
-$beltitem[FireFlask, "spellIndex"] = 38;
+$beltitem[FireFlask, "spellIndex"] = 71;
 $beltitem[FireFlask, "explosion"] = "Bomb9";
 
 BeltItem::Add("Ice Flask","IceFlask", "PotionItems", 0.1, 200, "SmallPotion", 551);
@@ -2959,7 +2995,7 @@ $AccessoryVar[IceFlask, $MiscInfo] = "A flask that radiates with ice energy. It 
 $AccessoryVar[IceFlask, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 MaidensTear 1";
 $beltitem[IceFlask, "isThrowable"] = True;
 $beltitem[IceFlask, "isDetonatable"] = True;
-$beltitem[IceFlask, "spellIndex"] = 39;
+$beltitem[IceFlask, "spellIndex"] = 72;
 $beltitem[IceFlask, "explosion"] = "Bomb2";
 
 BeltItem::Add("Lightning Flask","LightningFlask", "PotionItems", 0.1, 300, "SmallPotion", 552);
@@ -2967,7 +3003,7 @@ $AccessoryVar[LightningFlask, $MiscInfo] = "A flask that radiates with lightning
 $AccessoryVar[LightningFlask, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 TonberryOil 1";
 $beltitem[LightningFlask, "isThrowable"] = True;
 $beltitem[LightningFlask, "isDetonatable"] = True;
-$beltitem[LightningFlask, "spellIndex"] = 40;
+$beltitem[LightningFlask, "spellIndex"] = 73;
 $beltitem[LightningFlask, "explosion"] = "Bomb10";
 
 BeltItem::Add("Earth Flask","EarthFlask", "PotionItems", 0.1, 400, "SmallPotion", 553);
@@ -2975,7 +3011,7 @@ $AccessoryVar[EarthFlask, $MiscInfo] = "A flask that radiates with earth energy.
 $AccessoryVar[EarthFlask, "AlchemyIngredients"] = "ReinforcedAlchemistsBottle 1 VialOfWater 1 BehemothHornFragment 1";
 $beltitem[EarthFlask, "isThrowable"] = True;
 $beltitem[EarthFlask, "isDetonatable"] = True;
-$beltitem[EarthFlask, "spellIndex"] = 41;
+$beltitem[EarthFlask, "spellIndex"] = 74;
 $beltitem[EarthFlask, "explosion"] = "Bomb1";
 
 BeltItem::Add("Acid Flask","AcidFlask", "PotionItems", 0.1, 500, "SmallPotion", 554);
@@ -2983,7 +3019,7 @@ $AccessoryVar[AcidFlask, $MiscInfo] = "A flask that radiates with acid energy. I
 $AccessoryVar[AcidFlask, "AlchemyIngredients"] = "ArcaneCrystalPhial 1 VialOfWater 1 MalboroSporeSac 1";
 $beltitem[AcidFlask, "isThrowable"] = True;
 $beltitem[AcidFlask, "isDetonatable"] = True;
-$beltitem[AcidFlask, "spellIndex"] = 42;
+$beltitem[AcidFlask, "spellIndex"] = 75;
 $beltitem[AcidFlask, "explosion"] = "Bomb6";
 
 BeltItem::Add("Holy Flask","HolyFlask", "PotionItems", 0.1, 1000, "SmallPotion", 554);
@@ -3072,6 +3108,11 @@ $AccessoryVar[KalmHearthstone, $MiscInfo] = "A magical hearthstone that teleport
 $beltitem[KalmHearthstone, "targetPosition"] = "2004.24 496.11 2405.5";
 $beltitem[KalmHearthstone, "targetRotationZ"] = "0.715683";
 $beltitem[KalmHearthstone, "useSound"] = "AbsorbABS";
+BeltItem::Add("7th Heaven Hearthstone", "HeavenHearthstone", "MiscItems", 0.01, 5000, "Ruby", 702);
+$AccessoryVar[HeavenHearthstone, $MiscInfo] = "A magical hearthstone that teleports the user back to 7th Heaven.";
+$beltitem[HeavenHearthstone, "targetPosition"] = "1402.24 -462.11 -808.04";
+$beltitem[HeavenHearthstone, "targetRotationZ"] = "-0.158";
+$beltitem[HeavenHearthstone, "useSound"] = "AbsorbABS";
 
 // Quest Items
 BeltItem::Add("Black Statue", "BlackStatue", "QuestItems", $AccessoryVar[BlackStatue, $Weight], GenerateItemCost(BlackStatue));
@@ -3147,6 +3188,14 @@ $AccessoryVar[Pomegranate, $MiscInfo] = "A juicy pomegranate. It can be eaten to
 $restoreValue[Pomegranate, MP] = 5;
 $description = "A large seed that will grow into a Pomegranate Tree if planted in the right conditions.";
 BeltItem::AddSeed("Pomegranate Seed", "PomegranateSeed", "MiscItems", 0.01, 100, "Granite", 855, $description, "Pomegranate", "TreeFruit");
+
+BeltItem::Add("7th Heaven IPA", "HeavenIPA", "MiscItems", 0.5, 500, "", 856);
+$AccessoryVar[HeavenIPA, $MiscInfo] = "A strong IPA that was brewed and served at Tifa's bar 7th Heaven.";
+$restoreValue[HeavenIPA, MP] = 25;
+
+BeltItem::Add("Tifa's Old Fashion", "TifasOldFashioned", "MiscItems", 0.5, 1000, "", 857);
+$AccessoryVar[TifasOldFashioned, $MiscInfo] = "A classic cocktail made by Tifa at 7th Heaven.";
+$restoreValue[TifasOldFashioned, MP] = 50;
 
 BeltItem::Add("Wheat Seed", "WheatSeed", "MiscItems", 0.01, 10, "Bullet");
 $AccessoryVar[WheatSeed, $MiscInfo] = "A small wheat seed. It can be used to grow wheat.";

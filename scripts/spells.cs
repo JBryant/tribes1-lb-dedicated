@@ -147,8 +147,10 @@ $SpellMovementGraceDistance = 4;//2
 
 //-- SPELL DEFINITIONS -------------------------------------------------------------------------------------------
 
+$defaultMageClass = "BlackMage";
+
 //-----------transportation spells-------------
-$Spell::keyword[1] = "teleportd";
+$Spell::keyword[1] = "teleport";
 $Spell::index[teleport] = 1;
 $Spell::name[1] = "Teleport close to nearest zone";
 $Spell::description[1] = "Teleports you near a zone";
@@ -162,13 +164,13 @@ $Spell::minLevel[1] = 5;
 $Spell::groupListCheck[1] = False;
 $SkillType[teleport] = $SkillTimeMagick;
 
-$Spell::keyword[2] = "barqprz";
+$Spell::keyword[2] = "transport";
 $Spell::index[transport] = 2;
-$Spell::name[2] = "Teleporting to Rin Vale";
-$Spell::description[2] = "Teleports to Rin Vale";
+$Spell::name[2] = "Transport";
+$Spell::description[2] = "Teleports to Zone";
 $Spell::delay[2] = 4.0;
-$Spell::recoveryTime[2] = 35;
-$Spell::manaCost[2] = 500;
+$Spell::recoveryTime[2] = 23;
+$Spell::manaCost[2] = 12;
 $Spell::startSound[2] = cheespellsound;
 $Spell::endSound[2] = ActivateCH;
 $Spell::classRestrictions[2] = "";
@@ -316,7 +318,7 @@ $Spell::LOSrange[11] = 100;
 $Spell::manaCost[11] = 2;
 $Spell::startSound[11] = spellstart;
 $Spell::endSound[11] = ActivateAR;
-$Spell::classRestrictions[11] = ",BlackMage,";
+$Spell::classRestrictions[11] = ","@$defaultMageClass@",";
 $Spell::minLevel[11] = 1;
 $Spell::groupListCheck[11] = False;
 $Spell::Type[11] = $MagicType[Fire];
@@ -334,7 +336,7 @@ $Spell::LOSrange[12] = 500;
 $Spell::manaCost[12] = 20;
 $Spell::startSound[12] = spellstart;
 $Spell::endSound[12] = ActivateAR;
-$Spell::classRestrictions[12] = ",BlackMage,";
+$Spell::classRestrictions[12] = ","@$defaultMageClass@",";
 $Spell::minLevel[12] = 25;
 $Spell::groupListCheck[12] = False;
 $Spell::Type[12] = $MagicType[Fire];
@@ -351,7 +353,7 @@ $Spell::LOSrange[13] = 100;
 $Spell::manaCost[13] = 50;
 $Spell::startSound[13] = spellstart;
 $Spell::endSound[13] = ActivateAR;
-$Spell::classRestrictions[13] = ",BlackMage,";
+$Spell::classRestrictions[13] = ","@$defaultMageClass@",";
 $Spell::minLevel[13] = 100;
 $Spell::groupListCheck[13] = False;
 $Spell::Type[13] = $MagicType[Fire];
@@ -368,7 +370,7 @@ $Spell::LOSrange[14] = 300;
 $Spell::manaCost[14] = 100;
 $Spell::startSound[14] = spellstart;
 $Spell::endSound[14] = bigfire;
-$Spell::classRestrictions[14] = ",BlackMage,";
+$Spell::classRestrictions[14] = ","@$defaultMageClass@",";
 $Spell::minLevel[14] = 200;
 $Spell::groupListCheck[14] = False;
 $Spell::Type[14] = $MagicType[Fire];
@@ -385,7 +387,7 @@ $Spell::LOSrange[15] = 100;
 $Spell::manaCost[15] = 75;
 $Spell::startSound[15] = spellstart;
 $Spell::endSound[15] = ActivateAR;
-$Spell::classRestrictions[15] = ",BlackMage,";
+$Spell::classRestrictions[15] = ","@$defaultMageClass@",";
 $Spell::minLevel[15] = 50;
 $Spell::groupListCheck[15] = False;
 $Spell::Type[15] = $MagicType[Ice];
@@ -402,7 +404,7 @@ $Spell::LOSrange[16] = 100;
 $Spell::manaCost[16] = 4;
 $Spell::startSound[16] = spellstart;
 $Spell::endSound[16] = ActivateAR;
-$Spell::classRestrictions[16] = ",BlackMage,";
+$Spell::classRestrictions[16] = ","@$defaultMageClass@",";
 $Spell::minLevel[16] = 3;
 $Spell::groupListCheck[16] = False;
 $Spell::Type[16] = $MagicType[Ice];
@@ -419,7 +421,7 @@ $Spell::LOSrange[17] = 100;
 $Spell::manaCost[17] = 50;
 $Spell::startSound[17] = spellstart;
 $Spell::endSound[17] = ActivateAR;
-$Spell::classRestrictions[17] = ",BlackMage,";
+$Spell::classRestrictions[17] = ","@$defaultMageClass@",";
 $Spell::minLevel[17] = 40;
 $Spell::groupListCheck[17] = False;
 $Spell::Type[17] = $MagicType[Ice];
@@ -436,7 +438,7 @@ $Spell::LOSrange[18] = 300;
 $Spell::manaCost[18] = 80;
 $Spell::startSound[18] = spellstart;
 $Spell::endSound[18] = ActivateAR;
-$Spell::classRestrictions[18] = ",BlackMage,";
+$Spell::classRestrictions[18] = ","@$defaultMageClass@",";
 $Spell::minLevel[18] = 130;
 $Spell::groupListCheck[18] = False;
 $Spell::Type[18] = $MagicType[Ice];
@@ -453,7 +455,7 @@ $Spell::LOSrange[19] = 100;
 $Spell::manaCost[19] = 100;
 $Spell::startSound[19] = ActivateAR;
 $Spell::endSound[19] = portal1;
-$Spell::classRestrictions[19] = ",BlackMage,";
+$Spell::classRestrictions[19] = ","@$defaultMageClass@",";
 $Spell::minLevel[19] = 200;
 $Spell::groupListCheck[19] = False;
 $Spell::Type[19] = $MagicType[Ice];
@@ -470,7 +472,7 @@ $Spell::LOSrange[20] = 500;
 $Spell::manaCost[20] = 50;
 $Spell::startSound[20] = watershotstart;
 $Spell::endSound[20] = watersplash;
-$Spell::classRestrictions[20] = ",BlackMage,";
+$Spell::classRestrictions[20] = ","@$defaultMageClass@",";
 $Spell::minLevel[20] = 30;
 $Spell::groupListCheck[20] = False;
 $Spell::Type[20] = $MagicType[Water];
@@ -487,7 +489,7 @@ $Spell::LOSrange[21] = 500;
 $Spell::manaCost[21] = 80;
 $Spell::startSound[21] = watershotstart;
 $Spell::endSound[21] = watersplash;
-$Spell::classRestrictions[21] = ",BlackMage,";
+$Spell::classRestrictions[21] = ","@$defaultMageClass@",";
 $Spell::minLevel[21] = 50;
 $Spell::groupListCheck[21] = False;
 $Spell::Type[21] = $MagicType[Water];
@@ -500,11 +502,12 @@ $Spell::description[22] = "Water Level 3 Magic.";
 $Spell::delay[22] = 0;
 $Spell::recoveryTime[22] = 3;
 $Spell::damageValue[22] = 100;
+$Spell::radius[22] = "20";
 $Spell::LOSrange[22] = 800;
 $Spell::manaCost[22] = 120;
 $Spell::startSound[22] = watershotstart;
 $Spell::endSound[22] = watersplash;
-$Spell::classRestrictions[22] = ",BlackMage,";
+$Spell::classRestrictions[22] = ","@$defaultMageClass@",";
 $Spell::minLevel[22] = 100;
 $Spell::groupListCheck[22] = False;
 $Spell::Type[22] = $MagicType[Water];
@@ -520,7 +523,7 @@ $Spell::damageValue[23] = 66; // 200 / 3
 $Spell::manaCost[23] = 200;
 $Spell::startSound[23] = watershotstart;
 $Spell::endSound[23] = watersplash;
-$Spell::classRestrictions[23] = ",BlackMage,";
+$Spell::classRestrictions[23] = ","@$defaultMageClass@",";
 $Spell::groupListCheck[23] = False;
 $Spell::minLevel[23] = 200;
 $Spell::Type[23] = $MagicType[Water];
@@ -537,7 +540,7 @@ $Spell::LOSrange[24] = 500;
 $Spell::manaCost[24] = 25;
 $Spell::startSound[24] = spellstart;
 $Spell::endSound[24] = shockExplosion;
-$Spell::classRestrictions[24] = ",BlackMage,";
+$Spell::classRestrictions[24] = ","@$defaultMageClass@",";
 $Spell::minLevel[24] = 30;
 $Spell::groupListCheck[24] = False;
 $Spell::Type[24] = $MagicType[Earth];
@@ -554,7 +557,7 @@ $Spell::LOSrange[25] = 500;
 $Spell::manaCost[25] = 50;
 $Spell::startSound[25] = spellstart;
 $Spell::endSound[25] = shockExplosion;
-$Spell::classRestrictions[25] = ",BlackMage,";
+$Spell::classRestrictions[25] = ","@$defaultMageClass@",";
 $Spell::minLevel[25] = 60;
 $Spell::groupListCheck[25] = False;
 $Spell::Type[25] = $MagicType[Earth];
@@ -567,15 +570,17 @@ $Spell::description[26] = "Level 3 Earth magic.";
 $Spell::delay[26] = 4;
 $Spell::recoveryTime[26] = 8;
 $Spell::damageValue[26] = 40; // 120 / 3
+$Spell::radius[26] = "30";
 $Spell::LOSrange[26] = 500;
 $Spell::manaCost[26] = 100;
 $Spell::startSound[26] = spellstart;
 $Spell::endSound[26] = shockExplosion;
-$Spell::classRestrictions[26] = ",BlackMage,";
+$Spell::classRestrictions[26] = ","@$defaultMageClass@",";
 $Spell::minLevel[26] = 120;
 $Spell::groupListCheck[26] = False;
 $Spell::Type[26] = $MagicType[Earth];
 $SkillType[earthquake] = $SkillBlackMagick;
+// 
 
 $Spell::keyword[27] = "Cataclysm";
 $Spell::index[cataclysm] = 27;
@@ -588,7 +593,7 @@ $Spell::LOSrange[27] = 500;
 $Spell::manaCost[27] = 200;
 $Spell::startSound[27] = spellstart;
 $Spell::endSound[27] = shockExplosion;
-$Spell::classRestrictions[27] = ",BlackMage,";
+$Spell::classRestrictions[27] = ","@$defaultMageClass@",";
 $Spell::minLevel[27] = 230;
 $Spell::groupListCheck[27] = False;
 $Spell::Type[27] = $MagicType[Earth];
@@ -724,7 +729,7 @@ $Spell::LOSrange[35] = 300;
 $Spell::manaCost[35] = 10;
 $Spell::startSound[35] = spellstart;
 $Spell::endSound[35] = ActivateAR;
-$Spell::classRestrictions[35] = ",BlackMage,";
+$Spell::classRestrictions[35] = ","@$defaultMageClass@",";
 $Spell::minLevel[35] = 20;
 $Spell::groupListCheck[35] = False;
 $Spell::Type[35] = $MagicType[Black];
@@ -741,7 +746,7 @@ $Spell::LOSrange[36] = 100;
 $Spell::manaCost[36] = 50;
 $Spell::startSound[36] = ActivateAR;
 $Spell::endSound[36] = watersplash;
-$Spell::classRestrictions[36] = ",BlackMage,";
+$Spell::classRestrictions[36] = ","@$defaultMageClass@",";
 $Spell::minLevel[36] = 50;
 $Spell::groupListCheck[36] = False;
 $Spell::Type[36] = $MagicType[Black];
@@ -753,12 +758,12 @@ $Spell::name[37] = "Dark Magic";
 $Spell::description[37] = "Level 3 Dark Magic.";
 $Spell::delay[37] = 8;
 $Spell::recoveryTime[37] = 30;
-$Spell::damageValue[37] = 200;
+$Spell::damageValue[37] = 7; // 200 / 30
 $Spell::LOSrange[37] = 300;
 $Spell::manaCost[37] = 700;
 $Spell::startSound[37] = ultimathunder;
 $Spell::endSound[37] = spooky;
-$Spell::classRestrictions[37] = ",BlackMage,";
+$Spell::classRestrictions[37] = ","@$defaultMageClass@",";
 $Spell::minLevel[37] = 200;
 $Spell::groupListCheck[37] = False;
 $Spell::Type[37] = $MagicType[Black];
@@ -775,7 +780,7 @@ $Spell::LOSrange[38] = 500;
 $Spell::manaCost[38] = 40;
 $Spell::startSound[38] = spellstart;
 $Spell::endSound[38] = thunderlight;
-$Spell::classRestrictions[38] = ",BlackMage,";
+$Spell::classRestrictions[38] = ","@$defaultMageClass@",";
 $Spell::minLevel[38] = 30;
 $Spell::groupListCheck[38] = False;
 $Spell::Type[38] = $MagicType[Lightning];
@@ -792,7 +797,7 @@ $Spell::LOSrange[39] = 500;
 $Spell::manaCost[39] = 60;
 $Spell::startSound[39] = spellstart;
 $Spell::endSound[39] = thunderlight;
-$Spell::classRestrictions[39] = ",BlackMage,";
+$Spell::classRestrictions[39] = ","@$defaultMageClass@",";
 $Spell::minLevel[39] = 50;
 $Spell::groupListCheck[39] = False;
 $Spell::Type[39] = $MagicType[Lightning];
@@ -809,7 +814,7 @@ $Spell::LOSrange[40] = 500;
 $Spell::manaCost[40] = 80;
 $Spell::startSound[40] = spellstart;
 $Spell::endSound[40] = thunderlight;
-$Spell::classRestrictions[40] = ",BlackMage,";
+$Spell::classRestrictions[40] = ","@$defaultMageClass@",";
 $Spell::minLevel[40] = 70;
 $Spell::groupListCheck[40] = False;
 $Spell::Type[40] = $MagicType[Lightning];
@@ -821,12 +826,13 @@ $Spell::name[41] = "Lightning Magic";
 $Spell::description[41] = "Lightning Level 4 Magic.";
 $Spell::delay[41] = 4;
 $Spell::recoveryTime[41] = 30;
-$Spell::damageValue[41] = 150;
+$Spell::damageValue[41] = 17; // 150 / 9
 $Spell::LOSrange[41] = 500;
 $Spell::manaCost[41] = 150;
 $Spell::startSound[41] = spellstart;
 $Spell::endSound[41] = thunderlight;
-$Spell::classRestrictions[41] = ",BlackMage,";
+$Spell::radius[41] = "20";
+$Spell::classRestrictions[41] = ","@$defaultMageClass@",";
 $Spell::minLevel[41] = 150;
 $Spell::groupListCheck[41] = False;
 $Spell::Type[41] = $MagicType[Lightning];
@@ -844,7 +850,7 @@ $Spell::manaCost[42] = 30;
 $Spell::startSound[42] = spellstart;
 $Spell::endSound[42] = thunderlight;
 $Spell::radius[42] = "10";
-$Spell::classRestrictions[42] = ",BlackMage,";
+$Spell::classRestrictions[42] = ","@$defaultMageClass@",";
 $Spell::minLevel[42] = 15;
 $Spell::groupListCheck[42] = False;
 $Spell::Type[42] = $MagicType[Wind];
@@ -862,7 +868,7 @@ $Spell::manaCost[43] = 50;
 $Spell::startSound[43] = spellstart;
 $Spell::endSound[43] = thunderlight;
 $Spell::radius[43] = "10";
-$Spell::classRestrictions[43] = ",BlackMage,";
+$Spell::classRestrictions[43] = ","@$defaultMageClass@",";
 $Spell::minLevel[43] = 35;
 $Spell::groupListCheck[43] = False;
 $Spell::Type[43] = $MagicType[Wind];
@@ -880,7 +886,7 @@ $Spell::manaCost[44] = 320;
 $Spell::startSound[44] = spellstart;
 $Spell::endSound[44] = thunderlight;
 $Spell::radius[44] = "15";
-$Spell::classRestrictions[44] = ",BlackMage,";
+$Spell::classRestrictions[44] = ","@$defaultMageClass@",";
 $Spell::minLevel[44] = 50;
 $Spell::groupListCheck[44] = False;
 $Spell::Type[44] = $MagicType[Wind];
@@ -892,13 +898,13 @@ $Spell::name[45] = "Wind Magic";
 $Spell::description[45] = "Wind Level 4 Magic.";
 $Spell::delay[45] = 4;
 $Spell::recoveryTime[45] = 10;
-$Spell::damageValue[45] = 150;
+$Spell::damageValue[45] = 5; // 150 / 30
 $Spell::LOSrange[45] = 500;
 $Spell::manaCost[45] = 320;
 $Spell::startSound[45] = spellstart;
 $Spell::endSound[45] = thunderlight;
-$Spell::radius[42] = "20";
-$Spell::classRestrictions[45] = ",BlackMage,";
+$Spell::radius[45] = "20";
+$Spell::classRestrictions[45] = ","@$defaultMageClass@",";
 $Spell::minLevel[45] = 150;
 $Spell::groupListCheck[45] = False;
 $Spell::Type[45] = $MagicType[Wind];
@@ -998,7 +1004,7 @@ $Spell::LOSrange[51] = 200;
 $Spell::manaCost[51] = 15;
 $Spell::startSound[51] = spellstart;
 $Spell::endSound[51] = ActivateAR;
-$Spell::classRestrictions[51] = ",WhiteMage,BlackMage,";
+$Spell::classRestrictions[51] = ",WhiteMage,"@$defaultMageClass@",";
 $Spell::minLevel[51] = 10;
 $Spell::groupListCheck[51] = False;
 $SkillType[light] = $SkillSummonMagick;
@@ -1273,7 +1279,7 @@ $Spell::damageValue[%index] = 0;
 $Spell::manaCost[%index] = 1;
 $Spell::startSound[%index] = LoopSP;
 $Spell::endSound[%index] = AbsorbABS;
-$Spell::classRestrictions[%index] = ",WhiteMage,BlackMage,Ranger,Paladin,Fighter,Thief,Bard,Mage,Summoner,";
+$Spell::classRestrictions[%index] = ",WhiteMage,"@$defaultMageClass@",Ranger,Paladin,Fighter,Thief,Bard,Mage,Summoner,";
 $Spell::minLevel[%index] = 1;
 $Spell::groupListCheck[%index] = False;
 
@@ -1292,6 +1298,137 @@ $Spell::groupListCheck[69] = False;
 $Spell::refVal[69] = 0;
 $Spell::graceDistance[69] = 2;
 $SkillType[remort] = $SkillTimeMagick;
+
+$Spell::keyword[70] = "shadowblade";
+$Spell::index[shadowblade] = 70;
+$Spell::name[70] = "Shadow Blade";
+$Spell::description[70] = "Casts Shadow Blade.";
+$Spell::delay[70] = 3;
+$Spell::recoveryTime[70] = 3;
+$Spell::radius[70] = 30;
+$Spell::damageValue[70] = "320";
+$Spell::LOSrange[70] = 999; // 80
+$Spell::manaCost[70] = 1;
+$Spell::startSound[70] = PlaceSeal;
+$Spell::endSound[70] = Explode3FW;
+$Spell::groupListCheck[70] = False;
+$Spell::refVal[70] = 320;
+$Spell::graceDistance[70] = 2;
+$SkillType[shadowblade] = $SkillBlackMagick;
+
+// // fire flask spell
+$Spell::keyword[71] = "fireflaskbomb";
+$Spell::index[fireflaskbomb] = 71;
+$Spell::name[71] = "Fire Flask Bomb";
+$Spell::description[71] = "fire flask bomb explosion.";
+$Spell::delay[71] = 3;
+$Spell::recoveryTime[71] = 3;
+$Spell::radius[71] = 10;
+$Spell::damageValue[71] = "20";
+$Spell::LOSrange[71] = 999; // 80
+$Spell::manaCost[71] = 1;
+$Spell::startSound[71] = PlaceSeal;
+$Spell::endSound[71] = LaunchFB;
+$Spell::groupListCheck[71] = False;
+$Spell::refVal[71] = -9998;
+$Spell::graceDistance[71] = 10;
+$Spell::elementalType[71] = $ElementalFire;
+$SkillType[fireflaskbomb] = $SkillAlchemy;
+
+// // ice flask spell
+$Spell::keyword[72] = "iceflaskbomb";
+$Spell::index[iceflaskbomb] = 72;
+$Spell::name[72] = "Ice Flask Bomb";
+$Spell::description[72] = "ice flask bomb explosion.";
+$Spell::delay[72] = 3;
+$Spell::recoveryTime[72] = 3;
+$Spell::radius[72] = 10;
+$Spell::damageValue[72] = "40";
+$Spell::LOSrange[72] = 999; // 80
+$Spell::manaCost[72] = 1;
+$Spell::startSound[72] = PlaceSeal;
+$Spell::endSound[72] = LaunchFB;
+$Spell::groupListCheck[72] = False;
+$Spell::refVal[72] = -9998;
+$Spell::graceDistance[72] = 10;
+$Spell::elementalType[72] = $ElementalIce;
+$SkillType[iceflaskbomb] = $SkillAlchemy;
+
+// // lightning flask spell
+$Spell::keyword[73] = "lightningflaskbomb";
+$Spell::index[lightningflaskbomb] = 73;
+$Spell::name[73] = "Lightning Flask Bomb";
+$Spell::description[73] = "lightning flask bomb explosion.";
+$Spell::delay[73] = 3;
+$Spell::recoveryTime[73] = 3;
+$Spell::radius[73] = 10;
+$Spell::damageValue[73] = "60";
+$Spell::LOSrange[73] = 999; // 80
+$Spell::manaCost[73] = 1;
+$Spell::startSound[73] = PlaceSeal;
+$Spell::endSound[73] = LaunchFB;
+$Spell::groupListCheck[73] = False;
+$Spell::refVal[73] = -9998;
+$Spell::graceDistance[73] = 10;
+$Spell::elementalType[73] = $ElementalLightning;
+$SkillType[lightningflaskbomb] = $SkillAlchemy;
+
+// // earth flask spell
+$Spell::keyword[74] = "earthflaskbomb";
+$Spell::index[earthflaskbomb] = 74;
+$Spell::name[74] = "Earth Flask Bomb";
+$Spell::description[74] = "earth flask bomb explosion.";
+$Spell::delay[74] = 3;
+$Spell::recoveryTime[74] = 3;
+$Spell::radius[74] = 10;
+$Spell::damageValue[74] = "80";
+$Spell::LOSrange[74] = 999; // 80
+$Spell::manaCost[74] = 1;
+$Spell::startSound[74] = PlaceSeal;
+$Spell::endSound[74] = LaunchFB;
+$Spell::groupListCheck[74] = False;
+$Spell::refVal[74] = -9998;
+$Spell::graceDistance[74] = 10;
+$Spell::elementalType[74] = $ElementalEarth;
+$SkillType[earthflaskbomb] = $SkillAlchemy;
+
+// // acid flask spell
+$Spell::keyword[75] = "acidflaskbomb";
+$Spell::index[acidflaskbomb] = 75;
+$Spell::name[75] = "Acid Flask Bomb";
+$Spell::description[75] = "acid flask bomb explosion.";
+$Spell::delay[75] = 3;
+$Spell::recoveryTime[75] = 3;
+$Spell::radius[75] = 10;
+$Spell::damageValue[75] = "100";
+$Spell::LOSrange[75] = 999; // 80
+$Spell::manaCost[75] = 1;
+$Spell::startSound[75] = PlaceSeal;
+$Spell::endSound[75] = LaunchFB;
+$Spell::groupListCheck[75] = False;
+$Spell::refVal[75] = -9998;
+$Spell::graceDistance[75] = 10;
+$Spell::elementalType[75] = $ElementalPoison;
+$SkillType[acidflaskbomb] = $SkillAlchemy;
+
+// // exposive shot explosion
+$Spell::keyword[76] = "explosiveshotexplosion";
+$Spell::index[explosiveshotexplosion] = 76;
+$Spell::name[76] = "Explosive Shot";
+$Spell::description[76] = "The explosion caused by the explosive shot.";
+$Spell::delay[76] = 3;
+$Spell::recoveryTime[76] = 3;
+$Spell::radius[76] = 10;
+$Spell::damageValue[76] = "190";
+$Spell::LOSrange[76] = 999; // 80
+$Spell::manaCost[76] = 1;
+// $Spell::startSound[76] = PlaceSeal;
+// $Spell::endSound[76] = LaunchFB;
+$Spell::groupListCheck[76] = False;
+$Spell::refVal[76] = -9998;
+$Spell::graceDistance[76] = 10;
+$Spell::elementalType[76] = $ElementalFire;
+$SkillType[explosiveshotexplosion] = $SkillArchery;
 
 //====================================================================================================================
 //====================================================================================================================
@@ -1348,7 +1485,7 @@ function IntSpellSkills() {
 //----------------------------------------------------------------------------------------------------------------
 
 
-function SpellNum1(%Client, %castObj, %castPos) {
+function SpellNum1(%Client, %castObj, %castPos, %w2) {
 
 	%zoneId = GetNearestZone(%Client, %w2, 3);
 
@@ -1391,7 +1528,7 @@ function SpellNum1(%Client, %castObj, %castPos) {
 	}
 }
 
-function SpellNum2(%Client, %castObj, %castPos) {
+function SpellNum2(%Client, %castObj, %castPos, %w2) {
 
 	//Transport zone spell
 	%zoneId = GetZoneByKeywords(%Client, %w2, 3);
@@ -1417,7 +1554,7 @@ function SpellNum2(%Client, %castObj, %castPos) {
 		return "returnFlag 0";
 	}
 }
-function SpellNum3(%Client, %castObj, %castPos) {
+function SpellNum3(%Client, %castObj, %castPos, %w2) {
 	//Advanced Transport zone spell
 	%zoneId = GetZoneByKeywords(%Client, %w2, 3);
 
@@ -1701,6 +1838,7 @@ function SpellNum12(%Client, %castObj, %castPos) {
 }
 function SpellNum13(%Client, %castObj, %castPos) {
 	//fire 3 Spell
+
 	schedule("cast_flame("@%Client@");",0.1);
 	schedule("cast_flame("@%Client@");",0.2);
 	schedule("cast_flame("@%Client@");",0.3);
@@ -1829,6 +1967,7 @@ function SpellNum21(%Client, %castObj, %castPos) {
 function SpellNum22(%Client, %castObj, %castPos) {
 	// Aqua3 Spell
 	if(%castPos != "") {
+		%player = Client::getOwnedObject(%Client);
 		%index = 22;
 
 		%minrad = 0;
@@ -1843,7 +1982,8 @@ function SpellNum22(%Client, %castObj, %castPos) {
 
 			schedule("CreateAndDetBomb(\""@%Client@"\", \"Bomb300\", \""@%newPos@"\", False, \""@%index@"\");", %i / 16, %player);
 		}
-		schedule("CreateAndDetBomb(\""@%Client@"\", \"Bomb301\", \""@%castPos@"\", True, \""@%index@"\");", %i / 16, %player);
+
+		schedule("CreateAndDetBomb(\""@%Client@"\", \"Bomb301\", \""@%castPos@"\", True, \""@%index@"\");", 2, %player); // 1.6
 
 		%overrideEndSound = True;
 		return "returnFlag 1";
@@ -2012,8 +2152,8 @@ function SpellNum34(%Client, %castObj, %castPos) {
 
 			schedule("CreateAndDetBomb("@%Client@", \"Bomb8\", \""@%newPos@"\", False, "@%index@");", %i / 20, %player);
 		}
-		schedule("CreateAndDetBomb("@%Client@", \"Bomb200\", \""@%castPos@"\", False, "@%index@");", 1.0, %player);
-		schedule("CreateAndDetBomb("@%Client@", \"Bomb200\", \""@%castPos@"\", False, "@%index@");", 1.05, %player);
+		schedule("CreateAndDetBomb("@%Client@", \"Bomb200\", \""@%castPos@"\", True, "@%index@");", 1.0, %player);
+		schedule("CreateAndDetBomb("@%Client@", \"Bomb200\", \""@%castPos@"\", True, "@%index@");", 1.05, %player);
 		schedule("CreateAndDetBomb("@%Client@", \"Bomb107\", \""@%castPos@"\", True, "@%index@");", 1.1, %player);
 
 		%overrideEndSound = True;
@@ -2162,6 +2302,7 @@ function SpellNum41(%Client, %castObj, %castPos) {
 		%index = 41;
 		%minrad = 0;
 		%maxrad = $Spell::radius[%index] / 2;
+
 		for(%i = 0; %i <= 8; %i++) {
 			%tempPos = RandomPositionXY(%minrad, %maxrad);
 			%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
@@ -2170,8 +2311,9 @@ function SpellNum41(%Client, %castObj, %castPos) {
 
 			%newPos = %xPos@" "@%yPos@" "@%zPos;
 
-			schedule("CreateAndDetBomb("@%Client@", \"Bomb444\", \""@%newPos@"\", False, "@%index@");", %i / 7, %player);
+			schedule("CreateAndDetBomb("@ %Client @", \"Bomb444\", \""@ %newPos @"\", True, "@%index@");", %i / 7, %player);
 		}
+
 		CreateAndDetBomb(%Client, "Bomb444", %castPos, True, %index);
 
 		%overrideEndSound = True;
@@ -2231,7 +2373,8 @@ function SpellNum45(%Client, %castObj, %castPos) {
 	//Gale 4
 	if(%castPos != "") {
 		%index = 45;
-		CreateAndDetBomb(%Client, "Bomb6664", %castPos, True, %index);
+		// CreateAndDetBomb(%Client, "Bomb6664", %castPos, True, %index);
+		schedule("cast_tornado("@%Client@", \"" @ %castPos@ "\", "@%index@");",0.1);
 
 		return "returnFlag 1 overrideEndSound 1";
 	}
@@ -2263,11 +2406,11 @@ function SpellNum48(%Client, %castObj, %castPos) {
 function SpellNum49(%Client, %castObj, %castPos) {
 
 	//Block Front Utility
-	%passed = checkArea(%Client, 1);
-	if(!%passed) {
-		Client::sendMessage(%Client, $MsgBeige, "You are to close to an object. (wall or tree, etc)");
-	}
-	else {
+	// %passed = checkArea(%Client, 1);
+	// if(!%passed) {
+	// 	Client::sendMessage(%Client, $MsgBeige, "You are to close to an object. (wall or tree, etc)");
+	// }
+	// else {
 		%wall = newObject("MagicWall", "StaticShape", bluebluegreen,true);//,false);
 		if(%wall != 0) {
 			addToSet("MissionCleanup", %wall);
@@ -2282,19 +2425,19 @@ function SpellNum49(%Client, %castObj, %castPos) {
 		}
 
 		return "returnFlag 1";
-	}
+	//}
 }
 
 function SpellNum50(%Client, %castObj, %castPos) {
 
 	//Block Back Utility
-	%passed = checkArea(%Client, 5);
-	if(!%passed) {
-		Client::sendMessage(%Client, $MsgBeige, "You are to close to an object. (wall or tree, etc)");
-	}
-	else {
+	// %passed = checkArea(%Client, 5);
+	// if(!%passed) {
+	// 	Client::sendMessage(%Client, $MsgBeige, "You are to close to an object. (wall or tree, etc)");
+	// }
+	// else {
 		%wall = newObject("MagicWall", "StaticShape", hvshield2,true);//,false);
-		if(%wall!=0) {
+		if(%wall != 0) {
 			addToSet("MissionCleanup", %wall);
 			%time = floor(getFinalLVL(%Client)*7.2);
 			schedule("Item::Pop("@%wall@");", %time, %wall);
@@ -2307,7 +2450,7 @@ function SpellNum50(%Client, %castObj, %castPos) {
 		}
 
 		return "returnFlag 1";
-	}
+	//}
 }
 
 function SpellNum51(%Client, %castObj, %castPos) {
@@ -2395,6 +2538,7 @@ function SpellNum55(%Client, %castObj, %castPos) {
 function SpellNum56(%Client, %castObj, %castPos) {
 //echo("DEATH SPELL -- CPos: -"@%castPos@"- "); looks ok..
 	//death
+	%player = Client::getOwnedObject(%Client);
 	if(%castPos != "") {
 		%index = 56;
 		%minrad = 0;
@@ -2719,13 +2863,13 @@ function SpellNum65(%Client, %castObj, %castPos) {
 }
 
 function SpellNum66(%Client, %castObj, %castPos) {
-	%passed = checkArea(%Client, 5);
-	if(!%passed) {
-		Client::sendMessage(%Client, $MsgBeige, "You are to close to an object. (wall or tree, etc)");
-	}
-	else {
-		%wall = newObject("MagicWall", "StaticShape", hvshield2,true);//,false);
-		if(%wall!=0) {
+	// %passed = checkArea(%Client, 5);
+	// if(!%passed) {
+	// 	Client::sendMessage(%Client, $MsgBeige, "You are to close to an object. (wall or tree, etc)");
+	// }
+	// else {
+		%wall = newObject("MagicWall", "StaticShape", hvshield2, true);//,false);
+		if(%wall != 0) {
 			addToSet("MissionCleanup", %wall);
 			%time = floor(getFinalLVL(%Client)*7.2);
 			schedule("Item::Pop("@%wall@");", %time, %wall);
@@ -2736,9 +2880,9 @@ function SpellNum66(%Client, %castObj, %castPos) {
 			//GameBase::setRotation(%wall, GetWord(GameBase::getRotation(%Client),0)+1.6@" "@GetWord(GameBase::getRotation(%Client),1)@" "@(GetWord(GameBase::getRotation(%Client),2)+1.6));
 			GameBase::setRotation(%wall, "0 0 1.6");
 			Client::sendmessage(%client,0,"You create a magic wall with "@%time@" seconds of life and "@%wall.hp@" hp!");
-	}
-	return "returnFlag 1";
-	}
+		}
+		return "returnFlag 1";
+	//}
 }
 
 function SpellNum67(%Client, %castObj, %castPos) {
@@ -2795,15 +2939,23 @@ function SpellNum68(%Client, %castObj, %castPos) {
 	}
 }
 
-function SpellNum69(%Client, %castObj, %castPos) {
-	if(!fetchData(%Client, "currentlyRemorting")) {
-		%castPos = DoRemort(%Client);		
+function SpellNum69(%clientId, %castObj, %castPos) {
+	// if their level is 100 + remort levels then they can remort
+	%requiredLevel = 100 + (fetchData(%clientId, "RemortStep") * 5);
 
-		%extraDelay = 0.22;
-		%returnFlag = True;
-	}
-	else
+	if (fetchData(%clientId, "LVL") < %requiredLevel) {
+		Client::sendMessage(%clientId, $MsgRed, "You need to be level " @ %requiredLevel @ " to remort.");
 		%returnFlag = False;
+	} else {
+		if(!fetchData(%clientId, "currentlyRemorting")) {
+			%castPos = DoRemort(%clientId);		
+
+			%extraDelay = 0.22;
+			%returnFlag = True;
+		}
+		else
+			%returnFlag = False;
+	}
 }
 
 // //-- SPELL DEFINITIONS -------------------------------------------------------------------------------------------
@@ -3393,137 +3545,6 @@ function SpellNum69(%Client, %castObj, %castPos) {
 // $Spell::graceDistance[36] = 2;
 // $SkillType[advheal6] = $SkillWhiteMagick;
 
-// $Spell::keyword[37] = "shadowblade";
-// $Spell::index[dimensionrift] = 37;
-// $Spell::name[37] = "Shadow Blade";
-// $Spell::description[37] = "Casts Shadow Blade.";
-// $Spell::delay[37] = 3;
-// $Spell::recoveryTime[37] = 3;
-// $Spell::radius[37] = 30;
-// $Spell::damageValue[37] = "320";
-// $Spell::LOSrange[37] = 999; // 80
-// $Spell::manaCost[37] = 1;
-// $Spell::startSound[37] = PlaceSeal;
-// $Spell::endSound[37] = Explode3FW;
-// $Spell::groupListCheck[37] = False;
-// $Spell::refVal[37] = 320;
-// $Spell::graceDistance[37] = 2;
-// $SkillType[shadowblade] = $SkillBlackMagick;
-
-// // fire flask spell
-// $Spell::keyword[38] = "fireflaskbomb";
-// $Spell::index[fireflaskbomb] = 38;
-// $Spell::name[38] = "Fire Flask Bomb";
-// $Spell::description[38] = "fire flask bomb explosion.";
-// $Spell::delay[38] = 3;
-// $Spell::recoveryTime[38] = 3;
-// $Spell::radius[38] = 10;
-// $Spell::damageValue[38] = "100";
-// $Spell::LOSrange[38] = 999; // 80
-// $Spell::manaCost[38] = 1;
-// $Spell::startSound[38] = PlaceSeal;
-// $Spell::endSound[38] = LaunchFB;
-// $Spell::groupListCheck[38] = False;
-// $Spell::refVal[38] = -9998;
-// $Spell::graceDistance[38] = 10;
-// $Spell::elementalType[38] = $ElementalFire;
-// $SkillType[fireflaskbomb] = $SkillAlchemy;
-
-// // ice flask spell
-// $Spell::keyword[39] = "iceflaskbomb";
-// $Spell::index[iceflaskbomb] = 39;
-// $Spell::name[39] = "Ice Flask Bomb";
-// $Spell::description[39] = "ice flask bomb explosion.";
-// $Spell::delay[39] = 3;
-// $Spell::recoveryTime[39] = 3;
-// $Spell::radius[39] = 10;
-// $Spell::damageValue[39] = "200";
-// $Spell::LOSrange[39] = 999; // 80
-// $Spell::manaCost[39] = 1;
-// $Spell::startSound[39] = PlaceSeal;
-// $Spell::endSound[39] = LaunchFB;
-// $Spell::groupListCheck[39] = False;
-// $Spell::refVal[39] = -9998;
-// $Spell::graceDistance[39] = 10;
-// $Spell::elementalType[39] = $ElementalIce;
-// $SkillType[iceflaskbomb] = $SkillAlchemy;
-
-// // lightning flask spell
-// $Spell::keyword[40] = "lightningflaskbomb";
-// $Spell::index[lightningflaskbomb] = 250;
-// $Spell::name[40] = "Lightning Flask Bomb";
-// $Spell::description[40] = "lightning flask bomb explosion.";
-// $Spell::delay[40] = 3;
-// $Spell::recoveryTime[40] = 3;
-// $Spell::radius[40] = 10;
-// $Spell::damageValue[40] = "130";
-// $Spell::LOSrange[40] = 999; // 80
-// $Spell::manaCost[40] = 1;
-// $Spell::startSound[40] = PlaceSeal;
-// $Spell::endSound[40] = LaunchFB;
-// $Spell::groupListCheck[40] = False;
-// $Spell::refVal[40] = -9998;
-// $Spell::graceDistance[40] = 10;
-// $Spell::elementalType[40] = $ElementalLightning;
-// $SkillType[lightningflaskbomb] = $SkillAlchemy;
-
-// // earth flask spell
-// $Spell::keyword[41] = "earthflaskbomb";
-// $Spell::index[earthflaskbomb] = 41;
-// $Spell::name[41] = "Earth Flask Bomb";
-// $Spell::description[41] = "earth flask bomb explosion.";
-// $Spell::delay[41] = 3;
-// $Spell::recoveryTime[41] = 3;
-// $Spell::radius[41] = 10;
-// $Spell::damageValue[41] = "300";
-// $Spell::LOSrange[41] = 999; // 80
-// $Spell::manaCost[41] = 1;
-// $Spell::startSound[41] = PlaceSeal;
-// $Spell::endSound[41] = LaunchFB;
-// $Spell::groupListCheck[41] = False;
-// $Spell::refVal[41] = -9998;
-// $Spell::graceDistance[41] = 10;
-// $Spell::elementalType[41] = $ElementalEarth;
-// $SkillType[earthflaskbomb] = $SkillAlchemy;
-
-// // acid flask spell
-// $Spell::keyword[42] = "acidflaskbomb";
-// $Spell::index[acidflaskbomb] = 42;
-// $Spell::name[42] = "Acid Flask Bomb";
-// $Spell::description[42] = "acid flask bomb explosion.";
-// $Spell::delay[42] = 3;
-// $Spell::recoveryTime[42] = 3;
-// $Spell::radius[42] = 10;
-// $Spell::damageValue[42] = "400";
-// $Spell::LOSrange[42] = 999; // 80
-// $Spell::manaCost[42] = 1;
-// $Spell::startSound[42] = PlaceSeal;
-// $Spell::endSound[42] = LaunchFB;
-// $Spell::groupListCheck[42] = False;
-// $Spell::refVal[42] = -9998;
-// $Spell::graceDistance[42] = 10;
-// $Spell::elementalType[42] = $ElementalPoison;
-// $SkillType[acidflaskbomb] = $SkillAlchemy;
-
-// // exposive shot explosion
-// $Spell::keyword[43] = "explosiveshotexplosion";
-// $Spell::index[explosiveshotexplosion] = 43;
-// $Spell::name[43] = "Explosive Shot";
-// $Spell::description[43] = "The explosion caused by the explosive shot.";
-// $Spell::delay[43] = 3;
-// $Spell::recoveryTime[43] = 3;
-// $Spell::radius[43] = 10;
-// $Spell::damageValue[43] = "190";
-// $Spell::LOSrange[43] = 999; // 80
-// $Spell::manaCost[43] = 1;
-// // $Spell::startSound[43] = PlaceSeal;
-// // $Spell::endSound[43] = LaunchFB;
-// $Spell::groupListCheck[43] = False;
-// $Spell::refVal[43] = -9998;
-// $Spell::graceDistance[43] = 10;
-// $Spell::elementalType[43] = $ElementalFire;
-// $SkillType[explosiveshotexplosion] = $SkillArchery;
-
 //----------------------------------------------------------------------------------------------------------------
 
 // function BeginCastSpell(%clientId, %keyword)
@@ -3672,59 +3693,59 @@ function SpellNum69(%Client, %castObj, %castPos) {
 
 // 	if(%index == 2)
 // 	{
-// 		//teleport zone spell
+		// //teleport zone spell
 
-// 		%zoneId = GetNearestZone(%clientId, %w2, 3);
+		// %zoneId = GetNearestZone(%clientId, %w2, 3);
 
-// 		if(%zoneId != False)
-// 		{
-// 			Client::sendMessage(%clientId, $MsgBeige, "Teleporting near " @ Zone::getDesc(%zoneId));
+		// if(%zoneId != False)
+		// {
+		// 	Client::sendMessage(%clientId, $MsgBeige, "Teleporting near " @ Zone::getDesc(%zoneId));
 
-// 			//teleport
-// 			%originPos = gamebase::getposition(%clientId);
+		// 	//teleport
+		// 	%originPos = gamebase::getposition(%clientId);
 
-// 			if(!fetchData(%clientId, "invisible"))
-// 				GameBase::startFadeIn(%clientId);
-// 			CheckAndBootFromArena(%clientId);
-// 			Player::setDamageFlash(%clientId, 0.7);
+		// 	if(!fetchData(%clientId, "invisible"))
+		// 		GameBase::startFadeIn(%clientId);
+		// 	CheckAndBootFromArena(%clientId);
+		// 	Player::setDamageFlash(%clientId, 0.7);
 
-// 			//%mpos = Zone::getMarker(%zoneId);
-// 			//GameBase::setPosition(%clientId, %mpos);
-// 			//NullItemList(%clientId, Lore, $MsgRed, "You lost all %1s you were carrying when you teleported.");//never worked anyway
+		// 	//%mpos = Zone::getMarker(%zoneId);
+		// 	//GameBase::setPosition(%clientId, %mpos);
+		// 	//NullItemList(%clientId, Lore, $MsgRed, "You lost all %1s you were carrying when you teleported.");//never worked anyway
 
-// 			%extraDelay = 0.22;	//sometimes the endSound doesn't get played unless there is sufficient delay
+		// 	%extraDelay = 0.22;	//sometimes the endSound doesn't get played unless there is sufficient delay
 
-// 			//%castPos = SetOnGround(%clientId, 500);
+		// 	//%castPos = SetOnGround(%clientId, 500);
 
-// 			%returnFlag = True;
-// 			if($Zone::ForceTeleport[%zoneId]){
-// 				%castPos = TeleportToZone(%clientId, %desc, False, True);
-// 				if(%castPos == False){
-// 					Client::sendMessage(%id, $MsgBeige, "The zone's there, but you can't reach it.");
-// 					%returnFlag = False;
-// 					%castPos = %originPos;
-// 				}
-// 			}
-// 			else {
-// 				%mpos = Zone::getMarker(%zoneId);
-// 				%zid = $Zone::zoneID[%zoneId];
-// 				%sizex = $Zone::Length[%zid];
-// 				%sizey = $Zone::Width[%zid];
-// 				%castPos = findGroundPos(%mpos, %sizex*0.6, %sizey*0.6);
-// 				if(%castPos != False)
-// 					GameBase::setPosition(%clientId, %castPos);
-// 				else{
-// 					Client::sendMessage(%id, $MsgBeige, "The zone's there, but you can't reach it.");
-// 					%returnFlag = False;
-// 					%castPos = %originPos;
-// 				}
-// 			}
-// 		}
-// 		else
-// 		{
-// 			Client::sendMessage(%clientId, $MsgBeige, "Teleportation failed.");
-// 			%returnFlag = False;
-// 		}
+		// 	%returnFlag = True;
+		// 	if($Zone::ForceTeleport[%zoneId]){
+		// 		%castPos = TeleportToZone(%clientId, %desc, False, True);
+		// 		if(%castPos == False){
+		// 			Client::sendMessage(%id, $MsgBeige, "The zone's there, but you can't reach it.");
+		// 			%returnFlag = False;
+		// 			%castPos = %originPos;
+		// 		}
+		// 	}
+		// 	else {
+		// 		%mpos = Zone::getMarker(%zoneId);
+		// 		%zid = $Zone::zoneID[%zoneId];
+		// 		%sizex = $Zone::Length[%zid];
+		// 		%sizey = $Zone::Width[%zid];
+		// 		%castPos = findGroundPos(%mpos, %sizex*0.6, %sizey*0.6);
+		// 		if(%castPos != False)
+		// 			GameBase::setPosition(%clientId, %castPos);
+		// 		else{
+		// 			Client::sendMessage(%id, $MsgBeige, "The zone's there, but you can't reach it.");
+		// 			%returnFlag = False;
+		// 			%castPos = %originPos;
+		// 		}
+		// 	}
+		// }
+		// else
+		// {
+		// 	Client::sendMessage(%clientId, $MsgBeige, "Teleportation failed.");
+		// 	%returnFlag = False;
+		// }
 // 	}
 
 // 	if(%index == 3)

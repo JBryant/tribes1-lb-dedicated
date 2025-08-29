@@ -1161,8 +1161,8 @@ function SkillCanUseSpell(%clientId, %index, %echo) {
 
 	%class = fetchData(%clientId, "CLASS");
 	%minLevel = $Spell::minLevel[%index];
-	lbecho("Min Level: " @ %minLevel);
-	lbecho("Current Level: " @ getFinalLVL(%clientId));
+	// lbecho("Min Level: " @ %minLevel);
+	// lbecho("Current Level: " @ getFinalLVL(%clientId));
 
 	if($Spell::classRestrictions[%index] != "" && String::findSubStr($Spell::classRestrictions[%index], "," @ %class @ ",") == -1) {
 		if(%echo) Client::sendMessage(%clientId, 1, "You can't cast this spell because of your class.~wC_BuySell.wav");
