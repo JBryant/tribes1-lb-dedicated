@@ -24,6 +24,10 @@ $HugeArea = 20.0;
 $InsaneArea = 30.0;
 $MaxArea = 40.0; // shouldn't need it this big anyways
 
+$rockSpeed = 150.0;
+$arrowSpeed = 175.0;
+$quarrelSpeed = 200.0;
+
 //--------------------------------------
 // thrown ball, drops down over time (short distance)
 //--------------------------------------
@@ -1489,11 +1493,67 @@ RocketData shocklvone
   smokeDist = 2;
 };
 
+// =====================================
+// New Weapon Projectiles (LongBow)
+// =====================================
+
+//--------------------------------------
+// Basic Rock Projectile
+//--------------------------------------
+RocketData BasicRockImpact
+{
+   bulletShapeName  = "little_rock.dts";
+   explosionTag     = bulletexp1;
+   collisionRadius  = 0;
+   mass             = 0.1;
+
+   damageClass      = 0;       // 0 impact, 1, radius
+   damageValue      = 1;
+   damageType       = $WeaponDamage;
+
+   explosionRadius  = 10;
+   kickBackStrength = 1.0;
+   muzzleVelocity   = $rockSpeed; // 200
+   terminalVelocity = $rockSpeed; // 200
+   acceleration     = 9.0;
+   totalTime        = 10.0;
+   liveTime         = 4.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 1;
+};
+
+//--------------------------------------
+// Basic Rock Projectile (Small Area)
+//--------------------------------------
+RocketData BasicRockAreaSmall
+{
+   bulletShapeName  = "little_rock.dts";
+   explosionTag     = bulletexp1;
+   collisionRadius  = 0;
+   mass             = 0.1;
+
+   damageClass      = 1;       // 0 impact, 1, radius
+   damageValue      = 1;
+   damageType       = $WeaponDamage;
+
+   explosionRadius  = 10;
+   kickBackStrength = 1.0;
+   muzzleVelocity   = $rockSpeed; // 250.0
+   terminalVelocity = $rockSpeed; // 100
+   acceleration     = 9.0;
+   totalTime        = 10.0;
+   liveTime         = 4.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 1;
+};
 
 //--------------------------------------
 // Basic Arrow Projectile
 //--------------------------------------
-RocketData BasicArrow {
+RocketData BasicArrowImpact
+{
    bulletShapeName  = "tracer.dts";
    explosionTag     = bulletexp1;
    collisionRadius  = 0;
@@ -1505,14 +1565,93 @@ RocketData BasicArrow {
 
    explosionRadius  = 10;
    kickBackStrength = 1.0;
-   muzzleVelocity   = 200.0; // 250.0
-   terminalVelocity = 200.0; // 100
+   muzzleVelocity   = $arrowSpeed; // 250.0
+   terminalVelocity = $arrowSpeed; // 100
    acceleration     = 9.0;
    totalTime        = 10.0;
    liveTime         = 4.0;
    lightRange       = 9.0;
    lightColor       = { 0.4, 0.4, 1.0 };
    inheritedVelocityScale = 1;
+};
+
+//--------------------------------------
+// Basic Arrow Projectile (Small Radius)
+//--------------------------------------
+RocketData BasicArrowRadiusSmall
+{
+   bulletShapeName  = "tracer.dts";
+   explosionTag     = bulletexp1;
+   collisionRadius  = 0;
+   mass             = 0.1;
+
+   damageClass      = 1;       // 0 impact, 1, radius
+   damageValue      = 1;
+   damageType       = $WeaponDamage;
+
+   explosionRadius  = 10;
+   kickBackStrength = 1.0;
+   muzzleVelocity   = $arrowSpeed; // 250.0
+   terminalVelocity = $arrowSpeed; // 100
+   acceleration     = 9.0;
+   totalTime        = 10.0;
+   liveTime         = 4.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 1;
+};
+
+//--------------------------------------
+// Basic Quarrel Projectile
+//--------------------------------------
+RocketData BasicQuarrelImpact
+{
+   bulletShapeName  = "bullet.dts";
+   explosionTag     = bulletexp1;
+   collisionRadius  = 0;
+   mass             = 0.1;
+
+   damageClass      = 0;       // 0 impact, 1, radius
+   damageValue      = 1;
+   damageType       = $WeaponDamage;
+
+   explosionRadius  = 10;
+   kickBackStrength = 1.0;
+   muzzleVelocity   = $quarrelSpeed; // 200
+   terminalVelocity = $quarrelSpeed; // 200
+   acceleration     = 9.0;
+   totalTime        = 10.0;
+   liveTime         = 4.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 1;
+};
+
+//--------------------------------------
+// Basic Quarrel Projectile (Small Area)
+//--------------------------------------
+RocketData BasicQuarrelRadiusSmall
+{
+   bulletShapeName  = "bullet.dts";
+   explosionTag     = bulletexp1;
+   collisionRadius  = 0;
+   mass             = 0.1;
+
+   damageClass      = 1;       // 0 impact, 1, radius
+   damageValue      = 1;
+   damageType       = $WeaponDamage;
+
+   explosionRadius  = 10;
+   kickBackStrength = 1.0;
+   muzzleVelocity   = $quarrelSpeed; // 250.0
+   terminalVelocity = $quarrelSpeed; // 100
+   acceleration     = 9.0;
+   totalTime        = 10.0;
+   liveTime         = 4.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 1;
+};
 
 //--------------------------------------
 // small rocket fast with big shockwave

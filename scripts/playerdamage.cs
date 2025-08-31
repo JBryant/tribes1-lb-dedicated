@@ -1169,9 +1169,9 @@ function Vector::cross(%a, %b) {
 }
 
 function Muzzle_getBasisAndPos(%trans) {
-   %r0 = getWord(%trans, 0) @ " " @ getWord(%trans, 1) @ " " @ getWord(%trans, 2);  // Right
-   %r1 = getWord(%trans, 3) @ " " @ getWord(%trans, 4) @ " " @ getWord(%trans, 5);  // Forward (aim)
-   %r2 = getWord(%trans, 6) @ " " @ getWord(%trans, 7) @ " " @ getWord(%trans, 8);  // Up
+   %r0 = getWord(%trans, 0) @ " " @ getWord(%trans, 1) @ " " @ getWord(%trans, 2);    // Right
+   %r1 = getWord(%trans, 3) @ " " @ getWord(%trans, 4) @ " " @ getWord(%trans, 5);    // Forward (aim)
+   %r2 = getWord(%trans, 6) @ " " @ getWord(%trans, 7) @ " " @ getWord(%trans, 8);    // Up
    %pos = getWord(%trans, 9) @ " " @ getWord(%trans, 10) @ " " @ getWord(%trans, 11); // Position
 
    return %r0 @ " " @ %r1 @ " " @ %r2 @ " " @ %pos;

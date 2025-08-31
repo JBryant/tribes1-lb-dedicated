@@ -1919,7 +1919,7 @@ function BeltItem::AddWeaponData(%name, %item, %image, %accessoryType, %miscInfo
 	}
 }
 
-function BeltItem::AddProjectile(%name, %item, %type, %weight, %cost, %image, %weaponSkill, %skillRestriction, %special, %shopIndex) {
+function BeltItem::AddProjectile(%name, %item, %type, %weight, %cost, %projectile, %weaponSkill, %skillRestriction, %special, %shopIndex) {
 	$numBeltItems++;
 	%num = $count[%type]++;
 
@@ -1929,7 +1929,7 @@ function BeltItem::AddProjectile(%name, %item, %type, %weight, %cost, %image, %w
 	$beltitem[%item, "Item"] = %item;
 	$beltitem[%item, "Name"] = %name;
 	$beltitem[%item, "Type"] = %type;
-	$beltitem[%item, "Image"] = %image;
+	$beltitem[%item, "Projectile"] = %projectile;
 	$AccessoryVar[%item, $Weight] = %weight;
 	$AccessoryVar[%item, $SpecialVar] = %special;
 
@@ -2099,6 +2099,10 @@ function BeltItem::GetName(%item) {
 
 function BeltItem::GetImage(%item) {
 	return $beltitem[%item, "Image"];
+}
+
+function BeltItem::GetProjectile(%item) {
+	return $beltitem[%item, "Projectile"];
 }
 
 function BeltItem::GetEnchant(%item) {
@@ -2538,18 +2542,19 @@ generateEnchantsAndMateria();
 
 //Ammunition
 // function BeltItem::AddProjectile(%name, %item, %type, %weight, %cost, %image, %weaponSkill, %skillRestriction, %special, %shopIndex)
-BeltItem::AddProjectile("Small Rock", "SmallRock", "AmmoItems", 0.2, 13, "SmallRock", $SkillBows, $SkillBows @ " 1", "6 5", 1);
-BeltItem::AddProjectile("Basic Arrow", "BasicArrow", "AmmoItems", 0.1, 5, "Arrow", $SkillBows, $SkillBows @ " 1", "6 10", 2);
-BeltItem::AddProjectile("Sheaf Arrow", "SheafArrow", "AmmoItems", 0.1, 25, "Arrow", $SkillBows, $SkillBows @ " 1", "6 20", 3);
-BeltItem::AddProjectile("Bladed Arrow","BladedArrow","AmmoItems",0.1, 50, "Arrow", $SkillBows, $SkillBows @ " 1", "6 40", 4);
-BeltItem::AddProjectile("Light Quarrel","LightQuarrel","AmmoItems",0.1 ,100, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 10", 5);
-BeltItem::AddProjectile("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.1, 200, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 20", 6);
-BeltItem::AddProjectile("Short Quarrel","ShortQuarrel","AmmoItems",0.1, 300, "Quarrel", $SkillBows, $SkillBows @ " 1", "6 40", 7);
-BeltItem::AddProjectile("Stone Feather","StoneFeather","AmmoItems",0.1, 400, "Arrow", $SkillBows, $SkillBows @ " 1", "6 60", 8);
-BeltItem::AddProjectile("Metal Feather","MetalFeather","AmmoItems",0.1, 500, "Arrow", $SkillBows, $SkillBows @ " 1", "6 80", 9);
-BeltItem::AddProjectile("Talon", "Talon", "AmmoItems", 0.1, 800, "Arrow", $SkillBows, $SkillBows @ " 1", "6 100", 10);
-BeltItem::AddProjectile("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.1, 1000, "Arrow", $SkillBows, $SkillBows @ " 1", "6 120", 11);
-BeltItem::AddProjectile("Poison Arrow", "PoisonArrow", "AmmoItems", 0.1, 200, "Arrow", $SkillBows, $SkillBows @ " 1", "6 140", 12);
+BeltItem::AddProjectile("Small Rock", "SmallRock", "AmmoItems", 0.2, 13, "BasicRockImpact", $SkillBows, $SkillBows @ " 1", "6 5", 1);
+BeltItem::AddProjectile("Basic Arrow", "BasicArrow", "AmmoItems", 0.1, 5, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 10", 2);
+BeltItem::AddProjectile("Sheaf Arrow", "SheafArrow", "AmmoItems", 0.1, 25, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 20", 3);
+BeltItem::AddProjectile("Bladed Arrow","BladedArrow","AmmoItems",0.1, 50, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 40", 4);
+BeltItem::AddProjectile("Light Quarrel","LightQuarrel","AmmoItems",0.1 ,100, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 10", 5);
+BeltItem::AddProjectile("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.1, 200, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 20", 6);
+BeltItem::AddProjectile("Short Quarrel","ShortQuarrel","AmmoItems",0.1, 300, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 40", 7);
+BeltItem::AddProjectile("Stone Feather","StoneFeather","AmmoItems",0.1, 400, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 60", 8);
+BeltItem::AddProjectile("Metal Feather","MetalFeather","AmmoItems",0.1, 500, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 80", 9);
+BeltItem::AddProjectile("Talon", "Talon", "AmmoItems", 0.1, 800, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 100", 10);
+BeltItem::AddProjectile("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.1, 1000, "BasicArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 120", 11);
+BeltItem::AddProjectile("Poison Arrow", "PoisonArrow", "AmmoItems", 0.1, 200, "BasicArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 140", 12);
+BeltItem::AddProjectile("Explosive Quarrel","ExplosiveQuarrel","AmmoItems" ,0.1, 500, "BasicQuarrelRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 50", 13);
 
 //Gems
 BeltItem::Add("Quartz", "Quartz", "GemItems", 0.2, 100);

@@ -92,9 +92,10 @@ $ProjRestrictions[SmallRock] = ",Sling,";
 $ProjRestrictions[BasicArrow] = ",PracticeBow,QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[SheafArrow] = ",PracticeBow,QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[BladedArrow] = ",HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
-$ProjRestrictions[LightQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
-$ProjRestrictions[HeavyQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
-$ProjRestrictions[ShortQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeaterDragonboneCrossbow,";
+$ProjRestrictions[LightQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeater,DragonboneCrossbow,";
+$ProjRestrictions[HeavyQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeater,DragonboneCrossbow,";
+$ProjRestrictions[ShortQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeater,DragonboneCrossbow,";
+$ProjRestrictions[ExplosiveQuarrel] = "RepeaterCrossbow,SiegeCrossbow,StormRepeater,DragonboneCrossbow,";
 $ProjRestrictions[StoneFeather] = ",SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[MetalFeather] = ",SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[Talon] = ",ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
@@ -248,8 +249,10 @@ function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex)
 	// GameBase::setRotation(%arrow, %rot);
 	// GameBase::setRotation(%clientId, %rot);
 
+	// BasicArrowImpact
 	// new simpler and more efficient way to spawn projectiles (also gives more control on direction, rotation and how the projectile looks and acts)
-	Projectile::spawnProjectile("BasicArrowImpact", GameBase::getMuzzleTransform(%player), %player, Item::getVelocity(%player));
+	%projectile = BeltItem::GetProjectile(%loadedProjectile);
+	Projectile::spawnProjectile(%projectile, GameBase::getMuzzleTransform(%player), %player, Item::getVelocity(%player));
 
 	belt::takethisstuff(%clientId, %loadedProjectile, 1);
 
