@@ -182,7 +182,7 @@ $Skill::description[12] = "A rapid-fire attack that launches a hail of arrows at
 $Skill::actionMessage[12] = "You unleash a volley of arrows.";
 $Skill::delay[12] = 0.1;
 $Skill::recoveryTime[12] = 1; // 15;
-$Skill::radius[12] = 50;
+$Skill::radius[12] = 20;
 $Skill::LOSrange[12] = 100;
 $Skill::startSound[12] = ImpactTR;
 $Skill::groupListCheck[12] = False;
@@ -391,31 +391,33 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 			Client::sendMessage(%id, $MsgBeige, Client::getName(%clientId) @ " is mending on you.");
 
 		%requireOneOfItems = $Skill::requireOneOfItems[%index];
+
 		if (%requireOneOfItems != "") {
-			%hasItem = False;
+			%useItem = "";
+
 			for(%idx = 0; GetWord(%requireOneOfItems, %idx) != -1; %idx += 1) {
 				%checkItem = GetWord(%requireOneOfItems, %idx);
 				%amnt = Belt::HasThisStuff(%clientId, %checkItem);
 				
 				if (%amnt > 0) {
-					%hasItem = True;
-
-					if ($Skill::removeRequiredItem[%index] == True) {
-						// remove the item
-						belt::takethisstuff(%clientId, %checkItem, 1);
-						Client::sendMessage(%clientId, $MsgWhite, "You used 1 "@ $beltitem[%checkItem, "Name"] @". [have "@ (%amnt - 1) @"]");
-
-						%restoreValue = 0 - $restoreValue[%checkItem, HP];
-						%r = %restoreValue / $TribesDamageToNumericDamage;
-						refreshHP(%id, %r);
-						%castPos = GameBase::getPosition(%id);
-						
-						refreshAll(%clientId);
-					}
+					%useItem = %checkItem;
 				}
 			}
 
-			if (%hasItem == False) {
+			if (%useItem != "") {
+				if ($Skill::removeRequiredItem[%index] == True) {
+					// remove the item
+					belt::takethisstuff(%clientId, %useItem, 1);
+					Client::sendMessage(%clientId, $MsgWhite, "You used a "@ $beltitem[%useItem, "Name"] @". [have "@ (Belt::HasThisStuff(%clientId, %useItem) - 1) @"]");
+
+					%restoreValue = 0 - $restoreValue[%useItem, HP];
+					%r = %restoreValue / $TribesDamageToNumericDamage;
+					refreshHP(%id, %r);
+					%castPos = GameBase::getPosition(%id);
+					
+					refreshAll(%clientId);
+				}
+			} else {
 				Client::sendMessage(%clientId, $MsgRed, "You do not have the required items to use "@ %keyword @".");
 				return False;
 			}
@@ -563,7 +565,7 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
     }
 
 	if ($Skill::keyword[%index] == "explosiveshot") {
-		ProjectileAttack(%clientId, 100, True, "43");
+		ProjectileAttack(%clientId, 100, True, "43", "BasicArrowRadiusSmall");
     }
 
 	if ($Skill::keyword[%index] == "parry") {

@@ -1414,8 +1414,8 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-3709.34 -802 317.433";
-					rotation = "0 0 0";
+					position = "1477.6 -1240.97 -696.499";
+					rotation = "0 -0 -3.12807";
 				};
 			};
 			instant SimGroup "MUSIC CAP_Caverns.wav 60";
@@ -1434,7 +1434,7 @@ instant SimGroup "MissionGroup" {
 					dataBlock = "PathMarker";
 					name = "";
 					position = "1188.34 -958 -2880";
-					rotation = "0 0 0";
+					rotation = "0 -0 -2.97933";
 				};
 			};
 			instant SimGroup "MUSIC CAP_Fields_of_Tenerron.wav 102";
@@ -1450,8 +1450,8 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "1229.34 -1015 -2670";
-					rotation = "0 0 0";
+					position = "1241.19 -1032.25 -2670.34";
+					rotation = "0 -0 -0.00408822";
 				};
 			};
 			instant SimGroup "MUSIC CAP_Fields_of_Tenerron.wav 102";
@@ -1459,6 +1459,40 @@ instant SimGroup "MissionGroup" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "1291 -994 -2696";
+				rotation = "0 0 2.98794";
+			};
+		};
+		instant SimGroup "DUNGEON Obsidian Mines Shaft" {
+			instant SimGroup "DropPoints" {
+				instant Marker "Marker1" {
+					dataBlock = "PathMarker";
+					name = "";
+					position = "1383.37 -1005.16 -2469.3";
+					rotation = "0 -0 -1.6015";
+				};
+			};
+			instant SimGroup "MUSIC CAP_Fields_of_Tenerron.wav 102";
+			instant Marker "250 250 200 0" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "1387.60 -952 -2521";
+				rotation = "0 0 2.98794";
+			};
+		};
+		instant SimGroup "DUNGEON Upper Temple of Ancients" {
+			instant SimGroup "DropPoints" {
+				instant Marker "Marker1" {
+					dataBlock = "PathMarker";
+					name = "";
+					position = "1437.11 -1036.69 -1832.41";
+					rotation = "0 -0 1.52823";
+				};
+			};
+			instant SimGroup "MUSIC rmrmus5.wav 47";
+			instant Marker "250 250 100 0" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "1430.78 -1031.07 -1831.86";
 				rotation = "0 0 2.98794";
 			};
 		};
@@ -2642,6 +2676,66 @@ instant SimGroup "MissionGroup" {
 			position = "1232.87 -955.755 -2690.34";
 			rotation = "0 0 1.4777";
 		};
+		instant Marker "1 0 0 10 30 99" {
+			dataBlock = "PathMarker";
+			name = "obs mine shaft obs knight 1";
+			position = "1388.87 -960.332 -2526.3";
+			rotation = "0 0 1.4777";
+		};
+		instant Marker "1 0 0 10 30 99" {
+			dataBlock = "PathMarker";
+			name = "obs mine shaft obs knight 2";
+			position = "1388.95 -869.466 -2526.3";
+			rotation = "0 0 1.4777";
+		};
+		instant Marker "1 0 0 10 30 101" {
+			dataBlock = "PathMarker";
+			name = "obs mine shaft obs chanter 1";
+			position = "1444.25 -871.98 -2526.3";
+			rotation = "0 0 1.4777";
+		};
+		instant Marker "1 0 0 10 30 100" {
+			dataBlock = "PathMarker";
+			name = "obs mine shaft obs berserker 1";
+			position = "1341.01 -904.154 -2526.3";
+			rotation = "0 0 1.4777";
+		};
+		instant Marker "1 0 0 10 30 100" {
+			dataBlock = "PathMarker";
+			name = "obs mine shaft obs berserker 2";
+			position = "1341.01 -904.154 -2526.3";
+			rotation = "0 0 1.4777";
+		};
+		instant Marker "1 0 0 10 30 103" {
+			dataBlock = "PathMarker";
+			name = "upper toa defender 1";
+			position = "1407.65 -1060.9 -1832.41";
+			rotation = "0 0 1.4777";
+		};
+		instant Marker "1 0 0 10 30 104" {
+			dataBlock = "PathMarker";
+			name = "upper toa acolyte 1";
+			position = "1427.61 -1016.94 -1841.41";
+			rotation = "0 0 1.4777";
+		};
+		instant Marker "1 0 0 10 30 102" {
+			dataBlock = "PathMarker";
+			name = "upper toa cultist 1";
+			position = "1459.62 -1022.64 -1841.41";
+			rotation = "0 0 1.4777";
+		};
+		instant Marker "1 0 0 10 30 104" {
+			dataBlock = "PathMarker";
+			name = "upper toa acolyte 2";
+			position = "1452.86 -1040.82 -1848.41";
+			rotation = "0 0 1.4777";
+		};
+		instant Marker "1 0 0 10 30 102" {
+			dataBlock = "PathMarker";
+			name = "upper toa cultist 2";
+			position = "1412.58 -1042.73 -1848.41";
+			rotation = "0 0 1.4777";
+		};
 	};
 	instant SimGroup "Burial Tree" {
 		instant StaticShape "Misc Tree S" {
@@ -3660,8 +3754,9 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 0 0";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				landingPos = "1480.92 -1231.19 -696.51";
-				esay = "Press T to enter.";
+				landingPos = "1480.64 -1233.35 -696.495";
+				landingRot = "0 -0 2.93858";
+				esay = "Press T to enter Lower Heaven.";
 			};
 		};
 		instant SimGroup "lower heaven to heaven" {
@@ -3672,15 +3767,9 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 -0 -0.0999989";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
-				landingPos = "1431.81 -463.62 -808";
-				esay = "Press T to enter.";
-			};
-			instant InteriorShape "cdoord1" {
-				fileName = "CDoorD.dis";
-				isContainer = "0";
-				position = "1483.15 -1230.55 -696.504";
-				rotation = "0 -0 1.47993";
-				lightParams = "0 ";
+				landingPos = "1433.98 -463.676 -808.025";
+				landingRot = "0 -0 1.56003";
+				esay = "Press T to enter 7th Heaven.";
 			};
 		};
 		instant SimGroup "lower heaven to lh mines p1" {
@@ -3693,10 +3782,10 @@ instant SimGroup "MissionGroup" {
 				isSphere = "True";
 				landingPos = "1165.03 -974.931 -2880";
 				landingRot = "0 0 -1.57558";
-				esay = "Press T to enter.";
+				esay = "Press T to enter Upper Obsidian Mines.";
 			};
 		};
-		instant SimGroup "lh mines p1 lower heaven s" {
+		instant SimGroup "lh mines p1 lower heaven" {
 			instant Trigger "GroupTrigger1" {
 				dataBlock = "GroupTrigger";
 				name = "";
@@ -3706,7 +3795,7 @@ instant SimGroup "MissionGroup" {
 				isSphere = "True";
 				landingPos = "1410.18 -1263.53 -733.13";
 				landingRot = "0 -0 -1.55752";
-				esay = "Press T to enter.";
+				esay = "Press T to enter Lower Heaven.";
 			};
 		};
 		instant SimGroup "lh mines p1 to lh mines p2" {
@@ -3734,6 +3823,60 @@ instant SimGroup "MissionGroup" {
 				landingPos = "1266.71 -977.498 -2879.99";
 				landingRot = "0 -0 -3.09708";
 				esay = "Press T to touch the Tiara.";
+				enterSound = "AbsorbABS.wav";
+			};
+		};
+		instant SimGroup "lh mines p2 to lh mines p3" {
+			instant Trigger "GroupTrigger1" {
+				dataBlock = "GroupTrigger";
+				name = "";
+				position = "1189.44 -972.38 -2690.35";
+				rotation = "0 0 0";
+				boundingBox = "-1 -1 -1 1 1 1";
+				isSphere = "True";	
+				landingPos = "1389.13 -1004.22 -2469.3";
+				landingRot = "0 -0 -3.12111";
+				esay = "Press T to enter Obsidian Mines Shaft.";
+			};
+		};
+		instant SimGroup "lh mines p3 to lh mines p2" {
+			instant Trigger "GroupTrigger1" {
+				dataBlock = "GroupTrigger";
+				name = "";
+				position = "1389.02 -1002 -2469.32";
+				rotation = "0 0 0";
+				boundingBox = "-1 -1 -1 1 1 1";
+				isSphere = "True";
+				landingPos = "1191.21 -972.544 -2690.34";
+				landingRot = "0 -0 -1.57138";
+				esay = "Press T to enter Lower Obsidian Mines.";
+			};
+		};
+		instant SimGroup "lh mines p3 to upper toa" {
+			instant Trigger "GroupTrigger1" {
+				dataBlock = "GroupTrigger";
+				name = "";
+				position = "1317.13 -903.58 -2519.78";
+				rotation = "0 0 0";
+				boundingBox = "-1 -1 -1 1 1 1";
+				isSphere = "True";
+				landingPos = "1430.7 -1035.47 -1832.41";
+				landingRot = "0 -0 3.12002";
+				esay = "Press T to touch the light.";
+				enterSound = "AbsorbABS.wav";
+			};
+		};
+		instant SimGroup "upper toa to lh mines p3" {
+			instant Trigger "GroupTrigger1" {
+				dataBlock = "GroupTrigger";
+				name = "";
+				position = "1430.78 -1031.07 -1831.86";
+				rotation = "0 0 0";
+				boundingBox = "-1 -1 -1 1 1 1";
+				isSphere = "True";
+				landingPos = "1320.08 -903.775 -2520.3";
+				landingRot = " 0 -0 -1.56177";
+				esay = "Press T to touch the light.";
 				enterSound = "AbsorbABS.wav";
 			};
 		};
@@ -7805,6 +7948,13 @@ instant SimGroup "MissionGroup" {
 			rotation = "0 -0 0.139996";
 			lightParams = "0 ";
 		};
+		instant InteriorShape "cdoord1" {
+			fileName = "CDoorD.dis";
+			isContainer = "0";
+			position = "1483.15 -1230.55 -696.504";
+			rotation = "0 -0 1.47993";
+			lightParams = "0 ";
+		};
 	};
 	instant InteriorShape "rodm_21" {
 		fileName = "rodm_2.dis";
@@ -7969,14 +8119,6 @@ instant SimGroup "MissionGroup" {
 		rotation = "0 0 0";
 		lightParams = "0 ";
 	};
-	instant StaticShape "Cactus31" {
-		dataBlock = "Cactus3";
-		name = "";
-		position = "1189.44 -972.38 -2690.35";
-		rotation = "0 0 0";
-		destroyable = "True";
-		deleteOnDestroy = "False";
-	};
 	instant InteriorShape "cdoorc1" {
 		fileName = "CDoorC.dis";
 		isContainer = "0";
@@ -7984,15 +8126,7 @@ instant SimGroup "MissionGroup" {
 		rotation = "0 0 0";
 		lightParams = "0 ";
 	};
-	instant StaticShape "Cactus31" {
-		dataBlock = "Cactus3";
-		name = "";
-		position = "1389.02 -1002 -2469.32";
-		rotation = "0 0 0";
-		destroyable = "True";
-		deleteOnDestroy = "False";
-	};
-	instant StaticShape "BigElectroBeam1" {
+	instant StaticShape "BigElectroBeamOMStoUTOA" {
 		dataBlock = "ElectricalBeamBig";
 		name = "";
 		position = "1317.13 -903.588 -2519.78";
@@ -8000,10 +8134,18 @@ instant SimGroup "MissionGroup" {
 		destroyable = "True";
 		deleteOnDestroy = "False";
 	};
-	instant StaticShape "BigElectroBeam1" {
+	instant StaticShape "BigElectroBeamUTOAtoOMS" {
 		dataBlock = "ElectricalBeamBig";
 		name = "";
 		position = "1430.78 -1031.08 -1831.87";
+		rotation = "0 0 0";
+		destroyable = "True";
+		deleteOnDestroy = "False";
+	};
+	instant StaticShape "BigElectroBeamUTOAtoMTOA" {
+		dataBlock = "ElectricalBeamBig";
+		name = "";
+		position = "1430.78 -1065.81 -1847.91";
 		rotation = "0 0 0";
 		destroyable = "True";
 		deleteOnDestroy = "False";

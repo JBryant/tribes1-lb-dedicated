@@ -1307,8 +1307,9 @@ $Spell::delay[70] = 3;
 $Spell::recoveryTime[70] = 3;
 $Spell::radius[70] = 30;
 $Spell::damageValue[70] = "320";
-$Spell::LOSrange[70] = 999; // 80
+$Spell::LOSrange[70] = 999; // 8
 $Spell::manaCost[70] = 1;
+$Spell::radius[70] = 50;
 $Spell::startSound[70] = PlaceSeal;
 $Spell::endSound[70] = Explode3FW;
 $Spell::groupListCheck[70] = False;
@@ -2495,8 +2496,8 @@ function SpellNum50(%Client, %castObj, %castPos) {
 function SpellNum51(%Client, %castObj, %castPos) {
 
 	//Light Utility
-	Client::sendmessage(%client,1,"Disabled till futher notice.");
-	return false;
+	// Client::sendmessage(%client,1,"Disabled till futher notice.");
+	// return false;
 	schedule("cast_truelight("@%Client@");",0.1);
 
 	return "returnFlag 1";
@@ -2994,6 +2995,87 @@ function SpellNum69(%clientId, %castObj, %castPos) {
 		}
 		else
 			%returnFlag = False;
+	}
+}
+
+function SpellNum70(%clientId, %castObj, %castPos) {
+	%player = Client::getOwnedObject(%clientId);
+
+	// shadow blade
+	if(%castPos != "")	{
+		%index = 70;
+		%xPos = getWord(%castPos, 0);
+		%yPos = getWord(%castPos, 1);
+		%zPos = getWord(%castPos, 2) + 350;
+
+		%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+
+		// %sword = newObject("", "StaticShape", Masamune, true);
+		// addToSet("MissionCleanup", %sword);
+		// GameBase::setPosition(%sword, %castPos);
+		// GameBase::setRotation(%sword, );
+
+		%sword = newObject("", InteriorShape, "masamunefinal.dis");
+		gamebase::setPosition(%sword, %newPos);
+		// gamebase::setRotation(%sword, vector::getrotation($los::normal));
+		addToSet("MissionCleanup", %sword);
+		schedule("Item::Pop(" @ %sword @ ");", 10, %sword);
+
+		%minrad = 0;
+		%maxrad = 4;
+
+		// blue lights
+		// for(%i = 0; %i <= 10; %i++)
+		// {
+		// 	%tempPos = RandomPositionXY(%minrad, %maxrad);
+
+		// 	%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
+		// 	%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
+		// 	%zPos = GetWord(%castPos, 2) + (%i / 4);
+	
+		// 	%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+
+		// 	schedule("CreateAndDetBomb(" @ %clientId @ ", \"Bomb7\", \"" @ %newPos @ "\", False, " @ %index @ ");", %i / 20, %player);
+		// }
+
+		// scatter red lights
+		for(%i = 0; %i <= 40; %i++)
+		{
+			%tempPos = RandomPositionXY(%minrad, %maxrad);
+
+			%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
+			%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
+			%zPos = GetWord(%castPos, 2) + %i;
+	
+			%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+
+			// lbecho("add light");
+			// schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb300\", \"" @ %newPos @ "\", False, \"" @ %index @ "\");", %i / 16, %player);
+			schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb8\", \"" @ %newPos @ "\", False, \"" @ %index @ "\");", %i / 20, %player);
+		}
+
+
+		%xPos = getWord(%castPos, 0);
+		%yPos = getWord(%castPos, 1);
+		%zPos = getWord(%castPos, 2) + 350;
+
+		for(%i = 1; %i <= 30; %i++) {
+			%t = %i * 10;
+			%newPos = %xPos @ " " @ %yPos @ " " @ %zPos - %t;
+			schedule("gamebase::setPosition(" @ %sword @ ", \"" @ %newPos @ "\");", ((%i / 100) + 2), %player);
+		}
+
+		schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.3, %player);
+		schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb6\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.35, %player);
+		schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb14\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.4, %player);
+
+		%overrideEndSound = True;
+		%returnFlag = True;
+	}
+	else
+	{
+		Client::sendMessage(%clientId, $MsgBeige, "Could not find a target.");
+		%returnFlag = False;
 	}
 }
 

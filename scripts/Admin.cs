@@ -305,8 +305,7 @@ function Admin::startVote(%clientId, %topic, %action, %option)
    }
 }
 $menuChars = "1234567890-=abcghijklmnoqrtuvwxy .";
-function Game::menuRequest(%clientId)
-{
+function Game::menuRequest(%clientId) {
 	if(%clientId.IsInvalid)
 		return;
 
@@ -325,18 +324,18 @@ function Game::menuRequest(%clientId)
 		MenuChangeClass(%clientId);
 		return;
 	}
-	else if(%clientId.currentShop != "")
-	{
-		%clientId.beltShop = %clientId.currentShop;
-		MenuBuyBeltItem(%clientid, 1);
-		return;
-	}
-	else if(%clientId.currentBank != "")
-	{
-		//Store belt items
-		MenuWithdrawBelt(%clientId);
-		return;
-	}
+	// else if(%clientId.currentShop != "")
+	// {
+	// 	%clientId.beltShop = %clientId.currentShop;
+	// 	MenuBuyBeltItem(%clientid, 1);
+	// 	return;
+	// }
+	// else if(%clientId.currentBank != "")
+	// {
+	// 	//Store belt items
+	// 	MenuWithdrawBelt(%clientId);
+	// 	return;
+	// }
 
 	%curItem = 0;
 	Client::buildMenu(%clientId, "Options", "options", true);

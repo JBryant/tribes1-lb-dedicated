@@ -100,7 +100,9 @@ $ProjRestrictions[StoneFeather] = ",SharpshooterBow,GaleBow,ElvenLongbow,ArcaneB
 $ProjRestrictions[MetalFeather] = ",SharpshooterBow,GaleBow,ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[Talon] = ",ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[CeraphumsFeather] = ",ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
-$ProjRestrictions[PoisonArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,";
+$ProjRestrictions[PoisonArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[FireArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[TestArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
 
 function GenerateAllWeaponCosts()
 {
@@ -174,7 +176,7 @@ function MeleeAttack(%player)
 	PostAttack(%clientId, %weapon);
 }
 
-function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex)
+function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex, %projectileOverride)
 {
 	dbecho($dbechoMode, "ProjectileAttack(" @ %clientId @ ", " @ %weapon @ ", " @ %vel @ ")");
 
@@ -252,6 +254,10 @@ function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex)
 	// BasicArrowImpact
 	// new simpler and more efficient way to spawn projectiles (also gives more control on direction, rotation and how the projectile looks and acts)
 	%projectile = BeltItem::GetProjectile(%loadedProjectile);
+	
+	if (%projectileOverride != "")
+		%projectile = %projectileOverride;
+
 	Projectile::spawnProjectile(%projectile, GameBase::getMuzzleTransform(%player), %player, Item::getVelocity(%player));
 
 	belt::takethisstuff(%clientId, %loadedProjectile, 1);

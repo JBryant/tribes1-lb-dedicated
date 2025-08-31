@@ -1498,6 +1498,36 @@ RocketData shocklvone
 // =====================================
 
 //--------------------------------------
+// Test Arrow
+//--------------------------------------
+RocketData TestArrow
+{
+   bulletShapeName  = "tracer.dts";
+   explosionTag     = FusionExp;
+   collisionRadius  = 0; // bad collides: FusionExp or fusionbolt.dts
+   mass             = 0.1;
+
+   damageClass      = 1;       // 0 impact, 1, radius
+   damageValue      = 1;
+   damageType       = $WeaponDamage;
+
+   explosionRadius  = 10;
+   kickBackStrength = 1.0;
+   muzzleVelocity   = $arrowSpeed; // 250.0
+   terminalVelocity = $arrowSpeed; // 100
+   acceleration     = 9.0;
+   totalTime        = 10.0;
+   liveTime         = 4.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 1;
+
+   trailType   = 2;                // smoke trail
+   trailString = "fusionbolt.dts"; // breath, plasmatrail, plasmabolt, rsmoke (bad
+   smokeDist   = 0.8;
+};
+
+//--------------------------------------
 // Basic Rock Projectile
 //--------------------------------------
 RocketData BasicRockImpact
@@ -1581,7 +1611,7 @@ RocketData BasicArrowImpact
 RocketData BasicArrowRadiusSmall
 {
    bulletShapeName  = "tracer.dts";
-   explosionTag     = bulletexp1;
+   explosionTag     = debrisExpMedium; // bulletExp1
    collisionRadius  = 0;
    mass             = 0.1;
 
@@ -1589,7 +1619,7 @@ RocketData BasicArrowRadiusSmall
    damageValue      = 1;
    damageType       = $WeaponDamage;
 
-   explosionRadius  = 10;
+   explosionRadius  = 20;
    kickBackStrength = 1.0;
    muzzleVelocity   = $arrowSpeed; // 250.0
    terminalVelocity = $arrowSpeed; // 100
@@ -1599,6 +1629,36 @@ RocketData BasicArrowRadiusSmall
    lightRange       = 9.0;
    lightColor       = { 0.4, 0.4, 1.0 };
    inheritedVelocityScale = 1;
+};
+
+//--------------------------------------
+// Fire Arrow Projectile (Radius Small)
+//--------------------------------------
+RocketData FireArrowRadiusSmall
+{
+   bulletShapeName  = "tracer.dts";
+   explosionTag     = plasmaExp;
+   collisionRadius  = 0;
+   mass             = 0.1;
+
+   damageClass      = 1;       // 0 impact, 1, radius
+   damageValue      = 1;
+   damageType       = $WeaponDamage;
+
+   explosionRadius  = 20;
+   kickBackStrength = 1.0;
+   muzzleVelocity   = $arrowSpeed; // 250.0
+   terminalVelocity = $arrowSpeed; // 100
+   acceleration     = 9.0;
+   totalTime        = 10.0;
+   liveTime         = 4.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 1;
+
+   trailType   = 2;                // smoke trail
+   trailString = "plasmatrail.dts"; // breath, plasmatrail, plasmabolt, rsmoke
+   smokeDist   = 0.8;
 };
 
 //--------------------------------------
@@ -1701,9 +1761,9 @@ RocketData testarrowtwo {
    inheritedVelocityScale = 1;
 
    // rocket specific
-   //trailType   = 2;                // smoke trail
-   // trailString = "breath.dts";
-   //smokeDist   = 0.8;
+  //  trailType   = 2;                // smoke trail
+  //  trailString = "breath.dts";
+  //  smokeDist   = 0.8;
 
   //  soundId = SoundSwing4;
 };

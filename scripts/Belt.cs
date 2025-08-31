@@ -32,6 +32,9 @@
 //
 // Updated and ported by phantom
 // 09-05-2010 - 04-05-2014
+//
+// Refactors and changes by LongBow
+// 07-01-2025
 // ---------------------------------------
 // Adds a Belt option to tab menu designed to reduce number of itemdatas in server.
 //
@@ -44,7 +47,7 @@
 
 // TODO:
 // 1. Fix Drop Points in newer dungeons
-// 2. Healing Kit mend uses multiple healing kits
+// 2. Healing Kit mend uses multiple healing kits (Fixed)
 // 3. Add Shorty quest line
 // 
 
@@ -1434,9 +1437,11 @@ function processMenuStoreBeltItemFinal(%clientId, %opt)
 		}
 		else if(%cmnt >= %amnt)
 		{
-			Client::SendMessage(%clientid,0,"You store "@%amnt@" "@$beltitem[%item, "Name"]@".");
-			Belt::TakeThisStuff(%clientid,%item,%amnt);
-			Belt::BankGiveThisSTuff(%clientid,%item,%amnt);
+			Client::SendMessage(%clientid, 0, "You store "@%amnt@" "@$beltitem[%item, "Name"]@".");
+			Belt::TakeThisStuff(%clientid, %item, %amnt);
+			Belt::BankGiveThisSTuff(%clientid, %item, %amnt);
+			PlaySound(SoundPickupItem, GameBase::getPosition(%clientid));
+
 			if(Belt::GetNS(%clientid,%type) != "0")
 				MenuStoreBeltItem(%clientId, %type, 1);
 			else
@@ -1454,9 +1459,11 @@ function processMenuStoreBeltItemFinal(%clientId, %opt)
 		}
 		else if(%cmnt >= %amnt)
 		{
-			Client::SendMessage(%clientid,0,"You store "@%amnt@" "@$beltitem[%item, "Name"]@".");
-			Belt::TakeThisStuff(%clientid,%item,%amnt);
-			Belt::BankGiveThisSTuff(%clientid,%item,%amnt);
+			Client::SendMessage(%clientid, 0, "You store "@%amnt@" "@$beltitem[%item, "Name"]@".");
+			Belt::TakeThisStuff(%clientid, %item, %amnt);
+			Belt::BankGiveThisSTuff(%clientid, %item, %amnt);
+			PlaySound(SoundPickupItem, GameBase::getPosition(%clientid));
+			
 			if(%amnt < %cmnt)
 				MenuStoreBeltItemFinal(%clientid, %item, %type);
 			else if(Belt::GetNS(%clientid,%type) != "0")
@@ -1590,20 +1597,23 @@ function processMenuWithdrawBeltItemFinal(%clientId, %opt)
 	}
 	else if(%option == "withdrawall")
 	{
-		%amnt = Belt::BankHasThisStuff(%clientid,%item);
-		Client::SendMessage(%clientid,0,"You withdraw "@%amnt@" "@$beltitem[%item, "Name"]@".");
-		Belt::BankTakeThisSTuff(%clientid,%item,%amnt);
-		Belt::GiveThisStuff(%clientid,%item,%amnt);
+		%amnt = Belt::BankHasThisStuff(%clientid, %item);
+		Client::SendMessage(%clientid, 0, "You withdraw "@%amnt@" "@$beltitem[%item, "Name"]@"." );
+		Belt::BankTakeThisSTuff(%clientid, %item, %amnt);
+		Belt::GiveThisStuff(%clientid, %item, %amnt);
 		MenuWithdrawBeltItem(%clientid, %type, 1);
+		PlaySound(SoundPickupItem, GameBase::getPosition(%clientid));
 	}
 	else if(%option == "withdraw")
 	{
 		%cmnt = Belt::BankHasThisStuff(%clientid,%item);
 		if(%cmnt >= %amnt)
 		{
-			Client::SendMessage(%clientid,0,"You withdraw "@%amnt@" "@$beltitem[%item, "Name"]@".");
-			Belt::BankTakeThisSTuff(%clientid,%item,%amnt);
-			Belt::GiveThisStuff(%clientid,%item,%amnt);
+			Client::SendMessage(%clientid, 0, "You withdraw "@%amnt@" "@$beltitem[%item, "Name"]@".");
+			Belt::BankTakeThisSTuff(%clientid, %item, %amnt);
+			Belt::GiveThisStuff(%clientid, %item, %amnt);
+			PlaySound(SoundPickupItem, GameBase::getPosition(%clientid));
+
 			if(%cmnt == %amnt)
 				MenuWithdrawBeltItem(%clientid, %type, 1);
 			else
@@ -2542,19 +2552,23 @@ generateEnchantsAndMateria();
 
 //Ammunition
 // function BeltItem::AddProjectile(%name, %item, %type, %weight, %cost, %image, %weaponSkill, %skillRestriction, %special, %shopIndex)
-BeltItem::AddProjectile("Small Rock", "SmallRock", "AmmoItems", 0.2, 13, "BasicRockImpact", $SkillBows, $SkillBows @ " 1", "6 5", 1);
-BeltItem::AddProjectile("Basic Arrow", "BasicArrow", "AmmoItems", 0.1, 5, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 10", 2);
-BeltItem::AddProjectile("Sheaf Arrow", "SheafArrow", "AmmoItems", 0.1, 25, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 20", 3);
-BeltItem::AddProjectile("Bladed Arrow","BladedArrow","AmmoItems",0.1, 50, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 40", 4);
-BeltItem::AddProjectile("Light Quarrel","LightQuarrel","AmmoItems",0.1 ,100, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 10", 5);
-BeltItem::AddProjectile("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.1, 200, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 20", 6);
-BeltItem::AddProjectile("Short Quarrel","ShortQuarrel","AmmoItems",0.1, 300, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 40", 7);
-BeltItem::AddProjectile("Stone Feather","StoneFeather","AmmoItems",0.1, 400, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 60", 8);
-BeltItem::AddProjectile("Metal Feather","MetalFeather","AmmoItems",0.1, 500, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 80", 9);
-BeltItem::AddProjectile("Talon", "Talon", "AmmoItems", 0.1, 800, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 100", 10);
-BeltItem::AddProjectile("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.1, 1000, "BasicArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 120", 11);
-BeltItem::AddProjectile("Poison Arrow", "PoisonArrow", "AmmoItems", 0.1, 200, "BasicArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 140", 12);
-BeltItem::AddProjectile("Explosive Quarrel","ExplosiveQuarrel","AmmoItems" ,0.1, 500, "BasicQuarrelRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 50", 13);
+BeltItem::AddProjectile("Test Arrow", "TestArrow", "AmmoItems", 0.01, 1, "TestArrow", $SkillBows, $SkillBows @ " 1", "6 100");
+
+BeltItem::AddProjectile("Small Rock", "SmallRock", "AmmoItems", 0.02, 13, "BasicRockImpact", $SkillBows, $SkillBows @ " 1", "6 5", 1);
+BeltItem::AddProjectile("Basic Arrow", "BasicArrow", "AmmoItems", 0.01, 5, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 10", 2);
+BeltItem::AddProjectile("Sheaf Arrow", "SheafArrow", "AmmoItems", 0.01, 25, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 20", 3);
+BeltItem::AddProjectile("Bladed Arrow","BladedArrow","AmmoItems",0.01, 50, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 40", 4);
+BeltItem::AddProjectile("Stone Feather","StoneFeather","AmmoItems",0.01, 400, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 60", 8);
+BeltItem::AddProjectile("Metal Feather","MetalFeather","AmmoItems",0.01, 500, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 80", 9);
+BeltItem::AddProjectile("Talon", "Talon", "AmmoItems", 0.01, 800, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 100", 10);
+BeltItem::AddProjectile("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.01, 1000, "BasicArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 120", 11);
+BeltItem::AddProjectile("Poison Arrow", "PoisonArrow", "AmmoItems", 0.01, 1000, "BasicArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 140", 12);
+BeltItem::AddProjectile("Fire Arrow", "FireArrow", "AmmoItems", 0.01, 800, "FireArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 120", 12);
+
+BeltItem::AddProjectile("Light Quarrel","LightQuarrel","AmmoItems",0.01 ,100, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 10", 5);
+BeltItem::AddProjectile("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.01, 200, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 20", 6);
+BeltItem::AddProjectile("Short Quarrel","ShortQuarrel","AmmoItems",0.01, 300, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 40", 7);
+BeltItem::AddProjectile("Explosive Quarrel","ExplosiveQuarrel","AmmoItems" ,0.01, 500, "BasicQuarrelRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 50", 13);
 
 //Gems
 BeltItem::Add("Quartz", "Quartz", "GemItems", 0.2, 100);

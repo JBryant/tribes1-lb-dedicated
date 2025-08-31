@@ -49,10 +49,11 @@ function cast_blizzardblizzardboltfake(%Client)
 }
 function cast_truelight(%Client)
 {
+	lbecho("spawn light rocket");
 	%player = Client::getOwnedObject(%Client);
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
-	Player::setAnimation(%Client,41);
+	// Player::setAnimation(%Client,41);
 	Projectile::spawnProjectile("lightrocket",%trans,%player,%vel);
 }
 function cast_rocksummon(%Client)

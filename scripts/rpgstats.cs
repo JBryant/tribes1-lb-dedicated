@@ -746,12 +746,20 @@ function Game::refreshClientScore(%clientId)
 			if(%lvls > 0)
 			{
 				if(%lvls == 1)
-					Client::sendMessage(%clientId,0,"You have gained a level!");		
+					Client::sendMessage(%clientId, 0, "You have gained a level!");
 				else
-					Client::sendMessage(%clientId,0,"You have gained " @ %lvls @ " levels!");
+					Client::sendMessage(%clientId, 0, "You have gained " @ %lvls @ " levels!");
 					
-				Client::sendMessage(%clientId,0,"Welcome to level " @ fetchData(%clientId, "LVL"));
+				Client::sendMessage(%clientId, 0, "Welcome to level " @ fetchData(%clientId, "LVL"));
 				PlaySound(SoundLevelUp, GameBase::getPosition(%clientId));
+
+				// if new level is greater than or equal to remort level play different sound and send an additional message
+
+				%requiredLevel = 100 + (fetchData(%clientId, "RemortStep") * 5);
+				if(fetchData(%clientId, "LVL") >= %requiredLevel) {
+					Client::sendMessage(%clientId, $MsgBeige, "You are now able to remort!");
+					PlaySound(PlaceSeal, GameBase::getPosition(%clientId));
+				}
 
 				// setHP(%clientId, fetchData(%clientId, "MaxHP"));
 			}

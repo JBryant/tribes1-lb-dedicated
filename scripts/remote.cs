@@ -112,8 +112,9 @@ function remoteObjectivesMode(%clientId)
 
 function remoteScoresOn(%clientId)
 {
-	if(!%clientId.menuMode)
+	if(!%clientId.menuMode) {
 		Game::menuRequest(%clientId);
+	}
 }
 
 function remoteScoresOff(%clientId)

@@ -1003,8 +1003,8 @@ ItemImageData OrbOfLuminanceImage
 {
 	shapeFile = "orb";
 	mountPoint = $OverrideMountPoint[OrbOfLuminance];
-	mountOffset = {0.0, 0.0, 1.8};
-	mountRotation = {5, 3, 3};
+	mountOffset = { 0.0, 0.0, 1.8 };
+	mountRotation = { 5, 3, 3 };
 
 	lightType = 2;
 	lightRadius = 13;
