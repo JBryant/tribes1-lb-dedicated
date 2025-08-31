@@ -405,7 +405,7 @@ function Player::onKilled(%this) {
 	}
 }
 
-function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %quadrant, %object, %weapon, %projectile) {
+function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %quadrant, %object, %weapon, %projectile, %skillIndex) {
 	dbecho($dbechoMode2, "Player::onDamage(" @ %this @ ", " @ %type @ ", " @ %value @ ", " @ %pos @ ", " @ %vec @ ", " @ %mom @ ", " @ %vertPos @ ", " @ %quadrant @ ", " @ %object @ ", " @ %weapon @ ", " @ %projectile @ ")");
 
 	// lbecho("============= Player::onDamage ================");
@@ -434,6 +434,10 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 		%damagedClientPos = GameBase::getPosition(%damagedClient);
 		%shooterClientPos = GameBase::getPosition(%shooterClient);
 		%damagedCurrentArmor = GetCurrentlyWearingArmor(%damagedClient);
+
+		if (%weapon == "") {
+			%weapon = GetEquippedWeapon(%shooterClient);
+		}
 		
 		%skilltype = $SkillType[%weapon];
 
@@ -857,6 +861,13 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 					if(!%noImpulse) Player::applyImpulse(%this, %mom);
 					%noImpulse = "";
 
+					if (%skillIndex != "") {
+						if (%skillIndex == 12) {
+							// pop them up in the air
+							Player::applyImpulse(%this, "0 0 70");
+						}
+					}
+
 					if(%damagedCurrentArmor != "")
 						%ahs = $ArmorHitSound[%damagedCurrentArmor];
 					else
@@ -1128,4 +1139,95 @@ function remoteKill(%clientId)
 		playNextAnim(%clientId);
 		Player::kill(%clientId);
 	}
+}
+
+// ========================================================================================
+// New vector and muzzle transformation helpers (LongBow)
+// ========================================================================================
+
+function mAbs(%val) {
+   if (%val < 0)
+      return -%val;
+   else
+      return %val;
+}
+
+function Vector::cross(%a, %b) {
+   %ax = getWord(%a, 0);
+   %ay = getWord(%a, 1);
+   %az = getWord(%a, 2);
+
+   %bx = getWord(%b, 0);
+   %by = getWord(%b, 1);
+   %bz = getWord(%b, 2);
+
+   %cx = %ay * %bz - %az * %by;
+   %cy = %az * %bx - %ax * %bz;
+   %cz = %ax * %by - %ay * %bx;
+
+   return %cx @ " " @ %cy @ " " @ %cz;
+}
+
+function Muzzle_getBasisAndPos(%trans) {
+   %r0 = getWord(%trans, 0) @ " " @ getWord(%trans, 1) @ " " @ getWord(%trans, 2);  // Right
+   %r1 = getWord(%trans, 3) @ " " @ getWord(%trans, 4) @ " " @ getWord(%trans, 5);  // Forward (aim)
+   %r2 = getWord(%trans, 6) @ " " @ getWord(%trans, 7) @ " " @ getWord(%trans, 8);  // Up
+   %pos = getWord(%trans, 9) @ " " @ getWord(%trans, 10) @ " " @ getWord(%trans, 11); // Position
+
+   return %r0 @ " " @ %r1 @ " " @ %r2 @ " " @ %pos;
+}
+
+function Muzzle_getPosAndDir(%player) {
+   %t = GameBase::getMuzzleTransform(%player);
+   %forward = getWord(%t, 3) @ " " @ getWord(%t, 4) @ " " @ getWord(%t, 5);
+   %pos     = getWord(%t, 9) @ " " @ getWord(%t, 10) @ " " @ getWord(%t, 11);
+   %forward = Vector::normalize(%forward); // should already be unit, but safe
+
+   return %pos @ " " @ %forward;
+}
+
+function Muzzle_buildRay(%player, %meters) {
+   %res = Muzzle_getPosAndDir(%player);
+   %pos = getField(%res, 0);
+   %dir = getField(%res, 1);
+   %end = Vector::add(%pos, Vector::mul(%dir, %meters));
+
+   return %pos @ " " @ %end;
+}
+
+function Vector_fromAtoB(%posA, %posB) {
+   // Returns the (unnormalized) vector pointing from A to B
+   return Vector::sub(%posB, %posA);
+}
+
+function Direction_fromAtoB(%posA, %posB) {
+   // Returns the unit direction from A to B
+   return Vector::normalize(Vector::sub(%posB, %posA));
+}
+
+function MakeTransformFromPosAndDir(%pos, %forward) {
+   %f = Vector::normalize(%forward);
+
+   // Choose a safe up reference (avoid parallel with forward)
+   %upRef = "0 0 1";
+   %dot = Vector::dot(%f, %upRef);
+   if (mAbs(%dot) > 0.999) %upRef = "1 0 0";
+
+   %r = Vector::normalize(Vector::cross(%upRef, %f)); // Right
+   %u = Vector::cross(%f, %r);                        // Up (already unit if r,f are)
+
+   // Build row-major 3x3 + translation: Right, Forward, Up, tx ty tz
+   %transform =
+      getWord(%r,0) @ " " @ getWord(%r,1) @ " " @ getWord(%r,2) @ " " @
+      getWord(%f,0) @ " " @ getWord(%f,1) @ " " @ getWord(%f,2) @ " " @
+      getWord(%u,0) @ " " @ getWord(%u,1) @ " " @ getWord(%u,2) @ " " @
+      %pos;
+
+   return %transform;
+}
+
+function MakeTransformFromAtoB(%posA, %posB) {
+   %dir = Vector::normalize(Vector::sub(%posB, %posA));
+
+   return MakeTransformFromPosAndDir(%posA, %dir);
 }

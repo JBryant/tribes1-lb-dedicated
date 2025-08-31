@@ -68,7 +68,8 @@ function AntipersonelMine::onDamage(%this,%type,%value,%pos,%vec,%mom,%object)
 }
 
 //----------------------------------------------------------------------------
-
+// very large radius yellow bomb, low quality
+// ------------------------------------
 MineData Bomb1
 {
 	mass = 0.3;
@@ -93,6 +94,7 @@ function Bomb1::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// blue cloud
 MineData Bomb2
 {
 	mass = 0.3;
@@ -117,6 +119,7 @@ function Bomb2::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// weird yellow flash bomb
 MineData Bomb3
 {
 	mass = 0.3;
@@ -141,6 +144,7 @@ function Bomb3::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// standard shockwave
 MineData Bomb4
 {
 	mass = 0.3;
@@ -165,6 +169,7 @@ function Bomb4::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// blue electrical blal
 MineData Bomb24
 {
 	mass = 0.3;
@@ -189,6 +194,7 @@ function Bomb24::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// shockwave
 MineData Bomb5
 {
 	mass = 0.3;
@@ -213,6 +219,7 @@ function Bomb5::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// veryt large yellow mushroom cloud
 MineData Bomb6
 {
 	mass = 0.3;
@@ -237,6 +244,7 @@ function Bomb6::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// small blue twinkle star
 MineData Bomb7
 {
 	mass = 0.3;
@@ -262,7 +270,7 @@ function Bomb7::onAdd(%this)
 }
 
 
-//Chee
+//Chee small blue twinkle star
 MineData Bomb40
 {
 	mass = 0.3;
@@ -287,6 +295,7 @@ function Bomb40::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// medium yellow cloud with explosion sound
 MineData Bomb41
 {
 	mass = 0.3;
@@ -311,6 +320,7 @@ function Bomb41::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// blue spellcasting ghosty thingies with booms
 MineData Bomb44
 {
 	mass = 0.3;
@@ -335,6 +345,7 @@ function Bomb44::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// blue spellcasting ghosty thingies with booms
 MineData Bomb42
 {
 	mass = 0.3;
@@ -359,6 +370,7 @@ function Bomb42::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// blue spellcasting ghosty thingies with booms
 MineData Bomb43
 {
 	mass = 0.3;
@@ -382,6 +394,8 @@ function Bomb43::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// raining bullets?
 MineData Bomb107
 {
 	mass = 0.3;
@@ -405,6 +419,8 @@ function Bomb4::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// raining bullets?
 MineData Bomb108
 {
 	mass = 0.3;
@@ -428,6 +444,8 @@ function Bomb4::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// raining bullets?
 MineData Bomb200
 {
 	mass = 0.3;
@@ -452,6 +470,7 @@ function Bomb4::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// 1 bullet plus blue ice explosion
 MineData bomb201
 {
 	mass = 0.3;
@@ -476,6 +495,7 @@ function Bomb201::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// now souind medium large yellow/white cloud explosion
 MineData Bomb202
 {
 	mass = 0.3;
@@ -500,6 +520,7 @@ function Bomb202::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// small blue twinkle star no sound
 MineData Bomb300
 {
 	mass = 0.3;
@@ -548,6 +569,7 @@ function Bomb301::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// small blue twinkle star
 MineData Bomb302
 {
 	mass = 0.3;
@@ -572,6 +594,7 @@ function Bomb302::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// small blue shock ball (ice)
 MineData Bomb303
 {
 	mass = 0.3;
@@ -596,6 +619,7 @@ function Bomb303::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// large shockwave no sound
 MineData Bomb304
 {
 	mass = 0.3;
@@ -620,6 +644,7 @@ function Bomb304::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// small blue twinkle star
 MineData Bomb305
 {
 	mass = 0.3;
@@ -668,6 +693,7 @@ function Bomb306::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// lightning storm
 MineData Bomb307
 {
 	mass = 0.3;
@@ -691,6 +717,8 @@ function Bomb307::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// delayed explosion grenades with 2 explosons, one large and one small yellow cloud
 MineData Bomb950
 {
   mass = 0.3;
@@ -733,6 +761,7 @@ function shower(%this, %count)
 	}
 }
 
+// pulsing little red star
 MineData Bomb8
 {
 	mass = 0.3;
@@ -757,6 +786,7 @@ function Bomb8::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// yellow plasma ball explosion
 MineData Bomb9
 {
 	mass = 0.3;
@@ -781,6 +811,7 @@ function Bomb9::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// blue circle small explosion (ice)
 MineData Bomb10
 {
 	mass = 0.3;
@@ -805,6 +836,7 @@ function Bomb10::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// small dust explosion
 MineData Bomb11
 {
 	mass = 0.3;
@@ -829,6 +861,7 @@ function Bomb11::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// high quality small blue/white gas explosion
 MineData Bomb12
 {
 	mass = 0.3;
@@ -853,6 +886,7 @@ function Bomb12::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// medium high quality blue/white gas explosion
 MineData Bomb13
 {
 	mass = 0.3;
@@ -877,6 +911,7 @@ function Bomb13::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// slightly larger Bomb13
 MineData Bomb14
 {
 	mass = 0.3;
@@ -901,6 +936,7 @@ function Bomb14::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// small high quality blue/white explosion cloud
 MineData Bomb15
 {
 	mass = 0.3;
@@ -925,6 +961,7 @@ function Bomb15::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// medium high quality blue/white explosion cloud
 MineData Bomb16
 {
 	mass = 0.3;
@@ -949,6 +986,7 @@ function Bomb16::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
 
+// large high quality blue/white explosion cloud
 MineData Bomb17
 {
 	mass = 0.3;
@@ -1023,6 +1061,7 @@ function bomb611::onAdd(%this)
 	schedule("Mine::Detonate(" @ %this @ ");",0.9,%this);
 }
 
+// T Pose Skeleton with large yellow explosion
 MineData bomb612
 {
    	mass = 5.0;
@@ -1042,11 +1081,12 @@ MineData bomb612
 	triggerRadius = 0.5;
 	maxDamage = 1.5;
 };
-
 function bomb612::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");",0.9,%this);
 }
+
+// goblin with med dust explosion
 MineData bomb88888
 {
    	mass = 5.0;
@@ -1097,6 +1137,8 @@ function Handgrenade::onAdd(%this)
 	%data = GameBase::getDataName(%this);
 	schedule("Mine::Detonate(" @ %this @ ");",2.0,%this);
 }
+
+// blue ghosties again no sound
 MineData Bomb3000
 {
 	mass = 0.3;
@@ -1120,6 +1162,8 @@ function Bomb3000::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// more ghosties, maybe more?
 MineData Bomb3002
 {
 	mass = 0.3;
@@ -1143,6 +1187,8 @@ function Bomb3001::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// blue twinkle star
 MineData Bomb3003
 {
 	mass = 0.3;
@@ -1166,6 +1212,8 @@ function Bomb3003::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// tiny baby dust explosions
 MineData Bomb6661
 {
 	mass = 0.3;
@@ -1189,6 +1237,8 @@ function Bomb6661::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// tiny baby dust explosions
 MineData Bomb6662
 {
 	mass = 0.3;
@@ -1212,6 +1262,8 @@ function Bomb6662::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// invisible
 MineData Bomb6663
 {
 	mass = 0.3;
@@ -1235,6 +1287,8 @@ function Bomb6663::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// tiny baby white explosions
 MineData Bomb6664
 {
 	mass = 0.3;
@@ -1258,6 +1312,8 @@ function Bomb6664::onAdd(%this)
 {
 	schedule("Mine::Detonate(" @ %this @ ");", 0.2, %this);
 }
+
+// lightning storm
 MineData Bomb444
 {
 	mass = 0.3;

@@ -5,7 +5,7 @@ function cast_summonswordone(%Client)
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
-	Projectile::spawnProjectile("battleswordone",%trans,%player,%vel);
+	Projectile::spawnProjectile("battleswordone", %trans, %player, %vel);
 }
 function cast_summonswordtwo(%Client)
 {
@@ -273,7 +273,7 @@ function cast_tfist(%Client)
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,38);
-	Projectile::spawnProjectile("roguefist",%trans,%player,%vel);
+	Projectile::spawnProjectile("roguefist", %trans, %player, %vel);
 }
 
 function cast_tornado(%Client, %castPos, %index) {
@@ -366,6 +366,88 @@ function cast_mortar(%Client)
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
 	Projectile::spawnProjectile("MortarTurretShell",%trans,%player,%vel);
+}
+
+function cast_blackhole(%Client, %castObj, %castPos, %w2) {
+	// %player = Client::getOwnedObject(%Client);
+	// %trans = GameBase::getMuzzleTransform(%player);
+	// %vel = Item::getVelocity(%player);
+	// Player::setAnimation(%Client,39);
+	// Projectile::spawnProjectile("BlackHole", %trans, %player, %vel);
+
+	// spawn object at cast pos + some y
+	%pos = GetWord(%castPos, 0) @ " " @ GetWord(%castPos, 1) @ " " @ (GetWord(%castPos, 2) + 4);
+	// Projectile::spawnProjectile("BlackHole", %newPos, %player, %vel);
+	%hole = newObject("Blood", StaticShape, BloodSpot, true);
+	addToSet("MissionCleanup", %hole);
+  	schedule("Item::Pop(" @ %hole @ ");", 10, %hole);
+	gamebase::setposition(%hole, %pos);
+
+	// now find all enemies within the radius and pull them in
+
+	for(%i = 0; %i < 20; %i++) {
+		%freeze = "";
+		if (%i == 0) {
+			%freeze = True;
+		} else if (%i == 16) {
+			%freeze = False;
+		}
+
+		%set = newObject("set", SimSet);
+		%n = containerBoxFillSet(%set, $SimPlayerObjectType, %pos, 100, 100, 100, 0);
+		schedule("Group::iterateRecursive(" @ %set @ ", PullTowards, \"" @ %pos @ "\", \"" @ %freeze @ "\");", %i / 5);
+		schedule("deleteObject(" @ %set @ ");", %i / 5);
+
+		// Bomb24 - Small blue fusions exp
+		// Bomb7 - small blue twinkle star
+
+		if (%i == 1 || %i == 5 || %i == 10 || %i == 15 || %i == 19) {
+			schedule("CreateAndDetBomb(\"" @ %Client @ "\", \"Bomb303\", \"" @ %pos @ "\", True, 78);", %i / 5);
+		}
+		if (%i == 2 || %i == 6 || %i == 11 || %i == 16 || %i == 18) {
+			schedule("CreateAndDetBomb(\"" @ %Client @ "\", \"Bomb3002\", \"" @ %pos @ "\", False, 78);", %i / 5);
+		}
+		if (%i == 3 || %i == 7 || %i == 12 || %i == 17) {
+			schedule("CreateAndDetBomb(\"" @ %Client @ "\", \"Bomb42\", \"" @ %pos @ "\", False, 78);", %i / 5);
+		}
+
+		%randomPos = GetWord(%pos, 0) - (getRandom() * 3) @ " " @ GetWord(%pos, 1) - (getRandom() * 3) @ " " @ (GetWord(%pos, 2) - c);
+		schedule("CreateAndDetBomb(\"" @ %Client @ "\", \"Bomb300\", \"" @ %randomPos @ "\", False, 78);", %i / 5);
+	}
+}
+
+function PullTowards(%target, %pos, %freeze) {	
+	%targetId = Player::getClient(%target);
+
+	if(Player::isAiControlled(%targetId)) {
+		// if (%freeze == True) {
+		// 	storeData(%targetId, "frozen", True);
+		// 	AI::setVar(fetchData(%targetId, "BotInfoAiName"), SpotDist, 0);
+		// 	AI::newDirectiveRemove(fetchData(%targetId, "BotInfoAiName"), 99);
+		// }
+
+		%targetPos = GameBase::getPosition(%target);
+		%targetPosX = GetWord(%targetPos, 0);
+		%targetPosY = GetWord(%targetPos, 1);
+		%targetPosZ = GetWord(%targetPos, 2);
+
+		%endPosX = GetWord(%pos, 0);
+		%endPosY = GetWord(%pos, 1);
+		%endPosZ = GetWord(%pos, 2);
+
+		%dx = ((%endPosX - %targetPosX) * 8);
+		%dy = ((%endPosY - %targetPosY) * 8);
+		%dz = ((%endPosZ - %targetPosZ) * 15);
+
+		%vector = %dx @ " " @ %dy @ " " @ %dz;
+
+		Player::applyImpulse(%targetId, %vector);
+
+		// if (%freeze == False) {
+		// 	storeData(%targetId, "frozen", "");
+		// 	AI::SetSpotDist(%targetId);
+		// }
+	}
 }
 
 
@@ -466,9 +548,8 @@ function DoCastSpell(%Client, %index, %oldpos, %castPos, %castObj, %w2, %tempMan
 		%Client = %temp_id;
 	}
 
-	//if(String::findSubStr(%info, "overrideEndSound 1") != -1)
+
 	if ($Spell::endSound[%index] != "") {
-		// schedule("playSound("@$Spell::endSound[%index]@", \""@%castPos@"\");", 0.3);
 		if (%castPos != "") {
 			playSound($Spell::endSound[%index], %castPos);
 		} else {
@@ -480,6 +561,11 @@ function DoCastSpell(%Client, %index, %oldpos, %castPos, %castObj, %w2, %tempMan
 		remoteEval(%HealId, "RefreshHPset", Fix(getHP(%HealId), %HealId, HP));
 
 	%recovTime = $Spell::recoveryTime[%index];
+
+	if (HasBonusState(%clientId, "haste") == True) {
+		%recovTime = floor(%recovTime * 0.5);
+	}
+
 	if(%Client.repack > 32) {
 		remoteEval(%Client, "rpgbarhud", %recovTime, 4, 2, "||");
 	}
@@ -519,7 +605,7 @@ function ooo(%Client, %i) {
 		%zPos = GetWord(%ccpos, 2) + (%s * 2);
 
 		%newPos = %xPos@" "@%yPos@" "@%zPos;	//Bomb9
-       	schedule("CreateAndDetBomb(\""@%Client@"\", \"Bomb3000\", \""@%newPos@"\", \"False\", \""@%i@"\", \"1\");", %s / 20);
+       	schedule("CreateAndDetBomb(\""@%Client@"\", \"Bomb3000\", \""@%newPos@"\", \"False\", \""@%i@"\", \"1\", \"True\");", %s / 20);
 
 		// %tempPos = RandomPositionXY(%minrad, %maxrad);
 
@@ -543,7 +629,7 @@ function ooo(%Client, %i) {
 	}
 }
 
-function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index, %multiplier) {
+function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index, %multiplier, %skipSound) {
 	// lbecho("CreateAndDetBomb(" @ %clientId @ ", " @ %b @ ", " @ %castPos @ ", " @ %doDamage @ ", " @ %index @ ", " @ %multiplier @ ");");
 	%player = Client::getOwnedObject(%clientId);
 	%bomb = newObject("", "Mine", %b);
@@ -564,7 +650,7 @@ function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index, %multiplie
 		}
 	}
 
-	if ($Spell::endSound[%index] != "")
+	if ($Spell::endSound[%index] != "" && !%skipSound)
 		playSound($Spell::endSound[%index], %castPos);
 }
 

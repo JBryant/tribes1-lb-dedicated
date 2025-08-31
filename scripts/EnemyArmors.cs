@@ -464,9 +464,9 @@ $spawnIndex[98] = "CyclopsObscenity";
 
 %defaultAlchemyDropsI = "HealingHerb 5/-200 VialOfWater 3/-200 BombCore 3/-200 CrackedFlask 3/-200";
 %defaultAlchemyDropsII = "HealingHerb 5/-200 VialOfWater 3/-200 MaidensTear 3/-200 TonberryOil 3/-400 WornGlassVial 3/-200";
-%defaultAlchemyDropsIII = "HealingHerb 5/-200 VialOfWater 3/-200 BehemothHornFragment 3/-200 ReinforcedAlchemistsBottle 3/-200";
-%defaultAlchemyDropsIV = "HealingHerb 5/-200 VialOfWater 3/-200 MalboroSporeSac 3/-200 ArcaneCrystalPhial 3/-200";
-%defaultAlchemyDropsV = "HealingHerb 5/-200 VialOfWater 3/-200 MalboroSporeSac 3/-200 EtherealStasisFlask 3/-200";
+%defaultAlchemyDropsIII = "HealingHerb 5/-200 Sylphroot 2/-200 VialOfWater 3/-200 BehemothHornFragment 3/-200 ReinforcedAlchemistsBottle 3/-200";
+%defaultAlchemyDropsIV = "HealingHerb 5/-200 Sylphroot 3/-200 VialOfWater 3/-200 MalboroSporeSac 3/-200 ArcaneCrystalPhial 3/-200";
+%defaultAlchemyDropsV = "HealingHerb 5/-200 Sylphroot 5/-200 VialOfWater 3/-200 MalboroSporeSac 3/-200 EtherealStasisFlask 3/-200";
 
 $BotEquipment[GoblinRunt] = 	"CLASS Enemy LVL 2+1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1/-2000 " @ %defaultAlchemyDropsI;
 $BotEquipment[GoblinThief] = 	"CLASS Enemy LVL 5+2 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-1800 " @ %defaultAlchemyDropsI;
@@ -581,12 +581,12 @@ $BotEquipment[MateriaBat] = "CLASS Enemy LVL 400+75 COINS 115/50 LCK 3 BeastClaw
 $BotEquipment[MateriaBear] = "CLASS Enemy LVL 400+75 COINS 115/50 LCK 3 BeastClawII 1 IceMateriaII 1/-250 " @ %defaultAlchemyDropsV;
 
 $BotEquipment[OgreHellion] = "CLASS Enemy LVL 175+60 COINS 115/50 LCK 2 DragonBoneClub 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
-$BotEquipment[OgreDemon] = "CLASS Enemy LVL 225+60 COINS 115/50 LCK 2 AncientSword 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[OgreDemon] = "CLASS Enemy LVL 225+60 COINS 115/50 LCK 2 BloodSword 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[OgreNecromancer] = "CLASS Enemy LVL 200+60 COINS 115/50 LCK 2 CastingBlade 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 
 // lower obsidan mines (lvl 350 - 450)
-$BotEquipment[CyclopsAbomination] = "CLASS Enemy LVL 375+60 COINS 115/50 LCK 2 MateriaAxe 1 FireMateriaII 1/-600 " @ %defaultAlchemyDropsV;
-$BotEquipment[CyclopsObscenity] = "CLASS Enemy LVL 375+60 COINS 115/50 LCK 2 CastingBlade 1 FireMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[CyclopsAbomination] = "CLASS Enemy LVL 375+60 COINS 115/50 LCK 3 AncientSword 1 FireMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[CyclopsObscenity] = "CLASS Enemy LVL 375+60 COINS 115/50 LCK 3 CastingBlade 1 FireMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 
 //------------------------------
 

@@ -416,6 +416,18 @@ function Game::menuRequest(%clientId)
 			// If they have a ranged weapon, we can change this to not use GetAccessoryList in the future
 			if(GetAccessoryList(%clientId, 9, -1) != "")
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Ranged weapons" , "rweapons");
+
+			if (fetchData(%clientId, "MyHouse") != "")
+				%house = fetchData(%clientId, "MyHouse");
+			else
+				%house = "No House";
+			
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 1, \"" @ Client::getName(%clientId) @ ":\");", 0.1);
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 2, \"HP: " @ fetchData(%clientId, "HP") @ "/" @ fetchData(%clientId, "MaxHP") @ " | MANA: " @ fetchData(%clientId, "MANA") @ "/" @ fetchData(%clientId, "MaxMANA") @ "\");", 0.1);
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 3, \"ATK: " @ fetchData(%clientId, "ATK") @ " | DEF: " @ fetchData(%clientId, "DEF") @ " | MDEF: " @ fetchData(%clientId, "MDEF") @ "\");", 0.1);
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 4, \"LCK: " @ fetchData(%clientId, "LCK") @ " | " @ %house @ " | RP: " @ fetchData(%clientId, "RankPoints") @ "\");", 0.1);
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 5, \"COINS: " @ fetchData(%clientId, "COINS") @ " | BANK: " @ fetchData(%clientId, "BANK") @ "\");", 0.1);
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 6, \"RL: " @ fetchData(%clientId, "RemortStep") @ "\");", 0.1);
 		}
 	}
 }

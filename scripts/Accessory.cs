@@ -298,7 +298,19 @@ function GetEquippedAccessoriesCount(%clientId) {
 }
 
 function GetEquippedAccessoriesCountByBeltType(%clientId, %beltType) {
-	return GetWord(Belt::GetNS(%clientId, %beltType), 0);
+	%itemList = Belt::GetNS(%clientId, %beltType);
+	%totalItems = GetWord(%itemList, 0);
+	%count = 0;
+
+	for(%i = 1; %i <= %totalItems; %i++) {
+		%item = getword(%itemList, %i);
+
+		if (BeltItem::isEquipped(%clientId, %item)) {
+			%count++;
+		}
+	}
+
+	return %count;
 }
 
 function GetEquippedAccessoriesByBeltType(%clientId, %beltType) {

@@ -147,7 +147,7 @@ $SpellMovementGraceDistance = 4;//2
 
 //-- SPELL DEFINITIONS -------------------------------------------------------------------------------------------
 
-$defaultMageClass = "BlackMage";
+$defaultMageClass = "BlackMage,TimeMage";
 
 //-----------transportation spells-------------
 $Spell::keyword[1] = "teleport";
@@ -654,7 +654,7 @@ $Spell::keyword[31] = "Missile";
 $Spell::index[Missile] = 31;
 $Spell::name[31] = "Light Magic";
 $Spell::description[31] = "Level 4 Light Magic.";
-$Spell::delay[31] = 6;
+$Spell::delay[31] = 3;
 $Spell::recoveryTime[31] = 9;
 $Spell::damageValue[31] = 90;	
 $Spell::LOSrange[31] = 100;
@@ -1429,6 +1429,45 @@ $Spell::refVal[76] = -9998;
 $Spell::graceDistance[76] = 10;
 $Spell::elementalType[76] = $ElementalFire;
 $SkillType[explosiveshotexplosion] = $SkillArchery;
+
+// // exposive shot explosion
+$Spell::keyword[77] = "haste";
+$Spell::index[haste] = 77;
+$Spell::name[77] = "Haste";
+$Spell::description[77] = "Lowers all cooldowns for skills and spells.";
+$Spell::delay[77] = 2.5;
+$Spell::recoveryTime[77] = 2.5;
+$Spell::damageValue[77] = "0";
+$Spell::LOSrange[77] = 0; // 80
+$Spell::manaCost[77] = 50;
+$Spell::startSound[77] = PlaceSeal;
+$Spell::endSound[77] = ActivateCH;
+$Spell::groupListCheck[77] = False;
+$Spell::refVal[77] = -9998;
+$Spell::graceDistance[77] = 1;
+$Spell::classRestrictions[haste] = ",TimeMage,";
+// $Spell::elementalType[77] = $ElementalFire;
+$SkillType[haste] = $SkillTimeMagick;
+
+// // exposive shot explosion
+$Spell::keyword[78] = "blackhole";
+$Spell::index[blackhole] = 78;
+$Spell::name[78] = "Black Hole";
+$Spell::description[78] = "Creates a black hole that pulls in nearby enemies.";
+$Spell::delay[78] = 1;
+$Spell::recoveryTime[78] = 1;
+$Spell::damageValue[78] = "1";
+$Spell::LOSrange[78] = 80; // 80
+$Spell::radius[78] = 100;
+$Spell::manaCost[78] = 1;
+$Spell::startSound[78] = PlaceSeal;
+// $Spell::endSound[78] = ActivateCH;
+$Spell::groupListCheck[78] = False;
+$Spell::refVal[78] = -9998;
+$Spell::graceDistance[78] = 1;
+$Spell::classRestrictions[blackhole] = ",TimeMage,";
+// $Spell::elementalType[78] = $ElementalFire;
+$SkillType[blackhole] = $SkillTimeMagick;
 
 //====================================================================================================================
 //====================================================================================================================
@@ -2956,6 +2995,14 @@ function SpellNum69(%clientId, %castObj, %castPos) {
 		else
 			%returnFlag = False;
 	}
+}
+
+function SpellNum77(%clientId) {
+	UpdateBonusState(%clientId, "Haste", 15, "Haste");
+}
+
+function SpellNum78(%clientId, %castObj, %castPos, %w2) {
+	cast_blackhole(%clientId, %castObj, %castPos, %w2);
 }
 
 // //-- SPELL DEFINITIONS -------------------------------------------------------------------------------------------

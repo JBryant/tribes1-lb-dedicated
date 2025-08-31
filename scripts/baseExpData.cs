@@ -526,7 +526,7 @@ ExplosionData turretExp
 ExplosionData bulletExp0
 {
    shapeName = "chainspk.dts";
-   soundId   = ricochet1;
+   soundId   = SoundHitFlesh;
 
    faceCamera = true;
    randomSpin = true;
@@ -547,7 +547,7 @@ ExplosionData bulletExp0
 ExplosionData bulletExp1
 {
    shapeName = "chainspk.dts";
-   soundId   = ricochet2;
+   soundId   = SoundArrowHit2; // SoundHitFlesh
 
    faceCamera = true;
    randomSpin = true;
@@ -568,7 +568,7 @@ ExplosionData bulletExp1
 ExplosionData bulletExp2
 {
    shapeName = "chainspk.dts";
-   soundId   = ricochet3;
+   soundId   = SoundArrowHit2;
 
    faceCamera = true;
    randomSpin = true;

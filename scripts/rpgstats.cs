@@ -266,6 +266,8 @@ function MenuSP(%clientId, %page)
 	if(%ub > %ns)
 		%ub = %ns;
 
+	%cnt = 0;
+
 	for(%i = %lb; %i <= %ub; %i++)
 		Client::addMenuItem(%clientId, %cnt++ @ "(" @ GetPlayerSkill(%clientId, %i) @ ") " @ $SkillDesc[%i], %i @ " " @ %page);
 
@@ -287,25 +289,56 @@ function MenuSP(%clientId, %page)
 
 	return;
 }
+
 function processMenusp(%clientId, %opt)
 {
 	dbecho($dbechoMode, "processMenusp(" @ %clientId @ ", " @ %opt @ ")");
 
-	%o = GetWord(%opt, 0);
-	%p = GetWord(%opt, 1);
+	%skillIndex = GetWord(%opt, 0);
+	%page = GetWord(%opt, 1);
 
-	if(fetchData(%clientId, "SPcredits") > 0 && %o != "page" && %o != "done")
+	if (%skillIndex != "page" && %skillIndex != "done") {
+		MenuSPBulk(%clientId, %skillIndex, %page);
+	} else {
+		if(%opt != "done")
+			MenuSP(%clientId, %page);
+	}
+}
+
+function MenuSPBulk(%clientId, %skillIndex, %page) {
+	dbecho($dbechoMode, "MenuSPBulk(" @ %clientId @ ", " @ %page @ ")");
+	// lbecho("MenuSPBulk clientId: " @ %clientId @ ", skillIndex: " @ %skillIndex @ ", page: " @ %page);
+
+	Client::buildMenu(%clientId, "(" @ GetPlayerSkill(%clientId, %skillIndex) @ ") " @ $SkillDesc[%skillIndex] @ " - " @ fetchData(%clientId, "SPcredits") @ " SP", "spbulk", true);
+
+	%cnt = 0;
+
+	Client::addMenuItem(%clientId, %cnt++ @ "1", %skillIndex @ " " @ %page @ " 1");
+	Client::addMenuItem(%clientId, %cnt++ @ "5", %skillIndex @ " " @ %page @ " 5");
+	Client::addMenuItem(%clientId, %cnt++ @ "10", %skillIndex @ " " @ %page @ " 10");
+	Client::addMenuItem(%clientId, %cnt++ @ "50", %skillIndex @ " " @ %page @ " 50");
+	Client::addMenuItem(%clientId, %cnt++ @ "100", %skillIndex @ " " @ %page @ " 100");
+
+	Client::addMenuItem(%clientId, "xDone", "done " @ %page);
+
+	return;
+}
+
+function processMenuSPBulk(%clientId, %opt)
+{
+	dbecho($dbechoMode, "processMenuSPBulk(" @ %clientId @ ", " @ %opt @ ")");
+
+	%skillIndex = GetWord(%opt, 0);
+	%page = GetWord(%opt, 1);
+	%amount = GetWord(%opt, 2);
+
+	if(fetchData(%clientId, "SPcredits") > %amount && %page != "done")
 	{
-		if(%clientId.bulkNum < 1)
-			%clientId.bulkNum = 1;
-		if(%clientId.bulkNum > 30 && !(%clientId.adminLevel >= 1) )
-			%clientId.bulkNum = 30;
-
-		for(%i = 1; %i <= %clientId.bulkNum; %i++)
+		for(%i = 1; %i <= %amount; %i++)
 		{
 			if(fetchData(%clientId, "SPcredits") > 0)
 			{
-				if(AddSkillPoint(%clientId, %o))
+				if(AddSkillPoint(%clientId, %skillIndex))
 					storeData(%clientId, "SPcredits", 1, "dec");
 				else
 					break;
@@ -314,12 +347,18 @@ function processMenusp(%clientId, %opt)
 				break;
 		}
 
-		RefreshAll(%clientId);
+		RefreshAll(%clientId);	
 	}
 
-	if(%o != "done")
-		MenuSP(%clientId, %p);
+	if(%skillIndex != "done") {
+		MenuSPBulk(%clientId, %skillIndex, %page);
+	} else {
+		MenuSP(%clientId, %page);
+	}
+
+	return;
 }
+
 function processMenunull(%clientId, %opt)
 {
 	return;
@@ -640,7 +679,7 @@ function DistributeExpForKilling(%damagedClient)
 			%serverExpMultiplier = 5; // default to 1 but increase for server special occasions
 			%value = %value * %serverExpMultiplier;
 
-			%perc = %dCounter[%finalDamagedBy[%i]] / %total;
+			%perc = 1; // %dCounter[%finalDamagedBy[%i]] / %total;
 			%final = Cap(round(%value * %perc), "inf", 1000);
 
 			//rank point bonus

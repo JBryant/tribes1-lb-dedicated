@@ -1848,8 +1848,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 		if (%w1 == "#spells") {
 			%msg = "<f2>Spells\n\n";
 			%msg = %msg @ "<f1>Fire Magick:        <f0>Fire, Fira, Firaga, Flare\n";
-			%msg = %msg @ "<f1>Ice Magick:         <f0>Blizzard, Blizza, Blizzaga, Avalanche\n";
-			%msg = %msg @ "<f1>Lightning Magick:  <f0>Thunder, Thundera, Thunderaga, Thunderstorm\n";
+			%msg = %msg @ "<f1>Ice Magick:         <f0>Blizzard, Blizzara, Blizzaga, Avalanche\n";
+			%msg = %msg @ "<f1>Lightning Magick:  <f0>Thunder, Thundara, Thundaga, Thunderstorm\n";
 			%msg = %msg @ "<f1>Water Magick:     <f0>Aqua, Aquara, Aquaga, Tsunami\n";
 			%msg = %msg @ "<f1>Earth Magick:      <f0>Tremor, Quake, Earthquake, Cataclysm\n";
 			%msg = %msg @ "<f1>Wind Magick:      <f0>Aero, Aerora, Aeroga, Tornado\n";
@@ -1950,6 +1950,17 @@ function internalSay(%clientId, %team, %message, %senderName)
 		// ADMIN COMMANDS =============
 		//============================
 
+		if (%w1 == "#epoch") {
+			Client::sendMessage(%TrueClientId, 0, "Epoch: " @ Time::Epoch());
+		}
+
+		if (%w1 == "#timestamp") {
+			Client::sendMessage(%TrueClientId, 0, "Timestamp: " @ String::timestamp());
+		}
+
+		if (%w1 == "#strip") {
+			UnequipMountedStuff(%TrueClientId);
+		}
 
 		if(%w1 == "#spawnflyer")
 			{

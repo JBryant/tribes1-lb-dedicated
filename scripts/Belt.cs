@@ -43,9 +43,10 @@
 
 
 // TODO:
-// 1. Fix accessory max type checks
+// 1. Fix Drop Points in newer dungeons
 // 2. Healing Kit mend uses multiple healing kits
-// 3. Take off armor, weapons and accessories when u remort
+// 3. Add Shorty quest line
+// 
 
 // ------------------- //
 // Menu Functions      //
@@ -230,6 +231,18 @@ function MenuBeltGear(%clientid, %type, %page, %victim)
 		Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1 @" "@%type@" "@%victim);
 		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1 @" "@%type@" "@%victim);
 	}
+
+	if (fetchData(%clientId, "MyHouse") != "")
+		%house = fetchData(%clientId, "MyHouse");
+	else
+		%house = "No House";
+
+	remoteEval(%clientId, "setInfoLine", 1, Client::getName(%clientId) @ ":");
+	remoteEval(%clientId, "setInfoLine", 2, "HP: " @ fetchData(%clientId, "HP") @ "/" @ fetchData(%clientId, "MaxHP") @ " | MANA: " @ fetchData(%clientId, "MANA") @ "/" @ fetchData(%clientId, "MaxMANA") @ ":");
+	remoteEval(%clientId, "setInfoLine", 3, "ATK: " @ fetchData(%clientId, "ATK") @ " | DEF: " @ fetchData(%clientId, "DEF") @ " | MDEF: " @ fetchData(%clientId, "MDEF") @ ":");
+	remoteEval(%clientId, "setInfoLine", 4, "LCK: " @ fetchData(%clientId, "LCK") @ " | " @ %house @ " | RP: " @ fetchData(%clientId, "RankPoints") @ ":");
+	remoteEval(%clientId, "setInfoLine", 5, "COINS: " @ fetchData(%clientId, "COINS") @ " | BANK: " @ fetchData(%clientId, "BANK") @ ":");
+	remoteEval(%clientId, "setInfoLine", 6, "RL: " @ fetchData(%clientId, "RemortStep") @ ":");
 
 	return;
 }
@@ -449,6 +462,40 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 
 	Client::addMenuItem(%clientId, %cnt++ @ "Examine", %type@" examine "@%item);
 	Client::addMenuItem(%clientId, "z<< Back", %type@" back");
+
+
+	// %msg = "";
+	// %msg = %msg @ "<f1>" @ %desc @ %loc @ "\n";
+	// %msg = %msg @ "\nBonuses: " @ WhatSpecialVars(%item);
+	// if(%s != "")
+	// 	%msg = %msg @ "\nSkill Type: " @ %s;
+	// %msg = %msg @ "\nRestrictions: " @ WhatSkills(%item);
+	// if(%belt)
+	// 	%msg = %msg @ "\nCategory: Belt: " @ getDisp($beltitem[%item, "Type"]);
+	// if(%w != "")
+	// 	%msg = %msg @ "\nWeight: " @ %w;
+	// if(%c != "")
+	// 	%msg = %msg @ "\nPrice: $" @ %c;
+	// if(%sd != "")
+	// 	%msg = %msg @ "\nDelay: " @ %sd @ " sec";
+	// if(%sr != "")
+	// 	%msg = %msg @ "\nRecovery: " @ %sr @ " sec";
+	// if(%sm != "")
+	// 	%msg = %msg @ "\nMana: " @ %sm;
+
+	// %msg = %msg @ "\n\n<f0>" @ %nfo;
+
+	// %t = GetAccessoryVar(%item, $AccessoryType);
+	%w = GetAccessoryVar(%item, $Weight);
+	%c = GetItemCost(%item);
+	%s = $SkillDesc[$SkillType[%item]];
+
+	remoteEval(%clientId, "setInfoLine", 1, %name @ ":");
+	remoteEval(%clientId, "setInfoLine", 2, "Bonuses: " @ WhatSpecialVars(%item));
+	remoteEval(%clientId, "setInfoLine", 3, "Required Skills: " @ WhatSkills(%item));
+	remoteEval(%clientId, "setInfoLine", 4, "Weight: " @ %w);
+	remoteEval(%clientId, "setInfoLine", 5, "Cost: " @ %c);
+	remoteEval(%clientId, "setInfoLine", 6, $AccessoryVar[%item, $MiscInfo]);
 
 	return;
 }
@@ -1685,6 +1732,7 @@ function Belt::GetNS(%clientid, %type) {
 
     // LongBow: This is much faster... search through their inventory not ALL items that exist to see if they have it
 	%list = fetchdata(%clientid, %type);
+	// lbecho("%list: " @ %list);
 	for(%idx = 0; GetWord(%list, %idx) != -1; %idx += 2) {
 		%item = GetWord(%list, %idx);
 		%count = GetWord(%list, %idx + 1);
@@ -2764,8 +2812,8 @@ $description = "A legendary bow capable of firing arrows that never miss their m
 BeltItem::AddWeapon("Hawk's Talon", "HawksTalon", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1800", "320", 187);
 $description = "The ultimate crossbow, forged from ancient dragonbone and enhanced by magic.";
 BeltItem::AddWeapon("Dragonbone Crossbow", "DragonboneCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 2000", "350", 188);
+$description = "A worn but sturdy bow. It feels light in the hands and radiates a warm energy. Where did you find this?";
 BeltItem::AddWeapon("Longbow's Bow", "LongbowsBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 5000", "1000", 189);
-$description = "Longbow's Legendary Bow.";
 // 110, 130, 155, 175, 195, 215, 240, 265, 290, 320, 350
 
 // Armors and Shields (200 - 299)
@@ -2912,22 +2960,22 @@ BeltItem::AddAccessory("Ring of Defense +5", "RingOfDefense5", $RingAccessoryTyp
 
 //Potions
 // function BeltItem::Add(%name, %item, %type, %weight, %cost, %image, %shopIndex) {
-BeltItem::Add("Potion","Potion", "PotionItems", 0.5, 100, "", 501);
+BeltItem::Add("Potion","Potion", "PotionItems", 0.5, 10, "", 501);
 $AccessoryVar[Potion, $MiscInfo] = "A potion of Healing that heals 25 HP";
 $restoreValue[Potion, HP] = 25;
 $AccessoryVar[Potion, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 HealingHerb 5";
 
-BeltItem::Add("Hi-Potion", "HiPotion", "PotionItems", 0.5, 1000, "", 502);
+BeltItem::Add("Hi-Potion", "HiPotion", "PotionItems", 0.5, 100, "", 502);
 $AccessoryVar[HiPotion, $MiscInfo] = "A potion of Healing that heals 100 HP";
 $restoreValue[HiPotion, HP] = 100;
 $AccessoryVar[HiPotion, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 HealingHerb 10 MandragoraRoot 2";
 
-BeltItem::Add("X-Potion", "XPotion", "PotionItems", 0.5, 10000, "", 503);
+BeltItem::Add("X-Potion", "XPotion", "PotionItems", 0.5, 1000, "", 503);
 $AccessoryVar[XPotion, $MiscInfo] = "A potion of Healing that heals 250 HP";
 $restoreValue[XPotion, HP] = 250;
 $AccessoryVar[XPotion, "AlchemyIngredients"] = "ReinforcedAlchemistsBottle 1 VialOfWater 1 MandragoraRoot 10 Sylphroot 2";
 
-BeltItem::Add("Mega Potion", "MegaPotion", "PotionItems", 0.5, 25000, "", 504);
+BeltItem::Add("Mega Potion", "MegaPotion", "PotionItems", 0.5, 2500, "", 504);
 $AccessoryVar[MegaPotion, $MiscInfo] = "A potion of Healing that heals 500 HP";
 $restoreValue[MegaPotion, HP] = 500;
 $AccessoryVar[MegaPotion, "AlchemyIngredients"] = "ArcaneCrystalPhial 1 VialOfWater 1 Sylphroot 10 MaidensTear 2";

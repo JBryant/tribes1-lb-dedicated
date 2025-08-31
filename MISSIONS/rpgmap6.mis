@@ -5279,7 +5279,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "RACE MaleHuman";
 			instant SimGroup "TEAM 2";
 			instant SimGroup "GREETING What iz humeen doing here? Oh well, need good armor?";
-			instant SimGroup "BELTSHOP 200 201 202 203 204 205 206 207";
+			instant SimGroup "BELTSHOP 203 204 205 206 207 253 254 255";
 		};
 		instant SimGroup "merchant9" {
 			instant Marker "dunega weapons merchant" {
@@ -5321,7 +5321,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "RACE MaleHuman";
 			instant SimGroup "TEAM 2";
 			instant SimGroup "GREETING Welkom! Need armor? If you need pointy things, see Taggert and Boggert in Lower Gooba.";
-			instant SimGroup "BELTSHOP 203 204 205 206 207 208 209 210";
+			instant SimGroup "BELTSHOP 205 206 207 208 209 210 253 254 255 256 257 258";
 		};
 		instant SimGroup "merchant12" {
 			instant Marker "lower gooba weapon merchant" {
@@ -5377,7 +5377,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "BELTSHOP 200 201 202 203 204 250 251 252 253 254";
 		};
 		instant SimGroup "merchant16" {
-			instant Marker "kalm armor merchant" {
+			instant Marker "kalm archer merchant" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "-2413.36 -291.226 65.0993";
@@ -5430,7 +5430,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "BELTSHOP 856 857 702";
 		};
 		instant SimGroup "merchant20" {
-			instant Marker "heaven weapon merchant" {
+			instant Marker "heaven armor merchant" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "1427.09 -458.446 -808.027";
@@ -5439,11 +5439,11 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NAME Biggs";
 			instant SimGroup "ITEMS CLASS Chemist LVL 2 LCK 0";
 			instant SimGroup "RACE MaleHuman";
-			instant SimGroup "GREETING Need a fancy new weapon? Biggs has you covered!";
-			instant SimGroup "BELTSHOP 209 210 211 212";
+			instant SimGroup "GREETING Need some protection? Biggs has you covered!";
+			instant SimGroup "BELTSHOP 208 209 210 211 212 256 257 258 259 260";
 		};
 		instant SimGroup "merchant21" {
-			instant Marker "heaven armor merchant" {
+			instant Marker "heaven weapon merchant" {
 				dataBlock = "PathMarker";
 				name = "";
 				position = "1431.51 -457.795 -808.027";
@@ -5452,7 +5452,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NAME Wedge";
 			instant SimGroup "ITEMS CLASS Chemist LVL 2 LCK 0";
 			instant SimGroup "RACE MaleHuman";
-			instant SimGroup "GREETING Need a fancy new weapon? Biggs has you covered!";
+			instant SimGroup "GREETING Need a fancy new weapon? Wedge has you covered!";
 			instant SimGroup "BELTSHOP 24 25 26 58 59 60 107 108 109 132 133 134 157 158 159";
 		};
 		instant SimGroup "merchant22" {

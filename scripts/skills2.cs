@@ -32,7 +32,7 @@ $Skill::startSound[2] = AmrbroseSwordA;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
-$SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight C Monk";
+$SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight C Monk C Geomancer";
 
 $Skill::keyword[3] = "harvest";
 $Skill::index[harvest] = 3;
@@ -112,7 +112,7 @@ $Skill::startSound[8] = AmrbroseSwordA;
 $Skill::groupListCheck[8] = False;
 $Skill::refVal[8] = -10;
 $Skill::graceDistance[8] = 2;
-$SkillRestriction[$Skill::keyword[8]] = "C Knight C Monk";
+$SkillRestriction[$Skill::keyword[8]] = "C Knight C Monk C Geomancer";
 
 $Skill::keyword[9] = "parry";
 $Skill::index[parry] = 9;
@@ -121,14 +121,14 @@ $Skill::description[9] = "A defensive maneuver that reduces damage from incoming
 $Skill::actionMessage[9] = "You prepare to parry.";
 $Skill::delay[9] = 0.1;
 $Skill::recoveryTime[9] = 10; // 5 original
-$Skill::duration[9] = 30;
+$Skill::duration[9] = 6;
 $Skill::LOSrange[9] = 0;
 $Skill::startSound[9] = AmrbroseSwordA;
 // $Skill::endSound[9] = AmrbroseSwordA;
 $Skill::groupListCheck[9] = False;
 $Skill::refVal[9] = -10;
 $Skill::graceDistance[9] = 2;
-$SkillRestriction[$Skill::keyword[9]] = "C Knight";
+$SkillRestriction[$Skill::keyword[9]] = "C Knight C Geomancer";
 
 $Skill::keyword[10] = "infusepotions";
 $Skill::index[infusepotions] = 10;
@@ -158,7 +158,37 @@ $Skill::startSound[11] = AmrbroseSwordA;
 $Skill::groupListCheck[11] = False;
 $Skill::refVal[11] = -10;
 $Skill::graceDistance[11] = 2;
-$SkillRestriction[$Skill::keyword[11]] = "C Monk";
+$SkillRestriction[$Skill::keyword[11]] = "C Monk C Geomancer";
+
+$Skill::keyword[12] = "earthquake";
+$Skill::index[earthquake] = 12;
+$Skill::name[12] = "Earthquake";
+$Skill::description[12] = "A powerful attack that shakes the ground, dealing damage to all enemies in the area.";
+$Skill::actionMessage[12] = "You unleash a devastating earthquake.";
+$Skill::delay[12] = 0.1;
+$Skill::recoveryTime[12] = 15;
+$Skill::radius[12] = 12;
+$Skill::LOSrange[12] = 0;
+$Skill::startSound[12] = AmrbroseSwordA;
+$Skill::groupListCheck[12] = False;
+$Skill::refVal[12] = -10;
+$Skill::graceDistance[12] = 2;
+$SkillRestriction[$Skill::keyword[12]] = "C Geomancer";
+
+$Skill::keyword[12] = "volley";
+$Skill::index[volley] = 12;
+$Skill::name[12] = "Volley";
+$Skill::description[12] = "A rapid-fire attack that launches a hail of arrows at once from the sky.";
+$Skill::actionMessage[12] = "You unleash a volley of arrows.";
+$Skill::delay[12] = 0.1;
+$Skill::recoveryTime[12] = 1; // 15;
+$Skill::radius[12] = 50;
+$Skill::LOSrange[12] = 100;
+$Skill::startSound[12] = ImpactTR;
+$Skill::groupListCheck[12] = False;
+$Skill::refVal[12] = -10;
+$Skill::graceDistance[12] = 2;
+$SkillRestriction[$Skill::keyword[12]] = "C Archer";
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
@@ -261,6 +291,11 @@ function BeginUseSkill(%clientId, %keyword) {
 
     // recovery time is never smaller than half of the original and never bigger than the original.
     %recovTime = Cap(%a + %c, %a, %rt);
+
+	if (HasBonusState(%clientId, "haste") == True) {
+		%recovTime = floor(%recovTime * 0.5);
+	}
+
     storeData(%clientId, "SkillRecovTime", %recovTime);
 
 	// send action message if it exists
@@ -391,7 +426,7 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 
     if ($Skill::keyword[%index] == "cleave") {
 		%multi = 1.0;
-		PhysicalRadiusDamage(%clientId, GameBase::getPosition(%clientId), $Skill::radius[%index] * 2, $Skill::name[%index], %multi);
+		PhysicalRadiusDamage(%clientId, GameBase::getPosition(%clientId), $Skill::radius[%index] * 2, $Skill::name[%index], %multi, %index);
 		%returnFlag = True;
     }
 
@@ -402,7 +437,7 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		CreateAndDetBomb(%clientId, "Bomb5", %playerPos, False);
 		playSound(ExplodeLM, %playerPos);
 		%multi = 1.5;
-		PhysicalRadiusDamage(%clientId, %playerPos, $Skill::radius[%index] * 2, $Skill::name[%index], %multi);
+		PhysicalRadiusDamage(%clientId, %playerPos, $Skill::radius[%index] * 2, $Skill::name[%index], %multi, %index);
 		%returnFlag = True;
     }
 
@@ -413,11 +448,32 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		CreateAndDetBomb(%clientId, "Bomb5", %playerPos, False);
 		playSound(ExplodeLM, %playerPos);
 		%multi = 1.5;
-		PhysicalRadiusDamage(%clientId, %playerPos, $Skill::radius[%index] * 2, $Skill::name[%index], %multi);
+		PhysicalRadiusDamage(%clientId, %playerPos, $Skill::radius[%index] * 2, $Skill::name[%index], %multi, %index);
 
 		// schedule("CreateAndDetBomb(" @ %clientId @ ", \"Bomb5\", \"" @ %playerPos @ "\", False);", 0.5);
 		// schedule("playSound(ExplodeLM, " @ %playerPos @ ");", 0.5);
-		schedule("PhysicalRadiusDamage(" @ %clientId @ ", \"" @ %playerPos @ "\", \"" @ ($Skill::radius[%index] * 2) @ "\", \"" @ $Skill::name[%index] @ "\", 1.5);", 0.75);
+		schedule("PhysicalRadiusDamage(" @ %clientId @ ", \"" @ %playerPos @ "\", \"" @ ($Skill::radius[%index] * 2) @ "\", \"" @ $Skill::name[%index] @ "\", 1.5, " @ %index @ ");", 0.75);
+
+		%returnFlag = True;
+    }
+
+	if ($Skill::keyword[%index] == "earthquake") {
+		// do an explosion around the use
+		%playerPos = GameBase::getPosition(%clientId);
+		%multi = 1.5;
+
+		CreateAndDetBomb(%clientId, "Bomb5", %playerPos, False);
+		playSound(ExplodeLM, %playerPos);
+		PhysicalRadiusDamage(%clientId, %playerPos, $Skill::radius[%index] * 2, $Skill::name[%index], %multi, %index);
+
+		schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %playerPos @ "\", False);", 0.8);
+		schedule("playSound(ExplodeLM, \"" @ %playerPos @ "\");", 0.8);
+		schedule("PhysicalRadiusDamage(" @ %clientId @ ", \"" @ %playerPos @ "\", \"" @ ($Skill::radius[%index] * 2) @ "\", \"" @ $Skill::name[%index] @ "\", 1.5, " @ %index @ ");", 0.8);
+
+		schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %playerPos @ "\", False);", 1.6);
+		schedule("playSound(ExplodeLM, \"" @ %playerPos @ "\");", 1.6);
+		schedule("PhysicalRadiusDamage(" @ %clientId @ ", \"" @ %playerPos @ "\", \"" @ ($Skill::radius[%index] * 2) @ "\", \"" @ $Skill::name[%index] @ "\", 1.5, " @ %index @ ");", 1.6);
+
 
 		%returnFlag = True;
     }
@@ -518,7 +574,34 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		UpdateBonusState(%clientId, "InfusedPotions", ($Skill::duration[%index] / 2), "InfusedPotions");
 	}
 
+	if ($Skill::keyword[%index] == "volley") {
+		%volleyPos = GetWord(%castPos, 0) @ " " @ GetWord(%castPos, 1) @ " " @ GetWord(%castPos, 2) + 6;
+
+		for (%i = 0; %i < 10; %i++) {
+			// slightly modify %volleyPos x and y cordinates randomly +/- 2
+			%newPos = GetWord(%volleyPos, 0) + (getRandom() * 4 - 2) @ " " @ (GetWord(%volleyPos, 1) + (getRandom() * 4 - 2)) @ " " @ GetWord(%volleyPos, 2);
+			schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb12\", \"" @ %newPos @ "\", False);", 0.28 * %i);
+			// schedule("volleyHelper(" @ %clientId @ ", \"" @ %newPos @ "\");", 0.3 * %i);
+			schedule("shootAtRandomEnemyFromPosition(" @ %clientId @ ", \"" @ %newPos @ "\", " @ $Skill::radius[$Skill::index[volley]] @ ", \"BasicArrowImpact\");", 0.3 * %i);
+		}
+	}
+
     return EndSkill(%clientId, %overrideEndSound, %extraDelay, %index, %castPos, %returnFlag);
+}
+
+function shootAtRandomEnemyFromPosition(%clientId, %pos, %radius, %projectile) {
+	%player = Client::getOwnedObject(%clientId);
+	%randomEnemy = GetRandomEnemyFromPos(%clientId, %pos, %radius);
+
+	if (%randomEnemy != "") {
+		%enemyPos = GameBase::getPosition(%randomEnemy);
+		%fixedEnemyPos = GetWord(%enemyPos, 0) @ " " @ GetWord(%enemyPos, 1) @ " " @ (GetWord(%enemyPos, 2) + 1);
+		%vecToTarget = Vector::sub(%fixedEnemyPos, %pos);
+		%dirToTarget = Vector::normalize(%vecToTarget);
+		%transform = MakeTransformFromPosAndDir(%pos, %dirToTarget);
+
+		Projectile::spawnProjectile(%projectile, %transform, %player, Item::getVelocity(%player));
+	}
 }
 
 function FindHarvestableObjects(%object, %clientId, %index, %extra) {
@@ -635,7 +718,7 @@ function DoSkillBoxFunction(%target, %clientId, %index, %extra)
     }
 }
 
-function DoPhysicalDamage(%target, %clientId, %actionName, %multi) {
+function DoPhysicalDamage(%target, %clientId, %actionName, %multi, %skillIndex) {
 	%targetId = Player::getClient(%target);
 
 	if(GameBase::getTeam(%clientId) != GameBase::getTeam(%targetId)) {
@@ -643,17 +726,64 @@ function DoPhysicalDamage(%target, %clientId, %actionName, %multi) {
 			Client::sendMessage(%targetId, $MsgBeige, Client::getName(%clientId) @ " hit you with " @ %actionName);
 
 		%weapon = GetEquippedWeapon(%clientId);
-		GameBase::virtual(%target, "onDamage", "", %multi, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, %weapon);
+		GameBase::virtual(%target, "onDamage", "", %multi, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, %weapon, "", %skillIndex);
 	}
 }
 
-function PhysicalRadiusDamage(%clientId, %pos, %radius, %actionName, %multiplier) {
+function PhysicalRadiusDamage(%clientId, %pos, %radius, %actionName, %multiplier, %skillIndex) {
 	%multi = 1.0;
 	if (%multiplier != "") {
 		%multi = %multiplier;
 	}
 	%set = newObject("set", SimSet);
 	%n = containerBoxFillSet(%set, $SimPlayerObjectType, %pos, %radius, %radius, %radius, 0);
-	Group::iterateRecursive(%set, DoPhysicalDamage, %clientId, %actionName, %multi);
+	Group::iterateRecursive(%set, DoPhysicalDamage, %clientId, %actionName, %multi, %skillIndex);
 	deleteObject(%set);
+}
+
+function GetClosestEnemy(%clientId, %radius) {
+	%closest = 500000;
+	%closestId = "";
+	%b = %radius * 2;
+	%set = newObject("set", SimSet);
+	%n = containerBoxFillSet(%set, $SimPlayerObjectType, GameBase::getPosition(%clientId), %b, %b, %b, 0);
+
+	for(%i = 0; %i < Group::objectCount(%set); %i++) {
+		%id = Player::getClient(Group::getObject(%set, %i));
+
+		if(GameBase::getTeam(%id) != GameBase::getTeam(%clientId) && !fetchData(%id, "invisible") && %id != %clientId) {
+			%dist = Vector::getDistance($los::position, GameBase::getPosition(%id));
+
+			if(%dist < %closest) {
+				%closest = %dist;
+				%closestId = %id;
+			}
+		}
+	}
+	deleteObject(%set);
+
+	return %closestId;
+}
+
+function GetRandomEnemyFromPos(%clientId, %pos, %radius) {
+	%enemyCount = 0;
+	%enemyIds = "";
+	%closestId = "";
+	%b = %radius * 2;
+	%set = newObject("set", SimSet);
+	%n = containerBoxFillSet(%set, $SimPlayerObjectType, %pos, %b, %b, %b, 0);
+
+	for(%i = 0; %i < Group::objectCount(%set); %i++) {
+		%id = Player::getClient(Group::getObject(%set, %i));
+
+		if(GameBase::getTeam(%id) != GameBase::getTeam(%clientId) && !fetchData(%id, "invisible") && %id != %clientId) {
+			%enemyCount++;
+			%enemyIds = %enemyIds @ " " @ %id;
+		}
+	}
+	deleteObject(%set);
+
+	%randomEnemyId = floor(getRandom() * %enemyCount);
+
+	return GetWord(%enemyIds, %randomEnemyId);
 }

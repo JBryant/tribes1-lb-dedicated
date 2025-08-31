@@ -2608,24 +2608,47 @@ function UnequipMountedStuff(%clientId)
 {
 	dbecho($dbechoMode, "UnequipMountedStuff(" @ %clientId @ ")");
 
-	%max = getNumItems();
-	for(%i = 0; %i < %max; %i++)
-	{
-		%a = getItemData(%i);
-		%itemcount = Player::getItemCount(%clientId, %a);
+	// %max = getNumItems();
+	// for(%i = 0; %i < %max; %i++)
+	// {
+	// 	%a = getItemData(%i);
+	// 	%itemcount = Player::getItemCount(%clientId, %a);
 
-		if(%itemcount)
-		{
-			if(%a.className == "Equipped")
-			{
-				%b = String::getSubStr(%a, 0, String::len(%a)-1);
-				Player::decItemCount(%clientId, %a, 1);
-				Player::incItemCount(%clientId, %b, 1);
-			}
-			else if(Player::getMountedItem(%clientId, $WeaponSlot) == %a)
-			{
-				Player::unMountItem(%clientId, $WeaponSlot);
-			}
+	// 	if(%itemcount)
+	// 	{
+	// 		if(%a.className == "Equipped")
+	// 		{
+	// 			%b = String::getSubStr(%a, 0, String::len(%a)-1);
+	// 			Player::decItemCount(%clientId, %a, 1);
+	// 			Player::incItemCount(%clientId, %b, 1);
+	// 		}
+	// 		else if(Player::getMountedItem(%clientId, $WeaponSlot) == %a)
+	// 		{
+	// 			Player::unMountItem(%clientId, $WeaponSlot);
+	// 		}
+	// 	}
+	// }
+
+	// new unequip all items
+	// first unequip their weapon
+	%weapon = GetEquippedWeapon(%clientId);
+	if (%weapon != "") {
+		// TODO: GetEquippedWeapon returns regular name but armor returns with 0
+		Belt::UnequipWeapon(%clientId, %weapon@"0");
+	}
+
+	// unequip their armor
+	%armor = GetEquippedArmor(%clientId);
+	if (%armor != "") {
+		Item::onUse(%clientId, %armor);
+	}
+
+	%accessories = GetEquippedAccessories(%clientId);
+	if (%accessories != "") {
+		%total = GetEquippedAccessoriesCountByBeltType(%clientid, "AccessoryItems");
+
+		for(%i = 0; %i < %total; %i++) {
+			Item::onUse(%clientId, getword(%accessories, %i));
 		}
 	}
 }

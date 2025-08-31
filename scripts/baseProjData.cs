@@ -14,7 +14,8 @@ $DebrisDamageType      = 11;
 $MissileDamageType     = 12;
 $MineDamageType        = 13;
 $NullDamageType        = 14;
-$SpellDamageType        = 15;
+$SpellDamageType       = 15;
+$WeaponDamage          = 16;
 
 $InpactArea = 1.0; // need to be like on the explsion
 $SmallArea = 5.0;
@@ -831,6 +832,33 @@ BulletData crossbowshot
    detachFromShooter = false;
 };
 //--------------------------------------
+// 
+//--------------------------------------
+RocketData arrowbolt
+{
+  bulletShapeName = "fiery.dts";
+  explosionTag = grenadeExp;
+  collisionRadius = 0.0;
+  mass = 2.0;
+  damageClass = 1;
+  damageValue = 4.0;
+  damageType = $SpellDamageType;
+  explosionRadius = 5.0;
+  kickBackStrength = 40.0;
+  muzzleVelocity = 50.0;
+  terminalVelocity = 50.0;
+  acceleration = 15.0;
+  totalTime = 12.1;
+  liveTime = 12.1;
+  lightRange = 0.0;
+  lightColor = { 1.0, 1.0, 9.5 };
+  inheritedVelocityScale = 0.5;
+  trailType = 2;
+  trailString = "plasmatrail.dts";
+  smokeDist = 0.0;
+  soundId = NoSound;
+};
+//--------------------------------------
 // smoke project / trail with fire explosion
 //--------------------------------------
 RocketData combustiblebolt
@@ -1415,26 +1443,6 @@ RocketData flare
   soundId = NoSound;
 };
 
-  // bulletShapeName = "spikeshot.dts";
-  // explosionTag = plasmaExp;
-  // collisionRadius = 0.0;
-  // mass = 2.0;
-  // damageClass = 1;
-  // damageValue = 0.40; // 0.40 / 175
-  // damageType = $SpellDamageType;
-  // explosionRadius = 10; // 5.5
-  // kickBackStrength = 0.0;
-  // muzzleVelocity = 130.0;
-  // terminalVelocity = 130.0;
-  // acceleration = 5.0;
-  // totalTime = 6.5;
-  // liveTime = 10.0;
-  // lightRange = 5.0;
-  // lightColor = { 5.20, 6.7, 1.5 };
-  // inheritedVelocityScale = 0.0;
-  // trailType = 2;
-  // trailString = "plasmatrail.dts";
-  // smokeDist = 4;
 //--------------------------------------
 // small blue start proj, medium blue explosion
 //--------------------------------------
@@ -1480,6 +1488,107 @@ RocketData shocklvone
   trailString = "fusionbolt.dts";
   smokeDist = 2;
 };
+
+
+//--------------------------------------
+// Basic Arrow Projectile
+//--------------------------------------
+RocketData BasicArrow {
+   bulletShapeName  = "tracer.dts";
+   explosionTag     = bulletexp1;
+   collisionRadius  = 0;
+   mass             = 0.1;
+
+   damageClass      = 0;       // 0 impact, 1, radius
+   damageValue      = 1;
+   damageType       = $WeaponDamage;
+
+   explosionRadius  = 10;
+   kickBackStrength = 1.0;
+   muzzleVelocity   = 200.0; // 250.0
+   terminalVelocity = 200.0; // 100
+   acceleration     = 9.0;
+   totalTime        = 10.0;
+   liveTime         = 4.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 1;
+
+//--------------------------------------
+// small rocket fast with big shockwave
+//--------------------------------------
+BulletData testarrow
+{
+  bulletShapeName = "tracer.dts";
+  explosionTag = debrisExpSmall;
+  collisionRadius = 0.3;
+  mass = 2.0;
+  damageClass = 1;
+  damageValue = 1;
+  explosionRadius = 20.0;
+  damageType = $WeaponDamage;
+  aimDeflection = 0.0009;
+  kickBackStrength = 600.0;
+  muzzleVelocity = 100.0;
+  terminalVelocity = 100.0; // 100
+  acceleration = 5.0;
+  totalTime = 8.0;
+  liveTime = 15.0;
+  inheritedVelocityScale = 0.5;
+};
+
+// //--------------------------------------
+// // small rocket fast with big shockwave
+// //--------------------------------------
+RocketData testarrowtwo {
+   bulletShapeName  = "tracer.dts";
+   explosionTag     = bulletexp1;
+   collisionRadius  = 0;
+   mass             = 0.1;
+
+   damageClass      = 0;       // 0 impact, 1, radius
+   damageValue      = 1;
+   damageType       = $WeaponDamage;
+
+   explosionRadius  = 10;
+   kickBackStrength = 1.0;
+   muzzleVelocity   = 200.0; // 250.0
+   terminalVelocity = 200.0; // 100
+   acceleration     = 9.0;
+   totalTime        = 10.0;
+   liveTime         = 4.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 1;
+
+   // rocket specific
+   //trailType   = 2;                // smoke trail
+   // trailString = "breath.dts";
+   //smokeDist   = 0.8;
+
+  //  soundId = SoundSwing4;
+};
+
+//--------------------------------------
+// small blue start proj, medium blue explosion
+//--------------------------------------
+BulletData testarrowthree
+{
+  bulletShapeName = "tracer.dts";
+  explosionTag = bulletexp1;
+  damageClass = 0;
+  damageValue = 1;
+  damageType = $WeaponDamage;
+  muzzleVelocity = 100.0; // 100
+  totalTime = 3.0;
+  liveTime = 3.0;
+  lightRange = 3.0;
+  lightColor = { 1, 1, 0 };
+  inheritedVelocityScale = 0.3;
+  isVisible = True;
+  soundId = SoundSwing4;
+};
+
 //--------------------------------------
 // small rocket fast with big shockwave
 //--------------------------------------
@@ -1509,7 +1618,7 @@ RocketData shocklvthree
 {
    bulletShapeName  = "rocket.dts";
    explosionTag     = LargeShockwave;
-   collisionRadius  = 0.0;
+   collisionRadius  = 0.3;
    mass             = 2.0;
 
    damageClass      = 1;       // 0 impact, 1, radius

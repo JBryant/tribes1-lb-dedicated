@@ -177,6 +177,7 @@ function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex)
 {
 	dbecho($dbechoMode, "ProjectileAttack(" @ %clientId @ ", " @ %weapon @ ", " @ %vel @ ")");
 
+	%player = Client::getOwnedObject(%clientId);
 	%weapon = GetEquippedWeapon(%clientId);
 
 	if (%weapon == "")
@@ -207,8 +208,8 @@ function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex)
 
 	%loadedProjectile = fetchData(%clientId, "LoadedProjectile " @ %weapon);
 
-	if(%loadedProjectile == ""){
-		if(!Player::isAiControlled(%clientId)){
+	if(%loadedProjectile == "") {
+		if(!Player::isAiControlled(%clientId)) {
 			processMenuselectrweapon(%clientId, %weapon);
 		}
 		return;
@@ -216,35 +217,39 @@ function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex)
 	if(belt::hasthisstuff(%clientId, %loadedProjectile) <= 0)
 		return;
 
-	%zoffset = 0.44; // 0.44
+	// Old "Throwing" style of projectiles
+	// %zoffset = 0.44; // 0.44
 
-	// check if item has an image associated with it
-	%image = BeltItem::GetImage(%loadedProjectile);
-	%arrow = newObject("", "Item", %image, 1, false);
-	%arrow.owner = %clientId;
-	%arrow.delta = 1;
-	%arrow.weapon = %weapon;
-	%arrow.projectile = %loadedProjectile;
-	%arrow.spellIndex = %spellIndex;
+	// // check if item has an image associated with it
+	// %image = BeltItem::GetImage(%loadedProjectile);
+	// %arrow = newObject("", "Item", %image, 1, false);
+	// %arrow.owner = %clientId;
+	// %arrow.delta = 1;
+	// %arrow.weapon = %weapon;
+	// %arrow.projectile = %loadedProjectile;
+	// %arrow.spellIndex = %spellIndex;
 
-	if (%spellIndex != "") {
-		schedule("TriggerSpellEffectOnObject(" @ %arrow @ ", \"" @ %spellIndex @ "\");", 0.8, %arrow);
-	}
+	// if (%spellIndex != "") {
+	// 	schedule("TriggerSpellEffectOnObject(" @ %arrow @ ", \"" @ %spellIndex @ "\");", 0.8, %arrow);
+	// }
 
-	addToSet("MissionCleanup", %arrow);
-  	schedule("Item::Pop(" @ %arrow @ ");", 30, %arrow);	
+	// addToSet("MissionCleanup", %arrow);
+  	// schedule("Item::Pop(" @ %arrow @ ");", 30, %arrow);	
 
-	//double-check stuff
-	$ProjectileDoubleCheck[%arrow] = True;
-	schedule("$ProjectileDoubleCheck[" @ %arrow @ "] = \"\";", 1.5, %arrow);
+	// //double-check stuff
+	// $ProjectileDoubleCheck[%arrow] = True;
+	// schedule("$ProjectileDoubleCheck[" @ %arrow @ "] = \"\";", 1.5, %arrow);
 
-	%rot = GameBase::getRotation(%clientId);
-	%newrot = (GetWord(%rot, 0) - %zoffset) @ " " @ GetWord(%rot, 1) @ " " @ GetWord(%rot, 2);
+	// %rot = GameBase::getRotation(%clientId);
+	// %newrot = (GetWord(%rot, 0) - %zoffset) @ " " @ GetWord(%rot, 1) @ " " @ GetWord(%rot, 2);
 
-	GameBase::setRotation(%clientId, %newrot);
-	GameBase::throw(%arrow, Client::getOwnedObject(%clientId), %vel, false);
-	GameBase::setRotation(%arrow, %rot);
-	GameBase::setRotation(%clientId, %rot);
+	// GameBase::setRotation(%clientId, %newrot);
+	// GameBase::throw(%arrow, Client::getOwnedObject(%clientId), %vel, false);
+	// GameBase::setRotation(%arrow, %rot);
+	// GameBase::setRotation(%clientId, %rot);
+
+	// new simpler and more efficient way to spawn projectiles (also gives more control on direction, rotation and how the projectile looks and acts)
+	Projectile::spawnProjectile("BasicArrowImpact", GameBase::getMuzzleTransform(%player), %player, Item::getVelocity(%player));
 
 	belt::takethisstuff(%clientId, %loadedProjectile, 1);
 
