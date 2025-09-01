@@ -1645,7 +1645,7 @@ RocketData FireArrowRadiusSmall
    damageValue      = 1;
    damageType       = $WeaponDamage;
 
-   explosionRadius  = 20;
+   explosionRadius  = 10;
    kickBackStrength = 1.0;
    muzzleVelocity   = $arrowSpeed; // 250.0
    terminalVelocity = $arrowSpeed; // 100
@@ -1958,7 +1958,7 @@ RocketData GravityShot
    damageType       = $SpellDamageType;
 
    explosionRadius  = 30.0;
-   kickBackStrength = -450.0;
+   kickBackStrength = 0.0;
    muzzleVelocity   = 100.0;
    terminalVelocity = 100.0;
    acceleration     = 5.0;
@@ -2164,10 +2164,10 @@ BulletData MagicBolt
 	explosionTag = debrisExpsmall;
 	mass               = 0.005;
 
-	damageClass        = 0;
+	damageClass        = 1;
 	damageValue        = 0.15;
 	damageType         = $SpellDamageType;
-        explosionRadius    = 3.0;
+  explosionRadius    = 5.0;
 
 	muzzleVelocity     = 100.0;
 	totalTime          = 5.0;

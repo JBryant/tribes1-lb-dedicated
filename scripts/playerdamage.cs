@@ -454,18 +454,15 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 		if(%type == $SpellDamageType) {
 			// lbecho("----- create spell damage -----");
 			%lastSpell = fetchData(%shooterClient, "LastCastSpell");
-			// lbecho("lastSpell: " @ %lastSpell);
 
-			if (%weapon != "") {
+			if (%lastSpell == "" &&%weapon != "") {
 				%lastSpell = %weapon;
 			}
 
 			%spellIndex = $Spell::index[%lastSpell];
 			%spellSkillType = $SkillType[%lastSpell];
+			%skilltype = %spellSkillType;
 			%spellDamage = $Spell::damageValue[%spellIndex];
-			// lbecho("spellIndex: " @ %spellIndex);
-			// lbecho("spellSkillType: " @ %spellSkillType);
-			// lbecho("spellDamage: " @ %spellDamage);
 
 			if (%spellIndex == "") {
 				return;
@@ -477,6 +474,11 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			
 			if (Player::isAiControlled(%shooterClient)) {
 				%multiplier = 0.25;
+			}
+
+			// check for bonuses to damage, like inner fire, etc
+			if (%spellSkillType == $SkillWhiteMagick && HasBonusState(%shooterClient, "InnerFire") == True) {
+				%multiplier = 1.5;
 			}
 			
 			// lbecho("shooters skill level: " @ $PlayerSkill[%shooterClient, %spellSkillType]);
@@ -610,8 +612,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 		//------------------------------------
 		// CHECK IF PLAYER LANDED ON WATER
 		//------------------------------------
-		if(%damagedClient == %shooterClient && %type == $LandingDamageType)
-		{
+		if(%damagedClient == %shooterClient && %type == $LandingDamageType) {
 			%object = "";
 			for(%i = 0; %i >= -3.15; %i -= 1.57)
 			{
@@ -635,8 +636,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 		//---------------------------------------
 		// CHECK IF PLAYER LANDED WHILE IN WATER
 		//---------------------------------------
-		if(%damagedClient == %shooterClient && %type == $LandingDamageType)
-		{
+		if(%damagedClient == %shooterClient && %type == $LandingDamageType) {
 			if(Zone::getType(fetchData(%damagedClient, "zone")) == "WATER")
 				%value *= $waterDamageAmp;
 		}
@@ -654,8 +654,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 		//------------------------------------------------
 		// SAME TEAM CHECKS
 		//------------------------------------------------
-		if(Client::getTeam(%damagedClient) == Client::getTeam(%shooterClient) && %shooterClient != %damagedClient)
-		{
+		if(Client::getTeam(%damagedClient) == Client::getTeam(%shooterClient) && %shooterClient != %damagedClient) {
 			if(!HasTheftFlag(%damagedClient))
 			{
 				if(Zone::getType(fetchData(%damagedClient, "zone")) == "PROTECTED" && Zone::getType(fetchData(%shooterClient, "zone")) != "PROTECTED")
@@ -723,27 +722,23 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 		//-------------------------------------------------
 		// SAME PLAYER CHECKS
 		//-------------------------------------------------
-		if(%damagedClient == %shooterClient)
-		{
+		if(%damagedClient == %shooterClient) {
 			if(%type == $SpellDamageType)
-				%value = %value / 3;
+				%value = %value / 10; // 1/3 default
 		}
 
 		//-------------------------------------------------
 		// ARENA DAMAGE CHECKS
 		//-------------------------------------------------
-		if(IsStillArenaFighting(%damagedClient) != IsStillArenaFighting(%shooterClient))
-		{
+		if(IsStillArenaFighting(%damagedClient) != IsStillArenaFighting(%shooterClient)) {
 			%value = 0;						//example: spectator shooting in arena
 			%arenaNull = True;
 		}
-		if(IsInRoster(%damagedClient) != IsInRoster(%shooterClient))
-		{
+		if(IsInRoster(%damagedClient) != IsInRoster(%shooterClient)) {
 			%value = 0;						//example: roster shooting in arena
 			%arenaNull = True;
 		}
-		if(IsInRoster(%damagedClient))
-		{
+		if(IsInRoster(%damagedClient)) {
 			%value = 0;						//example: arena shooting in roster
 			%arenaNull = True;
 		}
@@ -765,6 +760,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			else if(!%isMiss && %value == 0 && %shooterClient != %damagedClient) {
 				%msgcolor = $MsgWhite;
 			}
+
 			if(%msgcolor != "") {
 				if(%type != $SpellDamageType)
 				{

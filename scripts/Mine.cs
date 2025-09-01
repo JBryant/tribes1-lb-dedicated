@@ -734,7 +734,7 @@ MineData Bomb950
   explosionRadius = 10.0;
   damageValue = 1.5;
   damageType = $SpellDamageType;
-  kickBackStrength = 100;
+  kickBackStrength = 20;
   triggerRadius = 0.5;
   maxDamage = 2.0;
 };

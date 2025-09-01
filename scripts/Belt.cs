@@ -46,9 +46,9 @@
 
 
 // TODO:
-// 1. Fix Drop Points in newer dungeons
-// 2. Healing Kit mend uses multiple healing kits (Fixed)
-// 3. Add Shorty quest line
+// 1. Add Shorty quest line
+// 2. 
+// 3. And as a black mage now, at level 1, my white magic is starting at 25 and my black magic at 10
 // 
 
 // ------------------- //
@@ -2796,7 +2796,7 @@ $description = "The ultimate spear, said to pierce even the heavens.";
 BeltItem::AddWeapon("Gungnir", "Gungnir", "Spear", $BludgeonAccessoryType, $description, $SkillSpears, $SkillSpears @ " 2000", "200", 164);
 
 $description = "Pugilist's Glove";
-BeltItem::AddWeapon("Pugilist's Glove", "PugilistsGlove", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, $SkillSwords @ " 1", "1");
+BeltItem::AddWeapon("Pugilist's Glove", "PugilistsGlove", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, "C Monk", "1");
 
 
 // Bows (175 - 199)

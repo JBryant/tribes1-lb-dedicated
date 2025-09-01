@@ -256,35 +256,42 @@ function MenuSP(%clientId, %page)
 
 	%clientId.bulkNum = "";
 
-	%l = 6;
-	%ns = GetNumSkills(); // change num skills to total
-	%np = floor(%ns / %l);
-	
-	%lb = (%page * %l) - (%l-1);
-	%ub = %lb + (%l-1);
+	%optionsPerPage = 6;
+	if(%clientId.repack >= 18)
+		%optionsPerPage = 30;
 
-	if(%ub > %ns)
-		%ub = %ns;
+	// %l = 6;
+	%ns = GetNumSkills(); // change num skills to total
+	// update get num skills to be based on class
+
+	%numSkills = GetNumClassSkills(%clientId);
+	%skillIndexList = GetClassSkillIndexes(%clientId);
+
+	%np = floor(%numSkills / %optionsPerPage);
+	%lb = (%page * %optionsPerPage) - (%optionsPerPage-1);
+	%ub = %lb + (%optionsPerPage-1);
+
+	if(%ub > %numSkills)
+		%ub = %numSkills;
 
 	%cnt = 0;
 
-	for(%i = %lb; %i <= %ub; %i++)
-		Client::addMenuItem(%clientId, %cnt++ @ "(" @ GetPlayerSkill(%clientId, %i) @ ") " @ $SkillDesc[%i], %i @ " " @ %page);
+	for(%i = %lb; %i <= %ub; %i++) {
+		%skillIndex = GetWord(%skillIndexList, %i - 1);
+		Client::addMenuItem(%clientId, %cnt++ @ "(" @ GetPlayerSkill(%clientId, %skillIndex) @ ") " @ $SkillDesc[%skillIndex], %skillIndex @ " " @ %page);
+	}
 
-	if(%page == 1)
-	{
-		Client::addMenuItem(%clientId, "nNext >>", "page " @ %page+1);
+	if(%page == 1) {
+		if(%ns > %optionsPerPage) Client::addMenuItem(%clientId, "nNext >>", "page " @ %page + 1);
 		Client::addMenuItem(%clientId, "xDone", "done");
 	}
-	else if(%page == %np+1)
-	{
-		Client::addMenuItem(%clientId, "p<< Prev", "page " @ %page-1);
+	else if(%page == %np + 1) {
+		Client::addMenuItem(%clientId, "p<< Prev", "page " @ %page - 1);
 		Client::addMenuItem(%clientId, "xDone", "done");
 	}
-	else
-	{
-		Client::addMenuItem(%clientId, "nNext >>", "page " @ %page+1);
-		Client::addMenuItem(%clientId, "p<< Prev", "page " @ %page-1);
+	else {
+		Client::addMenuItem(%clientId, "nNext >>", "page " @ %page + 1);
+		Client::addMenuItem(%clientId, "p<< Prev", "page " @ %page - 1);
 	}
 
 	return;

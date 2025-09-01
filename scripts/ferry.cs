@@ -29,8 +29,14 @@ $FerryfolderNameForPath = "Path";
 
 $FerryStationWait = 0.05;
 
+// raft objects:
+// raft_a: simple wood slab, no sail
+// raft_b: simple wood slab with sail
+// longship: ?
+// KL_longship: Viking ship
+
 if($ferryObject == "")
-	$ferryObject = "raft_b";
+	$ferryObject = "KL_longship";
 
 MoveableData PlatformFerry
 {
@@ -79,7 +85,7 @@ function NextWaypoint(%this) {
 	//echo("-------------------------------");
 
 	if(%which < (Moveable::getWaypointCount(%this)-1)) {
-		schedule("Moveable::moveToWaypoint(" @ %this @ ", " @ %which+1 @ ");", 0.05+$Ferry::PauseTime[%this, %which]);
+		schedule("Moveable::moveToWaypoint(" @ %this @ ", " @ %which+1 @ ");", 0.01 + $Ferry::PauseTime[%this, %which]);
 	}
 	else if(%which == (Moveable::getWaypointCount(%this)-1)) {
 		ResetFerry(%this);

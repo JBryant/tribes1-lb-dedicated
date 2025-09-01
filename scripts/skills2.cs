@@ -32,7 +32,7 @@ $Skill::startSound[2] = AmrbroseSwordA;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
-$SkillRestriction[$Skill::keyword[2]] = "C Squire C Knight C Monk C Geomancer";
+$SkillRestriction[$Skill::keyword[2]] = "L 20 C Squire C Knight C Monk C Geomancer";
 
 $Skill::keyword[3] = "harvest";
 $Skill::index[harvest] = 3;
@@ -82,7 +82,7 @@ $Skill::startSound[6] = Reflected;
 $Skill::groupListCheck[6] = False;
 $Skill::refVal[6] = -10;
 $Skill::graceDistance[6] = 10;
-$SkillRestriction[$Skill::keyword[6]] = "C Archer";
+$SkillRestriction[$Skill::keyword[6]] = "L 40 C Archer";
 
 $Skill::keyword[7] = "explosiveshot";
 $Skill::index[$Skill::keyword[7]] = 7;
@@ -94,7 +94,7 @@ $Skill::startSound[7] = ActivateAB;
 $Skill::groupListCheck[7] = False;
 $Skill::refVal[7] = -10;
 $Skill::graceDistance[7] = 10;
-$SkillRestriction[$Skill::keyword[7]] = "C Archer";
+$SkillRestriction[$Skill::keyword[7]] = "L 20 C Archer";
 
 $Skill::keyword[8] = "greatcleave";
 $Skill::index[greatcleave] = 8;
@@ -112,7 +112,7 @@ $Skill::startSound[8] = AmrbroseSwordA;
 $Skill::groupListCheck[8] = False;
 $Skill::refVal[8] = -10;
 $Skill::graceDistance[8] = 2;
-$SkillRestriction[$Skill::keyword[8]] = "C Knight C Monk C Geomancer";
+$SkillRestriction[$Skill::keyword[8]] = "L 40 C Knight C Monk C Geomancer";
 
 $Skill::keyword[9] = "parry";
 $Skill::index[parry] = 9;
@@ -158,7 +158,7 @@ $Skill::startSound[11] = AmrbroseSwordA;
 $Skill::groupListCheck[11] = False;
 $Skill::refVal[11] = -10;
 $Skill::graceDistance[11] = 2;
-$SkillRestriction[$Skill::keyword[11]] = "C Monk C Geomancer";
+$SkillRestriction[$Skill::keyword[11]] = "L 60 C Monk C Geomancer";
 
 $Skill::keyword[12] = "earthquake";
 $Skill::index[earthquake] = 12;
@@ -173,22 +173,38 @@ $Skill::startSound[12] = AmrbroseSwordA;
 $Skill::groupListCheck[12] = False;
 $Skill::refVal[12] = -10;
 $Skill::graceDistance[12] = 2;
-$SkillRestriction[$Skill::keyword[12]] = "C Geomancer";
+$SkillRestriction[$Skill::keyword[12]] = "L 80 C Geomancer";
 
 $Skill::keyword[12] = "volley";
 $Skill::index[volley] = 12;
 $Skill::name[12] = "Volley";
 $Skill::description[12] = "A rapid-fire attack that launches a hail of arrows at once from the sky.";
 $Skill::actionMessage[12] = "You unleash a volley of arrows.";
-$Skill::delay[12] = 0.1;
-$Skill::recoveryTime[12] = 1; // 15;
+$Skill::delay[12] = 1;
+$Skill::recoveryTime[12] = 8; // 15;
 $Skill::radius[12] = 20;
 $Skill::LOSrange[12] = 100;
 $Skill::startSound[12] = ImpactTR;
 $Skill::groupListCheck[12] = False;
 $Skill::refVal[12] = -10;
 $Skill::graceDistance[12] = 2;
-$SkillRestriction[$Skill::keyword[12]] = "C Archer";
+$SkillRestriction[$Skill::keyword[12]] = "L 60 C Archer";
+
+$Skill::keyword[13] = "innerfire";
+$Skill::index[innerfire] = 13;
+$Skill::name[13] = "Inner Fire";
+$Skill::description[13] = "Ignite your inner power, increasing spell damage.";
+$Skill::actionMessage[13] = "You channel your inner fire.";
+$Skill::delay[13] = 2;
+$Skill::recoveryTime[13] = 2;
+$Skill::duration[13] = 60;
+$Skill::LOSrange[13] = 0;
+$Skill::startSound[13] = ActivateTR;
+$Skill::endSound[13] = PlaceSeal;
+$Skill::groupListCheck[13] = False;
+$Skill::refVal[13] = -10;
+$Skill::graceDistance[13] = 1;
+$SkillRestriction[$Skill::keyword[13]] = "C WhiteMage C Mystic C Orator";
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
@@ -340,7 +356,7 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		//storeData(%clientId, "UseSkillStep", 2);
 
 		%returnflag = False;
-		return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
+		return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %oldpos, %returnflag);
 	}
 
 	// check to see if they still have the items to avoid dropping items while waiting for cast time
@@ -360,7 +376,7 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		if (%missingItems) {
 			Client::sendMessage(%clientId, $MsgRed, "You do not have the required items to use "@%keyword@".");
 			%returnFlag = True;
-			return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag);
+			return EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %oldpos, %returnflag);
 		}
 	}
 
@@ -576,6 +592,10 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		UpdateBonusState(%clientId, "InfusedPotions", ($Skill::duration[%index] / 2), "InfusedPotions");
 	}
 
+	if ($Skill::keyword[%index] == "innerfire") {
+		UpdateBonusState(%clientId, "InnerFire", ($Skill::duration[%index] / 2), "InnerFire");
+	}
+
 	if ($Skill::keyword[%index] == "volley") {
 		%volleyPos = GetWord(%castPos, 0) @ " " @ GetWord(%castPos, 1) @ " " @ GetWord(%castPos, 2) + 6;
 
@@ -588,7 +608,7 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		}
 	}
 
-    return EndSkill(%clientId, %overrideEndSound, %extraDelay, %index, %castPos, %returnFlag);
+    return EndSkill(%clientId, %overrideEndSound, %extraDelay, %index, %oldpos, %returnFlag);
 }
 
 function shootAtRandomEnemyFromPosition(%clientId, %pos, %radius, %projectile) {
@@ -647,14 +667,14 @@ function FindHarvestableObjects(%object, %clientId, %index, %extra) {
 	}
 }
 
-function EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %castpos, %returnflag) {
+function EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %soundPos, %returnflag) {
 	Player::setAnimation(%clientId, 39);
 
 	if(!%overrideEndSound) {
 		if(%extraDelay == "")
-			playSound($Skill::endSound[%index], %castPos);
+			playSound($Skill::endSound[%index], %soundPos);
 		else
-			schedule("playSound(" @ $Skill::endSound[%index] @ ", \"" @ %castPos @ "\");", %extraDelay);
+			schedule("playSound(" @ $Skill::endSound[%index] @ ", \"" @ %soundPos @ "\");", %extraDelay);
 	}
 	
 	storeData(%clientId, "UseSkillStep", 2);
