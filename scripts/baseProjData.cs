@@ -16,6 +16,7 @@ $MineDamageType        = 13;
 $NullDamageType        = 14;
 $SpellDamageType       = 15;
 $WeaponDamage          = 16;
+$TrueDamage            = 17;
 
 $InpactArea = 1.0; // need to be like on the explsion
 $SmallArea = 5.0;

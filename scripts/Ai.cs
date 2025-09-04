@@ -60,24 +60,22 @@ function createAI(%aiName, %markerGroup, %name)
 {
 	dbecho($dbechoMode, "createAI(" @ %aiName @ ", " @ %markerGroup @ ", " @ %name @ ")");
 
-	%group = nameToID( %markerGroup );
+	%group = nameToID(%markerGroup);
    
-	if( %group == -1 || Group::objectCount(%group) == 0 )
-	{
-	      %spawnPos = %markerGroup;
-	      %spawnRot = "0 0 0";
+	if(%group == -1 || Group::objectCount(%group) == 0) {
+		%spawnPos = %markerGroup;
+		%spawnRot = "0 0 0";
 	}
-	else
-	{
-		for(%i = 0; %i < Group::objectCount(%group); %i++)
-		{
+	else {
+		for(%i = 0; %i < Group::objectCount(%group); %i++) {
 			%obj = Group::getObject(%group, %i);
 			if(getObjectType(%obj) != "SimGroup")
 				break;
 		}
-	      %spawnMarker = Group::getObject(%group, %i);
-	      %spawnPos = GameBase::getPosition(%spawnMarker);
-	      %spawnRot = GameBase::getRotation(%spawnMarker);
+
+	    %spawnMarker = Group::getObject(%group, %i);
+	    %spawnPos = GameBase::getPosition(%spawnMarker);
+	    %spawnRot = GameBase::getRotation(%spawnMarker);
 	}
 
 	%guardtype = clipTrailingNumbers(%aiName);
@@ -87,43 +85,34 @@ function createAI(%aiName, %markerGroup, %name)
 	else
 		%armor = $RaceToArmorType[$NameForRace[%guardtype]];		//spawn bots will get this call
 
-	if( AI::spawn( %aiName, %armor, %spawnPos, %spawnRot, %name, "male2" ) != "false" )
+	if( AI::spawn(%aiName, %armor, %spawnPos, %spawnRot, %name, "male2") != "false")
 	{
 		%AiId = AI::getId(%aiName);
+		$aiIdList = $aiIdList @ %AiId @ " ";
 		ClearVariables(%AiId);
 
 		storeData(%AiId, "BotInfoAiName", %aiName);
-
 		storeData(%AiId, "RACE", $ArmorTypeToRace[%armor]);
-
 		storeData(%AiId, "LCKconsequence", "miss");
 		storeData(%AiId, "RemortStep", 0);
 		storeData(%AiId, "HasLoadedAndSpawned", True);
 		storeData(%AiId, "botAttackMode", 1);
 		storeData(%AiId, "tmpbotdata", "");
-
 		storeData(%AiId, "HP", fetchData(%AiId, "MaxHP"));
 		storeData(%AiId, "MANA", 1000);
-
 		refreshHPREGEN(%AiId);
 		refreshMANAREGEN(%AiId);
-
 		storeData(%AiId, "LCK", $BotInfo[%aiName, LCK]);
 
-		if(%group != -1)
-		{
+		if(%group != -1) {
 			// The order number is used for sorting waypoints, and other directives.  
 			%orderNumber = 200;
          
-			for(%i = 0; %i < Group::objectCount(%group); %i++)
-			{
+			for(%i = 0; %i < Group::objectCount(%group); %i++) {
 				%spawnMarker = Group::getObject(%group, %i);
-				if(getObjectType(%spawnMarker) != "SimGroup")
-				{
+				if(getObjectType(%spawnMarker) != "SimGroup") {
 					%spawnPos = GameBase::getPosition(%spawnMarker);
-           
-					AI::DirectiveWaypoint( %aiName, %spawnPos, %orderNumber );
-           
+					AI::DirectiveWaypoint(%aiName, %spawnPos, %orderNumber);
 					%orderNumber++;
 				}
 			}

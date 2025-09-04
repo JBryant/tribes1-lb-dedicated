@@ -3009,10 +3009,22 @@ $AccessoryVar[Elixir, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater
 BeltItem::Add("Ether", "Ether", "PotionItems", 0.5, 100, "", 506);
 $AccessoryVar[Ether, $MiscInfo] = "A potion that restores 25 MP";
 $restoreValue[Ether, MP] = 25;
+$AccessoryVar[Ether, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 HealingHerb 5 MandragoraRoot 2";
 
 BeltItem::Add("Turbo Ether","TurboEther","PotionItems", 1, 1000, "", 507);
-$AccessoryVar[TurboEther, $MiscInfo] = "An potion that provides 100 MP";
+$AccessoryVar[TurboEther, $MiscInfo] = "An potion that restores 100 MP";
 $restoreValue[TurboEther, MP] = 100;
+$AccessoryVar[TurboEther, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 HealingHerb 5 MaidensTear 2";
+
+BeltItem::Add("X-Ether","XEther","PotionItems", 1, 1000, "");
+$AccessoryVar[XEther, $MiscInfo] = "An potion that restores 250 MP";
+$restoreValue[XEther, MP] = 250;
+$AccessoryVar[XEther, "AlchemyIngredients"] = "ReinforcedAlchemistsBottle 1 VialOfWater 1 HealingHerb 5 BehemothHornFragment 2";
+
+BeltItem::Add("Mega Ether","MegaEther","PotionItems", 1, 1000, "");
+$AccessoryVar[MegaEther, $MiscInfo] = "An potion that restores 500 MP";
+$restoreValue[MegaEther, MP] = 500;
+$AccessoryVar[MegaEther, "AlchemyIngredients"] = "ArcaneCrystalPhial 1 VialOfWater 1 HealingHerb 5 MalboroSporeSac 2";
 
 BeltItem::Add("Healing Kit I", "HealingKitI", "MiscItems", 0.1, 10, "", 508);
 $AccessoryVar[HealingKitI, $MiscInfo] = "A medical kit that that let's you mend wounds. (10 HP)";

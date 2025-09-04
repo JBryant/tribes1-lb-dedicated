@@ -150,7 +150,8 @@ $ClassRequirements[30] = "HolyKnight 1 DarkKnight 1 Valkyrie 1 ArcaneArcher 1 Se
 $ClassName[31] = "ExSoldier";
 $ClassRequirements[31] = "Soldier 1 OnionKnight 1 Kefka 1";
 
-$ClassName[32] = "Enemy";
+// $ClassName[32] = "Enemy";
+$ClassRequirements[32] = "ExSoldier";
 
 
 function getFinalCLASS(%clientId) {

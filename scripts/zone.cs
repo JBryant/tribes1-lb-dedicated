@@ -134,31 +134,33 @@ function InitZones()
 	}
 }
 
-function RecursiveZone(%delay)
-{
+function RecursiveZone(%delay) {
 	dbecho($dbechoMode, "RecursiveZone(" @ %delay @ ")");
 
-	//increment by 1 every $zoneCheckDelay seconds
+	// increment by 1 every $zoneCheckDelay seconds
 	$zoneTicker[1]++;
 	$zoneTicker[2]++;
 
-	if($zoneTicker[1] >= 1)		//check zone every 2 seconds for players
-	{
-		DoZoneCheck(2, %delay);
+	// check zone every 2 seconds for players
+	if($zoneTicker[1] >= 1) {
+		DoZoneCheck(2);
 		$zoneTicker[1] = "";
 	}
+
 //	if($zoneTicker[2] >= 15)	//check zone every 30 seconds for bots
 //	{
 //		DoZoneCheck(1, %delay);
 //		$zoneTicker[2] = "";
 //	}
 
+	// DOT checks - Okay... let's do some DOT checks!
+	DoDotChecks();
+
 	schedule("RecursiveZone(" @ %delay @ ");", %delay);
 }
 
-function DoZoneCheck(%w, %d)
-{
-	dbecho($dbechoMode, "DoZoneCheck(" @ %w @ ", " @ %d @ ")");
+function DoZoneCheck() {
+	dbecho($dbechoMode, "DoZoneCheck()");
 
 	//Massive zone check for entire world
 	%mset = newObject("set", SimSet);
@@ -175,6 +177,48 @@ function DoZoneCheck(%w, %d)
 	Group::iterateRecursive(%mset, UpdateZone);
 	deleteObject(%mset);
 }
+
+$aiIdList = "";
+function DoDotChecks() {
+	dbecho($dbechoMode, "DoDotChecks()");
+	// lbecho("DoDotChecks()");
+	// loop through all players
+	%playerList = GetPlayerIdList();
+	for(%i = 0; (%playerId = getWord(%playerList, %i)) != -1; %i++) {
+		for(%j = 1; %j <= $maxBonusStates; %j++) {
+			if($BonusStateCnt[%playerId, %j] > 0 && $BonusStatePeriodic[%playerId, %j] == True && !IsDead(%playerId)) {
+				%attribute = $BonusStateAttribute[%playerId, %j];
+				%modifier = $BonusStateModifier[%playerId, %j];
+				%giver = $BonusStateGiver[%playerId, %j];
+
+				if (%attribute == "HP" && %modifier != "") {
+					refreshHP(%playerId, (%modifier * -1) / $TribesDamageToNumericDamage);
+				}
+			}
+		}
+	}
+
+	// loop through all ai
+	for(%i = 0; (%aiId = getWord($aiIdList, %i)) != -1; %i++) {
+		for(%j = 1; %j <= $maxBonusStates; %j++) {
+			if($BonusStateCnt[%aiId, %j] > 0 && $BonusStatePeriodic[%aiId, %j] == True && !IsDead(%aiId)) {
+				%attribute = $BonusStateAttribute[%aiId, %j];
+				%modifier = $BonusStateModifier[%aiId, %j];
+				%giver = $BonusStateGiver[%aiId, %j];
+
+				if (%attribute == "HP" && %modifier != "") {
+					if (%modifier > 0) {
+						refreshHP(%aiId, (%modifier * -1) / $TribesDamageToNumericDamage);
+					} else {
+						GameBase::virtual(%aiId, "onDamage", $TrueDamage, (%modifier * -1), "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %giver);
+					}
+					
+				}
+			}
+		}
+	}
+}
+
 function setzoneflags(%object, %z)
 {
 	dbecho($dbechoMode, "setzoneflags(" @ %object @ ", " @ %z @ ")");
@@ -214,8 +258,7 @@ function UpdateZone(%object)
 		else
 		{
 			//the client is in the same zone as he was since the last zonecheck
-			if($Zone::AmbientSound[%zoneflag] != "")
-			{
+			if($Zone::AmbientSound[%zoneflag] != "") {
 				%m = $Zone::AmbientSoundPerc[%zoneflag];
 				if(%m == "") %m = 100;
 	
@@ -223,10 +266,8 @@ function UpdateZone(%object)
 				if(%r <= %m)
 					Client::sendMessage(%clientId, 0, "~w" @ $Zone::AmbientSound[%zoneflag]);
 			}
-			if($Zone::Music[%zoneflag, 1] != "")
-			{
-				if(%clientId.MusicTicksLeft < 1)
-				{
+			if($Zone::Music[%zoneflag, 1] != "") {
+				if(%clientId.MusicTicksLeft < 1) {
 					for(%m = 1; $Zone::Music[%zoneflag, %m] != ""; %m++){}
 					%m--;
 					%clientId.currentMusic = floor(getRandom() * %m) + 1;
@@ -235,17 +276,12 @@ function UpdateZone(%object)
 					%clientId.MusicTicksLeft = $Zone::MusicTicks[%zoneflag, %clientId.currentMusic] + 15;
 				}
 			}
-			if($Zone::Type[%zoneflag] == "WATER")
-			{
-				if(!IsDead(%clientId))
-				{
+			if($Zone::Type[%zoneflag] == "WATER") {
+				if(!IsDead(%clientId)) {
 					%noDrown = "";
-					for(%i = 1; (%orb = $ItemList[Orb, %i]) != ""; %i++)
-					{
-						if($ProtectFromWater[%orb])
-						{
-							if(Player::getItemCount(%clientId, %orb @ "0"))
-							{
+					for(%i = 1; (%orb = $ItemList[Orb, %i]) != ""; %i++) {
+						if($ProtectFromWater[%orb]) {
+							if(Player::getItemCount(%clientId, %orb @ "0")) {
 								storeData(%clientId, "drownCounter", 0);
 								%noDrown = True;
 								break;
@@ -253,13 +289,11 @@ function UpdateZone(%object)
 						}
 					}
 
-					if(!%noDrown)
-					{
+					if(!%noDrown) {
 						%dn = 10;
-
 						storeData(%clientId, "drownCounter", 1, "inc");
-						if((%dc = fetchData(%clientId, "drownCounter")) > %dn)
-						{
+
+						if((%dc = fetchData(%clientId, "drownCounter")) > %dn) {
 							%dmg = Cap(floor(pow((%dc - %dn) / 1.2, 2)), 1.0, 1000) * "0.01";
 							GameBase::virtual(%clientId, "onDamage", 0, %dmg, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId);
 							%snd = radnomItems(3, SoundDrown1, SoundDrown2, SoundDrown3);

@@ -138,6 +138,11 @@ function Player::onKilled(%this) {
 
 		storeData(%clientId, "COINS", 0);
 
+		if(Player::isAiControlled(%clientId)) {
+			// and and remove %clientId from the string $aiIdList
+			$aiIdList = String::replace($aiIdList, %clientId @ " ", "");
+		}
+
 		%max = getNumItems();
 		for (%i = 0; %i < %max; %i++) {
 			%a = getItemData(%i);
@@ -422,6 +427,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 	// lbecho("objectType: " @ getObjectType(%object));
 
 	if(Player::isExposed(%this) && %object != -1 && %type != $NullDamageType && !Player::IsDead(%this)) {
+		%initialDamage = %value;
 		%damagedClient = Player::getClient(%this);
 
 		if ($BotShootingAt_WithId[%damagedClient] != "" && %object == 0) {
@@ -455,7 +461,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			// lbecho("----- create spell damage -----");
 			%lastSpell = fetchData(%shooterClient, "LastCastSpell");
 
-			if (%lastSpell == "" &&%weapon != "") {
+			if (%lastSpell == "" && %weapon != "") {
 				%lastSpell = %weapon;
 			}
 
@@ -471,14 +477,25 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			//For the case of SPELLS, the initial damage has already been determined before calling this function
 			%dmg = %spellDamage; // % value
 			%multiplier = 1;
+
+			if (%weapon == "") {
+				%multiplier = %multiplier * 2; // no weapon, do most damage
+			}
+			else {
+				if ($skillType[%weapon] == $SkillSpears) {
+					%multiplier = %multiplier * 1.5; // spears get a bonus
+				} else {
+					%multiplier = %multiplier * 1; // weapon present, so keep damage the same
+				}
+			}
 			
 			if (Player::isAiControlled(%shooterClient)) {
-				%multiplier = 0.25;
+				%multiplier = %multiplier * 0.25;
 			}
 
 			// check for bonuses to damage, like inner fire, etc
 			if (%spellSkillType == $SkillWhiteMagick && HasBonusState(%shooterClient, "InnerFire") == True) {
-				%multiplier = 1.5;
+				%multiplier = %multiplier * 1.5;
 			}
 			
 			// lbecho("shooters skill level: " @ $PlayerSkill[%shooterClient, %spellSkillType]);
@@ -585,6 +602,11 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			}
 
 			%value = (%value / $TribesDamageToNumericDamage);
+
+			if (%type == $TrueDamage) {
+				%value = (%initialDamage / $TribesDamageToNumericDamage);
+			}
+
 		}
 
         // Nobody likes missing... remove it or make it so that Miss does minimal damage
@@ -783,7 +805,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			//-------------------------------------------------
 			// SKILLS
 			//-------------------------------------------------
-			if(%skilltype >= 1 && !%arenaNull && !%sameTeamNull && %shooterClient != %damagedClient) {
+			if(%skilltype >= 1 && !%arenaNull && !%sameTeamNull && %shooterClient != %damagedClient && %type != $TrueDamage) {
 				%base1 = Cap(35 + (fetchData(%shooterClient, "LVL") - fetchData(%damagedClient, "LVL")), 1, "inf");
 				%base2 = Cap(35 + (fetchData(%damagedClient, "LVL") - fetchData(%shooterClient, "LVL")), 1, "inf");
 
@@ -822,8 +844,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				//--------------------
 				%enchantment = BeltItem::GetEnchant(%weapon);
 				%enchantDamage = 0;
-				
-				if (%enchantment != "") {
+
+				if (%enchantment != "" && %type != $TrueDamage) {
 					%enchantMod = $WeaponEnchantment[%enchantment, "mod"];
 					%enchantAction = $WeaponEnchantment[%enchantment, "action"];
 					%modId = GetWord(%enchantMod, 0);
@@ -1125,8 +1147,7 @@ function remoteKill(%clientId)
 		return;
 
 	%player = Client::getOwnedObject(%clientId);
-	if(%player != -1 && getObjectType(%player) == "Player" && !IsDead(%clientId) && IsInRoster(%clientId) == False)
-	{
+	if(%player != -1 && getObjectType(%player) == "Player" && !IsDead(%clientId) && IsInRoster(%clientId) == False) {
 		storeData(%clientId, "LCK", 1, "dec");
 
 		if(fetchData(%clientId, "LCK") >= 0)

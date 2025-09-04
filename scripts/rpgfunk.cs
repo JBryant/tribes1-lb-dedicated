@@ -1447,6 +1447,13 @@ function HasThisStuff(%clientId, %list, %multiplier)
 			else
 				return False;
 		}
+		else if(%w == "CLASS")
+		{
+			if(fetchData(%clientId, "CLASS") == %w2)
+				%flag = True;
+			else
+				return False;
+		}
 		else if(isBeltItem(%w))
 		{
 			%amnt = Belt::HasThisStuff(%clientid,%w);

@@ -274,25 +274,25 @@ function MenuSP(%clientId, %page)
 	if(%ub > %numSkills)
 		%ub = %numSkills;
 
-	%cnt = 0;
-
+	%cnt = -1;
 	for(%i = %lb; %i <= %ub; %i++) {
 		%skillIndex = GetWord(%skillIndexList, %i - 1);
-		Client::addMenuItem(%clientId, %cnt++ @ "(" @ GetPlayerSkill(%clientId, %skillIndex) @ ") " @ $SkillDesc[%skillIndex], %skillIndex @ " " @ %page);
+		// Client::addMenuItem(%clientId, string::getsubstr($menuChars, %cnt++, 1) @ %item, %item);
+		Client::addMenuItem(%clientId, string::getsubstr($menuChars, %cnt++, 1) @ "(" @ GetPlayerSkill(%clientId, %skillIndex) @ ") " @ $SkillDesc[%skillIndex], %skillIndex @ " " @ %page);
 	}
 
-	if(%page == 1) {
-		if(%ns > %optionsPerPage) Client::addMenuItem(%clientId, "nNext >>", "page " @ %page + 1);
-		Client::addMenuItem(%clientId, "xDone", "done");
-	}
-	else if(%page == %np + 1) {
-		Client::addMenuItem(%clientId, "p<< Prev", "page " @ %page - 1);
-		Client::addMenuItem(%clientId, "xDone", "done");
-	}
-	else {
-		Client::addMenuItem(%clientId, "nNext >>", "page " @ %page + 1);
-		Client::addMenuItem(%clientId, "p<< Prev", "page " @ %page - 1);
-	}
+	// if(%page == 1) {
+	// 	if(%ns > %optionsPerPage) Client::addMenuItem(%clientId, "nNext >>", "page " @ %page + 1);
+	// 	Client::addMenuItem(%clientId, "xDone", "done");
+	// }
+	// else if(%page == %np + 1) {
+	// 	Client::addMenuItem(%clientId, "p<< Prev", "page " @ %page - 1);
+	// 	Client::addMenuItem(%clientId, "xDone", "done");
+	// }
+	// else {
+	// 	Client::addMenuItem(%clientId, "nNext >>", "page " @ %page + 1);
+	// 	Client::addMenuItem(%clientId, "p<< Prev", "page " @ %page - 1);
+	// }
 
 	return;
 }
@@ -420,14 +420,17 @@ function MenuClass(%clientId)
 	for(%i = 1; $ClassName[%i] != ""; %i++) {
 		%meetsClassRequirements = True;
 		%classRequirements = $ClassRequirements[%i];
+		lbecho("Class Requirements for: " @ %classRequirements[%i]);
 
 		for(%x = 0; (%requiredClassName = getWord(%classRequirements, %x)) != -1; %x +=2) {
 			%requiredClassRemortLevel = getWord(%classRequirements, %x + 1);
+			lbecho("required class remort level for " @ %requiredClassName @ ": " @ %requiredClassRemortLevel);
 			// check if client has the class in the list
 			%remortedClassIndex = String::findSubStr(%remortedClasses, %requiredClassName);
 			// if %remortedClassIndex > 0 it exists, but how to get number next to it?
 			%cropped = String::getSubStr(%remortedClasses, %remortedClassIndex, 99999);
 			%remortedClassLevel = getword(%cropped, 1);
+			lbecho("remorted class level for " @ %requiredClassName @ ": " @ %remortedClassLevel);
 
 			if (%remortedClassIndex == -1 || %remortedClassLevel < %requiredClassRemortLevel) {
 				%meetsClassRequirements = False;
@@ -477,9 +480,13 @@ function processMenupickclass(%clientId, %className)
 	centerprint(%clientId, "<f1>Server powered by the RPG MOD version " @ $rpgver @ "<f0>\n\n" @ $loginMsg, 15);
 }
 
-function MenuChangeClass(%clientId)
+function MenuChangeClass(%clientId, %page)
 {
 	dbecho($dbechoMode, "MenuChangeClass(" @ %clientId @ ")");
+
+	if (%page == "") {
+		%page = 1;
+	}
 
 	Client::buildMenu(%clientId, "Pick a class:", "changeclass", true);
 
@@ -487,7 +494,13 @@ function MenuChangeClass(%clientId)
 	// loop through class requirements
 	// for each requirement, check if it exists in the characters RemortedClasses
 	%remortedClasses = fetchData(%clientId, "RemortedClasses");
-	%op = 0;
+
+	%optionsPerPage = 7;
+	if(%clientId.repack >= 18)
+		%optionsPerPage = 32;
+
+	%unlockedClasses = "";
+	%count = 0;
 
 	for(%i = 1; $ClassName[%i] != ""; %i++) {
 		%meetsClassRequirements = True;
@@ -495,9 +508,7 @@ function MenuChangeClass(%clientId)
 
 		for(%x = 0; (%requiredClassName = getWord(%classRequirements, %x)) != -1; %x +=2) {
 			%requiredClassRemortLevel = getWord(%classRequirements, %x + 1);
-			// check if client has the class in the list
 			%remortedClassIndex = String::findSubStr(%remortedClasses, %requiredClassName);
-			// if %remortedClassIndex > 0 it exists, but how to get number next to it?
 			%cropped = String::getSubStr(%remortedClasses, %remortedClassIndex, 99999);
 			%remortedClassLevel = getword(%cropped, 1);
 
@@ -507,11 +518,43 @@ function MenuChangeClass(%clientId)
 		}
 
 		if (%meetsClassRequirements == True) {
-			%op++;
-			Client::addMenuItem(%clientId, %op @ $ClassName[%i], $ClassName[%i]);
+			%count += 1;
+			%unlockedClasses = %unlockedClasses @ $ClassName[%i] @ " ";
+			//Client::addMenuItem(%clientId, %op @ $ClassName[%i], $ClassName[%i]);
 		}
 	}
 
+	// lbecho("Unlocked classes: " @ %unlockedClasses);
+	// lbecho("Unlocked class count: " @ %count);
+
+	%np = floor(%count / %optionsPerPage);
+	%lb = (%page * %optionsPerPage) - (%optionsPerPage - 1);
+	%ub = %lb + (%optionsPerPage - 1);
+
+	if(%ub > %count)
+		%ub = %count;
+
+	// %x = %lb - 1;
+
+	%cnt = -1;
+	for(%i = 0; %i < %count; %i++) {
+		// %x++;
+		%item = getWord(%unlockedClasses, %i); // %x
+		// Client::addMenuItem(%clientId, string::getsubstr($menuChars,%cnt++,1) @%amnt@" "@ $beltitem[%item, "Name"], %item @ " " @ %page @" "@%type@" "@%victim);
+		Client::addMenuItem(%clientId, string::getsubstr($menuChars, %cnt++, 1) @ %item, %item);
+	}
+
+	// if(%page == 1) {
+	// 	if(%ns > %optionsPerPage) Client::addMenuItem(%victim, "]Next >>", "page " @ %page+1 @" "@%type@" "@%victim);
+	// 	Client::addMenuItem(%clientId, "z<< Back", "back");
+	// }
+	// else if(%page == %np+1) {
+	// 	Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1 @" "@%type@" "@%victim);
+	// }
+	// else {
+	// 	Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1 @" "@%type@" "@%victim);
+	// 	Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1 @" "@%type@" "@%victim);
+	// }
 
 	return;
 }

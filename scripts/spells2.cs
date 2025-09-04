@@ -568,7 +568,7 @@ function DoCastSpell(%Client, %index, %oldpos, %castPos, %castObj, %w2, %tempMan
 	}
 
 	if(%Client.repack > 32) {
-		remoteEval(%Client, "rpgbarhud", %recovTime, 4, 2, "||");
+		remoteEval(%Client, "rpgbarhud", %recovTime, 4, 2, "||", 1, "Spell Cooldown");
 	}
 
 	if(String::findSubStr(%info, "returnFlag 1") != -1) {

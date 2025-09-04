@@ -1368,6 +1368,8 @@ ItemImageData TridentImage
 
 	sfxFire = SoundSwing3;
 	sfxActivate = AxeSlash2;
+	
+	mountOffset = {0, 0, 0};
 };
 ItemData Trident
 {

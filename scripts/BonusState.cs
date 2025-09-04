@@ -6,18 +6,18 @@
 
 $maxBonusStates = 20;
 
-function DecreaseBonusStateTicks(%clientId, %b)
-{
-	// %hasParry = HasBonusState(%clientId, "Parry");
-	// lbecho("client " @ %clientId @ " has parry: " @ %hasParry);
-
+function DecreaseBonusStateTicks(%clientId, %b) {
 	if(%b != "") {
 		//Decrease specified tick for the player
 		$BonusStateCnt[%clientId, %b]--;
 
 		if($BonusStateCnt[%clientId, %b] <= 0) {
-			$BonusStateCnt[%clientId, %b] = "";
 			$BonusState[%clientId, %b] = "";
+			$BonusState[%clientId, %b] = "";
+			$BonusStateAttribute[%clientId, %b] = "";
+			$BonusStateModifier[%clientId, %b] = "";
+			$BonusStatePeriodic[%clientId, %b] = "";
+			$BonusStateGiver[%clientId, %b] = "";
 			playSound(BonusStateExpire, GameBase::getPosition(%clientId));
 		}
 	}
@@ -31,11 +31,16 @@ function DecreaseBonusStateTicks(%clientId, %b)
 				$BonusStateCnt[%clientId, %i]--;
 
 				if($BonusStateCnt[%clientId, %i] <= 0) {
-					Client::sendMessage(%clientId, 0, $BonusStateName[%clientId, %i] @ " has expired.");
+					Client::sendMessage(%clientId, $MsgRed, $BonusStateName[%clientId, %i] @ " has expired.");
 
 					$BonusStateName[%clientId, %i] = "";
 					$BonusStateCnt[%clientId, %i] = "";
 					$BonusState[%clientId, %i] = "";
+					$BonusStateAttribute[%clientId, %i] = "";
+					$BonusStateModifier[%clientId, %i] = "";
+					$BonusStatePeriodic[%clientId, %i] = "";
+					$BonusStateGiver[%clientId, %i] = "";
+
 					playSound(BonusStateExpire, GameBase::getPosition(%clientId));
 				}
 				else {
@@ -71,7 +76,7 @@ function AddBonusStatePoints(%clientId, %filter) {
 	return %add;
 }
 
-function UpdateBonusState(%clientId, %type, %ticks, %name) {
+function UpdateBonusState(%clientId, %type, %ticks, %name, %giver, %attribute, %modifier, %periodic) {
 	//look thru the current bonus states and attempt to update
 	%flag = False;
 	for(%i = 1; %i <= $maxBonusStates; %i++) {
@@ -91,6 +96,16 @@ function UpdateBonusState(%clientId, %type, %ticks, %name) {
 				$BonusState[%clientId, %i] = %type;
 				$BonusStateCnt[%clientId, %i] = %ticks;
 				$BonusStateName[%clientId, %i] = %name;
+				$BonusStateGiver[%clientId, %i] = %giver;
+
+				if (%attribute != "")
+					$BonusStateAttribute[%clientId, %i] = %attribute;
+				if (%modifier != "")
+					$BonusStateModifier[%clientId, %i] = %modifier;
+				if (%periodic != "")
+					$BonusStatePeriodic[%clientId, %i] = %periodic;
+				if (%giver != "")
+					$BonusStateGiver[%clientId, %i] = %giver;
 
 				return True;
 			}

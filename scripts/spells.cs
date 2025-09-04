@@ -149,6 +149,7 @@ $SpellMovementGraceDistance = 4; // 2
 //-- SPELL DEFINITIONS -------------------------------------------------------------------------------------------
 
 $AllMageClasses = "BlackMage TimeMage Summoner Spellbow Spellblade DarkKnight ArcaneArcher Arcanist HexBlade";
+$WhiteMagicClasses = "WhiteMage Mystic Orator Samurai Dancer HolyKnight Valkyrie Seraphim Ancient HighSummoner";
 
 //-----------transportation spells-------------
 $Spell::keyword[1] = "teleport";
@@ -199,12 +200,12 @@ $Spell::index[medic] = 4;
 $Spell::name[4] = "Healing Magic";
 $Spell::description[4] = "Cure self.";
 $Spell::delay[4] = 1.5;
-$Spell::recoveryTime[4] = 5;
+$Spell::recoveryTime[4] = 2;
 $Spell::damageValue[4] = -80;
 $Spell::manaCost[4] = 5;
 $Spell::startSound[4] = DeActivateWA;
 $Spell::endSound[4] = lilheal; // lilheal
-$Spell::classRestrictions[4] = "Cleric Druid Paladin Ranger Thief Bard Mage Summoner,";
+$Spell::classRestrictions[4] = $WhiteMagicClasses;
 $Spell::minLevel[4] = 1;
 $Spell::groupListCheck[4] = False;
 $Spell::Type[4] = $MagicType[White];
@@ -218,10 +219,10 @@ $Spell::delay[5] = 1.5;
 $Spell::recoveryTime[5] =  20;
 $Spell::damageValue[5] = -200;
 $Spell::LOSrange[5] = 500;
-$Spell::manaCost[5] = 30;
+$Spell::manaCost[5] = 20;
 $Spell::startSound[5] = DeActivateWA;
 $Spell::endSound[5] = lilheal;
-$Spell::classRestrictions[5] = "Mage Summoner Paladin Cleric Druid Ranger Bard,";
+$Spell::classRestrictions[5] = $WhiteMagicClasses;
 $Spell::minLevel[5] = 15;
 $Spell::groupListCheck[5] = False;
 $Spell::Type[5] = $MagicType[White];
@@ -235,10 +236,10 @@ $Spell::delay[6] = 1.5;
 $Spell::recoveryTime[6] = 30;
 $Spell::damageValue[6] = -1000;
 $Spell::LOSrange[6] = 500;
-$Spell::manaCost[6] = 80;
+$Spell::manaCost[6] = 40;
 $Spell::startSound[6] = DeActivateWA;
 $Spell::endSound[6] = lilheal; // lilheal
-$Spell::classRestrictions[6] = "Cleric Druid Mage Summoner Bard";
+$Spell::classRestrictions[6] = $WhiteMagicClasses;
 $Spell::minLevel[6] = 40;
 $Spell::groupListCheck[6] = False;
 $Spell::Type[6] = $MagicType[White];
@@ -252,10 +253,10 @@ $Spell::delay[7] = 1.5;
 $Spell::recoveryTime[7] = 30;
 $Spell::damageValue[7] = -5000;
 $Spell::LOSrange[7] = 500;
-$Spell::manaCost[7] = 80;
+$Spell::manaCost[7] = 60;
 $Spell::startSound[7] = DeActivateWA;
 $Spell::endSound[7] = lilheal;
-$Spell::classRestrictions[7] = "Cleric Druid Mage Summoner Bard";
+$Spell::classRestrictions[7] = $WhiteMagicClasses;
 $Spell::minLevel[7] = 75;
 $Spell::groupListCheck[7] = False;
 $Spell::Type[7] = $MagicType[White];
@@ -318,7 +319,7 @@ $Spell::name[11] = "Fire Magic";
 $Spell::description[11] = "Level 1 fire magic.";
 $Spell::delay[11] = 2;
 $Spell::recoveryTime[11] = 5;
-$Spell::damageValue[11] = 4;
+$Spell::damageValue[11] = 6;
 $Spell::LOSrange[11] = 100;
 $Spell::manaCost[11] = 2;
 $Spell::startSound[11] = spellstart;
@@ -610,12 +611,12 @@ $Spell::name[28] = "Light Magic";
 $Spell::description[28] = "Level 1 Light Magic.";
 $Spell::delay[28] = 1;
 $Spell::recoveryTime[28] = 5;
-$Spell::damageValue[28] = 10;
-$Spell::LOSrange[28] = 400;
-$Spell::manaCost[28] = 1;
+$Spell::damageValue[28] = 5;
+$Spell::LOSrange[28] = 100;
+$Spell::manaCost[28] = 2;
 $Spell::startSound[28] = spellstart;
 $Spell::endSound[28] = mmsound;
-$Spell::classRestrictions[28] = "WhiteMage";
+$Spell::classRestrictions[28] = "WhiteMage Mystic Orator";
 $Spell::minLevel[28] = 1;
 $Spell::groupListCheck[28] = False;
 $Spell::Type[28] = $MagicType[White];
@@ -626,13 +627,13 @@ $Spell::index[wound] = 29;
 $Spell::name[29] = "Light Magic";
 $Spell::description[29] = "Level 2 Light Magic.";
 $Spell::delay[29] = 1;
-$Spell::recoveryTime[29] = 10;
+$Spell::recoveryTime[29] = 6;
 $Spell::damageValue[29] = 20;
 $Spell::LOSrange[29] = 200;
-$Spell::manaCost[29] = 25;
+$Spell::manaCost[29] = 10;
 $Spell::startSound[29] = spellstart;
 $Spell::endSound[29] = ActivateAR;
-$Spell::classRestrictions[29] = "WhiteMage";
+$Spell::classRestrictions[29] = "WhiteMage Mystic Orator";
 $Spell::minLevel[29] = 10;
 $Spell::groupListCheck[29] = False;
 $Spell::Type[29] = $MagicType[White];
@@ -646,11 +647,11 @@ $Spell::delay[30] = 1;
 $Spell::recoveryTime[30] = 10;
 $Spell::damageValue[30] = 55;
 $Spell::LOSrange[30] = 100;
-$Spell::manaCost[30] = 50;
+$Spell::manaCost[30] = 35;
 $Spell::startSound[30] = spellstart;
 $Spell::endSound[30] = ActivateAR;
-$Spell::classRestrictions[30] = "WhiteMage";
-$Spell::minLevel[30] = 50;
+$Spell::classRestrictions[30] = "WhiteMage Mystic Orator";
+$Spell::minLevel[30] = 30;
 $Spell::groupListCheck[30] = False;
 $Spell::Type[30] = $MagicType[White];
 $SkillType[Fist] = $SkillWhiteMagick;
@@ -663,11 +664,11 @@ $Spell::delay[31] = 3;
 $Spell::recoveryTime[31] = 9;
 $Spell::damageValue[31] = 120;	
 $Spell::LOSrange[31] = 100;
-$Spell::manaCost[31] = 100;
+$Spell::manaCost[31] = 60;
 $Spell::startSound[31] = thunderlight;
 $Spell::endSound[31] = shockExplosion;
-$Spell::classRestrictions[31] = "WhiteMage";
-$Spell::minLevel[31] = 100;
+$Spell::classRestrictions[31] = "WhiteMage Mystic Orator";
+$Spell::minLevel[31] = 60;
 $Spell::groupListCheck[31] = False;
 $Spell::Type[31] = $MagicType[White];
 $SkillType[Missile] = $SkillWhiteMagick;
@@ -678,13 +679,13 @@ $Spell::name[32] = "Light Magic";
 $Spell::description[32] = "Level 5 Light Magic.";
 $Spell::delay[32] = 6;
 $Spell::recoveryTime[32] = 9;
-$Spell::damageValue[32] = 150;
+$Spell::damageValue[32] = 100; // 150 / 2
 $Spell::LOSrange[32] = 100;
-$Spell::manaCost[32] = 150;
+$Spell::manaCost[32] = 120;
 $Spell::startSound[32] = thunderlight;
 $Spell::endSound[32] = shockExplosion;
-$Spell::classRestrictions[32] = "WhiteMage";
-$Spell::minLevel[32] = 130;
+$Spell::classRestrictions[32] = "WhiteMage Mystic Orator";
+$Spell::minLevel[32] = 90;
 $Spell::groupListCheck[32] = False;
 $Spell::Type[32] = $MagicType[White];
 $SkillType[Cannon] = $SkillWhiteMagick;
@@ -695,13 +696,13 @@ $Spell::name[33] = "Light Magic";
 $Spell::description[33] = "Level 6 Light Magic.";
 $Spell::delay[33] = 6;
 $Spell::recoveryTime[33] = 10;
-$Spell::damageValue[33] = 200;
+$Spell::damageValue[33] = 80; // 200 / 3
 $Spell::LOSrange[33] = 200;
-$Spell::manaCost[33] = 200;
+$Spell::manaCost[33] = 160;
 $Spell::startSound[33] = spellstart;
 $Spell::endSound[33] = ActivateAR;
-$Spell::classRestrictions[33] = "WhiteMage";
-$Spell::minLevel[33] = 170;
+$Spell::classRestrictions[33] = "WhiteMage Mystic Orator";
+$Spell::minLevel[33] = 120;
 $Spell::groupListCheck[33] = False;
 $Spell::Type[33] = $MagicType[White];
 $SkillType[bomb] = $SkillWhiteMagick;
@@ -714,11 +715,11 @@ $Spell::delay[34] = 2;
 $Spell::recoveryTime[34] = 5;
 $Spell::damageValue[34] = 50; // 235 / 5
 $Spell::LOSrange[34] = 800;
-$Spell::manaCost[34] = 300;
+$Spell::manaCost[34] = 240;
 $Spell::startSound[34] = ultimathunder;
 $Spell::endSound[34] = spooky;
-$Spell::classRestrictions[34] = "WhiteMage";
-$Spell::minLevel[34] = 250;
+$Spell::classRestrictions[34] = "WhiteMage Mystic Orator";
+$Spell::minLevel[34] = 150;
 $Spell::groupListCheck[34] = False;
 $Spell::Type[34] = $MagicType[White];
 $SkillType[Star] = $SkillWhiteMagick;
@@ -851,7 +852,7 @@ $Spell::delay[42] = 2;
 $Spell::recoveryTime[42] = 6;
 $Spell::damageValue[42] = 15; // 30
 $Spell::LOSrange[42] = 500;
-$Spell::manaCost[42] = 30;
+$Spell::manaCost[42] = 20;
 $Spell::startSound[42] = spellstart;
 $Spell::endSound[42] = thunderlight;
 $Spell::radius[42] = "10";
@@ -1447,6 +1448,7 @@ $Spell::name[77] = "Haste";
 $Spell::description[77] = "Lowers all cooldowns for skills and spells.";
 $Spell::delay[77] = 2.5;
 $Spell::recoveryTime[77] = 2.5;
+$Spell::duration[77] = 30;
 $Spell::damageValue[77] = "0";
 $Spell::LOSrange[77] = 0; // 80
 $Spell::manaCost[77] = 50;
@@ -1455,7 +1457,7 @@ $Spell::endSound[77] = ActivateCH;
 $Spell::groupListCheck[77] = False;
 $Spell::refVal[77] = -9998;
 $Spell::graceDistance[77] = 1;
-$Spell::classRestrictions[77] = "TimeMage";
+$Spell::classRestrictions[77] = "TimeMage Mystic";
 // $Spell::elementalType[77] = $ElementalFire;
 $SkillType[haste] = $SkillTimeMagick;
 
@@ -1479,6 +1481,195 @@ $Spell::classRestrictions[78] = "TimeMage";
 $Spell::minLevel[78] = 50;
 // $Spell::elementalType[78] = $ElementalFire;
 $SkillType[blackhole] = $SkillTimeMagick;
+
+$Spell::keyword[79] = "regen";
+$Spell::index[regen] = 79;
+$Spell::name[79] = "Regen";
+$Spell::description[79] = "Regenerates a target's health over time.";
+$Spell::delay[79] = 2;
+$Spell::recoveryTime[79] = 2;
+$Spell::damageValue[79] = "10";
+$Spell::duration[79] = "30";
+$Spell::LOSrange[79] = 10; // 80
+$Spell::radius[79] = 40; // 100
+$Spell::manaCost[79] = 1;
+$Spell::startSound[79] = PlaceSeal;
+// $Spell::endSound[79] = ActivateCH;
+$Spell::groupListCheck[79] = False;
+$Spell::refVal[79] = -9998;
+$Spell::graceDistance[79] = 1;
+// $Spell::classRestrictions[79] = $WhiteMagicClasses;
+$Spell::minLevel[79] = 1;
+// $Spell::elementalType[79] = $ElementalFire;
+$SkillType[regen] = $SkillTimeMagick;
+
+$Spell::keyword[80] = "regen2";
+$Spell::index[regen2] = 80;
+$Spell::name[80] = "Regen2";
+$Spell::description[80] = "Regenerates a target's health over time.";
+$Spell::delay[80] = 2;
+$Spell::recoveryTime[80] = 2;
+$Spell::damageValue[80] = "20";
+$Spell::duration[80] = "30";
+$Spell::LOSrange[80] = 10; // 80
+$Spell::radius[80] = 40; // 100
+$Spell::manaCost[80] = 1;
+$Spell::startSound[80] = PlaceSeal;
+// $Spell::endSound[80] = ActivateCH;
+$Spell::groupListCheck[80] = False;
+$Spell::refVal[80] = -9998;
+$Spell::graceDistance[80] = 1;
+$Spell::classRestrictions[80] = $WhiteMagicClasses;
+$Spell::minLevel[80] = 1;
+// $Spell::elementalType[80] = $ElementalFire;
+$SkillType[regen2] = $SkillTimeMagick;
+
+$Spell::keyword[81] = "regen3";
+$Spell::index[regen3] = 81;
+$Spell::name[81] = "Regen3";
+$Spell::description[81] = "Regenerates a target's health over time.";
+$Spell::delay[81] = 2;
+$Spell::recoveryTime[81] = 2;
+$Spell::damageValue[81] = "30";
+$Spell::duration[81] = "30";
+$Spell::LOSrange[81] = 10; // 80
+$Spell::radius[81] = 40; // 100
+$Spell::manaCost[81] = 1;
+$Spell::startSound[81] = PlaceSeal;
+// $Spell::endSound[81] = ActivateCH;
+$Spell::groupListCheck[81] = False;
+$Spell::refVal[81] = -9998;
+$Spell::graceDistance[81] = 1;
+$Spell::classRestrictions[81] = $WhiteMagicClasses;
+$Spell::minLevel[81] = 1;
+// $Spell::elementalType[81] = $ElementalFire;
+$SkillType[regen3] = $SkillTimeMagick;
+
+$Spell::keyword[82] = "regen4";
+$Spell::index[regen4] = 82;
+$Spell::name[82] = "Regen4";
+$Spell::description[82] = "Regenerates a target's health over time.";
+$Spell::delay[82] = 2;
+$Spell::recoveryTime[82] = 2;
+$Spell::damageValue[82] = "40";
+$Spell::duration[82] = "30";
+$Spell::LOSrange[82] = 10; // 80
+$Spell::radius[82] = 40; // 100
+$Spell::manaCost[82] = 1;
+$Spell::startSound[82] = PlaceSeal;
+// $Spell::endSound[82] = ActivateCH;
+$Spell::groupListCheck[82] = False;
+$Spell::refVal[82] = -9998;
+$Spell::graceDistance[82] = 1;
+$Spell::classRestrictions[82] = $WhiteMagicClasses;
+$Spell::minLevel[82] = 1;
+// $Spell::elementalType[82] = $ElementalFire;
+$SkillType[regen4] = $SkillTimeMagick;
+
+$Spell::keyword[83] = "hex";
+$Spell::index[hex] = 83;
+$Spell::name[83] = "Hex";
+$Spell::description[83] = "Curses a target, causing damage over time.";
+$Spell::delay[83] = 2;
+$Spell::recoveryTime[83] = 2;
+$Spell::damageValue[83] = "-5";
+$Spell::duration[83] = "30";
+$Spell::LOSrange[83] = 10; // 80
+$Spell::radius[83] = 40; // 100
+$Spell::manaCost[83] = 1;
+$Spell::startSound[83] = Portal11;
+// $Spell::endSound[83] = ActivateCH;
+$Spell::groupListCheck[83] = False;
+$Spell::refVal[83] = -9998;
+$Spell::graceDistance[83] = 1;
+$Spell::classRestrictions[83] = ""; // $WhiteMagicClasses;
+$Spell::minLevel[83] = 1;
+// $Spell::elementalType[83] = $ElementalFire;
+$SkillType[hex] = $WhiteMagicClasses;
+
+$Spell::keyword[84] = "vex";
+$Spell::index[vex] = 84;
+$Spell::name[84] = "Vex";
+$Spell::description[84] = "Curses a target, causing damage over time.";
+$Spell::delay[84] = 2;
+$Spell::recoveryTime[84] = 2;
+$Spell::damageValue[84] = "-10";
+$Spell::duration[84] = "30";
+$Spell::LOSrange[84] = 10; // 80
+$Spell::radius[84] = 40; // 100
+$Spell::manaCost[84] = 1;
+$Spell::startSound[84] = Portal11;
+// $Spell::endSound[84] = ActivateCH;
+$Spell::groupListCheck[84] = False;
+$Spell::refVal[84] = -9998;
+$Spell::graceDistance[84] = 1;
+$Spell::classRestrictions[84] = $WhiteMagicClasses;
+$Spell::minLevel[84] = 1;
+// $Spell::elementalType[84] = $ElementalFire;
+$SkillType[vex] = $WhiteMagicClasses;
+
+$Spell::keyword[85] = "curse";
+$Spell::index[curse] = 85;
+$Spell::name[85] = "Curse";
+$Spell::description[85] = "Curses a target, causing damage over time.";
+$Spell::delay[85] = 2;
+$Spell::recoveryTime[85] = 2;
+$Spell::damageValue[85] = "-25";
+$Spell::duration[85] = "30";
+$Spell::LOSrange[85] = 10; // 80
+$Spell::radius[85] = 40; // 100
+$Spell::manaCost[85] = 1;
+$Spell::startSound[85] = Portal11;
+// $Spell::endSound[85] = ActivateCH;
+$Spell::groupListCheck[85] = False;
+$Spell::refVal[85] = -9998;
+$Spell::graceDistance[85] = 1;
+$Spell::classRestrictions[85] = $WhiteMagicClasses;
+$Spell::minLevel[85] = 1;
+// $Spell::elementalType[85] = $ElementalFire;
+$SkillType[curse] = $WhiteMagicClasses;
+
+$Spell::keyword[86] = "plague";
+$Spell::index[plague] = 86;
+$Spell::name[86] = "Plague";
+$Spell::description[86] = "Curses a target, causing damage over time.";
+$Spell::delay[86] = 2;
+$Spell::recoveryTime[86] = 2;
+$Spell::damageValue[86] = "-50";
+$Spell::duration[86] = "30";
+$Spell::LOSrange[86] = 10; // 80
+$Spell::radius[86] = 40; // 100
+$Spell::manaCost[86] = 1;
+$Spell::startSound[86] = Portal11;
+// $Spell::endSound[86] = ActivateCH;
+$Spell::groupListCheck[86] = False;
+$Spell::refVal[86] = -9998;
+$Spell::graceDistance[86] = 1;
+$Spell::classRestrictions[86] = $WhiteMagicClasses;
+$Spell::minLevel[86] = 1;
+// $Spell::elementalType[86] = $ElementalFire;
+$SkillType[plague] = $WhiteMagicClasses;
+
+$Spell::keyword[87] = "blackdeath";
+$Spell::index[blackdeath] = 87;
+$Spell::name[87] = "Black Death";
+$Spell::description[87] = "Curses a target, causing damage over time.";
+$Spell::delay[87] = 2;
+$Spell::recoveryTime[87] = 2;
+$Spell::damageValue[87] = "-100";
+$Spell::duration[87] = "30";
+$Spell::LOSrange[87] = 10; // 80
+$Spell::radius[87] = 40; // 100
+$Spell::manaCost[87] = 1;
+$Spell::startSound[87] = Portal11;
+// $Spell::endSound[87] = ActivateCH;
+$Spell::groupListCheck[87] = False;
+$Spell::refVal[87] = -9998;
+$Spell::graceDistance[87] = 1;
+$Spell::classRestrictions[87] = $WhiteMagicClasses;
+$Spell::minLevel[87] = 1;
+// $Spell::elementalType[87] = $ElementalFire;
+$SkillType[blackdeath] = $WhiteMagicClasses;
 
 //====================================================================================================================
 //====================================================================================================================
@@ -2149,29 +2340,32 @@ function SpellNum29(%Client, %castObj, %castPos) {
 function SpellNum30(%Client, %castObj, %castPos) {
 
 		//Fist
-		schedule("cast_tfist("@%Client@");",0.1);
-		schedule("cast_tfist("@%Client@");",0.2);
+		schedule("cast_tfist("@%Client@");", 0.1);
+		schedule("cast_tfist("@%Client@");", 0.2);
 
 		return "returnFlag 1";
 	}
 function SpellNum31(%Client, %castObj, %castPos) {
 
 	//Missile
-	schedule("cast_shocklvtwo("@%Client@");",0.1);
-	schedule("cast_shocklvtwo("@%Client@");",0.2);
+	schedule("cast_shocklvtwo("@%Client@");", 0.1);
+	schedule("cast_shocklvtwo("@%Client@");", 0.2);
 
 	return "returnFlag 1";
 }
 function SpellNum32(%Client, %castObj, %castPos) {
 
 	//Cannon
-	schedule("cast_shocklvone("@%Client@");",0.1);
+	schedule("cast_shocklvone("@%Client@");", 0.1);
+	schedule("cast_shocklvone("@%Client@");", 0.2);
 	return "returnFlag 1";
 }
 function SpellNum33(%Client, %castObj, %castPos) {
 
 	//Bomb
-	schedule("cast_surge("@%Client@");",0.1);
+	schedule("cast_surge("@%Client@");", 0.1);
+	schedule("cast_surge("@%Client@");", 0.2);
+	schedule("cast_surge("@%Client@");", 0.3);
 	return "returnFlag 1";
 }
 function SpellNum34(%Client, %castObj, %castPos) {
@@ -3090,13 +3284,83 @@ function SpellNum70(%clientId, %castObj, %castPos) {
 }
 
 function SpellNum77(%clientId) {
-	UpdateBonusState(%clientId, "Haste", 15, "Haste");
+	%duration = $Spell::duration[77];
+	remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", 2, "Haste");
+	UpdateBonusState(%clientId, "Haste", %duration, "Haste");
 }
 
+// black hole
 function SpellNum78(%clientId, %castObj, %castPos, %w2) {
 	cast_blackhole(%clientId, %castObj, %castPos, %w2);
 }
 
+function ApplyBonusStateSpell(%targetId, %giver, %spellIndex, %type, %value) {
+	if (%value == "")
+		%value = $Spell::damageValue[%spellIndex];
+
+	remoteEval(%targetId, "rpgbarhud", ($Spell::duration[%spellIndex] * 2), 3, 2, "||", 2, $Spell::name[%spellIndex]);
+
+	lbecho("Applying bonus state: " @ $Spell::name[%spellIndex]);
+	lbecho("To " @ %targetId);
+	lbecho("With value: " @ %value);
+
+	UpdateBonusState(%targetId, $Spell::keyword[%spellIndex], $Spell::duration[%spellIndex], $Spell::keyword[%spellIndex], %giver, "HP", %value, True);
+}
+
+// regen
+function SpellNum79(%clientId, %castObj, %castPos, %w2) {
+	ApplyBonusStateSpell(%clientId, %clientId, 79, "HP");
+}
+
+// regen2
+function SpellNum80(%clientId, %castObj, %castPos, %w2) {
+	ApplyBonusStateSpell(%clientId, %clientId, 80, "HP");
+}
+
+// regen3
+function SpellNum81(%clientId, %castObj, %castPos, %w2) {
+	ApplyBonusStateSpell(%clientId, %clientId, 81, "HP");
+}
+
+// regen4
+function SpellNum82(%clientId, %castObj, %castPos, %w2) {
+	ApplyBonusStateSpell(%clientId, %clientId, 82, "HP");
+}
+
+// hex
+function SpellNum83(%clientId, %castObj, %castPos, %w2) {
+	if(Player::isAiControlled(%castObj)) {
+		ApplyBonusStateSpell(Player::getClient(%castObj), %clientId, 83, "HP");
+	}
+}
+
+// vex
+function SpellNum84(%clientId, %castObj, %castPos, %w2) {
+	if(Player::isAiControlled(%castObj)) {
+		ApplyBonusStateSpell(Player::getClient(%castObj), %clientId, 84, "HP");
+	}
+}
+
+// curse
+function SpellNum85(%clientId, %castObj, %castPos, %w2) {
+	if(Player::isAiControlled(%castObj)) {
+		ApplyBonusStateSpell(Player::getClient(%castObj), %clientId, 85, "HP");
+	}
+}
+
+// plague
+function SpellNum86(%clientId, %castObj, %castPos, %w2) {
+	if(Player::isAiControlled(%castObj)) {
+		ApplyBonusStateSpell(Player::getClient(%castObj), %clientId, 86, "HP");
+	}
+}
+
+// blackdeath
+function SpellNum87(%clientId, %castObj, %castPos, %w2) {
+	if(Player::isAiControlled(%castObj)) {
+		ApplyBonusStateSpell(Player::getClient(%castObj), %clientId, 87, "HP");
+	}
+}
 // //-- SPELL DEFINITIONS -------------------------------------------------------------------------------------------
 
 // $Spell::keyword[1] = "firebomb";

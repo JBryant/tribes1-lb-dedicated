@@ -74,6 +74,13 @@ $rpgmsghudsmall = 5;
 $rpgbathudwidth = 375;
 $rpgbarhudwidth = 400;//best not to mess with this, for now, it only affects the positioning
 
+$usedBarSlots[0] = "";
+$usedBarSlots[1] = "";
+$usedBarSlots[2] = "";
+$usedBarSlots[3] = "";
+$usedBarSlots[4] = "";
+$usedBarSlots[5] = "";
+
 //==========================================================================================================
 
 $rpghudlines = $rpgmsghudmedium;
@@ -348,18 +355,22 @@ function rpgmsghud::unload()
 function rpgbarhud::reset(%barnum){
 	%ngs = nameToId(NamedGuiSet);
 	%len = Group::objectCount(%ngs);
+
 	for(%i = 0; %i < %len; %i++) {
  		%obj = Group::getObject(%ngs, %i);
   		%objectName = Object::getName(%obj);
-		if(%barnum == -1){
+
+		if(%barnum == -1) {
 			if(string::FindSubStr(%objectname,"rpgbarhud_") != -1)
 				%list = %list @ %obj @ " ";
 		}
   		else if (string::compare(%objectname,"rpgbarhud_"@%barnum) == 0 || string::compare(%objectname,"rpgbarhud_"@(%barnum+1)) == 0)
     			%list = %list @ %obj @ " ";
   	}
+
 	for (%i = 0; (%g = getWord(%list,%i)) != -1; %i++)
 		deleteObject(%g);
+
 	if(%barnum == -1){
 		for(%i = 0;%i < 10;%i+=2)
 			schedule::cancel("rpgbarhud"@%i);
@@ -367,21 +378,25 @@ function rpgbarhud::reset(%barnum){
 	else
 		schedule::cancel("rpgbarhud"@%barnum);
 }
+
 function rpgbarhud::load(%recovTime, %c, %ec, %chars, %barnum, %addtext){
 	%barnum = %barnum * 2 + 2;
 	rpgbarhud::reset(%barnum);
+
 	%hudwidth = $rpgbarhudwidth;
 	%res = Repack::ScreenSize();
-	%x = getWord(%res,0);
+	%x = getWord(%res, 0);
 	%x -= %hudwidth;
 	%posx = %x * 0.5;
 
-	%y = getWord(%res,1);
+	%y = getWord(%res, 1);
 	%height = 26 * (%barnum-1);
 	%y -= %height;
 	%posy = %y;
 	%object = newObject("rpgbarhud_"@%barnum, FearGuiFormattedText,%posx, %posy, 15, 100);
+
 	addToSet(PlayGui, %object);
+
 	if(%addtext != ""){
 		%posy -= 15;
 		%bn = (%barnum+1);
@@ -389,6 +404,7 @@ function rpgbarhud::load(%recovTime, %c, %ec, %chars, %barnum, %addtext){
 		addToSet(PlayGui, %object);
 		control::setValue("rpgbarhud_"@%bn,%addtext);
 	}
+
 	%sch = string::getsubstr(%chars,0,1);
 	%ech = string::getsubstr(%chars,1,1);
 	%s_charwidth = rpgmsghud::charwidth(%sch)-1;
@@ -401,6 +417,7 @@ function rpgbarhud::load(%recovTime, %c, %ec, %chars, %barnum, %addtext){
 	else
 		rpgbarhud::frame(0, %recovTime, %s_charwidth, %e_charwidth, %sch, %ech, %barnum);
 }
+
 function rpgbarhud::frame(%state, %recovTime, %scw, %ecw, %sch, %ech, %barnum){
 	%pct = floor((%state / %recovTime) * 400)+1;
 	if(%pct > 400)
@@ -414,15 +431,16 @@ function rpgbarhud::frame(%state, %recovTime, %scw, %ecw, %sch, %ech, %barnum){
 		schedule::addf("rpgbarhud::frame("@%state@", "@%recovTime@","@%scw@","@%ecw@", \"" @ %sch @ "\", \"" @ %ech @ "\", " @ %barnum @ ");",%speed, "rpgbarhud"@%barnum);
 	}
 	else {
-		schedule::addf("rpgbarhud::reset("@%barnum@");",3, "rpgbarhud"@%barnum);
+		%usedBarSlots[%barnum] = "";
+		schedule::addf("rpgbarhud::reset("@%barnum@");", 3, "rpgbarhud"@%barnum);
 	}
 	%sch_width = floor(%pct / %scw);
 	%msg = String::create(%sch, %sch_width);
 	%ech_width = floor(%remainder / %ecw);
 	%msg = %msg @ String::create(%ech, %ech_width);
-	control::setValue("rpgbarhud_"@%barnum,%msg);
-
+	control::setValue("rpgbarhud_"@%barnum, %msg);
 }
+
 function rpgbarhud2::frame(%state, %recovTime, %sch, %ech, %barnum){
 	%pct = floor((%state / %recovTime) * 400)+1;
 	if(%pct > 400)
@@ -449,17 +467,30 @@ function rpgbarhud2::frame(%state, %recovTime, %sch, %ech, %barnum){
 //It should be okay to use any two chars, but it'll look pretty weird for many that aren't the correct width
 //Recommend just using "||" for chars
 //%barnum and %addtext added in repack 34
-function remoterpgbarhud(%server,%recovTime, %colour, %ecolour, %chars, %barnum, %addtext){
+function remoterpgbarhud(%server, %recovTime, %colour, %ecolour, %chars, %barnum, %addtext){
 	if(%server != 2048)
 		return;
+
 	%color = floor(%colour);
 	%ecolour = floor(%ecolour);
 	%barnum = floor(%barnum);
 	%recovTime += 1.0;
 	%recovTime -= 1.0;
+
 	if(%recovTime < 0.1)
 		%recovTime = 0.1;
-	rpgbarhud::load(%recovTime, %colour, %ecolour, %chars, %barnum, %addtext);
+
+	// update, try to use custom barNum watcher to use ready and open slots
+	%foundBarNum = 0;
+	for(%i = 0; %i < 6; %i++) {
+		if(%usedBarSlots[%i] == "") {
+			%usedBarSlots[%i] = "used";
+			%foundBarNum = %i;
+			break;
+		}
+	}
+
+	rpgbarhud::load(%recovTime, %colour, %ecolour, %chars, %foundBarNum, %addtext);
 }
 
 //Testing lines:

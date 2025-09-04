@@ -61,12 +61,10 @@ function GroupTrigger::onTrigEnter(%object, %this)
 		storeData(%clientId, "InEnterBox", %object);
 
 		%h = HasThisStuff(%clientId, %need);
-		if(%h != 667 && %h != 666 && %h != False)
-		{
+		if(%h != 667 && %h != 666 && %h != False) {
 			centerprint(%clientId, "<jc><f1>"@%esay, 8);
 		}
-		else
-		{
+		else {
 			for(%i = 0; GetWord(%need, %i) != -1; %i+=2)
 			{
 				%w = GetWord(%need, %i);
@@ -82,8 +80,7 @@ function GroupTrigger::onTrigEnter(%object, %this)
 			centerprint(%clientId, "<jc><f0>"@%nsay, 8);
 		}
 	}
-	else if(String::ICompare(Object::getName(getGroup(getGroup(getGroup(%object)))), "TeleportBoxes") == 0)
-	{
+	else if(String::ICompare(Object::getName(getGroup(getGroup(getGroup(%object)))), "TeleportBoxes") == 0) {
 		//echo("entered teleporter box");
 		
 		%group = getGroup(getGroup(%object));
@@ -109,8 +106,7 @@ function GroupTrigger::onTrigEnter(%object, %this)
 		}
 
 		%h = HasThisStuff(%clientId, %need);
-		if(%h != 667 && %h != 666 && %h != False)
-		{
+		if(%h != 667 && %h != 666 && %h != False) {
 			TakeThisStuff(%clientId, %take);
 
 			%pos = TeleportToMarker(%clientId, "TeleportBoxes\\" @ Object::getName(%group) @ "\\Output", False, True);
@@ -130,8 +126,7 @@ function GroupTrigger::onTrigEnter(%object, %this)
 	}
 }
 
-function GroupTrigger::onTrigLeave(%object, %this)
-{
+function GroupTrigger::onTrigLeave(%object, %this) {
 	dbecho($dbechoMode, "GroupTrigger::onTrigLeave(" @ %object @ ", " @ %this @ ")");
 
     %clientId = Player::getClient(%this);

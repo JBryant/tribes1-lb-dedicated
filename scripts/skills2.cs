@@ -32,7 +32,7 @@ $Skill::startSound[2] = AmrbroseSwordA;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
-$SkillRestriction[$Skill::keyword[2]] = "L 20 C Squire C Knight C Monk C Geomancer";
+$SkillRestriction[$Skill::keyword[2]] = "L 20 C Squire C Knight C Monk C Geomancer C Samurai";
 
 $Skill::keyword[3] = "harvest";
 $Skill::index[harvest] = 3;
@@ -58,7 +58,7 @@ $Skill::groupListCheck[4] = False;
 $Skill::refVal[4] = -10;
 $Skill::graceDistance[4] = 0.5;
 $Skill::requireOneOfItems[4] = "CrudeClayAlembic WornCopperAlembic ReinforcedIronAlembic ArcaneGlassAlembic CelestialMythrilAlembic";
-$SkillRestriction[$Skill::keyword[4]] = "C Chemist C BlackMage C WhiteMage C Mystic C TimeMage";
+$SkillRestriction[$Skill::keyword[4]] = "C Chemist C BlackMage C WhiteMage C Mystic C Summoner C TimeMage C WhiteMage C Mystic C Orator";
 
 $Skill::keyword[5] = "throw";
 $Skill::index[$Skill::keyword[5]] = 5;
@@ -70,7 +70,7 @@ $Skill::startSound[5] = FishWalk;
 $Skill::groupListCheck[5] = False;
 $Skill::refVal[5] = -10;
 $Skill::graceDistance[5] = 10;
-$SkillRestriction[$Skill::keyword[5]] = "C Chemist C BlackMage C WhiteMage C Mystic C TimeMage";
+$SkillRestriction[$Skill::keyword[5]] = "C Chemist C BlackMage C WhiteMage C Mystic C TimeMage C WhiteMage C Mystic C Orator";
 
 $Skill::keyword[6] = "quickshot";
 $Skill::index[$Skill::keyword[6]] = 6;
@@ -112,7 +112,7 @@ $Skill::startSound[8] = AmrbroseSwordA;
 $Skill::groupListCheck[8] = False;
 $Skill::refVal[8] = -10;
 $Skill::graceDistance[8] = 2;
-$SkillRestriction[$Skill::keyword[8]] = "L 40 C Knight C Monk C Geomancer";
+$SkillRestriction[$Skill::keyword[8]] = "L 40 C Knight C Monk C Geomancer C Samurai";
 
 $Skill::keyword[9] = "parry";
 $Skill::index[parry] = 9;
@@ -128,7 +128,7 @@ $Skill::startSound[9] = AmrbroseSwordA;
 $Skill::groupListCheck[9] = False;
 $Skill::refVal[9] = -10;
 $Skill::graceDistance[9] = 2;
-$SkillRestriction[$Skill::keyword[9]] = "C Knight C Geomancer";
+$SkillRestriction[$Skill::keyword[9]] = "C Knight C Geomancer C Samurai";
 
 $Skill::keyword[10] = "infusepotions";
 $Skill::index[infusepotions] = 10;
@@ -137,7 +137,7 @@ $Skill::description[10] = "Infuse your potions with additional effects.";
 $Skill::actionMessage[10] = "You begin to infuse your potions.";
 $Skill::delay[10] = 2;
 $Skill::recoveryTime[10] = 2;
-$Skill::duration[10] = 60;
+$Skill::duration[10] = 30;
 $Skill::LOSrange[10] = 0;
 $Skill::startSound[10] = ActivateTR;
 $Skill::groupListCheck[10] = False;
@@ -158,7 +158,7 @@ $Skill::startSound[11] = AmrbroseSwordA;
 $Skill::groupListCheck[11] = False;
 $Skill::refVal[11] = -10;
 $Skill::graceDistance[11] = 2;
-$SkillRestriction[$Skill::keyword[11]] = "L 60 C Monk C Geomancer";
+$SkillRestriction[$Skill::keyword[11]] = "L 60 C Monk C Geomancer C Samurai";
 
 $Skill::keyword[12] = "earthquake";
 $Skill::index[earthquake] = 12;
@@ -173,7 +173,7 @@ $Skill::startSound[12] = AmrbroseSwordA;
 $Skill::groupListCheck[12] = False;
 $Skill::refVal[12] = -10;
 $Skill::graceDistance[12] = 2;
-$SkillRestriction[$Skill::keyword[12]] = "L 80 C Geomancer";
+$SkillRestriction[$Skill::keyword[12]] = "L 80 C Geomancer C Samurai";
 
 $Skill::keyword[12] = "volley";
 $Skill::index[volley] = 12;
@@ -197,7 +197,7 @@ $Skill::description[13] = "Ignite your inner power, increasing spell damage.";
 $Skill::actionMessage[13] = "You channel your inner fire.";
 $Skill::delay[13] = 2;
 $Skill::recoveryTime[13] = 2;
-$Skill::duration[13] = 60;
+$Skill::duration[13] = 30;
 $Skill::LOSrange[13] = 0;
 $Skill::startSound[13] = ActivateTR;
 $Skill::endSound[13] = PlaceSeal;
@@ -392,6 +392,8 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		}
 	}
 
+	%duration = $Skill::duration[%index] / 2;
+
     // ************************************************************************************
     // Skill Code
     // ************************************************************************************
@@ -585,15 +587,18 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
     }
 
 	if ($Skill::keyword[%index] == "parry") {
-		UpdateBonusState(%clientId, "Parry", ($Skill::duration[%index] / 2), "Parry");
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", 2, "Parry");
+		UpdateBonusState(%clientId, "Parry", %duration, "Parry");
     }
 
 	if ($Skill::keyword[%index] == "infusepotions") {
-		UpdateBonusState(%clientId, "InfusedPotions", ($Skill::duration[%index] / 2), "InfusedPotions");
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", 2, "Infused Potions");
+		UpdateBonusState(%clientId, "InfusedPotions", %duration, "InfusedPotions");
 	}
 
 	if ($Skill::keyword[%index] == "innerfire") {
-		UpdateBonusState(%clientId, "InnerFire", ($Skill::duration[%index] / 2), "InnerFire");
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", 2, "Inner Fire");
+		UpdateBonusState(%clientId, "InnerFire", %duration, "InnerFire");
 	}
 
 	if ($Skill::keyword[%index] == "volley") {
@@ -703,8 +708,8 @@ function EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %soundPos, 
 		%recovTime = %recovTime * 0.5;
 	}
 
-	if(%clientId.repack > 32){
-		remoteEval(%clientId, "rpgbarhud", %recovTime, 4, 2, "||");
+	if(%clientId.repack > 32) {
+		remoteEval(%clientId, "rpgbarhud", %recovTime, 0, 2, "||", 0, "Skill Cooldown");
 		schedule("storeData(" @ %clientId @ ", \"UseSkillStep\", \"\");", %recovTime, %clientId);
 	}
 	else
