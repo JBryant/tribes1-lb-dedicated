@@ -20,16 +20,16 @@ function InitSpawnPoints()
 				for(%z = 5; GetWord(%info, %z) != -1; %z++)
 					%indexes = %indexes @ GetWord(%info, %z) @ " ";
 
-				//	echo("===================================================");
-				//	echo("Spawn Point was initialized, %this = " @ %this);
-				//	echo("Max spawn per: " @ GetWord(%info, 0));
-				//	echo("Min radius: " @ GetWord(%info, 1));
-				//	echo("Max radius: " @ GetWord(%info, 2));
-				//	echo("Min delay: " @ GetWord(%info, 3));
-				//	echo("Max delay: " @ GetWord(%info, 4));
-				//	echo("Spawn indexes: " @ %indexes);
-				//	echo("Marker Zone ID: " @ $MarkerZone[%this]);
-				//	echo("===================================================");
+					// echo("===================================================");
+					// echo("Spawn Point was initialized, %this = " @ %this);
+					// echo("Max spawn per: " @ GetWord(%info, 0));
+					// echo("Min radius: " @ GetWord(%info, 1));
+					// echo("Max radius: " @ GetWord(%info, 2));
+					// echo("Min delay: " @ GetWord(%info, 3));
+					// echo("Max delay: " @ GetWord(%info, 4));
+					// echo("Spawn indexes: " @ %indexes);
+					// echo("Marker Zone ID: " @ $MarkerZone[%this]);
+					// echo("===================================================");
 				%numSpawnPoints++;
 
 				SpawnLoop(%this);

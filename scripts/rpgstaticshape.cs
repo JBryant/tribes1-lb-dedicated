@@ -936,3 +936,79 @@ StaticShapeData nArrow
 	visibleToSensor = true;	//thanks Adger!!
 	mapFilter = 1;		//thanks Adger!!
 };
+
+StaticShapeData bluebluegreen
+{
+	shapeFile = "plasmawall";
+	debrisId = defaultDebrisSmall;
+	maxDamage = 400.0;
+	isTranslucent = true;
+   	description = "Energy Field";
+	visibleToSensor = true;
+};
+
+StaticShapeData hvshield2
+{
+	shapeFile = "shieldr";
+	debrisId = defaultDebrisSmall;
+	maxDamage = 99999.0;
+	isTranslucent = true;
+   	description = "Shield 2";
+	visibleToSensor = true;
+};
+
+StaticShapeData hvdomefiled
+{
+	shapeFile = "domefiled";
+	debrisId = defaultDebrisSmall;
+	maxDamage = 99999.0;
+	isTranslucent = true;
+   	description = "Shield 2";
+	visibleToSensor = true;
+};
+
+StaticShapeData nicefire
+{
+	shapeFile = "hitter";
+	debrisId = defaultDebrisSmall;
+	maxDamage = 2000.00;
+	isTranslucent = true;
+   	description = "a fire";
+	visibleToSensor = true;
+};
+StaticShapeData bluethingy
+{
+	shapeFile = "newproj";
+	debrisId = defaultDebrisSmall;
+	maxDamage = 2000.00;
+	isTranslucent = true;
+   	description = "funny goblin";
+	visibleToSensor = true;
+};
+StaticShapeData flaggy
+{
+	shapeFile = "flag";
+	debrisId = defaultDebrisSmall;
+	maxDamage = 2000.00;
+	isTranslucent = true;
+   	description = "a flag";
+	visibleToSensor = true;
+};
+StaticShapeData personeater
+{
+	shapeFile = "ragumuffin";
+	debrisId = defaultDebrisSmall;
+	maxDamage = 2000.00;
+	isTranslucent = true;
+   	description = "a oerson";
+	visibleToSensor = true;
+};
+
+StaticShapeData newdoor5
+{
+	shapeFile = "newdoor5";
+	maxDamage = 10.0;
+	debrisId = defaultDebrisLarge;
+	explosionId = debrisExpLarge;
+    description = "Barrier";
+};

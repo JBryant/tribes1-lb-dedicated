@@ -1226,7 +1226,111 @@ function TossLootbag(%clientId, %loot, %vel, %namelist, %t)
 	//	Item::Pop(%w);
 		storeData(%clientId, "lootbaglist", RemoveFromCommaList(%lootbaglist, %w));
 	}
+}
 
+function TossSpecialLootbag(%clientId, %loot, %vel, %namelist, %t) {
+	%player = Client::getOwnedObject(%clientId);
+	%ownerName = Client::getName(%clientId);
+
+	%lootbag = newObject("", "Item", "Lootbag", 1, false);
+	%preLoot = %ownerName @ " " @ %namelist;
+	%ownerLevel = fetchData(%clientId, "LVL");
+
+	// generate teh random loot
+	// we want a chance to get:
+	// 50k, 100k, 250k, 500k, 1M
+	// 1 LCK, 5 LCK, 10 LCK, 20 LCK, 50 LCK
+	// 1000 EXP, 2500 EXP, 5000 EXP, 7500 EXP, 10000 EXP
+	// 100 SP, 250 SP, 500 SP, 750 SP, 1000 SP
+	// 1 RankPoint
+	%rand = floor(getRandom() * 100);
+	%amtRand = floor(getRandom() * 100);
+
+	if (%rand < 24) {
+		// coins
+		if (%amtRand > 94 && %ownerLevel >= 1000)
+			%loot = "COINS 1000000";
+		else if (%amtRand > 85 && %ownerLevel >= 750)
+			%loot = "COINS 500000";
+		else if (%amtRand > 69 && %ownerLevel >= 500)
+			%loot = "COINS 250000";
+		else if (%amtRand > 43 && %ownerLevel >= 250)
+			%loot = "COINS 100000";
+		else if (%ownerLevel >= 100)
+			%loot = "COINS 25000";
+		else
+			%loot = "COINS 10000";
+	} else if (%rand < 48) {
+		// luck
+		if (%amtRand > 94 && %ownerLevel >= 1000)
+			%loot = "LCK 50";
+		else if (%amtRand > 85 && %ownerLevel >= 750)
+			%loot = "LCK 25";
+		else if (%amtRand > 69 && %ownerLevel >= 500)
+			%loot = "LCK 10";
+		else if (%amtRand > 43 && %ownerLevel >= 250)
+			%loot = "LCK 5";
+		else if (%ownerLevel >= 100)
+			%loot = "LCK 2";
+		else
+			%loot = "LCK 1";
+	} else if (%rand < 72) {
+		// exp
+		if (%amtRand > 94 && %ownerLevel >= 1000)
+			%loot = "EXP 10000";
+		else if (%amtRand > 85 && %ownerLevel >= 750)
+			%loot = "EXP 7500";
+		else if (%amtRand > 69 && %ownerLevel >= 500)
+			%loot = "EXP 5000";
+		else if (%amtRand > 43 && %ownerLevel >= 250)
+			%loot = "EXP 2500";
+		else if (%ownerLevel >= 100)
+			%loot = "EXP 1500";
+		else
+			%loot = "EXP 1000";
+	} else if (%rand < 97) {
+		// skill points
+		if (%amtRand > 94 && %ownerLevel >= 1000)
+			%loot = "SP 1000";
+		else if (%amtRand > 85 && %ownerLevel >= 750)
+			%loot = "SP 750";
+		else if (%amtRand > 69 && %ownerLevel >= 500)
+			%loot = "SP 500";
+		else if (%amtRand > 43 && %ownerLevel >= 250)
+			%loot = "SP 250";
+		else if (%ownerLevel >= 100)
+			%loot = "SP 100";
+		else
+			%loot = "SP 50";
+	} else {
+		// rp if high enough
+		if (%ownerLevel >= 1000) {
+			%loot = "RP 1";
+		} else {
+			%loot = "SP 50 EXP 1000 LCK 1 COINS 10000";
+		}
+	}
+
+	%loot = %preLoot @ " " @ %loot;
+
+	$loot[%lootbag] = %loot;
+	storeData(%clientId, "lootbaglist", AddToCommaList(fetchData(%clientId, "lootbaglist"), %lootbag));
+
+	$swpacknum++;
+	$sw::packowner[$swpacknum] = %ownerName;
+	$sw::packid[$swpacknum] = %lootbag;
+
+	addToSet("MissionCleanup", %lootbag);
+	GameBase::setMapName(%lootbag, "Backpack");
+	GameBase::throw(%lootbag, %player, %vel, false);
+
+	//Make sure there aren't more than 15 packs per player... This is to resolve lag problems
+	%lootbaglist = fetchData(%clientId, "lootbaglist");
+	if(CountObjInCommaList(%lootbaglist) > 15) {
+		%p = String::findSubStr(%lootbaglist, ",");
+		%w = String::getSubStr(%lootbaglist, 0, %p);
+		storeData(%clientId, "lootbaglist", RemoveFromCommaList(%lootbaglist, %w));
+	}
 }
 
 function ChangeSky(%sky)
@@ -1600,22 +1704,22 @@ function GiveThisStuff(%clientId, %list, %echo, %multiplier)
 		if(%w == "COINS")
 		{
 			storeData(%clientId, "COINS", %w2, "inc");
-			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ %w2 @ " coins.");
+			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ Number::Beautify(%w2) @ " coins.");
 		}
 		else if(%w == "EXP")
 		{
 			storeData(%clientId, "EXP", %w2, "inc");
-			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ %w2 @ " experience.");
+			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ Number::Beautify(%w2) @ " experience.");
 		}
 		else if(%w == "LCK")
 		{
 			storeData(%clientId, "LCK", %w2, "inc");
-			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ %w2 @ " LCK.");
+			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ Number::Beautify(%w2) @ " LCK.");
 		}
 		else if(%w == "SP")
 		{
 			storeData(%clientId, "SPcredits", %w2, "inc");
-			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ %w2 @ " Skill Points.");
+			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ Number::Beautify(%w2) @ " Skill Points.");
 		}
 		else if(%w == "CLASS")
 		{
@@ -1634,12 +1738,12 @@ function GiveThisStuff(%clientId, %list, %echo, %multiplier)
 		else if(%w == "RP")
 		{
 			storeData(%clientId, "RankPoints", %w2, "inc");
-			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ %w2 @ " Rank Points.");
+			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ Number::Beautify(%w2) @ " Rank Points.");
 		}
 		else if(%w == "RankPoints")
 		{
 			storeData(%clientId, "RankPoints", %w2, "inc");
-			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ %w2 @ " Rank Points.");
+			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ Number::Beautify(%w2) @ " Rank Points.");
 		}
 		else if(%w == "CNT")
 		{
@@ -2651,8 +2755,11 @@ function UnequipMountedStuff(%clientId)
 	}
 
 	%accessories = GetEquippedAccessories(%clientId);
+
 	if (%accessories != "") {
-		%total = GetEquippedAccessoriesCountByBeltType(%clientid, "AccessoryItems");
+		%total = GetEquippedAccessoriesCountByBeltType(%clientId, "AccessoryItems");
+		lbecho("Total Accessories: " @ %total);
+		lbecho("Accessories: " @ %accessories);
 
 		for(%i = 0; %i < %total; %i++) {
 			Item::onUse(%clientId, getword(%accessories, %i));

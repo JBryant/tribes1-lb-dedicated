@@ -11,7 +11,7 @@ function Item::giveItem(%player, %item, %delta, %showmsg)
 	//by giving the client an item and pre-equipping it.
 
 	if(%showmsg)
-		Client::sendMessage(%clientId, 0, "You received " @ %delta @ " " @ BeltItem::GetName(%item) @ ".");
+		Client::sendMessage(%clientId, 0, "You received " @ Number::Beautify(%delta) @ " " @ BeltItem::GetName(%item) @ ".");
 
 	if(isBeltItem(%item)) {
 		belt::givethisstuff(%clientId, %item, %delta);
@@ -30,16 +30,17 @@ function Item::onCollision(%this, %object) {
 	%armor = Player::getArmor(%clientId);
 
 	if(getObjectType(%object) == "Player" && !IsDead(%clientId)) {
-		%time = getIntegerTime(true) >> 5;
+		// %time = getIntegerTime(true) >> 5;
 		
-		if(%time - %clientId.lastItemPickupTime <= 0.1)
-			return 0;
+		// if(%time - %clientId.lastItemPickupTime <= 0.01)
+		// 	return 0;
 
-		%clientId.lastItemPickupTime = %time;
+		// %clientId.lastItemPickupTime = %time;
 
 		%item = Item::getItemData(%this);
 
 		if(%item == "Lootbag") {
+			if (Player::isAiControlled(%clientId)) return;
 			%msg = "";
 
 			%ownerName = GetWord($loot[%this], 0);
@@ -159,6 +160,7 @@ function Item::onCollision(%this, %object) {
 			//do nothing.
 		}
         else {
+			if (Player::isAiControlled(%clientId)) return;
             //%count = Player::getItemCount(%object,%item);
             if(Item::giveItem(%object, %item, %this.delta, True)) {
                 Item::playPickupSound(%this);

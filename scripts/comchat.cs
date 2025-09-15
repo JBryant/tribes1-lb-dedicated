@@ -1837,12 +1837,37 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 		
 		if (%w1 == "#read") {
-			lbecho("read it");
-			
 			%msg = "<f2>Title\n\n";
 			%msg = %msg @ "<f1>I am reading something right now.\n";
 
 			rpg::longPrint(%TrueClientId, %msg, 0, 10);
+		}
+
+		if (%w1 == "#potions") {
+			%msg = "<f2>Welcome to the Wonderful World of Potions!\n\n";
+
+			%msg = %msg @ "<f0>Potion: <f1>Heals " @ $restoreValue[Potion, HP] @ " HP\n";
+			%msg = %msg @ "<f1>Ingredients: "@$AccessoryVar[Potion, "AlchemyIngredients"]@"\n";
+			%msg = %msg @ "<f0>Hi-Potion: <f1>Heals " @ $restoreValue[HiPotion, HP] @ " HP\n";
+			%msg = %msg @ "<f1>Ingredients: "@$AccessoryVar[HiPotion, "AlchemyIngredients"]@"\n";
+			%msg = %msg @ "<f0>X-Potion: <f1>Heals " @ $restoreValue[XPotion, HP] @ " HP\n";
+			%msg = %msg @ "<f1>Ingredients: "@$AccessoryVar[XPotion, "AlchemyIngredients"]@"\n";
+			%msg = %msg @ "<f0>Mega Potion: <f1>Heals " @ $restoreValue[MegaPotion, HP] @ " HP\n";
+			%msg = %msg @ "<f1>Ingredients: "@$AccessoryVar[MegaPotion, "AlchemyIngredients"]@"\n";
+			%msg = %msg @ "<f0>Elixir: <f1>Heals " @ $restoreValue[Elixir, HP] @ " HP and " @ $restoreValue[Elixir, MP] @ " MP\n";
+			%msg = %msg @ "<f1>Ingredients: "@$AccessoryVar[Elixir, "AlchemyIngredients"]@"\n\n";
+
+			%msg = %msg @ "<f0>Ether: <f1>Restores " @ $restoreValue[Ether, MP] @ " MP\n";
+			%msg = %msg @ "<f1>Ingredients: "@$AccessoryVar[Ether, "AlchemyIngredients"]@"\n";
+			%msg = %msg @ "<f0>Turbo Ether: <f1>Restores " @ $restoreValue[TurboEther, MP] @ " MP\n";
+			%msg = %msg @ "<f1>Ingredients: "@$AccessoryVar[TurboEther, "AlchemyIngredients"]@"\n";
+			%msg = %msg @ "<f0>X-Ether: <f1>Restores " @ $restoreValue[XEther, MP] @ " MP\n";
+			%msg = %msg @ "<f1>Ingredients: "@$AccessoryVar[XEther, "AlchemyIngredients"]@"\n";
+			%msg = %msg @ "<f0>Mega Ether: <f1>Restores " @ $restoreValue[MegaEther, MP] @ " MP\n";
+			%msg = %msg @ "<f1>Ingredients: "@$AccessoryVar[MegaEther, "AlchemyIngredients"]@"\n";
+
+			rpg::longPrint(%TrueClientId, %msg, 0, 15);
+
 		}
 
 		if (%w1 == "#spells") {
@@ -1866,6 +1891,124 @@ function internalSay(%clientId, %team, %message, %senderName)
 			// White Magic: spike, wound, Fist, Missile, Cannon, bomb, Star
 
 			rpg::longPrint(%TrueClientId, %msg, 0, 10);
+		}
+
+		if (%w1 == "#squire") {
+			%msg = "<f2>Squire\n\n";
+			%msg = %msg @ "<f1>A Squire is a knight in training. They are skilled with basic weapons and armor.\n";
+			%msg = %msg @ "<f1>Squires can use the following skills:\n\n";
+			%msg = %msg @ "<f0>Cleave: <f1>A powerful slash that deals damage to all targets within an area. <f0>[#skill cleave]\n";
+			rpg::longPrint(%TrueClientId, %msg, 0, 15);
+		}
+
+		if (%w1 == "#knight") {
+			%msg = "<f2>Knight\n\n";
+			%msg = %msg @ "<f1>A Knight is a heavily armored warrior. They excel in melee combat and can use a variety of weapons.\n";
+			%msg = %msg @ "<f1>Knights can use the following skills:\n\n";
+			%msg = %msg @ "<f0>Cleave: <f1>A powerful slash that deals damage to all targets within an area. <f0>[#skill cleave]\n";
+			%msg = %msg @ "<f0>Great Cleave: <f1>A stronger slash that deals even more damage to all targets within an area. <f0>[#skill greatcleave]\n";
+			%msg = %msg @ "<f0>Parry: <f1>A defensive stance that reduces damage taken from melee attacks attack. <f0>[#skill parry]\n";
+			rpg::longPrint(%TrueClientId, %msg, 0, 15);
+		}
+
+		if (%w1 == "#monk") {
+			%msg = "<f2>Monk\n\n";
+			%msg = %msg @ "<f1>A Monk is a master of martial arts. They excel in unarmed combat and can use a variety of techniques and weapons.\n\n";
+			%msg = %msg @ "<f1>Monks can use the following skills:\n\n";
+			%msg = %msg @ "<f0>Cleave: <f1>A powerful slash that deals damage to all targets within an area. <f0>[#skill cleave]\n";
+			%msg = %msg @ "<f0>Great Cleave: <f1>A stronger slash that deals even more damage to all targets within an area. <f0>[#skill greatcleave]\n";
+			%msg = %msg @ "<f0>Parry: <f1>A defensive stance that reduces damage taken from melee attacks attack. <f0>[#skill parry]\n";
+			%msg = %msg @ "<f0>Whirlwind: <f1>A flurry of punches that deals damage to all enemies in the area. <f0>[#skill whirlwind]\n";
+			rpg::longPrint(%TrueClientId, %msg, 0, 15);
+		}
+
+		if (%w1 == "#geomancer") {
+			%msg = "<f2>Geomancer\n\n";
+			%msg = %msg @ "<f1>A Geomancer is a master of melee and earth magic. They can manipulate the earth and use it to their advantage in battle.\n\n";
+			%msg = %msg @ "<f1>Geomancers can use the following skills:\n\n";
+			%msg = %msg @ "<f0>Cleave: <f1>A powerful slash that deals damage to all targets within an area. <f0>[#skill cleave]\n";
+			%msg = %msg @ "<f0>Great Cleave: <f1>A stronger slash that deals even more damage to all targets within an area. <f0>[#skill greatcleave]\n";
+			%msg = %msg @ "<f0>Parry: <f1>A defensive stance that reduces damage taken from melee attacks attack. <f0>[#skill parry]\n";
+			%msg = %msg @ "<f0>Whirlwind: <f1>A flurry of punches that deals damage to all enemies in the area. <f0>[#skill whirlwind]\n";
+			%msg = %msg @ "<f0>Earthquake: <f1>Causes the ground to shake violently, dealing damage to all enemies in the area. <f0>[#skill earthquake]\n";
+			rpg::longPrint(%TrueClientId, %msg, 0, 15);
+		}
+
+		if (%w1 == "#chemist") {
+			%msg = "<f2>Chemist\n\n";
+			%msg = %msg @ "<f1>A Chemist is a master of potions and alchemy. They can create powerful elixirs and use them in battle.\n";
+			%msg = %msg @ "<f1>They also have the ability to make explosive flasks which can be thrown at enemies to do massive damage.\n\n";
+			%msg = %msg @ "<f1>Chemists can use the following skills:\n\n";
+			%msg = %msg @ "<f0>Harvest: <f1>Gather ingredients from the environment to use in potions. <f0>[#skill harvest]\n";
+			%msg = %msg @ "<f0>Alchemy: <f1>Combine gathered ingredients to create powerful potions. <f0>[#skill alchemy Name Amount]\n";
+			%msg = %msg @ "<f0>Throw: <f1>Throw a potion and/or flask at an enemy to deal damage or inflict a status effect. <f0>[#skill throw FlaskName]\n";
+			%msg = %msg @ "<f0>Infuse Potions: <f1>A skill that enhances the damage of your flasks for a short duration. <f0>[#skill infusepotions]\n";
+			rpg::longPrint(%TrueClientId, %msg, 0, 15);
+		}
+
+		if (%w1 == "#whitemage") {
+			%msg = "<f2>White Mage\n\n";
+			%msg = %msg @ "<f1>A White Mage is a master of healing and support magic. They can restore health and remove harmful effects from allies.\n\n";
+			%msg = %msg @ "<f1>White Mages can use the following skills:\n\n";
+			%msg = %msg @ "<f0>Harvest: <f1>Gather ingredients from the environment to use in potions. <f0>[#skill harvest]\n";
+			%msg = %msg @ "<f0>Alchemy: <f1>Combine gathered ingredients to create powerful potions. <f0>[#skill alchemy Name Amount]\n";
+			%msg = %msg @ "<f0>Throw: <f1>Throw a potion and/or flask at an enemy to deal damage or inflict a status effect. <f0>[#skill throw FlaskName]\n";
+			%msg = %msg @ "<f0>Inner Fire: <f1>Ignite your inner magic to enhance your healing and damage abilities. <f0>[#skill innerfire]\n\n";
+			%msg = %msg @ "<f0>Spells: <f1>White Mages can use all Light Spells found in the <f0>[#spells] list.\n";
+			rpg::longPrint(%TrueClientId, %msg, 0, 15);
+		}
+
+		if (%w1 == "#archer") {
+			%msg = "<f2>Archer\n\n";
+			%msg = %msg @ "<f1>An Archer is a student of ranged combat. They excel at using bows and crossbows to deal damage from a distance.\n";
+			%msg = %msg @ "<f1>They also have access to a wide array of arrows and ammunition types that enhance their combat abilities.\n\n";
+			%msg = %msg @ "<f1>Archers can use the following skills:\n\n";
+			%msg = %msg @ "<f0>Quick Shot: <f1>Fire a quick array of shots that deals damage to a single target. <f0>[#skill quickshot]\n";
+			%msg = %msg @ "<f0>Explosive Shot: <f1>Fire an arrow that detonates to deal area damage. <f0>[#skill explosiveshot]\n";
+			rpg::longPrint(%TrueClientId, %msg, 0, 15);
+		}
+
+		if (%w1 == "#hunter") {
+			%msg = "<f2>Hunter\n\n";
+			%msg = %msg @ "<f1>A Hunter is a master of tracking and ranged combat. They excel at using bows and traps to deal damage from a distance.\n";
+			%msg = %msg @ "<f1>They also have access to a wide array of arrows and ammunition types that enhance their combat abilities.\n\n";
+			%msg = %msg @ "<f1>Hunters can use the following skills:\n\n";
+			%msg = %msg @ "<f0>Quick Shot: <f1>Fire a quick array of shots that deals damage to a single target. <f0>[#skill quickshot]\n";
+			%msg = %msg @ "<f0>Explosive Shot: <f1>Fire an arrow that detonates to deal area damage. <f0>[#skill explosiveshot]\n";
+			%msg = %msg @ "<f0>Arrow Burst: <f1>Fire a rapid succession of arrows in a straight line, dealing massive damage to a single enemy. <f0>[#skill arrowburst]\n";
+			%msg = %msg @ "<f0>Volley: <f1>A magical attack that rains arrows down on all enemies in the area. <f0>[#skill volley]\n\n";
+			%msg = %msg @ "<f0>Double Shot: <f1>A special ability that allows the shooter to fire two arrows at once for a short duration. <f0>[#skill doubleshot]\n";
+			
+			rpg::longPrint(%TrueClientId, %msg, 0, 15);
+		}
+
+		if (%w1 == "#latest") {
+			%msg = "<f2>Latest Changes (9/13/25)\n\n";
+			%msg = %msg @ "<f0>Updates:\n";
+			%msg = %msg @ "<f1>Mana Updates! Increased Max Mana by 100%, but also increased all spell costs 100% as well.\n";
+			%msg = %msg @ "<f1>Reworked how Mana Regen works to now properly be Mana Regen / Second. Robes have been updated to use these.\n";
+			%msg = %msg @ "<f1>Adding new Hunter and Sniper weapons: Throwing Gloves. Can be purchased from Kelinor in Kalm.\n";
+			%msg = %msg @ "<f1>Added many new types of Throwing Projectiles (stars) that work with Throwing Gloves.\n";
+			%msg = %msg @ "\n";
+			%msg = %msg @ "<f0>Skills / Spells:\n";
+			%msg = %msg @ "<f0>Zangetsu (Samurai): <f1>A blade slice that shoots 4 projectiles that do AoE damage. <f0>[#skill zangetsu]\n";
+			%msg = %msg @ "<f0>Double Cast (Mages): <f1>A skill that doubles magic damage but doubles mana cost. <f0>[#skill doublecast]\n";
+			%msg = %msg @ "<f0>Shadow Blade (Dark Knight): <f1>A dark spell that summons an unholy sword upon enemies <f0>[#cast shadowblade]\n";
+			%msg = %msg @ "<f0>Holy Blade (Holy Knight): <f1>A holy spell that summons a divine sword upon enemies <f0>[#cast holyblade]\n";
+			%msg = %msg @ "\n";
+			%msg = %msg @ "<f0>Commands:\n";
+			%msg = %msg @ "<f0>#potions: <f1>Show information about existing potions and their recipes.\n";
+			%msg = %msg @ "<f0>#[class] <f1>Show information about the specified class. Only early classes supported so far. <f0>[#chemist]\n";
+			%msg = %msg @ "<f0>#latest: <f1>Show the latest changes to the server.\n";
+			%msg = %msg @ "\n";
+			%msg = %msg @ "<f0>Fixes:\n";
+			%msg = %msg @ "<f1>- Fixed Zangetsu not properly shooting in the right direction depending on weapon type.\n";
+			%msg = %msg @ "<f1>- Fixed bug where some spells were not properly requiring cooldowns.\n";
+			%msg = %msg @ "<f1>- Fix bug where Flasks were not detonating on impact with enemies.\n";
+			%msg = %msg @ "\n";
+			%msg = %msg @ "<f2>As always, thank you for playing and your continued support! -LongBow\n";
+
+			rpg::longPrint(%TrueClientId, %msg, 0, 20);
 		}
 
 		if (%w1 == "#bestmagick" || %w1 == "#bestblackmagic" || %w1 == "#bestspell") {
@@ -1965,31 +2108,45 @@ function internalSay(%clientId, %team, %message, %senderName)
 		if(%w1 == "#spawnflyer")
 			{
 			
-			if(%clientToServerAdminLevel < 6)
+			if(%clientToServerAdminLevel < 5)
 				return;
-			if(getword(%cropped,0) == -1)
-			{
-				Client::sendMessage(%TrueClientId,0,"go #spawnflyer scout, lapc or hapc");
+			if(getword(%cropped,0) == -1) {
+				Client::sendMessage(%TrueClientId,0,"go #spawnflyer scout, lapc, hapc or chocobo");
 				return;
 			}
 			
 			%player = Client::getownedObject(%TrueclientId);
-			if (GameBase::getLOSInfo(%player,50))
-			{
+
+			if (GameBase::getLOSInfo(%player, 50)) {
 				%rot = GameBase::getRotation(%player); 
-				%turret = newObject("Flyer","Flier",getword(%cropped,0),true);
+				%turret = newObject("Flyer", "Flier", getword(%cropped, 0), true);
 				addToSet("MissionCleanup", %turret);
-				GameBase::setTeam(%turret,GameBase::getTeam(%player));
-				GameBase::setPosition(%turret,$los::position);
-				GameBase::setRotation(%turret,%rot);
-				Client::sendMessage(%TrueClientId,0,getword(%cropped,0)@ " spawned.");
-				playSound(SoundPickupBackpack,$los::position);
+				GameBase::setTeam(%turret, GameBase::getTeam(%player));
+				GameBase::setPosition(%turret, $los::position);
+				GameBase::setRotation(%turret, %rot);
+				Client::sendMessage(%TrueClientId, 0, getword(%cropped, 0) @ " spawned.");
+				playSound(SoundPickupBackpack, $los::position);
 				return;
-						
 			}
 			else 
-				Client::sendMessage(%client,0,"Deploy position out of range");
-			
+				Client::sendMessage(%client, 0, "Deploy position out of range");
+
+			return;
+		}
+		if(%w1 == "#spawnchocobo") {
+			if(%clientToServerAdminLevel >= 3) {
+				if(%cropped != "") {
+					Chocobo::Spawn(%TrueClientId, %cropped, GameBase::getPosition(%TrueClientId));
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "Please enter a Chocobo # (Ex: #makeChocobo 1)");
+			}
+			return;
+		}
+		if (%w1 == "#getchocobo") {
+			if (%clientToServerAdminLevel >= 3) {
+				Chocobo::Get(%TrueClientId,  found, "Choco", "Red" , "Male", 1,    13,     14,     50,   46,   20,   75,   71,  83128,   76,       79,     412,    0,       0,     0,      0,     0);
+			}
 			return;
 		}
 		if(%w1 == "#gm")
@@ -2522,8 +2679,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 	                        else if(%id != -1)
 	                        {
-						storeData(%id, "SpellCastStep", "");
-	                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Spell flag reset.");
+								storeData(%id, "SpellCastStep", "");
+	                            if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Spell flag reset.");
 	                        }
 	                        else
 	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
@@ -2763,8 +2920,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 	                  $ArenaBotMatchTicker = $ArenaBotMatchLengthInTicks;
 	            }
 			return;
-	      }
-	      if(%w1 == "#teleport")
+	    }
+	    if(%w1 == "#teleport")
 		{
 	            if(%clientToServerAdminLevel >= 2)
 	            {
@@ -2791,8 +2948,13 @@ function internalSay(%clientId, %team, %message, %senderName)
 	                  }
 	            }
 			return;
-	      }
-	      if(%w1 == "#teleport2")
+	    }
+		if (%w1 == "#team") {
+			
+			%name = GetWord(%cropped, 0);
+	        %id = NEWgetClientByName(%name);
+		}
+	    if(%w1 == "#teleport2")
 		{
 	            if(%clientToServerAdminLevel >= 2)
 	            {

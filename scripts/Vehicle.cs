@@ -1,12 +1,11 @@
 //----------------------------------------------------------------------------
 //
 
-FlierData Scout
-{
+FlierData Scout {
 	explosionId = flashExpLarge;
 	debrisId = flashDebrisLarge;
 	className = "Vehicle";
-   shapeFile = "flyer";
+   shapeFile = "forcefield"; // flyer
    shieldShapeName = "shield_medium";
    mass = 5.0;
    drag = 1.0;

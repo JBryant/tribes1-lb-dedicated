@@ -219,8 +219,9 @@ function Player::onKilled(%this) {
 			%tmploot = %tmploot @ %beltstuff;
 		else
 		{
-			if(Player::isAiControlled(%clientId))
+			if(Player::isAiControlled(%clientId)) {
 				TossLootbag(%clientId, %beltstuff, 1, "*", 300);
+			}
 			else
 			{
 				%namelist = rpg::getname(%clientId) @ ",";
@@ -234,8 +235,15 @@ function Player::onKilled(%this) {
 
 		if(%tmploot != "" && %tmploot != " ")
 		{
-			if(Player::isAiControlled(%clientId))
+			if(Player::isAiControlled(%clientId)) {
 				TossLootbag(%clientId, %tmploot, 1, "*", 300);
+				// check if they are an Elite
+				%isElite = fetchData(%clientId, "IsElite");
+
+				if (%isElite == "True") {
+					TossSpecialLootbag(%clientId, "", 5, "*", 300);
+				}
+			}
 			else
 			{
 				%namelist = Client::getName(%clientId) @ ",";
@@ -458,7 +466,6 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 		//------------- CREATE DAMAGE VALUE -------------
 		if(%type == $SpellDamageType) {
-			// lbecho("----- create spell damage -----");
 			%lastSpell = fetchData(%shooterClient, "LastCastSpell");
 
 			if (%lastSpell == "" && %weapon != "") {
@@ -469,6 +476,9 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			%spellSkillType = $SkillType[%lastSpell];
 			%skilltype = %spellSkillType;
 			%spellDamage = $Spell::damageValue[%spellIndex];
+			
+			if (HasBonusState(%shooterClient, "DoubleCast"))
+				%spellDamage = %spellDamage * 2;
 
 			if (%spellIndex == "") {
 				return;
@@ -560,26 +570,28 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			// 		%delay = Cap(101 - fetchData(%shooterClient, "LVL"), 5, 50);
 			// 	}
 			// 	if(%shooterClient.repack > 33)
-			// 		remoteEval(%shooterClient, "rpgbarhud", %delay, 7, 2, "||", 1, "Bash regen");
+			// 		remoteEval(%shooterClient, "rpgbarhud", %delay, 7, 2, "||", "", "Bash regen");
 
 			// 	schedule("storeData(" @ %shooterClient @ ", \"blockBash\", \"\");", %delay);
 			// 	storeData(%shooterClient, "NextHitBash", "");
 			// }
 
-			if(%projectile != "") {
+			%projectile = "";
+			if(%type == $MissileDamageType) {
 				// %rweapondamage = GetRoll(GetWord(GetAccessoryVar(%projectile, $SpecialVar), 1));
+				%projectile = fetchData(%shooterClient, "LoadedProjectile " @ %weapon);
 				%rweaponAttack = GetWord(GetAccessoryVar(%projectile, $SpecialVar), 1);
-				%rweapondamage = floor(getRandom() * %rweaponAttack) + 1;
+				%rweapondamage = %rweaponAttack; // floor(getRandom() * %rweaponAttack) + 1;
 			} else {
 				%rweapondamage = 0;
 			}
 
 			%weapondamage = GetRoll(GetWord(GetAccessoryVar(%weapon, $SpecialVar), 1));
 
-			if (%weapon == "PugilistsGlove") {
-				//%value = round((( (%weapondamage + %rweapondamage) / 1000) * $PlayerSkill[%shooterClient, %skilltype]) * %multi);
+			if (%weapon == "PugilistsGlove" || $beltitem[%weapon, "BaseWeapon"] == "PugilistsGlove") {
 				%value = fetchData(%shooterClient, "LVL") * 2 * %multi;
-			} else {
+			}
+			else {
 				%value = round((( (%weapondamage + %rweapondamage) / 1000) * $PlayerSkill[%shooterClient, %skilltype]) * %multi);
 			}
 
@@ -603,7 +615,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 			%value = (%value / $TribesDamageToNumericDamage);
 
-			if (%type == $TrueDamage) {
+			if (%type == $TrueDamageType) {
 				%value = (%initialDamage / $TribesDamageToNumericDamage);
 			}
 
@@ -725,6 +737,18 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 							%sameTeamNull = True;
 						}
 					}
+
+
+					// check party
+					%shooterParty = IsInWhichParty(Client::getName(%shooterClient));
+					%damagedParty = IsInWhichParty(Client::getName(%damagedClient));
+					if (%shooterParty != "-1" && %shooterParty == %damagedParty) {
+						%value = 0;
+						%isMiss = False;
+						%noImpulse = True;
+						%sameTeamNull = True;
+
+					}
 				}
 				else
 				{
@@ -747,6 +771,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 		if(%damagedClient == %shooterClient) {
 			if(%type == $SpellDamageType)
 				%value = %value / 10; // 1/3 default
+			else
+				%value = 0; // no damage to self
 		}
 
 		//-------------------------------------------------
@@ -805,7 +831,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			//-------------------------------------------------
 			// SKILLS
 			//-------------------------------------------------
-			if(%skilltype >= 1 && !%arenaNull && !%sameTeamNull && %shooterClient != %damagedClient && %type != $TrueDamage) {
+			if(%skilltype >= 1 && !%arenaNull && !%sameTeamNull && %shooterClient != %damagedClient && %type != $TrueDamageType) {
 				%base1 = Cap(35 + (fetchData(%shooterClient, "LVL") - fetchData(%damagedClient, "LVL")), 1, "inf");
 				%base2 = Cap(35 + (fetchData(%damagedClient, "LVL") - fetchData(%shooterClient, "LVL")), 1, "inf");
 
@@ -845,7 +871,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				%enchantment = BeltItem::GetEnchant(%weapon);
 				%enchantDamage = 0;
 
-				if (%enchantment != "" && %type != $TrueDamage) {
+				if (%enchantment != "" && %type != $TrueDamageType) {
 					%enchantMod = $WeaponEnchantment[%enchantment, "mod"];
 					%enchantAction = $WeaponEnchantment[%enchantment, "action"];
 					%modId = GetWord(%enchantMod, 0);
@@ -871,6 +897,16 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 				%prehithp = fetchData(%damagedClient,"HP");
 				%rhp = refreshHP(%damagedClient, %finalDamage);
+
+				// check projectiles for spell effects
+				if (%projectile != "") {
+					%spellEffect = $beltitem[%projectile, "SpellEffect"];
+					if (%spellEffect != "") {
+						// UseSkill(%damagedClient, %spellEffect, True, True);
+						%spellIndex = $Spell::index[%spellEffect];
+						eval("SpellNum"@%spellIndex@"("@%shooterClient@", \""@%damagedClient@"\", \""@%pos@"\");");
+					}
+				}
 
 				if(%rhp == -1) {
 					%weaponDamage = -1;	//There was an LCK miss
@@ -964,19 +1000,19 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 					%animationStyle = "redmoon";
 					// This is where we shine! Take damage modifers into account, change the damage value, and send messages to porper parties
 					if(%shooterClient != %damagedClient) {
-						newprintmsg(%shooterClient, "You " @ %saction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ %convValue @ "<f0> points", $MsgRed);
-						remoteEval(%shooterClient, ATKText, "<f1>" @ %convValue, %animationStyle);
+						newprintmsg(%shooterClient, "You " @ %saction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ Number::Beautify(%convValue) @ "<f0> points", $MsgRed);
+						remoteEval(%shooterClient, ATKText, "<f1>" @ Number::Beautify(%convValue), %animationStyle);
 
 						if (%enchantDamage > 0) {
-							newprintmsg(%shooterClient, "You " @ %enchantAction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ %enchantDamage @ "<f0> points", $MsgRed);
-							remoteEval(%shooterClient, ATKText, "<f0>" @ %enchantDamage, %animationStyle);
+							newprintmsg(%shooterClient, "You " @ %enchantAction @ " <f1>" @ rpg::getname(%damagedClient) @ "<ff> - <f2>" @ Number::Beautify(%enchantDamage) @ "<f0> points", $MsgRed);
+							remoteEval(%shooterClient, ATKText, "<f0>" @ Number::Beautify(%enchantDamage), %animationStyle);
 						}
 					}
 
-					newprintmsg(%damagedClient, "You were " @ %daction @ " by <f1>" @ %hitby @ "<ff> - <f2>" @ %convValue @ "<ff> points", $MsgRed);
+					newprintmsg(%damagedClient, "You were " @ %daction @ " by <f1>" @ %hitby @ "<ff> - <f2>" @ Number::Beautify(%convValue) @ "<ff> points", $MsgRed);
 
 					if (%enchantDamage > 0) {
-						newprintmsg(%damagedClient, "You were " @ %enchantAction @ " by <f1>" @ %hitby @ "<ff> - <f2>" @ %enchantDamage @ "<ff> points", $MsgRed);
+						newprintmsg(%damagedClient, "You were " @ %enchantAction @ " by <f1>" @ %hitby @ "<ff> - <f2>" @ Number::Beautify(%enchantDamage) @ "<ff> points", $MsgRed);
 						%convValue = %convValue + %enchantDamage;
 					}
 
@@ -1008,7 +1044,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 					if(%hitpresentrad == "slash")
 						%hitpresentrad = "slashe";
 
-					radiusAllExcept(%damagedClient, %shooterClient, "<f1>"@%sname @ "<ff> "@%hitpresentrad@"s " @ %dname @ " for <f2>" @ %convValue @ "<ff> points of damage!", true);
+					radiusAllExcept(%damagedClient, %shooterClient, "<f1>"@%sname @ "<ff> "@%hitpresentrad@"s " @ %dname @ " for <f2>" @ Number::Beautify(%convValue) @ "<ff> points of damage!", true);
 				}
 				else if(%convValue < 0) {
 					//this happens when there's a LCK consequence as miss
@@ -1030,22 +1066,20 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 						%sname = "NPC";
 					else
 						%sname = Client::getName(%shooterClient);
+
 					%dname = Client::getName(%damagedClient);
-					if(%shooterClient != %damagedClient)
-					{
+
+					if(%shooterClient != %damagedClient) {
 						%index = "";
-						for(%i = 1; %i <= $maxDamagedBy; %i++)
-						{
+						for(%i = 1; %i <= $maxDamagedBy; %i++) {
 							if($damagedBy[%dname, %i] == "" && %index == "")
 								%index = %i;
 						}
-						if(%index != "")
-						{
+						if(%index != "") {
 							$damagedBy[%dname, %index] = %sname @ " " @ %finalDamage;
 							schedule("$damagedBy[\"" @ %dname @ "\", " @ %index @ "] = \"\";", $damagedByEraseDelay);
 						}
-						else
-						{
+						else {
 							//too many hits on waiting list, he doesn't get in on exp.
 						}
 					}
@@ -1072,23 +1106,20 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				//	RefreshWeight(%damagedClient);
 				//	schedule("storeData(" @ %damagedClient @ ", \"SlowdownHitFlag\", False);", $SlowdownHitDelay);
 				//	schedule("RefreshWeight(" @ %damagedClient @ ");", $SlowdownHitDelay, Client::getOwnedObject(%damagedClient));
-				//	=== This idea is also DUMB and not FUN... screw it -LongBow
+				//	=== This idea is also DUMB and not FUN... get rid of it -LongBow
 				}
 
 				//If player not dead then play a random hurt sound
-				if(!Player::IsDead(%this))
-				{
-					if(%damagedClient.lastDamage < getSimTime())
-					{
-						%sound = radnomItems(3,injure1,injure2,injure3);
+				if(!Player::IsDead(%this)) {
+					if(%damagedClient.lastDamage < getSimTime()) {
+						%sound = radnomItems(3, injure1, injure2, injure3);
 						playVoice(%damagedClient,%sound);
 						%damagedClient.lastdamage = getSimTime() + 1.5;
 					}
 				}
 				else		//player died
 				{
-					if(Player::isAiControlled(%shooterClient))
-					{
+					if(Player::isAiControlled(%shooterClient)) {
 						RemotePlayAnim(%shooterClient, 8);
 						PlaySound(RandomRaceSound(fetchData(%shooterClient, "RACE"), Taunt), %shooterClientPos);
 					}
@@ -1107,10 +1138,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				}
 			}
 
-			if(%isMiss)
-			{
-				if(fetchData(%damagedClient, "isBonused"))
-				{
+			if(%isMiss) {
+				if(fetchData(%damagedClient, "isBonused")) {
 					GameBase::activateShield(%this, "0 0 1.57", 1.47);
 					PlaySound(SoundHitShield, %damagedClientPos);
 				}
@@ -1122,31 +1151,35 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 function bloodSpray(%client){
 	if(BloodSpot.shapefile == False)
 		return;
+
 	$los::object = "";
 	%player = Client::getOwnedObject(%client);
-	if(GameBase::getLOSInfo(%player,5,(getRandom()*6.29317)@" "@(getRandom()*6.29317)@" "@(getRandom()*6.29317))){
+
+	if(GameBase::getLOSInfo(%player, 5, (getRandom()*6.29317)@" "@(getRandom()*6.29317)@" "@(getRandom()*6.29317))){
 		%target = $los::object;
 		%obj = getObjectType(%target);
+
 		if(%obj != "Player"){
 			%blood = newObject("Blood", StaticShape, BloodSpot, true);
 			%finalpos = $los::position;
-			gamebase::setposition(%blood,%finalpos);
-			gamebase::setRotation(%blood,vector::add(vector::getrotation($los::normal),"1.57 0 0"));
+			gamebase::setposition(%blood, %finalpos);
+			gamebase::setRotation(%blood, vector::add(vector::getrotation($los::normal), "1.57 0 0"));
 			Item::pop(%blood);
 		}
 	}
 }
 
-function remoteKill(%clientId)
-{
+function remoteKill(%clientId) {
 	dbecho($dbechoMode2, "remoteKill(" @ %clientId @ ")");
 
 	if(!$matchStarted)
 		return;
+
 	if(IsJailed(%clientId))
 		return;
 
 	%player = Client::getOwnedObject(%clientId);
+
 	if(%player != -1 && getObjectType(%player) == "Player" && !IsDead(%clientId) && IsInRoster(%clientId) == False) {
 		storeData(%clientId, "LCK", 1, "dec");
 

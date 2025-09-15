@@ -227,11 +227,11 @@ function bottalk::merchant(%TrueClientId, %closestId, %initTalk, %message){
 			NewBotMessage(%TrueClientId, %closestId, "Did you come to see what items you can buy?");
 		}
 		$state[%closestId, %TrueClientId] = 1;
+
+		PlaySound("hello.wav", GameBase::getPosition(%TrueClientId));
 	}
-	else if($state[%closestId, %TrueClientId] == 1)
-	{
-		if(String::findSubStr(%message, %trigger[2]) != -1)
-		{
+	else if($state[%closestId, %TrueClientId] == 1) {
+		if(String::findSubStr(%message, %trigger[2]) != -1) {
 			SetupShop(%TrueClientId, %closestId);
 			// AI::sayLater(%TrueClientId, %closestId, "Take a look at what I have.", True);
 			$state[%closestId, %TrueClientId] = "";
@@ -249,8 +249,8 @@ function bottalk::banker(%TrueClientId, %closestId, %initTalk, %message){
 	%trigger[4] = "storage";
 	%aiName = %closestId.name;
 	%aiGender = $BotInfo[%aiName, RACE];
-	if(%initTalk)
-	{
+
+	if(%initTalk) {
 		if(%TrueClientId.repack < 16) {
 			$botMenuOption[%TrueClientId,0] = "deposit";
 			$botMenuOption[%TrueClientId,1] = "withdraw";
@@ -263,22 +263,21 @@ function bottalk::banker(%TrueClientId, %closestId, %initTalk, %message){
 		}
 		
 		if ($BotInfo[%closestId.name, GREETING] != "") {
-			NewBotMessage(%TrueClientId, %closestId, $BotInfo[%closestId.name, GREETING] @ "  DEPOSIT, WITHDRAW or look at your STORAGE?  You are carrying " @ fetchData(%TrueClientId, "COINS") @ " coins and I have " @ fetchData(%TrueClientId, "BANK") @ " of yours.");
+			NewBotMessage(%TrueClientId, %closestId, $BotInfo[%closestId.name, GREETING] @ "  DEPOSIT, WITHDRAW or look at your STORAGE?  You are carrying " @ Number::Beautify(fetchData(%TrueClientId, "COINS")) @ " coins and I have " @ Number::Beautify(fetchData(%TrueClientId, "BANK")) @ " of yours.");
 		} else {
-			NewBotMessage(%TrueClientId, %closestId, "I can keep your money from being stolen by thieves.  DEPOSIT, WITHDRAW or look at your STORAGE?  You are carrying " @ fetchData(%TrueClientId, "COINS") @ " coins and I have " @ fetchData(%TrueClientId, "BANK") @ " of yours.");
+			NewBotMessage(%TrueClientId, %closestId, "I can keep your money from being stolen by thieves.  DEPOSIT, WITHDRAW or look at your STORAGE?  You are carrying " @ Number::Beautify(fetchData(%TrueClientId, "COINS")) @ " coins and I have " @ Number::Beautify(fetchData(%TrueClientId, "BANK")) @ " of yours.");
 		}
+
 		$state[%closestId, %TrueClientId] = 1;
 	}
-	else if($state[%closestId, %TrueClientId] == 1)
-	{
-		if(String::findSubStr(%message, %trigger[2]) != -1)
-		{
+	else if($state[%closestId, %TrueClientId] == 1) {
+		if(String::findSubStr(%message, %trigger[2]) != -1) {
 			//deposit question
 			%max = fetchData(%TrueClientId, "COINS");
 			%half = floor(%max/2);
 			$botMenuOption[%TrueClientId,0] = "all";
 			if(%half > 0)
-				$botMenuOption[%TrueClientId,1] = "half("@%half@")|"@%half;
+				$botMenuOption[%TrueClientId,1] = "half("@ Number::Beautify(%half) @")|"@%half;
 			if(%max > 500)
 				$botMenuOption[%TrueClientId,2] = 500;
 			if(%max > 1000)
@@ -289,21 +288,20 @@ function bottalk::banker(%TrueClientId, %closestId, %initTalk, %message){
 				$botMenuOption[%TrueClientId,5] = 5000;
 			if(%max > 10000)
 				$botMenuOption[%TrueClientId,6] = 10000;
-			%msg = "How much do you want me to hold? You are carrying " @ fetchData(%TrueClientId, "COINS") @ " coins and I have " @ fetchData(%TrueClientId, "BANK") @ " of yours.";
+			%msg = "How much do you want me to hold? You are carrying " @ Number::Beautify(fetchData(%TrueClientId, "COINS")) @ " coins and I have " @ Number::Beautify(fetchData(%TrueClientId, "BANK")) @ " of yours.";
 			if(%client.tmpbottalk == "chat")
 				%msg = %msg @ " You may also <f1>#say<f0> an amount.";
 			NewBotMessage(%TrueClientId, %closestId, %msg);
 			$state[%closestId, %TrueClientId] = 2;
 		}
 
-		if(String::findSubStr(%message, %trigger[3]) != -1)
-		{
+		if(String::findSubStr(%message, %trigger[3]) != -1) {
 			//withdraw question
 			%max = fetchData(%TrueClientId, "BANK");
 			%half = floor(%max/2);
 			$botMenuOption[%TrueClientId,0] = "all";
 			if(%half > 0)
-				$botMenuOption[%TrueClientId,1] = "half("@%half@")|"@%half;
+				$botMenuOption[%TrueClientId,1] = "half("@ Number::Beautify(%half) @")|"@%half;
 			if(%max > 500)
 				$botMenuOption[%TrueClientId,2] = 500;
 			if(%max > 1000)
@@ -314,48 +312,46 @@ function bottalk::banker(%TrueClientId, %closestId, %initTalk, %message){
 				$botMenuOption[%TrueClientId,5] = 5000;
 			if(%max > 10000)
 				$botMenuOption[%TrueClientId,6] = 10000;
-			%msg = "How much do you want to take out? You are carrying " @ fetchData(%TrueClientId, "COINS") @ " coins and I have " @ fetchData(%TrueClientId, "BANK") @ " of yours.";
+
+			%msg = "How much do you want to take out? You are carrying " @ Number::Beautify(fetchData(%TrueClientId, "COINS")) @ " coins and I have " @ Number::Beautify(fetchData(%TrueClientId, "BANK")) @ " of yours.";
+			
 			if(%client.tmpbottalk == "chat")
 				%msg = %msg  @ " You may also <f1>#say<f0> an amount.";
-			NewBotMessage(%TrueClientId, %closestId, %msg);
+			
+				NewBotMessage(%TrueClientId, %closestId, %msg);
 			$state[%closestId, %TrueClientId] = 3;
 		}
-		if(String::findSubStr(%message, %trigger[4]) != -1)
-		{
+		if(String::findSubStr(%message, %trigger[4]) != -1) {
 			//storage
 			AI::sayLater(%TrueClientId, %closestId, "This is the equipment you have stored here.", True);
 			SetupBank(%TrueClientId, %closestId);
 			$state[%closestId, %TrueClientId] = "";
 		}
 	}
-	else if($state[%closestId, %TrueClientId] == 2)
-	{
+	else if($state[%closestId, %TrueClientId] == 2) {
 		//deposit
 		if(%cropped == "all")
 			%cropped = fetchData(%TrueClientId, "COINS");
 		
 		%c = floor(%cropped);
-		if(%c <= 0)
-		{
+		if(%c <= 0) {
 			//I think this "error" message is alot more natural sounding than the old robo-banker.
 			NewBotMessage(%TrueClientId, %closestId, "Huh? I didn't understand that. Can you say that more clearly?");
 			//AI::sayLater(%TrueClientId, %closestId, "Invalid request.  Your transaction has been cancelled.~wError_Message.wav", True);
 		}
-		else if(%c <= fetchData(%TrueClientId, "COINS"))
-		{
+		else if(%c <= fetchData(%TrueClientId, "COINS")) {
 			storeData(%TrueClientId, "BANK", %c, "inc");
 			storeData(%TrueClientId, "COINS", %c, "dec");
 			RefreshAll(%TrueClientId);
 
-			NewBotMessage(%TrueClientId, %closestId, "You have given me " @ %c @ " coins.  You are now carrying " @ fetchData(%TrueClientId, "COINS") @ " coins and I have " @ fetchData(%TrueClientId, "BANK") @ " of yours.  Have a nice day.");
+			NewBotMessage(%TrueClientId, %closestId, "You have given me " @ Number::Beautify(%c) @ " coins. You are now carrying " @ Number::Beautify(fetchData(%TrueClientId, "COINS")) @ " coins and I have " @ Number::Beautify(fetchData(%TrueClientId, "BANK")) @ " of yours.  Have a nice day.");
 
 			playSound(SoundMoney1, GameBase::getPosition(%closestId));
 		}
-		else
-		{
+		else {
 
 			NewBotMessage(%TrueClientId, %closestId, "Sorry, you don't seem to have that many coins.");
-			//AI::sayLater(%TrueClientId, %closestId, "Sorry, you don't seem to have that many coins.  Your transaction has been cancelled.", True);
+			//AI::sayLater(%TrueClientId, %closestId, "Sorry, you don't seem to have that many coins. Your transaction has been cancelled.", True);
 			//beep beep robo-banker sez "duz not compute"
 		}
 		$state[%closestId, %TrueClientId] = "";
@@ -377,7 +373,7 @@ function bottalk::banker(%TrueClientId, %closestId, %initTalk, %message){
 			storeData(%TrueClientId, "COINS", %c, "inc");
 			storeData(%TrueClientId, "BANK", %c, "dec");
 			RefreshAll(%TrueClientId);
-			NewBotMessage(%TrueClientId, %closestId, "I have given you " @ %c @ " coins.  You are now carrying " @ fetchData(%TrueClientId, "COINS") @ " coins and I have " @ fetchData(%TrueClientId, "BANK") @ " of yours.  Have a nice day.");
+			NewBotMessage(%TrueClientId, %closestId, "I have given you " @ Number::Beautify(%c) @ " coins. You are now carrying " @ Number::Beautify(fetchData(%TrueClientId, "COINS")) @ " coins and I have " @ Number::Beautify(fetchData(%TrueClientId, "BANK")) @ " of yours.  Have a nice day.");
 
 			playSound(SoundMoney1, GameBase::getPosition(%TrueClientId));
 		}
@@ -423,7 +419,7 @@ function bottalk::assassin(%TrueClientId, %closestId, %initTalk, %message){
 		%aiGender = $BotInfo[%aiName, RACE];
 		playSound("Sound" @ %aiGender @ "Hey", GameBase::getPosition(%closestId));
 		$botMenuOption[%TrueClientId,0] = "I want to buy LCK.";//higher numbers reserved for player names
-		NewBotMessage(%TrueClientId, %closestId, "The highest bounty is currently on " @ %n @ " for $" @ %c @ ". Give me someone's name and I'll tell you their bounty, unless you want to buy something.");
+		NewBotMessage(%TrueClientId, %closestId, "The highest bounty is currently on " @ %n @ " for $" @  Number::Beautify(%c) @ ". Give me someone's name and I'll tell you their bounty, unless you want to buy something.");
 		$state[%closestId, %TrueClientId] = 1;
 	}
 	else if($state[%closestId, %TrueClientId] == 1)
@@ -433,7 +429,7 @@ function bottalk::assassin(%TrueClientId, %closestId, %initTalk, %message){
 			%cost = GetLCKcost(%TrueClientId);
 			$botMenuOption[%TrueClientId,0] = "yes";
 			$botMenuOption[%TrueClientId,1] = "no";
-			NewBotMessage(%TrueClientId, %closestId, "I will sell you one LCK point for $" @ %cost @ ". (YES/NO)");
+			NewBotMessage(%TrueClientId, %closestId, "I will sell you one LCK point for $" @  Number::Beautify(%cost) @ ". (YES/NO)");
 			$state[%closestId, %TrueClientId] = 2;
 		}
 		else
@@ -503,14 +499,14 @@ function bottalk::assassin(%TrueClientId, %closestId, %initTalk, %message){
 				if(IsInCommaList(fetchData(%TrueClientId, "TempKillList"), %n))
 				{
 					storeData(%TrueClientId, "TempKillList", RemoveFromCommaList(fetchData(%TrueClientId, "TempKillList"), %n));
-					NewBotMessage(%TrueClientId, %closestId, "I see you've killed " @ %n @ ". Here's your reward... " @ fetchData(%id, "bounty") @ " coins. Goodbye.", "");
+					NewBotMessage(%TrueClientId, %closestId, "I see you've killed " @ %n @ ". Here's your reward... " @  Number::Beautify(fetchData(%id, "bounty")) @ " coins. Goodbye.", "");
 					storeData(%TrueClientId, "COINS", fetchData(%id, "bounty"), "inc");
 					storeData(%id, "bounty", 0);
 					playSound(SoundMoney1, GameBase::getPosition(%TrueClientId));
 					RefreshAll(%TrueClientId);
 				}
 				else
-					NewBotMessage(%TrueClientId, %closestId, %n @ "'s bounty is currently at " @ fetchData(%id, "bounty") @ " coins. Goodbye.", "");
+					NewBotMessage(%TrueClientId, %closestId, %n @ "'s bounty is currently at " @ Number::Beautify(fetchData(%id, "bounty")) @ " coins. Goodbye.", "");
 			}
 			else
 					NewBotMessage(%TrueClientId, %closestId, "You can't get a reward for killing yourself... idiot.", "");
@@ -533,7 +529,7 @@ function bottalk::porter(%TrueClientId, %closestId, %initTalk, %message){
 		if($arenaOn)
 		{
 			$botMenuOption[%TrueClientId,0] = "I want to enter the arena.";
-			NewBotMessage(%TrueClientId, %closestId, "I am in charge of admitting fighters.  Do you want to ENTER for $" @ $teleportInArenaCost @ "?");
+			NewBotMessage(%TrueClientId, %closestId, "I am in charge of admitting fighters. Do you want to ENTER for $" @ $teleportInArenaCost @ "?");
 			$state[%closestId, %TrueClientId] = 1;
 		}
 		else
@@ -560,13 +556,13 @@ function bottalk::porter(%TrueClientId, %closestId, %initTalk, %message){
 				}
 				else
 				{
-					NewBotMessage(%TrueClientId, %closestId, "Hmmm... I guess there are people standing in the way of the teleport destinations.  Try again later.");
+					NewBotMessage(%TrueClientId, %closestId, "Hmmm... I guess there are people standing in the way of the teleport destinations. Try again later.");
 					$state[%closestId, %TrueClientId] = "";
 				}
 			}
 			else
 			{
-				NewBotMessage(%TrueClientId, %closestId, "You don't even have that many coins.  Sorry, you can't get in.");
+				NewBotMessage(%TrueClientId, %closestId, "You don't even have that many coins. Sorry, you can't get in.");
 				$state[%closestId, %TrueClientId] = "";
 			}
 		}

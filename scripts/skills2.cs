@@ -32,7 +32,7 @@ $Skill::startSound[2] = AmrbroseSwordA;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
-$SkillRestriction[$Skill::keyword[2]] = "L 20 C Squire C Knight C Monk C Geomancer C Samurai";
+$SkillRestriction[$Skill::keyword[2]] = "L 20 C Squire C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight";
 
 $Skill::keyword[3] = "harvest";
 $Skill::index[harvest] = 3;
@@ -58,7 +58,7 @@ $Skill::groupListCheck[4] = False;
 $Skill::refVal[4] = -10;
 $Skill::graceDistance[4] = 0.5;
 $Skill::requireOneOfItems[4] = "CrudeClayAlembic WornCopperAlembic ReinforcedIronAlembic ArcaneGlassAlembic CelestialMythrilAlembic";
-$SkillRestriction[$Skill::keyword[4]] = "C Chemist C BlackMage C WhiteMage C Mystic C Summoner C TimeMage C WhiteMage C Mystic C Orator";
+$SkillRestriction[$Skill::keyword[4]] = "C Chemist C BlackMage C WhiteMage C Mystic C Summoner C TimeMage C WhiteMage C Mystic C Orator C HolyKnight";
 
 $Skill::keyword[5] = "throw";
 $Skill::index[$Skill::keyword[5]] = 5;
@@ -70,31 +70,31 @@ $Skill::startSound[5] = FishWalk;
 $Skill::groupListCheck[5] = False;
 $Skill::refVal[5] = -10;
 $Skill::graceDistance[5] = 10;
-$SkillRestriction[$Skill::keyword[5]] = "C Chemist C BlackMage C WhiteMage C Mystic C TimeMage C WhiteMage C Mystic C Orator";
+$SkillRestriction[$Skill::keyword[5]] = "C Chemist C BlackMage C WhiteMage C Mystic C TimeMage C WhiteMage C Mystic C Orator C HolyKnight";
 
 $Skill::keyword[6] = "quickshot";
 $Skill::index[$Skill::keyword[6]] = 6;
 $Skill::name[6] = "Quick Shot";
 $Skill::description[6] = "A fast shot that shoots multiple arrows.";
 $Skill::delay[6] = 0.1;
-$Skill::recoveryTime[6] = 8;
+$Skill::recoveryTime[6] = 5;
 $Skill::startSound[6] = Reflected;
 $Skill::groupListCheck[6] = False;
 $Skill::refVal[6] = -10;
 $Skill::graceDistance[6] = 10;
-$SkillRestriction[$Skill::keyword[6]] = "L 40 C Archer";
+$SkillRestriction[$Skill::keyword[6]] = "L 40 C Archer C Hunter C Sniper";
 
 $Skill::keyword[7] = "explosiveshot";
 $Skill::index[$Skill::keyword[7]] = 7;
 $Skill::name[7] = "Explosive Shot";
 $Skill::description[7] = "A shot that explodes on impact.";
 $Skill::delay[7] = 0.1;
-$Skill::recoveryTime[7] = 8;
+$Skill::recoveryTime[7] = 5;
 $Skill::startSound[7] = ActivateAB;
 $Skill::groupListCheck[7] = False;
 $Skill::refVal[7] = -10;
 $Skill::graceDistance[7] = 10;
-$SkillRestriction[$Skill::keyword[7]] = "L 20 C Archer";
+$SkillRestriction[$Skill::keyword[7]] = "L 20 C Archer C Hunter C Sniper";
 
 $Skill::keyword[8] = "greatcleave";
 $Skill::index[greatcleave] = 8;
@@ -112,7 +112,7 @@ $Skill::startSound[8] = AmrbroseSwordA;
 $Skill::groupListCheck[8] = False;
 $Skill::refVal[8] = -10;
 $Skill::graceDistance[8] = 2;
-$SkillRestriction[$Skill::keyword[8]] = "L 40 C Knight C Monk C Geomancer C Samurai";
+$SkillRestriction[$Skill::keyword[8]] = "L 40 C Knight C Monk C Geomancer C Samurai C HolyKnight";
 
 $Skill::keyword[9] = "parry";
 $Skill::index[parry] = 9;
@@ -128,7 +128,7 @@ $Skill::startSound[9] = AmrbroseSwordA;
 $Skill::groupListCheck[9] = False;
 $Skill::refVal[9] = -10;
 $Skill::graceDistance[9] = 2;
-$SkillRestriction[$Skill::keyword[9]] = "C Knight C Geomancer C Samurai";
+$SkillRestriction[$Skill::keyword[9]] = "C Knight C Geomancer C Samurai C HolyKnight C DarkKnight";
 
 $Skill::keyword[10] = "infusepotions";
 $Skill::index[infusepotions] = 10;
@@ -158,7 +158,7 @@ $Skill::startSound[11] = AmrbroseSwordA;
 $Skill::groupListCheck[11] = False;
 $Skill::refVal[11] = -10;
 $Skill::graceDistance[11] = 2;
-$SkillRestriction[$Skill::keyword[11]] = "L 60 C Monk C Geomancer C Samurai";
+$SkillRestriction[$Skill::keyword[11]] = "L 60 C Monk C Geomancer C Samurai C HolyKnight";
 
 $Skill::keyword[12] = "earthquake";
 $Skill::index[earthquake] = 12;
@@ -173,38 +173,89 @@ $Skill::startSound[12] = AmrbroseSwordA;
 $Skill::groupListCheck[12] = False;
 $Skill::refVal[12] = -10;
 $Skill::graceDistance[12] = 2;
-$SkillRestriction[$Skill::keyword[12]] = "L 80 C Geomancer C Samurai";
+$SkillRestriction[$Skill::keyword[12]] = "L 80 C Geomancer C Samurai C HolyKnight";
 
-$Skill::keyword[12] = "volley";
-$Skill::index[volley] = 12;
-$Skill::name[12] = "Volley";
-$Skill::description[12] = "A rapid-fire attack that launches a hail of arrows at once from the sky.";
-$Skill::actionMessage[12] = "You unleash a volley of arrows.";
-$Skill::delay[12] = 1;
-$Skill::recoveryTime[12] = 8; // 15;
-$Skill::radius[12] = 20;
-$Skill::LOSrange[12] = 100;
-$Skill::startSound[12] = ImpactTR;
-$Skill::groupListCheck[12] = False;
-$Skill::refVal[12] = -10;
-$Skill::graceDistance[12] = 2;
-$SkillRestriction[$Skill::keyword[12]] = "L 60 C Archer";
-
-$Skill::keyword[13] = "innerfire";
-$Skill::index[innerfire] = 13;
-$Skill::name[13] = "Inner Fire";
-$Skill::description[13] = "Ignite your inner power, increasing spell damage.";
-$Skill::actionMessage[13] = "You channel your inner fire.";
-$Skill::delay[13] = 2;
-$Skill::recoveryTime[13] = 2;
-$Skill::duration[13] = 30;
-$Skill::LOSrange[13] = 0;
-$Skill::startSound[13] = ActivateTR;
-$Skill::endSound[13] = PlaceSeal;
+$Skill::keyword[13] = "volley";
+$Skill::index[volley] = 13;
+$Skill::name[13] = "Volley";
+$Skill::description[13] = "A rapid-fire attack that launches a hail of arrows at once from the sky.";
+$Skill::actionMessage[13] = "You unleash a volley of arrows.";
+$Skill::delay[13] = 1;
+$Skill::recoveryTime[13] = 8; // 15;
+$Skill::radius[13] = 20;
+$Skill::LOSrange[13] = 100;
+$Skill::startSound[13] = ImpactTR;
 $Skill::groupListCheck[13] = False;
 $Skill::refVal[13] = -10;
-$Skill::graceDistance[13] = 1;
-$SkillRestriction[$Skill::keyword[13]] = "C WhiteMage C Mystic C Orator";
+$Skill::graceDistance[13] = 2;
+$SkillRestriction[$Skill::keyword[13]] = "L 80 C Hunter C Sniper";
+
+$Skill::keyword[14] = "innerfire";
+$Skill::index[innerfire] = 14;
+$Skill::name[14] = "Inner Fire";
+$Skill::description[14] = "Ignite your inner power, increasing spell damage.";
+$Skill::actionMessage[14] = "You channel your inner fire.";
+$Skill::delay[14] = 2;
+$Skill::recoveryTime[14] = 2;
+$Skill::duration[14] = 30;
+$Skill::LOSrange[14] = 0;
+$Skill::startSound[14] = ActivateTR;
+$Skill::endSound[14] = PlaceSeal;
+$Skill::groupListCheck[14] = False;
+$Skill::refVal[14] = -10;
+$Skill::graceDistance[14] = 1;
+$SkillRestriction[$Skill::keyword[14]] = "C WhiteMage C Mystic C Orator C HolyKnight";
+
+$Skill::keyword[15] = "arrowburst";
+$Skill::index[$Skill::keyword[15]] = 15;
+$Skill::name[15] = "Arrow Burst";
+$Skill::description[15] = "A powerful shot that releases a burst of arrows.";
+$Skill::delay[15] = 0.1;
+$Skill::recoveryTime[15] = 5;
+$Skill::startSound[15] = Reflected;
+$Skill::groupListCheck[15] = False;
+$Skill::refVal[15] = -10;
+$Skill::graceDistance[15] = 10;
+$SkillRestriction[$Skill::keyword[15]] = "L 40 C Hunter C Sniper";
+
+$Skill::keyword[16] = "doubleshot";
+$Skill::index[$Skill::keyword[16]] = 16;
+$Skill::name[16] = "Double Shot";
+$Skill::description[16] = "Fire two arrows at once for a short durtation.";
+$Skill::delay[16] = 0.1;
+$Skill::recoveryTime[16] = 2;
+$Skill::duration[16] = 30;
+$Skill::startSound[16] = Reflected;
+$Skill::groupListCheck[16] = False;
+$Skill::refVal[16] = -10;
+$Skill::graceDistance[16] = 10;
+$SkillRestriction[$Skill::keyword[16]] = "L 60 C Hunter C Sniper";
+
+$Skill::keyword[17] = "zangetsu";
+$Skill::index[$Skill::keyword[17]] = 17;
+$Skill::name[17] = "Zangetsu";
+$Skill::description[17] = "A powerful technique that allows you to strike with the force of the moon.";
+$Skill::delay[17] = 0.1;
+$Skill::recoveryTime[17] = 10;
+$Skill::duration[17] = 30;
+$Skill::startSound[17] = AmrbroseSwordA;
+$Skill::groupListCheck[17] = False;
+$Skill::refVal[17] = -10;
+$Skill::graceDistance[17] = 10;
+$SkillRestriction[$Skill::keyword[17]] = "L 100 C Samurai C HolyKnight";
+
+$Skill::keyword[18] = "doublecast";
+$Skill::index[$Skill::keyword[18]] = 18;
+$Skill::name[18] = "Double Cast";
+$Skill::description[18] = "A powerful incantation that doubles the damage of your spells at the cost of twice the mana.";
+$Skill::delay[18] = 2.0;
+$Skill::recoveryTime[18] = 10;
+$Skill::duration[18] = 60;
+$Skill::startSound[18] = Reflected;
+$Skill::groupListCheck[18] = False;
+$Skill::refVal[18] = -10;
+$Skill::graceDistance[18] = 1;
+$SkillRestriction[$Skill::keyword[18]] = "C BlackMage C TimeMage C Summoner C Spellbow C Spellblade C DarkKnight C ArcaneArcher C Arcanist C Hexblade";
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
@@ -308,7 +359,7 @@ function BeginUseSkill(%clientId, %keyword) {
     // recovery time is never smaller than half of the original and never bigger than the original.
     %recovTime = Cap(%a + %c, %a, %rt);
 
-	if (HasBonusState(%clientId, "haste") == True) {
+	if (HasBonusState(%clientId, "Haste") == True) {
 		%recovTime = floor(%recovTime * 0.5);
 	}
 
@@ -582,38 +633,80 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		schedule("ProjectileAttack(" @ %clientId @ ", 100, True);", 0.5); // 0.5
     }
 
+	if ($Skill::keyword[%index] == "arrowburst") {
+		schedule("ProjectileAttack(" @ %clientId @ ", 100, True);", 0.01);
+		schedule("ProjectileAttack(" @ %clientId @ ", 100, True);", 0.25);
+		schedule("ProjectileAttack(" @ %clientId @ ", 100, True);", 0.5);
+		schedule("ProjectileAttack(" @ %clientId @ ", 100, True);", 0.75);
+		schedule("ProjectileAttack(" @ %clientId @ ", 100, True);", 1.0);	
+    }
+
 	if ($Skill::keyword[%index] == "explosiveshot") {
 		ProjectileAttack(%clientId, 100, True, "43", "BasicArrowRadiusSmall");
     }
 
 	if ($Skill::keyword[%index] == "parry") {
-		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", 2, "Parry");
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Parry", "left");
 		UpdateBonusState(%clientId, "Parry", %duration, "Parry");
     }
 
 	if ($Skill::keyword[%index] == "infusepotions") {
-		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", 2, "Infused Potions");
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Infused Potions", "left");
 		UpdateBonusState(%clientId, "InfusedPotions", %duration, "InfusedPotions");
 	}
 
 	if ($Skill::keyword[%index] == "innerfire") {
-		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", 2, "Inner Fire");
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Inner Fire", "left");
 		UpdateBonusState(%clientId, "InnerFire", %duration, "InnerFire");
 	}
 
+	if ($Skill::keyword[%index] == "doublecast") {
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Double Cast", "left");
+		UpdateBonusState(%clientId, "DoubleCast", %duration, "DoubleCast");
+	}
+
+
 	if ($Skill::keyword[%index] == "volley") {
+		%weapon = GetEquippedWeapon(%clientId);
+		%loadedProjectile = fetchData(%clientId, "LoadedProjectile " @ %weapon);
+		%projectile = BeltItem::GetProjectile(%loadedProjectile);
+
 		%volleyPos = GetWord(%castPos, 0) @ " " @ GetWord(%castPos, 1) @ " " @ GetWord(%castPos, 2) + 6;
 
 		for (%i = 0; %i < 10; %i++) {
 			// slightly modify %volleyPos x and y cordinates randomly +/- 2
 			%newPos = GetWord(%volleyPos, 0) + (getRandom() * 4 - 2) @ " " @ (GetWord(%volleyPos, 1) + (getRandom() * 4 - 2)) @ " " @ GetWord(%volleyPos, 2);
 			schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb12\", \"" @ %newPos @ "\", False);", 0.28 * %i);
-			// schedule("volleyHelper(" @ %clientId @ ", \"" @ %newPos @ "\");", 0.3 * %i);
-			schedule("shootAtRandomEnemyFromPosition(" @ %clientId @ ", \"" @ %newPos @ "\", " @ $Skill::radius[$Skill::index[volley]] @ ", \"BasicArrowImpact\");", 0.3 * %i);
+			schedule("shootAtClosestEnemyFromPosition(" @ %clientId @ ", \"" @ %newPos @ "\", " @ $Skill::radius[$Skill::index[volley]] @ ", \"" @ %projectile @ "\");", 0.3 * %i);
 		}
 	}
 
+	if ($Skill::keyword[%index] == "doubleshot") {
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Double Shot", "left");
+		UpdateBonusState(%clientId, "DoubleShot", %duration, "DoubleShot");
+	}
+
+	if ($Skill::keyword[%index] == "zangetsu") {
+		if(!Player::isAiControlled(%Client))
+		Player::unmountItem(%player, $WeaponSlot);
+
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 0.01);
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 0.25);
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 0.5);
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 0.75);
+
+		%weaponImage = $beltitem[GetEquippedWeapon(%clientId), "Image"];
+		schedule("Player::mountItem(" @ %clientId @ ", \"" @ %weaponImage @ "\", 0);", 0.8, %player);
+    }
+
     return EndSkill(%clientId, %overrideEndSound, %extraDelay, %index, %oldpos, %returnFlag);
+}
+
+function shootProjectile(%Client, %projectile) {
+	%player = Client::getOwnedObject(%Client);
+	%trans = GameBase::getMuzzleTransform(%player);
+	%vel = Item::getVelocity(%player);
+	Projectile::spawnProjectile(%projectile, %trans, %player, %vel);
 }
 
 function shootAtRandomEnemyFromPosition(%clientId, %pos, %radius, %projectile) {
@@ -621,12 +714,17 @@ function shootAtRandomEnemyFromPosition(%clientId, %pos, %radius, %projectile) {
 	%randomEnemy = GetRandomEnemyFromPos(%clientId, %pos, %radius);
 
 	if (%randomEnemy != "") {
-		%enemyPos = GameBase::getPosition(%randomEnemy);
-		%fixedEnemyPos = GetWord(%enemyPos, 0) @ " " @ GetWord(%enemyPos, 1) @ " " @ (GetWord(%enemyPos, 2) + 1);
-		%vecToTarget = Vector::sub(%fixedEnemyPos, %pos);
-		%dirToTarget = Vector::normalize(%vecToTarget);
-		%transform = MakeTransformFromPosAndDir(%pos, %dirToTarget);
+		%transform = MakeTransformFromAtoB(%pos, GameBase::getPosition(%randomEnemy));
+		Projectile::spawnProjectile(%projectile, %transform, %player, Item::getVelocity(%player));
+	}
+}
 
+function shootAtClosestEnemyFromPosition(%clientId, %pos, %radius, %projectile) {
+	%player = Client::getOwnedObject(%clientId);
+	%randomEnemy = GetClosestEnemyFromPos(%clientId, %pos, %radius);
+
+	if (%randomEnemy != "") {
+		%transform = MakeTransformFromAtoB(%pos, GameBase::getPosition(%randomEnemy));
 		Projectile::spawnProjectile(%projectile, %transform, %player, Item::getVelocity(%player));
 	}
 }
@@ -709,7 +807,7 @@ function EndSkill(%clientid, %overrideEndSound, %extradelay, %index, %soundPos, 
 	}
 
 	if(%clientId.repack > 32) {
-		remoteEval(%clientId, "rpgbarhud", %recovTime, 0, 2, "||", 0, "Skill Cooldown");
+		remoteEval(%clientId, "rpgbarhud", %recovTime, 0, 2, "||", "", "Skill Cooldown", "center");
 		schedule("storeData(" @ %clientId @ ", \"UseSkillStep\", \"\");", %recovTime, %clientId);
 	}
 	else
@@ -813,4 +911,28 @@ function GetRandomEnemyFromPos(%clientId, %pos, %radius) {
 	%randomEnemyId = floor(getRandom() * %enemyCount);
 
 	return GetWord(%enemyIds, %randomEnemyId);
+}
+
+function GetClosestEnemyFromPos(%clientId, %pos, %radius) {
+	%closest = 500000;
+	%b = %radius * 2;
+	%set = newObject("set", SimSet);
+	%n = containerBoxFillSet(%set, $SimPlayerObjectType, %pos, %b, %b, %b, 0);
+
+	for(%i = 0; %i < Group::objectCount(%set); %i++) {
+		%id = Player::getClient(Group::getObject(%set, %i));
+
+		if(GameBase::getTeam(%id) != GameBase::getTeam(%clientId) && !fetchData(%id, "invisible") && %id != %clientId) {
+			%dist = Vector::getDistance(%pos, GameBase::getPosition(%id));
+
+			if(%dist < %closest) {
+				%closest = %dist;
+				%closestId = %id;
+			}
+		}
+	}
+
+	deleteObject(%set);
+
+	return %closestId;
 }

@@ -78,12 +78,14 @@ function createAI(%aiName, %markerGroup, %name)
 	    %spawnRot = GameBase::getRotation(%spawnMarker);
 	}
 
-	%guardtype = clipTrailingNumbers(%aiName);
+	%guardtype = clipTrailingNumbers(%aiName); // also need to remove the "Elite" if it's there
+	%guardtype = String::replace(%guardtype, "Elite", "");
 
 	if($BotInfo[%aiName, RACE] != "")
 		%armor = $RaceToArmorType[$BotInfo[%aiName, RACE]];		//bots in map will get this call
 	else
 		%armor = $RaceToArmorType[$NameForRace[%guardtype]];		//spawn bots will get this call
+
 
 	if( AI::spawn(%aiName, %armor, %spawnPos, %spawnRot, %name, "male2") != "false")
 	{
@@ -125,13 +127,13 @@ function createAI(%aiName, %markerGroup, %name)
 	}
 	else
 	{
-      	dbecho(1, "Failure spawning bot:");
-		dbecho(1, "%aiName: " @ %aiName);
-		dbecho(1, "%armor: " @ %armor);
-		dbecho(1, "%guardtype: " @ %guardtype);
-		dbecho(1, "%spawnPos: " @ %spawnPos);
-		dbecho(1, "%spawnRot: " @ %spawnRot);
-		dbecho(1, "%name: " @ %name);
+      	lbecho("Failure spawning bot:");
+		lbecho("%aiName: " @ %aiName);
+		lbecho("%armor: " @ %armor);
+		lbecho("%guardtype: " @ %guardtype);
+		lbecho("%spawnPos: " @ %spawnPos);
+		lbecho("%spawnRot: " @ %spawnRot);
+		lbecho("%name: " @ %name);
 		return -1;
       }
 }
@@ -190,23 +192,31 @@ function AI::setupAI(%key, %team)
 //------------------------------
 // AI::setWeapons()
 //------------------------------
-function AI::setWeapons(%aiName, %loadout)
+function AI::setWeapons(%aiName, %loadout, %isElite)
 {
 	dbecho($dbechoMode, "AI::setWeapons(" @ %aiName @ ")");
 
 	%aiId = AI::getId(%aiName);
+	%clippedAiName = clipTrailingNumbers(%aiName);
+	%baseName = String::replace(%clippedAiName, "Elite", "");
 
-	if(%loadout == -1 || %loadout == "" || String::ICompare(%loadout, "default") == 0)
-	{
+	if(%loadout == -1 || %loadout == "" || String::ICompare(%loadout, "default") == 0) {
 		%items = $BotInfo[%aiName, ITEMS];
+
 		if(%items == "") {
-			GiveThisStuff(%aiId, $BotEquipment[clipTrailingNumbers(%aiName)], False);
+			GiveThisStuff(%aiId, $BotEquipment[%baseName], False);
 		}
 		else
 			GiveThisStuff(%aiId, %items, False);
 	}
 	else
 		GiveThisStuff(%aiId, $LoadOut[%loadout], False);
+
+	// check if they can have an elite
+	if(%isElite) {
+		%eliteItems = $BotEquipment[%clippedAiName];
+		GiveThisStuff(%aiId, %eliteItems, False);
+	}
 
 	HardcodeAIskills(%aiId);
 
@@ -755,10 +765,24 @@ function AI::helper(%aiName, %displayName, %commandIssuer, %loadout)
 	%newName = %aiName @ %n;
 	%customNames = $RaceToNamesList[$NameForRace[%aiName]];
 
+	%isElite = False;
+	if($BotEquipment["Elite" @ %aiName] != "") {
+		%rand = floor(getRandom() * 100);
+		if(%rand >= 80) { // 20% chance of elite spawning
+			%isElite = True;
+			%newName = "Elite" @ %aiName @ %n;
+		}
+	}
+
 	if (%customNames != "") {
 		// TODO: dynamically get the length of words in the list somehow (or always have 100)
 		// %randName = GetWord(%customNames, (getRandom() * 100));
+		
 		%displayName = $NameForRace[%aiName] @ "" @ GetWord(%customNames, (getRandom() * 100));
+
+		if (%isElite)
+			%displayName = "Elite" @ %displayName;
+
 		// if ($NameForClass[$NameForRace[%aiName]] != "")
 		// 	%displayName = $NameForClass[$NameForRace[%aiName]] @" "@  %randName;
 		// else
@@ -770,14 +794,14 @@ function AI::helper(%aiName, %displayName, %commandIssuer, %loadout)
 	}
 		
 	$numAI++;
-	SpawnAI(%newName, %displayName, %spawnPos, %commandIssuer, %loadout, %aiName);
+	SpawnAI(%newName, %displayName, %spawnPos, %commandIssuer, %loadout, %aiName, %isElite);
 
 	setAInumber(%newName, %n);
 
 	return %newName;
 }
 
-function SpawnAI(%newName, %displayName, %aiSpawnPos, %commandIssuer, %loadout, %aiName)
+function SpawnAI(%newName, %displayName, %aiSpawnPos, %commandIssuer, %loadout, %aiName, %isElite)
 {
 	dbecho($dbechoMode, "SpawnAI(" @ %newName @ ", " @ %displayName @ ", " @ %aiSpawnPos @ ", " @ %commandIssuer @ ")");
 
@@ -818,7 +842,11 @@ function SpawnAI(%newName, %displayName, %aiSpawnPos, %commandIssuer, %loadout, 
 			AI::SetVar(%newName, spotDist, $AIspotDist);
 		}
 
-		AI::setWeapons(%newName, %loadout);
+		AI::setWeapons(%newName, %loadout, %isElite);
+
+		if (%isElite) {
+			storeData(%aiId, "IsElite", "True");
+		}
 
 		// set custom skin 
 		%customSkin = $SkinForRace[%aiName];
@@ -1190,6 +1218,31 @@ function HardcodeAIskills(%aiId)
 	for(%i = 1; %i <= %ns; %i++)
 		AddSkillPoint(%aiId, %i, %a);
 
+	%aiLevel = fetchData(%aiId, "LVL");
+
+	%enduranceModifier = 0.5;
+	if (%aiLevel > 10) 
+		%enduranceModifier = 0.6;
+	if (%aiLevel > 20) 
+		%enduranceModifier = 0.7;
+	if (%aiLevel > 40)
+		%enduranceModifier = 0.8;
+	if (%aiLevel > 60)
+		%enduranceModifier = 0.9;
+	if (%aiLevel > 80)
+		%enduranceModifier = 1.0;
+	if (%aiLevel > 100) 
+		%enduranceModifier = 1.2;
+	if (%aiLevel > 200) 
+		%enduranceModifier = 1.4;
+	if (%aiLevel > 300)
+		%enduranceModifier = 1.6;
+	if (%aiLevel > 400)
+		%enduranceModifier = 1.8;
+	if (%aiLevel > 500)
+		%enduranceModifier = 2.0;
+
+
 	//==== HARDCODED SKILLS TO ENSURE CHALLENGING BOTS ============
 	$PlayerSkill[%aiId, $SkillSwords] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillAxes] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
@@ -1201,7 +1254,8 @@ function HardcodeAIskills(%aiId)
 	$PlayerSkill[%aiId, $SkillBlackMagick] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillTimeMagick] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillSummonMagick] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
-	$PlayerSkill[%aiId, $SkillEndurance] = ( (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel) ) / 2;
+	$PlayerSkill[%aiId, $SkillHealing] = ( (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel) ) / 2;
+	$PlayerSkill[%aiId, $SkillEndurance] = ( (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel) ) * %enduranceModifier;
 	$PlayerSkill[%aiId, $SkillAlchemy] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillMagicka] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillWoodCutting] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);

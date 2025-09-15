@@ -67,6 +67,8 @@ function PlayerSetupGui::onOpen()
 	{
 		%strIndex = String::findSubStr(%voiceSet, ".whello.wav");
 		%voiceBase = String::getSubStr(%voiceSet, 0, %strIndex);
+		lbecho("Found voice set: " @ %voiceSet);
+		lbecho("Found voice base: " @ %voiceBase);
 
 		if (%voiceBase != "")
 		{

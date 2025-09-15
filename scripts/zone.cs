@@ -210,7 +210,7 @@ function DoDotChecks() {
 					if (%modifier > 0) {
 						refreshHP(%aiId, (%modifier * -1) / $TribesDamageToNumericDamage);
 					} else {
-						GameBase::virtual(%aiId, "onDamage", $TrueDamage, (%modifier * -1), "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %giver);
+						GameBase::virtual(%aiId, "onDamage", $TrueDamageType, (%modifier * -1), "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %giver);
 					}
 					
 				}
@@ -907,8 +907,6 @@ function GetNearestZone(%clientId, %zonetype, %returnType)
 function GetZoneByKeywords(%clientId, %keywords, %returnType)
 {
 	dbecho($dbechoMode, "GetZoneByKeywords(" @ %clientId @ ", " @ %keywords @ ", " @ %returnType @ ")");
-	lbecho("Get Zone By Keywords");
-	lbecho("Keywords: " @ %keywords);
 
 	%mpos = "";
 
@@ -947,11 +945,6 @@ function GetZoneByKeywords(%clientId, %keywords, %returnType)
 					//2 = returns the description of the zone
 					//3 = returns the zone id
 					//4 = returns the position of the middle of the zone
-					lbecho("we found the zone");
-					lbecho("Distance: " @ %dist);
-					lbecho("Description: " @ %desc);
-					lbecho("Zone ID: " @ %object);
-					lbecho("Middle Position: " @ %mpos);
 
 					if(%returnType == 1)
 						return %dist;

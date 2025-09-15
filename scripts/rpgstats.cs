@@ -93,7 +93,7 @@ function fetchData(%clientId, %type)
 	}
 	else if(%type == "MaxMANA")
 	{
-		%a = 8 + round( $PlayerSkill[%clientId, $SkillMagicka] * (1/3) );
+		%a = 10 + round($PlayerSkill[%clientId, $SkillMagicka] * (2/3)); // original 1/3
 		%b = AddPoints(%clientId, 5);
 		%c = AddBonusStatePoints(%clientId, "MaxMANA");
 
@@ -420,17 +420,14 @@ function MenuClass(%clientId)
 	for(%i = 1; $ClassName[%i] != ""; %i++) {
 		%meetsClassRequirements = True;
 		%classRequirements = $ClassRequirements[%i];
-		lbecho("Class Requirements for: " @ %classRequirements[%i]);
 
 		for(%x = 0; (%requiredClassName = getWord(%classRequirements, %x)) != -1; %x +=2) {
 			%requiredClassRemortLevel = getWord(%classRequirements, %x + 1);
-			lbecho("required class remort level for " @ %requiredClassName @ ": " @ %requiredClassRemortLevel);
 			// check if client has the class in the list
 			%remortedClassIndex = String::findSubStr(%remortedClasses, %requiredClassName);
 			// if %remortedClassIndex > 0 it exists, but how to get number next to it?
 			%cropped = String::getSubStr(%remortedClasses, %remortedClassIndex, 99999);
 			%remortedClassLevel = getword(%cropped, 1);
-			lbecho("remorted class level for " @ %requiredClassName @ ": " @ %remortedClassLevel);
 
 			if (%remortedClassIndex == -1 || %remortedClassLevel < %requiredClassRemortLevel) {
 				%meetsClassRequirements = False;

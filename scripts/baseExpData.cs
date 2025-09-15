@@ -336,6 +336,27 @@ ExplosionData freezeExp
    radFactors = { 0.5, 6.5, 1.0 };
 };
 
+ExplosionData rocketExp
+{
+	shapeName = "bluex.dts";
+	soundId   = rocketExplosion;
+
+	faceCamera = true;
+	randomSpin = true;
+	hasLight   = true;
+	lightRange = 8.0;
+
+	timeScale = 1.5;
+
+	timeZero = 0.250;
+	timeOne  = 0.850;
+
+	colors[0]  = { 0.4, 0.4,  1.0 };
+	colors[1]  = { 1.0, 1.0,  1.0 };
+	colors[2]  = { 1.0, 0.95, 1.0 };
+	radFactors = { 0.5, 1.0, 1.0 };
+};
+
 ExplosionData iceExp
 {
    shapeName = "fusionex.dts";

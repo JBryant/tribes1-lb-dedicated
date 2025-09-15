@@ -416,7 +416,8 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 
 	if(%type == "AmmoItems"){
 		%curweap = GetEquippedWeapon(%clientId);
-		if(String::findSubStr($ProjRestrictions[%item], "," @ %curweap @ ",") != -1){
+		%baseWeapon = $beltitem[%curweap, "BaseWeapon"];
+		if(String::findSubStr($ProjRestrictions[%item], "," @ %curweap @ ",") != -1 || String::findSubStr($ProjRestrictions[%item], "," @ %baseWeapon @ ",") != -1){
 			Client::addMenuItem(%clientId, %cnt++ @ "Equip to "@%curweap, %type@" arm "@%item);
 		}
 	}
@@ -623,7 +624,8 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 	{
 		if(%type == "AmmoItems"){
 			%curweap = GetEquippedWeapon(%clientId);
-			if(String::findSubStr($ProjRestrictions[%item], "," @ %curweap @ ",") != -1) {
+			%baseWeapon = $beltitem[%curweap, "BaseWeapon"];
+			if(String::findSubStr($ProjRestrictions[%item], "," @ %curweap @ ",") != -1 || String::findSubStr($ProjRestrictions[%item], "," @ %baseWeapon @ ",") != -1){
 				storeData(%clientId, "LoadedProjectile " @ %curweap, %item);
 				Client::sendMessage(%clientId, $MsgBeige, rpg::EnglishItem(%item) @ " loaded as projectile for "@ %curweap @".");
 				playSound(SoundPickupItem, GameBase::getPosition(%clientId));
@@ -956,10 +958,10 @@ function MenuSellBeltItemFinal(%clientid, %item, %type) {
 
 	Client::buildMenu(%clientId, %name@" ("@%cmnt@")", "SellBeltItemFinal", true);
 	%cost = Belt::GetSellCost(%clientid,%item);
-	Client::addMenuItem(%clientId, %cnt++ @ "Sell "@%amnt@" for "@(%cost * %amnt)@" coins.", %type@" sell "@%item@" "@%amnt);
+	Client::addMenuItem(%clientId, %cnt++ @ "Sell "@%amnt@" for "@Number::Beautify(%cost * %amnt)@" coins.", %type@" sell "@%item@" "@%amnt);
 
 	if(%cmnt != %amnt)
-		Client::addMenuItem(%clientId, %cnt++ @ "Sell "@%cmnt@" (all) for "@(%cost * %cmnt)@" coins.", %type@" sellall "@%item@" "@%cmnt);
+		Client::addMenuItem(%clientId, %cnt++ @ "Sell "@%cmnt@" (all) for "@Number::Beautify(%cost * %cmnt)@" coins.", %type@" sellall "@%item@" "@%cmnt);
 
 	Client::addMenuItem(%clientId, "zBack", %type@" back");
 	return;
@@ -986,19 +988,19 @@ function MenuBuyBeltItemFinal(%clientid, %item) {
 	Client::buildMenu(%clientId, %name, "BuyBeltItemFinal", true);
 	%cost = getBuyCost(%clientId, %item);
 
-	Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%amnt@" for "@(%cost * %amnt)@" coins.", "buy "@%item@" "@%amnt);
+	Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%amnt@" for "@Number::Beautify(%cost * %amnt)@" coins.", "buy "@%item@" "@%amnt);
 	%cmnt = 10;
 	if(%cmnt != %amnt)
-		Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%cmnt@" for "@(%cost * %cmnt)@" coins.", "buy "@%item@" "@%cmnt);
+		Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%cmnt@" for "@Number::Beautify(%cost * %cmnt)@" coins.", "buy "@%item@" "@%cmnt);
 	%cmnt = 25;
 	if(%cmnt != %amnt)
-		Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%cmnt@" for "@(%cost * %cmnt)@" coins.", "buy "@%item@" "@%cmnt);
+		Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%cmnt@" for "@Number::Beautify(%cost * %cmnt)@" coins.", "buy "@%item@" "@%cmnt);
 	%cmnt = 50;
 	if(%cmnt != %amnt)
-		Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%cmnt@" for "@(%cost * %cmnt)@" coins.", "buy "@%item@" "@%cmnt);
+		Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%cmnt@" for "@Number::Beautify(%cost * %cmnt)@" coins.", "buy "@%item@" "@%cmnt);
 	%cmnt = 100;
 	if(%cmnt != %amnt)
-		Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%cmnt@" for "@(%cost * %cmnt)@" coins.", "buy "@%item@" "@%cmnt);
+		Client::addMenuItem(%clientId, %cnt++ @ "Buy "@%cmnt@" for "@Number::Beautify(%cost * %cmnt)@" coins.", "buy "@%item@" "@%cmnt);
 
 	Client::addMenuItem(%clientId, "eExamine", "examine "@%item);
 	Client::addMenuItem(%clientId, "xCancel", "done");
@@ -1120,7 +1122,7 @@ function processMenuSellBeltItemFinal(%clientId, %opt)
 		UseSkill(%clientId, $SkillHaggling, True, True);
 		storeData(%clientId, "COINS", %cost, "inc");
 		Belt::TakeThisStuff(%clientid,%item,%amnt);
-		Client::SendMessage(%clientId, $MsgWhite, "You received "@%cost@" coins.~wbuysellsound.wav");
+		Client::SendMessage(%clientId, $MsgWhite, "You received "@ Number::Beautify(%cost)@" coins.~wbuysellsound.wav");
 		RefreshAll(%clientId);
 		%clientId.bulkNum = 1;
 
@@ -1154,7 +1156,7 @@ function processMenuSellBeltItemFinal(%clientId, %opt)
 			UseSkill(%clientId, $SkillHaggling, True, True);
 			storeData(%clientId, "COINS", %cost, "inc");
 			Belt::TakeThisStuff(%clientid,%item,%amnt);
-			Client::SendMessage(%clientId, $MsgWhite, "You received "@%cost@" coins.~wbuysellsound.wav");
+			Client::SendMessage(%clientId, $MsgWhite, "You received "@ Number::Beautify(%cost) @" coins.~wbuysellsound.wav");
 			RefreshAll(%clientId);
 			%clientId.bulkNum = 1;
 
@@ -2149,7 +2151,7 @@ function Belt::GiveThisStuff(%clientid, %item, %amnt, %echo) {
 
 
 		if(%echo)
-			Client::sendMessage(%clientId, 0, "You received " @ %amnt @ " " @ $beltitem[%item, "Name"] @". " @ "["@getDisp($beltitem[%item, "Type"])@", have "@(%count+%amnt)@"]");
+			Client::sendMessage(%clientId, 0, "You received " @ Number::Beautify(%amnt) @ " " @ $beltitem[%item, "Name"] @". " @ "["@getDisp($beltitem[%item, "Type"])@", have "@(%count+%amnt)@"]");
 
 		if(%count > 0) {
 			%list = Belt::RemoveFromList(%list, %item@" "@%count);
@@ -2563,12 +2565,50 @@ BeltItem::AddProjectile("Metal Feather","MetalFeather","AmmoItems",0.01, 500, "B
 BeltItem::AddProjectile("Talon", "Talon", "AmmoItems", 0.01, 800, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 100", 10);
 BeltItem::AddProjectile("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.01, 1000, "BasicArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 120", 11);
 BeltItem::AddProjectile("Poison Arrow", "PoisonArrow", "AmmoItems", 0.01, 1000, "BasicArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 140", 12);
-BeltItem::AddProjectile("Fire Arrow", "FireArrow", "AmmoItems", 0.01, 800, "FireArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 120", 12);
+BeltItem::AddProjectile("Fire Arrow", "FireArrow", "AmmoItems", 0.01, 800, "FireArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 120", 13);
 
 BeltItem::AddProjectile("Light Quarrel","LightQuarrel","AmmoItems",0.01 ,100, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 10", 5);
 BeltItem::AddProjectile("Heavy Quarrel","HeavyQuarrel","AmmoItems",0.01, 200, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 20", 6);
 BeltItem::AddProjectile("Short Quarrel","ShortQuarrel","AmmoItems",0.01, 300, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 40", 7);
-BeltItem::AddProjectile("Explosive Quarrel","ExplosiveQuarrel","AmmoItems" ,0.01, 500, "BasicQuarrelRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 50", 13);
+BeltItem::AddProjectile("Explosive Quarrel","ExplosiveQuarrel","AmmoItems" ,0.01, 500, "BasicQuarrelRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 50", 14);
+
+BeltItem::AddProjectile("Hex Arrow", "HexArrow", "AmmoItems", 0.01, 250, "PoisonArrowImpact", $SkillBows, $SkillBows @ " 200", "6 20", 15);
+$beltitem[HexArrow, "SpellEffect"] = "hex";
+BeltItem::AddProjectile("Vex Arrow", "VexArrow", "AmmoItems", 0.01, 500, "PoisonArrowImpact", $SkillBows, $SkillBows @ " 400", "6 40", 16);
+$beltitem[VexArrow, "SpellEffect"] = "vex";
+BeltItem::AddProjectile("Curse Arrow", "CurseArrow", "AmmoItems", 0.01, 1000, "PoisonArrowImpact", $SkillBows, $SkillBows @ " 600", "6 60", 1017);
+$beltitem[CurseArrow, "SpellEffect"] = "curse";
+BeltItem::AddProjectile("Plague Arrow", "PlagueArrow", "AmmoItems", 0.01, 1500, "PoisonArrowImpact", $SkillBows, $SkillBows @ " 800", "6 80", 1018);
+$beltitem[PlagueArrow, "SpellEffect"] = "plague";
+BeltItem::AddProjectile("Black Arrow", "BlackArrow", "AmmoItems", 0.01, 2000, "PoisonArrowImpact", $SkillBows, $SkillBows @ " 1000", "6 100", 1019);
+$beltitem[BlackArrow, "SpellEffect"] = "blackdeath";
+
+// ninja stars
+BeltItem::AddWeapon("Practice Bow", "PracticeBow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "60", 174);
+BeltItem::AddWeapon("Quickshot Bow", "QuickshotBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 150", "85", 176);
+BeltItem::AddWeapon("Hunting Bow", "HuntingBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 300", "110", 177);
+BeltItem::AddWeapon("Reinforced Longbow", "ReinforcedLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 450", "130", 178);
+BeltItem::AddWeapon("Repeater Crossbow", "RepeaterCrossbow", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 600", "150", 179);
+BeltItem::AddWeapon("Warbow", "Warbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 750", "175", 180);
+BeltItem::AddWeapon("Sharpshooter Bow", "SharpshooterBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 900", "195", 181);
+BeltItem::AddWeapon("Siege Crossbow", "SiegeCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1050", "215", 182);
+BeltItem::AddWeapon("Gale Bow", "GaleBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1200", "235", 183);
+BeltItem::AddWeapon("Elven Longbow", "ElvenLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1350", "260", 184);
+BeltItem::AddWeapon("Storm Repeater", "StormRepeater", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1500", "285", 185);
+BeltItem::AddWeapon("Arcane Bow", "ArcaneBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1650", "310", 186);
+BeltItem::AddWeapon("Hawk's Talon", "HawksTalon", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1800", "340", 187);
+BeltItem::AddWeapon("Dragonbone Crossbow", "DragonboneCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 2000", "370", 188);
+
+BeltItem::AddProjectile("Throwing Star", "ThrowingStar", "AmmoItems", 0.01, 10, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1", "6 120", 1050);
+BeltItem::AddProjectile("Ninja Star", "NinjaStar", "AmmoItems", 0.01, 50, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 150", "6 160", 1051);
+BeltItem::AddProjectile("Shuriken", "Shuriken", "AmmoItems", 0.01, 200, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 300", "6 220", 1052);
+BeltItem::AddProjectile("War Star", "WarStar", "AmmoItems", 0.01, 500, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 450", "6 260", 1053);
+BeltItem::AddProjectile("Giant Shuriken", "GiantShuriken", "AmmoItems", 0.01, 1000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 600", "6 300", 1054);
+BeltItem::AddProjectile("Meteor Star", "MeteorStar", "AmmoItems", 0.01, 2000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 750", "6 350", 1055);
+BeltItem::AddProjectile("Shadow Star", "ShadowStar", "AmmoItems", 0.01, 3000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 900", "6 390", 1056);
+BeltItem::AddProjectile("Sky Star", "SkyStar", "AmmoItems", 0.01, 4000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1050", "6 430", 1057);
+BeltItem::AddProjectile("Heaven Star", "HeavenStar", "AmmoItems", 0.01, 5000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1200", "6 470", 1058);
+BeltItem::AddProjectile("Celestial Star", "CelestialStar", "AmmoItems", 0.01, 6000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1350", "6 500", 1059);
 
 //Gems
 BeltItem::Add("Quartz", "Quartz", "GemItems", 0.2, 100);
@@ -2693,6 +2733,9 @@ BeltItem::AddWeapon("Moon Axe", "MoonAxe", "BattleAxe", $AxeAccessoryType, $desc
 $description = "An axe forged for axe users who have mastered every technique and achieved knighthood's most exalted rank.";
 BeltItem::AddWeapon("Onion Axe", "OnionAxe", "BattleAxeNew", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 2000", "320", 64);
  
+// Special Axes
+$description = "I'm a lumberjack and I'm okay. This axe is perfect for chopping wood and also for chopping heads.";
+BeltItem::AddWeapon("Leif's Lumberjack Axe", "LeifsAxe", "WoodAxeFast", $AxeAccessoryType, $description, $SkillAxes, $SkillAxes @ " 1950", "300");
 
 // Hammers: (100 - 124)
 // Club, Mace, SpikedClub, SpikedMace
@@ -2795,45 +2838,40 @@ BeltItem::AddWeapon("Celestial Staff", "CelestialStaff", "LongStaff", $BludgeonA
 $description = "The ultimate spear, said to pierce even the heavens.";
 BeltItem::AddWeapon("Gungnir", "Gungnir", "Spear", $BludgeonAccessoryType, $description, $SkillSpears, $SkillSpears @ " 2000", "200", 164);
 
-$description = "Pugilist's Glove";
-BeltItem::AddWeapon("Pugilist's Glove", "PugilistsGlove", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, "C Monk", "1");
-
-
 // Bows (175 - 199)
 // Images: Crossbow, RepeatingCrossbow, LongBow, CompositeBow, CompositeBowFast, Sling
 $description = "A small bow mostly used for practice.";
-BeltItem::AddWeapon("Practice Bow", "PracticeBow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "40", 174);
+BeltItem::AddWeapon("Practice Bow", "PracticeBow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "60", 174);
 $description = "A simple sling used for hunting small game.";
-BeltItem::AddWeapon("Sling", "Sling", "Sling", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "40", 175);
+BeltItem::AddWeapon("Sling", "Sling", "Sling", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "60", 175);
 $description = "A lightweight bow made for rapid firing.";
-BeltItem::AddWeapon("Quickshot Bow", "QuickshotBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 150", "65", 176);
+BeltItem::AddWeapon("Quickshot Bow", "QuickshotBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 150", "85", 176);
 $description = "A handcrafted wooden bow designed for basic archery.";
-BeltItem::AddWeapon("Hunting Bow", "HuntingBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 300", "90", 177);
+BeltItem::AddWeapon("Hunting Bow", "HuntingBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 300", "110", 177);
 $description = "A well-balanced longbow with reinforced limbs for extra power.";
-BeltItem::AddWeapon("Reinforced Longbow", "ReinforcedLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 450", "110", 178);
+BeltItem::AddWeapon("Reinforced Longbow", "ReinforcedLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 450", "130", 178);
 $description = "A repeating crossbow capable of firing multiple bolts in quick succession.";
-BeltItem::AddWeapon("Repeater Crossbow", "RepeaterCrossbow", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 600", "130", 179);
+BeltItem::AddWeapon("Repeater Crossbow", "RepeaterCrossbow", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 600", "150", 179);
 $description = "A sturdy war bow favored by veteran archers.";
-BeltItem::AddWeapon("Warbow", "Warbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 750", "155", 180);
+BeltItem::AddWeapon("Warbow", "Warbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 750", "175", 180);
 $description = "A precision-crafted composite bow known for its deadly accuracy.";
-BeltItem::AddWeapon("Sharpshooter Bow", "SharpshooterBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 900", "175", 181);
+BeltItem::AddWeapon("Sharpshooter Bow", "SharpshooterBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 900", "195", 181);
 $description = "A heavy crossbow capable of piercing through armor.";
-BeltItem::AddWeapon("Siege Crossbow", "SiegeCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1050", "195", 182);
+BeltItem::AddWeapon("Siege Crossbow", "SiegeCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1050", "215", 182);
 $description = "An enchanted bow said to be blessed by the spirits of the wind.";
-BeltItem::AddWeapon("Gale Bow", "GaleBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1200", "215", 183);
+BeltItem::AddWeapon("Gale Bow", "GaleBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1200", "235", 183);
 $description = "A lightweight but durable longbow used by elven rangers.";
-BeltItem::AddWeapon("Elven Longbow", "ElvenLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1350", "240", 184);
+BeltItem::AddWeapon("Elven Longbow", "ElvenLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1350", "260", 184);
 $description = "A repeating crossbow enhanced with mechanisms for rapid-fire accuracy.";
-BeltItem::AddWeapon("Storm Repeater", "StormRepeater", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1500", "265", 185);
+BeltItem::AddWeapon("Storm Repeater", "StormRepeater", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1500", "285", 185);
 $description = "A mystical bow infused with elemental energy, increasing its power.";
-BeltItem::AddWeapon("Arcane Bow", "ArcaneBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1650", "290", 186);
+BeltItem::AddWeapon("Arcane Bow", "ArcaneBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1650", "310", 186);
 $description = "A legendary bow capable of firing arrows that never miss their mark.";
-BeltItem::AddWeapon("Hawk's Talon", "HawksTalon", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1800", "320", 187);
+BeltItem::AddWeapon("Hawk's Talon", "HawksTalon", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1800", "340", 187);
 $description = "The ultimate crossbow, forged from ancient dragonbone and enhanced by magic.";
-BeltItem::AddWeapon("Dragonbone Crossbow", "DragonboneCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 2000", "350", 188);
+BeltItem::AddWeapon("Dragonbone Crossbow", "DragonboneCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 2000", "370", 188);
 $description = "A worn but sturdy bow. It feels light in the hands and radiates a warm energy. Where did you find this?";
 BeltItem::AddWeapon("Longbow's Bow", "LongbowsBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 5000", "1000", 189);
-// 110, 130, 155, 175, 195, 215, 240, 265, 290, 320, 350
 
 // Armors and Shields (200 - 299)
 // BeltItem::AddArmor(%name, %item, %armorSkin, %hitSound, %special, %weight, %skillRestriction, %miscInfo, %shopIndex)
@@ -2876,36 +2914,45 @@ BeltItem::AddArmor("Onion Armor", "OnionArmor", "rpgfullplate",  SoundHitPlate,"
 $description = "A simple weave favored by new adventurers; light and supple, it barely whispers when you move.";
 BeltItem::AddRobe("Novice Acolyte Robe", "NoviceAcolyteRobe", "robepink", "3 30 7 15 11 1", "1", $SkillMagicka @ " 5", $description, 250);
 $description = "Traditional garb of healing orders; threads are blessed to soothe the wearer in battle.";
-BeltItem::AddRobe("White Mage Vestment", "WhiteMageVestment", "robepurple", "3 108 7 54 11 8", "1", $SkillMagicka @ " 138", $description, 251);
+BeltItem::AddRobe("White Mage Vestment", "WhiteMageVestment", "robepurple", "3 108 7 54 11 2", "1", $SkillMagicka @ " 138", $description, 251);
 $description = "Robe patterned after a notorious magus; its lining hums with unstable aether.";
-BeltItem::AddRobe("Black Waltz Robe", "BlackWaltzRobe", "robered", "3 186 7 93 11 14", "1", $SkillMagicka @ " 271", $description, 252);
+BeltItem::AddRobe("Black Waltz Robe", "BlackWaltzRobe", "robered", "3 186 7 93 11 3", "1", $SkillMagicka @ " 271", $description, 252);
 $description = "A mantle stitched with runes that bend seconds into strands—perfect for time magicks.";
-BeltItem::AddRobe("Timeweaver Mantle", "TimeweaverMantle", "robeblue", "3 264 7 132 11 21", "1", $SkillMagicka @ " 404", $description, 253);
+BeltItem::AddRobe("Timeweaver Mantle", "TimeweaverMantle", "robeblue", "3 264 7 132 11 4", "1", $SkillMagicka @ " 404", $description, 253);
 $description = "Earth-touched kesa worn by geomancers; soil never stains it, stones seem to soften underfoot.";
-BeltItem::AddRobe("Geomancer's Kesa", "GeomancersKesa", "robeblack", "3 342 7 171 11 27", "1", $SkillMagicka @ " 537", $description, 254);
+BeltItem::AddRobe("Geomancer's Kesa", "GeomancersKesa", "robeblack", "3 342 7 171 11 5", "1", $SkillMagicka @ " 537", $description, 254);
 $description = "A sea-blessed wrap that carries the hush of tides; water spells flow like currents.";
-BeltItem::AddRobe("Oracle of Tides Robe", "OracleOfTidesRobe", "robewhite", "3 420 7 210 11 34", "1", $SkillMagicka @ " 670", $description, 255);
+BeltItem::AddRobe("Oracle of Tides Robe", "OracleOfTidesRobe", "robewhite", "3 420 7 210 11 6", "1", $SkillMagicka @ " 670", $description, 255);
 $description = "A celebrant's stole from draconic rites; scales sewn within lend surprising resilience.";
-BeltItem::AddRobe("Dragonsong Stole", "DragonsongStole", "robeorange", "3 498 7 249 11 41", "1", $SkillMagicka @ " 803", $description, 256);
+BeltItem::AddRobe("Dragonsong Stole", "DragonsongStole", "robeorange", "3 498 7 249 11 7", "1", $SkillMagicka @ " 803", $description, 256);
 $description = "Shadow-steeped shroud that veils the wearer like moonless fog; eyes slip past you.";
-BeltItem::AddRobe("Voidwitch Shroud", "VoidwitchShroud", "robebrown", "3 576 7 288 11 47", "1", $SkillMagicka @ " 936", $description, 257);
+BeltItem::AddRobe("Voidwitch Shroud", "VoidwitchShroud", "robebrown", "3 576 7 288 11 8", "1", $SkillMagicka @ " 936", $description, 257);
 $description = "Star-mapped weave used by astrologians; constellations flare when fate is read.";
-BeltItem::AddRobe("Astrologian Starweave", "AstrologianStarweave", "robegreen", "3 654 7 327 11 54", "1", $SkillMagicka @ " 1069", $description, 258);
+BeltItem::AddRobe("Astrologian Starweave", "AstrologianStarweave", "robegreen", "3 654 7 327 11 9", "1", $SkillMagicka @ " 1069", $description, 258);
 $description = "Ceremonial garb wreathed in ember-charms; warmth radiates without burning.";
-BeltItem::AddRobe("Ifritfire Ceremonial Robe", "IfritfireCeremonialRobe", "robeblack", "3 732 7 366 11 60", "1", $SkillMagicka @ " 1202", $description, 259);
+BeltItem::AddRobe("Ifritfire Ceremonial Robe", "IfritfireCeremonialRobe", "robeblack", "3 732 7 366 11 10", "1", $SkillMagicka @ " 1202", $description, 259);
 $description = "Frost-kissed robe that never thaws; chilling calm sharpens the mind's focus.";
-BeltItem::AddRobe("Shiva Frostweave", "ShivaFrostweave", "robewhite", "3 810 7 405 11 67", "1", $SkillMagicka @ " 1335", $description, 260);
+BeltItem::AddRobe("Shiva Frostweave", "ShivaFrostweave", "robewhite", "3 810 7 405 11 11", "1", $SkillMagicka @ " 1335", $description, 260);
 $description = "Thunder-sigiled cloak; each step crackles faintly as air gathers to your call.";
-BeltItem::AddRobe("Ramuh Levincloak", "RamuhLevincloak", "robered", "3 888 7 444 11 74", "1", $SkillMagicka @ " 1468", $description, 261);
+BeltItem::AddRobe("Ramuh Levincloak", "RamuhLevincloak", "robered", "3 888 7 444 11 12", "1", $SkillMagicka @ " 1468", $description, 261);
 $description = "Stone-anchored vestment; grounding cords steady stance and will alike.";
-BeltItem::AddRobe("Titan Earthward Robe", "TitanEarthwardRobe", "robegreen", "3 966 7 483 11 80", "1", $SkillMagicka @ " 1601", $description, 262);
+BeltItem::AddRobe("Titan Earthward Robe", "TitanEarthwardRobe", "robegreen", "3 966 7 483 11 13", "1", $SkillMagicka @ " 1601", $description, 262);
 $description = "A torrent-warded wrap; hems ripple as if in unseen tides, quickening spellcraft.";
-BeltItem::AddRobe("Leviathan Stormwrap", "LeviathanStormwrap", "robepurple", "3 1044 7 522 11 87", "1", $SkillMagicka @ " 1734", $description, 263);
+BeltItem::AddRobe("Leviathan Stormwrap", "LeviathanStormwrap", "robepurple", "3 1044 7 522 11 14", "1", $SkillMagicka @ " 1734", $description, 263);
 $description = "An umbral vestment for archmagi; the void at the hem drinks stray mana.";
-BeltItem::AddRobe("Umbral Archmage Robe", "UmbralArchmageRobe", "robebrown", "3 1122 7 561 11 93", "1", $SkillMagicka @ " 1867", $description, 264);
+BeltItem::AddRobe("Umbral Archmage Robe", "UmbralArchmageRobe", "robebrown", "3 1122 7 561 11 15", "1", $SkillMagicka @ " 1867", $description, 264);
 $description = "A grand robe bound with zodiac plats; its pages and pleats record destinies.";
-BeltItem::AddRobe("Zodiac Grand Grimoire", "ZodiacGrandGrimoire", "robeblue", "3 1200 7 600 11 100", "1", $SkillMagicka @ " 2000", $description, 265);
+BeltItem::AddRobe("Zodiac Grand Grimoire", "ZodiacGrandGrimoire", "robeblue", "3 1200 7 600 11 16", "1", $SkillMagicka @ " 2000", $description, 265);
 
+// Test Robe
+$description = "Longbow's Robe";
+BeltItem::AddRobe("Longbow's Robe", "LongbowsRobe", "robeorange", "3 9999 7 9999 11 1", "1", $SkillMagicka @ " 1", $description);
+
+
+$description = "Gloves specially made for throwing small objects with great accuracy.";
+BeltItem::AddWeapon("Throwing Gloves", "ThrowingGloves", "ThrowingGloves", $RangedAccessoryType, $description, $SkillBows, "C Hunter C Sniper", "10", 298);
+$description = "Pugilist's Gloves";
+BeltItem::AddWeapon("Pugilist's Gloves", "PugilistsGlove", "Unarmed", $SwordAccessoryType, $description, $SkillSwords, "C Monk", "1", 299);
 
 // $description = "A fine robe made from the finest elven silk.";
 // BeltItem::AddRobe("Fine Robe", "FineRobe", "rpgpadded", "7 30 4 5", "10", $SkillMagicka @ " 8", $description);
@@ -2992,17 +3039,17 @@ $AccessoryVar[HiPotion, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 H
 BeltItem::Add("X-Potion", "XPotion", "PotionItems", 0.5, 1000, "", 503);
 $AccessoryVar[XPotion, $MiscInfo] = "A potion of Healing that heals 250 HP";
 $restoreValue[XPotion, HP] = 250;
-$AccessoryVar[XPotion, "AlchemyIngredients"] = "ReinforcedAlchemistsBottle 1 VialOfWater 1 MandragoraRoot 10 Sylphroot 2";
+$AccessoryVar[XPotion, "AlchemyIngredients"] = "ReinforcedAlchemistsBottle 1 VialOfWater 1 MandragoraRoot 10 MaidensTear 2";
 
 BeltItem::Add("Mega Potion", "MegaPotion", "PotionItems", 0.5, 2500, "", 504);
 $AccessoryVar[MegaPotion, $MiscInfo] = "A potion of Healing that heals 500 HP";
 $restoreValue[MegaPotion, HP] = 500;
-$AccessoryVar[MegaPotion, "AlchemyIngredients"] = "ArcaneCrystalPhial 1 VialOfWater 1 Sylphroot 10 MaidensTear 2";
+$AccessoryVar[MegaPotion, "AlchemyIngredients"] = "ArcaneCrystalPhial 1 VialOfWater 1 MaidensTear 10 Sylphroot 2";
 
-BeltItem::Add("Elixir", "Elixir", "PotionItems", 0.5, 100000, "", 505);
+BeltItem::Add("Elixir", "Elixir", "PotionItems", 0.5, 5000, "", 505);
 $AccessoryVar[Elixir, $MiscInfo] = "A rare elixir that restore HP and MP";
 $restoreValue[Elixir, HP] = 1000;
-$AccessoryVar[Elixir, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 MaidensTear 10 MandragoraRoot 2";
+$AccessoryVar[Elixir, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 Sylphroot 10 ChocoboFeather 2";
 
 // maybe make mega elixir later?
 
@@ -3014,7 +3061,7 @@ $AccessoryVar[Ether, "AlchemyIngredients"] = "CrackedFlask 1 VialOfWater 1 Heali
 BeltItem::Add("Turbo Ether","TurboEther","PotionItems", 1, 1000, "", 507);
 $AccessoryVar[TurboEther, $MiscInfo] = "An potion that restores 100 MP";
 $restoreValue[TurboEther, MP] = 100;
-$AccessoryVar[TurboEther, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 HealingHerb 5 MaidensTear 2";
+$AccessoryVar[TurboEther, "AlchemyIngredients"] = "WornGlassVial 1 VialOfWater 1 MandragoraRoot 5 TonberryOil 2";
 
 BeltItem::Add("X-Ether","XEther","PotionItems", 1, 1000, "");
 $AccessoryVar[XEther, $MiscInfo] = "An potion that restores 250 MP";
@@ -3192,6 +3239,11 @@ $AccessoryVar[HeavenHearthstone, $MiscInfo] = "A magical hearthstone that telepo
 $beltitem[HeavenHearthstone, "targetPosition"] = "1402.24 -462.11 -808.04";
 $beltitem[HeavenHearthstone, "targetRotationZ"] = "-0.158";
 $beltitem[HeavenHearthstone, "useSound"] = "AbsorbABS";
+BeltItem::Add("Wall Market Hearthstone", "WallMarketHearthstone", "MiscItems", 0.01, 10000, "Ruby", 703);
+$AccessoryVar[WallMarketHearthstone, $MiscInfo] = "A magical hearthstone that teleports the user back to Wall Market.";
+$beltitem[WallMarketHearthstone, "targetPosition"] = "-2470.01 -2285.44 7554.59";
+$beltitem[WallMarketHearthstone, "targetRotationZ"] = "-2.44212";
+$beltitem[WallMarketHearthstone, "useSound"] = "AbsorbABS";
 
 // Quest Items
 BeltItem::Add("Black Statue", "BlackStatue", "QuestItems", $AccessoryVar[BlackStatue, $Weight], GenerateItemCost(BlackStatue));
@@ -3284,3 +3336,5 @@ $beltitem[WheatSeed, "BushFruit"] = "Wheat";
 BeltItem::Add("Wheat", "Wheat", "MiscItems", 0.01, 10, "Tracer");
 $AccessoryVar[Wheat, $MiscInfo] = "Wheat is a common grain used in many recipes. It can be used to make bread and other baked goods.";
 // $beltitem[Grain, "isThrowable"] = True;
+
+// Special Player Items

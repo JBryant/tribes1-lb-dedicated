@@ -15,8 +15,8 @@ $MissileDamageType     = 12;
 $MineDamageType        = 13;
 $NullDamageType        = 14;
 $SpellDamageType       = 15;
-$WeaponDamage          = 16;
-$TrueDamage            = 17;
+$WeaponDamageType      = 16;
+$TrueDamageType        = 17;
 
 $InpactArea = 1.0; // need to be like on the explsion
 $SmallArea = 5.0;
@@ -28,6 +28,758 @@ $MaxArea = 40.0; // shouldn't need it this big anyways
 $rockSpeed = 150.0;
 $arrowSpeed = 175.0;
 $quarrelSpeed = 200.0;
+
+// OLD
+
+// Small tiny red start like bolter
+BulletData BlasterBolt
+{
+	bulletShapeName    = "shotgunbolt.dts";
+	explosionTag       = blasterExp;
+	damageClass        = 0;
+	damageValue        = "0.01";
+	baseDamageType		 = $BlasterDamageType;
+	muzzleVelocity     = 200.0;
+	totalTime          = 2.0;
+	liveTime           = 1.125;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = True;
+	rotationPeriod = 1;
+};
+
+// white slow disc with white trail and large explosion
+RocketData DreamShell
+{
+	bulletShapeName = "discb.dts";
+	explosionTag = rocketExp;
+	collisionRadius  = 0.0;
+	mass = 2.0;
+	damageClass = 1;
+	damageValue = 0.38;
+	baseDamageType = $ExplosionDamageType;
+	explosionRadius  = 4.0;
+	kickBackStrength = 75.0;
+	muzzleVelocity = 65.0;
+	terminalVelocity = 80.0;
+	Acceleration = 5.0;
+	totalTime = 6.5;
+	liveTime = 8.0;
+	lightRange = 5.0;
+	lightColor = { 0.4, 0.4, 1.0 };
+	inheritedVelocityScale = 0.5;
+	trailType   = 1;
+	trailLength = 15;
+	trailWidth  = 0.3;
+	soundId = SoundDiscSpin;
+};
+
+// fast rotating white disc with small explosion
+BulletData DiscRound
+{
+	bulletShapeName    = "discb.dts";
+	explosionTag       = rocketExp;
+	damageClass        = 1;
+	damageValue        = "0.92";
+	baseDamageType		 = $BlasterDamageType;
+	explosionRadius		 = 7.5;
+	muzzleVelocity     = 500.0;
+	totalTime          = 5.0;
+	liveTime           = 4.0;
+	lightRange         = 3.0;
+	lightColor         = { 1, 1, 1 };
+	inheritedVelocityScale = 0.3;
+	isVisible = True;
+	rotationPeriod = 1;
+};
+
+// slowish white disc with blue light around it, no tail, and tiny blue exposion
+// closest thing to a throwing star so far, maybe add a tail?
+RocketData DispersionBolt1
+{
+	bulletShapeName = "discb.dts";
+	explosionTag    = energyExp;
+	collisionRadius = 0.0;
+	mass            = 2.0;
+	damageClass = 0;
+	damageValue = 0.75;
+	baseDamageType = $EnergyDamageType;
+	explosionRadius  = 0.0;
+	kickBackStrength = 0.0;
+	muzzleVelocity = 100.0;
+	terminalVelocity = 100.0;
+	Acceleration = 10.0;
+	totalTime = 10.0;
+	liveTime = 10.0;
+	lightRange = 15.0;
+	lightColor = { 0.4, 0.4, 3.0 };
+	inheritedVelocityScale = 0.5;
+	trailType   = 1;
+	trailLength = 3;
+	trailWidth  = 0.3;
+	soundId = SoundDiscSpin;
+};
+
+// same as Bolt1 but larger blue explosion
+RocketData DispersionBolt2A
+{
+	bulletShapeName = "discb.dts";
+	explosionTag    = turretExp;
+	collisionRadius = 0.0;
+	mass            = 2.0;
+	damageClass = 1;
+	damageValue = 2.69;
+	baseDamageType = $EnergyDamageType;
+	explosionRadius  = 5.0;
+	kickBackStrength = 0.0;
+	muzzleVelocity = 100.0;
+	terminalVelocity = 100.0;
+	Acceleration = 10.0;
+	totalTime = 10.0;
+	liveTime = 10.0;
+	lightRange = 15.0;
+	lightColor = { 0.4, 0.4, 3.0 };
+	inheritedVelocityScale = 0.5;
+	trailType   = 1;
+	trailLength = 3;
+	trailWidth  = 0.3;
+	soundId = SoundDiscSpin;
+};
+
+// a very fast variant of DispersionBolt1
+RocketData ShockBeam
+{
+	bulletShapeName = "discb.dts";
+	explosionTag = energyExp;
+	collisionRadius = 0.0;
+	mass = 2.0;
+	damageClass = 0;
+	damageValue = "0.65";
+	baseDamageType = $BulletDamageType;
+	explosionRadius = 0.0;
+	kickBackStrength = 0.0;
+	muzzleVelocity = 1000.0;
+	terminalVelocity = 1000.0;
+	acceleration = 100.0;
+	totalTime = 5.0;
+	liveTime = 5.0;
+	lightRange = 20.0;
+	colors[0] = { 10.0, 0.75, 0.75 };
+	colors[1] = { 1.0, 0.25, 10.25 };
+	inheritedVelocityScale = 0.5;
+	trailType = 1;
+	trailString = "Energyex.dts";
+	smokeDist = 20;
+	soundId = SoundJetHeavy;
+	rotationPeriod = 0.1;
+};
+
+// 3 round burst of red bolt projectiles, not very spread out
+RocketData SuperShockBeam
+{
+	bulletShapeName = "shotgunbolt.dts";
+	explosionTag = BlasterExp;
+	collisionRadius = 0.0;
+	mass = 2.0;
+	damageClass = 0;
+	damageValue = "1.50";
+	baseDamageType = $BulletDamageType;
+	explosionRadius = 0.0;
+	kickBackStrength = 0.0;
+	muzzleVelocity = 850.0;
+	terminalVelocity = 850.0;
+	acceleration = 85.0;
+	totalTime = 5.0;
+	liveTime = 5.0;
+	lightRange = 20.0;
+	colors[0] = { 10.0, 0.75, 0.75 };
+	colors[1] = { 1.0, 0.25, 10.25 };
+	inheritedVelocityScale = 0.5;
+	trailType = 2;
+	trailString = "shotgunex.dts";
+	smokeDist = 10;
+	soundId = SoundJetHeavy;
+	rotationPeriod = 0.1;
+};
+
+// same thing but with trail of plasma
+RocketData UltraShockBeam
+{
+	bulletShapeName = "shotgunex.dts";
+	explosionTag = PlasmaExp;
+	collisionRadius = 0.0;
+	mass = 2.0;
+	damageClass = 0;
+	damageValue = "2.00";
+	baseDamageType = $BulletDamageType;
+	explosionRadius = 0.0;
+	kickBackStrength = 0.0;
+	muzzleVelocity = 600.0;
+	terminalVelocity = 600.0;
+	acceleration = 60.0;
+	totalTime = 5.0;
+	liveTime = 5.0;
+	lightRange = 20.0;
+	colors[0] = { 10.0, 0.75, 0.75 };
+	colors[1] = { 1.0, 0.25, 10.25 };
+	inheritedVelocityScale = 0.5;
+	trailType = 2;
+	trailString = "plasmabolt.dts";
+	smokeDist = 10;
+	soundId = SoundJetHeavy;
+	rotationPeriod = 0.1;
+};
+
+// slow moving tiny blue start with small blue explosion
+RocketData ShockAlt
+{
+	bulletShapeName = "enex.dts";
+	explosionTag = turretExp;
+	collisionRadius = 0.0;
+	mass = 2.0;
+	damageClass = 1;
+	damageValue = "1.12";
+	baseDamageType = $BulletDamageType;
+	explosionRadius = 5.0;
+	kickBackStrength = 60.0;
+	muzzleVelocity = 100.0;
+	terminalVelocity = 100.0;
+	acceleration = 10.0;
+	totalTime = 5.0;
+	liveTime = 5.0;
+	lightRange = 20.0;
+	colors[0] = { 10.0, 0.75, 0.75 };
+	colors[1] = { 1.0, 0.25, 10.25 };
+	inheritedVelocityScale = 0.5;
+	trailType = 0;
+	trailString = "Energyex.dts";
+	smokeDist = 0;
+	soundId = SoundJetHeavy;
+	rotationPeriod = 0.1;
+};
+
+// moving shockwave with blue trail and turret explosion
+RocketData NERay
+{
+	bulletShapeName = "shockwave_large.dts";
+	explosionTag = turretExp;
+	collisionRadius = 0.0;
+	mass = 2.0;
+	damageClass = 0;
+	damageValue = "1.35";
+	baseDamageType = $SpellDamageType;
+	explosionRadius = 0.0;
+	kickBackStrength = 0.0;
+	muzzleVelocity = 300.0;
+	terminalVelocity = 300.0;
+	acceleration = 30.0;
+	totalTime = 3.1;
+	liveTime = 3.0;
+	lightRange = 20.0;
+	colors[0] = { 10.0, 0.75, 0.75 };
+	colors[1] = { 1.0, 0.25, 10.25 };
+	inheritedVelocityScale = 0.5;
+	trailType = 2;
+	trailString = "enex.dts";
+	smokeDist = 1;
+	soundId = SoundJetHeavy;
+	rotationPeriod = 0.1;
+};
+
+// disc with cool mortar trail and grenade explosion
+RocketData BWave
+{
+	bulletShapeName = "discb.dts";
+	explosionTag = grenadeExp;
+	collisionRadius = 0.0;
+	mass = 2.0;
+	damageClass = 1;
+	damageValue = "2.03";
+	baseDamageType = $SpellDamageType;
+	explosionRadius = 25.0;
+	kickBackStrength = 150.0;
+	muzzleVelocity = 120.0;
+	terminalVelocity = 120.0;
+	acceleration = 12.0;
+	totalTime = 3.1;
+	liveTime = 3.0;
+	lightRange = 20.0;
+	colors[0] = { 10.0, 0.75, 0.75 };
+	colors[1] = { 1.0, 0.25, 10.25 };
+	inheritedVelocityScale = 0.5;
+	trailType = 2;
+	trailString = "MortarTrail.dts";
+	smokeDist = 1;
+	soundId = SoundJetHeavy;
+	rotationPeriod = 0.1;
+};
+
+// just a bullet with the same mortar trail and energy explosion
+RocketData MAcidBolt
+{
+	bulletShapeName = "bullet.dts";
+	explosionTag = energyExp;
+	collisionRadius = 0.0;
+	mass = 2.0;
+	damageClass = 0;
+	damageValue = "0.50";
+	baseDamageType = $SpellDamageType;
+	explosionRadius = 0.0;
+	kickBackStrength = 0.0;
+	muzzleVelocity = 250.0;
+	terminalVelocity = 250.0;
+	acceleration = 25.0;
+	totalTime = 3.1;
+	liveTime = 3.0;
+	lightRange = 20.0;
+	colors[0] = { 10.0, 0.75, 0.75 };
+	colors[1] = { 1.0, 0.25, 10.25 };
+	inheritedVelocityScale = 0.5;
+	trailType = 2;
+	trailString = "MortarTrail.dts";
+	smokeDist = 5;
+	soundId = SoundJetHeavy;
+	rotationPeriod = 0.1;
+};
+
+// very cool looking blue rings that get shot, maybe perfect for aquatic themed spell
+RocketData HolyRayBolt
+{
+	bulletShapeName = "shield.dts";
+	explosionTag = LargeShockWave;
+	collisionRadius = 0.0;
+	mass = 2.0;
+	damageClass = 1;
+	damageValue = "50.00";
+	baseDamageType = $SpellDamageType;
+	explosionRadius = 5.0;
+	kickBackStrength = 0.0;
+	muzzleVelocity = 100.0;
+	terminalVelocity = 100.0;
+	acceleration = 10.0;
+	totalTime = 3.1;
+	liveTime = 3.0;
+	lightRange = 20.0;
+	colors[0] = { 10.0, 0.75, 0.75 };
+	colors[1] = { 1.0, 0.25, 10.25 };
+	inheritedVelocityScale = 0.5;
+	trailType = 2;
+	trailString = "shield.dts";
+	smokeDist = 5;
+	soundId = SoundJetHeavy;
+	rotationPeriod = 0.1;
+};
+
+// spinning disc with very small explosion
+BulletData IceNormal
+{
+	bulletShapeName    = "discb.dts";
+	explosionTag       = energyExp;
+	damageClass        = 0;
+	damageValue        = "2.1";
+	baseDamageType		 = $BlasterDamageType;
+	muzzleVelocity     = 100.0;
+	totalTime          = 5.0;
+	liveTime           = 4.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = True;
+	rotationPeriod = 1;
+};
+
+// blue trail with small explosion
+RocketData DarkNormal
+{
+	bulletShapeName    = "mortar.dts";
+	explosionTag       = turretExp;
+	collisionRadius    = 0.0;
+	mass               = 2.0;
+	damageClass        = 0;
+	damageValue        = 3.50;
+	baseDamageType     = $EnergyDamageType;
+	explosionRadius    = 0.0;
+	kickBackStrength   = -50.0;
+	muzzleVelocity     = 120.0;
+	terminalVelocity   = 120.0;
+	acceleration       = 12.0;
+	totalTime          = 10.0;
+	liveTime           = 10.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = True;
+	rotationPeriod = 1;
+	trailType   = 2;
+	trailString = "enex.dts";
+	smokeDist   = 1.8;
+};
+
+// slow moving blue trail with large explosion
+RocketData DarkCombo1
+{
+	bulletShapeName    = "mortar.dts";
+	explosionTag       = grenadeExp;
+	collisionRadius    = 0.0;
+	mass               = 2.0;
+	damageClass        = 1;
+	damageValue        = 10.00;
+	damageType     = $EnergyDamageType;
+	explosionRadius    = 5.0;
+	kickBackStrength   = 0.0;
+	muzzleVelocity     = 30.0;
+	terminalVelocity   = 30.0;
+	acceleration       = 3.0;
+	totalTime          = 20.0;
+	liveTime           = 20.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = True;
+	rotationPeriod = 1;
+	trailType   = 2;
+	trailString = "enex.dts";
+	smokeDist   = 1.8;
+};
+
+// slow moving blue trail with medium explosion
+RocketData DarkCombo2
+{
+	bulletShapeName    = "mortar.dts";
+	explosionTag       = rocketExp;
+	collisionRadius    = 0.0;
+	mass               = 2.0;
+	damageClass        = 1;
+	damageValue        = 12.50;
+	damageType     = $EnergyDamageType;
+	explosionRadius    = 2.5;
+	kickBackStrength   = -150.0;
+	muzzleVelocity     = 30.0;
+	terminalVelocity   = 30.0;
+	acceleration       = 3.0;
+	totalTime          = 20.0;
+	liveTime           = 20.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = True;
+	rotationPeriod = 1;
+	trailType   = 2;
+	trailString = "fusionex.dts";
+	smokeDist   = 1.8;
+};
+
+// fast moving light ray with small explosion
+RocketData LightNormal
+{
+	bulletShapeName    = "rocket.dts";
+	explosionTag       = energyExp;
+	collisionRadius    = 0.0;
+	mass               = 2.0;
+	damageClass        = 0;
+	damageValue        = 3.50;
+	damageType     = $PlasmaDamageType;
+	explosionRadius    = 0.0;
+	kickBackStrength   = 50.0;
+	muzzleVelocity     = 750.0;
+	terminalVelocity   = 750.0;
+	acceleration       = 75.0;
+	totalTime          = 10.0;
+	liveTime           = 10.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = True;
+	rotationPeriod = 1;
+	trailType   = 2;
+	trailString = "chainspk.dts";
+	smokeDist   = 1.8;
+};
+
+// slower moving rocket with larger explosion
+RocketData LightCombo1
+{
+	bulletShapeName    = "rocket.dts";
+	explosionTag       = grenadeExp;
+	collisionRadius    = 0.0;
+	mass               = 2.0;
+	damageClass        = 1;
+	damageValue        = 10.00;
+	damageType     = $EnergyDamageType;
+	explosionRadius    = 5.0;
+	kickBackStrength   = 0.0;
+	muzzleVelocity     = 60.0;
+	terminalVelocity   = 60.0;
+	acceleration       = 6.0;
+	totalTime          = 20.0;
+	liveTime           = 20.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = True;
+	rotationPeriod = 1;
+	trailType   = 2;
+	trailString = "chainspk.dts";
+	smokeDist   = 1.8;
+};
+
+// very fast disc with no trail and tiny explosion
+RocketData PhazonNormal
+{
+	bulletShapeName    = "discb.dts";
+	explosionTag       = energyExp;
+	collisionRadius    = 0.0;
+	mass               = 2.0;
+	damageClass        = 0;
+	damageValue        = 4.88;
+	damageType     = $EnergyDamageType;
+	explosionRadius    = 0.0;
+	kickBackStrength   = 0.0;
+	muzzleVelocity     = 750.0;
+	terminalVelocity   = 750.0;
+	acceleration       = 75.0;
+	totalTime          = 10.0;
+	liveTime           = 10.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = True;
+	rotationPeriod = 1;
+	trailType   = 1;
+	trailLength = 20;
+	trailWidth  = 0.3;
+};
+
+// a much less accurate version of PhazonNormal
+BulletData PhazonScattershot
+{
+	bulletShapeName    = "discb.dts";
+	explosionTag       = energyExp;
+	mass               = 0.05;
+	damageClass        = 0;
+	damageValue        = 4.00;
+	damageType         = $EnergyDamageType;
+	aimDeflection      = 0.020;
+	muzzleVelocity     = 750.0;
+	totalTime          = 10.0;
+	inheritedVelocityScale = 1.0;
+	isVisible = True;
+};
+
+// medium speed fusionbolt no trail and large shockwave explosion
+RocketData HyperBeam
+{
+	bulletShapeName    = "fusionbolt.dts";
+	explosionTag       = LargeShockwave;
+	collisionRadius    = 0.0;
+	mass               = 2.0;
+	damageClass        = 1;
+	damageValue        = 16.00;
+	damageType     = $EnergyDamageType;
+	explosionRadius    = 10.0;
+	kickBackStrength   = 100.0;
+	muzzleVelocity     = 150.0;
+	terminalVelocity   = 150.0;
+	acceleration       = 15.0;
+	totalTime          = 10.0;
+	liveTime           = 10.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = True;
+	rotationPeriod = 1;
+};
+
+// very fast shot with no trail that is visible and small shockwave explosion
+RocketData AnnihilatorSniper
+{
+	bulletShapeName    = "shockwave_large.dts";
+	explosionTag       = energyExp;
+	collisionRadius    = 0.0;
+	mass               = 2.0;
+	damageClass        = 0;
+	damageValue        = 20.00;
+	damageType         = $EnergyDamageType;
+	explosionRadius    = 0.0;
+	kickBackStrength   = 0.0;
+	muzzleVelocity     = 7500.0;
+	terminalVelocity   = 7500.0;
+	acceleration       = 750.0;
+	totalTime          = 10.0;
+	liveTime           = 10.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = True;
+	rotationPeriod = 1;
+	trailType   = 2;
+	trailString = "chainspk.dts";
+	smokeDist   = 1.8;
+};
+
+// multiple shockwaves with blue trail and large shockwave explosion
+RocketData BGComet1
+{
+	bulletShapeName = "shockwave_large.dts";
+	explosionTag = LargeShockwave;
+	collisionRadius = 0.0;
+	mass = 2.0;
+	damageClass = 1;
+	damageValue = "9.50";
+	damageType = $RocketDamageType;
+	explosionRadius = 40.0;
+	kickBackStrength = -400.0;
+	muzzleVelocity = 80.0;
+	terminalVelocity = 80.0;
+	acceleration = 8.0;
+	totalTime = 10.1;
+	liveTime = 10.0;
+	lightRange = 20.0;
+	colors[0] = { 10.0, 0.75, 0.75 };
+	colors[1] = { 1.0, 0.25, 10.25 };
+	inheritedVelocityScale = 0.5;
+	trailType = 2;
+	trailString = "enex.dts";
+	smokeDist = 1;
+	soundId = SoundJetHeavy;
+	rotationPeriod = 0.1;
+};
+
+// didnt see anything
+BulletData BGAirCutter
+{
+	bulletShapeName    = "discb.dts";
+	explosionTag       = bulletExp0;
+	damageClass        = 0;
+	damageValue        = "2.0";
+	damageType         = $BlasterDamageType;
+	muzzleVelocity     = 300.0;
+	totalTime          = 5.0;
+	liveTime           = 4.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	isVisible = false;
+	rotationPeriod = 1;
+};
+
+// slow moving tiny smoke ball with large explosion and no tail
+RocketData BGWindSphere
+{
+	bulletShapeName    = "smoke.dts";
+	explosionTag       = RocketExp;
+	collisionRadius    = 0.0;
+	mass               = 2.0;
+	damageClass        = 1;
+	damageValue        = 6.00;
+	damageType         = $ExplosionDamageType;
+	explosionRadius    = 8.0;
+	kickBackStrength   = 350.0;
+	muzzleVelocity     = 90.0;
+	terminalVelocity   = 90.0;
+	acceleration       = 9.0;
+	totalTime          = 10.0;
+	liveTime           = 10.0;
+	lightRange         = 3.0;
+	lightColor         = { 1.0, 0.25, 0.25 };
+	inheritedVelocityScale = 0.5;
+	trailType 	   = 0;
+	trailString 	   = "mortartrail.dts";
+	smokeDist 	   = 0;
+	isVisible = True;
+	rotationPeriod = 1;
+};
+
+// standard slow moving disc shell white white light
+RocketData DiscShell
+{
+   bulletShapeName = "discb.dts";
+   explosionTag    = rocketExp;
+   collisionRadius = 0.0;
+   mass            = 2.0;
+   damageClass      = 1;       // 0 impact, 1, radius
+   damageValue      = 0.5;
+   damageType       = $ExplosionDamageType;
+   explosionRadius  = 7.5;
+   kickBackStrength = 150.0;
+   muzzleVelocity   = 65.0;
+   terminalVelocity = 80.0;
+   acceleration     = 5.0;
+   totalTime        = 6.5;
+   liveTime         = 8.0;
+   lightRange       = 5.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 0.5;
+
+   // rocket specific
+   trailType   = 1;
+   trailLength = 15;
+   trailWidth  = 0.3;
+
+   soundId = SoundDiscSpin;
+};
+
+// just a buggier version of DiscShell (from tracking?)
+SeekingMissileData DiscShellTracker 
+{
+  bulletShapeName = "discb.dts";
+  explosionTag = rocketExp;
+  collisionRadius = 0.0;
+  mass = 2.0;
+  damageClass = 1;
+  damageValue = 0.1;
+  damageType = $ExplosionDamageType;
+  explosionRadius = 7.5;
+  kickBackStrength = 200.0;
+  muzzleVelocity = 80.0;
+  terminalVelocity = 500.0;
+  acceleration = 10.0;
+  totalTime = 20.0;
+  liveTime = 21.0;
+  lightRange       = 5.0;
+  lightColor       = { 0.4, 0.4, 1.0 };
+
+  inheritedVelocityScale = 0.5;
+
+      // rocket specific
+  trailType   = 2;                // smoke trail
+  trailString = "plastrail.dts";
+  smokeDist   = 1.8;
+
+  soundId = SoundDiscSpin;
+
+};
+
+
+//--------------------------------------
+// throwing star type projectile
+//--------------------------------------
+RocketData ThrowingStarImpact
+{
+	bulletShapeName = "discb.dts";
+	explosionTag    = energyExp;
+	collisionRadius = 0.0;
+	mass            = 2.0;
+	damageClass = 0;
+	damageValue = 1;
+	damageType = $MissileDamageType;
+	explosionRadius  = 0.0;
+	kickBackStrength = 0.0;
+	muzzleVelocity = 100.0;
+	terminalVelocity = 100.0;
+	Acceleration = 10.0;
+	totalTime = 10.0;
+	liveTime = 10.0;
+	lightRange = 15.0;
+	lightColor = { 0.4, 0.4, 3.0 };
+	inheritedVelocityScale = 0.5;
+	trailType   = 1;
+	trailLength = 3;
+	trailWidth  = 0.3;
+	soundId = SoundDiscSpin;
+};
+
 
 //--------------------------------------
 // thrown ball, drops down over time (short distance)
@@ -1168,6 +1920,36 @@ RocketData ssurge2
 
 };
 //--------------------------------------
+// very cool wind cutter looking projectile with shockwaves, maybe a samurai cut?
+//--------------------------------------
+RocketData WindCutter
+{
+   bulletShapeName  = "shockwave_large.dts";
+   explosionTag     = LargeShockwave;
+   collisionRadius  = 0.0;
+   mass             = 0.2;
+
+   damageClass      = 1;       // 0 impact, 1, radius
+   damageValue      = 3.15;
+   damageType       = $WeaponDamageType;
+
+   explosionRadius  = 50.0;
+   kickBackStrength = 0.0;
+   muzzleVelocity   = 100.0;
+   terminalVelocity = 100.0;
+   acceleration     = 45.0;
+   totalTime        = 15.0;
+   liveTime         = 15.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 0.5;
+   rotationPeriod = 1;
+
+   trailType   = 1;
+   trailLength = 2000; // 2000
+   trailWidth  = 5.0;
+};
+//--------------------------------------
 // event large cut wave with blue explosion
 //--------------------------------------
 RocketData wave
@@ -1510,7 +2292,7 @@ RocketData TestArrow
 
    damageClass      = 1;       // 0 impact, 1, radius
    damageValue      = 1;
-   damageType       = $WeaponDamage;
+   damageType       = $MissileDamageType; // $WeaponDamageType;
 
    explosionRadius  = 10;
    kickBackStrength = 1.0;
@@ -1540,7 +2322,7 @@ RocketData BasicRockImpact
 
    damageClass      = 0;       // 0 impact, 1, radius
    damageValue      = 1;
-   damageType       = $WeaponDamage;
+   damageType       = $MissileDamageType;
 
    explosionRadius  = 10;
    kickBackStrength = 1.0;
@@ -1566,7 +2348,7 @@ RocketData BasicRockAreaSmall
 
    damageClass      = 1;       // 0 impact, 1, radius
    damageValue      = 1;
-   damageType       = $WeaponDamage;
+   damageType       = $MissileDamageType;
 
    explosionRadius  = 10;
    kickBackStrength = 1.0;
@@ -1592,7 +2374,7 @@ RocketData BasicArrowImpact
 
    damageClass      = 0;       // 0 impact, 1, radius
    damageValue      = 1;
-   damageType       = $WeaponDamage;
+   damageType       = $MissileDamageType;
 
    explosionRadius  = 10;
    kickBackStrength = 1.0;
@@ -1618,7 +2400,7 @@ RocketData BasicArrowRadiusSmall
 
    damageClass      = 1;       // 0 impact, 1, radius
    damageValue      = 1;
-   damageType       = $WeaponDamage;
+   damageType       = $MissileDamageType;
 
    explosionRadius  = 20;
    kickBackStrength = 1.0;
@@ -1644,7 +2426,7 @@ RocketData FireArrowRadiusSmall
 
    damageClass      = 1;       // 0 impact, 1, radius
    damageValue      = 1;
-   damageType       = $WeaponDamage;
+   damageType       = $MissileDamageType;
 
    explosionRadius  = 10;
    kickBackStrength = 1.0;
@@ -1663,6 +2445,36 @@ RocketData FireArrowRadiusSmall
 };
 
 //--------------------------------------
+// Poison Arrow Projectile (Impact)
+//--------------------------------------
+RocketData PoisonArrowImpact
+{
+   bulletShapeName  = "tracer.dts";
+   explosionTag     = bulletexp1;
+   collisionRadius  = 0;
+   mass             = 0.1;
+
+   damageClass      = 0;       // 0 impact, 1, radius
+   damageValue      = 1;
+   damageType       = $MissileDamageType;
+
+   explosionRadius  = 10;
+   kickBackStrength = 1.0;
+   muzzleVelocity   = $arrowSpeed; // 250.0
+   terminalVelocity = $arrowSpeed; // 100
+   acceleration     = 9.0;
+   totalTime        = 10.0;
+   liveTime         = 4.0;
+   lightRange       = 9.0;
+   lightColor       = { 0.4, 0.4, 1.0 };
+   inheritedVelocityScale = 1;
+
+   trailType   = 2;
+   trailString = "spitty.dts";
+   smokeDist   = 2;
+};
+
+//--------------------------------------
 // Basic Quarrel Projectile
 //--------------------------------------
 RocketData BasicQuarrelImpact
@@ -1674,7 +2486,7 @@ RocketData BasicQuarrelImpact
 
    damageClass      = 0;       // 0 impact, 1, radius
    damageValue      = 1;
-   damageType       = $WeaponDamage;
+   damageType       = $MissileDamageType;
 
    explosionRadius  = 10;
    kickBackStrength = 1.0;
@@ -1700,7 +2512,7 @@ RocketData BasicQuarrelRadiusSmall
 
    damageClass      = 1;       // 0 impact, 1, radius
    damageValue      = 1;
-   damageType       = $WeaponDamage;
+   damageType       = $MissileDamageType;
 
    explosionRadius  = 10;
    kickBackStrength = 1.0;
@@ -1726,7 +2538,7 @@ BulletData testarrow
   damageClass = 1;
   damageValue = 1;
   explosionRadius = 20.0;
-  damageType = $WeaponDamage;
+  damageType = $MissileDamageType;
   aimDeflection = 0.0009;
   kickBackStrength = 600.0;
   muzzleVelocity = 100.0;
@@ -1748,7 +2560,7 @@ RocketData testarrowtwo {
 
    damageClass      = 0;       // 0 impact, 1, radius
    damageValue      = 1;
-   damageType       = $WeaponDamage;
+   damageType       = $MissileDamageType;
 
    explosionRadius  = 10;
    kickBackStrength = 1.0;
@@ -1778,7 +2590,7 @@ BulletData testarrowthree
   explosionTag = bulletexp1;
   damageClass = 0;
   damageValue = 1;
-  damageType = $WeaponDamage;
+  damageType = $MissileDamageType;
   muzzleVelocity = 100.0; // 100
   totalTime = 3.0;
   liveTime = 3.0;

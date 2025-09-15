@@ -23,6 +23,11 @@
 //Starsiege: Tribes, including the engine, retains a proprietary license forbidding resale.
 
 
+// mountPoint = 0; // starting point
+// mountOffset = { 0.0, 0.5, -2.0 }; //-  left-right, back-front, up-down
+// mountRotation = { 0.0, 0, 0.0 }; //- X= up-down , Y= roll-left-right , Z= left-right
+
+
 $fireTimeDelay = 0.1;
 
 $RustyDamageAmp = 0.7;
@@ -102,6 +107,15 @@ $ProjRestrictions[Talon] = ",ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[CeraphumsFeather] = ",ElvenLongbow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[PoisonArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
 $ProjRestrictions[FireArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[HexArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[VexArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[CurseArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[PlagueArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
+$ProjRestrictions[BlackArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
+
+// throwing stars
+$ProjRestrictions[ThrowingStar] = ",ThrowingGloves,";
+
 $ProjRestrictions[TestArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
 
 function GenerateAllWeaponCosts()
@@ -176,8 +190,7 @@ function MeleeAttack(%player)
 	PostAttack(%clientId, %weapon);
 }
 
-function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex, %projectileOverride)
-{
+function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex, %projectileOverride) {
 	dbecho($dbechoMode, "ProjectileAttack(" @ %clientId @ ", " @ %weapon @ ", " @ %vel @ ")");
 
 	%player = Client::getOwnedObject(%clientId);
@@ -206,7 +219,9 @@ function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex, %projectileO
 			$WeaponDelay[%weapon] = GetDelay(%weapon);
 
 		$justRanged[%clientId] = True;
-		schedule("$justRanged["@%clientId@"]=\"\";",$WeaponDelay[%weapon]-0.11);
+		%delay = $WeaponDelay[%weapon] - 0.11;
+
+		schedule("$justRanged["@%clientId@"]=\"\";", %delay);
 	}
 
 	%loadedProjectile = fetchData(%clientId, "LoadedProjectile " @ %weapon);
@@ -217,6 +232,7 @@ function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex, %projectileO
 		}
 		return;
 	}
+
 	if(belt::hasthisstuff(%clientId, %loadedProjectile) <= 0)
 		return;
 
@@ -260,20 +276,35 @@ function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex, %projectileO
 
 	Projectile::spawnProjectile(%projectile, GameBase::getMuzzleTransform(%player), %player, Item::getVelocity(%player));
 
+	if (HasBonusState(%clientId, "DoubleShot") == True) {
+		schedule("Projectile::spawnProjectile(" @ %projectile @ ", GameBase::getMuzzleTransform(" @ %player @ "), " @ %player @ ", Item::getVelocity(" @ %player @ "));", 0.2);
+	}
+
 	belt::takethisstuff(%clientId, %loadedProjectile, 1);
 
 	// check the acount of loaded projectile, if it is less than 1 remove the LoadedProjectile
 	if(belt::hasthisstuff(%clientId, %loadedProjectile) < 1)
 		storeData(%clientId, "LoadedProjectile " @ %weapon, "");
 
-	PostAttack(%clientId, %weapon);
+	// PostAttack(%clientId, %weapon);
 }
 
-function WoodAxeSwing(%player, %weapon) {
+function WoodAxeSwing(%player) {
 	dbecho($dbechoMode, "PickAxeSwing(" @ %player @ ", " @ %length @ ")");
-	lbecho("woodaxe swing");
 
 	%clientId = Player::getClient(%player);
+
+	// get equipped weapon
+	%weapon = GetEquippedWeapon(%clientId);
+
+	if (%weapon == "")
+		return;
+	
+	if(%clientId == "")
+		%clientId = 0;
+
+	if(%clientId.sleepMode > 0)
+		return;
 
 	if(%clientId == "")
 		%clientId = 0;
@@ -286,14 +317,14 @@ function WoodAxeSwing(%player, %weapon) {
 		return;
 
 	//==== ANTI-SPAM CHECK, CAUSE FOR SPAM UNKNOWN ==========
-	%time = getIntegerTime(true) >> 5;
-	if(%time - %clientId.lastfiretime <= $WeaponDelay[%weapon]-0.2) {
-		if(%time - %clientId.lastfiretime <= $WeaponDelay[%weapon]-0.8)
-			return;
-	}
+	// %time = getIntegerTime(true) >> 5;
+	// if(%time - %clientId.lastfiretime <= $WeaponDelay[%weapon]-0.2) {
+	// 	if(%time - %clientId.lastfiretime <= $WeaponDelay[%weapon]-0.8)
+	// 		return;
+	// }
 
-	if(%time - %clientId.lastFireTime <= $fireTimeDelay)
-		return;
+	// if(%time - %clientId.lastFireTime <= $fireTimeDelay)
+	// 	return;
 
 	%clientId.lastFireTime = %time;
 	//=======================================================
@@ -947,13 +978,40 @@ ItemData WoodAxe
 	price = 0;
 	showWeaponBar = true;
 };
-
-function WoodAxeImage::onFire(%player, %slot)
-{
-	// %clientId = Player::getClient(%player);
-	// if(%clientId == -1)
-	// 	item::pop(%player);
+function WoodAxeImage::onFire(%player, %slot) {
 	WoodAxeSwing(%player, WoodAxe);
+}
+
+// WOOD AXE - Hatchet Image (hand axe)
+ItemImageData WoodAxeFastImage {
+	shapeFile  = "hatchet";
+	mountPoint = 0;
+
+	weaponType = 0; // Single Shot
+	reloadTime = 0;
+	fireTime = 0.4;
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing1;
+	sfxActivate = AxeSlash2;
+};
+ItemData WoodAxeFast
+{
+	heading = "bWeapons";
+	description = "Wood Axe";
+	className = "Weapon";
+	shapeFile  = "hatchet";
+	hudIcon = "axe";
+	shadowDetailMask = 4;
+	imageType = WoodAxeFastImage;
+	price = 0;
+	showWeaponBar = true;
+};
+function WoodAxeFastImage::onFire(%player, %slot) {
+	WoodAxeSwing(%player, WoodAxeFast);
 }
 
 // AXE (War Axe Image)
@@ -1404,6 +1462,8 @@ ItemImageData KatanaImage
 
 	sfxFire = SoundSwing3;
 	sfxActivate = AxeSlash2;
+
+	mountOffset = {0, 0, 0}; // no mout offset usually
 };
 ItemData Katana
 {
@@ -2258,6 +2318,9 @@ function CyborgGunImage::onFire(%player, %slot) {
 	ProjectileAttack(Player::getClient(%player), 100);
 }
 
+// ======================
+// Unnarmed Medium Speed
+// ======================
 ItemImageData UnarmedImage
 {
 	shapeFile  = "smallObject"; // blood1
@@ -2290,6 +2353,9 @@ function UnarmedImage::onFire(%player, %slot) {
 	MeleeAttack(%player);
 }
 
+// ======================
+// Unnarmed fast
+// ======================
 ItemImageData UnarmedFastImage
 {
 	shapeFile  = "smallObject"; // blood1
@@ -2320,4 +2386,40 @@ ItemData UnarmedFast
 };
 function UnarmedFastImage::onFire(%player, %slot) {
 	MeleeAttack(%player);
+}
+
+// ======================
+// Throwing Gloves
+// ======================
+ItemImageData ThrowingGlovesImage
+{
+	shapeFile  = "smallObject";
+	mountPoint = 0;
+
+	weaponType = 0;
+	reloadTime = 0;
+	fireTime = $WeaponDelay[Dagger];
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	accuFire = true;
+
+	sfxFire = SoundSwing5; // change this mabe?
+	sfxActivate = AxeSlash2; // change this mabe?
+};
+ItemData ThrowingGloves
+{
+	heading = "bWeapons";
+	description = "";
+	className = "Weapon";
+	shapeFile  = "smallObject";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = ThrowingGlovesImage;
+	price = 0;
+	showWeaponBar = true;
+};
+
+function ThrowingGlovesImage::onFire(%player, %slot) {
+	ProjectileAttack(Player::getClient(%player), 100);
 }

@@ -49,6 +49,7 @@ function refreshHPREGEN(%clientId)
 	dbecho($dbechoMode, "refreshHPREGEN(" @ %clientId @ ")");
 
 	%a = $PlayerSkill[%clientId, $SkillHealing] / 250000;
+
 	if(%clientId.sleepMode == 1)
 		%b = %a + 0.0200;
 	else if(%clientId.sleepMode == 2)
@@ -57,7 +58,6 @@ function refreshHPREGEN(%clientId)
 		%b = %a;
 
 	%c = AddPoints(%clientId, 10) / 2000;
-
 	%r = %b + %c;
 
 	GameBase::setAutoRepairRate(Client::getOwnedObject(%clientId), %r);

@@ -251,12 +251,15 @@ function createServer(%mission, %dedicated)
 	//exec(depbase);
 	exec(ferry);
 	exec(Player);
-	//exec(Vehicle);
+	exec(Vehicle);
 	//exec(Turret);
 	exec(Beacon);
 	exec(rpgStaticShape);
 	// new stuff
 	exec(worldtree);
+	// chocobo stuffz
+	exec(ChocoboArmor);
+	exec(Chocobo);
 
 	%oldrpgmap["rpgmap1"] = True;
 	%oldrpgmap["rpgmap5"] = True;

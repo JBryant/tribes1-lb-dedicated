@@ -862,6 +862,7 @@ $AllowedSkills[HolyKnight] = ""
 @ $SkillDesc[$SkillHammers] @ " "
 @ $SkillDesc[$SkillKatanas] @ " "
 @ $SkillDesc[$SkillSpears] @ " "
+@ $SkillDesc[$SkillWeightCapacity] @ " "
 @ $SkillDesc[$SkillWhiteMagick] @ " "
 @ $SkillDesc[$SkillTimeMagick] @ " "
 @ $SkillDesc[$SkillHealing] @ " "
@@ -1522,8 +1523,7 @@ function GetClassSkillIndexes(%clientId) {
 	return ltrim(%skillIndexList);
 }
 
-function AddSkillPoint(%clientId, %skill, %delta)
-{
+function AddSkillPoint(%clientId, %skill, %delta) {
 	dbecho($dbechoMode, "AddSkillPoint(" @ %clientId @ ", " @ %skill @ ", " @ %delta @ ")");
 
 	if(%delta == "")
@@ -1617,8 +1617,9 @@ function SkillCanUse(%clientId, %thing) {
 		}
 		else if(%s == "C") {
 			%gcflag++;
-			if(String::ICompare(fetchData(%clientId, "CLASS"), %n) == 0)
+			if(String::ICompare(fetchData(%clientId, "CLASS"), %n) == 0) {
 				%gc = 1;
+			}
 		}
 		else if(%s == "H") {
 			%hflag++;
@@ -1663,7 +1664,13 @@ function SkillCanUseSpell(%clientId, %index, %echo) {
 		return True;
 	}
 
-	if(getMANA(%clientId) < $Spell::manaCost[%index]) {
+	// check if double casting
+	%spellCost = $Spell::manaCost[%index];
+	if (HasBonusState(%clientId, "DoubleCast"))
+		%spellCost = %spellCost * 2;
+
+
+	if(getMANA(%clientId) < %spellCost) {
 		if(%echo) Client::sendMessage(%clientId, $MsgBeige, "Insufficient mana to cast this spell.");
 		return False;
 	}

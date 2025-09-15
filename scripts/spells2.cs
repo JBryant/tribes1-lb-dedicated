@@ -119,7 +119,8 @@ function cast_waterwater(%Client)
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
-	Projectile::spawnProjectile("watershottwo",%trans,%player,%vel);
+
+	Projectile::spawnProjectile("ThrowingStar", %trans, %player, %vel); // watershottwo
 }
 
 function cast_rangerwind(%Client)
@@ -455,10 +456,8 @@ function PullTowards(%target, %pos, %freeze) {
 //==================================================================================================================
 
 function BeginCastSpell(%Client, %keyword) { //--1 is casted--0 is scroll
-
 	%w1 = GetWord(%keyword, 0);
 	%w2 = String::getSubStr(%keyword, String::len(%w1)+1, 99999);
-
 	%i = $Spell::index[%w1];
 
 	if(%i == "") {
@@ -486,7 +485,11 @@ function BeginCastSpell(%Client, %keyword) { //--1 is casted--0 is scroll
 		storeData(%Client, "LastCastSpell", %w1);
 
 		if(%Client.adminLevel < 5) {
-			%tempManaCost = floor($Spell::manaCost[%i] / 2);
+			%spellCost = $Spell::manaCost[%i];
+			if (HasBonusState(%Client, "DoubleCast"))
+				%spellCost = %spellCost * 2;
+
+			%tempManaCost = floor(%spellCost / 2);
 			refreshMANA(%Client, %tempManaCost);
 		}
 
@@ -539,6 +542,8 @@ function DoCastSpell(%Client, %index, %oldpos, %castPos, %castObj, %w2, %tempMan
 	Schedule("$CanDoSpellDmg["@%Client@"] = \"\";", 3.1);
 	$ClientData[%Client, SpellType] = $Spell::Type[%index];
 	$ClientData[%Client, SpellDmg] = $Spell::damageValue[%index];
+	if (HasBonusState(%Client, "DoubleCast"))
+		$ClientData[%Client, SpellDmg] = $Spell::damageValue[%index] * 2;
 
 	%info = eval("SpellNum"@%index@"("@%Client@", \""@%castObj@"\", \""@%castPos@"\", \""@%w2@"\");");
 
@@ -558,29 +563,34 @@ function DoCastSpell(%Client, %index, %oldpos, %castPos, %castObj, %w2, %tempMan
 		}
 	}
 
-	if((%HealId = String::getSubStr(%info, String::findSubStr(%info, "HealId"), 4)) != "")
-		remoteEval(%HealId, "RefreshHPset", Fix(getHP(%HealId), %HealId, HP));
+	// if((%HealId = String::getSubStr(%info, String::findSubStr(%info, "HealId"), 4)) != "")
+	// 	remoteEval(%HealId, "RefreshHPset", Fix(getHP(%HealId), %HealId, HP)); // fetchData(%id, "HP")
 
 	%recovTime = $Spell::recoveryTime[%index];
 
-	if (HasBonusState(%clientId, "haste") == True) {
+	if (HasBonusState(%clientId, "Haste") == True) {
 		%recovTime = floor(%recovTime * 0.5);
 	}
 
 	if(%Client.repack > 32) {
-		remoteEval(%Client, "rpgbarhud", %recovTime, 4, 2, "||", 1, "Spell Cooldown");
+		remoteEval(%Client, "rpgbarhud", %recovTime, 4, 2, "||", "", "Spell Cooldown", "center");
 	}
 
-	if(String::findSubStr(%info, "returnFlag 1") != -1) {
+	//if(String::findSubStr(%info, "returnFlag 1") != -1) {
 		//$SpellCastStep[%Client] = 2;
-		storeData(%Client, "SpellCastStep", 2);
-		schedule("SayReadyToCast("@%Client@");", %recovTime);
-		return True;
-	}
-	else {
-		SayReadyToCast(%Client);
-		return False;
-	}
+		if ($Spell::recoveryTime[%index] != "") {
+			storeData(%Client, "SpellCastStep", 2);
+			schedule("SayReadyToCast("@%Client@");", %recovTime);
+			return True;
+		} else {
+			SayReadyToCast(%Client);
+			return True;
+		}
+	//}
+	//else {
+	//	SayReadyToCast(%Client);
+	//	return False;
+	//}
 }
 
 function SayReadyToCast(%Client) {
@@ -640,7 +650,7 @@ function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index, %multiplie
 	GameBase::setPosition(%bomb, %castPos);
 
 	if (%doDamage != False) {
-		if ($SkillType[$Spell::keyword[%index]] == $SkillArchery) {
+		if ($SkillType[$Spell::keyword[%index]] == $SkillBows) {
 			%multi = 1.0;
 			if (%multiplier != "") {
 				%multi = %multiplier;
@@ -656,7 +666,11 @@ function CreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %index, %multiplie
 }
 
 function SpellDamage(%Client, %targetId, %index) {
-	GameBase::virtual(%targetId, "onDamage", $SpellDamageType, $Spell::damageValue[%index], "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client, $Spell::keyword[%index]);
+	%spellDamage = $Spell::damageValue[%index];
+	if (HasBonusState(%Client, "DoubleCast"))
+		%spellDamage = %spellDamage * 2;
+
+	GameBase::virtual(%targetId, "onDamage", $SpellDamageType, %spellDamage, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client, $Spell::keyword[%index]);
 }
 
 function SpellRadiusDamage(%Client, %pos, %index) {
@@ -671,7 +685,11 @@ function SpellRadiusDamage(%Client, %pos, %index) {
 		%dist = Vector::getDistance(%pos, GameBase::getPosition(%id));
 
 		if(%dist <= $Spell::radius[%index]) {
-			%newDamage = SpellCalcRadiusDamage(%dist, $Spell::radius[%index], $Spell::damageValue[%index], %percMin, %percMax);
+			%spellDamage = $Spell::damageValue[%index];
+			if (HasBonusState(%Client, "DoubleCast"))
+				%spellDamage = %spellDamage * 2;
+
+			%newDamage = SpellCalcRadiusDamage(%dist, $Spell::radius[%index], %spellDamage, %percMin, %percMax);
 			GameBase::virtual(%id, "onDamage", $SpellDamageType, %newDamage, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client, $Spell::keyword[%index]);
 		}
 	}
@@ -908,20 +926,6 @@ function GetBestSpellNew(%clientId) {
 		%spells = "tsunami avalanche flare tornado thunderstorm cataclysm";
 		return $Spell::index[GetWord(%spells, floor(getRandom() * 6))];
 	}
-
-	// %currentBestSpell = "";
-	// %currentBestSpellLevel = 0;
-	// %currentBestSpellDamage = 0;
-
-	// for (%i = 0; %i < 69; %i++) {
-	// 	if (SkillCanUseSpell(%clientId, %i, 0) && $Spell::minLevel[%i] > %currentBestSpellLevel && $Spell::damageValue[%i] > %currentBestSpellDamage) {
-	// 		%currentBestSpell = $Spell::keyword[%i];
-	// 		%currentBestSpellLevel = $Spell::minLevel[%i];
-	// 		%currentBestSpellDamage = $Spell::damageValue[%i];
-	// 	}
-	// }
-
-	// return $Spell::index[%currentBestSpell];
 
 	return "11";
 }

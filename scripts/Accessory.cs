@@ -703,7 +703,7 @@ ItemImageData KnightShieldImage
 {
 	shapeFile = "shield3";
 	mountPoint = 2;
-	mountOffset = {0.18, -0.1, -0.2};
+	mountOffset = {0.18, -0.1, -0.5};
 	mountRotation = {0, 0, 0.5};
 };
 ItemData KnightShield
@@ -734,7 +734,7 @@ ItemImageData HeavenlyShieldImage
 {
 	shapeFile = "shield3";
 	mountPoint = 2;
-	mountOffset = {0.18, -0.1, -0.2};
+	mountOffset = {0.18, -0.1, -0.5};
 	mountRotation = {0, 0, 0.5};
 };
 ItemData HeavenlyShield
@@ -765,7 +765,7 @@ ItemImageData DragonShieldImage
 {
 	shapeFile = "shield3";
 	mountPoint = 2;
-	mountOffset = {0.18, -0.2, -0.3};
+	mountOffset = {0.18, -0.2, -0.5};
 	mountRotation = {0, 0, 0.5};
 };
 ItemData DragonShield
@@ -781,6 +781,35 @@ ItemData DragonShield
 ItemData DragonShield0
 {
 	description = "Dragon Shield";
+	className = "Equipped";
+	shapeFile = "shield3";
+
+	heading = "aArmor";
+};
+
+// ================ New Shields ============================
+ItemImageData ShieldThreeImage
+{
+	shapeFile = "shield3";
+	mountPoint = 2;
+	mountOffset = {0.18, -0.1, -1.0}; // {0.18, -0.1, -0.2};
+	mountRotation = {0, 0, 0.5};
+};
+
+ItemData ShieldThree
+{
+	description = "Knight's Shield";
+	className = "Accessory";
+	shapeFile = "shield3";
+	imageType = ShieldThreeImage;
+
+	heading = "eMiscellany";
+	price = 0;
+};
+
+ItemData ShieldThree0
+{
+	description = "Knight's Shield";
 	className = "Equipped";
 	shapeFile = "shield3";
 

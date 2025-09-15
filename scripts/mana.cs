@@ -49,21 +49,59 @@ function refreshMANA(%clientId, %value)
 
 	setMANA(%clientId, (fetchData(%clientId, "MANA") - %value));
 }
+
+
+// mana at magicka 30: 21
+// mana at magicka 100: 42
+// mana at magicka 500: 175
+// mana at magicka 1000: 341
+// mana at magicka 5000: 1675
+// mana at magicka 10000: 3341
+// 30: 21, 100: 42, 500: 175, 1000: 341, 5000: 1675, 10000: 3341
+// change mana regen
 function refreshMANAREGEN(%clientId)
 {
 	dbecho($dbechoMode, "refreshMANAREGEN(" @ %clientId @ ")");
 
-	%a = ($PlayerSkill[%clientId, $SkillMagicka] / 3250);
-	if(%clientId.sleepMode == 1)
-		%b = 1.0 + %a;
-	else if(%clientId.sleepMode == 2)
-		%b = 2.25 + %a;
-	else
-		%b = %a;
+	//%a = ($PlayerSkill[%clientId, $SkillMagicka] / 3250);
 
-	%c = AddPoints(%clientId, 11) / 800;
+	if(%clientId.sleepMode == 1)
+		%b = 1.0;
+	else if(%clientId.sleepMode == 2)
+		%b = 2.25;
+	else
+		%b = 0;
+
+	// get mana regen (now regen per second)
+	%manaPerSecond = AddPoints(%clientId, 11);
+	%playerMaxMana = fetchData(%clientId, "MaxMANA");
+
+	// recharge rate are is in percent of max energy per second
+	// use players max mana to calculate the recharge rate to match the mana per second
+	%c = (%manaPerSecond / %playerMaxMana) * 100;
 
 	%r = %b + %c;
 
 	GameBase::setRechargeRate(Client::getOwnedObject(%clientId), %r);
 }
+
+// old function
+// function refreshMANAREGEN(%clientId)
+// {
+// 	dbecho($dbechoMode, "refreshMANAREGEN(" @ %clientId @ ")");
+
+// 	%a = ($PlayerSkill[%clientId, $SkillMagicka] / 3250);
+
+// 	if(%clientId.sleepMode == 1)
+// 		%b = 1.0 + %a;
+// 	else if(%clientId.sleepMode == 2)
+// 		%b = 2.25 + %a;
+// 	else
+// 		%b = %a;
+
+// 	%c = AddPoints(%clientId, 11) / 800;
+
+// 	%r = %b + %c;
+
+// 	GameBase::setRechargeRate(Client::getOwnedObject(%clientId), %r);
+// }
