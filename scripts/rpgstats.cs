@@ -37,9 +37,6 @@ function fetchData(%clientId, %type)
 		%a = AddPoints(%clientId, 7);
 		%b = AddBonusStatePoints(%clientId, "DEF");
 		%c = (%a + %b);
-		// don't make armor go down if you are over weight
-		//%d = (fetchData(%clientId, "OverweightStep") * 7.0) / 100;
-		//%e = Cap(%c - (%c * %d), 0, "inf");
 
 		return floor(%c);
 	}
@@ -48,10 +45,8 @@ function fetchData(%clientId, %type)
 		%a = AddPoints(%clientId, 3);
 		%b = AddBonusStatePoints(%clientId, "MDEF");
 		%c = (%a + %b);
-		%d = (fetchData(%clientId, "OverweightStep") * 7.0) / 100;
-		%e = Cap(%c - (%c * %d), 0, "inf");
 		
-		return floor(%e);
+		return floor(%c);
 	}
 	else if(%type == "ATK")
 	{
@@ -75,6 +70,10 @@ function fetchData(%clientId, %type)
 	{
 		%a = $MinHP[fetchData(%clientId, "RACE")] + ($PlayerSkill[%clientId, $SkillEndurance] * 0.6);
 		%b = AddPoints(%clientId, 4);
+		// DEFAULT: %c = floor(fetchData(%clientId, "RemortStep") * ($PlayerSkill[%clientId, $SkillEndurance] / 8));
+		// this is why high remorters scale sooo much... they basically keep their health from previous levels. It's definitely too powrful as is.
+		// example a LVL 1000, RL 50 with 1000 endurance: 50 * (1000/8) = 6250 bonus hp
+		// where as a LVL 100, RL 0 with 1000 endurance only has 600 + 100 HP from endurance skill
 		%c = floor(fetchData(%clientId, "RemortStep") * ($PlayerSkill[%clientId, $SkillEndurance] / 8));
 		%d = fetchData(%clientId, "LVL");
 		%e = AddBonusStatePoints(%clientId, "MaxHP");
@@ -146,6 +145,7 @@ function fetchData(%clientId, %type)
 
 	return False;
 }
+
 function remotefetchData(%clientId, %type)
 {
 	dbecho($dbechoMode, "remotefetchData(" @ %clientId @ ", " @ %type @ ")");
@@ -517,12 +517,8 @@ function MenuChangeClass(%clientId, %page)
 		if (%meetsClassRequirements == True) {
 			%count += 1;
 			%unlockedClasses = %unlockedClasses @ $ClassName[%i] @ " ";
-			//Client::addMenuItem(%clientId, %op @ $ClassName[%i], $ClassName[%i]);
 		}
 	}
-
-	// lbecho("Unlocked classes: " @ %unlockedClasses);
-	// lbecho("Unlocked class count: " @ %count);
 
 	%np = floor(%count / %optionsPerPage);
 	%lb = (%page * %optionsPerPage) - (%optionsPerPage - 1);
@@ -531,33 +527,48 @@ function MenuChangeClass(%clientId, %page)
 	if(%ub > %count)
 		%ub = %count;
 
-	// %x = %lb - 1;
-
+	%x = %lb - 1;
 	%cnt = -1;
-	for(%i = 0; %i < %count; %i++) {
-		// %x++;
-		%item = getWord(%unlockedClasses, %i); // %x
-		// Client::addMenuItem(%clientId, string::getsubstr($menuChars,%cnt++,1) @%amnt@" "@ $beltitem[%item, "Name"], %item @ " " @ %page @" "@%type@" "@%victim);
+
+	for(%i = %lb; %i <= %ub; %i++) {
+		%item = getword(%unlockedClasses, %x);
+		%x++;
 		Client::addMenuItem(%clientId, string::getsubstr($menuChars, %cnt++, 1) @ %item, %item);
 	}
 
-	// if(%page == 1) {
-	// 	if(%ns > %optionsPerPage) Client::addMenuItem(%victim, "]Next >>", "page " @ %page+1 @" "@%type@" "@%victim);
-	// 	Client::addMenuItem(%clientId, "z<< Back", "back");
-	// }
-	// else if(%page == %np+1) {
-	// 	Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1 @" "@%type@" "@%victim);
-	// }
-	// else {
-	// 	Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1 @" "@%type@" "@%victim);
-	// 	Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1 @" "@%type@" "@%victim);
-	// }
+	if(%page == 1) {
+		if(%count > %optionsPerPage) Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1);
+		Client::addMenuItem(%clientId, "z<< Back", "back");
+	}
+	else if(%page == %np+1) {
+		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1);
+	}
+	else {
+		Client::addMenuItem(%clientId, "]Next >>", "page " @ %page+1);
+		Client::addMenuItem(%clientId, "[<< Prev", "page " @ %page-1);
+	}
 
 	return;
 }
 
-function processMenuchangeclass(%clientId, %className)
-{
+function processMenuchangeclass(%clientId, %className) {
+	%opt = GetWord(%className, 0);
+	%page = GetWord(%className, 1);
+	lbecho("processMenuchangeclass clientId: " @ %clientId @ ", className/opt: " @ %className @ ", page: " @ %page);
+
+	if (%opt == "page") {
+		MenuChangeClass(%clientId, %page);
+		return;
+	}
+	else if (%opt == "back") {
+		MenuClass(%clientId);
+		return;
+	}
+	else if (%opt == "") {
+		MenuChangeClass(%clientId, 1);
+		return;
+	}
+
 	dbecho($dbechoMode, "processMenuchangeclass(" @ %clientId @ ", " @ %opt @ ")");
 
 	storeData(%clientId, "CLASS", %className);
@@ -745,16 +756,16 @@ function DistributeExpForKilling(%damagedClient)
 			storeData(%listClientId, "EXP", %final, "inc");
 
 			if(%final > 0)
-				Client::sendMessage(%listClientId, 0, %dname @ " has died and you gained " @ %final @ " experience!");
+				Client::sendMessage(%listClientId, 0, %dname @ " has died and you gained " @ Number::Beautify(%final) @ " experience!");
 			else if(%final < 0)
-				Client::sendMessage(%listClientId, 0, %dname @ " has died and you lost " @ -%final @ " experience.");
+				Client::sendMessage(%listClientId, 0, %dname @ " has died and you lost " @ -Number::Beautify(%final) @ " experience.");
 			else if(%final == 0)
 				Client::sendMessage(%listClientId, 0, %dname @ " has died.");
 
 			if(%pvalue != 0)
 			{
 				storeData(%listClientId, "EXP", %pvalue, "inc");
-				Client::sendMessage(%listClientId, $MsgWhite, "You have gained " @ %pvalue @ " party experience!");
+				Client::sendMessage(%listClientId, $MsgWhite, "You have gained " @ Number::Beautify(%pvalue) @ " party experience!");
 			}
 
 			Game::refreshClientScore(%listClientId);
@@ -934,4 +945,11 @@ function getFinalLVL(%clientId) {
 
 	// return Cap(%a, 1, 999);
 	return fetchData(%clientId, "LVL");
+}
+
+function addEXP(%clientId, %amount) {
+	if (%amount > 0) {
+		storeData(%clientId, "EXP", %amount, "inc");
+		Game::refreshClientScore(%clientId);
+	}
 }

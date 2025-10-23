@@ -1730,6 +1730,15 @@ function GiveThisStuff(%clientId, %list, %echo, %multiplier)
 			//note: the class MUST be specified in %stuff prior to this call
 			storeData(%clientId, "EXP", GetExp(%w2, %clientId) + 100);
 		}
+		// natural DEF 
+		else if(%w == "NDEF")
+		{
+			storeData(%clientId, "NDEF", %w2, "inc");
+		}
+		else if(%w == "NMDEF")
+		{
+			storeData(%clientId, "NMDEF", %w2, "inc");
+		}
 		else if(%w == "TEAM")
 		{
 			GameBase::setTeam(%clientId, %w2);
@@ -2248,8 +2257,15 @@ function DisplayGetInfo(%clientId, %id, %obj)
 		%house = "";
 
 	%msg = "<f1>" @ Client::getName(%id) @ ", LEVEL " @ fetchData(%id, "LVL") @ " " @ fetchData(%id, "RACE") @ " " @ getFinalCLASS(%id) @ "<f0> " @ " " @ %showid @ "\n" @ %house @ "\n" @ fetchData(%id, "PlayerInfo");
-	if(fetchData(%id, "PlayerInfo") == "")
-		%msg = %msg @ "This player has not setup his/her information.  Use #setinfo to set this type of information.";
+	
+	if (Player::isAiControlled(%id)) {
+		// show the AI's HP, MANA, DEF and MDEF
+		%msg = %msg @ "\n<f1>HP:<f0> " @ Number::beautify(fetchData(%id, "HP")) @ "/" @ Number::beautify(fetchData(%id, "MaxHP")) @ "  <f1>MANA:<f0> " @ Number::beautify(fetchData(%id, "MANA")) @ "/" @ Number::beautify(fetchData(%id, "MaxMANA"));
+		%msg = %msg @ "\n<f1>DEF:<f0> " @ Number::beautify(fetchData(%id, "DEF")) @ "  <f1>MDEF:<f0> " @ Number::beautify(fetchData(%id, "MDEF"));
+	} else {
+		if(fetchData(%id, "PlayerInfo") == "")
+			%msg = %msg @ "This player has not setup his/her information.  Use #setinfo to set this type of information.";
+	}
 
 	bottomprint(%clientId, %msg, floor(String::len(%msg) / 20));
 }
@@ -2741,15 +2757,16 @@ function UnequipMountedStuff(%clientId)
 	// }
 
 	// new unequip all items
-	// first unequip their weapon
+	// first unequip their weaponp
 	%weapon = GetEquippedWeapon(%clientId);
 	if (%weapon != "") {
 		// TODO: GetEquippedWeapon returns regular name but armor returns with 0
-		Belt::UnequipWeapon(%clientId, %weapon@"0");
+		Belt::UnequipWeapon(%clientId, %weapon @ "0");
 	}
 
 	// unequip their armor
 	%armor = GetEquippedArmor(%clientId);
+	lbecho("equipped armor: " @ %armor);
 	if (%armor != "") {
 		Item::onUse(%clientId, %armor);
 	}

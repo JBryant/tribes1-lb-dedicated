@@ -64,3 +64,53 @@ StaticShapeData TiaraS
 	debrisId = flashDebrisSmall;
 	maxDamage = 10000.0;
 };
+
+// Summons
+
+StaticShapeData Shiva
+{
+	debrisId = defaultDebrisSmall;
+	maxDamage = 9999.0;
+	description = "Shiva";
+	className = "Summon";
+	shapeFile = "lfemalehuman";
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};
+
+StaticShapeData Ifrit
+{
+	debrisId = defaultDebrisSmall;
+	maxDamage = 9999.0;
+	description = "Ifrit";
+	className = "Summon";
+	shapeFile = "fedmonster";
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};
+
+StaticShapeData Ramuh
+{
+	debrisId = defaultDebrisSmall;
+	maxDamage = 9999.0;
+	description = "Ramuh";
+	className = "TownBot";
+	shapeFile = "magemale";
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};
+
+StaticShapeData Bahamut
+{
+	debrisId = defaultDebrisSmall;
+	maxDamage = 9999.0;
+	description = "Bahamut";
+	className = "TownBot";
+	shapeFile = "dragonarmorblue";
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};

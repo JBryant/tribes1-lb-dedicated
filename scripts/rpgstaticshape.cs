@@ -876,6 +876,18 @@ StaticShapeData TestTownBot
 	mapFilter = 1;		//thanks Adger!!
 };
 
+StaticShapeData RMoonFemaleBot
+{
+	debrisId = defaultDebrisSmall;
+	maxDamage = 9999.0;
+	description = "Female Town Bot";
+	className = "TownBot";
+	shapeFile = "rmoonfemale";
+
+	visibleToSensor = true;	//thanks Adger!!
+	mapFilter = 1;		//thanks Adger!!
+};
+
 StaticShapeData MaleMageTownBot
 {
 	debrisId = defaultDebrisSmall;
@@ -887,7 +899,6 @@ StaticShapeData MaleMageTownBot
 	visibleToSensor = true;	//thanks Adger!!
 	mapFilter = 1;		//thanks Adger!!
 };
-
 
 StaticShapeData MaleHumanTownBot
 {
