@@ -32,7 +32,7 @@ $Skill::startSound[2] = AmrbroseSwordA;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
-$SkillRestriction[$Skill::keyword[2]] = "L 20 C Squire C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight";
+$SkillRestriction[$Skill::keyword[2]] = "L 20 C Squire C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
 
 $Skill::keyword[3] = "harvest";
 $Skill::index[harvest] = 3;
@@ -112,7 +112,7 @@ $Skill::startSound[8] = AmrbroseSwordA;
 $Skill::groupListCheck[8] = False;
 $Skill::refVal[8] = -10;
 $Skill::graceDistance[8] = 2;
-$SkillRestriction[$Skill::keyword[8]] = "L 40 C Knight C Monk C Geomancer C Samurai C HolyKnight";
+$SkillRestriction[$Skill::keyword[8]] = "L 40 C Knight C Monk C Geomancer C Samurai C HolyKnight C Spellblade";
 
 $Skill::keyword[9] = "parry";
 $Skill::index[parry] = 9;
@@ -128,7 +128,7 @@ $Skill::startSound[9] = AmrbroseSwordA;
 $Skill::groupListCheck[9] = False;
 $Skill::refVal[9] = -10;
 $Skill::graceDistance[9] = 2;
-$SkillRestriction[$Skill::keyword[9]] = "C Knight C Geomancer C Samurai C HolyKnight C DarkKnight";
+$SkillRestriction[$Skill::keyword[9]] = "C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
 
 $Skill::keyword[10] = "infusepotions";
 $Skill::index[infusepotions] = 10;
@@ -158,7 +158,7 @@ $Skill::startSound[11] = AmrbroseSwordA;
 $Skill::groupListCheck[11] = False;
 $Skill::refVal[11] = -10;
 $Skill::graceDistance[11] = 2;
-$SkillRestriction[$Skill::keyword[11]] = "L 60 C Monk C Geomancer C Samurai C HolyKnight";
+$SkillRestriction[$Skill::keyword[11]] = "L 60 C Monk C Geomancer C Samurai C HolyKnight C Spellblade";
 
 $Skill::keyword[12] = "earthquake";
 $Skill::index[earthquake] = 12;
@@ -173,7 +173,7 @@ $Skill::startSound[12] = AmrbroseSwordA;
 $Skill::groupListCheck[12] = False;
 $Skill::refVal[12] = -10;
 $Skill::graceDistance[12] = 2;
-$SkillRestriction[$Skill::keyword[12]] = "L 80 C Geomancer C Samurai C HolyKnight";
+$SkillRestriction[$Skill::keyword[12]] = "L 80 C Geomancer C Samurai C HolyKnight C Spellblade";
 
 $Skill::keyword[13] = "volley";
 $Skill::index[volley] = 13;
@@ -242,7 +242,7 @@ $Skill::startSound[17] = AmrbroseSwordA;
 $Skill::groupListCheck[17] = False;
 $Skill::refVal[17] = -10;
 $Skill::graceDistance[17] = 10;
-$SkillRestriction[$Skill::keyword[17]] = "L 100 C Samurai C HolyKnight";
+$SkillRestriction[$Skill::keyword[17]] = "L 100 C Samurai C HolyKnight C Spellblade";
 
 $Skill::keyword[18] = "doublecast";
 $Skill::index[$Skill::keyword[18]] = 18;
@@ -256,6 +256,19 @@ $Skill::groupListCheck[18] = False;
 $Skill::refVal[18] = -10;
 $Skill::graceDistance[18] = 1;
 $SkillRestriction[$Skill::keyword[18]] = "C BlackMage C TimeMage C Summoner C Spellbow C Spellblade C DarkKnight C ArcaneArcher C Arcanist C Hexblade";
+
+$Skill::keyword[19] = "sneak";
+$Skill::index[$Skill::keyword[19]] = 19;
+$Skill::name[19] = "Sneak";
+$Skill::description[19] = "A stealthy maneuver that allows you to move undetected.";
+$Skill::delay[19] = 2.0;
+$Skill::recoveryTime[19] = 10;
+$Skill::duration[19] = 100;
+$Skill::startSound[19] = Reflected;
+$Skill::groupListCheck[19] = False;
+$Skill::refVal[19] = -10;
+$Skill::graceDistance[19] = 1;
+$SkillRestriction[$Skill::keyword[19]] = "C Archer C Hunter C Sniper C Thief C Ninja C Dancer";
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
@@ -699,6 +712,16 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		schedule("Player::mountItem(" @ %clientId @ ", \"" @ %weaponImage @ "\", 0);", 0.8, %player);
     }
 
+	if ($Skill::keyword[%index] == "sneak") {
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Sneak", "left");
+		UpdateBonusState(%clientId, "Sneak", %duration, "Sneak");
+		// make invisible
+		GameBase::startFadeOut(%clientId);
+		storeData(%clientId, "invisible", True);
+
+		Client::sendMessage(%clientId, $MsgBeige, "You successfully slip into the shadows.");
+    }
+
     return EndSkill(%clientId, %overrideEndSound, %extraDelay, %index, %oldpos, %returnFlag);
 }
 
@@ -726,6 +749,18 @@ function shootAtClosestEnemyFromPosition(%clientId, %pos, %radius, %projectile) 
 	if (%randomEnemy != "") {
 		%transform = MakeTransformFromAtoB(%pos, GameBase::getPosition(%randomEnemy));
 		Projectile::spawnProjectile(%projectile, %transform, %player, Item::getVelocity(%player));
+	}
+}
+
+function SpawnBombAtClosestEnemyFromPosition(%clientId, %pos, %radius, %bomb, %doDamage, %spellIndex) {
+	%player = Client::getOwnedObject(%clientId);
+	%randomEnemy = GetClosestEnemyFromPos(%clientId, %pos, %radius);
+
+	if (%doDamage != False)
+		%doDamage = True;
+
+	if (%randomEnemy != "") {
+		CreateAndDetBomb(%clientId, %bomb, GameBase::getPosition(%randomEnemy), %doDamage, %spellIndex);
 	}
 }
 

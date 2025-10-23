@@ -221,8 +221,8 @@ function DoCampSetup(%clientId, %step, %pos)
 	{
 		%g = "MissionCleanup/Camp" @ %clientId;
 
-		Player::incItemCount(%clientId, Tent);
-		RefreshAll(%clientId);
+		// Player::incItemCount(%clientId, Tent);
+		// RefreshAll(%clientId);
 
 		//so the players in the grouptrigger get kicked out first.
 		Group::iterateRecursive(%g, GameBase::setPosition, "0 0 0");

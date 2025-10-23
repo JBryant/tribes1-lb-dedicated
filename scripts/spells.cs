@@ -1083,7 +1083,7 @@ $Spell::LOSrange[%index] = 200;
 $Spell::manaCost[%index] = 500;
 $Spell::startSound[%index] = summonchant;
 $Spell::endSound[%index] = hadesgrr;
-$Spell::classRestrictions[%index] = "Summoner";
+$Spell::classRestrictions[%index] = "Summoner SpellBow SpellBlade DarkKnight Valkyrie ArcaneArcher Arcanist Hexblade";
 $Spell::minLevel[%index] = 100;
 $Spell::groupListCheck[%index] = False;
 $Spell::classRestrictions[51] = "Summoner";
@@ -1101,7 +1101,7 @@ $Spell::LOSrange[%index] = 200;
 $Spell::manaCost[%index] = 50;
 $Spell::startSound[%index] = summonchant;
 $Spell::endSound[%index] = shockExplosion;
-$Spell::classRestrictions[%index] = "Summoner";
+$Spell::classRestrictions[%index] = "Summoner SpellBow SpellBlade DarkKnight Valkyrie ArcaneArcher Arcanist Hexblade";
 $Spell::minLevel[%index] = 10;
 $Spell::groupListCheck[%index] = False;
 $SkillType[rock] = $SkillSummonMagick;
@@ -1112,67 +1112,75 @@ $Spell::index[$Spell::keyword[%index]] = %index;
 $Spell::name[%index] = "Shiva Summon";
 $Spell::description[%index] = "Level 20 Summon.";
 $Spell::delay[%index] = 4;
-$Spell::recoveryTime[%index] = 14;
-$Spell::damageValue[%index] = 40;
+$Spell::recoveryTime[%index] = 10; // 14
+$Spell::damageValue[%index] = 7; // (50 * 2) / 15 = 6.66 - was 40
+$Spell::numProjectiles[%index] = 15;
 $Spell::LOSrange[%index] = 150;
 $Spell::manaCost[%index] = 100;
+$Spell::radius[%index] = 50;
 $Spell::startSound[%index] = summonchant;
 $Spell::endSound[%index] = shockExplosion;
-$Spell::classRestrictions[%index] = "Summoner";
-$Spell::minLevel[%index] = 20;
+$Spell::classRestrictions[%index] = "Summoner SpellBow SpellBlade DarkKnight Valkyrie ArcaneArcher Arcanist Hexblade";
+$Spell::minLevel[%index] = 50;
 $Spell::groupListCheck[%index] = False;
 $SkillType[shiva] = $SkillSummonMagick;
 
 %index = 59;
-$Spell::keyword[%index] = "battle";
+$Spell::keyword[%index] = "ifrit";
 $Spell::index[$Spell::keyword[%index]] = %index;
-$Spell::name[%index] = "Battle Summon";
+$Spell::name[%index] = "Ifrit Summon";
 $Spell::description[%index] = "Level 30 Summon.";
 $Spell::delay[%index] = 4;
-$Spell::recoveryTime[%index] = 10;
-$Spell::damageValue[%index] = 60;
+$Spell::recoveryTime[%index] = 12;
+$Spell::damageValue[%index] = 10; // (100 * 2) / 20 = 10
+$Spell::numProjectiles[%index] = 20;
 $Spell::LOSrange[%index] = 200;
-$Spell::manaCost[%index] = 100;
+$Spell::manaCost[%index] = 200;
+$Spell::radius[%index] = 50;
 $Spell::startSound[%index] = summonchant;
 $Spell::endSound[%index] = shockExplosion;
-$Spell::classRestrictions[%index] = "Summoner";
-$Spell::minLevel[%index] = 30;
+$Spell::classRestrictions[%index] = "Summoner SpellBow SpellBlade DarkKnight Valkyrie ArcaneArcher Arcanist Hexblade";
+$Spell::minLevel[%index] = 100;
 $Spell::groupListCheck[%index] = False;
-$SkillType[battle] = $SkillSummonMagick;
+$SkillType[ifrit] = $SkillSummonMagick;
 
 %index = 60;
-$Spell::keyword[%index] = "sapper";
+$Spell::keyword[%index] = "ramuh";
 $Spell::index[$Spell::keyword[%index]] = %index;
-$Spell::name[%index] = "Sapper Summon";
+$Spell::name[%index] = "Ramuh Summon";
 $Spell::description[%index] = "Level 40 Summon.";
 $Spell::delay[%index] = 4;
-$Spell::recoveryTime[%index] = 12;
-$Spell::damageValue[%index] = 65;
+$Spell::recoveryTime[%index] = 14;
+$Spell::damageValue[%index] = 20; // (250 * 2) / 25 = 20 - was 50
+$Spell::numProjectiles[%index] = 25;
 $Spell::LOSrange[%index] = 250;
 $Spell::manaCost[%index] = 350;
+$Spell::radius[%index] = 50;
 $Spell::startSound[%index] = summonchant;
 $Spell::endSound[%index] = shockExplosion;
-$Spell::classRestrictions[%index] = "Summoner";
-$Spell::minLevel[%index] = 50;
+$Spell::classRestrictions[%index] = "Summoner SpellBow SpellBlade DarkKnight Valkyrie ArcaneArcher Arcanist Hexblade";
+$Spell::minLevel[%index] = 250;
 $Spell::groupListCheck[%index] = False;
-$SkillType[sapper] = $SkillSummonMagick;
+$SkillType[ramuh] = $SkillSummonMagick;
 
 %index = 61;
-$Spell::keyword[%index] = "pem315";
+$Spell::keyword[%index] = "bahamut";
 $Spell::index[$Spell::keyword[%index]] = %index;
-$Spell::name[%index] = "Ashes to ashes";
+$Spell::name[%index] = "Bahamut - The ultimate summon.";
 $Spell::description[%index] = "Ashes to ashes.";
-$Spell::delay[%index] = 1.0;
-$Spell::recoveryTime[%index] = 2;
+$Spell::delay[%index] = 5;
+$Spell::recoveryTime[%index] = 16;
 $Spell::LOSrange[%index] = 200;
-$Spell::damageValue[%index] = 1;
-$Spell::manaCost[%index] = 100;
-$Spell::startSound[%index] = LoopSP;
+$Spell::damageValue[%index] = 35; // (500 * 2) / 30 = 33 - was 60
+$Spell::numProjectiles[%index] = 30;
+$Spell::manaCost[%index] = 500;
+$Spell::radius[%index] = 50;
+$Spell::startSound[%index] = summonchant;
 $Spell::endSound[%index] = AbsorbABS;
-$Spell::classRestrictions[%index] = "Cleric Druid Ranger Paladin Fighter Thief Bard Mage Summoner";
-$Spell::minLevel[%index] = 1;
+$Spell::classRestrictions[%index] = "Summoner SpellBow SpellBlade DarkKnight Valkyrie ArcaneArcher Arcanist Hexblade";
+$Spell::minLevel[%index] = 500;
 $Spell::groupListCheck[%index] = False;
-$SkillType[pem315] = $SkillSummonMagick;
+$SkillType[bahamut] = $SkillSummonMagick;
 
 %index = 62;
 $Spell::keyword[%index] = "doppelgang";
@@ -1313,8 +1321,7 @@ $Spell::name[70] = "Shadow Blade";
 $Spell::description[70] = "Casts Shadow Blade.";
 $Spell::delay[70] = 3;
 $Spell::recoveryTime[70] = 10;
-$Spell::radius[70] = 30;
-$Spell::damageValue[70] = "320";
+$Spell::damageValue[70] = 320;
 $Spell::LOSrange[70] = 999; // 8
 $Spell::manaCost[70] = 500;
 $Spell::radius[70] = 50;
@@ -1323,7 +1330,7 @@ $Spell::endSound[70] = Explode3FW;
 $Spell::groupListCheck[70] = False;
 $Spell::refVal[70] = 320;
 $Spell::graceDistance[70] = 2;
-$Spell::classRestrictions[70] = "DeathKnight";
+$Spell::classRestrictions[70] = "DarkKnight";
 $Spell::minLevel[70] = 100;
 $SkillType[shadowblade] = $SkillBlackMagick;
 
@@ -1335,7 +1342,7 @@ $Spell::description[71] = "fire flask bomb explosion.";
 $Spell::delay[71] = 3;
 $Spell::recoveryTime[71] = 3;
 $Spell::radius[71] = 10;
-$Spell::damageValue[71] = "20";
+$Spell::damageValue[71] = 20;
 $Spell::LOSrange[71] = 999; // 80
 $Spell::manaCost[71] = 1;
 $Spell::startSound[71] = PlaceSeal;
@@ -1468,17 +1475,17 @@ $Spell::name[78] = "Black Hole";
 $Spell::description[78] = "Creates a black hole that pulls in nearby enemies.";
 $Spell::delay[78] = 2;
 $Spell::recoveryTime[78] = 8;
-$Spell::damageValue[78] = "100";
+$Spell::damageValue[78] = 20; // (150 * 2) / 14 = 21.42
 $Spell::LOSrange[78] = 100; // 80
 $Spell::radius[78] = 30; // 100
-$Spell::manaCost[78] = 500;
+$Spell::manaCost[78] = 250;
 $Spell::startSound[78] = PlaceSeal;
 // $Spell::endSound[78] = ActivateCH;
 $Spell::groupListCheck[78] = False;
 $Spell::refVal[78] = -9998;
 $Spell::graceDistance[78] = 1;
 $Spell::classRestrictions[78] = "TimeMage Summoner Spellbow Spellblade DarkKnight ArcaneArcher Arcanist Hexblade";
-$Spell::minLevel[78] = 50;
+$Spell::minLevel[78] = 150;
 // $Spell::elementalType[78] = $ElementalFire;
 $SkillType[blackhole] = $SkillTimeMagick;
 
@@ -2886,77 +2893,140 @@ function SpellNum57(%Client, %castObj, %castPos) {
 	schedule("cast_rocksummon("@%Client@");",0.1);
 	return "returnFlag 1";
 }
-function SpellNum58(%Client, %castObj, %castPos) {
+function SpellNum58(%clientId, %castObj, %castPos) {
 
 	//BLIZZARD SUMMON Spell
-	schedule("cast_blizzardblizzardboltfake("@%Client@");",0.1);
-	schedule("cast_blizzardblizzardboltfake("@%Client@");",0.2);
-	schedule("cast_blizzardblizzardboltfake("@%Client@");",0.3);
-	schedule("cast_blizzardblizzardboltfake("@%Client@");",0.4);
-	schedule("cast_blizzardblizzardboltfake("@%Client@");",0.5);
-	schedule("cast_blizzardblizzardboltfake("@%Client@");",0.6);
-	schedule("cast_blizzardblizzardboltfake("@%Client@");",0.7);
-	schedule("cast_blizzardblizzardboltreal("@%Client@");",0.8);
-	schedule("cast_blizzardblizzardboltreal("@%Client@");",0.9);
+	// schedule("cast_blizzardblizzardboltfake("@%Client@");",0.1);
+	// schedule("cast_blizzardblizzardboltfake("@%Client@");",0.2);
+	// schedule("cast_blizzardblizzardboltfake("@%Client@");",0.3);
+	// schedule("cast_blizzardblizzardboltfake("@%Client@");",0.4);
+	// schedule("cast_blizzardblizzardboltfake("@%Client@");",0.5);
+	// schedule("cast_blizzardblizzardboltfake("@%Client@");",0.6);
+	// schedule("cast_blizzardblizzardboltfake("@%Client@");",0.7);
+	// schedule("cast_blizzardblizzardboltreal("@%Client@");",0.8);
+	// schedule("cast_blizzardblizzardboltreal("@%Client@");",0.9);
+	// do some cool stuff
+	// FemaleHumanTownBot
+
+	%projectile = "IceBallBolt"; // IceBolt 
+	%volleyPos = GetWord(%castPos, 0) @ " " @ GetWord(%castPos, 1) @ " " @ GetWord(%castPos, 2) + 2;
+
+	%object = newObject("Shiva", StaticShape, Shiva, true);
+	addToSet("MissionCleanup", %object);
+	gamebase::setposition(%object, %volleyPos);
+	GameBase::setTeam(%object, 0);
+	schedule("Item::Pop(" @ %object @ ");", 6, %object);
+	%spellIndex = $Spell::index[shiva];
+
+	for (%i = 0; %i < $Spell::numProjectiles[%spellIndex]; %i++) {
+		%newPos = GetWord(%volleyPos, 0) + (getRandom() * 4 - 2) @ " " @ (GetWord(%volleyPos, 1) + (getRandom() * 4 - 2)) @ " " @ GetWord(%volleyPos, 2);
+		schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb12\", \"" @ %newPos @ "\", False);", 0.28 * %i);
+		schedule("shootAtClosestEnemyFromPosition(" @ %clientId @ ", \"" @ %newPos @ "\", " @ $Spell::radius[%spellIndex] @ ", \"" @ %projectile @ "\");", 0.3 * %i);
+	}
 
 	return "returnFlag 1";
 }
-function SpellNum59(%Client, %castObj, %castPos) {
+function SpellNum59(%clientId, %castObj, %castPos) {
+	// schedule("cast_summonswordone("@%Client@");",0.1);
+	// schedule("cast_summonswordtwo("@%Client@");",0.2);
+	// schedule("cast_summonswordthree("@%Client@");",0.3);
+	// schedule("cast_summonswordfour("@%Client@");",0.4);
 
-	//BATTLE SUMMON Spell
+	%projectile = "FlameBolt"; // FireBolt
+	%volleyPos = GetWord(%castPos, 0) @ " " @ GetWord(%castPos, 1) @ " " @ GetWord(%castPos, 2) + 2;
 
-	schedule("cast_summonswordone("@%Client@");",0.1);
-	schedule("cast_summonswordtwo("@%Client@");",0.2);
-	schedule("cast_summonswordthree("@%Client@");",0.3);
-	schedule("cast_summonswordfour("@%Client@");",0.4);
+	%object = newObject("Ifrit", StaticShape, Ifrit, true);
+	addToSet("MissionCleanup", %object);
+	gamebase::setposition(%object, %volleyPos);
+	GameBase::setTeam(%object, 0);
+	schedule("Item::Pop(" @ %object @ ");", 6, %object);
+	%spellIndex = $Spell::index[ifrit];
+
+	for (%i = 0; %i < $Spell::numProjectiles[%spellIndex]; %i++) {
+		%newPos = GetWord(%volleyPos, 0) + (getRandom() * 10 - 5) @ " " @ (GetWord(%volleyPos, 1) + (getRandom() * 10 - 5)) @ " " @ GetWord(%volleyPos, 2);
+		schedule("CreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb41\", \"" @ %newPos @ "\", False);", 0.28 * %i);
+		schedule("shootAtClosestEnemyFromPosition(" @ %clientId @ ", \"" @ %newPos @ "\", " @ $Spell::radius[%spellIndex] @ ", \"" @ %projectile @ "\");", 0.3 * %i);
+	}
 
 	return "returnFlag 1";
 }
-function SpellNum60(%Client, %castObj, %castPos) {
-
+function SpellNum60(%clientId, %castObj, %castPos) {
 	//SAPPERS SUMMON Spell
+	// if(%castPos != "") {
+	// 	%index = 60;
+	// 	CreateAndDetBomb(%Client, "bomb88888", %castPos, %index);
 
-	if(%castPos != "") {
-		%index = 60;
-		CreateAndDetBomb(%Client, "bomb88888", %castPos, %index);
+	// 	%overrideEndSound = True;
+	// 	return "returnFlag 1";
+	// }
+	// else {
+	// 	Client::sendMessage(%Client, $MsgGreen, "Cannot Cast that far with this spell.");
 
-		%overrideEndSound = True;
-		return "returnFlag 1";
+	// 	return "returnFlag 0";
+	// }
+	%volleyPos = GetWord(%castPos, 0) @ " " @ GetWord(%castPos, 1) @ " " @ GetWord(%castPos, 2) + 2;
+
+	%object = newObject("Ramuh", StaticShape, Ramuh, true);
+	addToSet("MissionCleanup", %object);
+	gamebase::setposition(%object, %volleyPos);
+	GameBase::setTeam(%object, 6);
+	schedule("Item::Pop(" @ %object @ ");", 6, %object);
+	%spellIndex = $Spell::index[ramuh];
+
+	for (%i = 0; %i < $Spell::numProjectiles[%spellIndex]; %i++) {
+		schedule("SpawnBombAtClosestEnemyFromPosition(\"" @ %clientId @ "\", \"" @ %volleyPos @ "\", " @ $Spell::radius[%spellIndex] @ ", \"Bomb307\", True, \"" @ %spellIndex @ "\");", 0.3 * %i);
 	}
-	else {
-		Client::sendMessage(%Client, $MsgGreen, "Cannot Cast that far with this spell.");
 
-		return "returnFlag 0";
-	}
+	return "returnFlag 1";
 }
-function SpellNum61(%Client, %castObj, %castPos) {
-	%player = Client::getOwnedObject(%Client);
-	if(%castPos != "")
-	{
-		%minrad = 0;
-		%maxrad = $Spell::radius[%index] / 2;
-		for(%i = 0; %i <= 8; %i++)
-		{
-			%tempPos = RandomPositionXY(%minrad, %maxrad);
 
-			%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
-			%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
-			%zPos = GetWord(%castPos, 2);
+function SpellNum61(%clientId, %castObj, %castPos) {
+	// %player = Client::getOwnedObject(%Client);
+	// if(%castPos != "")
+	// {
+	// 	%minrad = 0;
+	// 	%maxrad = $Spell::radius[%index] / 2;
+	// 	for(%i = 0; %i <= 8; %i++)
+	// 	{
+	// 		%tempPos = RandomPositionXY(%minrad, %maxrad);
 
-			%newPos = %xPos@" "@%yPos@" "@%zPos;
+	// 		%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
+	// 		%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
+	// 		%zPos = GetWord(%castPos, 2);
 
-			schedule("CreateAndDetBomb("@%clientId@", \"Supercheebomb1\", \""@%newPos@"\", False, "@%index@");", %i / 7, %player);
-		}
-		CreateAndDetBomb(%clientId, "Supercheebomb1", %castPos, True, %index);
+	// 		%newPos = %xPos@" "@%yPos@" "@%zPos;
 
-		%overrideEndSound = True;
-		%returnFlag = True;
+	// 		schedule("CreateAndDetBomb("@%clientId@", \"Supercheebomb1\", \""@%newPos@"\", False, "@%index@");", %i / 7, %player);
+	// 	}
+	// 	CreateAndDetBomb(%clientId, "Supercheebomb1", %castPos, True, %index);
+
+	// 	%overrideEndSound = True;
+	// 	%returnFlag = True;
+	// }
+	// else
+	// {
+	// 	Client::sendMessage(%clientId, $MsgBeige, "Could not find a target.");
+	// 	%returnFlag = False;
+	// }
+
+	%volleyPos = GetWord(%castPos, 0) @ " " @ GetWord(%castPos, 1) @ " " @ GetWord(%castPos, 2) + 2;
+
+	%object = newObject("Bahamut", StaticShape, Bahamut, true);
+	addToSet("MissionCleanup", %object);
+	gamebase::setposition(%object, %volleyPos);
+	GameBase::setTeam(%object, 0);
+	schedule("Item::Pop(" @ %object @ ");", 9, %object);
+	%spellIndex = $Spell::index[bahamut];
+
+	%possibleProjectiles = "showshockwave IceBallBolt FlameBolt roguefist flare Gravityshot shocklvone shocklvtwo shocklvthree";
+
+	for (%i = 0; %i < $Spell::numProjectiles[%spellIndex]; %i++) {
+		%projectile = getWord(%possibleProjectiles, floor(getRandom() * 9));
+		schedule("shootAtClosestEnemyFromPosition(" @ %clientId @ ", \"" @ %volleyPos @ "\", " @ $Spell::radius[%spellIndex] @ ", \"" @ %projectile @ "\");", 0.25 * %i);
+		schedule("SpawnBombAtClosestEnemyFromPosition(\"" @ %clientId @ "\", \"" @ %volleyPos @ "\", " @ $Spell::radius[%spellIndex] @ ", \"Bomb4\", True, \"" @ %spellIndex @ "\");", 0.3 * %i);
 	}
-	else
-	{
-		Client::sendMessage(%clientId, $MsgBeige, "Could not find a target.");
-		%returnFlag = False;
-	}
+
+	return "returnFlag 1";
 }
 function SpellNum62(%Client, %castObj, %castPos) { //mimic spell
 

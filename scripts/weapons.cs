@@ -75,6 +75,7 @@ $WeaponRange[CompositeBow] = 360;
 $WeaponRange[LightCrossbow] = 300;
 $WeaponRange[AeolusWing] = 400;
 $WeaponRange[HeavyCrossbow] = 500;
+$WeaponRange[EnemyThrowingProjectile] = 500;
 $WeaponRange[RepeatingCrossbow] = 280;
 $WeaponRange[CastingBlade] = 1000;	//will swing from anywhere...BUT will be able to snipe with beam
 $WeaponRange[Wand] = 1000;
@@ -115,8 +116,19 @@ $ProjRestrictions[BlackArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warb
 
 // throwing stars
 $ProjRestrictions[ThrowingStar] = ",ThrowingGloves,";
+$ProjRestrictions[Shuriken] = ",ThrowingGloves,";
+$ProjRestrictions[WarStar] = ",ThrowingGloves,";
+$ProjRestrictions[GiantShuriken] = ",ThrowingGloves,";
+$ProjRestrictions[MeteorStar] = ",ThrowingGloves,";
+$ProjRestrictions[ShadowStar] = ",ThrowingGloves,";
+$ProjRestrictions[SkyStar] = ",ThrowingGloves,";
+$ProjRestrictions[HeavenStar] = ",ThrowingGloves,";
+$ProjRestrictions[CelestialStar] = ",ThrowingGloves,";
 
 $ProjRestrictions[TestArrow] = ",QuickshotBow,HuntingBow,ReinforcedLongbow,Warbow,SharpshooterBow,GaleBow,ArcaneBow,HawksTalon,LongbowsBow,";
+
+// enemy stuff
+$ProjRestrictions[DragonBreathShot] = ",DragonBreath,";
 
 function GenerateAllWeaponCosts()
 {
@@ -269,11 +281,15 @@ function ProjectileAttack(%clientId, %vel, %skipDelay, %spellIndex, %projectileO
 
 	// BasicArrowImpact
 	// new simpler and more efficient way to spawn projectiles (also gives more control on direction, rotation and how the projectile looks and acts)
+
+	// TODO: Fix problem where when AI shoot the onDamage function is not aware of who the shooter client is
 	%projectile = BeltItem::GetProjectile(%loadedProjectile);
+	%projectile.ownerId = %clientId;
 	
 	if (%projectileOverride != "")
 		%projectile = %projectileOverride;
 
+	%player = Client::getOwnedObject(%clientId);
 	Projectile::spawnProjectile(%projectile, GameBase::getMuzzleTransform(%player), %player, Item::getVelocity(%player));
 
 	if (HasBonusState(%clientId, "DoubleShot") == True) {
@@ -2421,5 +2437,46 @@ ItemData ThrowingGloves
 };
 
 function ThrowingGlovesImage::onFire(%player, %slot) {
+	ProjectileAttack(Player::getClient(%player), 100);
+}
+
+// ======================
+// Enemy Throw Projectile
+// ======================
+ItemImageData EnemyThrowingProjectileImage
+{
+	shapeFile  = "smallObject";
+	mountPoint = 0;
+
+	weaponType = 0;
+	// projectileType = DragonFire;
+	accuFire = true;
+	reloadTime = 0;
+	fireTime = $WeaponDelay[Sword];
+	minEnergy = 0;
+	maxEnergy = 0;
+
+	lightType = 3;
+	lightRadius = 10;
+	lightTime = 3;
+	lightColor = { 10, 0, 0 };
+
+	sfxFire = SoundSwing5;
+	sfxActivate = AxeSlash2;
+};
+ItemData EnemyThrowingProjectile
+{
+	heading = "bWeapons";
+	description = "";
+	className = "Weapon";
+	shapeFile  = "smallObject";
+	hudIcon = "blaster";
+	shadowDetailMask = 4;
+	imageType = EnemyThrowingProjectileImage;
+	price = 0;
+	showWeaponBar = true;
+};
+
+function EnemyThrowingProjectileImage::onFire(%player, %slot) {
 	ProjectileAttack(Player::getClient(%player), 100);
 }

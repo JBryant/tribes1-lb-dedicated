@@ -120,7 +120,8 @@ function cast_waterwater(%Client)
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,41);
 
-	Projectile::spawnProjectile("ThrowingStar", %trans, %player, %vel); // watershottwo
+	// 
+	Projectile::spawnProjectile("DragonFire", %trans, %player, %vel); // watershottwo
 }
 
 function cast_rangerwind(%Client)
@@ -165,7 +166,7 @@ function cast_aqua(%Client)
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,39);
-	Projectile::spawnProjectile("drown",%trans,%player,%vel);
+	Projectile::spawnProjectile("drown", %trans, %player, %vel);
 }
 
 function cast_fc(%Client)
@@ -184,7 +185,7 @@ function cast_flare(%Client)
 	%trans = GameBase::getMuzzleTransform(%player);
 	%vel = Item::getVelocity(%player);
 	Player::setAnimation(%Client,40);
-	Projectile::spawnProjectile("flare", %trans,%player,%vel);
+	Projectile::spawnProjectile("flare", %trans, %player, %vel);
 }
 
 function cast_death(%Client)
@@ -670,7 +671,7 @@ function SpellDamage(%Client, %targetId, %index) {
 	if (HasBonusState(%Client, "DoubleCast"))
 		%spellDamage = %spellDamage * 2;
 
-	GameBase::virtual(%targetId, "onDamage", $SpellDamageType, %spellDamage, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client, $Spell::keyword[%index]);
+	GameBase::virtual(%targetId, "onDamage", $SpellDamageType, %spellDamage, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client, "", "", %index);
 }
 
 function SpellRadiusDamage(%Client, %pos, %index) {
@@ -690,7 +691,7 @@ function SpellRadiusDamage(%Client, %pos, %index) {
 				%spellDamage = %spellDamage * 2;
 
 			%newDamage = SpellCalcRadiusDamage(%dist, $Spell::radius[%index], %spellDamage, %percMin, %percMax);
-			GameBase::virtual(%id, "onDamage", $SpellDamageType, %newDamage, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client, $Spell::keyword[%index]);
+			GameBase::virtual(%id, "onDamage", $SpellDamageType, %newDamage, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %Client, "", "", %index);
 		}
 	}
 }
