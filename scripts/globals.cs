@@ -155,3 +155,6 @@ $playerNoDrop["BeastClawVII"] = True;
 $playerNoDrop["BeastClawVIII"] = True;
 $playerNoDrop["BeastClawIX"] = True;
 $playerNoDrop["BeastClawX"] = True;
+
+$playerNoDrop["DragonBreath"] = True;
+$playerNoDrop["DragonBreathShot"] = True;

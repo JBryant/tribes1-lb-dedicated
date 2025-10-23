@@ -206,7 +206,20 @@ function Player::onKilled(%this) {
 		%equippedWeapon = GetEquippedWeapon(%clientId);
 		if (%equippedWeapon != "") {
 			// TODO: Make this use a map later 
-			if (%equippedWeapon == "CastingBlade" || %equippedWeapon == "BeastClawI" || %equippedWeapon == "BeastClawII" || %equippedWeapon == "BeastClawIII" || %equippedWeapon == "BeastClawIV" || %equippedWeapon == "BeastClawV" || %equippedWeapon == "BeastClawVI" || %equippedWeapon == "BeastClawVII" || %equippedWeapon == "BeastClawVIII" || %equippedWeapon == "BeastClawIX" || %equippedWeapon == "BeastClawX") {
+			if (
+				%equippedWeapon == "CastingBlade" ||
+				%equippedWeapon == "BeastClawI" ||
+				%equippedWeapon == "BeastClawII" ||
+				%equippedWeapon == "BeastClawIII" ||
+				%equippedWeapon == "BeastClawIV" ||
+				%equippedWeapon == "BeastClawV" ||
+				%equippedWeapon == "BeastClawVI" ||
+				%equippedWeapon == "BeastClawVII" ||
+				%equippedWeapon == "BeastClawVIII" ||
+				%equippedWeapon == "BeastClawIX" ||
+				%equippedWeapon == "BeastClawX" ||
+				%equippedWeapon == "DragonBreath"
+			) {
 				belt::takethisstuff(%clientId, %equippedWeapon @ "0", 1);
 			} else {
 				Belt::UnequipAccessory(%clientId, %equippedWeapon @ "0");
@@ -418,6 +431,15 @@ function Player::onKilled(%this) {
 	}
 }
 
+// HOW TO FIX THE BUG WHERE AI PROJECTILES ARE NOT SAVING OWNERSHIP
+// 1. Use a hex editor like HxD to open the tribes executable (tribes.exe)
+// 2. Go to line:  0005A540
+// 3. Change 0D from E7 -> 2F
+// 4. Change 0E from 2E -> 2F
+// 5. Save the executable and re-run the server
+// %object should now properly be the AI id when an AI projectile is triggered here for damage
+// Huge shout out to Ledah and Kyred for point me in the right direction.
+// Big thanks as well to Bov for being the one to find the actual Fix for this.
 function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %quadrant, %object, %weapon, %projectile, %skillIndex) {
 	dbecho($dbechoMode2, "Player::onDamage(" @ %this @ ", " @ %type @ ", " @ %value @ ", " @ %pos @ ", " @ %vec @ ", " @ %mom @ ", " @ %vertPos @ ", " @ %quadrant @ ", " @ %object @ ", " @ %weapon @ ", " @ %projectile @ ")");
 
@@ -432,7 +454,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 	// lbecho("vertPos: " @ %vertPos);
 	// lbecho("quadrant: " @ %quadrant);
 	// lbecho("object: " @ %object);
-	// lbecho("objectType: " @ getObjectType(%object));
+	// lbecho("projectile: " @ %projectile);
+	// lbecho("skillIndex: " @ %skillIndex);
 
 	if(Player::isExposed(%this) && %object != -1 && %type != $NullDamageType && !Player::IsDead(%this)) {
 		%initialDamage = %value;
@@ -473,6 +496,12 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			}
 
 			%spellIndex = $Spell::index[%lastSpell];
+
+			if (%skillIndex != "") {
+				%spellIndex = %skillIndex;
+				%lastSpell = $Spell::keyword[%spellIndex];
+			}
+
 			%spellSkillType = $SkillType[%lastSpell];
 			%skilltype = %spellSkillType;
 			%spellDamage = $Spell::damageValue[%spellIndex];
@@ -500,7 +529,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			}
 			
 			if (Player::isAiControlled(%shooterClient)) {
-				%multiplier = %multiplier * 0.25;
+				%multiplier = %multiplier * 0.5;
 			}
 
 			// check for bonuses to damage, like inner fire, etc
@@ -508,17 +537,12 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				%multiplier = %multiplier * 1.5;
 			}
 			
-			// lbecho("shooters skill level: " @ $PlayerSkill[%shooterClient, %spellSkillType]);
-			// TODO: Make the skill based off something from the object that was shot
 			// OLD: %value = round(((%dmg / 1000) * $PlayerSkill[%shooterClient, $SkillBlackMagick]));
 			%value = round((%dmg / 100) * $PlayerSkill[%shooterClient, %spellSkillType] * %multiplier) + 1;
-			// lbecho("calculated value 1: " @ %value);
 			%extraDamage = round(getRandom() * floor((%value * 0.10) + 1));
-			// lbecho("extra damage: " @ %extraDamage);	
 			%value = (%value + %extraDamage);
-			// lbecho("value after extra damage: " @ %value);
 
-			%ab = (getRandom() * (fetchData(%damagedClient, "MDEF") / 10)) + 1;
+			%ab = (getRandom() * fetchData(%damagedClient, "MDEF")) + 1;
 			%value = Cap(%value - %ab, 0, "inf") + 1; // add 1 raise base damage slight and ensure damage is always done
 			//lbecho("calculated value 2: " @ %value);
 
@@ -531,28 +555,6 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			if (%value != "") {
 				%multi = %value;
 			}
-
-			//Backstab - rethink how to add this back in
-			// if(fetchData(%shooterClient, "invisible")) {
-			// 	%dRot = GetWord(GameBase::getRotation(%damagedClient), 2);
-			// 	%sRot = GetWord(GameBase::getRotation(%shooterClient), 2);
-			// 	%diff = %dRot - %sRot;
-
-			// 	if(%diff >= -0.9 && %diff <= 0.9) {
-			// 		if(%skilltype == $SkillPiercing) {
-			// 			%multi += $PlayerSkill[%shooterClient, $SkillBackstabbing] / 175;
-			// 			%Backstab = True;
-			// 			%dotherdebugmsg = "\n\nyou were backstabbed";
-			// 			%sotherdebugmsg = "\n\nyou successfully backstabbed!";
-			// 		}
-			// 	}
-			// 	if(%shooterClient.adminLevel < 5)
-			// 		UnHide(%shooterClient);
-			// }
-			// if(fetchData(%damagedClient, "invisible") && %damagedClient.adminLevel < 5)
-			// {
-			// 	UnHide(%damagedClient);
-			// }
 
 			//Bash - rethink bash as well
 			// if(fetchData(%shooterClient, "NextHitBash"))
@@ -595,7 +597,35 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				%value = round((( (%weapondamage + %rweapondamage) / 1000) * $PlayerSkill[%shooterClient, %skilltype]) * %multi);
 			}
 
-			%ab = (getRandom() * (fetchData(%damagedClient, "DEF") / 10)) + 1;
+			%finalMulti = 1;
+
+			if(fetchData(%shooterClient, "invisible")) {
+				%dRot = GetWord(GameBase::getRotation(%damagedClient), 2);
+				%sRot = GetWord(GameBase::getRotation(%shooterClient), 2);
+				%diff = %dRot - %sRot;
+
+				if(%diff >= -0.9 && %diff <= 0.9) {
+					if ($skillType[%weapon] == $SkillKatanas) {
+						%finalMulti += 4.0; // 
+					} else if ($skillType[%weapon] == $SkillBows) {
+						%finalMulti += 1.0; // bows get a smaller bonus
+					} else {
+						lbecho("weapon: " @ %weapon);
+						%finalMulti += 3.0; // everything else gets a small bonus
+					}
+					lbehco("Multiplier: " @ %finalMulti);
+				}
+
+				if(%shooterClient.adminLevel < 5)
+					UnHide(%shooterClient);
+			}
+			if(fetchData(%damagedClient, "invisible") && %damagedClient.adminLevel < 5) {
+				UnHide(%damagedClient);
+			}
+
+			%finalValue = %value * %finalMulti;
+
+			%ab = (getRandom() * fetchData(%damagedClient, "DEF")) + 1;
 			%value = Cap(%value - %ab, 1, "inf");
 
 			%a = (%value * 0.15);
@@ -880,14 +910,24 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 					// percentage increase to damage
 					if (%modId == 1) {
 						// direct damage (5 = 5 extra damage)
-						%enchantDamage = %modValue; 
-
-						// percent damage (eg 10 = 10% of hit damage)
-						// %enchantDamage = floor(%convValue * (%modValue / 100)) + 1;
+						%enchantDamage = %modValue;
 					}
-				}	
 
-				// %backupValue = %value;
+					if (%modId == 2) {
+						if (%type != $SpellDamageType || $skillType[%weapon] == $SkillSpears) {
+							// percent damage (eg 10 = 10% of hit damage)
+							%enchantDamage = round((%value * $TribesDamageToNumericDamage) * (%modValue / 100));
+						}
+					}
+
+					// add a +/1 10% damage variance to enchant damage
+					if (%enchantDamage > 0) {
+						%a = (%enchantDamage * 0.10);
+						%r = round((getRandom() * (%a * 2)) - %a);
+						%enchantDamage += %r;
+					}
+				}
+
 				%weaponDamage = %value;
 				%finalDamage = %weaponDamage;
 

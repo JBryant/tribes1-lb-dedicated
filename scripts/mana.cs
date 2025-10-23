@@ -59,11 +59,14 @@ function refreshMANA(%clientId, %value)
 // mana at magicka 10000: 3341
 // 30: 21, 100: 42, 500: 175, 1000: 341, 5000: 1675, 10000: 3341
 // change mana regen
+
+$magickaSkillRegenModifier = 0.01;
+
 function refreshMANAREGEN(%clientId)
 {
 	dbecho($dbechoMode, "refreshMANAREGEN(" @ %clientId @ ")");
 
-	//%a = ($PlayerSkill[%clientId, $SkillMagicka] / 3250);
+	%magickaPerSecond = ($PlayerSkill[%clientId, $SkillMagicka] * $magickaSkillRegenModifier);
 
 	if(%clientId.sleepMode == 1)
 		%b = 1.0;
@@ -78,13 +81,21 @@ function refreshMANAREGEN(%clientId)
 
 	// recharge rate are is in percent of max energy per second
 	// use players max mana to calculate the recharge rate to match the mana per second
-	%c = (%manaPerSecond / %playerMaxMana) * 100;
+	%c = ((%magickaPerSecond + %manaPerSecond) / %playerMaxMana) * 100;
 
 	%r = %b + %c;
 
 	GameBase::setRechargeRate(Client::getOwnedObject(%clientId), %r);
 }
 
+function getManaRegenPerSecond(%clientId) {
+	dbecho($dbechoMode, "getManaRegenPerSecond(" @ %clientId @ ")");
+
+	%magickaPerSecond = ($PlayerSkill[%clientId, $SkillMagicka] * $magickaSkillRegenModifier);
+	%manaPerSecond = AddPoints(%clientId, 11);
+
+	return round(%magickaPerSecond + %manaPerSecond);
+}
 // old function
 // function refreshMANAREGEN(%clientId)
 // {
