@@ -491,35 +491,34 @@ function processMenuOptions(%clientId, %option)
 	}
 	else if(%opt == "viewstats")
 	{
-		%a[%tmp++] = "<f1>" @ Client::getName(%clientId) @ ", LEVEL " @ fetchData(%clientId, "LVL") @ " " @ fetchData(%clientId, "RACE") @ " " @ fetchData(%clientId, "CLASS") @ "<f0>\n\n";
+		%msg = "<f1>" @ Client::getName(%clientId) @ " <f0>- LVL <f2>" @ Number::Beautify(fetchData(%clientId, "LVL")) @ " <f0>" @ fetchData(%clientId, "CLASS") @ "\n\n";
 
-		%a[%tmp++] = "ATK: " @ fetchData(%clientId, "ATK") @ "\n";
-		%a[%tmp++] = "DEF: " @ fetchData(%clientId, "DEF") @ "\n";
-		%a[%tmp++] = "MDEF: " @ fetchData(%clientId, "MDEF") @ "\n";
-		%a[%tmp++] = "HP: " @ fetchData(%clientId, "HP") @ " / " @ fetchData(%clientId, "MaxHP") @ "\n";
-		%a[%tmp++] = "MANA: " @ fetchData(%clientId, "MANA") @ " / " @ fetchData(%clientId, "MaxMANA") @ "\n";
-		%a[%tmp++] = "LCK: " @ fetchData(%clientId, "LCK") @ "\n\n";
+		%msg = %msg @ "<f0>Attack: <f1>" @  Number::Beautify(fetchData(%clientId, "ATK")) @ "\n";
+		%msg = %msg @ "<f0>Defense: <f1>" @ Number::Beautify(fetchData(%clientId, "DEF")) @ "\n";
+		%msg = %msg @ "<f0>Magic Defense: <f1>" @ Number::Beautify(fetchData(%clientId, "MDEF")) @ "\n\n";
+		%msg = %msg @ "<f0>Health: <f1>" @ Number::Beautify(fetchData(%clientId, "HP")) @ " / " @ Number::Beautify(fetchData(%clientId, "MaxHP")) @ "\n";
+		%msg = %msg @ "<f0>Health Regen: <f1>" @ Number::Beautify(getHealthRegenPerSecond(%clientId)) @ " / Sec\n\n";
+		%msg = %msg @ "<f0>Magicka: <f1>" @ Number::Beautify(fetchData(%clientId, "MANA")) @ " / " @ Number::Beautify(fetchData(%clientId, "MaxMANA")) @ "\n";
+		%msg = %msg @ "<f0>Magicka Regen: <f1>" @ Number::Beautify(getManaRegenPerSecond(%clientId)) @ " / Sec\n\n";
+		%msg = %msg @ "<f0>Luck: <f1>" @ Number::Beautify(fetchData(%clientId, "LCK")) @ "\n";
 
 		if(fetchData(%clientId, "MyHouse") != "")
-			%a[%tmp++] = "House: " @ fetchData(%clientId, "MyHouse") @ "\n";
+			%msg = %msg @ "<f0>House: <f1>" @ fetchData(%clientId, "MyHouse") @ "\n";
 
-		%a[%tmp++] = "Rank Pts: " @ fetchData(%clientId, "RankPoints") @ "\n\n";
-		%a[%tmp++] = "Coins: " @ fetchData(%clientId, "COINS") @ " - Bank: " @ fetchData(%clientId, "BANK") @ "\n";
-		%a[%tmp++] = "Exp: " @ fetchData(%clientId, "EXP") @ "\n";
-        %a[%tmp++] = "Exp to next level: " @ (GetExp(GetLevel(fetchData(%clientId, "EXP"), %clientId)+1, %clientId) - fetchData(%clientId, "EXP")) @ "\n";
+		%msg = %msg @ "<f0>Rank Pts: <f1>" @ Number::Beautify(fetchData(%clientId, "RankPoints")) @ "\n\n";
+		%msg = %msg @ "<f0>Coins: <f1>" @ Number::Beautify(fetchData(%clientId, "COINS")) @ "\n";
+		%msg = %msg @ "<f0>Bank: <f1>" @ Number::Beautify(fetchData(%clientId, "BANK")) @ "\n";
+		%msg = %msg @ "<f0>Total Assets: <f1>" @ Number::Beautify(fetchData(%clientId, "COINS") + fetchData(%clientId, "BANK")) @ "\n\n";
+		%msg = %msg @ "<f0>Exp: <f1>" @ Number::Beautify(fetchData(%clientId, "EXP")) @ "\n";
+        %msg = %msg @ "<f0>Exp to next level: <f1>" @ Number::Beautify(GetExp(GetLevel(fetchData(%clientId, "EXP"), %clientId)+1, %clientId) - fetchData(%clientId, "EXP")) @ "\n";
 
 		%bonuses = fetchData(%clientId, "Bonuses");
 		if (%bonuses != "")
-			%a[%tmp++] = "Bonuses:\n" @ %bonuses @ "\n";
+			%msg = %msg @ "<f0>Bonuses: <f1>\n" @ %bonuses @ "\n";
 
-		// %a[%tmp++] = "Class: " @ fetchData(%clientId, "CLASS") @ "\n";
-		// %a[%tmp++] = "TOTAL $: " @ fetchData(%clientId, "COINS") + fetchData(%clientId, "BANK") @ "\n\n";
-		// %a[%tmp++] = "Weight: " @ fetchData(%clientId, "Weight") @ " / " @ fetchData(%clientId, "MaxWeight") @ "\n";
+		%msg = %msg @ "<f0>Weight: <f1>" @ Number::Beautify(fetchData(%clientId, "Weight")) @ " / " @ Number::Beautify(fetchData(%clientId, "MaxWeight")) @ "\n";
 
-		for(%i = 1; %a[%i] != ""; %i++)
-			%f = %f @ %a[%i];
-
-		bottomprint(%clientId, %f, floor(String::len(%f) / 20));
+		rpg::longPrint(%clientId, %msg, 0, 10);
 
 		return;
 	}
@@ -536,13 +535,18 @@ function processMenuOptions(%clientId, %option)
 		return;
 	}
 	else if(%opt == "viewclasslevels") {
-		%a[%tmp++] = "<f1>" @ Client::getName(%clientId) @ ", LEVEL " @ fetchData(%clientId, "LVL") @ " " @ fetchData(%clientId, "RACE") @ " " @ fetchData(%clientId, "CLASS") @ "<f0>\n\n";
-		%a[%tmp++] = "Class Levels: " @ fetchData(%clientId, "RemortedClasses");
+		%msg = "<f1>" @ Client::getName(%clientId) @ ", LEVEL " @ fetchData(%clientId, "LVL") @ " " @ fetchData(%clientId, "RACE") @ " " @ fetchData(%clientId, "CLASS") @ "<f0>\n\n";
+		%msg = %msg @ "Class Levels:\n";
 
-		for(%i = 1; %a[%i] != ""; %i++)
-			%f = %f @ %a[%i];
+		%clist = fetchData(%clientId, "RemortedClasses");
+		for(%i = 0; (%c = GetWord(%clist, %i)) != -1; %i += 2) {
+			%class = GetWord(%clist, %i);
+			%lvl = GetWord(%clist, %i+1);
+			%msg = %msg @ "<f0>" @ %class @ ": <f2>" @ %lvl @ "\n";
+		}
 
-		bottomprint(%clientId, %f, floor(String::len(%f) / 10));
+		rpg::longPrint(%clientId, %msg, 0, 10);	
+		// bottomprint(%clientId, %f, floor(String::len(%f) / 10));
 	}
 	else if(%opt == "addgroup")
 	{

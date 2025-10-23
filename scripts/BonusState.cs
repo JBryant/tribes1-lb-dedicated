@@ -31,7 +31,13 @@ function DecreaseBonusStateTicks(%clientId, %b) {
 				$BonusStateCnt[%clientId, %i]--;
 
 				if($BonusStateCnt[%clientId, %i] <= 0) {
-					Client::sendMessage(%clientId, $MsgRed, $BonusStateName[%clientId, %i] @ " has expired.");
+					if ($BonusStateName[%clientId, %i] == "Sneak") {
+						GameBase::startFadeIn(%clientId);
+						storeData(%clientId, "invisible", "");
+						Client::sendMessage(%clientId, $MsgBeige, "You are no longer hidden in the shadows.");
+					} else {
+						Client::sendMessage(%clientId, $MsgRed, $BonusStateName[%clientId, %i] @ " has expired.");
+					}
 
 					$BonusStateName[%clientId, %i] = "";
 					$BonusStateCnt[%clientId, %i] = "";

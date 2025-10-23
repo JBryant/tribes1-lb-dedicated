@@ -260,6 +260,8 @@ function createServer(%mission, %dedicated)
 	// chocobo stuffz
 	exec(ChocoboArmor);
 	exec(Chocobo);
+	// housing stuff
+	exec(home);
 
 	%oldrpgmap["rpgmap1"] = True;
 	%oldrpgmap["rpgmap5"] = True;

@@ -1455,7 +1455,7 @@ BulletData icestaffbolt
    damageType        = 0;
    damageValue       = 0.80;
    bulletholeIndex   = 0;
-   damageType    = $SpellDamageType;
+   damageType        = $SpellDamageType;
    damageType        = $SpellDamageType;
    aimDeflection     = 0.000;
    liveTime          = 0.4;
@@ -2506,7 +2506,7 @@ RocketData BasicQuarrelImpact
 RocketData BasicQuarrelRadiusSmall
 {
    bulletShapeName  = "bullet.dts";
-   explosionTag     = bulletexp1;
+   explosionTag     = turretExp;
    collisionRadius  = 0;
    mass             = 0.1;
 
@@ -2529,25 +2529,25 @@ RocketData BasicQuarrelRadiusSmall
 //--------------------------------------
 // small rocket fast with big shockwave
 //--------------------------------------
-BulletData testarrow
-{
-  bulletShapeName = "tracer.dts";
-  explosionTag = debrisExpSmall;
-  collisionRadius = 0.3;
-  mass = 2.0;
-  damageClass = 1;
-  damageValue = 1;
-  explosionRadius = 20.0;
-  damageType = $MissileDamageType;
-  aimDeflection = 0.0009;
-  kickBackStrength = 600.0;
-  muzzleVelocity = 100.0;
-  terminalVelocity = 100.0; // 100
-  acceleration = 5.0;
-  totalTime = 8.0;
-  liveTime = 15.0;
-  inheritedVelocityScale = 0.5;
-};
+// BulletData testarrow
+// {
+//   bulletShapeName = "tracer.dts";
+//   explosionTag = debrisExpSmall;
+//   collisionRadius = 0.3;
+//   mass = 2.0;
+//   damageClass = 1;
+//   damageValue = 1;
+//   explosionRadius = 20.0;
+//   damageType = $MissileDamageType;
+//   aimDeflection = 0.0009;
+//   kickBackStrength = 600.0;
+//   muzzleVelocity = 100.0;
+//   terminalVelocity = 100.0; // 100
+//   acceleration = 5.0;
+//   totalTime = 8.0;
+//   liveTime = 15.0;
+//   inheritedVelocityScale = 0.5;
+// };
 
 // //--------------------------------------
 // // small rocket fast with big shockwave
@@ -2864,6 +2864,33 @@ function MiniFusionBolt::onAdd(%this)
 //--------------------------------------
 // nice low level firebolt
 //--------------------------------------
+RocketData LightningBolt
+{
+  bulletShapeName = "zap.dts";
+  explosionTag = electricalExp;
+  collisionRadius = 0.0;
+  mass = 2.0;
+  damageClass = 1;
+  damageValue = 1.0; // 0.40 / 175
+  damageType = $SpellDamageType;
+  explosionRadius = 10; // 5.5
+  kickBackStrength = 0.0;
+  muzzleVelocity = 130.0;
+  terminalVelocity = 130.0;
+  acceleration = 5.0;
+  totalTime = 6.5;
+  liveTime = 10.0;
+  lightRange = 5.0;
+  lightColor = { 5.20, 6.7, 1.5 };
+  inheritedVelocityScale = 0.0;
+  trailType = 2;
+  trailString = "fusionex.dts";
+  smokeDist = 4;
+};
+
+//--------------------------------------
+// nice low level firebolt
+//--------------------------------------
 RocketData FireBolt
 {
   bulletShapeName = "spikeshot.dts";
@@ -2996,6 +3023,35 @@ BulletData MagicBolt
 
    smokeName = "rsmoke.dts";
 };
+
+//--------------------------------------
+// large firebal with shockwave explosion
+//--------------------------------------
+RocketData DragonFire
+{
+  bulletShapeName = "plasmatrail.dts"; // plasmatrail
+  explosionTag = rocketExp; // FireExp
+  collisionRadius = 0.0;
+  mass = 2.0;
+  damageClass = 1;
+  damageValue = 1;
+  damageType = $WeaponDamageType;
+  explosionRadius = 25.0;
+  kickBackStrength = 0.0;
+  muzzleVelocity = 50.0;
+  terminalVelocity = 50.0;
+  acceleration = 5.0;
+  totalTime = 2.1;
+  liveTime = 2.1;
+  lightRange = 0.0;
+  lightColor = { 1.0, 1.0, 9.5 };
+  inheritedVelocityScale = 0.5;
+  trailType = 2;
+  trailString = "plasmaEx.dts"; // plasmaEx
+  smokeDist = 2.8;
+  soundId = NoSound;
+};
+
 //--------------------------------------
 // almost invisble looking laser beam
 //--------------------------------------

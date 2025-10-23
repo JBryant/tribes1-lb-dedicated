@@ -4,7 +4,7 @@ $spdlowmed = 7;
 $spdmed = 8;
 $spdmedhigh = 9;
 $spdhigh = 10;
-$spdhigher = 11;
+$spdhigher = 13;
 $spdfast = 16;
 $spdveryfast = 20;
 

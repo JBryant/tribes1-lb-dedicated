@@ -1328,51 +1328,51 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 		// 	return;
 		// }
-		if(%w1 == "#hide")
-		{
-			if(SkillCanUse(%TrueClientId, "#hide"))
-			{
-				if(!fetchData(%TrueClientId, "invisible") && !fetchData(%TrueClientId, "blockHide"))
-				{
-					%closeEnoughToWall = Cap($PlayerSkill[%TrueClientId, $SkillHiding] / 125, 3.5, 8);
+		// if(%w1 == "#hide")
+		// {
+		// 	if(SkillCanUse(%TrueClientId, "#hide"))
+		// 	{
+		// 		if(!fetchData(%TrueClientId, "invisible") && !fetchData(%TrueClientId, "blockHide"))
+		// 		{
+		// 			%closeEnoughToWall = Cap($PlayerSkill[%TrueClientId, $SkillHiding] / 125, 3.5, 8);
 	
-					%pos = GameBase::getPosition(%TrueClientId);
+		// 			%pos = GameBase::getPosition(%TrueClientId);
 	
-					%closest = 10000;
-					for(%i = 0; %i <= 6.283; %i+= 0.52)
-					{
-						GameBase::getLOSinfo(Client::getOwnedObject(%TrueClientId), 25, "0 0 " @ %i);
-						%dist = Vector::getDistance(%pos, $los::position);
-						if(%dist < %closest && $los::position != "0 0 0" && $los::position != "")
-							%closest = %dist;
-					}
+		// 			%closest = 10000;
+		// 			for(%i = 0; %i <= 6.283; %i+= 0.52)
+		// 			{
+		// 				GameBase::getLOSinfo(Client::getOwnedObject(%TrueClientId), 25, "0 0 " @ %i);
+		// 				%dist = Vector::getDistance(%pos, $los::position);
+		// 				if(%dist < %closest && $los::position != "0 0 0" && $los::position != "")
+		// 					%closest = %dist;
+		// 			}
 	
-					if(%closest <= %closeEnoughToWall)
-					{
-						Client::sendMessage(%TrueClientId, $MsgBeige, "You are successful at Hide In Shadows.");
+		// 			if(%closest <= %closeEnoughToWall)
+		// 			{
+		// 				Client::sendMessage(%TrueClientId, $MsgBeige, "You are successful at Hide In Shadows.");
 	
-						GameBase::startFadeOut(%TrueClientId);
-						storeData(%TrueClientId, "invisible", True);
+		// 				GameBase::startFadeOut(%TrueClientId);
+		// 				storeData(%TrueClientId, "invisible", True);
 	
-						%grace = Cap($PlayerSkill[%TrueClientId, $SkillHiding] / 10, 5, 100);
-						WalkSlowInvisLoop(%TrueClientId, 5, %grace);
+		// 				%grace = Cap($PlayerSkill[%TrueClientId, $SkillHiding] / 10, 5, 100);
+		// 				WalkSlowInvisLoop(%TrueClientId, 5, %grace);
 	
-						UseSkill(%TrueClientId, $SkillHiding, True, True);
-					}
-					else
-					{
-						Client::sendMessage(%TrueClientId, $MsgWhite, "You were unsuccessful at Hide In Shadows.");
-						UseSkill(%TrueClientId, $SkillHiding, False, True);
-					}
-				}
-			}
-			else
-			{
-				Client::sendMessage(%TrueClientId, $MsgWhite, "You can't hide because you lack the necessary skills.");
-				UseSkill(%TrueClientId, $SkillHiding, False, True);
-			}
-			return;
-		}
+		// 				UseSkill(%TrueClientId, $SkillHiding, True, True);
+		// 			}
+		// 			else
+		// 			{
+		// 				Client::sendMessage(%TrueClientId, $MsgWhite, "You were unsuccessful at Hide In Shadows.");
+		// 				UseSkill(%TrueClientId, $SkillHiding, False, True);
+		// 			}
+		// 		}
+		// 	}
+		// 	else
+		// 	{
+		// 		Client::sendMessage(%TrueClientId, $MsgWhite, "You can't hide because you lack the necessary skills.");
+		// 		UseSkill(%TrueClientId, $SkillHiding, False, True);
+		// 	}
+		// 	return;
+		// }
 		// if(%w1 == "#bash")
 		// {
 		// 	if(!fetchData(%TrueClientId, "blockBash"))
@@ -1581,8 +1581,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 		else if(%w1 == "#camp")
 		{
-			if(Player::getItemCount(%TrueClientId, Tent))
-			{
+			//if(Player::getItemCount(%TrueClientId, Tent))
+			//{
 				%camp = nameToId("MissionCleanup\\Camp" @ %TrueClientId);
 				if(%camp == -1)
 				{
@@ -1592,8 +1592,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 			
 						%pos = GameBase::getPosition(%TrueClientId);
 			
-						Player::decItemCount(%TrueClientId, Tent);
-						RefreshAll(%TrueClientId);
+						//Player::decItemCount(%TrueClientId, Tent);
+						//RefreshAll(%TrueClientId);
 						%group = newObject("Camp" @ %TrueClientId, SimGroup);
 						addToSet("MissionCleanup", %group);
 		
@@ -1607,9 +1607,9 @@ function internalSay(%clientId, %team, %message, %senderName)
 				}
 				else
 					Client::sendMessage(%TrueClientId, $MsgRed, "You already have a camp setup somewhere.");
-			}
-			else
-				Client::sendMessage(%TrueClientId, $MsgRed, "You aren't carrying a tent.");
+			// }
+			// else
+			// 	Client::sendMessage(%TrueClientId, $MsgRed, "You aren't carrying a tent.");
 	
 			return;
 		}
@@ -1795,6 +1795,301 @@ function internalSay(%clientId, %team, %message, %senderName)
 		// LONGBOW (and Others) COMMANDS
 		//============================
 
+		if (%w1 == "#changeweather") {
+			if(%clientToServerAdminLevel >= 4)
+				ChangeWeather();
+		}
+
+		if (%w1 == "#homecommands" || %w1 == "#housecommands") {
+			%msg = "<f2>Home Commands\n\n";
+			%msg = %msg @ "<f1>#homes:             <f0>View a list of all home types\n";
+			%msg = %msg @ "<f1>#placehome [type]:  <f0>Enter placemode to begin placing your home\n";
+			%msg = %msg @ "<f1>#place:             <f0>Exit placemode and place the item\n";
+			%msg = %msg @ "<f1>#homeaddx [X]:      <f0>Move you home the X direction. Can be +/-\n";
+			%msg = %msg @ "<f1>#homeaddy [Y]:      <f0>Move you home the Y direction. Can be +/-\n";
+			%msg = %msg @ "<f1>#homeaddz [Z]:      <f0>Move you home the Z direction. Can be +/-\n";
+			%msg = %msg @ "<f1>#homesetrot [R]:    <f0>Set the rotation of your home. Can be +/- [-1 to +1]\n";
+			%msg = %msg @ "<f1>#removehome:        <f0>Remove your home and all house items\n";
+
+			%msg = %msg @ "<f2>\nHome Item Commands\n\n";
+			%msg = %msg @ "<f1>#homeitems:         <f0>View a list of all home items\n";
+			%msg = %msg @ "<f1>#placeitem [type]:  <f0>Enter placemode to begin placing a home item\n";
+			%msg = %msg @ "<f1>#move:              <f0>Grab home item and move it to a new location\n";
+			%msg = %msg @ "<f1>#itemaddx [X]:      <f0>Move home item the X direction. Can be +/-\n";
+			%msg = %msg @ "<f1>#itemaddy [Y]:      <f0>Move home item the Y direction. Can be +/-\n";
+			%msg = %msg @ "<f1>#itemaddz [Z]:	   <f0>Move home item the Z direction. Can be +/-\n";
+			%msg = %msg @ "<f1>#itemsetrot [R]:    <f0>Set the rotation of a home item. Can be +/- [-1 to +1]\n";
+			%msg = %msg @ "<f1>#removeitem:        <f0>Remove a home item you are looking at\n";
+
+			rpg::longPrint(%TrueClientId, %msg, 0, 10);
+		}
+
+		if (%w1 == "#homes") {
+			%msg = "<f2>Homes\n\n";
+			%msg = %msg @ "<f1>house1:        <f0>\n";
+			%msg = %msg @ "<f1>store1:        <f0>\n";
+			%msg = %msg @ "<f1>nbank:         <f0>\n";
+			%msg = %msg @ "<f1>cozyhouse:     <f0>\n";
+			%msg = %msg @ "<f1>tavern:        <f0>\n";
+			%msg = %msg @ "<f1>lhouse:        <f0>\n";
+			%msg = %msg @ "<f1>cheehouselights:<f0>\n";
+			%msg = %msg @ "<f1>shildrikhouse: <f0>\n";
+			%msg = %msg @ "<f1>rmr7thheaven: <f0>\n";
+			%msg = %msg @ "<f1>cfarm1:        <f0>\n";
+			%msg = %msg @ "<f1>chaunted:      <f0>\n";
+			%msg = %msg @ "<f1>keep:          <f0>\n";
+			%msg = %msg @ "<f1>castle:        <f0>\n";
+			%msg = %msg @ "<f1>magetower:     <f0>\n";
+			%msg = %msg @ "<f1>shildriklit:   <f0>\n";
+			%msg = %msg @ "<f1>town51:        <f0>\n";
+			%msg = %msg @ "<f1>town52:        <f0>\n";
+			%msg = %msg @ "<f1>cthh:          <f0>\n";
+			%msg = %msg @ "<f1>limbo1:        <f0>\n";
+			%msg = %msg @ "<f1>fort:          <f0>\n";
+			%msg = %msg @ "<f1>dcty:          <f0>\n";
+			%msg = %msg @ "<f1>rmrrinvale:    <f0>\n";
+			%msg = %msg @ "<f1>edmire2lit:    <f0>\n";
+			%msg = %msg @ "<f1>ctown:         <f0>\n";
+			%msg = %msg @ "<f1>ncity:         <f0>\n";
+			rpg::longPrint(%TrueClientId, %msg, 0, 10);
+		}
+
+		if (%w1 == "#homeitems") {
+			%msg = "<f2>Home Items\n\n";
+			%msg = %msg @ "<f1>cabinet1:        <f0>\n";
+			%msg = %msg @ "<f1>cabinet2:        <f0>\n";
+			%msg = %msg @ "<f1>woodchair:      <f0>\n";
+			%msg = %msg @ "<f1>bar:            <f0>\n";
+			%msg = %msg @ "<f1>barstool:       <f0>\n";
+			%msg = %msg @ "<f1>table:          <f0>\n";
+			%msg = %msg @ "<f1>roundtable:     <f0>\n";
+			%msg = %msg @ "<f1>stove:          <f0>\n";
+			%msg = %msg @ "<f1>easel:          <f0>\n";
+			%msg = %msg @ "<f1>bed:            <f0>\n";
+			%msg = %msg @ "<f1>jfnt:           <f0>\n";
+			%msg = %msg @ "<f1>woodfire:       <f0>\n";
+			%msg = %msg @ "<f1>anvil:          <f0>\n";
+			%msg = %msg @ "<f1>bed1:           <f0>\n";
+			%msg = %msg @ "<f1>bed1b:          <f0>\n";
+			%msg = %msg @ "<f1>bed1c:          <f0>\n";
+			%msg = %msg @ "<f1>bed2:           <f0>\n";
+			%msg = %msg @ "<f1>bed3:           <f0>\n";
+			%msg = %msg @ "<f1>bench1:         <f0>\n";
+			%msg = %msg @ "<f1>bench2:         <f0>\n";
+			%msg = %msg @ "<f1>bench3:         <f0>\n";
+			%msg = %msg @ "<f1>bigtable1:      <f0>\n";
+			%msg = %msg @ "<f1>bigtable2:      <f0>\n";
+			%msg = %msg @ "<f1>candleabra:     <f0>\n";
+			%msg = %msg @ "<f1>chair1:         <f0>\n";
+			%msg = %msg @ "<f1>chair1a:        <f0>\n";
+			%msg = %msg @ "<f1>endtable:      <f0>\n";
+			%msg = %msg @ "<f1>fireplace:      <f0>\n";
+			%msg = %msg @ "<f1>fireplaceb:     <f0>\n";
+			%msg = %msg @ "<f1>pic1:           <f0>\n";
+			%msg = %msg @ "<f1>pic2:           <f0>\n";
+			%msg = %msg @ "<f1>pic3:           <f0>\n";
+			%msg = %msg @ "<f1>pic4:           <f0>\n";
+			%msg = %msg @ "<f1>pic5:           <f0>\n";
+			%msg = %msg @ "<f1>throne2:        <f0>\n";		
+			rpg::longPrint(%TrueClientId, %msg, 0, 10);
+		}
+
+		if (%w1 == "#place") {
+			//if(%clientToServerAdminLevel >= 4) {
+				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
+					Client::sendMessage(%TrueClientId, 1, "You are not currently moving any items.");
+					return;
+				}
+
+				EndPlaceMode(%TrueClientId);
+			//}
+		}
+
+		if (%w1 == "#placehome" || %w1 == "#placehouse") {
+			//if(%clientToServerAdminLevel >= 4) {				
+				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
+					%shape = getWord(%cropped, 0);
+					if (String::findSubStr($homeDisList, %shape) < 0 && $tagToObjectId[%TrueClientId @ "_home"] == "") {
+						Client::sendMessage(%TrueClientId, 1, "That is not a valid home shape. Type #homes to see a list of valid shapes.");
+						return;
+					}
+
+					StartPlaceMode(%TrueClientId, "home", %shape @ ".dis");
+				} else {
+					Client::sendMessage(%TrueClientId, 1, "You are already placing a home.");
+					return;
+				}
+			//}
+		}
+
+		if (%w1 == "#removehome" || %w1 == "#removehouse") {
+			//if(%clientToServerAdminLevel >= 4) {
+				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
+					RemoveHome(%TrueClientId);
+				} else {
+					Client::sendMessage(%TrueClientId, 1, "You are already placing a home.");
+					return;
+				}
+			//}
+		}
+
+		if (%w1 == "#homeaddx" || %w1 == "#houseaddx") {
+			%offset = getWord(%cropped, 0);
+			HomeAddX(%TrueClientId, %offset);
+		}
+
+		if (%w1 == "#homeaddy" || %w1 == "#houseaddy") {
+			%offset = getWord(%cropped, 0);
+			HomeAddY(%TrueClientId, %offset);
+		}
+
+		if (%w1 == "#homeaddz" || %w1 == "#houseaddz") {
+			%offset = getWord(%cropped, 0);
+			HomeAddZ(%TrueClientId, %offset);
+		}
+
+		if (%w1 == "#homesetrot" || %w1 == "#housesetrot") {
+			%rotation = getWord(%cropped, 0);
+			HomeSetRot(%TrueClientId, %rotation);
+		}
+
+
+		if (%w1 == "#placehomeitem" || %w1 == "#placehouseitem" || %w1 == "#placeitem") {
+			//if(%clientToServerAdminLevel >= 4) {
+				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
+					// check if they have a home first...
+					// if () {
+
+					// }
+
+
+					// check if they have any free slots
+					%openSlot = -1;
+					for (%i = 1; %i <= $maxHouseItems; %i++) {
+						%homeItem = $tagToObjectId[%TrueClientId @ "_homeitem_" @ %i];
+						if (%homeItem == "") {
+							%openSlot = %i;
+							break;
+						}
+					}
+
+					if (%openSlot < 0) {
+						Client::sendMessage(%TrueClientId, 1, "You have no open home item slots.");
+						return;
+					}
+
+					%shape = getWord(%cropped, 0);					
+					if (String::findSubStr($homeItemDisList, %shape) < 0) {
+						Client::sendMessage(%TrueClientId, 1, "That is not a valid home shape. Type #homes to see a list of valid shapes.");
+						return;
+					}
+
+					StartPlaceMode(%TrueClientId, "homeitem_" @ %openSlot, %shape @ ".dis", %openSlot);
+				} else {
+					Client::sendMessage(%TrueClientId, 1, "You are already placing an item.");
+					return;
+				}
+			//}
+		}
+
+		if (%w1 == "#move") {
+			%player = Client::getOwnedObject(%TrueClientId);
+
+			if(GameBase::getLOSinfo(%player, 1000)) {
+				%obj = $los::object;
+				if (%obj.owner == %TrueClientId && %obj.slot != "") {
+					lbecho("You own this item, you can move it.");
+					if (fetchData(%TrueClientId, "PlaceMode") != 1) {
+						StartPlaceMode(%TrueClientId, %obj.name);
+					} else {
+						Client::sendMessage(%TrueClientId, 1, "You are already placing an item.");
+						return;
+					}
+				} else {
+					Client::sendMessage(%TrueClientId, 1, "You can only move items that you own.");
+					return;
+
+				}
+			}
+		}
+
+		if (%w1 == "#itemsetrot") {
+			%player = Client::getOwnedObject(%TrueClientId);
+
+			if(GameBase::getLOSinfo(%player, 1000)) {
+				%obj = $los::object;
+
+				if (%obj.owner == %TrueClientId && %obj.slot != "") {
+					HomeItemSetRot(%TrueClientId, getWord(%cropped, 0), %obj.slot);
+				} else {
+					Client::sendMessage(%TrueClientId, 1, "You can only move items that you own.");
+					return;
+
+				}
+			}
+		}
+
+		if (%w1 == "#itemaddx" || %w1 == "#homeitemaddx") {
+			%player = Client::getOwnedObject(%TrueClientId);
+
+			if(GameBase::getLOSinfo(%player, 1000)) {
+				%obj = $los::object;
+
+				if (%obj.owner == %TrueClientId && %obj.slot != "") {
+					HomeItemAddX(%TrueClientId, getWord(%cropped, 0), %obj.slot);
+				} else {
+					Client::sendMessage(%TrueClientId, 1, "You can only move items that you own.");
+					return;
+				}
+			}
+		}
+
+		if (%w1 == "#itemaddy" || %w1 == "#homeitemaddy") {
+			%player = Client::getOwnedObject(%TrueClientId);
+
+			if(GameBase::getLOSinfo(%player, 1000)) {
+				%obj = $los::object;
+
+				if (%obj.owner == %TrueClientId && %obj.slot != "") {
+					HomeItemAddY(%TrueClientId, getWord(%cropped, 0), %obj.slot);
+				} else {
+					Client::sendMessage(%TrueClientId, 1, "You can only move items that you own.");
+					return;
+				}
+			}
+		}
+
+		if (%w1 == "#itemaddz" || %w1 == "#homeitemaddz") {
+			%player = Client::getOwnedObject(%TrueClientId);
+
+			if(GameBase::getLOSinfo(%player, 1000)) {
+				%obj = $los::object;
+
+				if (%obj.owner == %TrueClientId && %obj.slot != "") {
+					HomeItemAddZ(%TrueClientId, getWord(%cropped, 0), %obj.slot);
+				} else {
+					Client::sendMessage(%TrueClientId, 1, "You can only move items that you own.");
+					return;
+				}
+			}
+		}
+
+		if (%w1 == "#removehomeitem" || %w1 == "#removehouseitem" || %w1 == "#removeitem") {
+			%player = Client::getOwnedObject(%TrueClientId);
+
+			if(GameBase::getLOSinfo(%player, 1000)) {
+				%obj = $los::object;
+
+				if (%obj.owner == %TrueClientId && %obj.slot != "") {
+					RemoveHomeItem(%TrueClientId, %obj.slot);
+				} else {
+					Client::sendMessage(%TrueClientId, 1, "You can only remove items that you own.");
+					return;
+
+				}
+			}
+		}
+
 		if (%w1 == "#mypos") {
 			Client::sendMessage(%TrueClientId, 0, GameBase::getPosition(%TrueClientId));
 			lbecho("pos: " @ GameBase::getPosition(%TrueClientId));
@@ -1883,7 +2178,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%msg = %msg @ "<f1>Dark Magick:      <f0>DarkSpike, DarkShot, Surge\n";
 			%msg = %msg @ "<f1>Status Magick:    <f0>Confusion, Remove, MindControl\n";
 			%msg = %msg @ "<f1>Utility Magick:   <f0>blockfront, blockback, light\n";
-			%msg = %msg @ "<f1>Summoning Magick: <f0>rock, blizzard, battle, sapper, death\n";
+			%msg = %msg @ "<f1>Summoning Magick: <f0>shiva, ifrit, ramuh, bahamut\n";
 
 			// other random spells
 			// teleportd, advtransportd, redredwine, pem315, doppelgang
@@ -1983,30 +2278,45 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 
 		if (%w1 == "#latest") {
-			%msg = "<f2>Latest Changes (9/13/25)\n\n";
-			%msg = %msg @ "<f0>Updates:\n";
-			%msg = %msg @ "<f1>Mana Updates! Increased Max Mana by 100%, but also increased all spell costs 100% as well.\n";
-			%msg = %msg @ "<f1>Reworked how Mana Regen works to now properly be Mana Regen / Second. Robes have been updated to use these.\n";
-			%msg = %msg @ "<f1>Adding new Hunter and Sniper weapons: Throwing Gloves. Can be purchased from Kelinor in Kalm.\n";
-			%msg = %msg @ "<f1>Added many new types of Throwing Projectiles (stars) that work with Throwing Gloves.\n";
+			%msg = "<f2>Latest Changes (9/30/25)\n\n";
+			
+			%msg = %msg @ "<f0>Updates (Materia Updates!):\n";
+			%msg = %msg @ "<f1>Materia damage now scales with weapon damage. Level I = 10% up to level X which is 100%.\n";
+			%msg = %msg @ "<f1>Materia now triggers percent damage with spells, but only if a Staff / Spear type weapon is equipped.\n";
+			%msg = %msg @ "<f0>DEF & MDEF Changes: <f1>DEF and MDEF have been buffed across the board. Enemy spawns now have natural DEF and MDEF based on level.\n";
+			%msg = %msg @ "<f1>Inspecting enemies will now show their HP/MANA and DEF/MDEF values.\n";
+			%msg = %msg @ "<f1>Player Housing Beta! We have added basic housing functionality, allowing players to create and customize their own homes.\n";
+			%msg = %msg @ "<f1>As of now creation is unrestricted and free. Type #homecommands to see available commands.\n";
 			%msg = %msg @ "\n";
+
 			%msg = %msg @ "<f0>Skills / Spells:\n";
 			%msg = %msg @ "<f0>Zangetsu (Samurai): <f1>A blade slice that shoots 4 projectiles that do AoE damage. <f0>[#skill zangetsu]\n";
 			%msg = %msg @ "<f0>Double Cast (Mages): <f1>A skill that doubles magic damage but doubles mana cost. <f0>[#skill doublecast]\n";
 			%msg = %msg @ "<f0>Shadow Blade (Dark Knight): <f1>A dark spell that summons an unholy sword upon enemies <f0>[#cast shadowblade]\n";
 			%msg = %msg @ "<f0>Holy Blade (Holy Knight): <f1>A holy spell that summons a divine sword upon enemies <f0>[#cast holyblade]\n";
 			%msg = %msg @ "\n";
+
 			%msg = %msg @ "<f0>Commands:\n";
-			%msg = %msg @ "<f0>#potions: <f1>Show information about existing potions and their recipes.\n";
-			%msg = %msg @ "<f0>#[class] <f1>Show information about the specified class. Only early classes supported so far. <f0>[#chemist]\n";
+			%msg = %msg @ "<f0>#homecommands: <f1>Show information about existing home items and their placement.\n";
 			%msg = %msg @ "<f0>#latest: <f1>Show the latest changes to the server.\n";
+			%msg = %msg @ "<f0>#suggest: <f1>Suggest a feature or improvement for the server to be reviewed by Longbow. <f0>[#suggest [message]]\n";
+			%msg = %msg @ "<f0>#bug: <f1>Log a bug to be reviwed and fixed by Longbow. <f0>[#bug [message]]\n";
 			%msg = %msg @ "\n";
+
 			%msg = %msg @ "<f0>Fixes:\n";
-			%msg = %msg @ "<f1>- Fixed Zangetsu not properly shooting in the right direction depending on weapon type.\n";
+			%msg = %msg @ "<f1>- (Leif) - Flasks deal damage based on the most recent spell cast. If casting an offensive spell the flasks will deal the same dmg as that spell.\n";
+			%msg = %msg @ "<f1>- (Leif) - Fixed bug where elixir doesn't give mp\n";
 			%msg = %msg @ "<f1>- Fixed bug where some spells were not properly requiring cooldowns.\n";
 			%msg = %msg @ "<f1>- Fix bug where Flasks were not detonating on impact with enemies.\n";
 			%msg = %msg @ "\n";
-			%msg = %msg @ "<f2>As always, thank you for playing and your continued support! -LongBow\n";
+
+			%msg = %msg @ "<f0>Fixes In Development:\n";
+			%msg = %msg @ "<f1>(Leif) - Storm repeater crossbow only fires every second shot.\n";
+			%msg = %msg @ "<f1>(Leif) - Teleporter from Upper Dunega to The Burial Tree not working\n";
+			%msg = %msg @ "<f1>(Leif) - When using projectile spells/skills with an Axe, Ancient axe or Rune axe equipped the projectile fires to the right.\n";
+			%msg = %msg @ "<f1>(AngryGardenGnome) - Dancers have alchemy and summoning skills on menu, but can't use either skill tree.\n";
+
+			%msg = %msg @ "<f2>\nAs always, thank you for playing and your continued support! -LongBow\n";
 
 			rpg::longPrint(%TrueClientId, %msg, 0, 20);
 		}
@@ -2086,6 +2396,26 @@ function internalSay(%clientId, %team, %message, %senderName)
 					if(%type == "TreeShape")
 						tree::delete(%target);
 				}
+			}
+		}
+
+		if (%w1 == "#suggest") {
+			if (%cropped != -1 && %cropped != "") {
+				// LOG THE SUGGESTIONS
+				lbecho("SUGGESTION: (" @ %TCsenderName @ ") - " @ %cropped);
+				Client::sendMessage(%TrueClientId, $MsgBeige, "Thank you for your suggestion! It has been logged and will be reviewed.");
+			} else {
+				Client::sendMessage(%TrueClientId, $MsgBeige, "use #suggest [message] to send a suggestion to be reviewed for work.");
+			}
+		}
+
+		if (%w1 == "#bug") {
+			if (%cropped != -1 && %cropped != "") {
+				// LOG THE SUGGESTIONS
+				lbecho("BUGFIX: (" @ %TCsenderName @ ") - " @ %cropped);
+				Client::sendMessage(%TrueClientId, $MsgBeige, "Thank you for your bug report! It has been logged and will be reviewed.");
+			} else {
+				Client::sendMessage(%TrueClientId, $MsgBeige, "use #bug [message] to send a bug report to be reviewed for work.");
 			}
 		}
 

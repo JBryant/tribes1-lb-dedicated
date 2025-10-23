@@ -3007,6 +3007,48 @@ instant SimGroup "MissionGroup" {
 			position = "-2696.21 -2475.97 7238.65";
 			rotation = "0 0 1.47766";
 		};
+		instant Marker "1 0 0 10 30 110" {
+			dataBlock = "PathMarker";
+			name = "reactor 3 mech soldier 1";
+			position = "-2483.45 -2230.56 6474.48";
+			rotation = "0 0 1.47766";
+		};
+		instant Marker "1 0 0 10 30 110" {
+			dataBlock = "PathMarker";
+			name = "reactor 3 mech soldier 2";
+			position = "-2689.08 -2194.97 6495.7";
+			rotation = "0 0 1.47766";
+		};
+		instant Marker "1 0 0 10 30 110" {
+			dataBlock = "PathMarker";
+			name = "reactor 3 mech soldier 3";
+			position = "-2568.37 -2297.74 6487.7";
+			rotation = "0 0 1.47766";
+		};
+		instant Marker "1 0 0 10 30 111" {
+			dataBlock = "PathMarker";
+			name = "reactor 3 mech beamer 1";
+			position = "-2689.22 -2284.31 6502.7";
+			rotation = "0 0 1.47766";
+		};
+		instant Marker "1 0 0 10 30 111" {
+			dataBlock = "PathMarker";
+			name = "reactor 3 mech beamer 2";
+			position = "-2596.44 -2238.22 6487.7";
+			rotation = "0 0 1.47766";
+		};
+		instant Marker "1 0 0 10 30 112" {
+			dataBlock = "PathMarker";
+			name = "reactor 4 fire dragon 1";
+			position = "-2323.68 -2474.94 7301.05";
+			rotation = "0 -0 3.07436";
+		};
+		instant Marker "1 0 0 10 30 113" {
+			dataBlock = "PathMarker";
+			name = "reactor 4 magma dragon 1";
+			position = "-2356.34 -2477.92 7229.05";
+			rotation = "0 -0 3.07436";
+		};
 	};
 	instant SimGroup "Burial Tree" {
 		instant StaticShape "Misc Tree S" {
@@ -4253,7 +4295,7 @@ instant SimGroup "MissionGroup" {
 			instant Trigger "GroupTrigger1" {
 				dataBlock = "GroupTrigger";
 				name = "";
-				position = "-2194.18 -2282.53 7551.99";
+				position = "-2194.18 -2282.53 6551.99";
 				rotation = "0 0 0";
 				boundingBox = "-1 -1 -1 1 1 1";
 				isSphere = "True";
@@ -4642,6 +4684,28 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "TAKE COINS 500";
 			instant SimGroup "GSAY You have been teleported to the a Cultist Temple.~wPortal6.wav";
 			instant SimGroup "NSAY You need Remort Level 1 and a 500 coin donation to enter this gate.~wDeActivateDG.wav";
+		};
+		instant SimGroup "Kalm GY to Burial Tree" {
+			instant SimGroup "Input" {
+				instant Trigger "GroupTrigger1" {
+					dataBlock = "GroupTrigger";
+					name = "";
+					position = "-2476.28 -207.555 65.2519";
+					rotation = "0 -0 -0.819332";
+				};
+			};
+			instant SimGroup "Output" {
+				instant Marker "Marker1" {
+					dataBlock = "PathMarker";
+					name = "";
+					position = "-2795.43 -1187.45 701";
+					rotation = "0 -0 1.55891";
+				};
+			};
+			instant SimGroup "NEED COINS 0";
+			instant SimGroup "TAKE COINS 0";
+			instant SimGroup "GSAY ~wnull.wav";
+			instant SimGroup "NSAY ~wnull.wav";
 		};
 		instant SimGroup "Graveyard Top to Dunega" {
 			instant SimGroup "Input" {
@@ -9864,6 +9928,13 @@ instant SimGroup "MissionGroup" {
 			rotation = "0 0 0";
 			destroyable = "True";
 			deleteOnDestroy = "False";
+		};
+		instant InteriorShape "reactor3blocker1" {
+			fileName = "W64gatedoor.dis";
+			isContainer = "1";
+			position = "-2556.39 -2340.03 6908.54";
+			rotation = "0 0 1.58824";
+			lightParams = "0 ";
 		};
 	};
 	instant SimGroup "Slums" {

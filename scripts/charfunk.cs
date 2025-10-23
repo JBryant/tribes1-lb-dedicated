@@ -1,3 +1,5 @@
+$maxHouseItems = 50; // 10
+
 function ClearVariables(%clientId)
 {
 	dbecho($dbechoMode2, "ClearVariables(" @ %clientId @ ")");
@@ -179,6 +181,7 @@ function SaveCharacter(%clientId, %silent)
 
 	if(!%silent)
 		pecho("Saving character " @ %name @ " (" @ %clientId @ ")...");
+	
 	$funk::var["[\"" @ %name @ "\", 0, 1]"] = fetchData(%clientId, "RACE");
 	$funk::var["[\"" @ %name @ "\", 0, 2]"] = fetchData(%clientId, "EXP");
 	$funk::var["[\"" @ %name @ "\", 0, 3]"] = fetchData(%clientId, "campPos");
@@ -267,6 +270,32 @@ function SaveCharacter(%clientId, %silent)
 	%recallList = fetchData(%clientId,"recallList");
 	$funk::var["[\"" @ %name @ "\", 8, recallList]"] = %recallList;
 
+	// housing variables
+	$funk::var["[\"" @ %name @ "\", 9, 1]"] = fetchData(%clientId, "HasHome"); // hasHome (Boolean)
+	$funk::var["[\"" @ %name @ "\", 9, 2]"] = fetchData(%clientId, "HomeShape"); // HomeShape (String)
+	$funk::var["[\"" @ %name @ "\", 9, 3]"] = fetchData(%clientId, "HomePos"); // homeX (Boolean)
+	$funk::var["[\"" @ %name @ "\", 9, 4]"] = fetchData(%clientId, "HomeRot"); // homeY (Boolean)
+	$funk::var["[\"" @ %name @ "\", 9, 5]"] = fetchData(%clientId, "HomePurchasedDisList"); // homeZ (Boolean)
+	$funk::var["[\"" @ %name @ "\", 9, 6]"] = fetchData(%clientId, "HomeUpkeep"); // homeUpkeep (Boolean)
+	$funk::var["[\"" @ %name @ "\", 9, 7]"] = fetchData(%clientId, "HomeLastPaid"); // homeLastPaid (Boolean)
+	$funk::var["[\"" @ %name @ "\", 9, 8]"] = fetchData(%clientId, "HomeType"); // homeType (String)
+	$funk::var["[\"" @ %name @ "\", 9, 9]"] = fetchData(%clientId, "HomeLanding"); // homeLanding (String)
+	$funk::var["[\"" @ %name @ "\", 9, 10]"] = fetchData(%clientId, "HomeSleepZone"); // homeSleepZone (String)
+
+	// clean up up house
+	if ($tagToObjectId[%clientId @ "_home"] != "") {
+		$tagToObjectId[%clientId @ "_home"] = "";
+	}
+
+	// save and clean all the house items
+	for (%i = 1; %i <= $maxHouseItems; %i++) {
+		%houseItem = $tagToObjectId[%clientId @ "_homeitem_" @ %i];
+		if (%houseItem != "") {
+			$funk::var["[\"" @ %name @ "\", 9, 1, " @ %i @ ", 1]"] = %houseItem.shape;
+			$funk::var["[\"" @ %name @ "\", 9, 1, " @ %i @ ", 2]"] = %houseItem.posOffset;
+			$funk::var["[\"" @ %name @ "\", 9, 1, " @ %i @ ", 3]"] = %houseItem.rot;
+		}
+	}
 
 	//skill variables
 	%cnt = 0;
@@ -446,6 +475,63 @@ function LoadCharacter(%clientId)
 		storeData(%clientId, "BankMateriaItems", $funk::var[%name, 8, 16]);
 		storeData(%clientId, "MiscItems", $funk::var[%name, 8, 17]);
 		storeData(%clientId, "BankMiscItems", $funk::var[%name, 8, 18]);
+
+
+		// $funk::var["[\"" @ %name @ "\", 9, 1]"] = fetchData(%clientId, "HasHome"); // hasHome (Boolean)
+		// $funk::var["[\"" @ %name @ "\", 9, 2]"] = fetchData(%clientId, "HomeImage"); // homeImage (String)
+		// $funk::var["[\"" @ %name @ "\", 9, 3]"] = fetchData(%clientId, "HomeX"); // homeX (Boolean)
+		// $funk::var["[\"" @ %name @ "\", 9, 4]"] = fetchData(%clientId, "HomeY"); // homeY (Boolean)
+		// $funk::var["[\"" @ %name @ "\", 9, 5]"] = fetchData(%clientId, "HomeZ"); // homeZ (Boolean)
+		// $funk::var["[\"" @ %name @ "\", 9, 6]"] = fetchData(%clientId, "HomeUpkeep"); // homeUpkeep (Boolean)
+		// $funk::var["[\"" @ %name @ "\", 9, 7]"] = fetchData(%clientId, "HomeLastPaid"); // homeLastPaid (Boolean)
+		// $funk::var["[\"" @ %name @ "\", 9, 8]"] = fetchData(%clientId, "HomeType"); // homeType (String)
+		// $funk::var["[\"" @ %name @ "\", 9, 9]"] = fetchData(%clientId, "HomeLanding"); // homeLanding (String)
+		// $funk::var["[\"" @ %name @ "\", 9, 10]"] = fetchData(%clientId, "HomeSleepZone"); // homeSleepZone (String)
+
+		storeData(%clientId, "HasHome", $funk::var[%name, 9, 1]);
+		storeData(%clientId, "HomeShape", $funk::var[%name, 9, 2]);
+		storeData(%clientId, "HomePos", $funk::var[%name, 9, 3]);
+		storeData(%clientId, "HomeRot", $funk::var[%name, 9, 4]);
+		storeData(%clientId, "HomePurchasedDisList", $funk::var[%name, 9, 5]);
+		storeData(%clientId, "HomeUpkeep", $funk::var[%name, 9, 6]);
+		storeData(%clientId, "HomeLastPaid", $funk::var[%name, 9, 7]);
+		storeData(%clientId, "HomeType", $funk::var[%name, 9, 8]);
+		storeData(%clientId, "HomeLanding", $funk::var[%name, 9, 9]);
+		storeData(%clientId, "HomeSleepZone", $funk::var[%name, 9, 10]);
+
+		%group = newObject("Home" @ %clientId, SimGroup);
+		addToSet("MissionCleanup", %group);
+
+		// restore house and house items
+		if ($funk::var[%name, 9, 2] != "") {
+			%home = newObject("home", InteriorShape, $funk::var[%name, 9, 2], true);
+        	%home.owner = %clientId;
+			GameBase::setPosition(%home, $funk::var[%name, 9, 3]);
+			GameBase::setRotation(%home, $funk::var[%name, 9, 4]);
+			$tagToObjectId[%clientId @ "_home"] = %home;
+			addToSet("MissionCleanup\\Home" @ %clientId, %home);
+		}
+
+		// save and clean all the house items
+		for (%i = 1; %i <= $maxHouseItems; %i++) {
+			%houseItemShape = $funk::var[%name, 9, 1, %i, 1];
+
+			if (%houseItemShape != "") {
+				%houseItemPos = $funk::var[%name, 9, 1, %i, 2];
+				%houseItemRot = $funk::var[%name, 9, 1, %i, 3];
+				%homeItem = newObject("homeitem_" @ %i, InteriorShape, %houseItemShape, true);
+				%homeItem.owner = %clientId;
+				%homeItem.slot = %i;
+				%homeItem.shape = %houseItemShape;
+				%homePos = $funk::var[%name, 9, 3];
+				%homeItem.posOffset = %houseItemPos;
+				%homeItem.rot = %houseItemRot;
+				GameBase::setPosition(%homeItem, (getWord(%houseItemPos, 0) + getWord(%homePos, 0)) @ " " @ (getWord(%houseItemPos, 1) + getWord(%homePos, 1)) @ " " @ (getWord(%houseItemPos, 2) + getWord(%homePos, 2)));
+				GameBase::setRotation(%homeItem, %houseItemRot);
+				$tagToObjectId[%clientId @ "_homeitem_" @ %i] = %homeItem;
+				addToSet("MissionCleanup\\Home" @ %clientId, %homeItem);
+			}
+		}
 
 		%recallList = $funk::var[%name, 8, recallList];
 		storeData(%clientId, "recallList", %recallList);

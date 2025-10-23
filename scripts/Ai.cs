@@ -325,6 +325,10 @@ function AI::Periodic(%aiName)
 				for(%i = 0; %i < Group::objectCount(%set); %i++)
 				{
 					%id = Player::getClient(Group::getObject(%set, %i));
+					if (fetchData(%id, "invisible")) {
+						lbecho("id " @ %id @ " isInvisible: " @ fetchData(%id, "invisible"));
+					}
+					// lbecho("%id " @ %id @ " isInvisible: " @ fetchData(%id, "invisible"));
 					if(GameBase::getTeam(%id) != %aiTeam && !fetchData(%id, "invisible"))
 					{
 						%dist = Vector::getDistance(%aiPos, GameBase::getPosition(%id));
@@ -340,11 +344,9 @@ function AI::Periodic(%aiName)
 				if(%closest <= $AImaxRange)
 				{
 					if(%closest <= 10) {
-						// lbecho("Scooch closer...");
 						AI::newDirectiveWaypoint(%aiName, GameBase::getPosition(%closestId), 99);
 					}
 					else {
-						// lbecho("Follow...");
 						AI::newDirectiveFollow(%aiName, %closestId, 0, 99);
 					}
 
@@ -1241,6 +1243,22 @@ function HardcodeAIskills(%aiId)
 		%enduranceModifier = 1.8;
 	if (%aiLevel > 500)
 		%enduranceModifier = 2.0;
+	if (%aiLevel > 1000)
+		%enduranceModifier = 3.0;
+	if (%aiLevel > 2000)
+		%enduranceModifier = 4.0;
+	if (%aiLevel > 3000)
+		%enduranceModifier = 5.0;
+	if (%aiLevel > 4000)
+		%enduranceModifier = 6.0;
+	if (%aiLevel > 5000)
+		%enduranceModifier = 7.0;
+	if (%aiLevel > 6000)
+		%enduranceModifier = 8.0;
+	if (%aiLevel > 7000)
+		%enduranceModifier = 9.0;
+	if (%aiLevel > 8000)
+		%enduranceModifier = 10.0;
 
 
 	//==== HARDCODED SKILLS TO ENSURE CHALLENGING BOTS ============
@@ -1254,7 +1272,7 @@ function HardcodeAIskills(%aiId)
 	$PlayerSkill[%aiId, $SkillBlackMagick] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillTimeMagick] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillSummonMagick] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
-	$PlayerSkill[%aiId, $SkillHealing] = ( (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel) ) / 2;
+	$PlayerSkill[%aiId, $SkillHealing] = ( (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel) ) / 100;
 	$PlayerSkill[%aiId, $SkillEndurance] = ( (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel) ) * %enduranceModifier;
 	$PlayerSkill[%aiId, $SkillAlchemy] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	$PlayerSkill[%aiId, $SkillMagicka] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
@@ -1263,6 +1281,13 @@ function HardcodeAIskills(%aiId)
 	$PlayerSkill[%aiId, $SkillWeightCapacity] = (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel);
 	%a = (  (getRandom() * $SkillRangePerLevel) + ((fetchData(%aiId, "LVL")-1) * $SkillRangePerLevel)  ) / 2;
 	//=============================================================
+
+	// hardcode Natural DEF and MDEF (equal to 80% - 100% of level)
+	%def = (%aiLevel * 0.8) + (getRandom() * (%aiLevel * 0.2));
+	%mdef = (%aiLevel * 0.8) + (getRandom() * (%aiLevel * 0.2));
+
+	storeData(%aiId, "NDEF", %def, "inc");
+	storeData(%aiId, "NMDEF", %mdef, "inc");
 }
 
 //------ BotGroup stuff ---------------------------------

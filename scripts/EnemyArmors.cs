@@ -309,6 +309,16 @@ $SkinForRace[FailedExperiment] = "RMSkins2";
 $NameForRace[TorturedExperiment] = "Wight";
 $SkinForRace[TorturedExperiment] = "RMSkins2";
 
+// Reactor 2
+$NameForRace[MechSoldier] = "Mech";
+$SkinForRace[MechSoldier] = "TKK";
+$NameForRace[MechBeamer] = "Mech";
+$SkinForRace[MechBeamer] = "TKK";
+
+// Reactor 4
+$NameForRace[FireDragon] = "Dragon";
+$NameForRace[MoltenDragon] = "Dragon";
+
 // -------------- armor data ------------------
 
 $ArmorTypeToRace[TravellerArmor] = "Traveller";
@@ -337,7 +347,7 @@ $ArmorTypeToRace[BatArmor] = "Bat";
 $ArmorTypeToRace[BearArmor] = "Bear";
 $ArmorTypeToRace[NewMinoArmor] = "HornedKnight";
 $ArmorTypeToRace[OrcArmor] = "CultistAbomination";
-$ArmorTypeToRace[OgreArmor] = "CultistGiant";
+$ArmorTypeToRace[OgreArmorFast] = "Mech";
 
 $RaceToArmorType[Goblin] = "GoblinArmor"; // GoblinArmor // TestArmor
 $RaceToArmorType[Gnoll] = "GnollArmor";
@@ -367,6 +377,7 @@ $RaceToArmorType[Cyclops] = "OgreArmor";
 $RaceToArmorType[HornedKnight] = "NewMinoArmor";
 $RaceToArmorType[CultistAbomination] = "OrcArmor";
 $RaceToArmorType[CultistGiant] = "OgreArmor";
+$RaceToArmorType[Mech] = "OgreArmorFast";
 
 $RaceToNamesList[Traveller] = "Alphonse Cedric Lucian Darius Leontius Gregor Matthias Silvain Emeric Veyron Hadrian Tobias Valens Octavian Magnus Raphael Victor Alistair Remiel Lysander Cassian Garrick Percival Thaddeus Gideon Theodric Isidore Cornelius Reginald Leofric Oswald Baldwin Edric Ronan Severin Aldous Soren Valentin Leopold Desmond Eustace Corbin Ignatius Bertram Seraphim Maximus Felix Quentin Roderic Atticus Nicodemus Zephyrus Aurelius Fabian Tiberius Evander Cormac Orion Vesper Drystan Cassius Lazarus Marcellus Gideon Tarquin Lucan Zephiel Oberon Tristam Aurelian Myron Edgar Nathaniel Augustus Hector Vespasian Sirus Caliban Damian Cyprian Theron Alaric Thelonius Ulrich Galen Phineas Anselm Varian Valmont Bastien Xavier Leoric Simeon Zephyr Darian Florian Armand Hadrianus Orestes Fenrir Gael Romulus Malachai Noctis Thalric Eamon Belisarius Callum Solon";
 $RaceToNamesList[Goblin] = "Griknak Snaggit Borgul Zrogg Ruknash Dribbik Murgul Vrogg Tazgul Skarnak Drekz Broggit Klurg Snibbit Vraggo Trognash Glubnik Grizzik Nobnash Krognar Zraggit Blornik Snaggul Throgg Klibbit Drizzik Grobnar Vraknash Trogzit Borknash Graknik Zlubb Knorvik Drizzgul Trognik Krabnash Glubzit Morzik Zorknash Broggul Tarnik Flibbit Skragnak Zriggo Krobnash Vrixik Drobbit Skrognar Blaggit Truznik Frobnash Skribbit Klorgnak Vrobnash Gribzik Traknor Zlibbit Knarzik Frozgul Skraknit Grozzik Triggan Zorblik Broggar Trogzit Kribzik Slorbag Vragbit Gronbit Trasknak Zroblik Klibzit Kragnik Blibbit Driznash Skornak Froggit Trigblik Zrumblik Krobzit Snorggul Thragbit Glibnash Skragzit Draknor Vrobbit Zrobnik Snibnash Frakgul Triznak Grobnash Blugbit Kraznik Snibzit Trombit Skrubnik Grubzit Vorblik Zlagbit Kroggul Tragnor Blornash";
@@ -527,6 +538,12 @@ $spawnIndex[107] = "TempleWarlock";
 
 $spawnIndex[108] = "FailedExperiment";
 $spawnIndex[109] = "TorturedExperiment";
+
+$spawnIndex[110] = "MechSoldier";
+$spawnIndex[111] = "MechBeamer";
+
+$spawnIndex[112] = "FireDragon";
+$spawnIndex[113] = "MoltenDragon";
 //------------------------------
 
 // range looks like: RShortBow 1 BasicArrow 20/50
@@ -759,12 +776,23 @@ $BotEquipment[EliteTempleGiant] = "LVL 1500+150 LightningMateriaIII 1/-600";
 $BotEquipment[TempleWarlock] = "CLASS Enemy LVL 800+50 COINS 11500/50 LCK 4 CastingBlade 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteTempleWarlock] = "LVL 1500+150 LightningMateriaIII 1/-600";
 
-// Reactor 1
+// Reactor 2
 $BotEquipment[FailedExperiment] = "CLASS Enemy LVL 1000+100 COINS 11500/50 LCK 4 MagmaHammer 1 IceMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteFailedExperiment] = "LVL 2000+200 IceMateriaIV 1/-600";
 $BotEquipment[TorturedExperiment] = "CLASS Enemy LVL 1000+100 COINS 11500/50 LCK 4 CastingBlade 1 IceMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteTorturedExperiment] = "LVL 2000+200 IceMateriaIV 1/-600";
 
+// Reactor 3
+$BotEquipment[MechSoldier] = "CLASS Enemy LVL 2000+200 COINS 11500/50 LCK 5 MateriaBlade 1 LightningMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[EliteMechSoldier] = "LVL 4000+300 LightningMateriaIV 1/-600";
+$BotEquipment[MechBeamer] = "CLASS Enemy LVL 2000+100 COINS 11500/50 LCK 5 CastingBlade 1 LightningMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[EliteMechBeamer] = "LVL 4000+200 LightningMateriaIV 1/-600";
+
+// Reactor 4
+$BotEquipment[FireDragon] = "CLASS Enemy LVL 4000+200 COINS 11500/50 LCK 5 DragonBreath 1 DragonBreathShot 1000 FireMateriaIV 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[EliteFireDragon] = "LVL 6000+300 FireMateriaV 1/-600";
+$BotEquipment[MoltenDragon] = "CLASS Enemy LVL 4000+100 COINS 11500/50 LCK 5 CastingBlade 1 FireMateriaIV 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[EliteMoltenDragon] = "LVL 6000+200 FireMateriaV 1/-600";
 
 //------------------------------
 
@@ -796,6 +824,7 @@ $TeamForRace[Cyclops] = 2;
 $TeamForRace[HornedKnight] = 1;
 $TeamForRace[CultistAbomination] = 1;
 $TeamForRace[CultistGiant] = 1;
+$TeamForRace[Mech] = 1;
 
 //------------------------------
 
@@ -808,6 +837,16 @@ $RaceSound[Ogre, Taunt, 1] = SoundOgreTaunt1;
 $RaceSound[Ogre, Taunt, 2] = SoundOgreTaunt2;
 $RaceSound[Ogre, RandomWait, 1] = SoundOgreRandom1;
 $RaceSound[Ogre, RandomWait, 2] = SoundOgreRandom2;
+
+$RaceSound[Mech, Death, 1] = SoundOgreDeath1;
+$RaceSound[Mech, Acquired, 1] = SoundOgreAcquired1;
+$RaceSound[Mech, Acquired, 2] = SoundOgreAcquired2;
+$RaceSound[Mech, Hit, 1] = SoundOgreHit1;
+$RaceSound[Mech, Hit, 2] = SoundOgreHit2;
+$RaceSound[Mech, Taunt, 1] = SoundOgreTaunt1;
+$RaceSound[Mech, Taunt, 2] = SoundOgreTaunt2;
+$RaceSound[Mech, RandomWait, 1] = SoundOgreRandom1;
+$RaceSound[Mech, RandomWait, 2] = SoundOgreRandom2;
 
 $RaceSound[Cyclops, Death, 1] = SoundOgreDeath1;
 $RaceSound[Cyclops, Acquired, 1] = SoundOgreAcquired1;
@@ -1681,6 +1720,172 @@ PlayerData OgreArmor
 	maxForwardSpeed = $spdlow;
 	maxBackwardSpeed = $spdlow * 0.8;
 	maxSideSpeed = $spdlow * 0.75;
+	groundForce = 75 * 9.0;
+	mass = 9.0;
+	groundTraction = 3.0;
+	maxEnergy = 110;
+	drag = 1.0;
+	density = 1.2;
+
+	minDamageSpeed = 16;
+	damageScale = 0.006;
+
+	jumpImpulse = 75;
+	jumpSurfaceMinDot = $jumpSurfaceMinDot;
+  
+	// animation data:
+	// animation name, one shot, exclude, direction, firstPerson, chaseCam, thirdPerson, signalThread
+
+	// movement animations:
+	animData[0]  = { "root", none, 1, true, true, true, false, 0 };
+	animData[1]  = { "run", none, 1, true, false, true, false, 3 };
+	animData[2]  = { "runback", none, 1, true, false, true, false, 3 };
+	animData[3]  = { "side left", none, 1, true, false, true, false, 3 };
+	animData[4]  = { "side left", none, -1, true, false, true, false, 3 };
+	animData[5] = { "jump stand", none, 1, true, false, true, false, 3 };
+	animData[6] = { "jump run", none, 1, true, false, true, false, 3 };
+	animData[7] = { "crouch root", none, 1, true, true, true, false, 3 };
+	animData[8] = { "crouch root", none, 1, true, true, true, false, 3 };
+	animData[9] = { "crouch root", none, -1, true, true, true, false, 3 };
+	animData[10] = { "crouch forward", none, 1, true, false, true, false, 3 };
+	animData[11] = { "crouch forward", none, -1, true, false, true, false, 3 };
+	animData[12] = { "crouch side left", none, 1, true, false, true, false, 3 };
+	animData[13] = { "crouch side left", none, -1, true, false, true, false, 3 };
+	animData[14]  = { "fall", none, 1, true, true, true, false, 3 };
+	animData[15]  = { "landing", SoundLandOnGround, 1, true, false, false, false, 3 };
+	animData[16]  = { "landing", SoundLandOnGround, 1, true, false, false, false, 3 };
+	animData[17]  = { "tumble loop", none, 1, true, false, false, false, 3 };
+	animData[18]  = { "tumble end", none, 1, true, false, false, false, 3 };
+	animData[19] = { "jet", none, 1, true, true, true, false, 3 };
+
+	// misc. animations:
+	animData[20] = { "die back", none, 1, true, false, false, false, 0 };
+	animData[21] = { "throw", none, 1, true, false, false, false, 3 };
+	animData[22] = { "flyer root", none, 1, false, false, false, false, 3 };
+	animData[23] = { "apc root", none, 1, true, true, true, false, 3 };
+	animData[24] = { "apc pilot", none, 1, false, false, false, false, 3 };
+   
+	// death animations:
+	animData[25] = { "crouch die", none, 1, false, false, false, false, 4 };
+	animData[26] = { "die chest", none, 1, false, false, false, false, 4 };
+	animData[27] = { "die head", none, 1, false, false, false, false, 4 };
+	animData[28] = { "die grab back", none, 1, false, false, false, false, 4 };
+	animData[29] = { "die right side", none, 1, false, false, false, false, 4 };
+	animData[30] = { "die left side", none, 1, false, false, false, false, 4 };
+	animData[31] = { "die leg left", none, 1, false, false, false, false, 4 };
+	animData[32] = { "die leg right", none, 1, false, false, false, false, 4 };
+	animData[33] = { "die blown back", none, 1, false, false, false, false, 4 };
+	animData[34] = { "die spin", none, 1, false, false, false, false, 4 };
+	animData[35] = { "die forward", none, 1, false, false, false, false, 4 };
+	animData[36] = { "die forward kneel", none, 1, false, false, false, false, 4 };
+	animData[37] = { "die back", none, 1, false, false, false, false, 4 };
+
+	// signal moves:
+	animData[38] = { "sign over here",  none, 1, true, false, false, false, 2 };
+	animData[39] = { "sign point", none, 1, true, false, false, false, 1 };
+	animData[40] = { "sign retreat",none, 1, true, false, false, false, 2 };
+	animData[41] = { "sign stop", none, 1, true, false, false, true, 1 };
+	animData[42] = { "sign salut", none, 1, true, false, false, true, 1 }; 
+
+	// celebraton animations:
+	animData[43] = { "celebration 1", none, 1, true, false, false, false, 2 };
+	animData[44] = { "celebration 2", none, 1, true, false, false, false, 2 };
+	animData[45] = { "celebration 3", none, 1, true, false, false, false, 2 };
+
+	// taunt anmations:
+	animData[46] = { "taunt 1", none, 1, true, false, false, false, 2 };
+	animData[47] = { "taunt 2", none, 1, true, false, false, false, 2 };
+
+	// poses:
+	animData[48] = { "pose kneel", none, 1, true, false, false, true, 1 };
+	animData[49] = { "pose stand", none, 1, true, false, false, true, 1 };
+
+	// Bonus wave
+	animData[50] = { "wave", none, 1, true, false, false, true, 1 };
+
+	jetSound = NoSound;
+
+	rFootSounds = 
+	{
+		SoundHFootRSoft,
+		SoundHFootRHard,
+		SoundHFootRSoft,
+		SoundHFootRHard,
+		SoundHFootRSoft,
+		SoundHFootRSoft,
+		SoundHFootRSoft,
+		SoundHFootRHard,
+		SoundHFootRSnow,
+		SoundHFootRSoft,
+		SoundHFootRSoft,
+		SoundHFootRSoft,
+		SoundHFootRSoft,
+		SoundHFootRSoft,
+		SoundHFootRSoft
+	}; 
+	lFootSounds =
+	{
+		SoundHFootLSoft,
+		SoundHFootLHard,
+		SoundHFootLSoft,
+		SoundHFootLHard,
+		SoundHFootLSoft,
+		SoundHFootLSoft,
+		SoundHFootLSoft,
+		SoundHFootLHard,
+		SoundHFootLSnow,
+		SoundHFootLSoft,
+		SoundHFootLSoft,
+		SoundHFootLSoft,
+		SoundHFootLSoft,
+		SoundHFootLSoft,
+		SoundHFootLSoft
+	};
+
+	footPrints = { 4, 5 };
+
+	boxWidth = 0.8;
+	boxDepth = 0.8;
+	boxNormalHeight = 2.6;
+
+	boxNormalHeadPercentage  = 0.70;
+	boxNormalTorsoPercentage = 0.45;
+
+	boxHeadLeftPercentage  = 0.48;
+	boxHeadRightPercentage = 0.70;
+	boxHeadBackPercentage  = 0.48;
+	boxHeadFrontPercentage = 0.60;
+};
+
+//------------------------------------------------------------------
+// Ogre Armor data:		(heavy)
+//------------------------------------------------------------------
+
+PlayerData OgreArmorFast
+{
+	className = "Armor";
+	shapeFile = "harmor";
+	flameShapeName = "hflame";
+	shieldShapeName = "shield";
+	damageSkinData = "armorDamageSkins";
+	debrisId = playerDebris;
+	shadowDetailMask = 1;
+
+	canCrouch = false;
+	visibleToSensor = True;
+	mapFilter = 1;
+	mapIcon = "M_player";
+
+	maxJetSideForceFactor = 1;
+	maxJetForwardVelocity = 1.0;
+	minJetEnergy = 60;
+	jetForce = 1;
+	jetEnergyDrain = 0.0;
+
+	maxDamage = 1.0;
+	maxForwardSpeed = $spdhigher;
+	maxBackwardSpeed = $spdhigher * 0.8;
+	maxSideSpeed = $spdhigher * 0.75;
 	groundForce = 75 * 9.0;
 	mass = 9.0;
 	groundTraction = 3.0;
@@ -6823,7 +7028,7 @@ PlayerData BlueDragonArmor
 // Green Dragon Armor
 //------------------------------------------------------------------
 
-PlayerData BlueDragonArmor
+PlayerData GreenDragonArmor
 {
 	className = "Armor";
 	shapeFile = "dragonarmorgreen";

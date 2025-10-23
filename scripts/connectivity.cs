@@ -194,9 +194,13 @@ function Server::onClientDisconnect(%clientId)
 		if(%camp != -1)
 			DoCampSetup(%clientId, 5);
 
+		// on disconnect
 		SaveCharacter(%clientId);
 
 		ClearEvents(%clientId);
+
+		// clear and remove homes
+		ClearHomeVariables(%clientId);
 
 		for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))
 		{

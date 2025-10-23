@@ -636,61 +636,63 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 	}
 	else if(%option == "use")
 	{
+		%itemUsed = False;
 		%has = belt::hasthisstuff(%clientId, %item);
+
 		if(%has < 1)
 			return;
 
-		if ($restoreValue[%item, HP] > 0 || $restoreValue[%item, MP] > 0 || $beltitem[%item, "targetPosition"]) {
-			// check if HP restore object
-			if ($restoreValue[%item, HP] > 0){
-				// %hp = fetchData(%clientId, "HP");
-				refreshHP(%clientId, $restoreValue[%item, HP] * -0.01);
-				// if(fetchData(%clientId, "HP") != %hp)
-				// 	UseSkill(%clientId, $SkillHealing, True, True);
-			}
-			
-			// check if MP restore object
-			if ($restoreValue[%item, MP] > 0) {
-				refreshMANA(%clientId, $restoreValue[%item, MP] * -1);
-			}
+		// check if health item
+		if ($restoreValue[%item, HP] > 0) {
+			refreshHP(%clientId, $restoreValue[%item, HP] * -0.01);
+			%itemUsed = True;
+		}
+		
+		// check if mana item
+		if ($restoreValue[%item, MP] > 0) {
+			refreshMANA(%clientId, $restoreValue[%item, MP] * -1);
+			%itemUsed = True;
+		}
 
-			// check if location change item
-			if ($beltitem[%item, "targetPosition"]) {
-				// lbecho("Client::setPosition(" @ %clientId @ ", \"" @ $beltitem[%item, "targetPosition"] @ "\");")
-				schedule("gamebase::setPosition(" @ %clientId @ ", \"" @ $beltitem[%item, "targetPosition"] @ "\");", 1);
-				// GameBase::setPosition(%clientId, $beltitem[%item, "targetPosition"]);
+		if ($restoreValue[%item, EXP] > 0) {
+			addEXP(%clientId, $restoreValue[%item, EXP]);
+			%itemUsed = True;
+		}
 
-				if ($beltitem[%item, "targetRotationZ"]) {
-					schedule("gamebase::setRotation(" @ %clientId @ ", \"0 0 " @ $beltitem[%item, "targetRotationZ"] @ "\");", 1);
-					// GameBase::setRotation(%clientId, "0 0 " @ $beltitem[%item, "targetRotationZ"]);
-				}
+		// check if location change item
+		if ($beltitem[%item, "targetPosition"]) {
+			schedule("gamebase::setPosition(" @ %clientId @ ", \"" @ $beltitem[%item, "targetPosition"] @ "\");", 1);
+
+			if ($beltitem[%item, "targetRotationZ"]) {
+				schedule("gamebase::setRotation(" @ %clientId @ ", \"0 0 " @ $beltitem[%item, "targetRotationZ"] @ "\");", 1);
 			}
+			%itemUsed = True;
+		}
 
-			if ($beltitem[%item, "reusable"]) {
-				// If the item is reusable, we can use it without consuming it
-				Client::sendMessage(%clientId, $MsgWhite, "You used " @ $beltitem[%item, "Name"] @ ".");
-			} else {
-				belt::takethisstuff(%clientId, %item, 1);
-				%has--;
-				Client::sendMessage(%clientId, $MsgWhite, "You used " @ $beltitem[%item, "Name"] @ ". [have " @ %has @ "]");
-				refreshAll(%clientId);
-			}
+		if ($beltitem[%item, "reusable"]) {
+			// If the item is reusable, we can use it without consuming it
+			Client::sendMessage(%clientId, $MsgWhite, "You used " @ $beltitem[%item, "Name"] @ ".");
+			%itemUsed = True;
+		} else {
+			belt::takethisstuff(%clientId, %item, 1);
+			%has--;
+			Client::sendMessage(%clientId, $MsgWhite, "You used " @ $beltitem[%item, "Name"] @ ". [have " @ %has @ "]");
+			refreshAll(%clientId);
+			%itemUsed = True;
+		}
 
+		if (%itemUsed) {
 			// play sound if it exists
-			if ($beltitem[%item, "useSound"] != "") {
+			if ($beltitem[%item, "useSound"] != "")
 				playSound($beltitem[%item, "useSound"], GameBase::getPosition(%clientId));
-			}
-			
-			//MenuBeltDrop(%clientId, %item, %type, %victim);
-			return;
 		} else {
 			Client::sendMessage(%clientId, $MsgWhite, "You cannot use " @ $beltitem[%item, "Name"] @ ".");
 		}
-		
-		// if (!%keybind) {
-		// 	if (%has > 0)
-		// 		MenuBeltDrop(%clientid, %item, %type);
-		// }
+					
+		if (!%keybind) {
+			if (%has > 0)
+				MenuBeltDrop(%clientid, %item, %type);
+		}
 	}
 	
 	%clientId.bulkNum = 1;
@@ -796,7 +798,7 @@ function MenuSellBeltItem(%clientid, %type, %page) {
 	%x = %lb - 1;
 	for(%i = %lb; %i <= %ub; %i++) {
 		%x++;
-		%item = getword(%nf,%x);
+		%item = getword(%nf, %x);
 		%amnt = Belt::HasThisStuff(%clientid, %item);
 		Client::addMenuItem(%clientId, %cnt++ @%amnt@" "@ $beltitem[%item, "Name"], %item @ " " @ %page @" "@%type);
 	}
@@ -2042,8 +2044,6 @@ $enchantLevels[10] = "X";
 
 function generateEnchantsAndMateria() {
 	// base enchant damage
-	%baseDamage = 5;
-
 	for(%i = 0; getWord($baseEnchants, %i) != "" && getWord($baseEnchants, %i) != -1; %i++) {
 		%baseEnchant = getWord($baseEnchants, %i);
 
@@ -2051,10 +2051,10 @@ function generateEnchantsAndMateria() {
 			%enchantLevel = $enchantLevels[%x];
 			%enchant = %baseEnchant@%enchantLevel;
 			// forumala for damage scaling eg: lvl 1 = 4 additional dmg, lvl 10 = 40 additional damage
-			%damage = %baseDamage * %x;
+			%damagePercent = %x * 10; // 10 -> 100
 
 			$WeaponEnchantment[%enchant, "name"] = %baseEnchant @ " " @ %enchantLevel;
-			$WeaponEnchantment[%enchant, "mod"] = "1 " @ %damage;
+			$WeaponEnchantment[%enchant, "mod"] = "2 " @ %damagePercent;
 			$WeaponEnchantment[%enchant, "action"] = $enchantDamageVerb[%baseEnchant];
 			$WeaponEnchantment[%enchant, "materia"] = %baseEnchant @ "Materia" @ %enchantLevel;
 			$WeaponEnchantment[%enchant, "elementalType"] = $materiaElementalType[%baseEnchant];
@@ -2564,7 +2564,7 @@ BeltItem::AddProjectile("Stone Feather","StoneFeather","AmmoItems",0.01, 400, "B
 BeltItem::AddProjectile("Metal Feather","MetalFeather","AmmoItems",0.01, 500, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 80", 9);
 BeltItem::AddProjectile("Talon", "Talon", "AmmoItems", 0.01, 800, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 100", 10);
 BeltItem::AddProjectile("Ceraphum's Feather","CeraphumsFeather","AmmoItems",0.01, 1000, "BasicArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 120", 11);
-BeltItem::AddProjectile("Poison Arrow", "PoisonArrow", "AmmoItems", 0.01, 1000, "BasicArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 140", 12);
+BeltItem::AddProjectile("Poison Arrow", "PoisonArrow", "AmmoItems", 0.01, 1000, "BasicArrowImpact", $SkillBows, $SkillBows @ " 1", "6 140", 12);
 BeltItem::AddProjectile("Fire Arrow", "FireArrow", "AmmoItems", 0.01, 800, "FireArrowRadiusSmall", $SkillBows, $SkillBows @ " 1", "6 120", 13);
 
 BeltItem::AddProjectile("Light Quarrel","LightQuarrel","AmmoItems",0.01 ,100, "BasicQuarrelImpact", $SkillBows, $SkillBows @ " 1", "6 10", 5);
@@ -2583,32 +2583,36 @@ $beltitem[PlagueArrow, "SpellEffect"] = "plague";
 BeltItem::AddProjectile("Black Arrow", "BlackArrow", "AmmoItems", 0.01, 2000, "PoisonArrowImpact", $SkillBows, $SkillBows @ " 1000", "6 100", 1019);
 $beltitem[BlackArrow, "SpellEffect"] = "blackdeath";
 
-// ninja stars
-BeltItem::AddWeapon("Practice Bow", "PracticeBow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "60", 174);
-BeltItem::AddWeapon("Quickshot Bow", "QuickshotBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 150", "85", 176);
-BeltItem::AddWeapon("Hunting Bow", "HuntingBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 300", "110", 177);
-BeltItem::AddWeapon("Reinforced Longbow", "ReinforcedLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 450", "130", 178);
-BeltItem::AddWeapon("Repeater Crossbow", "RepeaterCrossbow", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 600", "150", 179);
-BeltItem::AddWeapon("Warbow", "Warbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 750", "175", 180);
-BeltItem::AddWeapon("Sharpshooter Bow", "SharpshooterBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 900", "195", 181);
-BeltItem::AddWeapon("Siege Crossbow", "SiegeCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1050", "215", 182);
-BeltItem::AddWeapon("Gale Bow", "GaleBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1200", "235", 183);
-BeltItem::AddWeapon("Elven Longbow", "ElvenLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1350", "260", 184);
-BeltItem::AddWeapon("Storm Repeater", "StormRepeater", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1500", "285", 185);
-BeltItem::AddWeapon("Arcane Bow", "ArcaneBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1650", "310", 186);
-BeltItem::AddWeapon("Hawk's Talon", "HawksTalon", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1800", "340", 187);
-BeltItem::AddWeapon("Dragonbone Crossbow", "DragonboneCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 2000", "370", 188);
+// enemy projectiles
+BeltItem::AddWeapon("DragonBreath", "DragonBreath", "EnemyThrowingProjectile", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1000", "350");
+BeltItem::AddProjectile("DragonBreathShot", "DragonBreathShot", "AmmoItems", 0.01, 1, "DragonFire", $SkillBows, $SkillBows @ " 1", "6 1");
 
-BeltItem::AddProjectile("Throwing Star", "ThrowingStar", "AmmoItems", 0.01, 10, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1", "6 120", 1050);
-BeltItem::AddProjectile("Ninja Star", "NinjaStar", "AmmoItems", 0.01, 50, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 150", "6 160", 1051);
-BeltItem::AddProjectile("Shuriken", "Shuriken", "AmmoItems", 0.01, 200, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 300", "6 220", 1052);
-BeltItem::AddProjectile("War Star", "WarStar", "AmmoItems", 0.01, 500, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 450", "6 260", 1053);
-BeltItem::AddProjectile("Giant Shuriken", "GiantShuriken", "AmmoItems", 0.01, 1000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 600", "6 300", 1054);
-BeltItem::AddProjectile("Meteor Star", "MeteorStar", "AmmoItems", 0.01, 2000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 750", "6 350", 1055);
-BeltItem::AddProjectile("Shadow Star", "ShadowStar", "AmmoItems", 0.01, 3000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 900", "6 390", 1056);
-BeltItem::AddProjectile("Sky Star", "SkyStar", "AmmoItems", 0.01, 4000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1050", "6 430", 1057);
-BeltItem::AddProjectile("Heaven Star", "HeavenStar", "AmmoItems", 0.01, 5000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1200", "6 470", 1058);
-BeltItem::AddProjectile("Celestial Star", "CelestialStar", "AmmoItems", 0.01, 6000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1350", "6 500", 1059);
+// ninja stars
+BeltItem::AddWeapon("Practice Bow", "PracticeBow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1", "80", 174);
+BeltItem::AddWeapon("Quickshot Bow", "QuickshotBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 150", "105", 176);
+BeltItem::AddWeapon("Hunting Bow", "HuntingBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 300", "120", 177);
+BeltItem::AddWeapon("Reinforced Longbow", "ReinforcedLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 450", "150", 178);
+BeltItem::AddWeapon("Repeater Crossbow", "RepeaterCrossbow", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 600", "170", 179);
+BeltItem::AddWeapon("Warbow", "Warbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 750", "195", 180);
+BeltItem::AddWeapon("Sharpshooter Bow", "SharpshooterBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 900", "215", 181);
+BeltItem::AddWeapon("Siege Crossbow", "SiegeCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1050", "235", 182);
+BeltItem::AddWeapon("Gale Bow", "GaleBow", "CompositeBowFast", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1200", "255", 183);
+BeltItem::AddWeapon("Elven Longbow", "ElvenLongbow", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1350", "280", 184);
+BeltItem::AddWeapon("Storm Repeater", "StormRepeater", "RepeatingCrossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1500", "305", 185);
+BeltItem::AddWeapon("Arcane Bow", "ArcaneBow", "CompositeBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1650", "330", 186);
+BeltItem::AddWeapon("Hawk's Talon", "HawksTalon", "LongBow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 1800", "360", 187);
+BeltItem::AddWeapon("Dragonbone Crossbow", "DragonboneCrossbow", "Crossbow", $RangedAccessoryType, $description, $SkillBows, $SkillBows @ " 2000", "400", 188);
+
+BeltItem::AddProjectile("Throwing Star", "ThrowingStar", "AmmoItems", 0.01, 10, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1", "6 240", 1050);
+BeltItem::AddProjectile("Ninja Star", "NinjaStar", "AmmoItems", 0.01, 50, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 150", "6 320", 1051);
+BeltItem::AddProjectile("Shuriken", "Shuriken", "AmmoItems", 0.01, 200, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 300", "6 440", 1052);
+BeltItem::AddProjectile("War Star", "WarStar", "AmmoItems", 0.01, 500, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 450", "6 520", 1053);
+BeltItem::AddProjectile("Giant Shuriken", "GiantShuriken", "AmmoItems", 0.01, 1000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 600", "6 600", 1054);
+BeltItem::AddProjectile("Meteor Star", "MeteorStar", "AmmoItems", 0.01, 2000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 750", "6 700", 1055);
+BeltItem::AddProjectile("Shadow Star", "ShadowStar", "AmmoItems", 0.01, 3000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 900", "6 780", 1056);
+BeltItem::AddProjectile("Sky Star", "SkyStar", "AmmoItems", 0.01, 4000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1050", "6 860", 1057);
+BeltItem::AddProjectile("Heaven Star", "HeavenStar", "AmmoItems", 0.01, 5000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1200", "6 940", 1058);
+BeltItem::AddProjectile("Celestial Star", "CelestialStar", "AmmoItems", 0.01, 6000, "ThrowingStarImpact", $SkillBows, $SkillBows @ " 1350", "6 1000", 1059);
 
 //Gems
 BeltItem::Add("Quartz", "Quartz", "GemItems", 0.2, 100);
@@ -3049,6 +3053,7 @@ $AccessoryVar[MegaPotion, "AlchemyIngredients"] = "ArcaneCrystalPhial 1 VialOfWa
 BeltItem::Add("Elixir", "Elixir", "PotionItems", 0.5, 5000, "", 505);
 $AccessoryVar[Elixir, $MiscInfo] = "A rare elixir that restore HP and MP";
 $restoreValue[Elixir, HP] = 1000;
+$restoreValue[Elixir, MP] = 500;
 $AccessoryVar[Elixir, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 Sylphroot 10 ChocoboFeather 2";
 
 // maybe make mega elixir later?
@@ -3104,8 +3109,9 @@ BeltItem::Add("Healing Kit X", "HealingKitX", "MiscItems", 0.1, 200, "", 517);
 $AccessoryVar[HealingKitX, $MiscInfo] = "A medical kit that that let's you mend wounds. (500 HP)";
 $restoreValue[HealingKitX, HP] = 500;
 
-
-// TODO: Maybe make a new BeltItem::AddThrowable function that takes in a damage value and type?
+BeltItem::Add("Potion of XP", "PotionOfXP", "PotionItems", 0.5, 5000, "");
+$AccessoryVar[PotionOfXP, $MiscInfo] = "A golden potion that swirls with vivid colors. Grants a large amount of experience when consumed.";
+$restoreValue[PotionOfXP, EXP] = 1000;
 
 // poisons / elemental flasks
 BeltItem::Add("Fire Flask","FireFlask", "PotionItems", 0.1, 100, "SmallPotion", 550);

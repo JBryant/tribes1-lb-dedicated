@@ -423,6 +423,19 @@ function AddPoints(%clientId, %specialVar) {
 		}
 	}
 
+	// check for natural DEF and NDEF
+	if (%specialVar == 7) {
+		%ndef = fetchData(%clientId, "NDEF");
+		if (%ndef > 0) {
+			%add += %ndef;
+		}
+	} else if (%specialVar == 3) {
+		%nmdef = fetchData(%clientId, "NMDEF");
+		if (%nmdef > 0) {
+			%add += %nmdef;
+		}
+	}
+
 	return %add;
 }
 
