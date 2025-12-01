@@ -1,4 +1,4 @@
-function setHP(%clientId, %val)
+function setHP(%clientId, %val, %lckCost)
 {
 	dbecho($dbechoMode, "setHP(" @ %clientId @ ", " @ %val @ ")");
 
@@ -20,7 +20,11 @@ function setHP(%clientId, %val)
 
 	if(%c == %armor.maxDamage && !IsStillArenaFighting(%clientId))
 	{
-		storeData(%clientId, "LCK", 1, "dec");
+		%lck = 1;
+		if(%lckCost != "")
+			%lck = %lckCost;
+
+		storeData(%clientId, "LCK", %lck, "dec");
 
 		if(fetchData(%clientId, "LCK") >= 0)
 		{

@@ -261,14 +261,14 @@ $Skill::keyword[19] = "sneak";
 $Skill::index[$Skill::keyword[19]] = 19;
 $Skill::name[19] = "Sneak";
 $Skill::description[19] = "A stealthy maneuver that allows you to move undetected.";
-$Skill::delay[19] = 2.0;
+$Skill::delay[19] = 1.0;
 $Skill::recoveryTime[19] = 10;
-$Skill::duration[19] = 100;
-$Skill::startSound[19] = Reflected;
+$Skill::duration[19] = 20;
+$Skill::startSound[19] = Portal6;
 $Skill::groupListCheck[19] = False;
 $Skill::refVal[19] = -10;
 $Skill::graceDistance[19] = 1;
-$SkillRestriction[$Skill::keyword[19]] = "C Archer C Hunter C Sniper C Thief C Ninja C Dancer";
+$SkillRestriction[$Skill::keyword[19]] = "C Thief";
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");

@@ -142,3 +142,21 @@ function HasBonusState(%clientId, %type) {
 	}
 	return False;
 }
+
+function RemoveBonusState(%clientId, %type) {
+	for(%i = 1; %i <= $maxBonusStates; %i++) {
+		if($BonusStateCnt[%clientId, %i] > 0) {
+			if(String::ICompare($BonusState[%clientId, %i], %type) == 0) {
+				$BonusStateCnt[%clientId, %i] = 0;
+				$BonusStateName[%clientId, %i] = "";
+				$BonusState[%clientId, %i] = "";
+				$BonusStateAttribute[%clientId, %i] = "";
+				$BonusStateModifier[%clientId, %i] = "";
+				$BonusStatePeriodic[%clientId, %i] = "";
+				$BonusStateGiver[%clientId, %i] = "";
+				return True;
+			}
+		}
+	}
+	return False;
+}

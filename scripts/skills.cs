@@ -422,6 +422,44 @@ $AllowedSkills[Hunter] = ""
 @ $SkillDesc[$SkillFarming] @ " ";
 
 //--------------
+// Thief
+//--------------
+
+$SkillMultiplier[Thief, $SkillSwords] = 1.2;
+$SkillMultiplier[Thief, $SkillAxes] = 1.0;
+$SkillMultiplier[Thief, $SkillHammers] = 1.0;
+$SkillMultiplier[Thief, $SkillKatanas] = 1.5;
+$SkillMultiplier[Thief, $SkillWeightCapacity] = 1.4;
+$SkillMultiplier[Thief, $SkillSpears] = 1.7;
+$SkillMultiplier[Thief, $SkillStealing] = 1.3;
+$SkillMultiplier[Thief, $SkillHiding] = 1.2;
+$SkillMultiplier[Thief, $SkillBackstabbing] = 1.0;
+$SkillMultiplier[Thief, $SkillBlackMagick] = 0.5;
+$SkillMultiplier[Thief, $SkillWhiteMagick] = 1.0;
+$SkillMultiplier[Thief, $SkillSummonMagick] = 0.5;
+$SkillMultiplier[Thief, $SkillTimeMagick] = 0.5;
+$SkillMultiplier[Thief, $SkillHealing] = 1.2;
+$SkillMultiplier[Thief, $SkillBows] = 1.4;
+$SkillMultiplier[Thief, $SkillEndurance] = 1.2;
+$SkillMultiplier[Thief, $SkillMining] = 0.8;
+$SkillMultiplier[Thief, $SkillMagicka] = 1.0;
+$SkillMultiplier[Thief, $SkillAlchemy] = 1.0;
+$SkillMultiplier[Thief, $SkillHaggling] = 1.2;
+$SkillMultiplier[Thief, $SkillWoodCutting] = 1.5;
+$SkillMultiplier[Thief, $SkillFarming] = 1.5;
+$EXPmultiplier[Thief] = 1.00;
+$AllowedSkills[Thief] = ""
+@ $SkillDesc[$SkillSwords] @ " "
+@ $SkillDesc[$SkillKatanas] @ " "
+@ $SkillDesc[$SkillBows] @ " "
+@ $SkillDesc[$SkillStealing] @ " "
+@ $SkillDesc[$SkillHiding] @ " "
+@ $SkillDesc[$SkillBackstabbing] @ " "
+@ $SkillDesc[$SkillHealing] @ " "
+@ $SkillDesc[$SkillEndurance] @ " "
+@ $SkillDesc[$SkillWeightCapacity] @ " ";
+
+//--------------
 // Mystic
 //--------------
 

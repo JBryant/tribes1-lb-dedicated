@@ -599,31 +599,30 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 			%finalMulti = 1;
 
+			// check for backstab
 			if(fetchData(%shooterClient, "invisible")) {
 				%dRot = GetWord(GameBase::getRotation(%damagedClient), 2);
 				%sRot = GetWord(GameBase::getRotation(%shooterClient), 2);
 				%diff = %dRot - %sRot;
 
 				if(%diff >= -0.9 && %diff <= 0.9) {
+					%Backstab = True;
 					if ($skillType[%weapon] == $SkillKatanas) {
-						%finalMulti += 4.0; // 
+						%finalMulti += floor($PlayerSkill[%shooterClient, $SkillBackstabbing] / 100.0) + 1; // katana backstabs are deadly
 					} else if ($skillType[%weapon] == $SkillBows) {
-						%finalMulti += 1.0; // bows get a smaller bonus
-					} else {
-						lbecho("weapon: " @ %weapon);
-						%finalMulti += 3.0; // everything else gets a small bonus
+						%finalMulti += floor($PlayerSkill[%shooterClient, $SkillBackstabbing] / 200.0) + 1;
 					}
-					lbehco("Multiplier: " @ %finalMulti);
 				}
 
-				if(%shooterClient.adminLevel < 5)
-					UnHide(%shooterClient);
+				// if(%shooterClient.adminLevel < 5)
+				// 	UnHide(%shooterClient);
 			}
+			
 			if(fetchData(%damagedClient, "invisible") && %damagedClient.adminLevel < 5) {
 				UnHide(%damagedClient);
 			}
 
-			%finalValue = %value * %finalMulti;
+			%value = %value * %finalMulti;
 
 			%ab = (getRandom() * fetchData(%damagedClient, "DEF")) + 1;
 			%value = Cap(%value - %ab, 1, "inf");
