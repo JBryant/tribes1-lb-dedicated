@@ -75,8 +75,8 @@ $Quest::stepReq[2, 1] = "SpiderFang 5";
 $Quest::stepReq[2, 2] = "SpiderVenom 5";
 
 $Quest::stepReward[2, 0] = "";
-$Quest::stepReward[2, 1] = "EXP 1000";
-$Quest::stepReward[2, 2] = "EXP 2000 PoisonMateriaI";
+$Quest::stepReward[2, 1] = "EXP 2000";
+$Quest::stepReward[2, 2] = "EXP 3000 PoisonMateriaI";
 
 $QuestNPC::name[2] = "Researcher Arin";
 $QuestNPC::shape[2] = "MaleHumanTownBot";
@@ -87,13 +87,6 @@ $QuestNPC::questId[2] = 2;
 // =====================
 // STEP 0 — ACCEPT QUEST
 // =====================
-$QuestNPC::conversations[2, 2, 0, 0, 0] =
-  "Ah-! Oh. Sorry. I didn't hear you approach. Are you... brave? Or at least *reckless*?|What are you talking about?";
-$QuestNPC::conversations[2, 2, 0, 0, 1] =
-  "The spiders nesting in the Burial Tree have begun showing signs of magical infusion. Fascinating! Terrifying! Mostly fascinating.|That sounds dangerous.";
-$QuestNPC::conversations[2, 2, 0, 0, 2] =
-  "Dangerous, yes. Which is why *you* will be collecting the samples. I'll take notes from a safe distance. First, I need 5 Spider Fangs.|I can handle that.";
-
 $QuestNPC::conversations[2, 2, 0, 1, 0] =
   "Ah-! Oh. Sorry. I didn't hear you approach. Are you... brave? Or at least *reckless*?|What are you talking about?";
 $QuestNPC::conversations[2, 2, 0, 1, 1] =
@@ -136,6 +129,81 @@ $QuestNPC::conversations[2, 2, 3, 1, 0] =
   "That Poison Materia should retain some of the spiders' properties. Handle it carefully - it tends to... linger.|I'll keep that in mind.";
 $QuestNPC::conversations[2, 2, 3, 1, 1] =
   "If more creatures start glowing, hissing, or whispering at you - do let me know.|That's... reassuring.";
+
+
+// quest 3 - mako vials and zombie viscera
+$Quest::name[3] = "A Dirty Job";
+$Quest::desc[3] = "Help Researcher Arin collect more research materials from the catacombs.";
+$Quest::npcId[3] = 3;
+$Quest::type[3] = 0;
+
+$Quest::stepName[3, 0] = "Help out the Researcher";
+$Quest::stepName[3, 1] = "Retrieve 6 Mako Vials";
+$Quest::stepName[3, 2] = "Retrieve 10 Zombie Viscera";
+
+$Quest::stepDescription[3, 0] = "Researcher Arin needs your help collecting more research materials. Speak to him to find out more.";
+$Quest::stepDescription[3, 1] = "Researcher Arin has asked you to collect 6 Mako Vials. You can find them on Shinra guards that patrol the tree back up where you came from.";
+$Quest::stepDescription[3, 2] = "Researcher Arin also needs 10 Zombie Viscera. Collect them from zombies in the catacombs below where you currently are.";
+
+$Quest::stepReq[3, 0] = "";
+$Quest::stepReq[3, 1] = "MakoVial 4";
+$Quest::stepReq[3, 2] = "ZombieViscera 10";
+
+$Quest::stepReward[3, 0] = "";
+$Quest::stepReward[3, 1] = "EXP 2000";
+$Quest::stepReward[3, 2] = "EXP 3000 FireMateriaI";
+
+$QuestNPC::name[3] = "Researcher Arin";
+$QuestNPC::shape[3] = "MaleHumanTownBot";
+$QuestNPC::pos[3] = "194.691 -842.015 5050.75";
+$QuestNPC::rot[3] = "0 -0 0.815921";
+$QuestNPC::questId[3] = 3;
+
+// =====================
+// STEP 0 — ACCEPT QUEST
+// =====================
+$QuestNPC::conversations[3, 3, 0, 1, 0] =
+  "Ah, it's you again! Perfect timing. I've moved deeper into the catacombs and found something... *interesting*. And I'll need your help to collect some more research materials.|What is it this time?";
+$QuestNPC::conversations[3, 3, 0, 1, 1] =
+  "The Shinra guards up above are carrying Mako Vials - concentrated energy samples. And these zombies down here... well, they're not exactly *fresh*, but their viscera will be valuable for my research.|That sounds... unpleasant.";
+$QuestNPC::conversations[3, 3, 0, 1, 2] =
+  "Science rarely is pleasant! But it's necessary. First, I need 4 Mako Vials from those Shinra guards. They patrol the tree back up where you came from.|I can handle that.";
+
+// =====================
+// STEP 1 — MAKO VIALS
+// =====================
+$QuestNPC::conversations[3, 3, 1, 0, 0] =
+  "Any progress on those Mako Vials? I've been documenting the ambient energy fluctuations while you were gone.|Not yet.";
+$QuestNPC::conversations[3, 3, 1, 0, 1] =
+  "Take your time - but not too much time. These readings are fascinating!|I'll hurry.";
+
+$QuestNPC::conversations[3, 3, 1, 1, 0] =
+  "Excellent! These vials are pulsing with raw Mako energy. Can you feel the tingle?|I think so?";
+$QuestNPC::conversations[3, 3, 1, 1, 1] =
+  "Good, good. Now for the... messier part. I need 10 samples of Zombie Viscera from the undead down in the catacombs below. Try not to think about what you're collecting.|I'll try not to.";
+
+// =====================
+// STEP 2 — ZOMBIE VISCERA
+// =====================
+$QuestNPC::conversations[3, 3, 2, 0, 0] =
+  "You're back! Please tell me you have the viscera - and that you washed your hands.|Not yet.";
+$QuestNPC::conversations[3, 3, 2, 0, 1] =
+  "Ah... well. I'll prepare the preservation containers. And maybe some disinfectant.|I'll be back.";
+
+$QuestNPC::conversations[3, 3, 2, 1, 0] =
+  "Perfect! These samples are... well, they're exactly what I needed. The decomposition patterns are revealing!|Here you go.";
+$QuestNPC::conversations[3, 3, 2, 1, 1] =
+  "You've been invaluable. As a reward, I found this Fire Materia while studying the area. It should complement your collection nicely.|Thank you.";
+$QuestNPC::conversations[3, 3, 2, 1, 2] =
+  "Just remember - science is a dirty job, but someone's got to do it!|I'll keep that in mind.";
+
+// =====================
+// STEP 3 — COMPLETED CHATTER
+// =====================
+$QuestNPC::conversations[3, 3, 3, 1, 0] =
+  "That Fire Materia should serve you well. Handle it carefully - it's been exposed to some interesting energy signatures.|I'll be careful.";
+$QuestNPC::conversations[3, 3, 3, 1, 1] =
+  "If you find any more... unusual materials, feel free to bring them by. I'm always interested in expanding my research.|I'll keep an eye out.";
 
 // =====================
 // QUEST INITIALIZATION
@@ -479,9 +547,10 @@ function Quests::ResetQuest(%clientId, %questId, %removeFromActive) {
 
 function Quests::GetLastStep(%questId) {
 	// Find the highest step index with a defined stepReq
+	// Start from step 1 (skip step 0 which is the accept gate)
 	%last = 0;
 
-	for (%i = 0; %i < 100; %i++) {
+	for (%i = 1; %i < 100; %i++) {
 		if ($Quest::stepReq[%questId, %i] == "")
 			break;
 

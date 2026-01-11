@@ -3235,6 +3235,10 @@ BeltItem::Add("Spider Fang", "SpiderFang", "MiscItems", 0.01, 100, "", 631);
 $AccessoryVar[SpiderFang, $MiscInfo] = "A sharp fang from a spider. It is often used in alchemy and crafting.";
 BeltItem::Add("Spider Venom", "SpiderVenom", "MiscItems", 0.01, 100, "", 632);
 $AccessoryVar[SpiderVenom, $MiscInfo] = "A potent venom extracted from a spider. It is often used in alchemy and crafting.";
+BeltItem::Add("Mako Vial", "MakoVial", "MiscItems", 0.01, 100, "", 633);
+$AccessoryVar[MakoVial, $MiscInfo] = "A vial containing concentrated Mako energy. Often carried by Shinra guards for research purposes.";
+BeltItem::Add("Zombie Viscera", "ZombieViscera", "MiscItems", 0.01, 100, "", 634);
+$AccessoryVar[ZombieViscera, $MiscInfo] = "Preserved viscera from a zombie. Unpleasant but valuable for research into undead biology.";
 
 
 // hearth stones

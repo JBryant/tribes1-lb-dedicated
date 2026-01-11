@@ -672,11 +672,11 @@ $BotEquipment[EliteBlackWidow] = "LVL 22+4 PoisonMateriaII 1/-1000";
 // write bot equipment for each shinra type, 3 should be grouped together at a time
 // ex goose grunt infantry lvl 20 - 35, trooper officer sergeant 40 - 55, turk soldier3 soldier2 60 - 75, soldier1 shinra 80 - 90
 // the + indicates the max +/- variance in level from the base level, this should get higher as the level increases but go no larger than 15%
-$BotEquipment[ShinraGoon] = "CLASS Enemy LVL 10+2 COINS 20/50 LCK 0 Club 1 FireMateriaI 1/-800 " @ %defaultAlchemyDropsI;
+$BotEquipment[ShinraGoon] = "CLASS Enemy LVL 10+2 COINS 20/50 LCK 0 Club 1 FireMateriaI 1/-800 MakoVial 1/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteShinraGoon] = "LVL 20+4 FireMateriaII 1/-800";
-$BotEquipment[ShinraGrunt] = "CLASS Enemy LVL 15+3 COINS 23/50 LCK 0 HandAxe 1 FireMateriaI 1/-800 " @ %defaultAlchemyDropsI;
+$BotEquipment[ShinraGrunt] = "CLASS Enemy LVL 15+3 COINS 23/50 LCK 0 HandAxe 1 FireMateriaI 1/-800 MakoVial 1/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteShinraGrunt] = "LVL 30+6 FireMateriaII 1/-800";
-$BotEquipment[ShinraInfantry] = "CLASS Enemy LVL 20+3 COINS 26/50 LCK 0 Broadsword 1 FireMateriaI 1/-800 " @ %defaultAlchemyDropsI;
+$BotEquipment[ShinraInfantry] = "CLASS Enemy LVL 20+3 COINS 26/50 LCK 0 Broadsword 1 FireMateriaI 1/-800 MakoVial 1/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteShinraInfantry] = "LVL 40+6 FireMateriaII 1/-800";
 
 $BotEquipment[ShinraTrooper] = "CLASS Enemy LVL 41+4 COINS 29/50 LCK 0 IronHammer 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
@@ -696,9 +696,9 @@ $BotEquipment[ShinraSoldier1] = "CLASS Enemy LVL 105+10 COINS 47/50 LCK 0 Chippe
 $BotEquipment[EliteShinraSoldier1] = "LVL 210+20 FireMateriaII 1/-600 BombCore 10/-125 TonberryOil 1/-100";
 
 // dunega crypt bot equipment
-$BotEquipment[ZombieCorpse] = "CLASS Enemy LVL 20+3 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-200 " @ %defaultAlchemyDropsI;
+$BotEquipment[ZombieCorpse] = "CLASS Enemy LVL 20+3 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-200 ZombieViscera 1/-35 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteZombieCorpse] = "LVL 40+6 IceMateriaII 1/-500 SkeletonBonePowder 1/-200";
-$BotEquipment[ZombieWalker] = "CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-175 " @ %defaultAlchemyDropsI;
+$BotEquipment[ZombieWalker] = "CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-175 ZombieViscera 1/-35 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteZombieWalker] = "LVL 44+8 IceMateriaII 1/-500 SkeletonBonePowder 1/-175";
 $BotEquipment[UndeadRattler] = "CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 Broadsword 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-125 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteUndeadRattler] = "LVL 54+8 IceMateriaII 1/-500 SkeletonBonePowder 1/-125";
