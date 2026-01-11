@@ -26,14 +26,6 @@ $Quest::stepReward[1, 0] = "";
 $Quest::stepReward[1, 1] = "EXP 1000";
 $Quest::stepReward[1, 2] = "EXP 2000";
 
-// Questline wiring (optional)
-$Quest::prereq[1] = "";        // e.g. "Q:10=COMPLETED"
-$Quest::next[1]   = "2";       // unlock quest 2 when this completes
-
-
-// =====================
-// NPC DEFINITIONS
-// ===================
 $QuestNPC::name[1] = "Elder Thalos";
 $QuestNPC::shape[1] = "MaleHumanTownBot";
 $QuestNPC::pos[1] = "-2369.98 -292.01 65.0002";
@@ -64,6 +56,86 @@ $QuestNPC::conversations[1, 1, 2, 1, 1] = "Here's a shiny new weapon for your ef
 $QuestNPC::conversations[1, 1, 3, 1, 0] = "How is that new weapon treating you?|It's still shiny!";
 $QuestNPC::conversations[1, 1, 3, 1, 1] = "I'm glad you like it! Keep it safe... and shiny!|I will!";
 
+// quest 2 - spider fangs
+$Quest::name[2] = "Creepy Crawlers";
+$Quest::desc[2] = "Collect spider materials for Researcher Arin.";
+$Quest::npcId[2] = 2;
+$Quest::type[2] = 0;
+
+$Quest::stepName[2, 0] = "Help out the Researcher";
+$Quest::stepName[2, 1] = "Retrieve 5 Spider Fangs";
+$Quest::stepName[2, 2] = "Retrieve 5 Spider Venom";
+
+$Quest::stepDescription[2, 0] = "Researcher Arin needs your help collecting spider materials. Speak to him to find out more.";
+$Quest::stepDescription[2, 1] = "Researcher Arin has asked you to collect 5 Spider Fangs. You can find them on spiders in the caves of the Burial Tree.";
+$Quest::stepDescription[2, 2] = "Researcher Arin also needs 5 Spider Venom. Collect them from the stronger spiders in the caves of the Burial Tree.";
+
+$Quest::stepReq[2, 0] = "";
+$Quest::stepReq[2, 1] = "SpiderFang 5";
+$Quest::stepReq[2, 2] = "SpiderVenom 5";
+
+$Quest::stepReward[2, 0] = "";
+$Quest::stepReward[2, 1] = "EXP 1000";
+$Quest::stepReward[2, 2] = "EXP 2000 PoisonMateriaI";
+
+$QuestNPC::name[2] = "Researcher Arin";
+$QuestNPC::shape[2] = "MaleHumanTownBot";
+$QuestNPC::pos[2] = "-2833.05 -1181.97 701.008";
+$QuestNPC::rot[2] = "0 -0 -1.56603";
+$QuestNPC::questId[2] = 2;
+
+// =====================
+// STEP 0 — ACCEPT QUEST
+// =====================
+$QuestNPC::conversations[2, 2, 0, 0, 0] =
+  "Ah-! Oh. Sorry. I didn't hear you approach. Are you... brave? Or at least *reckless*?|What are you talking about?";
+$QuestNPC::conversations[2, 2, 0, 0, 1] =
+  "The spiders nesting in the Burial Tree have begun showing signs of magical infusion. Fascinating! Terrifying! Mostly fascinating.|That sounds dangerous.";
+$QuestNPC::conversations[2, 2, 0, 0, 2] =
+  "Dangerous, yes. Which is why *you* will be collecting the samples. I'll take notes from a safe distance. First, I need 5 Spider Fangs.|I can handle that.";
+
+$QuestNPC::conversations[2, 2, 0, 1, 0] =
+  "Ah-! Oh. Sorry. I didn't hear you approach. Are you... brave? Or at least *reckless*?|What are you talking about?";
+$QuestNPC::conversations[2, 2, 0, 1, 1] =
+  "The spiders nesting in the Burial Tree have begun showing signs of magical infusion. Fascinating! Terrifying! Mostly fascinating.|That sounds dangerous.";
+$QuestNPC::conversations[2, 2, 0, 1, 2] =
+  "Dangerous, yes. Which is why *you* will be collecting the samples. I'll take notes from a safe distance. First, I need 5 Spider Fangs.|I can handle that.";
+
+// =====================
+// STEP 1 — SPIDER FANGS
+// =====================
+$QuestNPC::conversations[2, 2, 1, 0, 0] =
+  "Any luck with the Spider Fangs? I've been sketching theories while you were gone.|Not yet.";
+$QuestNPC::conversations[2, 2, 1, 0, 1] =
+  "No worries - research is patient. Try not to get bitten. Or webbed. Or eaten.|I'll try.";
+
+$QuestNPC::conversations[2, 2, 1, 1, 0] =
+  "Marvelous! These fangs are resonating with residual magic. Do you feel that hum?|I think so?";
+$QuestNPC::conversations[2, 2, 1, 1, 1] =
+  "Excellent. Now for the trickier part. I need 5 samples of Spider Venom. The stronger specimens below should have it.|Of course they do.";
+
+// =====================
+// STEP 2 — SPIDER VENOM
+// =====================
+$QuestNPC::conversations[2, 2, 2, 0, 0] =
+  "You're back! Please tell me you have the venom - and that you still have all your limbs.|Not yet.";
+$QuestNPC::conversations[2, 2, 2, 0, 1] =
+  "Ah... well. I'll prepare the containment vials. Slowly. Carefully.|I'll be back.";
+
+$QuestNPC::conversations[2, 2, 2, 1, 0] =
+  "Incredible! The venom is pulsing with arcane energy! Oh, don't worry, it's *probably* stable.|Here you go.";
+$QuestNPC::conversations[2, 2, 2, 1, 1] =
+  "You've been an enormous help. As promised, here's something... interesting I found while studying the area.|What is it?";
+$QuestNPC::conversations[2, 2, 2, 1, 2] =
+  "If my calculations are correct, I believe this is Poison Materia. It could retain some of the spiders' properties.|Thank you.";
+
+// =====================
+// STEP 3 — COMPLETED CHATTER
+// =====================
+$QuestNPC::conversations[2, 2, 3, 1, 0] =
+  "That Poison Materia should retain some of the spiders' properties. Handle it carefully - it tends to... linger.|I'll keep that in mind.";
+$QuestNPC::conversations[2, 2, 3, 1, 1] =
+  "If more creatures start glowing, hissing, or whispering at you - do let me know.|That's... reassuring.";
 
 // =====================
 // QUEST INITIALIZATION
@@ -280,7 +352,7 @@ function Quests::ProgressQuest(%clientId, %questId) {
 	if (%state == 0) {
 		%state = 1;
 		Client::sendMessage(%clientId, 0, "You have accepted the quest " @ $Quest::name[%questId]);
-		PlaySound(bigheal, GameBase::getPosition(%clientId));
+		PlaySound(EnterProtected, GameBase::getPosition(%clientId));
 	}
 
 	// Consume only for real turn-ins (usually steps >= 1)
@@ -371,7 +443,7 @@ function Quests::ConsumeRequirements(%clientId, %req) {
 		%item = getWord(%req, %i);
 		%amt  = getWord(%req, %i + 1);
 
-		if (%item == "" || %amt == "")%step = %max;
+		if (%item == "" || %amt == "")
 			continue;
 
 		if (isBeltItem(%item)) {

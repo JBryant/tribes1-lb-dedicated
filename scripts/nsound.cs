@@ -2041,6 +2041,11 @@ SoundData Harp {
    profile = Profile3dNear;
 };
 
+SoundData EnterProtected {
+   wavFileName = "EnterProtected.wav";
+   profile = Profile3dNear;
+};
+
 //SoundData hadesgrr{   wavFileName = "UndeadDeath1.wav";   profile = Profile3dLudicrouslyFar;};
 //SoundData mypack{   wavFileName = "drums.wav";   profile = Profile3dLudicrouslyFar;};
 

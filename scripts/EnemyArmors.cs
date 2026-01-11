@@ -547,6 +547,20 @@ $spawnIndex[113] = "MoltenDragon";
 //------------------------------
 
 // range looks like: RShortBow 1 BasicArrow 20/50
+//
+// Drop Rate Formula: "ItemName Amount/-X"
+// The formula calculates: %r = floor(getRandom() * (100+X)) - X + 1
+// Item drops when %r >= 0, giving approximately (101/(100+X))% chance
+//
+// Common drop rate values:
+//   75% chance: Amount/-35   (e.g., "SpiderFang 2/-35")
+//   50% chance: Amount/-100  (e.g., "SpiderFang 2/-100")
+//   25% chance: Amount/-300  (e.g., "SpiderFang 2/-300")
+//   10% chance: Amount/-910  (e.g., "SpiderFang 2/-910")
+//    5% chance: Amount/-1920 (e.g., "SpiderFang 2/-1920")
+//    1% chance: Amount/-10000 (e.g., "SpiderFang 2/-10000")
+//
+// Note: When item drops, amount ranges from 0 to Amount (weighted toward lower values)
 
 %defaultAlchemyDropsI = "HealingHerb 5/-200 VialOfWater 3/-200 BombCore 3/-200 CrackedFlask 3/-200";
 %defaultAlchemyDropsII = "HealingHerb 5/-200 VialOfWater 3/-200 MaidensTear 3/-200 TonberryOil 3/-400 WornGlassVial 3/-200";
@@ -646,13 +660,13 @@ $BotEquipment[EliteAcolyte] = 	"LVL 1634/50 DiamondSword 1 DragonScale 1/-2500 G
 $BotEquipment[Doomsayer] = 	"CLASS Enemy LVL 1027/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500";
 $BotEquipment[EliteDoomsayer] = 	"LVL 2054/50 CastingBlade 1 DragonScale 1/-250 Emerald 1/-800 DarkMateriaII 1/-1200 ";
 
-$BotEquipment[Spiderling] = "CLASS Enemy LVL 2+1 COINS 5/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
+$BotEquipment[Spiderling] = "CLASS Enemy LVL 2+1 COINS 5/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteSpiderling] = "LVL 4+1 PoisonMateriaII 1/-1000";
-$BotEquipment[Huntsman] = "CLASS Enemy LVL 5+2 COINS 10/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
+$BotEquipment[Huntsman] = "CLASS Enemy LVL 5+2 COINS 10/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteHuntsman] = "LVL 10+2 PoisonMateriaII 1/-1000";
-$BotEquipment[BrownRecluse] = "CLASS Enemy LVL 9+2 COINS 15/50 LCK 0 BeastClawV 1 PoisonMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
+$BotEquipment[BrownRecluse] = "CLASS Enemy LVL 9+2 COINS 15/50 LCK 0 BeastClawV 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 SpiderVenom 1/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteBrownRecluse] = "LVL 18+4 PoisonMateriaII 1/-1000";
-$BotEquipment[BlackWidow] = "CLASS Enemy LVL 11+3 COINS 20/50 LCK 0 BeastClawV 1 PoisonMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
+$BotEquipment[BlackWidow] = "CLASS Enemy LVL 11+3 COINS 20/50 LCK 0 BeastClawV 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 SpiderVenom 1/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteBlackWidow] = "LVL 22+4 PoisonMateriaII 1/-1000";
 
 // write bot equipment for each shinra type, 3 should be grouped together at a time

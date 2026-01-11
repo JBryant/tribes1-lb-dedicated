@@ -3231,6 +3231,11 @@ BeltItem::Add("Skeleton Bone Powder", "SkeletonBonePowder", "MiscItems", 0.01, 1
 $AccessoryVar[SkeletonBonePowder, $MiscInfo] = "A fine powder made from ground skeleton bones. It is often used in bomb crafting.";
 BeltItem::Add("Ahriman Eye Lens", "AhrimanEyeLens", "MiscItems", 0.01, 100, "", 630);
 $AccessoryVar[AhrimanEyeLens, $MiscInfo] = "A lens made from the eye of an Ahriman. It is known for its ability to enhance magical properties.";
+BeltItem::Add("Spider Fang", "SpiderFang", "MiscItems", 0.01, 100, "", 631);
+$AccessoryVar[SpiderFang, $MiscInfo] = "A sharp fang from a spider. It is often used in alchemy and crafting.";
+BeltItem::Add("Spider Venom", "SpiderVenom", "MiscItems", 0.01, 100, "", 632);
+$AccessoryVar[SpiderVenom, $MiscInfo] = "A potent venom extracted from a spider. It is often used in alchemy and crafting.";
+
 
 // hearth stones
 BeltItem::Add("Gooba Hearthstone", "GoobaHearthstone", "MiscItems", 0.01, 1000, "Ruby", 700);

@@ -734,7 +734,7 @@ function DistributeExpForKilling(%damagedClient)
 				%value = %value * %expMultiplier;
 			}
  
-			%serverExpMultiplier = 5; // default to 1 but increase for server special occasions
+			%serverExpMultiplier = 1; //5; // default to 1 but increase for server special occasions
 			%value = %value * %serverExpMultiplier;
 
 			%perc = 1; // %dCounter[%finalDamagedBy[%i]] / %total;
