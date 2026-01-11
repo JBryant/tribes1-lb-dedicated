@@ -192,12 +192,18 @@ function MeleeAttack(%player)
 				Client::sendMessage(%clientId, $MsgBeige, "You attacked " @ %targetClient @ " but they parried!");
 			} else {
 				GameBase::virtual($los::object, "onDamage", "", 1.0, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, %weapon);
+				
+				// show fancy animation
+				// SpawnLight(GameBase::getPosition(%target), 5, 1.0, 0.0, 0.0, 1);
+				// figure out if they have a base enchant, if they do, map the type to a color and spawn the light
 			}
 		}
 		else if(%target.isIce){
 			ice::hit(%clientId,%target);
 		}
 	}
+
+	// SpawnLight(GameBase::getPosition(%clientId), 5, "1 0 0", 1, True);
 
 	PostAttack(%clientId, %weapon);
 }

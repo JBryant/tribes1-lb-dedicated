@@ -207,17 +207,17 @@ function Player::onKilled(%this) {
 		if (%equippedWeapon != "") {
 			// TODO: Make this use a map later 
 			if (
-				%equippedWeapon == "CastingBlade" ||
-				%equippedWeapon == "BeastClawI" ||
-				%equippedWeapon == "BeastClawII" ||
-				%equippedWeapon == "BeastClawIII" ||
-				%equippedWeapon == "BeastClawIV" ||
-				%equippedWeapon == "BeastClawV" ||
-				%equippedWeapon == "BeastClawVI" ||
-				%equippedWeapon == "BeastClawVII" ||
+				%equippedWeapon == "CastingBlade"  ||
+				%equippedWeapon == "BeastClawI"    ||
+				%equippedWeapon == "BeastClawII"   ||
+				%equippedWeapon == "BeastClawIII"  ||
+				%equippedWeapon == "BeastClawIV"   ||
+				%equippedWeapon == "BeastClawV"    ||
+				%equippedWeapon == "BeastClawVI"   ||
+				%equippedWeapon == "BeastClawVII"  ||
 				%equippedWeapon == "BeastClawVIII" ||
-				%equippedWeapon == "BeastClawIX" ||
-				%equippedWeapon == "BeastClawX" ||
+				%equippedWeapon == "BeastClawIX"   ||
+				%equippedWeapon == "BeastClawX"    ||
 				%equippedWeapon == "DragonBreath"
 			) {
 				belt::takethisstuff(%clientId, %equippedWeapon @ "0", 1);

@@ -200,41 +200,41 @@ SoundData SoundDoorClose
    profile = Profile3dNear;
 };
 
-SoundData ForceFieldOpen
-{
-   wavFileName = "ForceOpen.wav";
-   profile = Profile3dNear;
-};
+// SoundData ForceFieldOpen
+// {
+//    wavFileName = "ForceOpen.wav";
+//    profile = Profile3dNear;
+// };
 
-SoundData ForceFieldClose
-{
-   wavFileName = "ForceClose.wav";
-   profile = Profile3dNear;
-};
+// SoundData ForceFieldClose
+// {
+//    wavFileName = "ForceClose.wav";
+//    profile = Profile3dNear;
+// };
 
-SoundData SoundElevatorRun
-{
-   wavFileName = "generator.wav";
-   profile = Profile3dNearLoop;
-};
+// SoundData SoundElevatorRun
+// {
+//    wavFileName = "generator.wav";
+//    profile = Profile3dNearLoop;
+// };
 
-SoundData SoundElevatorBlocked
-{
-   wavFileName = "turret_whir.wav";
-   profile = Profile3dNearLoop;
-};
+// SoundData SoundElevatorBlocked
+// {
+//    wavFileName = "turret_whir.wav";
+//    profile = Profile3dNearLoop;
+// };
 
-SoundData SoundElevatorStart
-{
-   wavFileName = "elevator1.wav";
-   profile = Profile3dNear;
-};
+// SoundData SoundElevatorStart
+// {
+//    wavFileName = "elevator1.wav";
+//    profile = Profile3dNear;
+// };
 
-SoundData SoundElevatorStop
-{
-   wavFileName = "elevator2.wav";
-   profile = Profile3dNear;
-};
+// SoundData SoundElevatorStop
+// {
+//    wavFileName = "elevator2.wav";
+//    profile = Profile3dNear;
+// };
 
 //----------------------------------------------------------------------------
 // foot sounds
@@ -1578,6 +1578,12 @@ SoundData SoundLevelUp
    profile = Profile3dNear;
 };
 
+// SoundData SoundEnterProtected
+// {
+//    wavFileName = "EnterProtected.wav";
+//    profile = Profile3dNear;
+// };
+
 //OGRE SOUNDS
 SoundData SoundOgreDeath1
 {
@@ -2029,6 +2035,12 @@ SoundData Summonchant {
    wavFileName = "loopSP.wav";
    profile = Profile3dNear;
 };
+
+SoundData Harp {
+   wavFileName = "object_harp.wav";
+   profile = Profile3dNear;
+};
+
 //SoundData hadesgrr{   wavFileName = "UndeadDeath1.wav";   profile = Profile3dLudicrouslyFar;};
 //SoundData mypack{   wavFileName = "drums.wav";   profile = Profile3dLudicrouslyFar;};
 

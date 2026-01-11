@@ -1012,14 +1012,17 @@ function MenuBuyBeltItemFinal(%clientid, %item) {
 
 	%s = $SkillDesc[$SkillType[%item]];
 	if(%s != "")
-		remoteEval(%clientId, "setInfoLine", 3, "Skill Type: "@%s);
+		remoteEval(%clientId, "setInfoLine", 2, "Skill: "@%s);
+
+	remoteEval(%clientId, "setInfoLine", 3, WhatSpecialVars(%item));
+
+	remoteEval(%clientId, "setInfoLine", 4, "Restrictions: "@WhatSkills(%item));
 
 	%w = GetAccessoryVar(%item, $Weight);
 	if(%w == "")
 		%w = 0;
 
-	remoteEval(%clientId, "setInfoLine", 4, "Weight: "@fixDecimals(%w));
-	remoteEval(%clientId, "setInfoLine", 5, "Restrictions: "@WhatSkills(%item));
+	remoteEval(%clientId, "setInfoLine", 5, "Weight: " @ fixDecimals(%w));
 	remoteEval(%clientId, "setInfoLine", 6, $AccessoryVar[%item, $MiscInfo]);
 
 	return;
@@ -2171,7 +2174,7 @@ function Belt::TakeThisStuff(%clientid, %item, %amnt) {
 	if(%amnt > 0) {
 		%item = $beltitem[%item, "Item"];
 		%type = $beltitem[%item, "Type"];
-		%list = fetchdata(%clientid,%type);
+		%list = fetchdata(%clientid, %type);
 		%count = Belt::ItemCount(%item,%list);
 		%amnt = %count - %amnt;
 		%list = Belt::RemoveFromList(%list, %item@" "@%count);

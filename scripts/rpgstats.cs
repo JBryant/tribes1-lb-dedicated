@@ -916,6 +916,7 @@ function DoRemort(%clientId)
 		storeData(%clientId, "RemortedClasses", %remortedClasses @ %currentClass @ " 1 ");
 	}
 
+	Quests::ResetAllByType(%clientId, 0);
 	%clientId.choosingClass = True;
 	MenuChangeClass(%clientId);
 

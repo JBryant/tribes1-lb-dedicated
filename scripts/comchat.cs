@@ -1800,6 +1800,18 @@ function internalSay(%clientId, %team, %message, %senderName)
 				ChangeWeather();
 		}
 
+		if (%w1 == "#resetquest") {
+			if(%clientToServerAdminLevel >= 4) {
+				%name = GetWord(%cropped, 0);
+				%clientId = NEWgetClientByName(%name);
+				%qid = GetWord(%cropped, 1);
+				
+				Quests::ResetQuest(%clientId, %qid, True);
+	
+				Client::SendMessage(%TrueClientId,0,"Quest " @ %qid @ " has been reset for player " @ %name @ ".");
+			}
+		}
+
 		if (%w1 == "#homecommands" || %w1 == "#housecommands") {
 			%msg = "<f2>Home Commands\n\n";
 			%msg = %msg @ "<f1>#homes:             <f0>View a list of all home types\n";
@@ -2278,12 +2290,14 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 
 		if (%w1 == "#latest") {
-			%msg = "<f2>Latest Changes (9/30/25)\n\n";
+			%msg = "<f2>Latest Changes (1/9/26)\n\n";
 			
-			%msg = %msg @ "<f0>Updates (Materia Updates!):\n";
-			%msg = %msg @ "<f1>Materia damage now scales with weapon damage. Level I = 10% up to level X which is 100%.\n";
-			%msg = %msg @ "<f1>Materia now triggers percent damage with spells, but only if a Staff / Spear type weapon is equipped.\n";
-			%msg = %msg @ "<f0>DEF & MDEF Changes: <f1>DEF and MDEF have been buffed across the board. Enemy spawns now have natural DEF and MDEF based on level.\n";
+			%msg = %msg @ "<f0>Updates (New Questing System - in the works!):\n";
+			%msg = %msg @ "<f1>Sorry for the long outage. Was out of country for over a month and came back to a roaring KoK.\n";
+			%msg = %msg @ "<f1>I think it is perfect timing though, as it gives me some time to finish up the mod.\n";
+			%msg = %msg @ "<f1>I am overhauling the questing system to make it more engaging and rewarding for players.\n";
+			%msg = %msg @ "<f1>This includes multi step quests, repeatable, daily and per remort quests, as well as more dynamic quest controls.\n";
+			%msg = %msg @ "<f1>Should have updates ready soon!\n";
 			%msg = %msg @ "<f1>Inspecting enemies will now show their HP/MANA and DEF/MDEF values.\n";
 			%msg = %msg @ "<f1>Player Housing Beta! We have added basic housing functionality, allowing players to create and customize their own homes.\n";
 			%msg = %msg @ "<f1>As of now creation is unrestricted and free. Type #homecommands to see available commands.\n";
@@ -2304,11 +2318,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%msg = %msg @ "\n";
 
 			%msg = %msg @ "<f0>Fixes:\n";
-			%msg = %msg @ "<f1>- (Leif) - Flasks deal damage based on the most recent spell cast. If casting an offensive spell the flasks will deal the same dmg as that spell.\n";
-			%msg = %msg @ "<f1>- (Leif) - Fixed bug where elixir doesn't give mp\n";
-			%msg = %msg @ "<f1>- Fixed bug where some spells were not properly requiring cooldowns.\n";
-			%msg = %msg @ "<f1>- Fix bug where Flasks were not detonating on impact with enemies.\n";
-			%msg = %msg @ "\n";
 
 			%msg = %msg @ "<f0>Fixes In Development:\n";
 			%msg = %msg @ "<f1>(Leif) - Storm repeater crossbow only fires every second shot.\n";

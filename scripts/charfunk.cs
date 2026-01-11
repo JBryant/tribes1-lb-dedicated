@@ -282,6 +282,8 @@ function SaveCharacter(%clientId, %silent)
 	$funk::var["[\"" @ %name @ "\", 9, 9]"] = fetchData(%clientId, "HomeLanding"); // homeLanding (String)
 	$funk::var["[\"" @ %name @ "\", 9, 10]"] = fetchData(%clientId, "HomeSleepZone"); // homeSleepZone (String)
 
+	// quest variables
+
 	// clean up up house
 	if ($tagToObjectId[%clientId @ "_home"] != "") {
 		$tagToObjectId[%clientId @ "_home"] = "";
@@ -304,6 +306,9 @@ function SaveCharacter(%clientId, %silent)
 		$funk::var["[\"" @ %name @ "\", 4, " @ %cnt++ @ "]"] = $PlayerSkill[%clientId, %i];
 		$funk::var["[\"" @ %name @ "\", 4, " @ %cnt++ @ "]"] = $SkillCounter[%clientId, %i];
 	}
+
+	// quest variables
+	Quests::SaveCharacter(%clientId);
 
 	//IP dump, for server admin look-up purposes
 	$funk::var["[\"" @ %name @ "\", 0, 666]"] = Client::getTransportAddress(%clientId);
@@ -532,6 +537,9 @@ function LoadCharacter(%clientId)
 				addToSet("MissionCleanup\\Home" @ %clientId, %homeItem);
 			}
 		}
+
+		// load character quest data
+		Quests::LoadCharacter(%clientId);
 
 		%recallList = $funk::var[%name, 8, recallList];
 		storeData(%clientId, "recallList", %recallList);

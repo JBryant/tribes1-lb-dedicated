@@ -201,6 +201,8 @@ function createServer(%mission, %dedicated)
 	exec(globals);
 	rp_include(strings);
 	exec(rpgfunk);
+	// insert new quests controller before charfunk
+	exec(Quests);
 	exec(charfunk);
 	exec(connectivity);
 
@@ -263,6 +265,9 @@ function createServer(%mission, %dedicated)
 	// housing stuff
 	exec(home);
 
+	// script testing
+	exec(test);
+
 	%oldrpgmap["rpgmap1"] = True;
 	%oldrpgmap["rpgmap5"] = True;
 	if(!%oldrpgmap[%mission])
@@ -280,6 +285,7 @@ function createServer(%mission, %dedicated)
 	exec(bottalk);
 	exec(belt);
 	exec(compass);
+
 	$Server::Info = "Running Tribes Repack RPG\nDownload: https://www.moddb.com/mods/rpgmod/downloads/tribes-rpg-repack-minimal-full-ver";
 	$server::modinfo = $Server::Info;
 
@@ -301,7 +307,8 @@ function createServer(%mission, %dedicated)
 	InitZones();
 	InitFerry();
 	InitTownBots();
-	
+	InitQuests();
+		
 	if(!$NoSpawn)
 		InitSpawnPoints();
 
