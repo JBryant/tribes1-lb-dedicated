@@ -1307,9 +1307,36 @@ function TossSpecialLootbag(%clientId, %loot, %vel, %namelist, %t) {
 		if (%ownerLevel >= 1000) {
 			%loot = "RP 1";
 		} else {
-			%loot = "SP 50 EXP 1000 LCK 1 COINS 10000";
+			%loot = "SP 50 EXP 1000 LCK 5 COINS 10000";
 		}
 	}
+
+	// Randomize amounts in loot string (1 to max for each amount)
+	// Format: "TYPE1 AMOUNT1 TYPE2 AMOUNT2 ..." -> "TYPE1 RAND1 TYPE2 RAND2 ..."
+	%randomizedLoot = "";
+	%wordCount = getWordCount(%loot);
+	for (%i = 0; %i < %wordCount; %i += 2) {
+		%type = getWord(%loot, %i);
+		%maxAmount = getWord(%loot, %i + 1);
+		
+		if (%type == "" || %maxAmount == "")
+			break;
+		
+		// Convert to number (TorqueScript auto-converts strings to numbers)
+		%maxAmountNum = %maxAmount * 1;
+		
+		// Generate random amount from 1 to maxAmount
+		if (%maxAmountNum > 0)
+			%randomAmount = floor(getRandom() * %maxAmountNum) + 1;
+		else
+			%randomAmount = %maxAmount; // Keep original if 0 or invalid
+		
+		if (%randomizedLoot == "")
+			%randomizedLoot = %type @ " " @ %randomAmount;
+		else
+			%randomizedLoot = %randomizedLoot @ " " @ %type @ " " @ %randomAmount;
+	}
+	%loot = %randomizedLoot;
 
 	%loot = %preLoot @ " " @ %loot;
 
