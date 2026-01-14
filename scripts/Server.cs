@@ -282,6 +282,7 @@ function createServer(%mission, %dedicated)
 	exec(comchat);
 	//exec(plugs);
 	exec(version);
+	exec(Games);
 	exec(bottalk);
 	exec(belt);
 	exec(compass);
@@ -308,6 +309,7 @@ function createServer(%mission, %dedicated)
 	InitFerry();
 	InitTownBots();
 	InitQuests();
+	InitBlackJackBots();
 		
 	if(!$NoSpawn)
 		InitSpawnPoints();

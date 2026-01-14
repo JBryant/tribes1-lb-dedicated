@@ -99,6 +99,13 @@ function endBotTalkChoice(%client){
 		$botMenuOption[%client,%i] = "";
 	}
 	$yousaid[%client] = "";
+	
+	// Clean up blackjack game if player was in one (but don't clear bet if game is still valid)
+	// Only clean up if they're leaving mid-game without finishing
+	if($BlackJack::state[%client] != "" && $BlackJack::state[%client] == "playing") {
+		// Player left mid-game - we'll keep the state so they can return
+		// But if they come back and bet is 0, we'll clean it up then
+	}
 }
 
 
@@ -1040,4 +1047,266 @@ function bottalk::manager(%TrueClientId, %closestId, %initTalk, %message){
 			}
 		}
 	}
+}
+
+// ============================================================
+// BLACKJACK BOT CONVERSATION HANDLER
+// ============================================================
+// Note: Blackjack game logic is in Games.cs
+// This handler manages the conversation flow and UI
+
+function bottalk::BlackJackBot(%clientId, %object, %initTalk, %message) {
+	%w1 = GetWord(%message, 0);
+	%cropped = String::NEWgetSubStr(%message, (String::len(%w1)+1), 99999);
+	%aiName = %object.name;
+	%state = $BlackJack::state[%clientId];
+	
+	if(%initTalk) {
+		// Initial greeting
+		if(%state == "") {
+			// Not in a game
+			$botMenuOption[%clientId, 0] = "play|play";
+			$botMenuOption[%clientId, 1] = "rules|rules";
+			NewBotMessage(%clientId, %object, "Welcome to the blackjack table! Would you like to <f1>PLAY<f0> a game or learn the <f1>RULES<f0>?");
+			$state[%object, %clientId] = 1;
+		}
+		else {
+			// Check if we have a valid game state (bet must exist)
+			%bet = $BlackJack::bet[%clientId];
+			if(%bet == "" || %bet == 0) {
+				// Invalid state - bet was lost, clean up and start fresh
+				BlackJack::Cleanup(%clientId);
+				$state[%object, %clientId] = "";
+				$botMenuOption[%clientId, 0] = "play|play";
+				$botMenuOption[%clientId, 1] = "rules|rules";
+				NewBotMessage(%clientId, %object, "Welcome back to the blackjack table! Your previous game was interrupted. Would you like to <f1>PLAY<f0> a new game or learn the <f1>RULES<f0>?");
+				$state[%object, %clientId] = 1;
+			}
+			else {
+				// Already in a valid game - show current state
+				BlackJack::ShowGameState(%clientId, %object);
+			}
+		}
+	}
+	else if($state[%object, %clientId] == 1) {
+		// Main menu
+		if(String::findSubStr(%message, "play") != -1) {
+			// Start betting phase
+			%coins = fetchData(%clientId, "COINS");
+			if(%coins < 10) {
+				NewBotMessage(%clientId, %object, "You need at least 10 coins to play. You currently have " @ %coins @ " coins.");
+				$state[%object, %clientId] = "";
+				return;
+			}
+			
+			// Set up bet options
+			%maxBet = %coins;
+			if(%maxBet > 1000)
+				%maxBet = 1000;
+			
+			$botMenuOption[%clientId, 0] = "10|10";
+			if(%maxBet >= 25)
+				$botMenuOption[%clientId, 1] = "25|25";
+			if(%maxBet >= 50)
+				$botMenuOption[%clientId, 2] = "50|50";
+			if(%maxBet >= 100)
+				$botMenuOption[%clientId, 3] = "100|100";
+			if(%maxBet >= 250)
+				$botMenuOption[%clientId, 4] = "250|250";
+			if(%maxBet >= 500)
+				$botMenuOption[%clientId, 5] = "500|500";
+			if(%maxBet >= 1000)
+				$botMenuOption[%clientId, 6] = "1000|1000";
+			
+			NewBotMessage(%clientId, %object, "Place your bet! You have " @ Number::Beautify(%coins) @ " coins. Minimum bet is 10 coins.");
+			$state[%object, %clientId] = 2;
+			$BlackJack::state[%clientId] = "betting";
+		}
+		else if(String::findSubStr(%message, "rules") != -1) {
+			// Cancel any scheduled message refresh first
+			schedule::Cancel("NewBotMessage"@%clientId);
+			
+			// Clear existing menu options
+			for(%i = 0; $botMenuOption[%clientId,%i] != ""; %i++)
+				$botMenuOption[%clientId,%i] = "";
+			
+			%rules = "Blackjack Rules:\n\n" @
+				"<f1>Goal:<f0> Get closer to 21 than the dealer without going over.\n\n" @
+				"<f1>Card Values:<f0>\n" @
+				"  Number cards = face value\n" @
+				"  Face cards (J, Q, K) = 10\n" @
+				"  Ace = 1 or 11 (whichever is better)\n\n" @
+				"<f1>Blackjack:<f0> 21 with your first 2 cards pays 3:2\n\n" @
+				"<f1>Actions:<f0>\n" @
+				"  <f1>HIT<f0> - Take another card\n" @
+				"  <f1>STAND<f0> - Keep your hand\n\n" @
+				"<f1>Payouts:<f0>\n" @
+				"  Win = 1:1 (double your bet)\n" @
+				"  Blackjack = 3:2\n" @
+				"  Push (tie) = return bet";
+			
+			// Set up menu options to return to main menu
+			$botMenuOption[%clientId, 0] = "play|play";
+			
+			// Use NewBotMessage but it will schedule itself - that's okay since we want it to stay visible
+			NewBotMessage(%clientId, %object, %rules);
+			$state[%object, %clientId] = 1; // Return to main menu
+		}
+	}
+	else if($state[%object, %clientId] == 2) {
+		// Betting phase
+		%bet = floor(%cropped);
+		if(%bet <= 0)
+			%bet = floor(%message);
+		
+		if(%bet < 10) {
+			NewBotMessage(%clientId, %object, "Minimum bet is 10 coins. Please place a valid bet.");
+			return;
+		}
+		
+		%coins = fetchData(%clientId, "COINS");
+		if(%bet > %coins) {
+			NewBotMessage(%clientId, %object, "You don't have enough coins. You have " @ %coins @ " coins.");
+			return;
+		}
+		
+		if(%bet > 1000) {
+			NewBotMessage(%clientId, %object, "Maximum bet is 1000 coins.");
+			return;
+		}
+		
+		// Deduct bet and start game
+		storeData(%clientId, "COINS", -%bet, "inc");
+		$BlackJack::bet[%clientId] = %bet;
+		BlackJack::StartGame(%clientId);
+		
+		// Show initial hands
+		BlackJack::ShowGameState(%clientId, %object);
+		$state[%object, %clientId] = 3;
+	}
+	else if($state[%object, %clientId] == 3) {
+		// Playing phase - validate bet exists
+		%bet = $BlackJack::bet[%clientId];
+		if(%bet == "" || %bet == 0) {
+			// Bet was lost, clean up and return to main menu
+			BlackJack::Cleanup(%clientId);
+			$state[%object, %clientId] = 1;
+			$botMenuOption[%clientId, 0] = "play|play";
+			$botMenuOption[%clientId, 1] = "rules|rules";
+			NewBotMessage(%clientId, %object, "Your game was interrupted. Please place a new bet to start a game.");
+			return;
+		}
+		
+		if($BlackJack::state[%clientId] != "playing") {
+			// Game finished, show result
+			BlackJack::ShowGameState(%clientId, %object, True);
+			$state[%object, %clientId] = 4;
+			return;
+		}
+		
+		if(String::findSubStr(%message, "hit") != -1) {
+			%result = BlackJack::PlayerHit(%clientId);
+			
+			if(%result == "bust") {
+				// Player busted
+				$BlackJack::state[%clientId] = "finished";
+				BlackJack::ShowGameState(%clientId, %object, True);
+				$state[%object, %clientId] = 4;
+			}
+			else {
+				// Show updated hand
+				BlackJack::ShowGameState(%clientId, %object);
+			}
+		}
+		else if(String::findSubStr(%message, "stand") != -1) {
+			// Player stands, dealer plays
+			$BlackJack::state[%clientId] = "dealer";
+			%dealerResult = BlackJack::DealerPlay(%clientId);
+			$BlackJack::state[%clientId] = "finished";
+			
+			// Show final result
+			BlackJack::ShowGameState(%clientId, %object, True);
+			$state[%object, %clientId] = 4;
+		}
+	}
+	else if($state[%object, %clientId] == 4) {
+		// Game finished - offer to play again
+		if(String::findSubStr(%message, "play") != -1 || String::findSubStr(%message, "again") != -1) {
+			BlackJack::Cleanup(%clientId);
+			$state[%object, %clientId] = 1;
+			// Restart conversation
+			eval("bottalk::"@clipTrailingNumbers(%aiName)@"("@%clientId@","@%object@",True,\"#say hello\");");
+		}
+		else if(String::findSubStr(%message, "leave") != -1 || String::findSubStr(%message, "exit") != -1) {
+			BlackJack::Cleanup(%clientId);
+			$state[%object, %clientId] = "";
+			endBotTalkChoice(%clientId);
+		}
+	}
+}
+
+function BlackJack::ShowGameState(%clientId, %object, %showDealer) {
+	%playerHand = $BlackJack::playerHand[%clientId];
+	%dealerHand = $BlackJack::dealerHand[%clientId];
+	%bet = $BlackJack::bet[%clientId];
+	%state = $BlackJack::state[%clientId];
+	
+	%playerValue = BlackJack::GetHandValue(%playerHand);
+	%playerFormatted = BlackJack::FormatHand(%playerHand, False);
+	
+	if(%showDealer || %state == "finished") {
+		%dealerValue = BlackJack::GetHandValue(%dealerHand);
+		%dealerFormatted = BlackJack::FormatHand(%dealerHand, False);
+		%message = "Bet: " @ Number::Beautify(%bet) @ " coins\n\n" @
+			"<f1>Your Hand:<f0> " @ %playerFormatted @ "(<f1>" @ %playerValue @ "<f0>)\n" @
+			"<f1>Dealer Hand:<f0> " @ %dealerFormatted @ "(<f1>" @ %dealerValue @ "<f0>)";
+		
+		if(%state == "finished") {
+			%result = BlackJack::DetermineWinner(%clientId);
+			%winnings = BlackJack::Payout(%clientId, %result);
+			%coins = fetchData(%clientId, "COINS");
+			
+			if(%result == "player_blackjack") {
+				%message = %message @ "\n\n<f1>BLACKJACK!<f0> You win " @ Number::Beautify(%winnings) @ " coins!";
+			}
+			else if(%result == "player") {
+				%message = %message @ "\n\n<f1>You Win!<f0> You win " @ Number::Beautify(%winnings) @ " coins!";
+			}
+			else if(%result == "dealer_blackjack") {
+				%message = %message @ "\n\n<f1>Dealer Blackjack!<f0> You lose " @ Number::Beautify(%bet) @ " coins.";
+			}
+			else if(%result == "dealer") {
+				%message = %message @ "\n\n<f1>Dealer Wins!<f0> You lose " @ Number::Beautify(%bet) @ " coins.";
+			}
+			else {
+				%message = %message @ "\n\n<f1>Push!<f0> It's a tie. Your bet is returned.";
+			}
+			
+			%message = %message @ "\n\nYou now have " @ Number::Beautify(%coins) @ " coins.";
+			
+			$botMenuOption[%clientId, 0] = "play again|play";
+			$botMenuOption[%clientId, 1] = "leave|leave";
+		}
+	}
+	else {
+		%dealerFormatted = BlackJack::FormatHand(%dealerHand, True);
+		%message = "Bet: " @ Number::Beautify(%bet) @ " coins\n\n" @
+			"<f1>Your Hand:<f0> " @ %playerFormatted @ "(<f1>" @ %playerValue @ "<f0>)\n" @
+			"<f1>Dealer Hand:<f0> " @ %dealerFormatted;
+		
+		if(%playerValue == 21) {
+			%message = %message @ "\n\n<f1>21!<f0> You must stand.";
+			$botMenuOption[%clientId, 0] = "stand|stand";
+		}
+		else {
+			$botMenuOption[%clientId, 0] = "hit|hit";
+			$botMenuOption[%clientId, 1] = "stand|stand";
+		}
+	}
+	
+	NewBotMessage(%clientId, %object, %message);
+	
+	// Update inventory text
+	%txt = "<f1><jc>COINS: " @ fetchData(%clientId, "COINS");
+	Client::setInventoryText(%clientId, %txt);
 }
