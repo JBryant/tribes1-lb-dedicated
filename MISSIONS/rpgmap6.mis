@@ -5298,7 +5298,7 @@ instant SimGroup "MissionGroup" {
 					rotation = "0 0 0";
 				};
 			};
-			instant SimGroup "NEED AI false Nothing 99";
+			instant SimGroup "NEED AI false COINS 0";
 			instant SimGroup "TAKE COINS 0";
 			instant SimGroup "NSAY There is a cool draft coming from the North East.~wTink.wav";
 			instant SimGroup "GSAY .~wenterprotected.wav";
