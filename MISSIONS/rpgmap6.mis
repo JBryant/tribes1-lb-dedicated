@@ -3942,7 +3942,7 @@ instant SimGroup "MissionGroup" {
 				isSphere = "True";
 				landingPos = "1994.3 498.99 2200";
 				need = "AI false";
-				esay = "Press T to enter this unoccupied house.";
+				esay = "Press T to enter the Housing Committee.";
 			};
 		};
 		instant SimGroup "hfs1 ex" {
@@ -6251,6 +6251,19 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "RACE FemaleHuman";
 			instant SimGroup "GREETING Hey there Stranger. What can I get'cha?";
 			instant SimGroup "BELTSHOP 503 504 505 514 515 516 517 856 857 703";
+		};
+		instant SimGroup "merchant28" {
+			instant Marker "kalm housing merchant" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "2001.96 503.667 2200";
+				rotation = "0 -0 -0.850831";
+			};
+			instant SimGroup "NAME Becca";
+			instant SimGroup "ITEMS CLASS Archer LVL 2 LCK 0";
+			instant SimGroup "RACE FemaleHuman";
+			instant SimGroup "GREETING Welcome, builder! I've got homes and furnishings to make your dreams feel real.";
+			instant SimGroup "BELTSHOP 1000 1001 1002 1003 1004 1005 1006 1007 1008 1009 1010 1011 1012 1013 1014 1015 1016 1017 1018 1019 1020 1021 1022 1023 1024 1025 1026 1027 1028 1029 1030 1031 1032 1033 1034 1035 1036 1037 1038 1039 1040 1041 1042 1043 1044 1045 1046 1047 1048 1049 1050 1051 1052 1053 1054 1055 1056 1057 1058 1059";
 		};
 		instant SimGroup "banker1" {
 			instant Marker "kalm banker" {

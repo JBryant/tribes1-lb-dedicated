@@ -67,11 +67,12 @@ function getDisp(%type) {
 	%disp["QuestItems"] = "Quest Items";
 	%disp["AccessoryItems"] = "Accessories";
 	%disp["MiscItems"] = "Miscellaneous";
+	%disp["HousingItems"] = "Housing";
 
 	return %disp[%type];
 }
 
-$belttypelist = "AmmoItems GemItems PotionItems WeaponItems ArmorItems MateriaItems QuestItems AccessoryItems MiscItems";
+$belttypelist = "AmmoItems GemItems PotionItems WeaponItems ArmorItems MateriaItems QuestItems AccessoryItems MiscItems HousingItems";
 
 function belt::checkmenus(%clientId)
 {
@@ -421,7 +422,7 @@ function MenuBeltDrop(%clientid, %item, %type, %victim)
 			Client::addMenuItem(%clientId, %cnt++ @ "Equip to "@%curweap, %type@" arm "@%item);
 		}
 	}
-	else if(%type == "PotionItems" || %type == "MiscItems") {
+	else if(%type == "PotionItems" || %type == "MiscItems" || %type == "HousingItems") {
 		Client::addMenuItem(%clientId, %cnt++ @ "Use", %type@" use "@%item);
 	}
 	else if(%type == "WeaponItems") {
@@ -641,6 +642,70 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 
 		if(%has < 1)
 			return;
+
+		if ($beltitem[%item, "isHousingItem"]) {
+			if (fetchData(%clientId, "PlaceMode") == 1) {
+				Client::sendMessage(%clientId, $MsgWhite, "Finish placing your current item first.");
+				return;
+			}
+			if (fetchData(%clientId, "RotateMode") == 1) {
+				Client::sendMessage(%clientId, $MsgWhite, "Finish rotating your current item first.");
+				return;
+			}
+
+			%shape = $beltitem[%item, "shape"];
+			%housingType = $beltitem[%item, "housingType"];
+			if (%shape == "" || %housingType == "") {
+				Client::sendMessage(%clientId, $MsgWhite, "This housing item is missing data.");
+				return;
+			}
+
+			if (%housingType == "home") {
+				if ($tagToObjectId[%clientId @ "_home"] != "") {
+					Client::sendMessage(%clientId, $MsgWhite, "You already have a home placed. Remove it first.");
+					return;
+				}
+				StartPlaceMode(%clientId, "home", %shape @ ".dis");
+				Client::sendMessage(%clientId, $MsgWhite, "Placing home: " @ %shape @ ".");
+				return;
+			}
+
+			if (%housingType == "homeitem") {
+				%home = $tagToObjectId[%clientId @ "_home"];
+				if (fetchData(%clientId, "HomeShape") == "" && %home != "" && %home != 0) {
+					%shape = $tagToObjectShape[%clientId @ "_home"];
+					if (%shape == "")
+						%shape = %home.shape;
+					if (%shape != "")
+						storeData(%clientId, "HomeShape", %shape);
+					storeData(%clientId, "HomePos", GameBase::getPosition(%home));
+					storeData(%clientId, "HomeRot", GameBase::getRotation(%home));
+					storeData(%clientId, "HasHome", 1);
+				}
+				if (fetchData(%clientId, "HomeShape") == "" || $tagToObjectId[%clientId @ "_home"] == "") {
+					Client::sendMessage(%clientId, $MsgWhite, "You need a placed home before placing home items.");
+					return;
+				}
+
+				%openSlot = -1;
+				for (%i = 1; %i <= $maxHouseItems; %i++) {
+					%homeItem = $tagToObjectId[%clientId @ "_homeitem_" @ %i];
+					if (%homeItem == "") {
+						%openSlot = %i;
+						break;
+					}
+				}
+
+				if (%openSlot < 0) {
+					Client::sendMessage(%clientId, $MsgWhite, "You have no open home item slots.");
+					return;
+				}
+
+				StartPlaceMode(%clientId, "homeitem_" @ %openSlot, %shape @ ".dis", %openSlot);
+				Client::sendMessage(%clientId, $MsgWhite, "Placing home item: " @ %shape @ ".");
+				return;
+			}
+		}
 
 		// check if health item
 		if ($restoreValue[%item, HP] > 0) {

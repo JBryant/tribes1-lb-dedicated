@@ -262,11 +262,6 @@ function createServer(%mission, %dedicated)
 	// chocobo stuffz
 	exec(ChocoboArmor);
 	exec(Chocobo);
-	// housing stuff
-	exec(home);
-
-	// script testing
-	exec(test);
 
 	%oldrpgmap["rpgmap1"] = True;
 	%oldrpgmap["rpgmap5"] = True;
@@ -286,6 +281,12 @@ function createServer(%mission, %dedicated)
 	exec(bottalk);
 	exec(belt);
 	exec(compass);
+
+	// housing stuff
+	exec(home);
+	
+	// script testing
+	exec(test);
 
 	$Server::Info = "Running Tribes Repack RPG\nDownload: https://www.moddb.com/mods/rpgmod/downloads/tribes-rpg-repack-minimal-full-ver";
 	$server::modinfo = $Server::Info;

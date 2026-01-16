@@ -1937,6 +1937,17 @@ function internalSay(%clientId, %team, %message, %senderName)
 		if (%w1 == "#placehomeitem" || %w1 == "#placehouseitem" || %w1 == "#placeitem") {
 			//if(%clientToServerAdminLevel >= 4) {
 				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
+					%home = $tagToObjectId[%TrueClientId @ "_home"];
+					if (fetchData(%TrueClientId, "HomeShape") == "" && %home != "" && %home != 0) {
+						%shape = $tagToObjectShape[%TrueClientId @ "_home"];
+						if (%shape == "")
+							%shape = %home.shape;
+						if (%shape != "")
+							storeData(%TrueClientId, "HomeShape", %shape);
+						storeData(%TrueClientId, "HomePos", GameBase::getPosition(%home));
+						storeData(%TrueClientId, "HomeRot", GameBase::getRotation(%home));
+						storeData(%TrueClientId, "HasHome", 1);
+					}
 					// check if they have a home first...
 					if (fetchData(%TrueClientId, "HomeShape") == "" || $tagToObjectId[%TrueClientId @ "_home"] == "") {
 						Client::sendMessage(%TrueClientId, 1, "You need to place a home before placing home items.");
@@ -1974,6 +1985,17 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 
 		if (%w1 == "#move") {
+			%home = $tagToObjectId[%TrueClientId @ "_home"];
+			if (fetchData(%TrueClientId, "HomeShape") == "" && %home != "" && %home != 0) {
+				%shape = $tagToObjectShape[%TrueClientId @ "_home"];
+				if (%shape == "")
+					%shape = %home.shape;
+				if (%shape != "")
+					storeData(%TrueClientId, "HomeShape", %shape);
+				storeData(%TrueClientId, "HomePos", GameBase::getPosition(%home));
+				storeData(%TrueClientId, "HomeRot", GameBase::getRotation(%home));
+				storeData(%TrueClientId, "HasHome", 1);
+			}
 			if (fetchData(%TrueClientId, "HomeShape") == "" || $tagToObjectId[%TrueClientId @ "_home"] == "") {
 				Client::sendMessage(%TrueClientId, 1, "You need a placed home before moving home items.");
 				return;
@@ -1982,7 +2004,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 			if(GameBase::getLOSinfo(%player, 1000)) {
 				%obj = $los::object;
-				if (%obj.owner == %TrueClientId && %obj.slot != "") {
+				if (%obj.owner == %TrueClientId && (%obj.slot != "" || %obj.name == "home")) {
 					lbecho("You own this item, you can move it.");
 					if (fetchData(%TrueClientId, "PlaceMode") != 1) {
 						StartPlaceMode(%TrueClientId, %obj.name, %obj.shape, %obj.slot, %obj);
@@ -1999,6 +2021,17 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 
 		if (%w1 == "#rotate") {
+			%home = $tagToObjectId[%TrueClientId @ "_home"];
+			if (fetchData(%TrueClientId, "HomeShape") == "" && %home != "" && %home != 0) {
+				%shape = $tagToObjectShape[%TrueClientId @ "_home"];
+				if (%shape == "")
+					%shape = %home.shape;
+				if (%shape != "")
+					storeData(%TrueClientId, "HomeShape", %shape);
+				storeData(%TrueClientId, "HomePos", GameBase::getPosition(%home));
+				storeData(%TrueClientId, "HomeRot", GameBase::getRotation(%home));
+				storeData(%TrueClientId, "HasHome", 1);
+			}
 			if (fetchData(%TrueClientId, "HomeShape") == "" || $tagToObjectId[%TrueClientId @ "_home"] == "") {
 				Client::sendMessage(%TrueClientId, 1, "You need a placed home before rotating home items.");
 				return;
@@ -2015,7 +2048,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%player = Client::getOwnedObject(%TrueClientId);
 			if(GameBase::getLOSinfo(%player, 1000)) {
 				%obj = $los::object;
-				if (%obj.owner == %TrueClientId && %obj.slot != "") {
+				if (%obj.owner == %TrueClientId && (%obj.slot != "" || %obj.name == "home")) {
 					StartRotateMode(%TrueClientId, %obj.name, %obj);
 				} else {
 					Client::sendMessage(%TrueClientId, 1, "You can only rotate items that you own.");

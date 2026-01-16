@@ -118,6 +118,7 @@ function StartPlaceMode(%clientId, %name, %objectShape, %slot, %objectId) {
         %object = newObject(%name, InteriorShape, %objectShape, true);
         %object.owner = %clientId;
         %object.name = %name;
+        %object.shape = %objectShape;
         if (%slot != "") %object.slot = %slot;
         $tagToObjectId[%tag] = %object;
         $tagToObjectShape[%tag] = %objectShape;
@@ -476,4 +477,29 @@ function ClearHomeVariables(%clientId) {
     //so the players in the grouptrigger get kicked out first.
     Group::iterateRecursive(%g, GameBase::setPosition, "0 0 0");
     schedule("deleteObject(" @ nameToId(%g) @ ");", 1);
+}
+
+// home items
+
+if (!$Housing::ItemsInitialized) {
+	$Housing::ItemsInitialized = True;
+	%shopIndex = 1000;
+
+	for (%i = 0; (%shape = getWord($homeDisList, %i)) != "" && %shape != -1; %i++) {
+		%itemName = "Home_" @ %shape;
+		BeltItem::Add(%shape, %itemName, "HousingItems", 0.01, 0, "", %shopIndex++);
+		$beltitem[%itemName, "isHousingItem"] = True;
+		$beltitem[%itemName, "housingType"] = "home";
+		$beltitem[%itemName, "shape"] = %shape;
+		$beltitem[%itemName, "reusable"] = True;
+	}
+
+	for (%i = 0; (%shape = getWord($homeItemDisList, %i)) != "" && %shape != -1; %i++) {
+		%itemName = "HomeItem_" @ %shape;
+		BeltItem::Add(%shape, %itemName, "HousingItems", 0.01, 0, "", %shopIndex++);
+		$beltitem[%itemName, "isHousingItem"] = True;
+		$beltitem[%itemName, "housingType"] = "homeitem";
+		$beltitem[%itemName, "shape"] = %shape;
+		$beltitem[%itemName, "reusable"] = True;
+	}
 }
