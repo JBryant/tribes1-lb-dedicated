@@ -162,6 +162,7 @@ function EndPlaceMode(%clientId) {
         storeData(%clientId, "HomeShape", %shape);
         storeData(%clientId, "HomePos", %objectPos);
         storeData(%clientId, "HomeRot", %objectRot);
+        storeData(%clientId, "HasHome", 1);
     } else {
         %homePos = fetchData(%clientId, "HomePos");
         %homePosX = getWord(%homePos, 0);
@@ -184,7 +185,15 @@ function EndPlaceMode(%clientId) {
 
 function HomeAddX(%clientId, %offset) {
     %home = $tagToObjectId[%clientId @ "_home"];
+    if (%home == "" || %home == 0) {
+        Client::sendMessage(%clientId, 1, "You don't have a home placed.");
+        return;
+    }
     %homePos = fetchData(%clientId, "HomePos");
+    if (%homePos == "") {
+        Client::sendMessage(%clientId, 1, "Home position data is missing.");
+        return;
+    }
     %homePosX = getWord(%homePos, 0);
     %newPosX = %homePosX + %offset;
     GameBase::setPosition(%home, %newPosX @ " " @ getWord(%homePos, 1) @ " " @ getWord(%homePos, 2));
@@ -193,7 +202,15 @@ function HomeAddX(%clientId, %offset) {
 
 function HomeAddY(%clientId, %offset) {
     %home = $tagToObjectId[%clientId @ "_home"];
+    if (%home == "" || %home == 0) {
+        Client::sendMessage(%clientId, 1, "You don't have a home placed.");
+        return;
+    }
     %homePos = fetchData(%clientId, "HomePos");
+    if (%homePos == "") {
+        Client::sendMessage(%clientId, 1, "Home position data is missing.");
+        return;
+    }
     %homePosY = getWord(%homePos, 1);
     %newPosY = %homePosY + %offset;
     GameBase::setPosition(%home, getWord(%homePos, 0) @ " " @ %newPosY @ " " @ getWord(%homePos, 2));
@@ -202,7 +219,15 @@ function HomeAddY(%clientId, %offset) {
 
 function HomeAddZ(%clientId, %offset) {
     %home = $tagToObjectId[%clientId @ "_home"];
+    if (%home == "" || %home == 0) {
+        Client::sendMessage(%clientId, 1, "You don't have a home placed.");
+        return;
+    }
     %homePos = fetchData(%clientId, "HomePos");
+    if (%homePos == "") {
+        Client::sendMessage(%clientId, 1, "Home position data is missing.");
+        return;
+    }
     %homePosZ = getWord(%homePos, 2);
     %newPosZ = %homePosZ + %offset;
     GameBase::setPosition(%home, getWord(%homePos, 0) @ " " @ getWord(%homePos, 1) @ " " @ %newPosZ);
@@ -211,34 +236,65 @@ function HomeAddZ(%clientId, %offset) {
 
 function HomeSetRot(%clientId, %rotation) {
     %home = $tagToObjectId[%clientId @ "_home"];
+    if (%home == "" || %home == 0) {
+        Client::sendMessage(%clientId, 1, "You don't have a home placed.");
+        return;
+    }
     GameBase::setRotation(%home, "0 0 " @ %rotation);
     storeData(%clientId, "HomeRot", "0 0 " @ %rotation);
 }
 
 function HomeItemAddX(%clientId, %offset, %slot) {
     %homeitem = $tagToObjectId[%clientId @ "_homeitem_" @ %slot];
+    if (%homeitem == "" || %homeitem == 0) {
+        Client::sendMessage(%clientId, 1, "Home item not found.");
+        return;
+    }
+    %homePos = fetchData(%clientId, "HomePos");
+    if (%homePos == "") {
+        Client::sendMessage(%clientId, 1, "Home position data is missing.");
+        return;
+    }
     %homeitemPos = GameBase::getPosition(%homeitem);
     %newPosX = getWord(%homeitemPos, 0) + %offset;
     GameBase::setPosition(%homeitem, %newPosX @ " " @ getWord(%homeitemPos, 1) @ " " @ getWord(%homeitemPos, 2));
-    %homeitem.posOffset = %newPosX @ " " @ getWord(%homeitemPos, 1) @ " " @ getWord(%homeitemPos, 2);
+    %homeitem.posOffset = (%newPosX - getWord(%homePos, 0)) @ " " @ (getWord(%homeitemPos, 1) - getWord(%homePos, 1)) @ " " @ (getWord(%homeitemPos, 2) - getWord(%homePos, 2));
     //storeData(%clientId, "HomeItemRot_" @ %slot, "0 0 " @ %rotation);
 }
 
 function HomeItemAddY(%clientId, %offset, %slot) {
     %homeitem = $tagToObjectId[%clientId @ "_homeitem_" @ %slot];
+    if (%homeitem == "" || %homeitem == 0) {
+        Client::sendMessage(%clientId, 1, "Home item not found.");
+        return;
+    }
+    %homePos = fetchData(%clientId, "HomePos");
+    if (%homePos == "") {
+        Client::sendMessage(%clientId, 1, "Home position data is missing.");
+        return;
+    }
     %homeitemPos = GameBase::getPosition(%homeitem);
     %newPosY = getWord(%homeitemPos, 1) + %offset;
     GameBase::setPosition(%homeitem, getWord(%homeitemPos, 0) @ " " @ %newPosY @ " " @ getWord(%homeitemPos, 2));
-    %homeitem.posOffset = getWord(%homeitemPos, 0) @ " " @ %newPosY @ " " @ getWord(%homeitemPos, 2);
+    %homeitem.posOffset = (getWord(%homeitemPos, 0) - getWord(%homePos, 0)) @ " " @ (%newPosY - getWord(%homePos, 1)) @ " " @ (getWord(%homeitemPos, 2) - getWord(%homePos, 2));
     //storeData(%clientId, "HomeItemRot_" @ %slot, "0 0 " @ %rotation);
 }
 
 function HomeItemAddZ(%clientId, %offset, %slot) {
     %homeitem = $tagToObjectId[%clientId @ "_homeitem_" @ %slot];
+    if (%homeitem == "" || %homeitem == 0) {
+        Client::sendMessage(%clientId, 1, "Home item not found.");
+        return;
+    }
+    %homePos = fetchData(%clientId, "HomePos");
+    if (%homePos == "") {
+        Client::sendMessage(%clientId, 1, "Home position data is missing.");
+        return;
+    }
     %homeitemPos = GameBase::getPosition(%homeitem);
     %newPosZ = getWord(%homeitemPos, 2) + %offset;
     GameBase::setPosition(%homeitem, getWord(%homeitemPos, 0) @ " " @ getWord(%homeitemPos, 1) @ " " @ %newPosZ);
-    %homeitem.posOffset = getWord(%homeitemPos, 0) @ " " @ getWord(%homeitemPos, 1) @ " " @ %newPosZ;
+    %homeitem.posOffset = (getWord(%homeitemPos, 0) - getWord(%homePos, 0)) @ " " @ (getWord(%homeitemPos, 1) - getWord(%homePos, 1)) @ " " @ (%newPosZ - getWord(%homePos, 2));
     //storeData(%clientId, "HomeItemRot_" @ %slot, "0 0 " @ %rotation);
 }
 
@@ -253,6 +309,7 @@ function RemoveHome(%clientId) {
     storeData(%clientId, "HomeShape", "");
     storeData(%clientId, "HomePos", "");
     storeData(%clientId, "HomeRot", "");
+    storeData(%clientId, "HasHome", 0);
     // set all other values to empty as well
 
     // TODO: If items are used to place homes / home items, return those items to player inventory

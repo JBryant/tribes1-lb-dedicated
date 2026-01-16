@@ -1970,9 +1970,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 			//if(%clientToServerAdminLevel >= 4) {
 				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
 					// check if they have a home first...
-					// if () {
-
-					// }
+					if (fetchData(%TrueClientId, "HomeShape") == "" || $tagToObjectId[%TrueClientId @ "_home"] == "") {
+						Client::sendMessage(%TrueClientId, 1, "You need to place a home before placing home items.");
+						return;
+					}
 
 
 					// check if they have any free slots
