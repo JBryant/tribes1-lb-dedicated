@@ -696,13 +696,13 @@ $BotEquipment[ShinraSoldier1] = "CLASS Enemy LVL 105+10 COINS 47/50 LCK 0 Chippe
 $BotEquipment[EliteShinraSoldier1] = "LVL 210+20 FireMateriaII 1/-600 BombCore 10/-125 TonberryOil 1/-100";
 
 // dunega crypt bot equipment
-$BotEquipment[ZombieCorpse] = "CLASS Enemy LVL 20+3 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-200 ZombieViscera 1/-35 " @ %defaultAlchemyDropsI;
+$BotEquipment[ZombieCorpse] = "CLASS Enemy LVL 20+3 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-200 ZombieViscera 1/-35 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteZombieCorpse] = "LVL 40+6 IceMateriaII 1/-500 SkeletonBonePowder 1/-200";
-$BotEquipment[ZombieWalker] = "CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-175 ZombieViscera 1/-35 " @ %defaultAlchemyDropsI;
+$BotEquipment[ZombieWalker] = "CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-175 ZombieViscera 1/-35 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteZombieWalker] = "LVL 44+8 IceMateriaII 1/-500 SkeletonBonePowder 1/-175";
-$BotEquipment[UndeadRattler] = "CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 Broadsword 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-125 " @ %defaultAlchemyDropsII;
+$BotEquipment[UndeadRattler] = "CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 Broadsword 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-125 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteUndeadRattler] = "LVL 54+8 IceMateriaII 1/-500 SkeletonBonePowder 1/-125";
-$BotEquipment[UndeadMagician] = "CLASS Enemy LVL 31+5 COINS 26/50 LCK 0 CastingBlade 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-100 " @ %defaultAlchemyDropsII;
+$BotEquipment[UndeadMagician] = "CLASS Enemy LVL 31+5 COINS 26/50 LCK 0 CastingBlade 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-100 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteUndeadMagician] = "LVL 62+10 IceMateriaII 1/-500 SkeletonBonePowder 1/-100";
 
 $BotEquipment[DemonImp] = "CLASS Enemy LVL 50+5 COINS 23/50 LCK 0 Kodachi 1 Opal 3/-300 FireMateriaI 1/-400 ChimeraFlameGland 1/-200 " @ %defaultAlchemyDropsIII;

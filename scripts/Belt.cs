@@ -2844,6 +2844,8 @@ $description = "An ancient and mysterious staff of unparalleled magical power.";
 BeltItem::AddWeapon("Celestial Staff", "CelestialStaff", "LongStaff", $BludgeonAccessoryType, $description, $SkillSpears, $SkillSpears @ " 1950", "190", 163);
 $description = "The ultimate spear, said to pierce even the heavens.";
 BeltItem::AddWeapon("Gungnir", "Gungnir", "Spear", $BludgeonAccessoryType, $description, $SkillSpears, $SkillSpears @ " 2000", "200", 164);
+$description = "A flimsy fishing rod that can double as a very weak bludgeon.";
+BeltItem::AddWeapon("Fishing Rod", "FishingRod", "QuarterStaff", $BludgeonAccessoryType, $description, $SkillSpears, $SkillSpears @ " 0", "10", 165);
 
 // Bows (175 - 199)
 // Images: Crossbow, RepeatingCrossbow, LongBow, CompositeBow, CompositeBowFast, Sling
@@ -3239,6 +3241,8 @@ BeltItem::Add("Mako Vial", "MakoVial", "MiscItems", 0.01, 100, "", 633);
 $AccessoryVar[MakoVial, $MiscInfo] = "A vial containing concentrated Mako energy. Often carried by Shinra guards for research purposes.";
 BeltItem::Add("Zombie Viscera", "ZombieViscera", "MiscItems", 0.01, 100, "", 634);
 $AccessoryVar[ZombieViscera, $MiscInfo] = "Preserved viscera from a zombie. Unpleasant but valuable for research into undead biology.";
+BeltItem::Add("Wriggly Worm", "WrigglyWorm", "MiscItems", 0.01, 100, "", 635);
+$AccessoryVar[WrigglyWorm, $MiscInfo] = "A lively worm used as bait. The Old Fisherman swears by them.";
 
 
 // hearth stones

@@ -205,6 +205,71 @@ $QuestNPC::conversations[3, 3, 3, 1, 0] =
 $QuestNPC::conversations[3, 3, 3, 1, 1] =
   "If you find any more... unusual materials, feel free to bring them by. I'm always interested in expanding my research.|I'll keep an eye out.";
 
+
+// quest 4 - wriggly worms
+$Quest::name[4] = "Wriggly Things";
+$Quest::desc[4] = "Help the Old Fisherman by bringing him Wriggly Worms.";
+$Quest::npcId[4] = 4;
+$Quest::type[4] = 0;
+
+$Quest::stepName[4, 0] = "Meet the Old Fisherman";
+$Quest::stepName[4, 1] = "Bring 15 Wriggly Worms";
+
+$Quest::stepDescription[4, 0] = "An old fisherman at Fisherman's Horizon could use a hand. Speak to him to see what he needs.";
+$Quest::stepDescription[4, 1] = "The Old Fisherman asked for 15 Wriggly Worms. They can be found on zombies in the catacombs atop the mountain to the North.";
+
+$Quest::stepReq[4, 0] = "";
+$Quest::stepReq[4, 1] = "WrigglyWorm 15";
+
+$Quest::stepReward[4, 0] = "";
+$Quest::stepReward[4, 1] = "EXP 2500 FishingRod 1";
+
+$QuestNPC::name[4] = "Old Fisherman";
+$QuestNPC::shape[4] = "MaleHumanTownBot";
+$QuestNPC::pos[4] = "-1267.47 355.396 85.4751";
+$QuestNPC::rot[4] = "0 -0 2.37237";
+$QuestNPC::questId[4] = 4;
+
+// =====================
+// STEP 0 — ACCEPT QUEST
+// =====================
+$QuestNPC::conversations[4, 4, 0, 1, 0] =
+  "Ahh, a friendly face! The fish aren't biting, but I could still use a hand.|What can I do to help?";
+$QuestNPC::conversations[4, 4, 0, 1, 1] =
+  "I'm old, but I still know a good bait when I see one. I need 15 Wriggly Worms for my next trip out.|Where can I find them?";
+$QuestNPC::conversations[4, 4, 0, 1, 2] =
+  "The worms show up on the zombies in the catacombs atop the mountain to the North. Bring me 15 and I'll make it worth your while.|I'll be back with them.";
+
+// =====================
+// STEP 1 — WRIGGLY WORMS
+// =====================
+$QuestNPC::conversations[4, 4, 1, 0, 0] =
+  "Have you found those Wriggly Worms yet?|Not yet.";
+$QuestNPC::conversations[4, 4, 1, 0, 1] =
+  "Take your time, lad. But the fish won't wait forever.|I'll hurry.";
+
+$QuestNPC::conversations[4, 4, 1, 1, 0] =
+  "Now that's a fine haul! These will do nicely.|Here you go.";
+$QuestNPC::conversations[4, 4, 1, 1, 1] =
+  "You've earned this. A sturdy Fishing Rod and a bit of experience for your troubles.|Thank you.";
+
+// =====================
+// STEP 2 — COMPLETED CHATTER
+// =====================
+$QuestNPC::conversations[4, 4, 2, 1, 0] =
+  "That Fishing Rod should serve you well. A calm shoreline does wonders for the soul.|I'll keep that in mind.";
+$QuestNPC::conversations[4, 4, 2, 1, 1] =
+  "If you ever find more worms, or just want to talk fishing, I'm here.|I'll stop by again.";
+
+// Create a new quest NPC for the Fisherman's Horizon.
+// this NPC will be called Old Fisherman, the quest will be called "Wriggly Things"
+// his personality will be old, friendly and helpful.
+// The quest will be a simple 1 stepquest to find and bring to him 15 Wriggly Worms. 
+// These worms can be found on the zombies in the catacombs on top of the mountain to the North.
+// If the player brings the worms to him, he will give them a reward of 2500 EXP and a Fishing Rod (Item: FishingRod)
+// pos: -1267.47 355.396 85.4751
+// rot: 0 -0 2.37237
+
 // =====================
 // QUEST INITIALIZATION
 // =====================
