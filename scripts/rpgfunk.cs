@@ -1735,8 +1735,12 @@ function GiveThisStuff(%clientId, %list, %echo, %multiplier)
 		}
 		else if(%w == "EXP")
 		{
-			storeData(%clientId, "EXP", %w2, "inc");
-			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ Number::Beautify(%w2) @ " experience.");
+			%exp = %w2;
+			if (HasBonusState(%clientId, "Rested"))
+				%exp = %exp * 1.5;
+
+			storeData(%clientId, "EXP", %exp, "inc");
+			if(%echo) Client::sendMessage(%clientId, 0, "You received " @ Number::Beautify(%exp) @ " experience.");
 		}
 		else if(%w == "LCK")
 		{

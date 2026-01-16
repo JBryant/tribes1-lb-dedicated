@@ -298,6 +298,7 @@ function SaveCharacter(%clientId, %silent)
 			$funk::var["[\"" @ %name @ "\", 9, 1, " @ %i @ ", 1]"] = %houseItem.shape;
 			$funk::var["[\"" @ %name @ "\", 9, 1, " @ %i @ ", 2]"] = %houseItem.posOffset;
 			$funk::var["[\"" @ %name @ "\", 9, 1, " @ %i @ ", 3]"] = %houseItem.rot;
+			$funk::var["[\"" @ %name @ "\", 9, 1, " @ %i @ ", 4]"] = %houseItem.name;
 		}
 	}
 
@@ -542,10 +543,12 @@ function LoadCharacter(%clientId)
 			if (%houseItemShape != "") {
 				%houseItemPos = $funk::var[%name, 9, 1, %i, 2];
 				%houseItemRot = $funk::var[%name, 9, 1, %i, 3];
+				%houseItemName = $funk::var[%name, 9, 1, %i, 4];
 				%homeItem = newObject("homeitem_" @ %i, InteriorShape, %houseItemShape, true);
 				%homeItem.owner = %clientId;
 				%homeItem.slot = %i;
 				%homeItem.shape = %houseItemShape;
+				%homeItem.name = %houseItemName;
 				%homePos = $funk::var[%name, 9, 3];
 				%homeItem.posOffset = %houseItemPos;
 				%homeItem.rot = %houseItemRot;

@@ -86,12 +86,14 @@ $homeDisList = "house1 store1 nbank cozyhouse tavern lhouse cheehouselights shil
 
 $homeItemDisList = "cabinet1 cabinet2 woodchair bar barstool table roundtable stove easel bed jfnt woodfire anvil bed1 bed1b bed1c bed2 bed3 bench1 bench2 bench3 bigtable1 bigtable2 candleabra chair1 chair1a endtable fireplace fireplaceb pic1 pic2 pic3 pic4 pic5 throne2";
 
-function StartPlaceMode(%clientId, %name, %objectShape, %slot, %objectId) {
+function StartPlaceMode(%clientId, %name, %objectShape, %slot, %objectId, %itemName) {
     storeData(%clientId, "PlaceMode", 1);
     $userMovingHouseItem[%clientId] = %name;
     %tag = %clientId @ "_" @ %name;
 
     if (%objectId != "" && %objectId != 0) {
+		if (%itemName != "")
+			%objectId.name = %itemName;
         if (%name == "")
             %name = %objectId.name;
         if (%name == "" && %slot != "")
@@ -114,10 +116,13 @@ function StartPlaceMode(%clientId, %name, %objectShape, %slot, %objectId) {
         return;
     }
 
-    if ($tagToObjectId[%tag] == "" || $tagToObjectId[%tag] == 0 || $tagToObjectId[%tag] == "0") {
+	if ($tagToObjectId[%tag] == "" || $tagToObjectId[%tag] == 0 || $tagToObjectId[%tag] == "0") {
         %object = newObject(%name, InteriorShape, %objectShape, true);
         %object.owner = %clientId;
-        %object.name = %name;
+		if (%itemName != "")
+			%object.name = %itemName;
+		else
+			%object.name = %name;
         %object.shape = %objectShape;
         if (%slot != "") %object.slot = %slot;
         $tagToObjectId[%tag] = %object;

@@ -388,6 +388,15 @@ function remoteConsider(%clientId)
 
 		%index = GetEventCommandIndex(%object.tag, "onConsider");
 
+		if (%obj == "InteriorShape" && %object.name != "") {
+			// call function to attempt if there is an event that can trigger for that object
+			%interated = Item::onConsider(%clientId, %object.name, %object);
+
+			if (%interated)
+				%sawsomething = True;
+		}
+
+
 		if(%obj == "Player")
 		{
 			DisplayGetInfo(%clientId, %cl, %object);

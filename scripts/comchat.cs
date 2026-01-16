@@ -1814,7 +1814,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 		if (%w1 == "#homecommands" || %w1 == "#housecommands") {
 			%msg = "<f2>Home Commands\n\n";
-			%msg = %msg @ "<f1>#homes:             <f0>View a list of all home types\n";
+			%msg = %msg @ "<f1>#move:              <f0>Move your home to a new location\n";
 			%msg = %msg @ "<f1>#rotate:            <f0>Rotate a home item by moving (toggle)\n";
 			%msg = %msg @ "<f1>#homeaddx [X]:      <f0>Move you home the X direction. Can be +/-\n";
 			%msg = %msg @ "<f1>#homeaddy [Y]:      <f0>Move you home the Y direction. Can be +/-\n";
@@ -1823,7 +1823,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%msg = %msg @ "<f1>#removehome:        <f0>Remove your home and all house items\n";
 
 			%msg = %msg @ "<f2>\nHome Item Commands\n\n";
-			%msg = %msg @ "<f1>#homeitems:         <f0>View a list of all home items\n";
 			%msg = %msg @ "<f1>#move:              <f0>Grab home item and move it to a new location\n";
 			%msg = %msg @ "<f1>#rotate:            <f0>Rotate a home item by moving (toggle)\n";
 			%msg = %msg @ "<f1>#itemaddx [X]:      <f0>Move home item the X direction. Can be +/-\n";
@@ -1835,51 +1834,29 @@ function internalSay(%clientId, %team, %message, %senderName)
 			rpg::longPrint(%TrueClientId, %msg, 0, 10);
 		}
 
-		// if (%w1 == "#homes") {
-		// 	%msg = "<f2>Homes\n\n";
-		// 	%count = getWordCount($homeDisList);
-		// 	for (%i = 0; %i < %count; %i++) {
-		// 		%name = getWord($homeDisList, %i);
-		// 		if (%name != "")
-		// 			%msg = %msg @ "<f1>" @ %name @ ":<f0>\n";
-		// 	}
-		// 	rpg::longPrint(%TrueClientId, %msg, 0, 10);
-		// }
+		if (%w1 == "#place") {
+			//if(%clientToServerAdminLevel >= 4) {
+				if (fetchData(%TrueClientId, "RotateMode") == 1) {
+					EndRotateMode(%TrueClientId);
+					if (fetchData(%TrueClientId, "PlaceMode") != 1)
+						return;
+				}
+				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
+					Client::sendMessage(%TrueClientId, 1, "You are not currently moving any items.");
+					return;
+				}
 
-		// if (%w1 == "#homeitems") {
-		// 	%msg = "<f2>Home Items\n\n";
-		// 	%count = getWordCount($homeItemDisList);
-		// 	for (%i = 0; %i < %count; %i++) {
-		// 		%name = getWord($homeItemDisList, %i);
-		// 		if (%name != "")
-		// 			%msg = %msg @ "<f1>" @ %name @ ":<f0>\n";
-		// 	}
-		// 	rpg::longPrint(%TrueClientId, %msg, 0, 10);
-		// }
+				EndPlaceMode(%TrueClientId);
+			//}
+		}
 
-		// if (%w1 == "#place") {
-		// 	//if(%clientToServerAdminLevel >= 4) {
-		// 		if (fetchData(%TrueClientId, "RotateMode") == 1) {
-		// 			EndRotateMode(%TrueClientId);
-		// 			if (fetchData(%TrueClientId, "PlaceMode") != 1)
-		// 				return;
-		// 		}
-		// 		if (fetchData(%TrueClientId, "PlaceMode") != 1) {
-		// 			Client::sendMessage(%TrueClientId, 1, "You are not currently moving any items.");
-		// 			return;
-		// 		}
+		if (%w1 == "#placelock") {
+			PlaceLockPos(%TrueClientId);
+		}
 
-		// 		EndPlaceMode(%TrueClientId);
-		// 	//}
-		// }
-
-		// if (%w1 == "#placelock") {
-		// 	PlaceLockPos(%TrueClientId);
-		// }
-
-		// if (%w1 == "#placeunlock") {
-		// 	PlaceUnlockPos(%TrueClientId);
-		// }
+		if (%w1 == "#placeunlock") {
+			PlaceUnlockPos(%TrueClientId);
+		}
 
 		// if (%w1 == "#placehome" || %w1 == "#placehouse") {
 		// 	//if(%clientToServerAdminLevel >= 4) {				
@@ -2003,7 +1980,13 @@ function internalSay(%clientId, %team, %message, %senderName)
 				if (%obj.owner == %TrueClientId && (%obj.slot != "" || %obj.name == "home")) {
 					lbecho("You own this item, you can move it.");
 					if (fetchData(%TrueClientId, "PlaceMode") != 1) {
-						StartPlaceMode(%TrueClientId, %obj.name, %obj.shape, %obj.slot, %obj);
+						if (%obj.name == "home")
+							%placeName = "home";
+						else if (%obj.slot != "")
+							%placeName = "homeitem_" @ %obj.slot;
+						else
+							%placeName = %obj.name;
+						StartPlaceMode(%TrueClientId, %placeName, %obj.shape, %obj.slot, %obj, %obj.name);
 					} else {
 						Client::sendMessage(%TrueClientId, 1, "You are already placing an item.");
 						return;
@@ -2045,7 +2028,13 @@ function internalSay(%clientId, %team, %message, %senderName)
 			if(GameBase::getLOSinfo(%player, 1000)) {
 				%obj = $los::object;
 				if (%obj.owner == %TrueClientId && (%obj.slot != "" || %obj.name == "home")) {
-					StartRotateMode(%TrueClientId, %obj.name, %obj);
+					if (%obj.name == "home")
+						%placeName = "home";
+					else if (%obj.slot != "")
+						%placeName = "homeitem_" @ %obj.slot;
+					else
+						%placeName = %obj.name;
+					StartRotateMode(%TrueClientId, %placeName, %obj);
 				} else {
 					Client::sendMessage(%TrueClientId, 1, "You can only rotate items that you own.");
 					return;

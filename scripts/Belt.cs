@@ -665,7 +665,7 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 					Client::sendMessage(%clientId, $MsgWhite, "You already have a home placed. Remove it first.");
 					return;
 				}
-				StartPlaceMode(%clientId, "home", %shape @ ".dis");
+				StartPlaceMode(%clientId, "home", %shape @ ".dis", "", "", %item);
 				Belt::TakeThisStuff(%clientId, %item, 1);
 				Client::sendMessage(%clientId, $MsgWhite, "Placing home: " @ %shape @ ".");
 				return;
@@ -702,7 +702,7 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 					return;
 				}
 
-				StartPlaceMode(%clientId, "homeitem_" @ %openSlot, %shape @ ".dis", %openSlot);
+				StartPlaceMode(%clientId, "homeitem_" @ %openSlot, %shape @ ".dis", %openSlot, "", %item);
 				Belt::TakeThisStuff(%clientId, %item, 1);
 				Client::sendMessage(%clientId, $MsgWhite, "Placing home item: " @ %shape @ ".");
 				return;

@@ -730,6 +730,7 @@ function DistributeExpForKilling(%damagedClient)
 
 			// add class exp multiplier
 			%expMultiplier = $EXPmultiplier[fetchData(%listClientId, "CLASS")];
+
 			if (%expMultiplier != "") {
 				%value = %value * %expMultiplier;
 			}
@@ -752,6 +753,9 @@ function DistributeExpForKilling(%damagedClient)
 				%pvalue = round(%final * (1.0 + (%pf * 0.1)));
 			else
 				%pvalue = 0;
+
+			if (HasBonusState(%listClientId, "Rested"))
+				%final = %final * 1.5;
 
 			storeData(%listClientId, "EXP", %final, "inc");
 

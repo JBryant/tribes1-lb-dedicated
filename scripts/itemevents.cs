@@ -384,3 +384,24 @@ function Ammo::onDrop(%player,%item)
 function Item::onDeploy(%player,%item,%pos)
 {
 }
+
+function Item::onConsider(%clientId, %item, %object) {
+	dbecho($dbechoMode, "Item::onConsider(" @ %clientId @ ", " @ %item @ ", " @ %object @ ")");
+
+	if (%item == "BarStool") {
+		Client::sendMessage(%clientId, $MsgWhite, "You see a wooden bar stool. It doesn't look very comfortable.");
+
+		return True;
+	}
+
+	if (%item == "BlueDoubleBed" || %item == "BrownDoubleBed" || %item == "LightDoubleBed") {
+		%duration = 3600 / 2;
+		Client::sendMessage(%clientId, $MsgWhite, "You rested in your own bed. You feel well rested and ready to continue your journey.");
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Rested", "left");
+		UpdateBonusState(%clientId, "Rested", %duration, "Rested");
+		
+		return True;
+	}
+
+	return False;
+}

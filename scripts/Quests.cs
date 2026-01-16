@@ -595,8 +595,8 @@ function Quests::GrantStepReward(%clientId, %questId, %step) {
 	if (%reward == "")
 		return;
 
-	Client::sendMessage(%clientId, $MsgWhite, "You received: " @ %reward);
-	GiveThisStuff(%clientId, %reward);
+	// Client::sendMessage(%clientId, $MsgWhite, "You received: " @ %reward);
+	GiveThisStuff(%clientId, %reward, True);
 	PlaySound(bigheal, GameBase::getPosition(%clientId));
 }
 
