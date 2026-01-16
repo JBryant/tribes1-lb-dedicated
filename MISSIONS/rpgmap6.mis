@@ -1282,7 +1282,7 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 0 0";
 			};
 		};
-		instant SimGroup "PROTECTED Delkin Port" {
+		instant SimGroup "PROTECTED Fisherman's Horizon" {
 			instant SimGroup "DropPoints" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
@@ -1309,7 +1309,7 @@ instant SimGroup "MissionGroup" {
 					rotation = "0 0 0";
 				};
 			};
-			instant SimGroup "MUSIC delkinmusic2.wav 48";
+			instant SimGroup "MUSIC CAP_Rainy_Day.wav 48";
 			instant Marker "95 95 90 0" {
 				dataBlock = "PathMarker";
 				name = "";
@@ -4685,21 +4685,21 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "GSAY You have been teleported to the a Cultist Temple.~wPortal6.wav";
 			instant SimGroup "NSAY You need Remort Level 1 and a 500 coin donation to enter this gate.~wDeActivateDG.wav";
 		};
-		instant SimGroup "Kalm GY to Burial Tree" {
+		instant SimGroup "Dunega to Burial Tree" {
 			instant SimGroup "Input" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-2476.28 -207.555 65.2519";
-					rotation = "0 -0 -0.819332";
+					position = "220.061 -716.736 5141.59";
+					rotation = "0 -0 -2.80281";
 				};
 			};
 			instant SimGroup "Output" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-2795.43 -1187.45 701";
-					rotation = "0 -0 1.55891";
+					position = "-2822.34 -1183.5 638.588";
+					rotation = "0 0 -3.04487";
 				};
 			};
 			instant SimGroup "NEED COINS 0";
@@ -4707,7 +4707,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "GSAY ~wnull.wav";
 			instant SimGroup "NSAY ~wnull.wav";
 		};
-		instant SimGroup "Graveyard Top to Dunega" {
+		instant SimGroup "Burial Tree to Dunega" {
 			instant SimGroup "Input" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
@@ -4722,28 +4722,6 @@ instant SimGroup "MissionGroup" {
 					name = "";
 					position = "217.604 -722.226 5140.56";
 					rotation = "0 0 -3.09991";
-				};
-			};
-			instant SimGroup "NEED COINS 0";
-			instant SimGroup "TAKE COINS 0";
-			instant SimGroup "GSAY ~wnull.wav";
-			instant SimGroup "NSAY ~wnull.wav";
-		};
-		instant SimGroup "Dunega to Graveyard top" {
-			instant SimGroup "Input" {
-				instant Trigger "GroupTrigger1" {
-					dataBlock = "GroupTrigger";
-					name = "";
-					position = "-2467.23 -198.84 65.249";
-					rotation = "0 -0 -0.832948";
-				};
-			};
-			instant SimGroup "Output" {
-				instant Marker "Marker1" {
-					dataBlock = "PathMarker";
-					name = "";
-					position = "-2822.34 -1183.5 638.588";
-					rotation = "0 0 -3.04487";
 				};
 			};
 			instant SimGroup "NEED COINS 0";
@@ -4958,13 +4936,13 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "-224.5 592.291 168.83";
-					rotation = "0 0 0";
+					position = "-2469.07 -200.369 65.2509";
+					rotation = "0 -0 -0.831848";
 				};
 			};
 			instant SimGroup "NEED COINS 0";
 			instant SimGroup "TAKE COINS 0";
-			instant SimGroup "GSAY ~wnull.wav";
+			instant SimGroup "GSAY ~wPortal6.wav";
 			instant SimGroup "NSAY ~wnull.wav";
 		};
 		instant SimGroup "Outside to Bloodan" {
@@ -4972,8 +4950,8 @@ instant SimGroup "MissionGroup" {
 				instant Trigger "GroupTrigger1" {
 					dataBlock = "GroupTrigger";
 					name = "";
-					position = "-238.776 626.51 176.561";
-					rotation = "0 -0 0.819913";
+					position = "-2476.21 -207.797 65.2483";
+					rotation = "0 -0 2.35043";
 					boundingBox = "-1 -1 -1 1 1 1";
 					isSphere = "True";
 				};
@@ -4982,14 +4960,14 @@ instant SimGroup "MissionGroup" {
 				instant Marker "Marker1" {
 					dataBlock = "PathMarker";
 					name = "";
-					position = "402.141 -522.562 1438.5";
-					rotation = "0 0 0";
+					position = "401.651 -524.116 1438";
+					rotation = "0 0 -0.315594";
 				};
 			};
 			instant SimGroup "NEED LVLG 49 COINS 0";
 			instant SimGroup "TAKE COINS 0";
-			instant SimGroup "GSAY ~wnull.wav";
-			instant SimGroup "NSAY You cannot enter here yet (lev 50)~wnull.wav";
+			instant SimGroup "GSAY ~wPortal6.wav";
+			instant SimGroup "NSAY You cannot enter here yet (LVL 50)~wDeActivateDG.wav";
 		};
 		instant SimGroup "Enter Inn Beds" {
 			instant SimGroup "Input" {

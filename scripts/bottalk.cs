@@ -1093,32 +1093,30 @@ function bottalk::BlackJackBot(%clientId, %object, %initTalk, %message) {
 		if(String::findSubStr(%message, "play") != -1) {
 			// Start betting phase
 			%coins = fetchData(%clientId, "COINS");
-			if(%coins < 10) {
-				NewBotMessage(%clientId, %object, "You need at least 10 coins to play. You currently have " @ %coins @ " coins.");
+			if(%coins < 100) {
+				NewBotMessage(%clientId, %object, "You need at least 100 coins to play. You currently have " @ %coins @ " coins.");
 				$state[%object, %clientId] = "";
 				return;
 			}
 			
 			// Set up bet options
 			%maxBet = %coins;
-			if(%maxBet > 1000)
-				%maxBet = 1000;
+			if(%maxBet > 100000)
+				%maxBet = 100000;
 			
-			$botMenuOption[%clientId, 0] = "10|10";
-			if(%maxBet >= 25)
-				$botMenuOption[%clientId, 1] = "25|25";
-			if(%maxBet >= 50)
-				$botMenuOption[%clientId, 2] = "50|50";
-			if(%maxBet >= 100)
-				$botMenuOption[%clientId, 3] = "100|100";
-			if(%maxBet >= 250)
-				$botMenuOption[%clientId, 4] = "250|250";
-			if(%maxBet >= 500)
-				$botMenuOption[%clientId, 5] = "500|500";
+			$botMenuOption[%clientId, 0] = "100|100";
 			if(%maxBet >= 1000)
-				$botMenuOption[%clientId, 6] = "1000|1000";
+				$botMenuOption[%clientId, 1] = "1000|1000";
+			if(%maxBet >= 5000)
+				$botMenuOption[%clientId, 2] = "5000|5000";
+			if(%maxBet >= 10000)
+				$botMenuOption[%clientId, 3] = "10000|10000";
+			if(%maxBet >= 50000)
+				$botMenuOption[%clientId, 4] = "50000|50000";
+			if(%maxBet >= 100000)
+				$botMenuOption[%clientId, 5] = "100000|100000";
 			
-			NewBotMessage(%clientId, %object, "Place your bet! You have " @ Number::Beautify(%coins) @ " coins. Minimum bet is 10 coins.");
+			NewBotMessage(%clientId, %object, "Place your bet! You have " @ Number::Beautify(%coins) @ " coins. Minimum bet is 100 coins.");
 			$state[%object, %clientId] = 2;
 			$BlackJack::state[%clientId] = "betting";
 		}
@@ -1159,8 +1157,8 @@ function bottalk::BlackJackBot(%clientId, %object, %initTalk, %message) {
 		if(%bet <= 0)
 			%bet = floor(%message);
 		
-		if(%bet < 10) {
-			NewBotMessage(%clientId, %object, "Minimum bet is 10 coins. Please place a valid bet.");
+		if(%bet < 100) {
+			NewBotMessage(%clientId, %object, "Minimum bet is 100 coins. Please place a valid bet.");
 			return;
 		}
 		
@@ -1170,8 +1168,8 @@ function bottalk::BlackJackBot(%clientId, %object, %initTalk, %message) {
 			return;
 		}
 		
-		if(%bet > 1000) {
-			NewBotMessage(%clientId, %object, "Maximum bet is 1000 coins.");
+		if(%bet > 100000) {
+			NewBotMessage(%clientId, %object, "Maximum bet is 100000 coins.");
 			return;
 		}
 		
@@ -1268,18 +1266,23 @@ function BlackJack::ShowGameState(%clientId, %object, %showDealer) {
 			
 			if(%result == "player_blackjack") {
 				%message = %message @ "\n\n<f1>BLACKJACK!<f0> You win " @ Number::Beautify(%winnings) @ " coins!";
+				Client::sendMessage(%clientId, $MsgWhite, "You won " @ Number::Beautify(%winnings) @ " coins from blackjack!~wbuysellsound.wav");
 			}
 			else if(%result == "player") {
 				%message = %message @ "\n\n<f1>You Win!<f0> You win " @ Number::Beautify(%winnings) @ " coins!";
+				Client::sendMessage(%clientId, $MsgWhite, "You won " @ Number::Beautify(%winnings) @ " coins!~wbuysellsound.wav");
 			}
 			else if(%result == "dealer_blackjack") {
 				%message = %message @ "\n\n<f1>Dealer Blackjack!<f0> You lose " @ Number::Beautify(%bet) @ " coins.";
+				Client::sendMessage(%clientId, $MsgWhite, "You lost " @ Number::Beautify(%bet) @ " coins.~wbuysellsound.wav");
 			}
 			else if(%result == "dealer") {
 				%message = %message @ "\n\n<f1>Dealer Wins!<f0> You lose " @ Number::Beautify(%bet) @ " coins.";
+				Client::sendMessage(%clientId, $MsgWhite, "You lost " @ Number::Beautify(%bet) @ " coins.~wbuysellsound.wav");
 			}
 			else {
 				%message = %message @ "\n\n<f1>Push!<f0> It's a tie. Your bet is returned.";
+				Client::sendMessage(%clientId, $MsgWhite, "Push! Your bet of " @ Number::Beautify(%bet) @ " coins was returned.~wbuysellsound.wav");
 			}
 			
 			%message = %message @ "\n\nYou now have " @ Number::Beautify(%coins) @ " coins.";
