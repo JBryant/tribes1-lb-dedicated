@@ -504,6 +504,12 @@ function LoadCharacter(%clientId)
 		storeData(%clientId, "HomeLanding", $funk::var[%name, 9, 9]);
 		storeData(%clientId, "HomeSleepZone", $funk::var[%name, 9, 10]);
 
+		// Sync HasHome based on saved home shape
+		if ($funk::var[%name, 9, 2] != "")
+			storeData(%clientId, "HasHome", 1);
+		else
+			storeData(%clientId, "HasHome", 0);
+
 		%group = newObject("Home" @ %clientId, SimGroup);
 		addToSet("MissionCleanup", %group);
 

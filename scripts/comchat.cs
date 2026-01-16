@@ -1838,71 +1838,23 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 		if (%w1 == "#homes") {
 			%msg = "<f2>Homes\n\n";
-			%msg = %msg @ "<f1>house1:        <f0>\n";
-			%msg = %msg @ "<f1>store1:        <f0>\n";
-			%msg = %msg @ "<f1>nbank:         <f0>\n";
-			%msg = %msg @ "<f1>cozyhouse:     <f0>\n";
-			%msg = %msg @ "<f1>tavern:        <f0>\n";
-			%msg = %msg @ "<f1>lhouse:        <f0>\n";
-			%msg = %msg @ "<f1>cheehouselights:<f0>\n";
-			%msg = %msg @ "<f1>shildrikhouse: <f0>\n";
-			%msg = %msg @ "<f1>rmr7thheaven: <f0>\n";
-			%msg = %msg @ "<f1>cfarm1:        <f0>\n";
-			%msg = %msg @ "<f1>chaunted:      <f0>\n";
-			%msg = %msg @ "<f1>keep:          <f0>\n";
-			%msg = %msg @ "<f1>castle:        <f0>\n";
-			%msg = %msg @ "<f1>magetower:     <f0>\n";
-			%msg = %msg @ "<f1>shildriklit:   <f0>\n";
-			%msg = %msg @ "<f1>town51:        <f0>\n";
-			%msg = %msg @ "<f1>town52:        <f0>\n";
-			%msg = %msg @ "<f1>cthh:          <f0>\n";
-			%msg = %msg @ "<f1>limbo1:        <f0>\n";
-			%msg = %msg @ "<f1>fort:          <f0>\n";
-			%msg = %msg @ "<f1>dcty:          <f0>\n";
-			%msg = %msg @ "<f1>rmrrinvale:    <f0>\n";
-			%msg = %msg @ "<f1>edmire2lit:    <f0>\n";
-			%msg = %msg @ "<f1>ctown:         <f0>\n";
-			%msg = %msg @ "<f1>ncity:         <f0>\n";
+			%count = getWordCount($homeDisList);
+			for (%i = 0; %i < %count; %i++) {
+				%name = getWord($homeDisList, %i);
+				if (%name != "")
+					%msg = %msg @ "<f1>" @ %name @ ":<f0>\n";
+			}
 			rpg::longPrint(%TrueClientId, %msg, 0, 10);
 		}
 
 		if (%w1 == "#homeitems") {
 			%msg = "<f2>Home Items\n\n";
-			%msg = %msg @ "<f1>cabinet1:        <f0>\n";
-			%msg = %msg @ "<f1>cabinet2:        <f0>\n";
-			%msg = %msg @ "<f1>woodchair:      <f0>\n";
-			%msg = %msg @ "<f1>bar:            <f0>\n";
-			%msg = %msg @ "<f1>barstool:       <f0>\n";
-			%msg = %msg @ "<f1>table:          <f0>\n";
-			%msg = %msg @ "<f1>roundtable:     <f0>\n";
-			%msg = %msg @ "<f1>stove:          <f0>\n";
-			%msg = %msg @ "<f1>easel:          <f0>\n";
-			%msg = %msg @ "<f1>bed:            <f0>\n";
-			%msg = %msg @ "<f1>jfnt:           <f0>\n";
-			%msg = %msg @ "<f1>woodfire:       <f0>\n";
-			%msg = %msg @ "<f1>anvil:          <f0>\n";
-			%msg = %msg @ "<f1>bed1:           <f0>\n";
-			%msg = %msg @ "<f1>bed1b:          <f0>\n";
-			%msg = %msg @ "<f1>bed1c:          <f0>\n";
-			%msg = %msg @ "<f1>bed2:           <f0>\n";
-			%msg = %msg @ "<f1>bed3:           <f0>\n";
-			%msg = %msg @ "<f1>bench1:         <f0>\n";
-			%msg = %msg @ "<f1>bench2:         <f0>\n";
-			%msg = %msg @ "<f1>bench3:         <f0>\n";
-			%msg = %msg @ "<f1>bigtable1:      <f0>\n";
-			%msg = %msg @ "<f1>bigtable2:      <f0>\n";
-			%msg = %msg @ "<f1>candleabra:     <f0>\n";
-			%msg = %msg @ "<f1>chair1:         <f0>\n";
-			%msg = %msg @ "<f1>chair1a:        <f0>\n";
-			%msg = %msg @ "<f1>endtable:      <f0>\n";
-			%msg = %msg @ "<f1>fireplace:      <f0>\n";
-			%msg = %msg @ "<f1>fireplaceb:     <f0>\n";
-			%msg = %msg @ "<f1>pic1:           <f0>\n";
-			%msg = %msg @ "<f1>pic2:           <f0>\n";
-			%msg = %msg @ "<f1>pic3:           <f0>\n";
-			%msg = %msg @ "<f1>pic4:           <f0>\n";
-			%msg = %msg @ "<f1>pic5:           <f0>\n";
-			%msg = %msg @ "<f1>throne2:        <f0>\n";		
+			%count = getWordCount($homeItemDisList);
+			for (%i = 0; %i < %count; %i++) {
+				%name = getWord($homeItemDisList, %i);
+				if (%name != "")
+					%msg = %msg @ "<f1>" @ %name @ ":<f0>\n";
+			}
 			rpg::longPrint(%TrueClientId, %msg, 0, 10);
 		}
 
@@ -2006,6 +1958,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 
 		if (%w1 == "#move") {
+			if (fetchData(%TrueClientId, "HomeShape") == "" || $tagToObjectId[%TrueClientId @ "_home"] == "") {
+				Client::sendMessage(%TrueClientId, 1, "You need a placed home before moving home items.");
+				return;
+			}
 			%player = Client::getOwnedObject(%TrueClientId);
 
 			if(GameBase::getLOSinfo(%player, 1000)) {
