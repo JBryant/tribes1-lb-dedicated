@@ -266,6 +266,8 @@ function SaveCharacter(%clientId, %silent)
 	$funk::var["[\"" @ %name @ "\", 8, 16]"] = fetchData(%clientId, "BankMateriaItems");
 	$funk::var["[\"" @ %name @ "\", 8, 17]"] = fetchData(%clientId, "MiscItems");
 	$funk::var["[\"" @ %name @ "\", 8, 18]"] = fetchData(%clientId, "BankMiscItems");
+	$funk::var["[\"" @ %name @ "\", 8, 19]"] = fetchData(%clientId, "HousingItems");
+	$funk::var["[\"" @ %name @ "\", 8, 20]"] = fetchData(%clientId, "BankHousingItems");
 
 	%recallList = fetchData(%clientId,"recallList");
 	$funk::var["[\"" @ %name @ "\", 8, recallList]"] = %recallList;
@@ -285,9 +287,9 @@ function SaveCharacter(%clientId, %silent)
 	// quest variables
 
 	// clean up up house
-	if ($tagToObjectId[%clientId @ "_home"] != "") {
+	%homeObj = $tagToObjectId[%clientId @ "_home"];
+	if (%homeObj != "")
 		$tagToObjectId[%clientId @ "_home"] = "";
-	}
 
 	// save and clean all the house items
 	for (%i = 1; %i <= $maxHouseItems; %i++) {
@@ -297,6 +299,13 @@ function SaveCharacter(%clientId, %silent)
 			$funk::var["[\"" @ %name @ "\", 9, 1, " @ %i @ ", 2]"] = %houseItem.posOffset;
 			$funk::var["[\"" @ %name @ "\", 9, 1, " @ %i @ ", 3]"] = %houseItem.rot;
 		}
+	}
+
+	// restore home tag after save so runtime references don't break
+	if (%homeObj != "" && %homeObj != 0) {
+		$tagToObjectId[%clientId @ "_home"] = %homeObj;
+		if ($tagToObjectShape[%clientId @ "_home"] == "")
+			$tagToObjectShape[%clientId @ "_home"] = %homeObj.shape;
 	}
 
 	//skill variables
@@ -480,6 +489,8 @@ function LoadCharacter(%clientId)
 		storeData(%clientId, "BankMateriaItems", $funk::var[%name, 8, 16]);
 		storeData(%clientId, "MiscItems", $funk::var[%name, 8, 17]);
 		storeData(%clientId, "BankMiscItems", $funk::var[%name, 8, 18]);
+		storeData(%clientId, "HousingItems", $funk::var[%name, 8, 19]);
+		storeData(%clientId, "BankHousingItems", $funk::var[%name, 8, 20]);
 
 
 		// $funk::var["[\"" @ %name @ "\", 9, 1]"] = fetchData(%clientId, "HasHome"); // hasHome (Boolean)

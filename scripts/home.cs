@@ -443,6 +443,23 @@ function HomeItemSetRot(%clientId, %rotation, %slot) {
 }
 
 function RemoveHome(%clientId) {
+    %home = $tagToObjectId[%clientId @ "_home"];
+    if (%home != "" && %home != 0) {
+        %shape = %home.shape;
+        if (%shape == "")
+            %shape = $tagToObjectShape[%clientId @ "_home"];
+        if (String::findSubStr(%shape, ".dis") != -1)
+            %shape = String::replace(%shape, ".dis", "");
+        if (%shape != "")
+            Belt::GiveThisStuff(%clientId, $Housing::itemName["home", %shape], 1);
+    }
+
+    for (%i = 1; %i <= $maxHouseItems; %i++) {
+        %homeItem = $tagToObjectId[%clientId @ "_homeitem_" @ %i];
+        if (%homeItem != "" && %homeItem != 0)
+            RemoveHomeItem(%clientId, %i, true);
+    }
+
     storeData(%clientId, "HomeShape", "");
     storeData(%clientId, "HomePos", "");
     storeData(%clientId, "HomeRot", "");
@@ -457,13 +474,23 @@ function RemoveHome(%clientId) {
     SaveCharacter(%clientId, true);
 }
 
-function RemoveHomeItem(%clientId, %slot) {
+function RemoveHomeItem(%clientId, %slot, %skipSave) {
     %old = $tagToObjectId[%clientId @ "_homeitem_" @ %slot];
+    if (%old != "" && %old != 0) {
+        %shape = %old.shape;
+        if (%shape == "")
+            %shape = $tagToObjectShape[%clientId @ "_homeitem_" @ %slot];
+        if (String::findSubStr(%shape, ".dis") != -1)
+            %shape = String::replace(%shape, ".dis", "");
+        if (%shape != "")
+            Belt::GiveThisStuff(%clientId, $Housing::itemName["homeitem", %shape], 1);
+    }
     deleteObject(%old);
     $tagToObjectId[%clientId @ "_homeitem_" @ %slot] = "";
 
     Client::sendMessage(%clientId, 2, "Home item removed.");
-    SaveCharacter(%clientId, true);
+    if (%skipSave == "")
+        SaveCharacter(%clientId, true);
 }
 
 function ClearHomeVariables(%clientId) {
@@ -481,25 +508,79 @@ function ClearHomeVariables(%clientId) {
 
 // home items
 
+function Housing::AddItemDef(%housingType, %shape, %displayName, %itemName, %weight, %cost, %shopIndex) {
+    $Housing::itemName[%housingType, %shape] = %itemName;
+    BeltItem::Add(%displayName, %itemName, "HousingItems", %weight, %cost, "", %shopIndex);
+    $beltitem[%itemName, "isHousingItem"] = True;
+    $beltitem[%itemName, "housingType"] = %housingType;
+    $beltitem[%itemName, "shape"] = %shape;
+    $beltitem[%itemName, "reusable"] = True;
+}
+
 if (!$Housing::ItemsInitialized) {
 	$Housing::ItemsInitialized = True;
-	%shopIndex = 1000;
 
-	for (%i = 0; (%shape = getWord($homeDisList, %i)) != "" && %shape != -1; %i++) {
-		%itemName = "Home_" @ %shape;
-		BeltItem::Add(%shape, %itemName, "HousingItems", 0.01, 0, "", %shopIndex++);
-		$beltitem[%itemName, "isHousingItem"] = True;
-		$beltitem[%itemName, "housingType"] = "home";
-		$beltitem[%itemName, "shape"] = %shape;
-		$beltitem[%itemName, "reusable"] = True;
-	}
+	// Homes (100000+)
+	Housing::AddItemDef("home", "house1", "Standard House", "StandardHouse", 800, 150000, 1000);
+	Housing::AddItemDef("home", "store1", "Small Shop House", "SmallShopHouse", 900, 200000, 1001);
+	Housing::AddItemDef("home", "nbank", "Blue Roof House", "BlueRoofHouse", 850, 180000, 1002);
+	Housing::AddItemDef("home", "cozyhouse", "Cozy Cottage", "CozyCottage", 700, 140000, 1003);
+	Housing::AddItemDef("home", "tavern", "Tavern House", "TavernHouse", 1200, 350000, 1004);
+	Housing::AddItemDef("home", "lhouse", "Large L-House", "LargeLHouse", 1400, 450000, 1005);
+	Housing::AddItemDef("home", "cheehouselights", "Cheetah Lights Home", "CheetahLightsHome", 1300, 420000, 1006);
+	Housing::AddItemDef("home", "shildrikhouse", "Shildrik House", "ShildrikHouse", 1350, 480000, 1007);
+	Housing::AddItemDef("home", "rmr7thheaven", "Seventh Heaven Bar", "SeventhHeavenBar", 1500, 600000, 1008);
+	Housing::AddItemDef("home", "cfarm1", "Country Farmhouse", "CountryFarmhouse", 1250, 380000, 1009);
+	Housing::AddItemDef("home", "chaunted", "Haunted Manor", "HauntedManor", 1600, 700000, 1010);
+	Housing::AddItemDef("home", "keep", "Stone Keep", "StoneKeep", 2500, 1200000, 1011);
+	Housing::AddItemDef("home", "castle", "Grand Castle", "GrandCastle", 3000, 1800000, 1012);
+	Housing::AddItemDef("home", "magetower", "Mage Tower", "MageTower", 2200, 1500000, 1013);
+	Housing::AddItemDef("home", "shildriklit", "Shildrik Base", "ShildrikBase", 2000, 1100000, 1014);
+	Housing::AddItemDef("home", "town51", "Blue Roof Townhouse", "BlueRoofTownhouse", 2300, 900000, 1015);
+	Housing::AddItemDef("home", "town52", "Multi-Building Complex", "MultiBuildingComplex", 2600, 1300000, 1016);
+	Housing::AddItemDef("home", "cthh", "Temple Estate", "TempleEstate", 2400, 1250000, 1017);
+	Housing::AddItemDef("home", "limbo1", "Limbo Sanctuary", "LimboSanctuary", 2600, 1400000, 1018);
+	Housing::AddItemDef("home", "fort", "Jaten Fort", "JatenFort", 3500, 2200000, 1019);
+	Housing::AddItemDef("home", "dcty", "Delkin Port Town", "DelkinPortTown", 3800, 2500000, 1020);
+	Housing::AddItemDef("home", "rmrrinvale", "Rinvale Town", "RinvaleTown", 3600, 2300000, 1021);
+	Housing::AddItemDef("home", "edmire2lit", "Edmire Town", "EdmireTown", 3400, 2100000, 1022);
+	Housing::AddItemDef("home", "ctown", "Nibelheim Town", "NibelheimTown", 4500, 3500000, 1023);
+	Housing::AddItemDef("home", "ncity", "Keldrin City", "KeldrinCity", 5000, 4500000, 1024);
 
-	for (%i = 0; (%shape = getWord($homeItemDisList, %i)) != "" && %shape != -1; %i++) {
-		%itemName = "HomeItem_" @ %shape;
-		BeltItem::Add(%shape, %itemName, "HousingItems", 0.01, 0, "", %shopIndex++);
-		$beltitem[%itemName, "isHousingItem"] = True;
-		$beltitem[%itemName, "housingType"] = "homeitem";
-		$beltitem[%itemName, "shape"] = %shape;
-		$beltitem[%itemName, "reusable"] = True;
-	}
+	// Home items (1000 - 10000)
+	Housing::AddItemDef("homeitem", "cabinet1", "Tall Wood Cabinet", "TallWoodCabinet", 60, 4500, 1025);
+	Housing::AddItemDef("homeitem", "cabinet2", "Short Wood Cabinet", "ShortWoodCabinet", 45, 3500, 1026);
+	Housing::AddItemDef("homeitem", "woodchair", "Wooden Chair", "WoodenChair", 10, 1500, 1027);
+	Housing::AddItemDef("homeitem", "bar", "Wooden Bar", "WoodenBar", 40, 8000, 1028);
+	Housing::AddItemDef("homeitem", "barstool", "Bar Stool", "BarStool", 6, 1200, 1029);
+	Housing::AddItemDef("homeitem", "table", "Small Wood Table", "SmallWoodTable", 10, 2000, 1030);
+	Housing::AddItemDef("homeitem", "roundtable", "Small Round Table", "SmallRoundTable", 12, 2200, 1031);
+	Housing::AddItemDef("homeitem", "stove", "Metal Stove", "MetalStove", 60, 9000, 1032);
+	Housing::AddItemDef("homeitem", "easel", "Artist Easel", "ArtistEasel", 15, 3000, 1033);
+	Housing::AddItemDef("homeitem", "bed", "Single Bed", "SingleBed", 80, 5000, 1034);
+	Housing::AddItemDef("homeitem", "jfnt", "Small Fountain", "SmallFountain", 90, 7000, 1035);
+	Housing::AddItemDef("homeitem", "woodfire", "Wood Fireplace", "WoodFireplace", 50, 6500, 1036);
+	Housing::AddItemDef("homeitem", "anvil", "Blacksmith Anvil", "BlacksmithAnvil", 150, 10000, 1037);
+	Housing::AddItemDef("homeitem", "bed1", "Blue Double Bed", "BlueDoubleBed", 120, 7000, 1038);
+	Housing::AddItemDef("homeitem", "bed1b", "Brown Double Bed", "BrownDoubleBed", 120, 7000, 1039);
+	Housing::AddItemDef("homeitem", "bed1c", "Light Double Bed", "LightDoubleBed", 120, 7000, 1040);
+	Housing::AddItemDef("homeitem", "bed2", "Queen Bed", "QueenBed", 150, 9000, 1041);
+	Housing::AddItemDef("homeitem", "bed3", "Canopy Bed", "CanopyBed", 180, 10000, 1042);
+	Housing::AddItemDef("homeitem", "bench1", "Stone Bench", "StoneBench", 60, 4000, 1043);
+	Housing::AddItemDef("homeitem", "bench2", "Ornate Bench (Light)", "OrnateBenchLight", 55, 4500, 1044);
+	Housing::AddItemDef("homeitem", "bench3", "Ornate Bench (Dark)", "OrnateBenchDark", 55, 4500, 1045);
+	Housing::AddItemDef("homeitem", "bigtable1", "Large Fancy Table (Dark)", "LargeFancyTableDark", 90, 8000, 1046);
+	Housing::AddItemDef("homeitem", "bigtable2", "Large Fancy Table (Light)", "LargeFancyTableLight", 90, 8000, 1047);
+	Housing::AddItemDef("homeitem", "candleabra", "Wall Candelabra", "WallCandelabra", 15, 3000, 1048);
+	Housing::AddItemDef("homeitem", "chair1", "Cushioned Chair", "CushionedChair", 12, 2500, 1049);
+	Housing::AddItemDef("homeitem", "chair1a", "White Cushioned Chair", "WhiteCushionedChair", 12, 2600, 1050);
+	Housing::AddItemDef("homeitem", "endtable", "Small End Table", "SmallEndTable", 12, 2000, 1051);
+	Housing::AddItemDef("homeitem", "fireplace", "Stone Fireplace", "StoneFireplace", 250, 10000, 1052);
+	Housing::AddItemDef("homeitem", "fireplaceb", "Grand Fireplace", "GrandFireplace", 300, 10000, 1053);
+	Housing::AddItemDef("homeitem", "pic1", "Wall Picture I", "WallPicture1", 5, 1200, 1054);
+	Housing::AddItemDef("homeitem", "pic2", "Wall Picture II", "WallPicture2", 5, 1200, 1055);
+	Housing::AddItemDef("homeitem", "pic3", "Wall Picture III", "WallPicture3", 5, 1200, 1056);
+	Housing::AddItemDef("homeitem", "pic4", "Wall Picture IV", "WallPicture4", 5, 1200, 1057);
+	Housing::AddItemDef("homeitem", "pic5", "Wall Picture V", "WallPicture5", 5, 1200, 1058);
+	Housing::AddItemDef("homeitem", "throne2", "Ornate Throne", "OrnateThrone", 120, 9500, 1059);
 }

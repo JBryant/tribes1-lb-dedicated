@@ -666,11 +666,12 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 					return;
 				}
 				StartPlaceMode(%clientId, "home", %shape @ ".dis");
+				Belt::TakeThisStuff(%clientId, %item, 1);
 				Client::sendMessage(%clientId, $MsgWhite, "Placing home: " @ %shape @ ".");
 				return;
 			}
 
-			if (%housingType == "homeitem") {
+			if (%housingType == "homeitem") {	
 				%home = $tagToObjectId[%clientId @ "_home"];
 				if (fetchData(%clientId, "HomeShape") == "" && %home != "" && %home != 0) {
 					%shape = $tagToObjectShape[%clientId @ "_home"];
@@ -702,6 +703,7 @@ function processMenuBeltDrop(%clientId, %opt, %keybind)
 				}
 
 				StartPlaceMode(%clientId, "homeitem_" @ %openSlot, %shape @ ".dis", %openSlot);
+				Belt::TakeThisStuff(%clientId, %item, 1);
 				Client::sendMessage(%clientId, $MsgWhite, "Placing home item: " @ %shape @ ".");
 				return;
 			}

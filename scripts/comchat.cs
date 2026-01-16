@@ -1815,10 +1815,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 		if (%w1 == "#homecommands" || %w1 == "#housecommands") {
 			%msg = "<f2>Home Commands\n\n";
 			%msg = %msg @ "<f1>#homes:             <f0>View a list of all home types\n";
-			%msg = %msg @ "<f1>#placehome [type]:  <f0>Enter placemode to begin placing your home\n";
-			%msg = %msg @ "<f1>#place:             <f0>Exit placemode and place the item\n";
-			%msg = %msg @ "<f1>#placelock:         <f0>Lock position while placing\n";
-			%msg = %msg @ "<f1>#placeunlock:       <f0>Unlock position while placing\n";
 			%msg = %msg @ "<f1>#rotate:            <f0>Rotate a home item by moving (toggle)\n";
 			%msg = %msg @ "<f1>#homeaddx [X]:      <f0>Move you home the X direction. Can be +/-\n";
 			%msg = %msg @ "<f1>#homeaddy [Y]:      <f0>Move you home the Y direction. Can be +/-\n";
@@ -1828,8 +1824,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 			%msg = %msg @ "<f2>\nHome Item Commands\n\n";
 			%msg = %msg @ "<f1>#homeitems:         <f0>View a list of all home items\n";
-			%msg = %msg @ "<f1>#placeitem [type]:  <f0>Enter placemode to begin placing a home item\n";
 			%msg = %msg @ "<f1>#move:              <f0>Grab home item and move it to a new location\n";
+			%msg = %msg @ "<f1>#rotate:            <f0>Rotate a home item by moving (toggle)\n";
 			%msg = %msg @ "<f1>#itemaddx [X]:      <f0>Move home item the X direction. Can be +/-\n";
 			%msg = %msg @ "<f1>#itemaddy [Y]:      <f0>Move home item the Y direction. Can be +/-\n";
 			%msg = %msg @ "<f1>#itemaddz [Z]:	   <f0>Move home item the Z direction. Can be +/-\n";
@@ -1839,68 +1835,68 @@ function internalSay(%clientId, %team, %message, %senderName)
 			rpg::longPrint(%TrueClientId, %msg, 0, 10);
 		}
 
-		if (%w1 == "#homes") {
-			%msg = "<f2>Homes\n\n";
-			%count = getWordCount($homeDisList);
-			for (%i = 0; %i < %count; %i++) {
-				%name = getWord($homeDisList, %i);
-				if (%name != "")
-					%msg = %msg @ "<f1>" @ %name @ ":<f0>\n";
-			}
-			rpg::longPrint(%TrueClientId, %msg, 0, 10);
-		}
+		// if (%w1 == "#homes") {
+		// 	%msg = "<f2>Homes\n\n";
+		// 	%count = getWordCount($homeDisList);
+		// 	for (%i = 0; %i < %count; %i++) {
+		// 		%name = getWord($homeDisList, %i);
+		// 		if (%name != "")
+		// 			%msg = %msg @ "<f1>" @ %name @ ":<f0>\n";
+		// 	}
+		// 	rpg::longPrint(%TrueClientId, %msg, 0, 10);
+		// }
 
-		if (%w1 == "#homeitems") {
-			%msg = "<f2>Home Items\n\n";
-			%count = getWordCount($homeItemDisList);
-			for (%i = 0; %i < %count; %i++) {
-				%name = getWord($homeItemDisList, %i);
-				if (%name != "")
-					%msg = %msg @ "<f1>" @ %name @ ":<f0>\n";
-			}
-			rpg::longPrint(%TrueClientId, %msg, 0, 10);
-		}
+		// if (%w1 == "#homeitems") {
+		// 	%msg = "<f2>Home Items\n\n";
+		// 	%count = getWordCount($homeItemDisList);
+		// 	for (%i = 0; %i < %count; %i++) {
+		// 		%name = getWord($homeItemDisList, %i);
+		// 		if (%name != "")
+		// 			%msg = %msg @ "<f1>" @ %name @ ":<f0>\n";
+		// 	}
+		// 	rpg::longPrint(%TrueClientId, %msg, 0, 10);
+		// }
 
-		if (%w1 == "#place") {
-			//if(%clientToServerAdminLevel >= 4) {
-				if (fetchData(%TrueClientId, "RotateMode") == 1) {
-					EndRotateMode(%TrueClientId);
-					if (fetchData(%TrueClientId, "PlaceMode") != 1)
-						return;
-				}
-				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
-					Client::sendMessage(%TrueClientId, 1, "You are not currently moving any items.");
-					return;
-				}
+		// if (%w1 == "#place") {
+		// 	//if(%clientToServerAdminLevel >= 4) {
+		// 		if (fetchData(%TrueClientId, "RotateMode") == 1) {
+		// 			EndRotateMode(%TrueClientId);
+		// 			if (fetchData(%TrueClientId, "PlaceMode") != 1)
+		// 				return;
+		// 		}
+		// 		if (fetchData(%TrueClientId, "PlaceMode") != 1) {
+		// 			Client::sendMessage(%TrueClientId, 1, "You are not currently moving any items.");
+		// 			return;
+		// 		}
 
-				EndPlaceMode(%TrueClientId);
-			//}
-		}
+		// 		EndPlaceMode(%TrueClientId);
+		// 	//}
+		// }
 
-		if (%w1 == "#placelock") {
-			PlaceLockPos(%TrueClientId);
-		}
+		// if (%w1 == "#placelock") {
+		// 	PlaceLockPos(%TrueClientId);
+		// }
 
-		if (%w1 == "#placeunlock") {
-			PlaceUnlockPos(%TrueClientId);
-		}
+		// if (%w1 == "#placeunlock") {
+		// 	PlaceUnlockPos(%TrueClientId);
+		// }
 
-		if (%w1 == "#placehome" || %w1 == "#placehouse") {
-			//if(%clientToServerAdminLevel >= 4) {				
-				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
-					%shape = getWord(%cropped, 0);
-					if (String::findSubStr($homeDisList, %shape) < 0 && $tagToObjectId[%TrueClientId @ "_home"] == "") {
-						Client::sendMessage(%TrueClientId, 1, "That is not a valid home shape. Type #homes to see a list of valid shapes.");
-						return;
-					}
+		// if (%w1 == "#placehome" || %w1 == "#placehouse") {
+		// 	//if(%clientToServerAdminLevel >= 4) {				
+		// 		if (fetchData(%TrueClientId, "PlaceMode") != 1) {
+		// 			%shape = getWord(%cropped, 0);
+		// 			if (String::findSubStr($homeDisList, %shape) < 0 && $tagToObjectId[%TrueClientId @ "_home"] == "") {
+		// 				Client::sendMessage(%TrueClientId, 1, "That is not a valid home shape. Type #homes to see a list of valid shapes.");
+		// 				return;
+		// 			}
 
-					StartPlaceMode(%TrueClientId, "home", %shape @ ".dis");
-				} else {
-					Client::sendMessage(%TrueClientId, 1, "You are already placing a home.");
-					return;
-				}
-			//}
-		}
+		// 			StartPlaceMode(%TrueClientId, "home", %shape @ ".dis");
+		// 		} else {
+		// 			Client::sendMessage(%TrueClientId, 1, "You are already placing a home.");
+		// 			return;
+		// 		}
+		// 	//}
+		// }
 
 		if (%w1 == "#removehome" || %w1 == "#removehouse") {
 			//if(%clientToServerAdminLevel >= 4) {
@@ -1934,55 +1930,55 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 
 
-		if (%w1 == "#placehomeitem" || %w1 == "#placehouseitem" || %w1 == "#placeitem") {
-			//if(%clientToServerAdminLevel >= 4) {
-				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
-					%home = $tagToObjectId[%TrueClientId @ "_home"];
-					if (fetchData(%TrueClientId, "HomeShape") == "" && %home != "" && %home != 0) {
-						%shape = $tagToObjectShape[%TrueClientId @ "_home"];
-						if (%shape == "")
-							%shape = %home.shape;
-						if (%shape != "")
-							storeData(%TrueClientId, "HomeShape", %shape);
-						storeData(%TrueClientId, "HomePos", GameBase::getPosition(%home));
-						storeData(%TrueClientId, "HomeRot", GameBase::getRotation(%home));
-						storeData(%TrueClientId, "HasHome", 1);
-					}
-					// check if they have a home first...
-					if (fetchData(%TrueClientId, "HomeShape") == "" || $tagToObjectId[%TrueClientId @ "_home"] == "") {
-						Client::sendMessage(%TrueClientId, 1, "You need to place a home before placing home items.");
-						return;
-					}
+		// if (%w1 == "#placehomeitem" || %w1 == "#placehouseitem" || %w1 == "#placeitem") {
+		// 	//if(%clientToServerAdminLevel >= 4) {
+		// 		if (fetchData(%TrueClientId, "PlaceMode") != 1) {
+		// 			%home = $tagToObjectId[%TrueClientId @ "_home"];
+		// 			if (fetchData(%TrueClientId, "HomeShape") == "" && %home != "" && %home != 0) {
+		// 				%shape = $tagToObjectShape[%TrueClientId @ "_home"];
+		// 				if (%shape == "")
+		// 					%shape = %home.shape;
+		// 				if (%shape != "")
+		// 					storeData(%TrueClientId, "HomeShape", %shape);
+		// 				storeData(%TrueClientId, "HomePos", GameBase::getPosition(%home));
+		// 				storeData(%TrueClientId, "HomeRot", GameBase::getRotation(%home));
+		// 				storeData(%TrueClientId, "HasHome", 1);
+		// 			}
+		// 			// check if they have a home first...
+		// 			if (fetchData(%TrueClientId, "HomeShape") == "" || $tagToObjectId[%TrueClientId @ "_home"] == "") {
+		// 				Client::sendMessage(%TrueClientId, 1, "You need to place a home before placing home items.");
+		// 				return;
+		// 			}
 
 
-					// check if they have any free slots
-					%openSlot = -1;
-					for (%i = 1; %i <= $maxHouseItems; %i++) {
-						%homeItem = $tagToObjectId[%TrueClientId @ "_homeitem_" @ %i];
-						if (%homeItem == "") {
-							%openSlot = %i;
-							break;
-						}
-					}
+		// 			// check if they have any free slots
+		// 			%openSlot = -1;
+		// 			for (%i = 1; %i <= $maxHouseItems; %i++) {
+		// 				%homeItem = $tagToObjectId[%TrueClientId @ "_homeitem_" @ %i];
+		// 				if (%homeItem == "") {
+		// 					%openSlot = %i;
+		// 					break;
+		// 				}
+		// 			}
 
-					if (%openSlot < 0) {
-						Client::sendMessage(%TrueClientId, 1, "You have no open home item slots.");
-						return;
-					}
+		// 			if (%openSlot < 0) {
+		// 				Client::sendMessage(%TrueClientId, 1, "You have no open home item slots.");
+		// 				return;
+		// 			}
 
-					%shape = getWord(%cropped, 0);					
-					if (String::findSubStr($homeItemDisList, %shape) < 0) {
-						Client::sendMessage(%TrueClientId, 1, "That is not a valid home shape. Type #homes to see a list of valid shapes.");
-						return;
-					}
+		// 			%shape = getWord(%cropped, 0);					
+		// 			if (String::findSubStr($homeItemDisList, %shape) < 0) {
+		// 				Client::sendMessage(%TrueClientId, 1, "That is not a valid home shape. Type #homes to see a list of valid shapes.");
+		// 				return;
+		// 			}
 
-					StartPlaceMode(%TrueClientId, "homeitem_" @ %openSlot, %shape @ ".dis", %openSlot);
-				} else {
-					Client::sendMessage(%TrueClientId, 1, "You are already placing an item.");
-					return;
-				}
-			//}
-		}
+		// 			StartPlaceMode(%TrueClientId, "homeitem_" @ %openSlot, %shape @ ".dis", %openSlot);
+		// 		} else {
+		// 			Client::sendMessage(%TrueClientId, 1, "You are already placing an item.");
+		// 			return;
+		// 		}
+		// 	//}
+		// }
 
 		if (%w1 == "#move") {
 			%home = $tagToObjectId[%TrueClientId @ "_home"];
