@@ -520,6 +520,7 @@ function LoadCharacter(%clientId)
 			GameBase::setPosition(%home, $funk::var[%name, 9, 3]);
 			GameBase::setRotation(%home, $funk::var[%name, 9, 4]);
 			$tagToObjectId[%clientId @ "_home"] = %home;
+			$tagToObjectShape[%clientId @ "_home"] = $funk::var[%name, 9, 2];
 			addToSet("MissionCleanup\\Home" @ %clientId, %home);
 		}
 
@@ -540,6 +541,7 @@ function LoadCharacter(%clientId)
 				GameBase::setPosition(%homeItem, (getWord(%houseItemPos, 0) + getWord(%homePos, 0)) @ " " @ (getWord(%houseItemPos, 1) + getWord(%homePos, 1)) @ " " @ (getWord(%houseItemPos, 2) + getWord(%homePos, 2)));
 				GameBase::setRotation(%homeItem, %houseItemRot);
 				$tagToObjectId[%clientId @ "_homeitem_" @ %i] = %homeItem;
+				$tagToObjectShape[%clientId @ "_homeitem_" @ %i] = %houseItemShape;
 				addToSet("MissionCleanup\\Home" @ %clientId, %homeItem);
 			}
 		}

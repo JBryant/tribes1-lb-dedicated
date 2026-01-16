@@ -86,11 +86,33 @@ $homeDisList = "house1 store1 nbank cozyhouse tavern lhouse cheehouselights shil
 
 $homeItemDisList = "cabinet1 cabinet2 woodchair bar barstool table roundtable stove easel bed jfnt woodfire anvil bed1 bed1b bed1c bed2 bed3 bench1 bench2 bench3 bigtable1 bigtable2 candleabra chair1 chair1a endtable fireplace fireplaceb pic1 pic2 pic3 pic4 pic5 throne2";
 
-function StartPlaceMode(%clientId, %name, %objectShape, %slot) {
-    Client::sendMessage(%clientId, 2, "You are placing " @ %name @ ". Type #place when you are done.");
+function StartPlaceMode(%clientId, %name, %objectShape, %slot, %objectId) {
     storeData(%clientId, "PlaceMode", 1);
     $userMovingHouseItem[%clientId] = %name;
     %tag = %clientId @ "_" @ %name;
+
+    if (%objectId != "" && %objectId != 0) {
+        if (%name == "")
+            %name = %objectId.name;
+        if (%name == "" && %slot != "")
+            %name = "homeitem_" @ %slot;
+        $userMovingHouseItem[%clientId] = %name;
+        %tag = %clientId @ "_" @ %name;
+        $tagToObjectId[%tag] = %objectId;
+        if (%objectShape == "")
+            %objectShape = %objectId.shape;
+        if (%objectShape == "")
+            %objectShape = $tagToObjectShape[%tag];
+        if (%objectShape != "")
+            $tagToObjectShape[%tag] = %objectShape;
+    }
+
+    if (%objectShape == "" && $tagToObjectId[%tag] == "") {
+        Client::sendMessage(%clientId, 1, "Unable to place item: missing shape data.");
+        storeData(%clientId, "PlaceMode", 0);
+        $userMovingHouseItem[%clientId] = "";
+        return;
+    }
 
     if ($tagToObjectId[%tag] == "" || $tagToObjectId[%tag] == 0 || $tagToObjectId[%tag] == "0") {
         %object = newObject(%name, InteriorShape, %objectShape, true);
@@ -100,6 +122,13 @@ function StartPlaceMode(%clientId, %name, %objectShape, %slot) {
         $tagToObjectId[%tag] = %object;
         $tagToObjectShape[%tag] = %objectShape;
     }
+
+    Client::sendMessage(%clientId, 2, "You are placing " @ %name @ ". Type #place when you are done.");
+
+    // Initialize placement rotation from current object rotation (Z only)
+    %currentRot = GameBase::getRotation($tagToObjectId[%tag]);
+    $placeRot[%clientId] = getWord(%currentRot, 2);
+    $placeLockPos[%clientId] = "";
 
     PlaceModeLoop(%clientId, %name);
 }
@@ -112,13 +141,22 @@ function PlaceModeLoop(%clientId, %name) {
     if (fetchData(%clientId, "PlaceMode") == 1 && %player != -1 && %object != -1) {
         %player = Client::getOwnedObject(%clientId);
 
-        if(GameBase::getLOSinfo(%player, 1000)) {
+        if($placeLockPos[%clientId] != "") {
+            %pos = $placeLockPos[%clientId];
+            %obj = "";
+        } else if(GameBase::getLOSinfo(%player, 1000)) {
             %pos = $los::position;
             %obj = $los::object;
+        } else {
+            %pos = "";
+            %obj = "";
+        }
 
-            if ($los::object != %object && getObjectType($los::object) != "Player") {
+        if (%pos != "" && (%obj == "" || (%obj != %object && getObjectType(%obj) != "Player"))) {
                 // lbecho("set position of " @ %name @ " to " @ %pos);
                 GameBase::setPosition(%object, %pos);
+                if ($placeRot[%clientId] != "")
+                    GameBase::setRotation(%object, "0 0 " @ $placeRot[%clientId]);
                 if (%name == "home") {
                     // lbecho("Also moving all house items with it");
                     // also move all the home items with it
@@ -133,10 +171,9 @@ function PlaceModeLoop(%clientId, %name) {
                         }
                     }
                 }
-            }
         }
 
-        schedule("PlaceModeLoop(" @ %clientId @ ", " @ %name @ ");", 0.2);
+        schedule("PlaceModeLoop(" @ %clientId @ ", \"" @ %name @ "\");", 0.2);
     }
 }
 
@@ -180,7 +217,106 @@ function EndPlaceMode(%clientId) {
 
     addToSet("MissionCleanup\\Home" @ %clientId, %object);
     $userMovingHouseItem[%clientId] = "";
+    $placeRot[%clientId] = "";
+    $placeLockPos[%clientId] = "";
     storeData(%clientId, "PlaceMode", 0);
+}
+
+function PlaceLockPos(%clientId) {
+    if (fetchData(%clientId, "PlaceMode") != 1)
+        return;
+
+    %name = $userMovingHouseItem[%clientId];
+    if (%name == "")
+        return;
+
+    %object = $tagToObjectId[%clientId @ "_" @ %name];
+    if (%object == "" || %object == 0)
+        return;
+
+    $placeLockPos[%clientId] = GameBase::getPosition(%object);
+}
+
+function PlaceUnlockPos(%clientId) {
+    $placeLockPos[%clientId] = "";
+}
+
+function StartRotateMode(%clientId, %name, %objectId) {
+    if (fetchData(%clientId, "RotateMode") == 1)
+        return;
+
+    if (%objectId != "" && %objectId != 0) {
+        if (%name == "")
+            %name = %objectId.name;
+        if (%name == "" && %objectId.slot != "")
+            %name = "homeitem_" @ %objectId.slot;
+        %tag = %clientId @ "_" @ %name;
+        $tagToObjectId[%tag] = %objectId;
+        %object = %objectId;
+    } else {
+        %tag = %clientId @ "_" @ %name;
+        %object = $tagToObjectId[%tag];
+    }
+    if (%object == "" || %object == 0 || %name == "")
+        return;
+
+    %player = Client::getOwnedObject(%clientId);
+    if (%player == -1)
+        return;
+
+    storeData(%clientId, "RotateMode", 1);
+    $userRotatingHouseItem[%clientId] = %name;
+    $rotateLastPos[%clientId] = GameBase::getPosition(%player);
+    $rotateRot[%clientId] = getWord(GameBase::getRotation(%object), 2);
+
+    Client::sendMessage(%clientId, 2, "Rotate mode started. Move to rotate, type #rotate again to stop.");
+    RotateModeLoop(%clientId, %name);
+}
+
+function RotateModeLoop(%clientId, %name) {
+    if (fetchData(%clientId, "RotateMode") != 1)
+        return;
+
+    %object = $tagToObjectId[%clientId @ "_" @ %name];
+    %player = Client::getOwnedObject(%clientId);
+    if (%object == "" || %object == 0 || %player == -1)
+        return;
+
+    %currentPos = GameBase::getPosition(%player);
+    %lastPos = $rotateLastPos[%clientId];
+    %dx = getWord(%currentPos, 0) - getWord(%lastPos, 0);
+    %dy = getWord(%currentPos, 1) - getWord(%lastPos, 1);
+    %delta = %dx + %dy;
+
+    if (%delta > 5) %delta = 5;
+    if (%delta < -5) %delta = -5;
+
+    if (%delta != 0) {
+        $rotateRot[%clientId] = $rotateRot[%clientId] + %delta;
+        GameBase::setRotation(%object, "0 0 " @ $rotateRot[%clientId]);
+    }
+
+    $rotateLastPos[%clientId] = %currentPos;
+    schedule("RotateModeLoop(" @ %clientId @ ", \"" @ %name @ "\");", 0.2);
+}
+
+function EndRotateMode(%clientId) {
+    if (fetchData(%clientId, "RotateMode") != 1)
+        return;
+
+    %name = $userRotatingHouseItem[%clientId];
+    if (%name != "") {
+        %object = $tagToObjectId[%clientId @ "_" @ %name];
+        if (%object != "" && %object != 0) {
+            %object.rot = GameBase::getRotation(%object);
+        }
+    }
+
+    storeData(%clientId, "RotateMode", 0);
+    $userRotatingHouseItem[%clientId] = "";
+    $rotateLastPos[%clientId] = "";
+    $rotateRot[%clientId] = "";
+    Client::sendMessage(%clientId, 2, "Rotate mode ended.");
 }
 
 function HomeAddX(%clientId, %offset) {
@@ -317,6 +453,7 @@ function RemoveHome(%clientId) {
     ClearHomeVariables(%clientId);
     
     Client::sendMessage(%clientId, 2, "Home and all house items removed.");
+    SaveCharacter(%clientId, true);
 }
 
 function RemoveHomeItem(%clientId, %slot) {
@@ -325,6 +462,7 @@ function RemoveHomeItem(%clientId, %slot) {
     $tagToObjectId[%clientId @ "_homeitem_" @ %slot] = "";
 
     Client::sendMessage(%clientId, 2, "Home item removed.");
+    SaveCharacter(%clientId, true);
 }
 
 function ClearHomeVariables(%clientId) {

@@ -1817,6 +1817,9 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%msg = %msg @ "<f1>#homes:             <f0>View a list of all home types\n";
 			%msg = %msg @ "<f1>#placehome [type]:  <f0>Enter placemode to begin placing your home\n";
 			%msg = %msg @ "<f1>#place:             <f0>Exit placemode and place the item\n";
+			%msg = %msg @ "<f1>#placelock:         <f0>Lock position while placing\n";
+			%msg = %msg @ "<f1>#placeunlock:       <f0>Unlock position while placing\n";
+			%msg = %msg @ "<f1>#rotate:            <f0>Rotate a home item by moving (toggle)\n";
 			%msg = %msg @ "<f1>#homeaddx [X]:      <f0>Move you home the X direction. Can be +/-\n";
 			%msg = %msg @ "<f1>#homeaddy [Y]:      <f0>Move you home the Y direction. Can be +/-\n";
 			%msg = %msg @ "<f1>#homeaddz [Z]:      <f0>Move you home the Z direction. Can be +/-\n";
@@ -1860,6 +1863,11 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 		if (%w1 == "#place") {
 			//if(%clientToServerAdminLevel >= 4) {
+				if (fetchData(%TrueClientId, "RotateMode") == 1) {
+					EndRotateMode(%TrueClientId);
+					if (fetchData(%TrueClientId, "PlaceMode") != 1)
+						return;
+				}
 				if (fetchData(%TrueClientId, "PlaceMode") != 1) {
 					Client::sendMessage(%TrueClientId, 1, "You are not currently moving any items.");
 					return;
@@ -1867,6 +1875,14 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 				EndPlaceMode(%TrueClientId);
 			//}
+		}
+
+		if (%w1 == "#placelock") {
+			PlaceLockPos(%TrueClientId);
+		}
+
+		if (%w1 == "#placeunlock") {
+			PlaceUnlockPos(%TrueClientId);
 		}
 
 		if (%w1 == "#placehome" || %w1 == "#placehouse") {
@@ -1969,7 +1985,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 				if (%obj.owner == %TrueClientId && %obj.slot != "") {
 					lbecho("You own this item, you can move it.");
 					if (fetchData(%TrueClientId, "PlaceMode") != 1) {
-						StartPlaceMode(%TrueClientId, %obj.name);
+						StartPlaceMode(%TrueClientId, %obj.name, %obj.shape, %obj.slot, %obj);
 					} else {
 						Client::sendMessage(%TrueClientId, 1, "You are already placing an item.");
 						return;
@@ -1978,6 +1994,32 @@ function internalSay(%clientId, %team, %message, %senderName)
 					Client::sendMessage(%TrueClientId, 1, "You can only move items that you own.");
 					return;
 
+				}
+			}
+		}
+
+		if (%w1 == "#rotate") {
+			if (fetchData(%TrueClientId, "HomeShape") == "" || $tagToObjectId[%TrueClientId @ "_home"] == "") {
+				Client::sendMessage(%TrueClientId, 1, "You need a placed home before rotating home items.");
+				return;
+			}
+			if (fetchData(%TrueClientId, "PlaceMode") == 1) {
+				Client::sendMessage(%TrueClientId, 1, "Finish placing before rotating an item.");
+				return;
+			}
+			if (fetchData(%TrueClientId, "RotateMode") == 1) {
+				EndRotateMode(%TrueClientId);
+				return;
+			}
+
+			%player = Client::getOwnedObject(%TrueClientId);
+			if(GameBase::getLOSinfo(%player, 1000)) {
+				%obj = $los::object;
+				if (%obj.owner == %TrueClientId && %obj.slot != "") {
+					StartRotateMode(%TrueClientId, %obj.name, %obj);
+				} else {
+					Client::sendMessage(%TrueClientId, 1, "You can only rotate items that you own.");
+					return;
 				}
 			}
 		}
