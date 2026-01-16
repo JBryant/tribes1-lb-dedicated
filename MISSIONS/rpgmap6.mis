@@ -7193,19 +7193,27 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2450 -2310.5 56.7798";
-				rotation = "0 -0 -1.36085";
+				position = "1998.29 494.529 2200";
+				rotation = "0 -0 -2.41004";
 			};
-			instant SimGroup "NAME Shorty";
+			instant SimGroup "NAME Hank";
 			instant SimGroup "RACE MaleHuman";
 			instant SimGroup "NEED HealingKitI 1000";
 			instant SimGroup "TAKE HealingKitI 1000";
 			instant SimGroup "GIVE HealingKitI 1000";
-			instant SimGroup "SAY1 Pssst... hey you!";
+			instant SimGroup "SAY1 Hey there. Want to learn how to build a home?";
 			instant SimGroup "CUE1 yes";
-			instant SimGroup "SAY2 I got a proposal for you. You help me get outta here, and I will make it worth your while.";
-			instant SimGroup "NCUE1 thanks";
-			instant SimGroup "NSAY2 To craft a Potion simply type #alchemy Potion. Take my old Alembic here to get started, and make sure to stock up on more flasks and water before you head out!";
+			instant SimGroup "SAY2 Start by buying home deeds and furniture from housing merchants. You can find them all over the world.";
+			instant SimGroup "CUE2 home";
+			instant SimGroup "SAY3 To place a home, open Housing in your belt and Use the home item. Aim where you want it, then type #place.";
+			instant SimGroup "CUE3 place";
+			instant SimGroup "SAY4 Need adjustments? Look at your home and use #move or #rotate, then #place again to confirm.";
+			instant SimGroup "CUE4 more";
+			instant SimGroup "SAY5 You can also purchase furniture from merchants. Place them inside your home and they will follow your house even if you move it.";
+			instant SimGroup "CUE5 move";
+			instant SimGroup "SAY6 You can #move, #rotate, and #place furniture just like the home itself.";
+			instant SimGroup "CUE6 thanks";
+			instant SimGroup "SAY7 That's the basics. Build something cozy and make it yours.";
 		};
 	};
 	instant InteriorShape "RemorterHall1" {
