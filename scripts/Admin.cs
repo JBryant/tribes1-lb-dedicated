@@ -403,6 +403,7 @@ function Game::menuRequest(%clientId) {
 			if(!IsDead(%clientId)){
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Skill points" , "sp");
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Inventory (wt: "@Belt::GetWeight(%clientid)@" / "@ fetchData(%clientId, "MaxWeight") @")", "viewbelt");
+				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Quest Log", "questlog");
 				Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Compass" , "compass");
 			}
 
@@ -545,7 +546,7 @@ function processMenuOptions(%clientId, %option)
 			%msg = %msg @ "<f0>" @ %class @ ": <f2>" @ %lvl @ "\n";
 		}
 
-		rpg::longPrint(%clientId, %msg, 0, 10);	
+		rpg::longPrint(%clientId, %msg, 0, 10);
 		// bottomprint(%clientId, %f, floor(String::len(%f) / 10));
 	}
 	else if(%opt == "addgroup")
@@ -629,6 +630,39 @@ function processMenuOptions(%clientId, %option)
 
 			Client::addMenuItem(%clientId, %curitem++ @ %item.description, %item);
 		}
+		return;
+	}
+	else if(%opt == "questlog")
+	{
+		QuestLog::BuildListMenu(%clientId);
+		return;
+	}
+	else if(%opt == "questlogview")
+	{
+		%questId = floor(getWord(%option, 1));
+		QuestLog::BuildQuestMenu(%clientId, %questId);
+		return;
+	}
+	else if(%opt == "questlogdesc")
+	{
+		%questId = floor(getWord(%option, 1));
+		QuestLog::ShowQuestDetails(%clientId, %questId);
+		QuestLog::BuildQuestMenu(%clientId, %questId);
+		return;
+	}
+	else if(%opt == "questlogabandon")
+	{
+		%questId = floor(getWord(%option, 1));
+		if (%questId > 0) {
+			Quests::ResetQuest(%clientId, %questId, true);
+			Client::sendMessage(%clientId, $MsgWhite, "Quest abandoned.");
+		}
+		QuestLog::BuildListMenu(%clientId);
+		return;
+	}
+	else if(%opt == "mainmenu")
+	{
+		Game::menuRequest(%clientId);
 		return;
 	}
 	else if(%opt == "partyoptions")
@@ -1063,6 +1097,75 @@ function remoteSelectClient(%clientId, %selId) {
       remoteEval(%clientId, "setInfoLine", 3, "Email Addr: " @ $Client::info[%selId, 2]);
       remoteEval(%clientId, "setInfoLine", 5, "URL: " @ $Client::info[%selId, 4]);
    }
+}
+
+function QuestLog::BuildListMenu(%clientId) {
+	Client::buildMenu(%clientId, "Quest Log", "options", true);
+
+	%curItem = 0;
+	%count = $Quest::activeCount[%clientId];
+
+	if (%count == "" || %count <= 0) {
+		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "(No active quests)", "");
+	} else {
+		for (%i = 0; %i < %count; %i++) {
+			%qid = $Quest::active[%clientId, %i];
+			if (%qid == "" || %qid == -1)
+				continue;
+
+			%data = Quests::GetData(%clientId, %qid);
+			%state = getWord(%data, 0);
+			if (%state == 2)
+				%status = "Completed";
+			else
+				%status = "In Progress";
+
+			Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ $Quest::name[%qid] @ " (" @ %status @ ")", "questlogview " @ %qid);
+		}
+	}
+
+	Client::addMenuItem(%clientId, "z<< Back", "mainmenu");
+}
+
+function QuestLog::BuildQuestMenu(%clientId, %questId) {
+	if (%questId == "" || %questId == 0) {
+		QuestLog::BuildListMenu(%clientId);
+		return;
+	}
+
+	Client::buildMenu(%clientId, $Quest::name[%questId], "options", true);
+	%curItem = 0;
+	Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Description", "questlogdesc " @ %questId);
+	Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Abandon", "questlogabandon " @ %questId);
+	Client::addMenuItem(%clientId, "z<< Back", "questlog");
+}
+
+function QuestLog::ShowQuestDetails(%clientId, %questId) {
+	%name = $Quest::name[%questId];
+	%desc = $Quest::desc[%questId];
+	%data = Quests::GetData(%clientId, %questId);
+	%state = getWord(%data, 0);
+	%step = getWord(%data, 1);
+	if (%step == "" || %step == -1)
+		%step = 0;
+
+	if (%state == 2)
+		%step = Quests::GetLastStep(%questId);
+
+	%stepDesc = $Quest::stepDescription[%questId, %step];
+	%lastStep = Quests::GetLastStep(%questId);
+	%reward = $Quest::stepReward[%questId, %lastStep];
+	if (%reward == "")
+		%reward = "None";
+
+	%msg = "<f1>" @ %name @ "<f0>\n\n";
+	if (%desc != "")
+		%msg = %msg @ "<f0>Overview: <f1>" @ %desc @ "\n\n";
+	if (%stepDesc != "")
+		%msg = %msg @ "<f0>Current Step: <f1>" @ %stepDesc @ "\n\n";
+	%msg = %msg @ "<f0>Completion Reward: <f1>" @ %reward @ "\n";
+
+	rpg::longPrint(%clientId, %msg, 1, 10);
 }
 
 

@@ -395,11 +395,11 @@ function Item::onConsider(%clientId, %item, %object) {
 	}
 
 	if (%item == "BlueDoubleBed" || %item == "BrownDoubleBed" || %item == "LightDoubleBed") {
-		%duration = 3600 / 2;
+		%duration = 3600 / 2; // 1 hour reset EXP bonus
 		Client::sendMessage(%clientId, $MsgWhite, "You rested in your own bed. You feel well rested and ready to continue your journey.");
 		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Rested", "left");
 		UpdateBonusState(%clientId, "Rested", %duration, "Rested");
-		
+
 		return True;
 	}
 

@@ -2309,15 +2309,13 @@ function internalSay(%clientId, %team, %message, %senderName)
 		if (%w1 == "#latest") {
 			%msg = "<f2>Latest Changes (1/9/26)\n\n";
 			
-			%msg = %msg @ "<f0>Updates (New Questing System - in the works!):\n";
-			%msg = %msg @ "<f1>Sorry for the long outage. Was out of country for over a month and came back to a roaring KoK.\n";
-			%msg = %msg @ "<f1>I think it is perfect timing though, as it gives me some time to finish up the mod.\n";
-			%msg = %msg @ "<f1>I am overhauling the questing system to make it more engaging and rewarding for players.\n";
-			%msg = %msg @ "<f1>This includes multi step quests, repeatable, daily and per remort quests, as well as more dynamic quest controls.\n";
-			%msg = %msg @ "<f1>Should have updates ready soon!\n";
-			%msg = %msg @ "<f1>Inspecting enemies will now show their HP/MANA and DEF/MDEF values.\n";
-			%msg = %msg @ "<f1>Player Housing Beta! We have added basic housing functionality, allowing players to create and customize their own homes.\n";
-			%msg = %msg @ "<f1>As of now creation is unrestricted and free. Type #homecommands to see available commands.\n";
+			%msg = %msg @ "<f0>Updates (Questing + Housing):\n";
+			%msg = %msg @ "<f1>The questing system has been fully overhauled.\n";
+			%msg = %msg @ "<f1>Quest lines can span multiple quests with multi-step progression.\n";
+			%msg = %msg @ "<f1>Quests may reset daily, weekly, or per remort depending on the quest.\n";
+			%msg = %msg @ "<f1>Quest data now saves and persists across logout.\n";
+			%msg = %msg @ "<f1>Housing items and homes can be purchased and placed from your inventory (Housing tab).\n";
+			%msg = %msg @ "<f1>Use a Housing item to place it, then #move / #rotate / #place to adjust.\n";
 			%msg = %msg @ "\n";
 
 			%msg = %msg @ "<f0>Skills / Spells:\n";
