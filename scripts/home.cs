@@ -1,3 +1,21 @@
+// Home system overview
+// - Home shapes and home item shapes are listed in $homeDisList and $homeItemDisList.
+// - Placement uses StartPlaceMode/PlaceModeLoop/EndPlaceMode:
+//   * StartPlaceMode spawns (or reuses) the InteriorShape and begins a LOS-follow loop.
+//   * PlaceModeLoop moves the object to the LOS position; if placing a home, it also
+//     moves all placed home items by their stored offsets.
+//   * EndPlaceMode finalizes placement and saves HomeShape/HomePos/HomeRot or
+//     item offsets/rotations into runtime data (storeData) and object fields.
+// - Objects are tracked with tags like "<clientId>_home" and "<clientId>_homeitem_<slot>"
+//   via $tagToObjectId and $tagToObjectShape.
+// - Persistence lives in charfunk.cs:
+//   * Save: HomeShape/HomePos/HomeRot and item shape/offset/rot to $funk::var
+//   * Load: Recreates the home/group and restores each item relative to HomePos.
+// - Removal uses RemoveHome/RemoveHomeItem/ClearHomeVariables to clear tags and delete
+//   the MissionCleanup group "Home<clientId>" and its objects.
+// - Current system is prototype-level: no ownership costs, no purchase gating, and
+//   no buff/tax logic yet (see notes in TODOs and expansion plan).
+//
 // Home DIS options
 // ----- small homes ------
 // house1 - The standard brown house with an upstairs attic
