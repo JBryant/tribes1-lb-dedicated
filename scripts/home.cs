@@ -286,7 +286,7 @@ function RotateModeLoop(%clientId, %name) {
     %lastPos = $rotateLastPos[%clientId];
     %dx = getWord(%currentPos, 0) - getWord(%lastPos, 0);
     %dy = getWord(%currentPos, 1) - getWord(%lastPos, 1);
-    %delta = %dx + %dy;
+    %delta = (%dx + %dy) * 0.5;
 
     if (%delta > 5) %delta = 5;
     if (%delta < -5) %delta = -5;
