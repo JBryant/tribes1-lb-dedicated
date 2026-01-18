@@ -1,8 +1,6 @@
 // =====================
 // QUEST DEFINITIONS
 // =====================
-
-// IDs as numbers are fine; no need to also store $Quest::id[1] = "1";
 $Quest::name[1] = "Helping Your Elders";
 $Quest::desc[1] = "Speak to the village elder to begin your journey.";
 $Quest::npcId[1] = 1;
@@ -76,7 +74,7 @@ $Quest::stepReq[2, 2] = "SpiderVenom 5";
 
 $Quest::stepReward[2, 0] = "";
 $Quest::stepReward[2, 1] = "EXP 2000";
-$Quest::stepReward[2, 2] = "EXP 3000 PoisonMateriaI";
+$Quest::stepReward[2, 2] = "EXP 3000 PoisonMateriaI 1";
 
 $QuestNPC::name[2] = "Researcher Arin";
 $QuestNPC::shape[2] = "MaleHumanTownBot";
@@ -151,7 +149,7 @@ $Quest::stepReq[3, 2] = "ZombieViscera 10";
 
 $Quest::stepReward[3, 0] = "";
 $Quest::stepReward[3, 1] = "EXP 2000";
-$Quest::stepReward[3, 2] = "EXP 3000 FireMateriaI";
+$Quest::stepReward[3, 2] = "EXP 3000 IceMateriaII 1";
 
 $QuestNPC::name[3] = "Researcher Arin";
 $QuestNPC::shape[3] = "MaleHumanTownBot";
@@ -269,6 +267,54 @@ $QuestNPC::conversations[4, 4, 2, 1, 1] =
 // If the player brings the worms to him, he will give them a reward of 2500 EXP and a Fishing Rod (Item: FishingRod)
 // pos: -1267.47 355.396 85.4751
 // rot: 0 -0 2.37237
+
+// =========== Mythril Mines Quest ===========
+$Quest::name[5] = "Pesky Pests";
+$Quest::desc[5] = "Help Elira Stoneveil by defeating the pesky goblins and gnolls.";
+$Quest::npcId[5] = 5;
+$Quest::type[5] = 0; // 0 one-time per remort | 1 repeatable | 2 daily | 3 weekly | 4 one-time ever
+
+$Quest::stepName[5, 0] = "Help out the Elder";
+$Quest::stepName[5, 1] = "Find a Chipped Dagger";
+$Quest::stepName[5, 2] = "Find a Quartz";
+
+$Quest::stepDescription[5, 0] = "Word around town is that the Town Elder needs help. Speak to him to find out more.";
+$Quest::stepDescription[5, 1] = "Elder Thalos has asked you to find a Chipped Dagger. Search the mines to the South-East over the bridge.";
+$Quest::stepDescription[5, 2] = "A piece of Quartz is needed to complete the Elder's request. Find it in the same mine where you found the Chipped Dagger.";
+
+// Requirements to ACCEPT quest (step 0 gate)
+$Quest::stepReq[5, 0] = "LVLG 1"; // LVLG = level greater than or equal to 4, also LVLS = level less than or equal to X and LVLE = level equal to X
+$Quest::stepReq[5, 1] = "ChippedDagger 15";
+$Quest::stepReq[5, 2] = "ShatteredBoneClub 10";
+
+// Rewards for completing the quest
+$Quest::stepReward[5, 0] = "";
+$Quest::stepReward[5, 1] = "EXP 2000";
+$Quest::stepReward[5, 2] = "EXP 3000 FireMateriaI 1";
+
+$QuestNPC::name[5] = "Elira Stoneveil";
+$QuestNPC::shape[5] = "FemaleHumanTownBot";
+$QuestNPC::pos[5] = "-1713.04 -1001.81 268.572";
+$QuestNPC::rot[5] = "0 -0 -1.06919";
+$QuestNPC::questId[5] = 5;
+
+$QuestNPC::conversations[5, 5, 0, 1, 0] = "Excuse me, Sir. You wouldn't happen to be an adventurer would you?|Why yes, I am.";
+$QuestNPC::conversations[5, 5, 0, 1, 1] = "Oh thank goodness! Our home nearby has been under attack by nasty goblins and gnolls. Could you help us get rid of them?|Of course, m'lady!";
+$QuestNPC::conversations[5, 5, 0, 1, 2] = "Thank you. First take out those pesky goblins. Bring me 15 Chipper Daggers and I will know the deed is done.|I'll be back with them.";
+
+$QuestNPC::conversations[5, 5, 1, 0, 0] = "Have you delt with the goblins yet?|No, sorry.";
+$QuestNPC::conversations[5, 5, 1, 0, 1] = "I see, well it must be dangerous in there. Stay safe and good luck.|Thanks.";
+$QuestNPC::conversations[5, 5, 1, 1, 0] = "Ahh, 15 Chipped Daggers. Excellent! Your next quarry will not be as easy. The gnolls are a fair bit stronger.|Gnolls?";
+$QuestNPC::conversations[5, 5, 1, 1, 1] = "You will find them further down in the mines than the golbins. Bring me 10 Shattered Bone Clubs as proof of your deed.|Clubbin' time!";
+$QuestNPC::conversations[5, 5, 1, 1, 2] = "Please be safe while in there, and make sure to not go too deep!|Will do.";
+
+$QuestNPC::conversations[5, 5, 2, 0, 0] = "Have you taken care of those gnolls yet?|Not yet...";
+$QuestNPC::conversations[5, 5, 2, 0, 1] = "I don't think can feel safe until you do. Please hurry!|I'll update you when I have them.";
+$QuestNPC::conversations[5, 5, 2, 1, 0] = "Oh my! Look at all these clubs! That should teach them to leave us alone!|It was easy enough.";
+$QuestNPC::conversations[5, 5, 2, 1, 1] = "Thank you so much Adventuer. I don't have much but I did find this lying around outside the mines.|Looks expensive...";
+
+$QuestNPC::conversations[5, 5, 3, 1, 0] = "Thank you for your help again. I will be sure to inform the townsfolk of your deed.|It was nothing.";
+$QuestNPC::conversations[5, 5, 3, 1, 1] = "You say that, but this really does mean a lot to us. Thank you again.|You are very welcome m'lady.";
 
 // =====================
 // QUEST INITIALIZATION
