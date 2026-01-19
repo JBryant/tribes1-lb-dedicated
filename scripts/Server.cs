@@ -278,6 +278,7 @@ function createServer(%mission, %dedicated)
 	//exec(plugs);
 	exec(version);
 	exec(Games);
+	exec(Mercenaries);
 	exec(bottalk);
 	exec(belt);
 	exec(compass);

@@ -2699,6 +2699,87 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
+		if(%w1 == "#merc")
+		{
+			Merc::Init();
+			%sub = getWord(%cropped, 0);
+			%mercId = Merc::GetOwnerMerc(%TrueClientId);
+
+			if(%sub == "" || %sub == "status")
+			{
+				if(%mercId == "")
+				{
+					Client::sendMessage(%TrueClientId, 0, "You do not have a mercenary hired.");
+					return;
+				}
+				%templateId = fetchData(%TrueClientId, "MercenaryTemplate");
+				%name = $Merc::name[%templateId];
+				%class = $Merc::class[%templateId];
+				%role = $Merc::role[%templateId];
+				Client::sendMessage(%TrueClientId, 0, "Mercenary: " @ %name @ " | Class: " @ %class @ " | Role: " @ %role);
+				return;
+			}
+
+			if(%mercId == "")
+			{
+				Client::sendMessage(%TrueClientId, 0, "You do not have a mercenary hired.");
+				return;
+			}
+
+			if(%sub == "follow")
+			{
+				storeData(%mercId, "botAttackMode", 2);
+				storeData(%mercId, "tmpbotdata", %TrueClientId);
+				AI::newDirectiveFollow(fetchData(%mercId, "BotInfoAiName"), %TrueClientId, 0, 99);
+				Client::sendMessage(%TrueClientId, 0, "Your mercenary is now following you.");
+				return;
+			}
+			if(%sub == "stay")
+			{
+				%pos = GameBase::getPosition(%mercId);
+				AI::newDirectiveWaypoint(fetchData(%mercId, "BotInfoAiName"), %pos, 99);
+				storeData(%mercId, "botAttackMode", 3);
+				storeData(%mercId, "tmpbotdata", %pos);
+				Client::sendMessage(%TrueClientId, 0, "Your mercenary will hold position.");
+				return;
+			}
+			if(%sub == "recall")
+			{
+				%player = Client::getOwnedObject(%TrueClientId);
+				if(%player == -1) {
+					Client::sendMessage(%TrueClientId, 0, "Unable to recall mercenary right now.");
+					return;
+				}
+
+				if(GameBase::getLOSinfo(%player, 1000)) {
+					%pos = $los::position;
+					%dist = Vector::getDistance(GameBase::getPosition(%player), %pos);
+					if(%dist > 10) {
+						Client::sendMessage(%TrueClientId, 0, "Recall position too far. Keep it within 10 meters.");
+						return;
+					}
+
+					GameBase::setPosition(%mercId, %pos);
+					// AI::newDirectiveWaypoint(fetchData(%mercId, "BotInfoAiName"), %pos, 99);
+					// storeData(%mercId, "botAttackMode", 3);
+					// storeData(%mercId, "tmpbotdata", %pos);
+					Client::sendMessage(%TrueClientId, 0, "Your mercenary has been recalled.");
+					return;
+				}
+
+				Client::sendMessage(%TrueClientId, 0, "No valid position to recall to.");
+				return;
+			}
+			if(%sub == "dismiss")
+			{
+				Merc::Dismiss(%TrueClientId, %mercId);
+				Client::sendMessage(%TrueClientId, 0, "Your mercenary has been dismissed.");
+				return;
+			}
+
+			Client::sendMessage(%TrueClientId, 0, "Usage: #merc [status|follow|stay|recall|dismiss]");
+			return;
+		}
 		if(%w1 == "#createbotgroup")
 		{
 			if(%clientToServerAdminLevel >= 1)
@@ -3346,43 +3427,41 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 		if(%w1 == "#follow")
 		{
-			if(%clientToServerAdminLevel >= 1)
-			{
+			if(%clientToServerAdminLevel >= 1) {
 				%c1 = GetWord(%cropped, 0);
 				%c2 = GetWord(%cropped, 1);
 	
-				if(%c1 != -1 && %c2 != -1)
-				{
+				if(%c1 != -1 && %c2 != -1) {
 					%id1 = NEWgetClientByName(%c1);
 					%id2 = NEWgetClientByName(%c2);
-	                        if(%id1 != -1 && %id2 != -1)
-	                        {
-	                              if(Player::isAiControlled(%id1))
-	                              {
-	                                    if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Making " @ %c1 @ " (" @ %id1 @ ") follow " @ %c2 @ " (" @ %id2 @ ").");
-	
+
+					if(%id1 != -1 && %id2 != -1) {
+						if(Player::isAiControlled(%id1)) {
+							if(!%echoOff)
+								Client::sendMessage(%TrueClientId, 0, "Making " @ %c1 @ " (" @ %id1 @ ") follow " @ %c2 @ " (" @ %id2 @ ").");
+
 							%event = String::findSubStr(%cropped, ">");
-							if(%event != -1)
-							{
+							
+							if(%event != -1) {
 								%cmd = String::NEWgetSubStr(%cropped, %event, 99999);
 								AddEventCommand(%id1, %senderName, "onIdCloseEnough " @ %id2, %cmd);
 							}
-	                                    
+										
 							storeData(%id1, "tmpbotdata", %id2);
 							storeData(%id1, "botAttackMode", 2);
-	                              }
-	                              else
-	                                    Client::sendMessage(%TrueClientId, 0, "First name must be a bot.");
-	                        }
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name(s).");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
-	            }
+						}
+						else
+							Client::sendMessage(%TrueClientId, 0, "First name must be a bot.");
+					}
+					else
+						Client::sendMessage(%TrueClientId, 0, "Invalid player name(s).");
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
+	        }
 			return;
-	      }
-	      if(%w1 == "#cancelfollow")
+	    }
+	    if(%w1 == "#cancelfollow")
 		{
 			if(%clientToServerAdminLevel >= 1)
 			{
@@ -6029,7 +6108,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 	{
 		//process TownBot talk
 		//bottalk.cs
-		processbottalk(%clientId,%TrueClientId,%message,%cropped,%w1);
+		processbottalk(%clientId, %TrueClientId, %message, %cropped, %w1);
+		processMercenaryTalk(%clientId, %TrueClientId, %cropped);
 		return;
 	}
 }

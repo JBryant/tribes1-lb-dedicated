@@ -148,9 +148,7 @@ function bottalkChoice(%client,%key){
 
 
 
-function processbottalk(%clientId,%TrueClientId,%message,%cropped,%w1){
-
-
+function processbottalk(%clientId, %TrueClientId, %message, %cropped, %w1) {
 	//process TownBot talk
 
 	%initTalk = False;
@@ -160,26 +158,26 @@ function processbottalk(%clientId,%TrueClientId,%message,%cropped,%w1){
 
 	%clientPos = GameBase::getPosition(%TrueClientId);
 	%closest = 5000000;
-
+	%closestTownId = "";
 	for(%i = 0; (%id = GetWord($TownBotList, %i)) != -1; %i++)
 	{
+		if(%id == "")
+			continue;
 		%botPos = GameBase::getPosition(%id);
 		%dist = Vector::getDistance(%clientPos, %botPos);
 
 		if(%dist < %closest)
 		{
 			%closest = %dist;
-			%closestId = %id;
+			%closestTownId = %id;
 			%closestPos = %botPos;
 		}
 	}
 
+	%closestId = %closestTownId;
 
 	%aiName = %closestId.name;
 	%displayName = $BotInfo[%aiName, NAME];
-
-
-
 
 	if(%closest <= $maxAIdistVec && Client::getTeam(%TrueClientId) == GameBase::getTeam(%closestId))
 	{
@@ -214,9 +212,51 @@ function processbottalk(%clientId,%TrueClientId,%message,%cropped,%w1){
 		//This is old code but I am leaving it in just because it could still be useful.
 
 		for(%i = 0; (%id = GetWord($TownBotList, %i)) != -1; %i++)
-			$state[%id, %TrueClientId] = "";
+			if(%id != "")
+				$state[%id, %TrueClientId] = "";
 	}
 
+}
+
+function processMercenaryTalk(%clientId, %TrueClientId, %message) {
+	%clientPos = GameBase::getPosition(%TrueClientId);
+	%closest = 5000000;
+	%closestId = "";
+	for(%i = 0; (%id = GetWord($MercBotList, %i)) != -1; %i++)
+	{
+		if(%id == "")
+			continue;
+		%botPos = GameBase::getPosition(%id);
+		%dist = Vector::getDistance(%clientPos, %botPos);
+
+		if(%dist < %closest)
+		{
+			%closest = %dist;
+			%closestId = %id;
+			%closestPos = %botPos;
+		}
+	}
+
+	if(%closestId == "")
+		return;
+
+	if(%closest <= $maxAIdistVec && Client::getTeam(%TrueClientId) == GameBase::getTeam(%closestId))
+	{
+		if(String::findSubStr(%cropped, "\"") != -1){
+			return;
+		}
+
+		%rot = Vector::getRotation(Vector::normalize(Vector::sub(%clientPos, %closestPos)));
+		%rot = "0 -0 "@GetWord(%rot, 2);
+		GameBase::setRotation(%closestId, %rot);
+		Merc::Talk(%TrueClientId, %closestId, %message);
+	}
+	else
+	{
+		for(%i = 0; (%id = GetWord($MercBotList, %i)) != -1; %i++)
+			if(%id != "")
+				$state[%id, %TrueClientId] = "";
+	}
 }
 
 
@@ -808,8 +848,9 @@ function bottalk::botmaker(%TrueClientId, %closestId, %initTalk, %message){
 					%n = "generic";
 
 				$BotEquipment[generic] = "CLASS " @ %class @ " " @ %defaults;
+				%spawnPos = "-2487.32 -58.0211 108.125";
 				//%an = AI::helper("generic", %n, "TempSpawn " @ GameBase::getPosition($BotInfo[%aiName, DESTSPAWN]) @ " " @ GameBase::getTeam(%TrueClientId));
-				%an = AI::helper("generic", %n, "TempSpawn " @ $BotInfo[%aiName, DESTSPAWN] @ " " @ GameBase::getTeam(%TrueClientId));
+				%an = AI::helper("generic", %n, "TempSpawn " @ %spawnPos @ " " @ GameBase::getTeam(%TrueClientId));
 				%id = AI::getId(%an);
 				ChangeRace(%id, %gender @ "Human");
 				storeData(%id, "tmpbotdata", %TrueClientId);
@@ -832,6 +873,125 @@ function bottalk::botmaker(%TrueClientId, %closestId, %initTalk, %message){
 				$state[%closestId, %TrueClientId] = "";
 			}
 
+		}
+		else if(String::findSubStr(%message, %trigger[3]) != -1)
+		{
+			NewBotMessage(%TrueClientId, %closestId, "As you wish. Goodbye.");
+			$state[%closestId, %TrueClientId] = "";
+		}
+	}
+}
+
+function bottalk::mercenary(%TrueClientId, %closestId, %initTalk, %message){
+	%w1 = GetWord(%message, 0);
+	%cropped = String::NEWgetSubStr(%message, (String::len(%w1)+1), 99999);
+	%aiName = %closestId.name;
+	%trigger[2] = "yes";
+	%trigger[3] = "no";
+
+	Merc::Init();
+
+	if(%initTalk)
+	{
+		%TrueClientId.tmpbottalk = "";
+		for(%i = 0; %i < 20; %i++)
+			$botMenuOption[%TrueClientId, %i] = "";
+
+		if(Merc::GetOwnerMerc(%TrueClientId) != "")
+		{
+			NewBotMessage(%TrueClientId, %closestId, "You already have a mercenary. Dismiss them before hiring another.");
+			$state[%closestId, %TrueClientId] = "";
+			return;
+		}
+
+		%idx = 0;
+		%max = Merc::GetCount();
+		if(%max <= 0)
+		{
+			Merc::Init();
+			%max = Merc::GetCount();
+		}
+		for(%i = 1; %i <= %max; %i++)
+		{
+			if($Merc::name[%i] == "")
+				continue;
+			%opt = $Merc::name[%i] @ " - " @ $Merc::class[%i] @ " (" @ $Merc::cost[%i] @ " coins)|merc " @ %i;
+			$botMenuOption[%TrueClientId, %idx] = %opt;
+			%idx++;
+		}
+
+		if(%idx <= 0)
+		{
+			NewBotMessage(%TrueClientId, %closestId, "No mercenaries are available right now.");
+			$state[%closestId, %TrueClientId] = "";
+			return;
+		}
+
+		NewBotMessage(%TrueClientId, %closestId, "Looking to hire a mercenary? Pick one from the list.");
+		$state[%closestId, %TrueClientId] = 1;
+	}
+	else if($state[%closestId, %TrueClientId] == 1)
+	{
+		if(String::findSubStr(%cropped, "merc") != -1)
+		{
+			%templateId = floor(getWord(%cropped, 1));
+			if($Merc::name[%templateId] == "")
+			{
+				NewBotMessage(%TrueClientId, %closestId, "That mercenary is not available.");
+				$state[%closestId, %TrueClientId] = "";
+				return;
+			}
+
+			$tmpdata[%TrueClientId, "MercTemplate"] = %templateId;
+			$botMenuOption[%TrueClientId,0] = "yes";
+			$botMenuOption[%TrueClientId,1] = "no";
+			NewBotMessage(%TrueClientId, %closestId, "Hire a " @ $Merc::name[%templateId] @ " for " @ $Merc::cost[%templateId] @ " coins? [yes/no]");
+			$state[%closestId, %TrueClientId] = 2;
+		}
+	}
+	else if($state[%closestId, %TrueClientId] == 2)
+	{
+		if(String::findSubStr(%message, %trigger[2]) != -1)
+		{
+			%templateId = $tmpdata[%TrueClientId, "MercTemplate"];
+			%cost = $Merc::cost[%templateId];
+
+			if(%templateId == "" || %cost <= 0)
+			{
+				NewBotMessage(%TrueClientId, %closestId, "Invalid request. Your transaction has been cancelled.~wError_Message.wav");
+				$state[%closestId, %TrueClientId] = "";
+				return;
+			}
+
+			if(Merc::GetOwnerMerc(%TrueClientId) != "")
+			{
+				NewBotMessage(%TrueClientId, %closestId, "You already have a mercenary.");
+				$state[%closestId, %TrueClientId] = "";
+				return;
+			}
+
+			if(%cost <= fetchData(%TrueClientId, "COINS"))
+			{
+				storeData(%TrueClientId, "COINS", %cost, "dec");
+				playSound(SoundMoney1, GameBase::getPosition(%closestId));
+				RefreshAll(%TrueClientId);
+
+				%id = Merc::SpawnFor(%TrueClientId, %templateId);
+				if(%id == "")
+				{
+					NewBotMessage(%TrueClientId, %closestId, "Something went wrong. Please try again.");
+					$state[%closestId, %TrueClientId] = "";
+					return;
+				}
+
+				AI::sayLater(%TrueClientId, %closestId, "Your mercenary is ready and will follow you. Use #merc to control them.", True);
+				$state[%closestId, %TrueClientId] = "";
+			}
+			else
+			{
+				NewBotMessage(%TrueClientId, %closestId, "You don't have enough coins.");
+				$state[%closestId, %TrueClientId] = "";
+			}
 		}
 		else if(String::findSubStr(%message, %trigger[3]) != -1)
 		{
@@ -883,7 +1043,6 @@ function bottalk::blacksmith(%TrueClientId, %closestId, %initTalk, %message){
 		}
 	}
 }
-
 
 function bottalk::guildmaster(%TrueClientId, %closestId, %initTalk, %message){
 	%w1 = GetWord(%message, 0);
@@ -994,8 +1153,6 @@ function bottalk::guildmaster(%TrueClientId, %closestId, %initTalk, %message){
 		$state[%closestId, %TrueClientId] = "";
 	}
 }
-
-
 
 function bottalk::manager(%TrueClientId, %closestId, %initTalk, %message){
 	//process manager code

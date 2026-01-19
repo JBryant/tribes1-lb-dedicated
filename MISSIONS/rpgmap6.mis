@@ -6387,7 +6387,7 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 -0 1.75964";
 			};
 			instant SimGroup "NAME manager";
-			instant SimGroup "RACE MaleHuman";
+			instant SimGroup "RACE MaleHuman";	
 			instant SimGroup "ITEMS CLASS Ranger LVL 2 LCK 0 Dagger 1";
 		};
 		instant SimGroup "assassin2" {
@@ -6405,12 +6405,22 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2474.5 -2335.5 82.2892";
-				rotation = "0 -0 -1.07828";
+				position = "-2487.44 -56.0561 108.125";
+				rotation = "0 -0 1.93834";
 			};
 			instant SimGroup "NAME Trevin";
 			instant SimGroup "RACE MaleHuman";
 			instant SimGroup "SIMGROUP GroupBotMaker1";
+		};
+		instant SimGroup "mercenary1" {
+			instant Marker "Marker1" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "2008.59 496.627 2400";
+				rotation = "0 -0 1.59251";
+			};
+			instant SimGroup "NAME Vianess Noir";
+			instant SimGroup "RACE FemaleHuman";
 		};
 		instant SimGroup "quest2" {
 			instant SimGroup "NAME Miguel";
@@ -7742,8 +7752,8 @@ instant SimGroup "MissionGroup" {
 			rotation = "0 0 0";
 		};
 		instant SimGroup "NAMES Maximus Geronimo Avatar Necron Sephter Abacus Ternim Unther Deytuv Kessam Henry Slivat Pronimus Fennis Mortyr Vlad Xavius Tuvan";
-		instant SimGroup "DEFAULTS Chemist RShortsword 1 LVL 13";
-		instant SimGroup "DEFAULTS Squire RLongSword 1 LVL 18";
+		instant SimGroup "DEFAULTS Chemist IronwoodStaff 1 LVL 20";
+		instant SimGroup "DEFAULTS Squire Longsword 1 LVL 20";
 	};
 	instant InteriorShape "anvil1 anvil" {
 		fileName = "anvil.0.dis";

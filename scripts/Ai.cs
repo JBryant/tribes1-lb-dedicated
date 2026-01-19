@@ -966,7 +966,7 @@ function AI::onCommand ( %name, %commander, %command, %waypoint, %targetId, %cmd
 // Example:
 //    Ai::soundHelper( 2051, 2049, cheer3 );
 //
-function Ai::soundHelper( %sourceId, %destId, %waveFileName )
+function Ai::soundHelper(%sourceId, %destId, %waveFileName)
 {
 	dbecho($dbechoMode, "Ai::soundHelper(" @ %sourceId @ ", " @ %destId @ ", " @ %waveFileName @ ")");
 
@@ -1043,8 +1043,7 @@ function AI::onDroneKilled(%aiName)
 //weapon).  This means that if the bot ever gets close enough to engage in battle, he will try his best to continue
 //the fight by following the target.  Once the target is lost or dies, directive 99 will be cancelled and directive
 //99 will take over (regular walking, formations etc)
-function AI::onTargetLOSAcquired(%aiName, %idNum)
-{
+function AI::onTargetLOSAcquired(%aiName, %idNum) {
 	dbecho($dbechoMode, "AI::onTargetLOSAcquired(" @ %aiName @ ", " @ %idNum @ ")");
 
 	%aiId = AI::getId(%aiName);
@@ -1053,8 +1052,7 @@ function AI::onTargetLOSAcquired(%aiName, %idNum)
 		AI::newDirectiveFollow(%aiName, %idNum, 0, 99);
 }
 
-function AI::onTargetLOSLost(%aiName, %idNum)
-{
+function AI::onTargetLOSLost(%aiName, %idNum) {
 	dbecho($dbechoMode, "AI::onTargetLOSLost(" @ %aiName @ ", " @ %idNum @ ")");
 
 	%aiId = AI::getId(%aiName);
@@ -1063,8 +1061,7 @@ function AI::onTargetLOSLost(%aiName, %idNum)
 		AI::newDirectiveRemove(%aiName, 99);
 }
 
-function AI::onTargetLOSRegained(%aiName, %idNum)
-{
+function AI::onTargetLOSRegained(%aiName, %idNum) {
 	dbecho($dbechoMode, "AI::onTargetLOSRegained(" @ %aiName @ ", " @ %idNum @ ")");
 
 	%aiId = AI::getId(%aiName);
@@ -1073,8 +1070,7 @@ function AI::onTargetLOSRegained(%aiName, %idNum)
 		AI::newDirectiveFollow(%aiName, %idNum, 0, 99);
 }
 
-function AI::onTargetDied(%aiName, %idNum)
-{
+function AI::onTargetDied(%aiName, %idNum) {
 	dbecho($dbechoMode, "AI::onTargetDied(" @ %aiName @ ", " @ %idNum @ ")");
 
 	%aiId = AI::getId(%aiName);
@@ -1083,19 +1079,17 @@ function AI::onTargetDied(%aiName, %idNum)
 		AI::newDirectiveRemove(%aiName, 99);
 }                                 
 
-function AI::sayLater(%clientId, %guardId, %message, %look)
-{
+function AI::sayLater(%clientId, %guardId, %message, %look) {
 	dbecho($dbechoMode, "AI::sayLater(" @ %clientId @ ", " @ %guardId @ ", " @ %message @ ", " @ %look @ ")");
 
 	%name = Client::getName(%clientId);
 
 	Client::sendMessage(%clientId, $MsgBeige, $BotInfo[%guardId.name, NAME] @ " tells you, \"" @ %message @ "\"");
 
-//	if(%look)
-//		AI::lookAtPlayer(%clientId, %guardId);
+	//	if(%look)
+	//		AI::lookAtPlayer(%clientId, %guardId);
 }
-function AI::lookAtPlayer(%clientId, %guardId)
-{
+function AI::lookAtPlayer(%clientId, %guardId) {
 	dbecho($dbechoMode, "AI::lookAtPlayer(" @ %clientId @ ", " @ %guardId @ ")");
 
 	%clpos = GameBase::getPosition(%clientId);
@@ -1118,8 +1112,7 @@ function AI::lookAtPlayer(%clientId, %guardId)
 	RotateTownBot(%guardId, %rot);
 }
 
-function getAInumber()
-{
+function getAInumber() {
 	dbecho($dbechoMode, "getAInumber()");
 
 	for(%i = 0; %i <= 5000; %i++)
@@ -1130,8 +1123,7 @@ function getAInumber()
 		}
 	}
 }
-function setAInumber(%aiName, %n)
-{
+function setAInumber(%aiName, %n) {
 	dbecho($dbechoMode, "setAInumber(" @ %aiName @ ", " @ %n @ ")");
 
 	$aiNumTable[%n] = True;
@@ -1139,8 +1131,7 @@ function setAInumber(%aiName, %n)
 }
 
 //=================================================
-function AI::SelectMovement(%aiName)
-{
+function AI::SelectMovement(%aiName) {
 	dbecho($dbechoMode, "AI::SelectMovement(" @ %aiName @ ")");
 
 	%aiId = AI::getId(%aiName);
