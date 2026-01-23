@@ -889,8 +889,6 @@ function bottalk::mercenary(%TrueClientId, %closestId, %initTalk, %message){
 	%trigger[2] = "yes";
 	%trigger[3] = "no";
 
-	Merc::Init();
-
 	if(%initTalk)
 	{
 		%TrueClientId.tmpbottalk = "";
@@ -906,11 +904,6 @@ function bottalk::mercenary(%TrueClientId, %closestId, %initTalk, %message){
 
 		%idx = 0;
 		%max = Merc::GetCount();
-		if(%max <= 0)
-		{
-			Merc::Init();
-			%max = Merc::GetCount();
-		}
 		for(%i = 1; %i <= %max; %i++)
 		{
 			if($Merc::name[%i] == "")

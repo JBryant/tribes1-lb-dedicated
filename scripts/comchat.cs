@@ -2696,7 +2696,6 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 		if(%w1 == "#merc")
 		{
-			Merc::Init();
 			%sub = getWord(%cropped, 0);
 			%mercId = Merc::GetOwnerMerc(%TrueClientId);
 

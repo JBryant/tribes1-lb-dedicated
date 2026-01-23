@@ -128,7 +128,7 @@ $stealDelay = 5;
 
 $droppingAllowed = 1;
 $sepchar = ",";
-$maxAIdistVec = 5;
+$maxAIdistVec = 10; // 5
 $coinweight = 0; // 0.001;
 $maxEvents = 8;
 

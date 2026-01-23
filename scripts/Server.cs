@@ -310,6 +310,7 @@ function createServer(%mission, %dedicated)
 	InitZones();
 	InitFerry();
 	InitTownBots();
+	Merc::Init();
 	InitQuests();
 	InitBlackJackBots();
 		

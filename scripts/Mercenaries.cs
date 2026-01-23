@@ -15,7 +15,10 @@ function Merc::Init() {
 
 	// id, displayName, class, defaults, cost, race, gender, role
 	Merc::AddTemplate(1, "Pelinor", "Squire", "Longsword 1 LVL 20", 1500, "MaleHuman", "Male", "tank", "Pelinor is a stout and sturdy boy.");
-	Merc::AddTemplate(2, "Mr Squiggles", "Chemist", "IronwoodStaff 1 LVL 20", 1800, "MaleHuman", "Male", "support", "Mr. Squiggles is a mischievous chemist.");
+	Merc::AddTemplate(2, "Mr Squiggles", "Chemist", "IronwoodStaff 1 LVL 20", 2000, "MaleHuman", "Male", "support", "Mr. Squiggles is a mischievous chemist.");
+	Merc::AddTemplate(3, "Lady Lisandra", "BlackMage", "CastingBlade 1 LVL 20", 2400, "FemaleHuman", "Female", "dps", "Lady Lisandra is a confident mage with a teasing streak.");
+
+	Merc::SpawnTownMerc(3, "-2397.2 -250.891 65.0002", "0 -0 2.98419");
 }
 
 function Merc::AddTemplate(%id, %displayName, %class, %defaults, %cost, %race, %gender, %role, %description) {
@@ -34,6 +37,59 @@ function Merc::AddTemplate(%id, %displayName, %class, %defaults, %cost, %race, %
 
 function Merc::GetCount() {
 	return $Merc::count;
+}
+
+function Merc::SpawnTownMerc(%templateId, %pos, %rot) {
+	%displayName = $Merc::name[%templateId];
+	if(%displayName == "")
+		return "";
+
+	%existing = NEWgetClientByName(%displayName);
+	if(%existing != -1 && Player::isAiControlled(%existing)) {
+		%id = %existing;
+	}
+	else {
+		%class = $Merc::class[%templateId];
+		%defaults = $Merc::defaults[%templateId];
+		if(%class == "" || %defaults == "")
+			return "";
+
+		%aiKey = "generic";
+		$BotEquipment[%aiKey] = "CLASS " @ %class @ " " @ %defaults;
+		%aiName = AI::helper(%aiKey, %displayName, "TempSpawn " @ %pos @ " 0");
+		%id = AI::getId(%aiName);
+
+		if(%id == "")
+			return "";
+	}
+
+	if($Merc::race[%templateId] != "")
+		ChangeRace(%id, $Merc::race[%templateId]);
+
+	GameBase::setPosition(%id, %pos);
+	GameBase::setRotation(%id, %rot);
+
+	storeData(%id, "botAttackMode", 1);
+	storeData(%id, "frozen", True);
+	storeData(%id, "tmpbotdata", "");
+	storeData(%id, "petowner", "");
+	storeData(%id, "OwnerID", "");
+
+	$Merc::owner[%id] = "";
+	$Merc::ownerName[%id] = "";
+	%id.ownerId = "";
+	%id.ownerName = "";
+
+	%id.mercTemplate = %templateId;
+	$Merc::templateById[%id] = %templateId;
+	$Merc::name[%id] = %displayName;
+
+	Merc::NormalizeList();
+	if (String::findSubStr($MercBotList, " " @ %id @ " ") == -1)
+		$MercBotList = $MercBotList @ " " @ %id;
+
+	$Merc::townMerc[%templateId] = %id;
+	return %id;
 }
 
 function Merc::PickName() {
@@ -104,6 +160,54 @@ function Merc::SpawnFor(%clientId, %templateId) {
 	AddToParty(%clientId, Client::getName(%id));
 
 	return %id;
+}
+
+function Merc::RequestJoin(%mercId, %clientId) {
+	lbecho("Merc::RequestJoin(" @ %mercId @ ", " @ %clientId @ ")");
+	%mercId = floor(%mercId);
+	if(%mercId == "" || %mercId == 0 || %clientId == "" || %clientId == 0)
+		return;
+
+	if(!Player::isAiControlled(%mercId))
+		return;
+
+	%currentOwner = $Merc::owner[%mercId];
+	if(%currentOwner != "" && %currentOwner != False && %currentOwner != %clientId) {
+		AI::sayLater(%clientId, %mercId, "I am already in another's service.", True);
+		return;
+	}
+
+	if(Merc::GetOwnerMerc(%clientId) != "" && %currentOwner != %clientId) {
+		AI::sayLater(%clientId, %mercId, "You already have a mercenary.", True);
+		return;
+	}
+
+	storeData(%mercId, "tmpbotdata", %clientId);
+	storeData(%mercId, "botAttackMode", 2);
+	storeData(%mercId, "petowner", %clientId);
+	storeData(%mercId, "OwnerID", %clientId);
+	storeData(%mercId, "frozen", "");
+
+	$Merc::owner[%mercId] = %clientId;
+	$Merc::ownerName[%mercId] = Client::getName(%clientId);
+	%mercId.ownerId = %clientId;
+	%mercId.ownerName = Client::getName(%clientId);
+
+	%templateId = $Merc::templateById[%mercId];
+	if(%templateId == "")
+		%templateId = %mercId.mercTemplate;
+	storeData(%clientId, "MercenaryId", %mercId);
+	storeData(%clientId, "MercenaryTemplate", %templateId);
+
+	$PetList = AddToCommaList($PetList, %mercId);
+	storeData(%clientId, "PersonalPetList", AddToCommaList(fetchData(%clientId, "PersonalPetList"), %mercId));
+	Merc::NormalizeList();
+	if (String::findSubStr($MercBotList, " " @ %mercId @ " ") == -1)
+		$MercBotList = $MercBotList @ " " @ %mercId;
+
+	if(!fetchData(%clientId, "partyOwned"))
+		CreateParty(%clientId);
+	AddToParty(%clientId, Client::getName(%mercId));
 }
 
 function Merc::Dismiss(%clientId, %mercId) {
@@ -275,21 +379,25 @@ function Merc::RequestHeal(%mercId, %clientId) {
 function Merc::TryHeal(%mercId, %clientId, %attempts) {
 	if(%attempts == "")
 		%attempts = 0;
+
 	if(%attempts > 3)
 		return;
+
 	if(fetchData(%clientId, "HP") <= 0)
 		return;
 
 	%mercPos = GameBase::getPosition(%mercId);
 	%clientPos = GameBase::getPosition(%clientId);
+
 	if(%mercPos == "" || %clientPos == "")
 		return;
 
-	%dist = Vector::getDistance(%mercPos, %clientPos);
-	if(%dist > 25) {
+	if(Vector::getDistance(%mercPos, %clientPos) > 25) {
 		%aiName = fetchData(%mercId, "BotInfoAiName");
+
 		if(%aiName != "")
 			AI::moveToLOS(%aiName, %clientId);
+
 		schedule("Merc::TryHeal(" @ %mercId @ ", " @ %clientId @ ", " @ (%attempts + 1) @ ");", 1.0);
 		return;
 	}
@@ -304,6 +412,7 @@ function Merc::TryHeal(%mercId, %clientId, %attempts) {
 
 	%mercObj = Client::getOwnedObject(%mercId);
 	%clientObj = Client::getOwnedObject(%clientId);
+
 	if(%mercObj != "" && GameBase::getLOSinfo(%mercObj, 500)) {
 		if($los::object == %clientObj) {
 			BeginCastSpell(%mercId, %spellKeyword);
@@ -314,16 +423,11 @@ function Merc::TryHeal(%mercId, %clientId, %attempts) {
 	%aiName = fetchData(%mercId, "BotInfoAiName");
 	if(%aiName != "")
 		AI::moveToLOS(%aiName, %clientId);
+	
 	schedule("Merc::TryHeal(" @ %mercId @ ", " @ %clientId @ ", " @ (%attempts + 1) @ ");", 1.0);
 }
 
 function Merc::DeliverReply(%mercClientId, %playerClientId, %text) {
-    // Send private message to the player, as the merc
-    // Client::sendMessage(
-    //    %playerClientId,
-    //    2,
-    //    %mercName @ ": " @ %text
-    // );
 	say(%mercClientId, %text);
  }
 
