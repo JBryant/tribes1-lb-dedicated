@@ -76,6 +76,23 @@ function remoteSay(%clientId, %team, %message, %senderName)
 	internalSay(%clientId, %team, %message);
 }
 
+function say(%clientId, %message) {
+	%senderName = Client::getName(%clientId);
+	
+	if(SkillCanUse(%clientId, "#say")) {
+		for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl)) {
+			%distVec = Vector::getDistance(GameBase::getPosition(%clientId), GameBase::getPosition(%cl));
+
+			if(%distVec <= $maxSAYdistVec && !%cl.muted[%clientId] && %cl != %clientId)
+				Client::sendMessage(%cl, $MsgWhite, %senderName @ " says, \"" @ %message @ "\"");
+		}
+
+		Client::sendMessage(%clientId, $MsgWhite, "You say, \"" @ %message @ "\"");
+	}
+	else
+		Client::sendMessage(%clientId, $MsgWhite, "You lack the necessary skills to use this command.");
+}
+
 //This separation is a much better solution to the old
 //remoteSay exploit, Tribes RPG's first exploit.
 //All instances of "remotesay" in all scripts should be
@@ -269,30 +286,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 		if(%w1 == "#say" || %w1 == "#s")
 		{
-			if(SkillCanUse(%TrueClientId, "#say"))
-			{
-				for(%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl))
-				{
-					%talkingPos = GameBase::getPosition(%TrueClientId);
-					%receivingPos = GameBase::getPosition(%cl);
-					%distVec = Vector::getDistance(%talkingPos, %receivingPos);
-					if(%distVec <= $maxSAYdistVec)
-					{
-						//%newmsg = FadeMsg(%cropped, %distVec, $maxSAYdistVec);
-						%newmsg = %cropped;
-	
-						if(!%cl.muted[%TrueClientId] && %cl != %TrueClientId)
-							Client::sendMessage(%cl, $MsgWhite, %TCsenderName @ " says, \"" @ %newmsg @ "\"");
-					}
-				}
-				Client::sendMessage(%TrueClientId, $MsgWhite, "You say, \"" @ %cropped @ "\"");
-	
-				%botTalk = True;
-			}
-			else
-			{
-				Client::sendMessage(%TrueClientId, $MsgWhite, "You lack the necessary skills to use this command.");
-			}
+			say(%TrueClientId, %cropped, %TCsenderName);
+			%botTalk = True;
 		}
 	
 		if(%w1 == "#shout")

@@ -570,7 +570,7 @@ $spawnIndex[113] = "MoltenDragon";
 
 $BotEquipment[GoblinRunt] = 	"CLASS Enemy LVL 2+1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1/-2000 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteGoblinRunt] = "LVL 4+2 Quartz 5/-250 FireMateriaII 1/-1800 " @ %defaultAlchemyDropsI;
-$BotEquipment[GoblinThief] = 	"CLASS Enemy LVL 5+2 COINS 3/50 LCK 0 ChippedDagger 1 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-1800 " @ %defaultAlchemyDropsI;
+$BotEquipment[GoblinThief] = 	"CLASS Enemy LVL 5+2 COINS 3/50 LCK 0 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-1800 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteGoblinThief] = "LVL 10+4 BlackStatue 1/-75 FireMateriaII 1/-1600 " @ %defaultAlchemyDropsI;
 $BotEquipment[GoblinWizard] = 	"CLASS Enemy LVL 9+2 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1650 "  @ %defaultAlchemyDropsI; // 1/-500
 $BotEquipment[EliteGoblinWizard] = "LVL 18+4 FireMateriaII 1/-1500 " @ %defaultAlchemyDropsI;

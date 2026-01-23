@@ -99,6 +99,10 @@ function Merc::SpawnFor(%clientId, %templateId) {
 	if (String::findSubStr($MercBotList, " " @ %id @ " ") == -1)
 		$MercBotList = $MercBotList @ " " @ %id;
 
+	if(!fetchData(%clientId, "partyOwned"))
+		CreateParty(%clientId);
+	AddToParty(%clientId, Client::getName(%id));
+
 	return %id;
 }
 
@@ -125,6 +129,8 @@ function Merc::Dismiss(%clientId, %mercId) {
 	%mercId.mercTemplate = "";
 	$Merc::templateById[%mercId] = "";
 	$Merc::name[%mercId] = "";
+
+	RemoveFromParty(%clientId, Client::getName(%mercId), True);
 
 	AI::newDirectiveRemove(fetchData(%mercId, "BotInfoAiName"), 99);
 	deleteObject(%mercId);
@@ -170,17 +176,19 @@ function Merc::Talk(%clientId, %mercId, %message) {
 		if(%ownerId == %clientId)
 			%isOwner = True;
 	}
+
 	if(!%isOwner && %ownerName != "") {
 		if(String::ICompare(%ownerName, Client::getName(%clientId)) == 0)
 			%isOwner = True;
 	}
+
 	if(!%isOwner && IsInCommaList(fetchData(%clientId, "PersonalPetList"), %mercId))
 		%isOwner = True;
 
-	if(!%isOwner) {
-		AI::sayLater(%clientId, %mercId, "I'm not your mercenary.", True);
-		return;
-	}
+	// if(!%isOwner) {
+	// 	AI::sayLater(%clientId, %mercId, "I'm not your mercenary.", True);
+	// 	return;
+	// }
 
 	// AI::sayLater(%clientId, %mercId, "I'm ready. Use #merc commands to direct me.", True);
     
@@ -310,18 +318,13 @@ function Merc::TryHeal(%mercId, %clientId, %attempts) {
 }
 
 function Merc::DeliverReply(%mercClientId, %playerClientId, %text) {
-    %mercName = Client::getName(%mercClientId);
-
-    if (%mercName == "") {
-       %mercName = "Mercenary";
-    }
- 
     // Send private message to the player, as the merc
-    Client::sendMessage(
-       %playerClientId,
-       2,
-       %mercName @ ": " @ %text
-    );
+    // Client::sendMessage(
+    //    %playerClientId,
+    //    2,
+    //    %mercName @ ": " @ %text
+    // );
+	say(%mercClientId, %text);
  }
 
  function DeliverMercReply(%mercClientId, %playerClientId, %text) {

@@ -596,7 +596,7 @@ function GetRange(%weapon)
 {
 	dbecho($dbechoMode, "GetRange(" @ %weapon @ ")");
 
-	%minRange = 2.0;
+	%minRange = 3.0;
 	if($WeaponRange[%weapon] != "")
 		return %minRange + $WeaponRange[%weapon];
 	else
