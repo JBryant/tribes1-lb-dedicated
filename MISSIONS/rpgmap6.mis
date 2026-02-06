@@ -5898,6 +5898,12 @@ instant SimGroup "MissionGroup" {
 			locked = "1";
 		};
 	};
+	// Merchant setup notes for agents:
+	// - Each merchant SimGroup contains a Marker (spawn), NAME, ITEMS CLASS <Class> LVL <level> LCK <luck>,
+	//   RACE, optional TEAM, optional GREETING, and a BELTSHOP list of shop indices.
+	// - BELTSHOP indices map to $AccessoryVar[%item, $ShopIndex] in rpg/scripts/Belt.cs
+	//   (see BeltItem::Add and BeltItem::AddProjectile).
+	// - Add a new merchant by copying a block, using a unique SimGroup name, and placing the Marker in the zone.
 	instant SimGroup "TownBots" {
 		instant SimGroup "merchant1" {
 			instant Marker "kalm merchant" {
@@ -6186,6 +6192,19 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "GREETING Welcome to Jesse's Fantastic General Store! What will ya have?";
 			instant SimGroup "BELTSHOP 4 8 9 10 11 301 302 304 305 503 504 507 510 511 512 608 609 610 616 854 855";
 		};
+		instant SimGroup "merchant29" {
+			instant Marker "heaven ranged merchant" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "1432.56 -439.704 -808.028";
+				rotation = "0 -0 2.5218";
+			};
+			instant SimGroup "NAME Dunedain";
+			instant SimGroup "ITEMS CLASS Hunter LVL 80 LCK 0";
+			instant SimGroup "RACE MaleHuman";
+			instant SimGroup "GREETING Keep your distance and keep your aim. Dunedain has the finest ranged gear in Heaven.";
+			instant SimGroup "BELTSHOP 174 176 177 178 179 298 1050 1051 1052 1053 1 2 3 4 5 6 7 8 9 10 11 14 15 16 1017";
+		};
 		instant SimGroup "merchant23" {
 			instant Marker "wall market armor merchant" {
 				dataBlock = "PathMarker";
@@ -6263,7 +6282,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "ITEMS CLASS Archer LVL 2 LCK 0";
 			instant SimGroup "RACE FemaleHuman";
 			instant SimGroup "GREETING Welcome, builder! I've got homes and furnishings to make your dreams feel real.";
-			instant SimGroup "BELTSHOP 1000 1001 1002 1003 1004 1005 1006 1007 1008 1009 1010 1011 1012 1013 1014 1015 1016 1017 1018 1019 1020 1021 1022 1023 1024 1025 1026 1027 1028 1029 1030 1031 1032 1033 1034 1035 1036 1037 1038 1039 1040 1041 1042 1043 1044 1045 1046 1047 1048 1049 1050 1051 1052 1053 1054 1055 1056 1057 1058 1059";
+			instant SimGroup "BELTSHOP 1200 1201 1202 1203 1204 1205 1206 1207 1208 1209 1210 1211 1212 1213 1214 1215 1216 1217 1218 1219 1220 1221 1222 1223 1224 1225 1226 1227 1228 1229 1230 1231 1232 1233 1234 1235 1236 1237 1238 1239 1240 1241 1242 1243 1244 1245 1246 1247 1248 1249 1250 1251 1252 1253 1254 1255 1256 1257 1258 1259";
 		};
 		instant SimGroup "banker1" {
 			instant Marker "kalm banker" {
