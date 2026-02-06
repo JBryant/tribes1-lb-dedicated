@@ -30,6 +30,8 @@ function Merc::AddTemplate(%id, %displayName, %class, %defaults, %cost, %race, %
 	$Merc::gender[%id] = %gender;
 	$Merc::role[%id] = %role;
 	$Merc::description[%id] = %description;
+	$Merc::homePos[%id] = "";
+	$Merc::homeRot[%id] = "";
     
 	if(%id > $Merc::count)
 		$Merc::count = %id;
@@ -39,8 +41,8 @@ function Merc::GetCount() {
 	return $Merc::count;
 }
 
-function Merc::SpawnTownMerc(%templateId, %pos, %rot) {
-	%displayName = $Merc::name[%templateId];
+function Merc::SpawnTownMerc(%mercId, %pos, %rot) {
+	%displayName = $Merc::name[%mercId];
 	if(%displayName == "")
 		return "";
 
@@ -49,8 +51,8 @@ function Merc::SpawnTownMerc(%templateId, %pos, %rot) {
 		%id = %existing;
 	}
 	else {
-		%class = $Merc::class[%templateId];
-		%defaults = $Merc::defaults[%templateId];
+		%class = $Merc::class[%mercId];
+		%defaults = $Merc::defaults[%mercId];
 		if(%class == "" || %defaults == "")
 			return "";
 
@@ -63,11 +65,15 @@ function Merc::SpawnTownMerc(%templateId, %pos, %rot) {
 			return "";
 	}
 
-	if($Merc::race[%templateId] != "")
-		ChangeRace(%id, $Merc::race[%templateId]);
+	if($Merc::race[%mercId] != "")
+		ChangeRace(%id, $Merc::race[%mercId]);
 
 	GameBase::setPosition(%id, %pos);
 	GameBase::setRotation(%id, %rot);
+	$Merc::homePos[%mercId] = %pos;
+	$Merc::homeRot[%mercId] = %rot;
+	%id.mercHomePos = %pos;
+	%id.mercHomeRot = %rot;
 
 	storeData(%id, "botAttackMode", 1);
 	storeData(%id, "frozen", True);
@@ -80,15 +86,15 @@ function Merc::SpawnTownMerc(%templateId, %pos, %rot) {
 	%id.ownerId = "";
 	%id.ownerName = "";
 
-	%id.mercTemplate = %templateId;
-	$Merc::templateById[%id] = %templateId;
+	%id.mercTemplate = %mercId;
+	$Merc::templateById[%id] = %mercId;
 	$Merc::name[%id] = %displayName;
 
 	Merc::NormalizeList();
 	if (String::findSubStr($MercBotList, " " @ %id @ " ") == -1)
 		$MercBotList = $MercBotList @ " " @ %id;
 
-	$Merc::townMerc[%templateId] = %id;
+	$Merc::townMerc[%mercId] = %id;
 	return %id;
 }
 
@@ -111,12 +117,12 @@ function Merc::GetOwnerMerc(%clientId) {
 	return "";
 }
 
-function Merc::SpawnFor(%clientId, %templateId) {
+function Merc::SpawnFor(%clientId, %mercId) {
 	if (Merc::GetOwnerMerc(%clientId) != "")
 		return "";
 
-	%class = $Merc::class[%templateId];
-	%defaults = $Merc::defaults[%templateId];
+	%class = $Merc::class[%mercId];
+	%defaults = $Merc::defaults[%mercId];
 	if(%class == "" || %defaults == "")
 		return "";
 
@@ -124,15 +130,15 @@ function Merc::SpawnFor(%clientId, %templateId) {
 	$BotEquipment[%aiKey] = "CLASS " @ %class @ " " @ %defaults;
 
 	%spawnPos = GameBase::getPosition(%clientId);
-	%displayName = $Merc::name[%templateId]; // Merc::PickName();
+	%displayName = $Merc::name[%mercId]; // Merc::PickName();
 	%aiName = AI::helper(%aiKey, %displayName, "TempSpawn " @ %spawnPos @ " " @ GameBase::getTeam(%clientId));
 	%id = AI::getId(%aiName);
 
 	if(%id == "")
 		return "";
 
-	if($Merc::race[%templateId] != "")
-		ChangeRace(%id, $Merc::race[%templateId]);
+	if($Merc::race[%mercId] != "")
+		ChangeRace(%id, $Merc::race[%mercId]);
 
 	storeData(%id, "tmpbotdata", %clientId);
 	storeData(%id, "botAttackMode", 2);
@@ -144,9 +150,9 @@ function Merc::SpawnFor(%clientId, %templateId) {
 	%id.ownerName = Client::getName(%clientId);
 
 	storeData(%clientId, "MercenaryId", %id);
-	storeData(%clientId, "MercenaryTemplate", %templateId);
-	%id.mercTemplate = %templateId;
-	$Merc::templateById[%id] = %templateId;
+	storeData(%clientId, "MercenaryTemplate", %mercId);
+	%id.mercTemplate = %mercId;
+	$Merc::templateById[%id] = %mercId;
 	$Merc::name[%id] = %displayName;
 
 	$PetList = AddToCommaList($PetList, %id);
@@ -175,6 +181,12 @@ function Merc::RequestJoin(%mercId, %clientId) {
 	if(%currentOwner != "" && %currentOwner != False && %currentOwner != %clientId) {
 		AI::sayLater(%clientId, %mercId, "I am already in another's service.", True);
 		return;
+	}
+
+	%mercName = Client::getName(%mercId);
+	if(%currentOwner == %clientId) {
+		if(IsInCommaList(fetchData(%clientId, "partylist"), %mercName))
+			return;
 	}
 
 	if(Merc::GetOwnerMerc(%clientId) != "" && %currentOwner != %clientId) {
@@ -207,12 +219,73 @@ function Merc::RequestJoin(%mercId, %clientId) {
 
 	if(!fetchData(%clientId, "partyOwned"))
 		CreateParty(%clientId);
-	AddToParty(%clientId, Client::getName(%mercId));
+	AddToParty(%clientId, %mercName);
+}
+
+function Merc::RequestLeave(%mercId, %clientId) {
+	%mercId = floor(%mercId);
+	if(%mercId == "" || %mercId == 0 || %clientId == "" || %clientId == 0)
+		return;
+
+	if(!Player::isAiControlled(%mercId))
+		return;
+
+	%owner = $Merc::owner[%mercId];
+	if(%owner == "" || %owner == False || %owner != %clientId) {
+		AI::sayLater(%clientId, %mercId, "I am not bound to you.", True);
+		return;
+	}
+
+	RemoveFromParty(%clientId, Client::getName(%mercId), True);
+
+	storeData(%mercId, "botAttackMode", 1);
+	storeData(%mercId, "tmpbotdata", "");
+	storeData(%mercId, "petowner", "");
+	storeData(%mercId, "OwnerID", "");
+	storeData(%mercId, "frozen", True);
+
+	$Merc::owner[%mercId] = "";
+	$Merc::ownerName[%mercId] = "";
+	%mercId.ownerId = "";
+	%mercId.ownerName = "";
+
+	$PetList = RemoveFromCommaList($PetList, %mercId);
+	storeData(%clientId, "PersonalPetList", RemoveFromCommaList(fetchData(%clientId, "PersonalPetList"), %mercId));
+	Merc::NormalizeList();
+
+	storeData(%clientId, "MercenaryId", "");
+	storeData(%clientId, "MercenaryTemplate", "");
+
+	AI::newDirectiveRemove(fetchData(%mercId, "BotInfoAiName"), 99);
+
+	%homePos = %mercId.mercHomePos;
+	%homeRot = %mercId.mercHomeRot;
+	%templateId = $Merc::templateById[%mercId];
+	if(%templateId == "")
+		%templateId = %mercId.mercTemplate;
+	if(%homePos == "" || %homePos == False)
+		%homePos = $Merc::homePos[%templateId];
+	if(%homeRot == "" || %homeRot == False)
+		%homeRot = $Merc::homeRot[%templateId];
+
+	if(%homePos != "" && %homePos != False) {
+		GameBase::setPosition(%mercId, %homePos);
+	}
+	if(%homeRot != "" && %homeRot != False) {
+		GameBase::setRotation(%mercId, %homeRot);
+	}
+
+	// AI::sayLater(%clientId, %mercId, "As you wish. I will return to my post.", True);
 }
 
 function Merc::Dismiss(%clientId, %mercId) {
 	if (%mercId == "" || %mercId == 0)
 		return;
+
+	if(%mercId.mercHomePos != "") {
+		Merc::RequestLeave(%mercId, %clientId);
+		return;
+	}
 
 	$PetList = RemoveFromCommaList($PetList, %mercId);
 	storeData(%clientId, "PersonalPetList", RemoveFromCommaList(fetchData(%clientId, "PersonalPetList"), %mercId));
@@ -246,6 +319,17 @@ function Merc::NormalizeList() {
 		$MercBotList = String::replaceAll($MercBotList, ",", " ");
 	if (String::getSubStr($MercBotList, 0, 1) != " ")
 		$MercBotList = " " @ $MercBotList;
+
+	%clean = "";
+	for(%i = 0; (%id = GetWord($MercBotList, %i)) != -1; %i++) {
+		if(%id == "" || %id == False)
+			continue;
+		if(!Player::isAiControlled(%id))
+			continue;
+		if(String::findSubStr(" " @ %clean @ " ", " " @ %id @ " ") == -1)
+			%clean = %clean @ " " @ %id;
+	}
+	$MercBotList = %clean;
 }
 
 function Merc::Escape(%s) {
@@ -429,8 +513,8 @@ function Merc::TryHeal(%mercId, %clientId, %attempts) {
 
 function Merc::DeliverReply(%mercClientId, %playerClientId, %text) {
 	say(%mercClientId, %text);
- }
+}
 
- function DeliverMercReply(%mercClientId, %playerClientId, %text) {
-    Merc::DeliverReply(%mercClientId, %playerClientId, %text);
- }
+function DeliverMercReply(%mercClientId, %playerClientId, %text) {
+	Merc::DeliverReply(%mercClientId, %playerClientId, %text);
+}

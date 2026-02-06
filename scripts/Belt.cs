@@ -3231,7 +3231,7 @@ $AccessoryVar[HolyFlask, $MiscInfo] = "A flask that radiates with holy energy. I
 $AccessoryVar[HolyFlask, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 MalboroSporeSac 1";
 $beltitem[HolyFlask, "isThrowable"] = True;
 $beltitem[HolyFlask, "isDetonatable"] = True;
-$beltitem[HolyFlask, "spellIndex"] = 42;
+$beltitem[HolyFlask, "spellIndex"] = 89;
 $beltitem[HolyFlask, "explosion"] = "Bomb5";
 
 BeltItem::Add("Unholy Flask","UnholyFlask", "PotionItems", 0.1, 1000, "SmallPotion", 554);
@@ -3239,7 +3239,7 @@ $AccessoryVar[UnholyFlask, $MiscInfo] = "A flask that radiates with unholy energ
 $AccessoryVar[UnholyFlask, "AlchemyIngredients"] = "EtherealStasisFlask 1 VialOfWater 1 MalboroSporeSac 1";
 $beltitem[UnholyFlask, "isThrowable"] = True;
 $beltitem[UnholyFlask, "isDetonatable"] = True;
-$beltitem[UnholyFlask, "spellIndex"] = 42;
+$beltitem[UnholyFlask, "spellIndex"] = 89;
 $beltitem[UnholyFlask, "explosion"] = "Bomb14";
 
 // Alchemy Items (no shoping except for maybe Potion Bottles?)
@@ -3333,6 +3333,18 @@ $AccessoryVar[WallMarketHearthstone, $MiscInfo] = "A magical hearthstone that te
 $beltitem[WallMarketHearthstone, "targetPosition"] = "-2470.01 -2285.44 7554.59";
 $beltitem[WallMarketHearthstone, "targetRotationZ"] = "-2.44212";
 $beltitem[WallMarketHearthstone, "useSound"] = "AbsorbABS";
+// Jaten Hearth stone
+BeltItem::Add("Jaten Hearthstone", "JatenHearthstone", "MiscItems", 0.01, 1000, "Ruby", 704);
+$AccessoryVar[JatenHearthstone, $MiscInfo] = "A magical hearthstone that teleports the user back to Jaten.";
+$beltitem[JatenHearthstone, "targetPosition"] = "-339.535 1778.06 65.005";
+$beltitem[JatenHearthstone, "targetRotationZ"] = "1.47177";
+$beltitem[JatenHearthstone, "useSound"] = "AbsorbABS";
+// Fort Ethren Hearth stone
+BeltItem::Add("Fort Ethren Hearthstone", "FortEthrenHearthstone", "MiscItems", 0.01, 1000, "Ruby", 705);
+$AccessoryVar[FortEthrenHearthstone, $MiscInfo] = "A magical hearthstone that teleports the user back to Fort Ethren.";
+$beltitem[FortEthrenHearthstone, "targetPosition"] = "-2374.1 -2295.51 65.0004";
+$beltitem[FortEthrenHearthstone, "targetRotationZ"] = "1.57664";
+$beltitem[FortEthrenHearthstone, "useSound"] = "AbsorbABS";
 
 // Quest Items
 BeltItem::Add("Black Statue", "BlackStatue", "QuestItems", $AccessoryVar[BlackStatue, $Weight], GenerateItemCost(BlackStatue));

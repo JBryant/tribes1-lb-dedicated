@@ -80,6 +80,7 @@ function createAI(%aiName, %markerGroup, %name)
 
 	%guardtype = clipTrailingNumbers(%aiName); // also need to remove the "Elite" if it's there
 	%guardtype = String::replace(%guardtype, "Elite", "");
+	lbecho("BotInfo Race: " @ $BotInfo[%aiName, RACE]);
 
 	if($BotInfo[%aiName, RACE] != "")
 		%armor = $RaceToArmorType[$BotInfo[%aiName, RACE]];		//bots in map will get this call

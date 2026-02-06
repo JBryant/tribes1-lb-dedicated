@@ -6184,7 +6184,7 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "ITEMS CLASS Chemist LVL 2 LCK 0";
 			instant SimGroup "RACE FemaleHuman";
 			instant SimGroup "GREETING Welcome to Jesse's Fantastic General Store! What will ya have?";
-			instant SimGroup "BELTSHOP 301 302 304 305 503 504 507 510 511 512 608 609 610 616 854 855";
+			instant SimGroup "BELTSHOP 4 8 9 10 11 301 302 304 305 503 504 507 510 511 512 608 609 610 616 854 855";
 		};
 		instant SimGroup "merchant23" {
 			instant Marker "wall market armor merchant" {

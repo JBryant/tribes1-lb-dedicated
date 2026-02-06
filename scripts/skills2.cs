@@ -188,7 +188,7 @@ $Skill::startSound[13] = ImpactTR;
 $Skill::groupListCheck[13] = False;
 $Skill::refVal[13] = -10;
 $Skill::graceDistance[13] = 2;
-$SkillRestriction[$Skill::keyword[13]] = "L 80 C Hunter C Sniper";
+$SkillRestriction[$Skill::keyword[13]] = "L 80 C Archer C Hunter C Sniper";
 
 $Skill::keyword[14] = "innerfire";
 $Skill::index[innerfire] = 14;
@@ -229,7 +229,7 @@ $Skill::startSound[16] = Reflected;
 $Skill::groupListCheck[16] = False;
 $Skill::refVal[16] = -10;
 $Skill::graceDistance[16] = 10;
-$SkillRestriction[$Skill::keyword[16]] = "L 60 C Hunter C Sniper";
+$SkillRestriction[$Skill::keyword[16]] = "L 60 C Archer C Hunter C Sniper";
 
 $Skill::keyword[17] = "zangetsu";
 $Skill::index[$Skill::keyword[17]] = 17;
