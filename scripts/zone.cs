@@ -826,6 +826,8 @@ function Zone::onEnter(%clientId, %oldZone, %newZone)
 
 	if($Merchant::UseZoneSpawns)
 		Merchant::OnZoneEnter(%clientId, %newZone);
+	if($Quest::UseZoneSpawns)
+		Quest::OnZoneEnter(%clientId, %newZone);
 
 	if(Zone::getType(%newZone) == "WATER")
 	{
@@ -854,6 +856,8 @@ function Zone::onExit(%clientId, %zoneLeft)
 
 	if($Merchant::UseZoneSpawns)
 		Merchant::OnZoneExit(%clientId, %zoneLeft);
+	if($Quest::UseZoneSpawns)
+		Quest::OnZoneExit(%clientId, %zoneLeft);
 
 	if(Zone::getType(%zoneLeft) == "WATER")
 	{

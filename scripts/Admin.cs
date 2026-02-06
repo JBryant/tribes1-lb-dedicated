@@ -654,8 +654,14 @@ function processMenuOptions(%clientId, %option)
 	{
 		%questId = floor(getWord(%option, 1));
 		if (%questId > 0) {
-			Quests::ResetQuest(%clientId, %questId, true);
-			Client::sendMessage(%clientId, $MsgWhite, "Quest abandoned.");
+			%data = Quests::GetData(%clientId, %questId);
+			%state = getWord(%data, 0);
+			if (%state == 2) {
+				Client::sendMessage(%clientId, $MsgWhite, "You cannot abandon a completed quest.");
+			} else {
+				Quests::ResetQuest(%clientId, %questId, true);
+				Client::sendMessage(%clientId, $MsgWhite, "Quest abandoned.");
+			}
 		}
 		QuestLog::BuildListMenu(%clientId);
 		return;
@@ -1136,7 +1142,10 @@ function QuestLog::BuildQuestMenu(%clientId, %questId) {
 	Client::buildMenu(%clientId, $Quest::name[%questId], "options", true);
 	%curItem = 0;
 	Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Description", "questlogdesc " @ %questId);
-	Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Abandon", "questlogabandon " @ %questId);
+	%data = Quests::GetData(%clientId, %questId);
+	%state = getWord(%data, 0);
+	if (%state != 2)
+		Client::addMenuItem(%clientId, string::getsubstr($menuChars,%curItem++,1) @ "Abandon", "questlogabandon " @ %questId);
 	Client::addMenuItem(%clientId, "z<< Back", "questlog");
 }
 
