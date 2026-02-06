@@ -1424,6 +1424,9 @@ function InitTownBots()
 				%marker = GatherBotInfo(%object);
 			}
 
+			if($Merchant::UseZoneSpawns && String::ICompare(clipTrailingNumbers(%name), "merchant") == 0)
+				continue;
+
 			%townbot = newObject("", "StaticShape", $BotInfo[%name, RACE] @ "TownBot", true);
 
 			addToSet("MissionCleanup", %townbot);

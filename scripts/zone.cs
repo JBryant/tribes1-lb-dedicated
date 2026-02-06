@@ -824,6 +824,9 @@ function Zone::onEnter(%clientId, %oldZone, %newZone)
 
 	refreshHPREGEN(%clientId);	//this is because you regen faster or slower depending on the zone you are in
 
+	if($Merchant::UseZoneSpawns)
+		Merchant::OnZoneEnter(%clientId, %newZone);
+
 	if(Zone::getType(%newZone) == "WATER")
 	{
 		//Client::sendMessage(%clientId, $MsgBeige, "You have entered water!");
@@ -848,6 +851,9 @@ function Zone::onExit(%clientId, %zoneLeft)
 	dbecho($dbechoMode, "Zone::onExit(" @ %clientId @ ", " @ %zoneLeft @ ")");
 
 	refreshHPREGEN(%clientId);	//this is because you regen faster or slower depending on the zone you are in
+
+	if($Merchant::UseZoneSpawns)
+		Merchant::OnZoneExit(%clientId, %zoneLeft);
 
 	if(Zone::getType(%zoneLeft) == "WATER")
 	{
