@@ -828,6 +828,8 @@ function Zone::onEnter(%clientId, %oldZone, %newZone)
 		Merchant::OnZoneEnter(%clientId, %newZone);
 	if($Quest::UseZoneSpawns)
 		Quest::OnZoneEnter(%clientId, %newZone);
+	if($ZoneShapes::UseZoneSpawns)
+		ZoneShapes::OnZoneEnter(%clientId, %newZone);
 
 	if(Zone::getType(%newZone) == "WATER")
 	{
@@ -858,6 +860,8 @@ function Zone::onExit(%clientId, %zoneLeft)
 		Merchant::OnZoneExit(%clientId, %zoneLeft);
 	if($Quest::UseZoneSpawns)
 		Quest::OnZoneExit(%clientId, %zoneLeft);
+	if($ZoneShapes::UseZoneSpawns)
+		ZoneShapes::OnZoneExit(%clientId, %zoneLeft);
 
 	if(Zone::getType(%zoneLeft) == "WATER")
 	{

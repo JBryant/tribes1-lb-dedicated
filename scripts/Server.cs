@@ -280,6 +280,7 @@ function createServer(%mission, %dedicated)
 	exec(Games);
 	exec(Mercenaries);
 	exec(merchants);
+	exec(ZoneShapes);
 	exec(bottalk);
 	exec(belt);
 	exec(compass);
@@ -309,6 +310,7 @@ function createServer(%mission, %dedicated)
 	LoadWorld();
 	InitCrystals();
 	InitZones();
+	ZoneShapes::Init();
 	Merchant::Init();
 	InitFerry();
 	InitTownBots();
