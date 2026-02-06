@@ -1427,6 +1427,13 @@ instant SimGroup "MissionGroup" {
 				position = "1431 -1223 -700";
 				rotation = "0 0 2.98792";
 			};
+			instant InteriorShape "walkhome1" {
+				fileName = "walkhome.dis";
+				isContainer = "1";
+				position = "1432.25 -510.174 -804.593";
+				rotation = "0 0 0";
+				lightParams = "0 ";
+			};
 		};
 		instant SimGroup "DUNGEON Upper Obsidian Mines" {
 			instant SimGroup "DropPoints" {
@@ -3220,7 +3227,6 @@ instant SimGroup "MissionGroup" {
 			locked = "1";
 		};
 	};
-	instant SimGroup "Nooes Pub";
 	instant SimGroup "Goomba Catacombs" {
 		instant InteriorShape "Part 1" {
 			fileName = "rmrsirastrialp1.dis";
@@ -6902,16 +6908,6 @@ instant SimGroup "MissionGroup" {
 		rotation = "0 -0 -0.439967";
 		lightParams = "0 ";
 	};
-	instant SimGroup "SeventhHeaven" {
-		// ZoneShapes.cs spawns SeventhHeaven interiors dynamically (except base shapes).
-		instant InteriorShape "walkhome1" {
-			fileName = "walkhome.dis";
-			isContainer = "1";
-			position = "1432.25 -510.174 -804.593";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-	};
 	instant SimGroup "D2start" {
 		instant InteriorShape "m11" {
 			fileName = "M1.dis";
@@ -7316,90 +7312,6 @@ instant SimGroup "MissionGroup" {
 		deleteOnDestroy = "False";
 	};
 	instant SimGroup "Midgar" {
-		instant InteriorShape "w64gatedoor1" {
-			fileName = "W64gatedoor.dis";
-			isContainer = "1";
-			position = "-2737.83 -2314.59 7552.78";
-			rotation = "0 -0 1.11998";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gatedoor1" {
-			fileName = "W64gatedoor.dis";
-			isContainer = "1";
-			position = "-2628.65 -2629.12 7550.01";
-			rotation = "0 -0 -0.459996";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2503.08 -2106.67 7545.79";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2355.01 -2657.58 7547.92";
-			rotation = "0 -0 -2.71993";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2198.37 -2404.55 7547.82";
-			rotation = "0 -0 -1.55995";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2800.52 -2404.75 7544.48";
-			rotation = "0 -0 1.53997";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2288.69 -2195.12 7547.82";
-			rotation = "0 -0 -0.800003";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2653.13 -2421 7547.92";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2726.95 -2607.02 7547.82";
-			rotation = "0 -0 2.31996";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2291.76 -2614.52 7547.82";
-			rotation = "0 -0 -2.34315";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2519.69 -2261.33 7547.81";
-			rotation = "0 -0 -1.58823";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2580.01 -2119.88 7547.82";
-			rotation = "0 -0 0.179994";
-			lightParams = "0 ";
-		};
 		instant InteriorShape "factory1" {
 			fileName = "factory.dis";
 			isContainer = "1";
@@ -7407,690 +7319,123 @@ instant SimGroup "MissionGroup" {
 			rotation = "0 -0 -1.89996";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2691.06 -2165.43 7545.32";
-			rotation = "0 -0 0.599979";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2489.41 -2107.25 7547.82";
-			rotation = "0 -0 -0.119993";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2369.71 -2134 7549";
-			rotation = "0 -0 -0.57999";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2521.97 -2275.92 7547.81";
-			rotation = "0 -0 -1.58822";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64elevlink11" {
-			fileName = "W64elevlink1.dis";
-			isContainer = "1";
-			position = "-2308.46 -2176.81 7548.99";
-			rotation = "0 -0 -0.759984";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2595.32 -2299.95 7547.81";
-			rotation = "0 -0 2.37455";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2506.32 -2558.69 7534.04";
-			rotation = "0.691653 -0.823764 -0.188057";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2279.87 -2206.66 7547.82";
-			rotation = "0 -0 -0.879992";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2212.56 -2310.64 7547.82";
-			rotation = "0 -0 -1.41991";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "factory1" {
+		instant InteriorShape "factory1_2" {
 			fileName = "factory.dis";
 			isContainer = "1";
 			position = "-2220.65 -2279.71 7549";
 			rotation = "0 -0 -2.71993";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64elevlink11" {
-			fileName = "W64elevlink1.dis";
-			isContainer = "1";
-			position = "-2202.25 -2380.12 7547.79";
-			rotation = "0 -0 -1.45994";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2200.02 -2418.94 7547.82";
-			rotation = "0 -0 -1.77996";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "factory1" {
+		instant InteriorShape "factory1_3" {
 			fileName = "factory.dis";
 			isContainer = "1";
 			position = "-2222.87 -2509.45 7547.82";
 			rotation = "0 -0 2.73994";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2236.37 -2537.78 7547.82";
-			rotation = "0 -0 -2.17992";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64short1" {
-			fileName = "W64short.dis";
-			isContainer = "1";
-			position = "-2264.12 -2579.42 7547.82";
-			rotation = "0 -0 -2.23993";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2303.15 -2622.87 7547.82";
-			rotation = "0 -0 -2.53993";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2800.69 -2390.94 7549.86";
-			rotation = "0 -0 1.25996";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "factory1" {
+		instant InteriorShape "factory1_4" {
 			fileName = "factory.dis";
 			isContainer = "1";
 			position = "-2609.86 -2131.89 7547.82";
 			rotation = "0 -0 -1.19998";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2756.04 -2272.18 7549.86";
-			rotation = "0 -0 0.999993";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2734.05 -2594.07 7547.82";
-			rotation = "0 -0 2.09995";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "factory1" {
+		instant InteriorShape "factory1_5" {
 			fileName = "factory.dis";
 			isContainer = "1";
 			position = "-2769.29 -2299.85 7548.65";
 			rotation = "0 -0 -0.439996";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2789.86 -2481.54 7547.61";
-			rotation = "0 -0 1.73994";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2715.52 -2615.38 7547.9";
-			rotation = "0 -0 -0.559992";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "factory1" {
+		instant InteriorShape "factory1_6" {
 			fileName = "factory.dis";
 			isContainer = "1";
 			position = "-2781.57 -2510.56 7547.82";
 			rotation = "0 -0 0.359996";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2606.62 -2661.28 7549";
-			rotation = "0 -0 -0.259996";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2519.18 -2118.26 7547.82";
-			rotation = "0 -0 -1.58315";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2520.27 -2181.76 7547.82";
-			rotation = "0 -0 -1.58823";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "factory1" {
+		instant InteriorShape "factory1_7" {
 			fileName = "factory.dis";
 			isContainer = "1";
 			position = "-2642.79 -2658.45 7546.48";
 			rotation = "0 -0 1.11996";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "factory1" {
+		instant InteriorShape "factory1_8" {
 			fileName = "factory.dis";
 			isContainer = "1";
 			position = "-2463.5 -2688.21 7550.11";
 			rotation = "0.732336 -0.11708 1.74482";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2486.7 -2117.75 7547.82";
-			rotation = "0 -0 -1.58823";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2487.75 -2181.56 7547.82";
-			rotation = "0 -0 -1.58823";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2489.42 -2276.05 7547.81";
-			rotation = "0 -0 -1.58822";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2491.15 -2261.46 7547.81";
-			rotation = "0 -0 1.55172";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2305.58 -2192.37 7547.81";
-			rotation = "0 -0 -2.39996";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2423.43 -2299.41 7547.82";
-			rotation = "0 -0 -2.40855";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2352.57 -2235.34 7547.82";
-			rotation = "0 -0 -2.40855";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2410.37 -2290.37 7547.82";
-			rotation = "0 -0 -2.40855";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2286.51 -2214.79 7548.29";
-			rotation = "0 -0 -2.40855";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2333.37 -2257.21 7547.82";
-			rotation = "0 -0 -2.40855";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2404.03 -2320.52 7547.81";
-			rotation = "0 -0 -2.40855";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2394.34 -2309.27 7547.81";
-			rotation = "0 -0 0.723212";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2208.35 -2388.87 7547.81";
-			rotation = "0 -0 -3.13997";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2368.19 -2389.03 7547.81";
-			rotation = "0 -0 -3.14158";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2336.37 -2389.04 7547.82";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2352.33 -2391.04 7547.81";
-			rotation = "0 -0 -3.14158";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2271.04 -2420.68 7547.82";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2334.88 -2420.58 7547.82";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2366.91 -2420.62 7547.81";
-			rotation = "0 -0 -3.14158";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2350.89 -2418.61 7547.81";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
 		instant InteriorShape "w64gatedoor1" {
+			fileName = "W64gatedoor.dis";
+			isContainer = "1";
+			position = "-2737.83 -2314.59 7552.78";
+			rotation = "0 -0 1.11998";
+			lightParams = "0 ";
+		};
+		instant InteriorShape "w64gatedoor1_2" {
+			fileName = "W64gatedoor.dis";
+			isContainer = "1";
+			position = "-2628.65 -2629.12 7550.01";
+			rotation = "0 -0 -0.459996";
+			lightParams = "0 ";
+		};
+		instant InteriorShape "w64gatedoor1_3" {
 			fileName = "W64gatedoor.dis";
 			isContainer = "1";
 			position = "-2205.84 -2531.43 7549.61";
 			rotation = "0 -0 1.15998";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2286.01 -2597.79 7547.82";
-			rotation = "0 -0 2.35996";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2398.96 -2485.09 7547.81";
-			rotation = "0 -0 2.35617";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2331.15 -2552.94 7547.82";
-			rotation = "0 -0 2.35617";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2389.2 -2497.76 7547.81";
-			rotation = "0 -0 2.35617";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2308.51 -2620.61 7547.82";
-			rotation = "0 -0 2.35617";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2353.77 -2575.34 7547.88";
-			rotation = "0 -0 2.35617";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2422.12 -2507.87 7547.81";
-			rotation = "0 -0 2.35617";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2409.1 -2517.62 7547.82";
-			rotation = "0 -0 -0.767003";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2696.81 -2198.03 7547.82";
-			rotation = "0 -0 -0.779991";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2651.36 -2243.03 7547.81";
-			rotation = "0 -0 -0.785397";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2718.88 -2220.27 7547.59";
-			rotation = "0 -0 -0.785397";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2673.64 -2265.55 7547.69";
-			rotation = "0 -0 -0.785397";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2583.68 -2308.19 7547.81";
-			rotation = "0 -0 -0.785397";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2607.58 -2331.6 7547.82";
-			rotation = "0 -0 -0.785397";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2615.61 -2320.68 7547.82";
-			rotation = "0 -0 -0.785397";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2729.53 -2390.32 7546.04";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2788.62 -2389.05 7546";
-			rotation = "0 -0 -0.0199999";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2635.89 -2391.54 7547.82";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2651.58 -2390.46 7550.75";
-			rotation = "0 -0 3.11997";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2732.36 -2422.97 7548.92";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2637.47 -2423.04 7547.81";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2796.34 -2423.34 7548.67";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64short1" {
-			fileName = "W64short.dis";
-			isContainer = "1";
-			position = "-2546.1 -2351.82 7547.81";
-			rotation = "0 -0 0.599994";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64short1" {
-			fileName = "W64short.dis";
-			isContainer = "1";
-			position = "-2495.35 -2333.7 7547.82";
-			rotation = "0 -0 -0.219998";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64short1" {
-			fileName = "W64short.dis";
-			isContainer = "1";
-			position = "-2449.87 -2353.6 7547.82";
-			rotation = "0 -0 -1.01997";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64short1" {
-			fileName = "W64short.dis";
-			isContainer = "1";
-			position = "-2440.46 -2446.29 7547.82";
-			rotation = "0 -0 1.07998";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64short1" {
-			fileName = "W64short.dis";
-			isContainer = "1";
-			position = "-2579.19 -2395.77 7547.81";
-			rotation = "0 -0 1.05998";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2734.8 -2592.96 7543.4";
-			rotation = "0 -0 0.739992";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2687.71 -2549.81 7543.21";
-			rotation = "0 -0 0.733038";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2616.87 -2485.38 7547.81";
-			rotation = "0 -0 0.733038";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2627.29 -2497.3 7547.81";
-			rotation = "0 -0 -2.41997";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2595.44 -2509.81 7547.81";
-			rotation = "0 -0 0.733038";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2666.62 -2573.82 7547.82";
-			rotation = "0 -0 0.733038";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2714 -2616.65 7547.82";
-			rotation = "0 -0 0.733038";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gate1" {
-			fileName = "W64gate.dis";
-			isContainer = "1";
-			position = "-2608.58 -2518.82 7547.81";
-			rotation = "0 -0 0.733038";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2524.31 -2476.07 7535.21";
-			rotation = "-0.759832 -0.00871913 -1.58329";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2509.41 -2587.28 7544.15";
-			rotation = "1.19943 0.0448186 -1.6188";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64long1" {
-			fileName = "W64long.dis";
-			isContainer = "1";
-			position = "-2492.09 -2520.5 7535.73";
-			rotation = "-0.507896 -0.0779745 -1.0448";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64short1" {
-			fileName = "W64short.dis";
-			isContainer = "1";
-			position = "-2580.22 -2418.35 7547.82";
-			rotation = "0 -0 -1.25996";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64short1" {
-			fileName = "W64short.dis";
-			isContainer = "1";
-			position = "-2558.06 -2472.51 7555.67";
-			rotation = "-0.241063 0.620601 -0.322335";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64short1" {
-			fileName = "W64short.dis";
-			isContainer = "1";
-			position = "-2455.71 -2465.2 7547.82";
-			rotation = "0.276233 0.372629 -2.53233";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "w64gatedoor1" {
+		instant InteriorShape "w64gatedoor1_4" {
 			fileName = "W64gatedoor.dis";
 			isContainer = "1";
 			position = "-2665.43 -2674.57 7548.27";
 			rotation = "0 -0 -0.459996";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64gatedoor1" {
+		instant InteriorShape "w64gatedoor1_5" {
 			fileName = "W64gatedoor.dis";
 			isContainer = "1";
 			position = "-2808.79 -2506.43 7549.69";
 			rotation = "0 -0 -1.19998";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64gatedoor1" {
+		instant InteriorShape "w64gatedoor1_6" {
 			fileName = "W64gatedoor.dis";
 			isContainer = "1";
 			position = "-2783.85 -2278.06 7550.42";
 			rotation = "0 -0 1.13997";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64gatedoor1" {
+		instant InteriorShape "w64gatedoor1_7" {
 			fileName = "W64gatedoor.dis";
 			isContainer = "1";
 			position = "-2605.36 -2106.35 7545.59";
 			rotation = "0 -0 0.379995";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64gatedoor1" {
+		instant InteriorShape "w64gatedoor1_8" {
 			fileName = "W64gatedoor.dis";
 			isContainer = "1";
 			position = "-2378.57 -2106.31 7549.19";
 			rotation = "0 -0 -0.319997";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64gatedoor1" {
+		instant InteriorShape "w64gatedoor1_9" {
 			fileName = "W64gatedoor.dis";
 			isContainer = "1";
 			position = "-2196.87 -2283.82 7549.98";
 			rotation = "0 -0 -1.15998";
 			lightParams = "0 ";
 		};
-		instant InteriorShape "w64short1" {
-			fileName = "W64short.dis";
+		instant InteriorShape "rmr7thheaven1" {
+			fileName = "rmr7thheaven.dis";
 			isContainer = "1";
-			position = "-2442.35 -2365.41 7547.81";
-			rotation = "0 -0 -1.01997";
+			position = "-2461.22 -2305.52 7561.56";
+			rotation = "0 -0 2.71997";
 			lightParams = "0 ";
 		};
 	};
@@ -8367,113 +7712,6 @@ instant SimGroup "MissionGroup" {
 			isContainer = "1";
 			position = "-2556.39 -2340.03 6908.54";
 			rotation = "0 0 1.58824";
-			lightParams = "0 ";
-		};
-	};
-	instant SimGroup "Slums" {
-		instant InteriorShape "shildrikhousesfinal1" {
-			fileName = "shildrikhousesfinal.dis";
-			isContainer = "1";
-			position = "-2379.24 -2183.6 7556.58";
-			rotation = "0 -0 -1.09999";
-			lightParams = "2 2.500000 1 2.500000 1 ";
-		};
-		instant InteriorShape "lowershildriksfinal1" {
-			fileName = "lowershildriksfinal.dis";
-			isContainer = "1";
-			position = "-2443.08 -2192.79 7556.37";
-			rotation = "0 -0 -1.57998";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "rmrwindmill1" {
-			fileName = "rmrwindmill.dis";
-			isContainer = "1";
-			position = "-2330.76 -2178.71 7548.99";
-			rotation = "0 -0 -1.18001";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "rmr7thheaven1" {
-			fileName = "rmr7thheaven.dis";
-			isContainer = "1";
-			position = "-2461.22 -2305.52 7561.56";
-			rotation = "0 -0 2.71997";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "rmrhousing1" {
-			fileName = "rmrhousing.dis";
-			isContainer = "1";
-			position = "-2665.19 -2585.04 7556.58";
-			rotation = "0 -0 0.739991";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "rmrmayorhouse1" {
-			fileName = "rmrmayorhouse.dis";
-			isContainer = "1";
-			position = "-2559.69 -2524.88 7556.38";
-			rotation = "0 -0 -2.54319";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "jfnt1" {
-			fileName = "JFNT.dis";
-			isContainer = "1";
-			position = "-2404.33 -2215.43 7548.99";
-			rotation = "0 0 0";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "Tent1" {
-			fileName = "tent.dis";
-			isContainer = "1";
-			position = "-2551.45 -2578.6 7549.09";
-			rotation = "0 -0 0.679995";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "woodfire1" {
-			fileName = "woodfire.dis";
-			isContainer = "0";
-			position = "-2561.49 -2591.47 7549.08";
-			rotation = "0 0 0";
-			lightParams = "1 1.250000 1 ";
-		};
-		instant InteriorShape "Tent1" {
-			fileName = "tent.dis";
-			isContainer = "1";
-			position = "-2548.6 -2589.5 7549.35";
-			rotation = "0 -0 -0.119998";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "Tent1" {
-			fileName = "tent.dis";
-			isContainer = "1";
-			position = "-2554.1 -2601.8 7549.64";
-			rotation = "0 -0 -0.699996";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "Tent1" {
-			fileName = "tent.dis";
-			isContainer = "1";
-			position = "-2565.02 -2608.82 7549.68";
-			rotation = "0 -0 -1.31998";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "anvil1" {
-			fileName = "anvil.dis";
-			isContainer = "0";
-			position = "-2370.23 -2187.02 7549.11";
-			rotation = "0 -0 -0.519996";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "anvil1" {
-			fileName = "anvil.dis";
-			isContainer = "0";
-			position = "-2367.61 -2191.83 7549.11";
-			rotation = "0 -0 -1.61998";
-			lightParams = "0 ";
-		};
-		instant InteriorShape "bssign1" {
-			fileName = "bssign.dis";
-			isContainer = "1";
-			position = "-2384.04 -2207.1 7548.99";
-			rotation = "0 -0 0.499986";
 			lightParams = "0 ";
 		};
 	};
