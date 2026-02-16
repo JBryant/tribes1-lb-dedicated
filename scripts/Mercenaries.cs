@@ -1,6 +1,4 @@
 // Mercenary templates and helpers
-echo("### mercenaries.cs LOADED ###");
-
 $Merc::init = False;
 $Merc::count = 0;
 $MercBotList = "";
@@ -14,10 +12,12 @@ function Merc::Init() {
 	$Merc::namePool = "Alden Bria Cora Dax Elen Fenn Garr Hal Ilya Jax Kira Lorn Mira Nox Orin Pax Quin Risa Soren Tavi Varn Wren Yara Zane";
 
 	// id, displayName, class, defaults, cost, race, gender, role
-	Merc::AddTemplate(1, "Pelinor", "Squire", "Longsword 1 LVL 20", 1500, "MaleHuman", "Male", "tank", "Pelinor is a stout and sturdy boy.");
-	Merc::AddTemplate(2, "Mr Squiggles", "Chemist", "IronwoodStaff 1 LVL 20", 2000, "MaleHuman", "Male", "support", "Mr. Squiggles is a mischievous chemist.");
-	Merc::AddTemplate(3, "Lady Lisandra", "BlackMage", "CastingBlade 1 LVL 20", 2400, "FemaleHuman", "Female", "dps", "Lady Lisandra is a confident mage with a teasing streak.");
+	Merc::AddTemplate(1, "Pelinor", "Squire", "Broadsword 1 Longsword 1 LeatherArmor 1 LVL 20", 1500, "MaleHuman", "Male", "tank", "Pelinor is a stout and sturdy boy.");
+	Merc::AddTemplate(2, "Mr Squiggles", "Chemist", "Club 1 IronwoodStaff 1 LeatherArmor 1 LVL 20", 2000, "MaleHuman", "Male", "support", "Mr. Squiggles is a mischievous chemist.");
+	Merc::AddTemplate(3, "Lady Lisandra", "BlackMage", "CastingBlade 1 WhiteMageVestment 1 LVL 20", 2400, "FemaleHuman", "Female", "dps", "Lady Lisandra is a confident mage with a teasing streak.");
 
+	Merc::SpawnTownMerc(1, "-2364.02 -278.263 65.0002", "0 -0 2.31905");
+	Merc::SpawnTownMerc(2, "-2400.94 -268.489 65.095", "0 -0 2.0142");
 	Merc::SpawnTownMerc(3, "-2397.2 -250.891 65.0002", "0 -0 2.98419");
 }
 
@@ -89,6 +89,7 @@ function Merc::SpawnTownMerc(%mercId, %pos, %rot) {
 	%id.mercTemplate = %mercId;
 	$Merc::templateById[%id] = %mercId;
 	$Merc::name[%id] = %displayName;
+	%id.isMercenary = True;
 
 	Merc::NormalizeList();
 	if (String::findSubStr($MercBotList, " " @ %id @ " ") == -1)
@@ -112,8 +113,14 @@ function Merc::GetOwnerMerc(%clientId) {
 	%id = fetchData(%clientId, "MercenaryId");
 	if(%id == "" || %id == 0)
 		return "";
-	if(Player::isAiControlled(%id))
+	%isMerc = %id.isMercenary;
+	if(!%isMerc && %id.mercTemplate != "")
+		%isMerc = True;
+	if(!%isMerc && $Merc::templateById[%id] != "")
+		%isMerc = True;
+	if(Player::isAiControlled(%id) && %isMerc)
 		return %id;
+	storeData(%clientId, "MercenaryId", "");
 	return "";
 }
 
@@ -154,6 +161,7 @@ function Merc::SpawnFor(%clientId, %mercId) {
 	%id.mercTemplate = %mercId;
 	$Merc::templateById[%id] = %mercId;
 	$Merc::name[%id] = %displayName;
+	%id.isMercenary = True;
 
 	$PetList = AddToCommaList($PetList, %id);
 	storeData(%clientId, "PersonalPetList", AddToCommaList(fetchData(%clientId, "PersonalPetList"), %id));
@@ -204,6 +212,7 @@ function Merc::RequestJoin(%mercId, %clientId) {
 	$Merc::ownerName[%mercId] = Client::getName(%clientId);
 	%mercId.ownerId = %clientId;
 	%mercId.ownerName = Client::getName(%clientId);
+	%mercId.isMercenary = True;
 
 	%templateId = $Merc::templateById[%mercId];
 	if(%templateId == "")
@@ -220,6 +229,12 @@ function Merc::RequestJoin(%mercId, %clientId) {
 	if(!fetchData(%clientId, "partyOwned"))
 		CreateParty(%clientId);
 	AddToParty(%clientId, %mercName);
+
+	%ownerLevel = fetchData(%clientId, "LVL");
+	if(%ownerLevel == "" || %ownerLevel == 0)
+		%ownerLevel = GetLevel(fetchData(%clientId, "EXP"), %clientId);
+	storeData(%mercId, "EXP", GetExp(%ownerLevel, %mercId));
+	Game::refreshClientScore(%mercId);
 }
 
 function Merc::RequestLeave(%mercId, %clientId) {

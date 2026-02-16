@@ -231,6 +231,7 @@ function AI::setWeapons(%aiName, %loadout, %isElite)
 	ai::callbackPeriodic(%aiName, 5, AI::Periodic);
 
 	AI::SelectBestWeapon(%aiId);	//this way the bot spawns and has a weapon in hand
+	AI::SelectBestArmor(%aiId);
 }
 
 
@@ -505,6 +506,25 @@ function AI::SelectBestWeapon(%aiId)
 		
 
 			AI::SetSpotDist(%aiId);
+		}
+	}
+
+	return -1;
+}
+
+function AI::SelectBestArmor(%aiId)
+{
+	dbecho($dbechoMode, "AI::SelectBestArmor(" @ %aiId @ ")");
+
+	%armor = GetBestArmor(%aiId);
+
+	if(%armor != -1) {
+		%currentArmor = GetCurrentlyWearingArmor(%aiId);
+
+		if(%currentArmor != %armor) {
+			if(%currentArmor != "")
+				Belt::UnequipAccessory(%aiId, %currentArmor @ "0");
+			Belt::EquipAccessory(%aiId, %armor);
 		}
 	}
 

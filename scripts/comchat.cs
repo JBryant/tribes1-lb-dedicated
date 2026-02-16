@@ -2788,6 +2788,32 @@ function internalSay(%clientId, %team, %message, %senderName)
 				Client::sendMessage(%TrueClientId, 0, "No valid position to recall to.");
 				return;
 			}
+			if(%sub == "spawn")
+			{
+				%mercPlayer = Client::getOwnedObject(%mercId);
+				%mercDead = fetchData(%mercId, "isDead") || %mercPlayer == -1 || Player::isDead(%mercPlayer);
+				if(!%mercDead) {
+					Client::sendMessage(%TrueClientId, 0, "Your mercenary is already alive.");
+					return;
+				}
+
+				%templateId = fetchData(%TrueClientId, "MercenaryTemplate");
+				if(%templateId == "")
+					%templateId = $Merc::templateById[%mercId];
+				if(%templateId == "")
+					%templateId = %mercId.mercTemplate;
+
+				Merc::Dismiss(%TrueClientId, %mercId);
+				if(%mercId != "" && Player::isAiControlled(%mercId))
+					deleteObject(%mercId);
+
+				%newId = Merc::SpawnFor(%TrueClientId, %templateId);
+				if(%newId == "")
+					Client::sendMessage(%TrueClientId, 0, "Unable to respawn mercenary.");
+				else
+					Client::sendMessage(%TrueClientId, 0, "Your mercenary has been re-summoned.");
+				return;
+			}
 			if(%sub == "dismiss")
 			{
 				Merc::Dismiss(%TrueClientId, %mercId);
@@ -2795,7 +2821,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 				return;
 			}
 
-			Client::sendMessage(%TrueClientId, 0, "Usage: #merc [status|follow|stay|recall|dismiss]");
+			Client::sendMessage(%TrueClientId, 0, "Usage: #merc [status|follow|stay|recall|spawn|dismiss]");
 			return;
 		}
 		if(%w1 == "#createbotgroup")
@@ -3927,35 +3953,36 @@ function internalSay(%clientId, %team, %message, %senderName)
 	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
 	            }
 			return;
-	      }
-	      if(%w1 == "#setexp")
+	    }
+	    if(%w1 == "#setexp")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
-	                  %c1 = GetWord(%cropped, 0);
-	                  %c2 = GetWord(%cropped, 1);
+	        if(%clientToServerAdminLevel >= 3)
+	        {
+	            %c1 = GetWord(%cropped, 0);
+	            %c2 = GetWord(%cropped, 1);
 	
-	                  if(%c1 != -1 && %c2 != -1)
-	                  {
-	                        %id = NEWgetClientByName(%c1);
+	            if(%c1 != -1 && %c2 != -1)
+	            {
+	                 %id = NEWgetClientByName(%c1);
 	
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
+					
 					else if(%id != -1)
-	                        {
+	                {
 						storeData(%id, "EXP", %c2);
-	                              Game::refreshClientScore(%id);
-	                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Setting " @ %c1 @ " (" @ %id @ ") EXP to " @ fetchData(%id, "EXP") @ ".");
-	                        }
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
+	                    Game::refreshClientScore(%id);
+	                    if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Setting " @ %c1 @ " (" @ %id @ ") EXP to " @ fetchData(%id, "EXP") @ ".");
+	                }
+	                else
+	                    Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
 	            }
+	            else
+	                Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
+	        }
 			return;
-	      }
-	      if(%w1 == "#addcoins")
+		}
+	    if(%w1 == "#addcoins")
 		{
 	            if(%clientToServerAdminLevel >= 2)
 	            {

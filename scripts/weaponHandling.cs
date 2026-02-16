@@ -307,3 +307,31 @@ function GetBestWeapon(%clientId)
 
 	return %bestWeapon;
 }
+
+function GetBestArmor(%clientId)
+{
+	dbecho($dbechoMode, "GetBestArmor(" @ %clientId @ ")");
+
+	%highest = -1;
+	%bestArmor = -1;
+
+	%itemList = Belt::GetNS(%clientId, "ArmorItems");
+	%totalItems = GetWord(%itemList, 0);
+
+	for(%i = 1; %i <= %totalItems; %i++) {
+		%armor = getword(%itemList, %i);
+
+		if(SkillCanUse(%clientId, %armor)) {
+			%def = AddItemSpecificPoints(%armor, 7);
+			%mdef = AddItemSpecificPoints(%armor, 3);
+			%v = %def + %mdef;
+
+			if(%v > %highest) {
+				%bestArmor = %armor;
+				%highest = %v;
+			}
+		}
+	}
+
+	return %bestArmor;
+}
