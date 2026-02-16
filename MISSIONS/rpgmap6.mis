@@ -3895,6 +3895,80 @@ instant SimGroup "MissionGroup" {
 				deleteOnDestroy = "False";
 			};
 		};
+		instant SimGroup "System4" {
+			instant SimPath "Path" {
+				isLooping = "False";
+				isCompressed = "False";
+				instant Marker "50" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2405.59 -372.53 61.4549";
+					rotation = "0 -0 2.57862";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2438.7 -504.557 206.902";
+					rotation = "0 -0 2.57862";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2568.89 -841.503 513.189";
+					rotation = "0 -0 2.57862";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2637.15 -969.724 700.618";
+					rotation = "0 -0 2.57862";
+				};
+				instant Marker "10" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2766.16 -1145.58 699.976";
+					rotation = "0 -0 2.57862";
+				};
+				instant Marker "10" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2766.16 -1145.58 699.976";
+					rotation = "0 -0 2.57862";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2637.15 -969.724 700.618";
+					rotation = "0 -0 2.57862";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2568.89 -841.503 513.189";
+					rotation = "0 -0 2.57862";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2438.7 -504.557 206.902";
+					rotation = "0 -0 2.57862";
+				};
+				instant Marker "50" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2405.59 -372.53 61.4549";
+					rotation = "0 -0 2.57862";
+				};
+			};
+			instant Moveable "AirshipFerry1" {
+				dataBlock = "AirshipFerry";
+				name = "";
+				position = "-2405.59 -372.53 61.4549";
+				rotation = "0 -0 2.57862";
+				destroyable = "True";
+				deleteOnDestroy = "False";
+			};
+		};
 	};
 	instant SimGroup "EnterBoxes" {
 		instant SimGroup "UseATextEditor" {

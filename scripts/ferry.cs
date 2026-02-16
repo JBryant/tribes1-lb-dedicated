@@ -34,6 +34,10 @@ $FerryStationWait = 0.05;
 // raft_b: simple wood slab with sail
 // longship: ?
 // KL_longship: Viking ship
+// airship_s
+// airship_m
+// airship_ml
+// airhsip_l
 
 if($ferryObject == "")
 	$ferryObject = "KL_longship";
@@ -54,6 +58,27 @@ MoveableData PlatformFerry
 	sfxStart = NoSound;
 	sfxStop = NoSound;
       sfxRun = SoundBoat;
+	sfxBlocked = NoSound;
+
+	speed = 25;
+};
+
+MoveableData AirshipFerry
+{
+	shapeFile = "airship_s";
+	className = "Ferry";
+	destroyable = false;
+	maxDamage = 100;
+	triggerRadius = 4;
+	isPerspective = true;
+	displace = true;
+
+	explosionId = debrisExpLarge;
+	debrisId = defaultDebrisLarge;
+
+	sfxStart = NoSound;
+	sfxStop = NoSound;
+    sfxRun = SoundWindWalkers;
 	sfxBlocked = NoSound;
 
 	speed = 25;
@@ -151,6 +176,10 @@ function InitFerry()
 					%ferry = %o;
 				}
 			}
+
+		if(%ferry != "") {
+			GameBase::setActive(%ferry, true);
+		}
 
 			$Ferry::FolderName[%ferry] = "MissionGroup\\Ferry\\" @ %system;
 

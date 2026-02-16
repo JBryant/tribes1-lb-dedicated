@@ -3,6 +3,7 @@ MissionRegObject( RPG, "Empty Crystal", MissionCreateObject, EmptyCrystal, Stati
 MissionRegObject( RPG, "SoundPoint", MissionCreateObject, SoundPoint, StaticShape, SoundPoint );
 
 MissionRegObject( Platforms, "Ferry Platform", MissionCreateObject, PlatformFerry,  Moveable, PlatformFerry );
+MissionRegObject( Platforms, "Airship Ferry", MissionCreateObject, AirshipFerry,  Moveable, AirshipFerry );
 
 //my stuff (JI)
 missionRegDis(JI, mine1);

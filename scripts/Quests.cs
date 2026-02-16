@@ -1212,8 +1212,10 @@ $Quest::stepReward[31, 1] = "COINS 50";
 
 $QuestNPC::name[31] = "Karthus";
 $QuestNPC::shape[31] = "MaleHumanTownBot";
-$QuestNPC::pos[31] = "-2401.75 -357.942 65";
-$QuestNPC::rot[31] = "0 -0 -0.75326";
+// $QuestNPC::pos[31] = "-2294.62 -440.998 96.6916";
+// $QuestNPC::rot[31] = "0 -0 0.503522";
+$QuestNPC::pos[31] = "-2401.97 -356.53 65.0079";
+$QuestNPC::rot[31] = "0 -0 -0.78814";
 $QuestNPC::questId[31] = 31;
 
 $QuestNPC::conversations[31, 31, 0, 1, 0] = "Have you visited the haunted tree yet?|tree";
