@@ -394,7 +394,9 @@ function Item::onConsider(%clientId, %item, %object) {
 		return True;
 	}
 
-	if (%item == "BlueDoubleBed" || %item == "BrownDoubleBed" || %item == "LightDoubleBed") {
+	lbecho(%item);
+
+	if (%item == "BlueDoubleBed" || %item == "BrownDoubleBed" || %item == "LightDoubleBed" || %item == "SingleBed" || %item == "QueenBed" || %item == "CanopyBed") {
 		%duration = 3600 / 2; // 1 hour reset EXP bonus
 		Client::sendMessage(%clientId, $MsgWhite, "You rested in your own bed. You feel well rested and ready to continue your journey.");
 		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Rested", "left");

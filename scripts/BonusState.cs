@@ -1,7 +1,22 @@
 //======================================================================
 // Bonus States are special bonuses for a certain player that last a
-// certain amount of ticks.  A tick is decreased every 2 seconds by
-// the zone check.
+// certain amount of ticks. A tick is decreased every 2 seconds by the
+// zone check.
+//
+// Notes for agents:
+// - Storage: $BonusStateCnt/%Name/%Attribute/%Modifier/%Periodic/%Giver
+//   are keyed by [%clientId, %slot] where %slot is 1..$maxBonusStates.
+// - UpdateBonusState() refreshes ticks if the same %type already exists,
+//   otherwise it fills the first empty slot.
+// - DecreaseBonusStateTicks() is called by the zone loop; when a slot
+//   hits 0 it clears all slot fields and plays the expire sound. Sneak
+//   also resets invisibility and fade.
+// - AddBonusStatePoints(%clientId, "ATK"/"DEF"/"MDEF"/"MaxHP"/"MaxMANA"/"MaxWeight")
+//   is how fetchData() applies temporary bonuses on stats.
+// - Periodic effects: if $BonusStatePeriodic[%id,%slot] == True, the DOT
+//   loop in zone.cs applies %Attribute/%Modifier each tick.
+// - $SpecialVar indices (Accessory.cs): 3=MDEF, 4=HP, 5=Mana, 6=ATK,
+//   7=DEF, 10=HP regen, 11=Mana regen, 12=MaxWeight.
 //======================================================================
 
 $maxBonusStates = 20;

@@ -450,13 +450,18 @@ function HomeItemSetRot(%clientId, %rotation, %slot) {
 function RemoveHome(%clientId) {
     %home = $tagToObjectId[%clientId @ "_home"];
     if (%home != "" && %home != 0) {
-        %shape = %home.shape;
-        if (%shape == "")
-            %shape = $tagToObjectShape[%clientId @ "_home"];
-        if (String::findSubStr(%shape, ".dis") != -1)
-            %shape = String::replace(%shape, ".dis", "");
-        if (%shape != "")
-            Belt::GiveThisStuff(%clientId, $Housing::itemName["home", %shape], 1);
+        %itemName = %home.name;
+        if ($beltitem[%itemName, "isHousingItem"]) {
+            Belt::GiveThisStuff(%clientId, %itemName, 1);
+        } else {
+            %shape = %home.shape;
+            if (%shape == "")
+                %shape = $tagToObjectShape[%clientId @ "_home"];
+            if (String::findSubStr(%shape, ".dis") != -1)
+                %shape = String::replace(%shape, ".dis", "");
+            if (%shape != "")
+                Belt::GiveThisStuff(%clientId, $Housing::itemName["home", %shape], 1);
+        }
     }
 
     for (%i = 1; %i <= $maxHouseItems; %i++) {
@@ -482,13 +487,18 @@ function RemoveHome(%clientId) {
 function RemoveHomeItem(%clientId, %slot, %skipSave) {
     %old = $tagToObjectId[%clientId @ "_homeitem_" @ %slot];
     if (%old != "" && %old != 0) {
-        %shape = %old.shape;
-        if (%shape == "")
-            %shape = $tagToObjectShape[%clientId @ "_homeitem_" @ %slot];
-        if (String::findSubStr(%shape, ".dis") != -1)
-            %shape = String::replace(%shape, ".dis", "");
-        if (%shape != "")
-            Belt::GiveThisStuff(%clientId, $Housing::itemName["homeitem", %shape], 1);
+        %itemName = %old.name;
+        if ($beltitem[%itemName, "isHousingItem"]) {
+            Belt::GiveThisStuff(%clientId, %itemName, 1);
+        } else {
+            %shape = %old.shape;
+            if (%shape == "")
+                %shape = $tagToObjectShape[%clientId @ "_homeitem_" @ %slot];
+            if (String::findSubStr(%shape, ".dis") != -1)
+                %shape = String::replace(%shape, ".dis", "");
+            if (%shape != "")
+                Belt::GiveThisStuff(%clientId, $Housing::itemName["homeitem", %shape], 1);
+        }
     }
     deleteObject(%old);
     $tagToObjectId[%clientId @ "_homeitem_" @ %slot] = "";
@@ -514,12 +524,19 @@ function ClearHomeVariables(%clientId) {
 // home items
 
 function Housing::AddItemDef(%housingType, %shape, %displayName, %itemName, %weight, %cost, %shopIndex) {
-    $Housing::itemName[%housingType, %shape] = %itemName;
+    if ($Housing::itemName[%housingType, %shape] == "")
+        $Housing::itemName[%housingType, %shape] = %itemName;
     BeltItem::Add(%displayName, %itemName, "HousingItems", %weight, %cost, "", %shopIndex);
     $beltitem[%itemName, "isHousingItem"] = True;
     $beltitem[%itemName, "housingType"] = %housingType;
     $beltitem[%itemName, "shape"] = %shape;
     $beltitem[%itemName, "reusable"] = True;
+}
+
+function Housing::AddShrineDef(%displayName, %itemName, %weight, %cost, %shopIndex, %bonus, %ticks) {
+	Housing::AddItemDef("homeitem", "endtable", %displayName, %itemName, %weight, %cost, %shopIndex);
+	$Housing::shrineBonus[%itemName] = %bonus;
+	$Housing::shrineTicks[%itemName] = %ticks;
 }
 
 if (!$Housing::ItemsInitialized) {
@@ -588,4 +605,29 @@ if (!$Housing::ItemsInitialized) {
 	Housing::AddItemDef("homeitem", "pic4", "Wall Picture IV", "WallPicture4", 5, 1200, 1257);
 	Housing::AddItemDef("homeitem", "pic5", "Wall Picture V", "WallPicture5", 5, 1200, 1258);
 	Housing::AddItemDef("homeitem", "throne2", "Ornate Throne", "OrnateThrone", 120, 9500, 1259);
+
+	// Buff shrines (1260+)
+	Housing::AddShrineDef("Lesser Shrine of Strength I", "LesserShrineStrengthI", 20, 3000, 1260, "ATK 25", 1800);
+	Housing::AddShrineDef("Shrine of Strength II", "ShrineStrengthII", 25, 6000, 1261, "ATK 50", 1800);
+	Housing::AddShrineDef("Greater Shrine of Strength III", "GreaterShrineStrengthIII", 30, 9000, 1262, "ATK 100", 1800);
+
+	Housing::AddShrineDef("Lesser Shrine of Defense I", "LesserShrineDefenseI", 20, 3000, 1263, "DEF 25", 1800);
+	Housing::AddShrineDef("Shrine of Defense II", "ShrineDefenseII", 25, 6000, 1264, "DEF 50", 1800);
+	Housing::AddShrineDef("Greater Shrine of Defense III", "GreaterShrineDefenseIII", 30, 9000, 1265, "DEF 100", 1800);
+
+	Housing::AddShrineDef("Lesser Shrine of Warding I", "LesserShrineWardingI", 20, 3000, 1266, "MDEF 25", 1800);
+	Housing::AddShrineDef("Shrine of Warding II", "ShrineWardingII", 25, 6000, 1267, "MDEF 50", 1800);
+	Housing::AddShrineDef("Greater Shrine of Warding III", "GreaterShrineWardingIII", 30, 9000, 1268, "MDEF 100", 1800);
+
+	Housing::AddShrineDef("Lesser Shrine of Vitality I", "LesserShrineVitalityI", 20, 3000, 1269, "MaxHP 25", 1800);
+	Housing::AddShrineDef("Shrine of Vitality II", "ShrineVitalityII", 25, 6000, 1270, "MaxHP 50", 1800);
+	Housing::AddShrineDef("Greater Shrine of Vitality III", "GreaterShrineVitalityIII", 30, 9000, 1271, "MaxHP 100", 1800);
+
+	Housing::AddShrineDef("Lesser Shrine of Focus I", "LesserShrineFocusI", 20, 3000, 1272, "MaxMANA 25", 1800);
+	Housing::AddShrineDef("Shrine of Focus II", "ShrineFocusII", 25, 6000, 1273, "MaxMANA 50", 1800);
+	Housing::AddShrineDef("Greater Shrine of Focus III", "GreaterShrineFocusIII", 30, 9000, 1274, "MaxMANA 100", 1800);
+
+	Housing::AddShrineDef("Lesser Shrine of Capacity I", "LesserShrineCapacityI", 20, 3000, 1275, "MaxWeight 25", 1800);
+	Housing::AddShrineDef("Shrine of Capacity II", "ShrineCapacityII", 25, 6000, 1276, "MaxWeight 50", 1800);
+	Housing::AddShrineDef("Greater Shrine of Capacity III", "GreaterShrineCapacityIII", 30, 9000, 1277, "MaxWeight 100", 1800);
 }

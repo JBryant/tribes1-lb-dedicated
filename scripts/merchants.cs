@@ -13,7 +13,7 @@ function Merchant::Init() {
 
 	// Kalm Inn
 	Merchant::Add("merchant13", "Kalm Inn", "1993.79 501.375 2400", "0 -0 -0.853833", "Dustin", "MaleHuman", "CLASS Chemist LVL 2 LCK 0 Dagger 1", "616 801 850 851 852 853 701", "Welcome to Kalm Inn. Care to look at my wares?");
-	Merchant::Add("merchant28", "Kalm Inn", "2001.96 503.667 2200", "0 -0 -0.850831", "Becca", "FemaleHuman", "CLASS Archer LVL 2 LCK 0", "1200 1201 1202 1203 1204 1205 1206 1207 1208 1209 1210 1211 1212 1213 1214 1215 1216 1217 1218 1219 1220 1221 1222 1223 1224 1225 1226 1227 1228 1229 1230 1231 1232 1233 1234 1235 1236 1237 1238 1239 1240 1241 1242 1243 1244 1245 1246 1247 1248 1249 1250 1251 1252 1253 1254 1255 1256 1257 1258 1259", "Welcome, builder! I've got homes and furnishings to make your dreams feel real.");
+	Merchant::Add("merchant28", "Kalm Inn", "2001.96 503.667 2200", "0 -0 -0.850831", "Becca", "FemaleHuman", "CLASS Archer LVL 2 LCK 0", "1200 1201 1202 1203 1204 1205 1206 1207 1208 1209 1210 1211 1212 1213 1214 1215 1216 1217 1218 1219 1220 1221 1222 1223 1224 1225 1226 1227 1228 1229 1230 1231 1232 1233 1234 1235 1236 1237 1238 1239 1240 1241 1242 1243 1244 1245 1246 1247 1248 1249 1250 1251 1252 1253 1254 1255 1256 1257 1258 1259 1260 1261 1262 1263 1264 1265 1266 1267 1268 1269 1270 1271 1272 1273 1274 1275 1276 1277", "Welcome, builder! I've got homes and furnishings to make your dreams feel real.");
 
 	// Fort Ethren
 	Merchant::Add("merchant2", "Fort Ethren", "-2438.75 -2291.25 56.7893", "0 -0 -2.87792", "Cole", "MaleHuman", "CLASS Ranger LVL 2 LCK 0 Dagger 1", "303 304 305 204 205 206 207 208 209", "");

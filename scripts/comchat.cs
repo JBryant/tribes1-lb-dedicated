@@ -1972,10 +1972,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 			if(GameBase::getLOSinfo(%player, 1000)) {
 				%obj = $los::object;
-				if (%obj.owner == %TrueClientId && (%obj.slot != "" || %obj.name == "home")) {
+				if (%obj.owner == %TrueClientId && (%obj.slot != "" || %obj.name == "home" || %obj == %home)) {
 					lbecho("You own this item, you can move it.");
 					if (fetchData(%TrueClientId, "PlaceMode") != 1) {
-						if (%obj.name == "home")
+						if (%obj.name == "home" || %obj == %home)
 							%placeName = "home";
 						else if (%obj.slot != "")
 							%placeName = "homeitem_" @ %obj.slot;
@@ -2022,8 +2022,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%player = Client::getOwnedObject(%TrueClientId);
 			if(GameBase::getLOSinfo(%player, 1000)) {
 				%obj = $los::object;
-				if (%obj.owner == %TrueClientId && (%obj.slot != "" || %obj.name == "home")) {
-					if (%obj.name == "home")
+				if (%obj.owner == %TrueClientId && (%obj.slot != "" || %obj.name == "home" || %obj == %home)) {
+					if (%obj.name == "home" || %obj == %home)
 						%placeName = "home";
 					else if (%obj.slot != "")
 						%placeName = "homeitem_" @ %obj.slot;
@@ -2035,6 +2035,30 @@ function internalSay(%clientId, %team, %message, %senderName)
 					return;
 				}
 			}
+		}
+
+		if (%w1 == "#useshrine" || %w1 == "#shrine") {
+			%player = Client::getOwnedObject(%TrueClientId);
+			if (GameBase::getLOSinfo(%player, 1000)) {
+				%obj = $los::object;
+				%itemName = %obj.name;
+				%bonus = $Housing::shrineBonus[%itemName];
+				if (%bonus == "") {
+					Client::sendMessage(%TrueClientId, 1, "That is not a shrine.");
+					return;
+				}
+				if (%obj.owner != %TrueClientId) {
+					Client::sendMessage(%TrueClientId, 1, "You can only use shrines you own.");
+					return;
+				}
+				%ticks = $Housing::shrineTicks[%itemName];
+				if (%ticks == "")
+					%ticks = 1800;
+				UpdateBonusState(%TrueClientId, %bonus, %ticks, $beltitem[%itemName, "Name"], "Shrine");
+				Client::sendMessage(%TrueClientId, $MsgBeige, "You draw power from the shrine.");
+				return;
+			}
+			Client::sendMessage(%TrueClientId, 1, "No shrine in sight.");
 		}
 
 		if (%w1 == "#itemsetrot") {
