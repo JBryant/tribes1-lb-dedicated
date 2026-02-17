@@ -3969,6 +3969,128 @@ instant SimGroup "MissionGroup" {
 				deleteOnDestroy = "False";
 			};
 		};
+		instant SimGroup "System5" {
+			instant SimPath "Path" {
+				isLooping = "False";
+				isCompressed = "False";
+				instant Marker "50" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-4235.37 -329.253 49.4135";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-4196.41 -341.065 134.931";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-4003.51 -401.045 318.575";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-3781.25 -469.593 473.843";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-3386.32 -560.277 570.471";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-3037.39 -543.969 485.743";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2770.7 -460.622 342.338";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2578.35 -358.099 179.757";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "10" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2488.11 -298.162 64.0061";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "10" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2488.11 -298.162 64.0061";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2578.35 -358.099 179.757";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-2770.7 -460.622 342.338";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-3037.39 -543.969 485.743";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-3386.32 -560.277 570.471";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-3781.25 -469.593 473.843";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-4003.51 -401.045 318.575";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "0" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-4196.41 -341.065 134.931";
+					rotation = "0 -0 -1.88183";
+				};
+				instant Marker "50" {
+					dataBlock = "DropPointMarker";
+					name = "";
+					position = "-4235.37 -329.253 49.4135";
+					rotation = "0 -0 -1.88183";
+				};
+			};
+			instant Moveable "AirshipFerry2" {
+				dataBlock = "AirshipFerry";
+				name = "";
+				position = "-4235.37 -329.253 49.4135";
+				rotation = "0 -0 -1.88183";
+				destroyable = "True";
+				deleteOnDestroy = "False";
+			};
+		};
 	};
 	instant SimGroup "EnterBoxes" {
 		instant SimGroup "UseATextEditor" {
