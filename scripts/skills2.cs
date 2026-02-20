@@ -270,6 +270,19 @@ $Skill::refVal[19] = -10;
 $Skill::graceDistance[19] = 1;
 $SkillRestriction[$Skill::keyword[19]] = "C Thief";
 
+$Skill::keyword[20] = "rage";
+$Skill::index[$Skill::keyword[20]] = 20;
+$Skill::name[20] = "Rage";
+$Skill::description[20] = "Enter a fury that doubles your damage but makes you take more damage.";
+$Skill::delay[20] = 1.0;
+$Skill::recoveryTime[20] = 10;
+$Skill::duration[20] = 30;
+$Skill::startSound[20] = Reflected;
+$Skill::groupListCheck[20] = False;
+$Skill::refVal[20] = -10;
+$Skill::graceDistance[20] = 1;
+$SkillRestriction[$Skill::keyword[20]] = "C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
+
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
 
@@ -676,6 +689,11 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 	if ($Skill::keyword[%index] == "doublecast") {
 		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Double Cast", "left");
 		UpdateBonusState(%clientId, "DoubleCast", %duration, "DoubleCast");
+	}
+
+	if ($Skill::keyword[%index] == "rage") {
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Rage", "left");
+		UpdateBonusState(%clientId, "Rage", %duration, "Rage");
 	}
 
 

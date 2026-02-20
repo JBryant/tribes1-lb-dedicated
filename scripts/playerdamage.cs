@@ -549,6 +549,9 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			%value = Cap(%value - %ab, 0, "inf") + 1; // add 1 raise base damage slight and ensure damage is always done
 			//lbecho("calculated value 2: " @ %value);
 
+			if (HasBonusState(%damagedClient, "Rage"))
+				%value = %value * 1.33;
+
 			%value = (%value / $TribesDamageToNumericDamage);
 			//lbecho("calculated value 3: " @ %value);
 		}
@@ -627,6 +630,9 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 			%value = %value * %finalMulti;
 
+			if (HasBonusState(%shooterClient, "Rage"))
+				%value = %value * 3;
+
 			%ab = (getRandom() * fetchData(%damagedClient, "DEF")) + 1;
 			%value = Cap(%value - %ab, 1, "inf");
 
@@ -636,6 +642,9 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 
 			if(%value < 1)
 				%value = 1;
+
+			if (HasBonusState(%damagedClient, "Rage"))
+				%value = %value * 1.33;
 
 			if(%Bash)	//i'm doing this condition here because %mom is dependant on %value
 			{
