@@ -777,8 +777,8 @@ $BotEquipment[TempleDefender] = "CLASS Enemy LVL 500+50 COINS 11500/50 LCK 3 Hol
 $BotEquipment[EliteTempleDefender] = "LVL 1000+100 LightningMateriaIII 1/-600";
 $BotEquipment[TempleAcolyte] = "CLASS Enemy LVL 550+50 COINS 11500/50 LCK 3 CastingBlade 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteTempleAcolyte] = "LVL 1100+100 LightningMateriaIII 1/-600";
-$BotEquipment[TempleCultist] = "CLASS Enemy LVL 600+50 COINS 11500/50 LCK 3 Onimusha 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
-$BotEquipment[EliteTempleCultist] = "LVL 1200+100 LightningMateriaIII 1/-600";
+$BotEquipment[TempleCultist] = "CLASS Enemy LVL 600+50 COINS 11500/50 LCK 3 Onimusha 1 CultistBadge 1/-150 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[EliteTempleCultist] = "LVL 1200+100 CultistBadge 1/-100 LightningMateriaIII 1/-600";
 
 // Mid ToA
 $BotEquipment[TempleBerserker] = "CLASS Enemy LVL 700+50 COINS 11500/50 LCK 4 DiamondAxe 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;

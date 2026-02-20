@@ -3353,6 +3353,9 @@ BeltItem::Add("Enchanted Stone", "EnchantedStone", "QuestItems", $AccessoryVar[E
 BeltItem::Add("Dragon Scale", "DragonScale", "QuestItems", $AccessoryVar[DragonScale, $Weight], GenerateItemCost(DragonScale));
 BeltItem::Add("Parchment", "Parchment", "QuestItems", $AccessoryVar[Parchment, $Weight], GenerateItemCost(Parchment));
 BeltItem::Add("Magic Dust", "MagicDust", "QuestItems", $AccessoryVar[MagicDust, $Weight], GenerateItemCost(MagicDust));
+BeltItem::Add("Cultist Badge", "CultistBadge", "QuestItems", $AccessoryVar[CultistBadge, $Weight], GenerateItemCost(CultistBadge));
+$AccessoryVar[CultistBadge, $Weight] = 0.01;
+$AccessoryVar[CultistBadge, $MiscInfo] = "A dark insignia taken from a cultist. Proof of their presence.";
 
 // Enemy Weapons
 $description = "A casting blade.";

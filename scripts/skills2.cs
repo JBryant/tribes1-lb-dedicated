@@ -70,7 +70,7 @@ $Skill::startSound[5] = FishWalk;
 $Skill::groupListCheck[5] = False;
 $Skill::refVal[5] = -10;
 $Skill::graceDistance[5] = 10;
-$SkillRestriction[$Skill::keyword[5]] = "C Chemist C BlackMage C WhiteMage C Mystic C TimeMage C WhiteMage C Mystic C Orator C HolyKnight";
+$SkillRestriction[$Skill::keyword[5]] = "C Chemist C BlackMage C WhiteMage C Mystic C TimeMage C WhiteMage C Mystic C Summoner C Orator C HolyKnight";
 
 $Skill::keyword[6] = "quickshot";
 $Skill::index[$Skill::keyword[6]] = 6;

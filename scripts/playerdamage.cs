@@ -293,9 +293,12 @@ function Player::onKilled(%this) {
 				storeData(%clientId, "RankPoints", 0);
 			}
 
-			//victim loses two rank points
-			Client::sendMessage(%clientId, $MsgWhite, "You lost 2 Rank Points.");
-			storeData(%clientId, "RankPoints", 2, "dec");
+			//victim has a 25% chance to lose one rank point
+			if(getRandom() <= 0.25) {
+				Client::sendMessage(%clientId, $MsgWhite, "The gods have witnessed your failure. You lost 1 Rank Point and LCK.");
+				storeData(%clientId, "RankPoints", 1, "dec");
+				storeData(%clientId, "LCK", 1, "dec");
+			}
 
 			if(%khn != "")
 			{

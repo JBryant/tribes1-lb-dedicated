@@ -769,22 +769,26 @@ $QuestNPC::conversations[18, 18, 2, 1, 0] = "Thanks again for your help.|Any tim
 
 
 // Legacy map quest15
-$Quest::name[19] = "Brian Request";
-$Quest::desc[19] = "Speak to Brian to learn what they need.";
+$Quest::name[19] = "Missing Townsfolk";
+$Quest::desc[19] = "Help Mayor Brian investigate the disappearances in Nibelheim.";
 $Quest::npcId[19] = 19;
 $Quest::type[19] = 0;
 
-$Quest::stepName[19, 0] = "Meet Brian";
-$Quest::stepName[19, 1] = "Complete the request";
+$Quest::stepName[19, 0] = "Meet Mayor Brian";
+$Quest::stepName[19, 1] = "Find Evidence of Kidnappings";
+$Quest::stepName[19, 2] = "Bring 10 Cultist Badges";
 
-$Quest::stepDescription[19, 0] = "Speak to Brian to learn what they need.";
-$Quest::stepDescription[19, 1] = "Bring EXP 4000 to Brian.";
+$Quest::stepDescription[19, 0] = "Speak to Mayor Brian in Nibelheim.";
+$Quest::stepDescription[19, 1] = "Find a Cultist Badge from the cultists and bring it back.";
+$Quest::stepDescription[19, 2] = "Bring 10 Cultist Badges as proof the threat has been handled.";
 
-$Quest::stepReq[19, 0] = "";
-$Quest::stepReq[19, 1] = "";
+$Quest::stepReq[19, 0] = "LVLG 100";
+$Quest::stepReq[19, 1] = "CultistBadge 1";
+$Quest::stepReq[19, 2] = "CultistBadge 10";
 
 $Quest::stepReward[19, 0] = "";
-$Quest::stepReward[19, 1] = "LeatherArmor 1";
+$Quest::stepReward[19, 1] = "EXP 2000";
+$Quest::stepReward[19, 2] = "EXP 6000";
 
 $QuestNPC::name[19] = "Brian";
 $QuestNPC::shape[19] = "MaleHumanTownBot";
@@ -792,13 +796,16 @@ $QuestNPC::pos[19] = "-4474.5 -268 65.829";
 $QuestNPC::rot[19] = "0 -0 1.55037";
 $QuestNPC::questId[19] = 19;
 
-$QuestNPC::conversations[19, 19, 0, 1, 0] = "Hail Traveller, and welcome to Nibelheim. I am Brian, the Mayor of this fine town. Alas, you have come at a troubled time. Many woes have stricken our town of late and the citizens are rightfully concerned.|Troubled time?";
-$QuestNPC::conversations[19, 19, 0, 1, 1] = "Yes. Our Mako mines have been overrun by demons and villagers have begun vanishing without a trace. To make matters worse my only daughter has gone missing. I fear she has left to find out what is happening.|Missing?";
-$QuestNPC::conversations[19, 19, 0, 1, 2] = "Yes. She is missing. That is what I said...|next";
-$QuestNPC::conversations[19, 19, 1, 0, 0] = "Have you brought what I asked for?|Not yet.";
-$QuestNPC::conversations[19, 19, 1, 1, 0] = "I see your skills have improved since the last time we met!|indeed";
-$QuestNPC::conversations[19, 19, 1, 1, 1] = "For being such a brave adventurer, here is a gift I'm sure you will appreciate.|next";
-$QuestNPC::conversations[19, 19, 2, 1, 0] = "Thanks again for your help.|Any time.";
+$QuestNPC::conversations[19, 19, 0, 1, 0] = "Welcome to Nibelheim, traveler. Our town is in mourning. People vanish every other week with no trace.|What can I do?";
+$QuestNPC::conversations[19, 19, 0, 1, 1] = "We have signs of cultists at the old well. Find any evidence of their presence.|Evidence?";
+$QuestNPC::conversations[19, 19, 0, 1, 2] = "Bring me a Cultist Badge. If they are involved, we must know.|I'll return with one.";
+$QuestNPC::conversations[19, 19, 1, 0, 0] = "Have you found any evidence of the kidnappings?|Not yet.";
+$QuestNPC::conversations[19, 19, 1, 1, 0] = "A Cultist Badge... So it is true. Take this for your trouble.|What now?";
+$QuestNPC::conversations[19, 19, 1, 1, 1] = "Bring me 10 more badges as proof the culprits have been dealt with.|I'll handle it.";
+$QuestNPC::conversations[19, 19, 2, 0, 0] = "Do you have the 10 Cultist Badges?|Not yet.";
+$QuestNPC::conversations[19, 19, 2, 0, 1] = "Please hurry. Every day matters.|I'll be back.";
+$QuestNPC::conversations[19, 19, 2, 1, 0] = "You've done us a great service. Nibelheim owes you a debt.|Glad to help.";
+$QuestNPC::conversations[19, 19, 3, 1, 0] = "Thank you again for standing with us.|Any time.";
 
 
 // Legacy map quest16
@@ -1447,6 +1454,66 @@ $QuestNPC::conversations[37, 37, 0, 1, 6] = "That's the basics. Build something 
 $QuestNPC::conversations[37, 37, 1, 0, 0] = "Have you brought what I asked for?|Not yet.";
 $QuestNPC::conversations[37, 37, 1, 1, 0] = "Thank you for your help.|Glad to help.";
 $QuestNPC::conversations[37, 37, 2, 1, 0] = "Thanks again for your help.|Any time.";
+
+// Nibelheim villager
+$Quest::name[38] = "Missing Husband";
+$Quest::desc[38] = "Help a villager find evidence about her missing husband.";
+$Quest::npcId[38] = 38;
+$Quest::type[38] = 0;
+
+$Quest::stepName[38, 0] = "Meet the Villager";
+$Quest::stepName[38, 1] = "Find Evidence of the Kidnapping";
+
+$Quest::stepDescription[38, 0] = "A villager in Nibelheim begs for help. Speak with her.";
+$Quest::stepDescription[38, 1] = "Bring a Cultist Badge as evidence of who took her husband.";
+
+$Quest::stepReq[38, 0] = "LVLG 100";
+$Quest::stepReq[38, 1] = "CultistBadge 1";
+
+$Quest::stepReward[38, 0] = "";
+$Quest::stepReward[38, 1] = "COINS 2000";
+
+$QuestNPC::name[38] = "Liora";
+$QuestNPC::shape[38] = "FemaleHumanTownBot";
+$QuestNPC::pos[38] = "-4419.98 -308.881 65.0978";
+$QuestNPC::rot[38] = "0 -0 -0.000835243";
+$QuestNPC::questId[38] = 38;
+
+$QuestNPC::conversations[38, 38, 0, 1, 0] = "Please, my husband is missing. No one will listen.|Tell me what happened.";
+$QuestNPC::conversations[38, 38, 0, 1, 1] = "He went to draw water at the old well and never returned. If you find any evidence, bring it to me.|I'll look.";
+$QuestNPC::conversations[38, 38, 0, 1, 2] = "Anything, even a scrap from those cultists, would ease my heart.|I'll return.";
+$QuestNPC::conversations[38, 38, 1, 0, 0] = "Did you find anything about my husband?|Not yet.";
+$QuestNPC::conversations[38, 38, 1, 1, 0] = "A Cultist Badge... So they took him. It's not much, but please take this.|Thank you.";
+$QuestNPC::conversations[38, 38, 2, 1, 0] = "Thank you for listening. Please be careful down there.|I will.";
+
+// Nibelheim innkeeper
+$Quest::name[39] = "Innkeeper's Welcome";
+$Quest::desc[39] = "Speak with the innkeeper in Nibelheim.";
+$Quest::npcId[39] = 39;
+$Quest::type[39] = 0;
+
+$Quest::stepName[39, 0] = "Meet the Innkeeper";
+$Quest::stepName[39, 1] = "Finish the conversation";
+
+$Quest::stepDescription[39, 0] = "The innkeeper welcomes travelers to Nibelheim.";
+$Quest::stepDescription[39, 1] = "Listen to the innkeeper's advice.";
+
+$Quest::stepReq[39, 0] = "LVLG 100";
+$Quest::stepReq[39, 1] = "";
+
+$Quest::stepReward[39, 0] = "";
+$Quest::stepReward[39, 1] = "";
+
+$QuestNPC::name[39] = "Innkeeper Rhea";
+$QuestNPC::shape[39] = "FemaleHumanTownBot";
+$QuestNPC::pos[39] = "-4386.1 -246.77 71.3045";
+$QuestNPC::rot[39] = "0 -0 2.04084";
+$QuestNPC::questId[39] = 39;
+
+$QuestNPC::conversations[39, 39, 0, 1, 0] = "Welcome to Nibelheim. Rooms are free if you help with our troubles.|What's wrong?";
+$QuestNPC::conversations[39, 39, 0, 1, 1] = "People vanish every other week. We suspect cultists slipping in through the old well.|Old well?";
+$QuestNPC::conversations[39, 39, 0, 1, 2] = "Deep below, something hums with dark power. If you can, find the source.|I'll look into it.";
+$QuestNPC::conversations[39, 39, 1, 1, 0] = "Rest if you need it. Nibelheim stands with its helpers.|Thanks.";
 
 // =====================
 // QUEST INITIALIZATION

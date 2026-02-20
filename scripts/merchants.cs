@@ -15,6 +15,11 @@ function Merchant::Init() {
 	Merchant::Add("merchant13", "Kalm Inn", "1993.79 501.375 2400", "0 -0 -0.853833", "Dustin", "MaleHuman", "CLASS Chemist LVL 2 LCK 0 Dagger 1", "616 801 850 851 852 853 701", "Welcome to Kalm Inn. Care to look at my wares?");
 	Merchant::Add("merchant28", "Kalm Inn", "2001.96 503.667 2200", "0 -0 -0.850831", "Becca", "FemaleHuman", "CLASS Archer LVL 2 LCK 0", "1200 1201 1202 1203 1204 1205 1206 1207 1208 1209 1210 1211 1212 1213 1214 1215 1216 1217 1218 1219 1220 1221 1222 1223 1224 1225 1226 1227 1228 1229 1230 1231 1232 1233 1234 1235 1236 1237 1238 1239 1240 1241 1242 1243 1244 1245 1246 1247 1248 1249 1250 1251 1252 1253 1254 1255 1256 1257 1258 1259 1260 1261 1262 1263 1264 1265 1266 1267 1268 1269 1270 1271 1272 1273 1274 1275 1276 1277", "Welcome, builder! I've got homes and furnishings to make your dreams feel real.");
 
+	// Nibelheim
+	Merchant::Add("merchant30", "Nibelheim", "-4421.13 -246.917 65.0978", "0 -0 3.07775", "Sela", "FemaleHuman", "CLASS Chemist LVL 100 LCK 0", "4 8 9 10 11 301 302 304 305 503 504 507 510 511 512 608 609 610 616 854 855", "Welcome to Nibelheim. Supplies are free to those who help us.");
+	Merchant::Add("merchant31", "Nibelheim", "-4440.64 -246.563 65.0978", "0 -0 3.12587", "Orin", "MaleHuman", "CLASS Knight LVL 100 LCK 0", "27 28 29 61 62 63 110 111 112 135 136 137", "A steady blade saves lives. See what suits you.");
+	Merchant::Add("merchant32", "Nibelheim", "-4448.22 -246.445 65.0978", "0 -0 3.12838", "Maera", "FemaleHuman", "CLASS Knight LVL 100 LCK 0", "208 209 210 211 212 256 257 258 259 260", "Armor fit for veterans of the wilds.");
+
 	// Fort Ethren
 	Merchant::Add("merchant2", "Fort Ethren", "-2438.75 -2291.25 56.7893", "0 -0 -2.87792", "Cole", "MaleHuman", "CLASS Ranger LVL 2 LCK 0 Dagger 1", "303 304 305 204 205 206 207 208 209", "");
 	Merchant::Add("merchant4", "Fort Ethren", "-2438.75 -2303.5 56.7893", "0 -0 0.362497", "Clifton", "MaleHuman", "CLASS Ranger LVL 2 LCK 0 Dagger 1", "21 22 23 55 56 57 104 105 106 129 130 131 153 154 155 178 179 180", "");

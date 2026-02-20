@@ -6173,6 +6173,18 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "GREETING Welcome to the Bank of Midgar.";
 			instant SimGroup "ITEMS CLASS Archer LVL 2 LCK 0 Dagger 1";
 		};
+		instant SimGroup "banker8" {
+			instant Marker "nibelheim banker" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "-4428.31 -246.517 65.0978";
+				rotation = "0 -0 3.10489";
+			};
+			instant SimGroup "NAME Edrik";
+			instant SimGroup "RACE MaleHuman";
+			instant SimGroup "GREETING Welcome to the Bank of Nibelheim.";
+			instant SimGroup "ITEMS CLASS Ranger LVL 100 LCK 0 Dagger 1";
+		};
 		instant SimGroup "blacksmith1" {
 			instant Marker "kalm blacksmith" {
 				dataBlock = "PathMarker";
