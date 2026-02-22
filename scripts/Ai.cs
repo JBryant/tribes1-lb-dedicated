@@ -1233,44 +1233,7 @@ function HardcodeAIskills(%aiId)
 		AddSkillPoint(%aiId, %i, %a);
 
 	%aiLevel = fetchData(%aiId, "LVL");
-
-	%enduranceModifier = 0.5;
-	if (%aiLevel > 10) 
-		%enduranceModifier = 0.6;
-	if (%aiLevel > 20) 
-		%enduranceModifier = 0.7;
-	if (%aiLevel > 40)
-		%enduranceModifier = 0.8;
-	if (%aiLevel > 60)
-		%enduranceModifier = 0.9;
-	if (%aiLevel > 80)
-		%enduranceModifier = 1.0;
-	if (%aiLevel > 100) 
-		%enduranceModifier = 1.2;
-	if (%aiLevel > 200) 
-		%enduranceModifier = 1.4;
-	if (%aiLevel > 300)
-		%enduranceModifier = 1.6;
-	if (%aiLevel > 400)
-		%enduranceModifier = 1.8;
-	if (%aiLevel > 500)
-		%enduranceModifier = 2.0;
-	if (%aiLevel > 1000)
-		%enduranceModifier = 3.0;
-	if (%aiLevel > 2000)
-		%enduranceModifier = 4.0;
-	if (%aiLevel > 3000)
-		%enduranceModifier = 5.0;
-	if (%aiLevel > 4000)
-		%enduranceModifier = 6.0;
-	if (%aiLevel > 5000)
-		%enduranceModifier = 7.0;
-	if (%aiLevel > 6000)
-		%enduranceModifier = 8.0;
-	if (%aiLevel > 7000)
-		%enduranceModifier = 9.0;
-	if (%aiLevel > 8000)
-		%enduranceModifier = 10.0;
+	%enduranceModifier = %aiLevel / 100;
 
 
 	//==== HARDCODED SKILLS TO ENSURE CHALLENGING BOTS ============

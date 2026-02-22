@@ -568,244 +568,244 @@ $spawnIndex[113] = "MoltenDragon";
 %defaultAlchemyDropsIV = "HealingHerb 5/-200 Sylphroot 3/-200 VialOfWater 3/-200 MalboroSporeSac 3/-200 ArcaneCrystalPhial 3/-200 ChocoboFeather 3/-400";
 %defaultAlchemyDropsV = "HealingHerb 5/-200 Sylphroot 5/-200 VialOfWater 3/-200 MalboroSporeSac 3/-200 EtherealStasisFlask 3/-200 ChocoboFeather 3/-200";
 
-$BotEquipment[GoblinRunt] = 	"CLASS Enemy LVL 2+1 COINS 1/50 LCK 0 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1/-2000 " @ %defaultAlchemyDropsI;
+$BotEquipment[GoblinRunt] = 	"CLASS Enemy LVL 2+1 COINS 1/50 ChippedDagger 1 Quartz 4/-300 FireMateriaI 1/-2000 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteGoblinRunt] = "LVL 4+2 Quartz 5/-250 FireMateriaII 1/-1800 " @ %defaultAlchemyDropsI;
-$BotEquipment[GoblinThief] = 	"CLASS Enemy LVL 5+2 COINS 3/50 LCK 0 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-1800 " @ %defaultAlchemyDropsI;
+$BotEquipment[GoblinThief] = 	"CLASS Enemy LVL 5+2 COINS 3/50 Sling 1 SmallRock 20/50 BlackStatue 1/-100 FireMateriaI 1/-1800 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteGoblinThief] = "LVL 10+4 BlackStatue 1/-75 FireMateriaII 1/-1600 " @ %defaultAlchemyDropsI;
-$BotEquipment[GoblinWizard] = 	"CLASS Enemy LVL 9+2 COINS 5/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1650 "  @ %defaultAlchemyDropsI; // 1/-500
+$BotEquipment[GoblinWizard] = 	"CLASS Enemy LVL 9+2 COINS 5/50 CastingBlade 1 FireMateriaI 1/-1650 "  @ %defaultAlchemyDropsI; // 1/-500
 $BotEquipment[EliteGoblinWizard] = "LVL 18+4 FireMateriaII 1/-1500 " @ %defaultAlchemyDropsI;
-$BotEquipment[GoblinRaider] = 	"CLASS Enemy LVL 11+3 COINS 4/50 LCK 0 WarpedClub 1 BlackStatue 1/-150 Jade 1/-300 FireMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[GoblinRaider] = 	"CLASS Enemy LVL 11+3 COINS 4/50 WarpedClub 1 BlackStatue 1/-150 Jade 1/-300 FireMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteGoblinRaider] = "LVL 22+6 BlackStatue 1/-100 Jade 1/-250 FireMateriaII 1/-1300 " @ %defaultAlchemyDropsI;
 
-$BotEquipment[GnollPup] = 		"CLASS Enemy LVL 10+3 COINS 6/50 LCK 0 ShatteredBoneClub 1 Potion 1 Ruby 1/-2000 FireMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[GnollPup] = 		"CLASS Enemy LVL 10+3 COINS 6/50 ShatteredBoneClub 1 Potion 1 Ruby 1/-2000 FireMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteGnollPup] = 	"LVL 20+6 Ruby 2/-1500 FireMateriaII 1/-1300 " @ %defaultAlchemyDropsI;
-$BotEquipment[GnollShaman] = 	"CLASS Enemy LVL 12+3 COINS 7/50 LCK 0 CastingBlade 1 FireMateriaI 1/-1400 " @ %defaultAlchemyDropsI;
+$BotEquipment[GnollShaman] = 	"CLASS Enemy LVL 12+3 COINS 7/50 CastingBlade 1 FireMateriaI 1/-1400 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteGnollShaman] = "LVL 24+6 FireMateriaII 1/-1200 " @ %defaultAlchemyDropsI;
-$BotEquipment[GnollScavenger] = 	"CLASS Enemy LVL 15+3 COINS 8/50 LCK 0 ShatteredBoneClub 1 Sapphire 2/-5000 FireMateriaI 1/-1250 " @ %defaultAlchemyDropsI;
+$BotEquipment[GnollScavenger] = 	"CLASS Enemy LVL 15+3 COINS 8/50 ShatteredBoneClub 1 Sapphire 2/-5000 FireMateriaI 1/-1250 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteGnollScavenger] = "LVL 30+6 Sapphire 3/-4000 FireMateriaII 1/-1000 " @ %defaultAlchemyDropsI;
-$BotEquipment[GnollHunter] = 	"CLASS Enemy LVL 17+3 COINS 9/50 LCK 0 RustyShank 1 Sling 1 SmallRock 20/50 Topaz 3/-3000 FireMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
+$BotEquipment[GnollHunter] = 	"CLASS Enemy LVL 17+3 COINS 9/50 RustyShank 1 Sling 1 SmallRock 20/50 Topaz 3/-3000 FireMateriaI 1/-1000 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteGnollHunter] = "LVL 34+6 Topaz 4/-2500 FireMateriaII 1/-800 " @ %defaultAlchemyDropsI;
 
-$BotEquipment[OrcWarlock] = 	"CLASS Enemy LVL 16+3 COINS 10/50 LCK 0 CastingBlade 1 Sling 1 SmallRock 20/50 EnchantedStone 1/-100 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[OrcWarlock] = 	"CLASS Enemy LVL 16+3 COINS 10/50 CastingBlade 1 Sling 1 SmallRock 20/50 EnchantedStone 1/-100 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteOrcWarlock] = "LVL 32+6 EnchantedStone 1/-75 EarthMateriaII 1/-1300 " @ %defaultAlchemyDropsI;
-$BotEquipment[OrcBerserker] = 	"CLASS Enemy LVL 20+4 COINS 13/50 LCK 0 HandAxe 1 Topaz 4/-500 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[OrcBerserker] = 	"CLASS Enemy LVL 20+4 COINS 13/50 HandAxe 1 Topaz 4/-500 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteOrcBerserker] = "LVL 40+8 Topaz 5/-400 EarthMateriaII 1/-1200 " @ %defaultAlchemyDropsI;
-$BotEquipment[OrcRavager] = 	"CLASS Enemy LVL 24+4 COINS 16/50 LCK 0 Club 1 Potion 3/30 Opal 4/-300 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[OrcRavager] = 	"CLASS Enemy LVL 24+4 COINS 16/50 Club 1 Potion 3/30 Opal 4/-300 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteOrcRavager] = "LVL 48+8 Opal 5/-250 EarthMateriaII 1/-1000 " @ %defaultAlchemyDropsI;
-$BotEquipment[OrcSlayer] = 	"CLASS Enemy LVL 28+4 COINS 19/50 LCK 0 Broadsword 1 BasicArrow 20/50 Opal 5/-250 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
+$BotEquipment[OrcSlayer] = 	"CLASS Enemy LVL 28+4 COINS 19/50 Broadsword 1 BasicArrow 20/50 Opal 5/-250 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteOrcSlayer] = "LVL 56+8 Opal 6/-200 EarthMateriaII 1/-800 " @ %defaultAlchemyDropsI;
 
-$BotEquipment[OgreRuffian] = 	"CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[OgreRuffian] = 	"CLASS Enemy LVL 22+4 COINS 20/50 Club 1 Quartz 8/-200 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteOgreRuffian] = "LVL 44+8 Quartz 10/-150 EarthMateriaII 1/-1300 " @ %defaultAlchemyDropsII;
-$BotEquipment[OgreDestroyer] = 	"CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 HandAxe 1 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[OgreDestroyer] = 	"CLASS Enemy LVL 27+4 COINS 23/50 HandAxe 1 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteOgreDestroyer] = "LVL 54+8 EarthMateriaII 1/-1200 " @ %defaultAlchemyDropsII;
-$BotEquipment[OgreHalberdier] = "CLASS Enemy LVL 31+5 COINS 26/50 LCK 0 Broadsword 1 Potion 3/30 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[OgreHalberdier] = "CLASS Enemy LVL 31+5 COINS 26/50 Broadsword 1 Potion 3/30 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteOgreHalberdier] = "LVL 62+10 EarthMateriaII 1/-1000 " @ %defaultAlchemyDropsII;
-$BotEquipment[OgreDreadnought] = "CLASS Enemy LVL 36+5 COINS 29/50 LCK 1 WalkingStaff 1 BasicArrow 15/75 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[OgreDreadnought] = "CLASS Enemy LVL 36+5 COINS 29/50 WalkingStaff 1 BasicArrow 15/75 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteOgreDreadnought] = "LVL 72+10 EarthMateriaII 1/-800 " @ %defaultAlchemyDropsII;
-$BotEquipment[OgreMagi] =		"CLASS Enemy LVL 42+6 COINS 50/50 LCK 1 CastingBlade 1 Emerald 1/-6000 Quartz 10/-200 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[OgreMagi] =		"CLASS Enemy LVL 42+6 COINS 50/50 CastingBlade 1 Emerald 1/-6000 Quartz 10/-200 EarthMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteOgreMagi] = 	"LVL 84+12 Emerald 1/-5000 Quartz 15/-150 EarthMateriaII 1/-700 " @ %defaultAlchemyDropsII;
 
-$BotEquipment[ZombieMauler] = 	"CLASS Enemy LVL 45/50 COINS 20/50 LCK 0 SpikedClub 1 Granite 10/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[ZombieMauler] = 	"CLASS Enemy LVL 45/50 COINS 20/50 SpikedClub 1 Granite 10/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteZombieMauler] = "LVL 90/50 Granite 15/-250 PoisonMateriaII 1/-1300 " @ %defaultAlchemyDropsII;
-$BotEquipment[ZombieThrasher] =	"CLASS Enemy LVL 49/50 COINS 23/50 LCK 0 Axe 1 Opal 3/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[ZombieThrasher] =	"CLASS Enemy LVL 49/50 COINS 23/50 Axe 1 Opal 3/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteZombieThrasher] = "LVL 98/50 Opal 4/-250 PoisonMateriaII 1/-1200 " @ %defaultAlchemyDropsII;
-$BotEquipment[UndeadSkeleton] = 	"CLASS Enemy LVL 54/50 COINS 26/50 LCK 0 Longsword 1 SkeletonBone 1/-250 Turquoise 4/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[UndeadSkeleton] = 	"CLASS Enemy LVL 54/50 COINS 26/50 Longsword 1 SkeletonBone 1/-250 Turquoise 4/-300 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteUndeadSkeleton] = "LVL 108/50 SkeletonBone 1/-200 Turquoise 5/-250 PoisonMateriaII 1/-1000 " @ %defaultAlchemyDropsIII;
-$BotEquipment[UndeadNecromancer] = "CLASS Enemy LVL 61/50 COINS 29/50 LCK 1 CastingBlade 1 Sling 1 SmallRock 20/50 Diamond 1/-3000 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[UndeadNecromancer] = "CLASS Enemy LVL 61/50 COINS 29/50 CastingBlade 1 Sling 1 SmallRock 20/50 Diamond 1/-3000 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteUndeadNecromancer] = "LVL 122/50 Diamond 1/-2500 PoisonMateriaII 1/-800 " @ %defaultAlchemyDropsIII;
-$BotEquipment[DemonSpawn] = 		"CLASS Enemy LVL 180/90 COINS 500/50 LCK 2 IronwoodStaff 1 Diamond 1/-1000 Emerald 1/-700 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[DemonSpawn] = 		"CLASS Enemy LVL 180/90 COINS 500/50 IronwoodStaff 1 Diamond 1/-1000 Emerald 1/-700 PoisonMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteDemonSpawn] = 	"LVL 360/90 Diamond 1/-800 Emerald 1/-600 PoisonMateriaII 1/-700 " @ %defaultAlchemyDropsIII;
 
-$BotEquipment[Protector] = 	"CLASS Enemy LVL 55/50 COINS 25/50 LCK 0 Mace 1 Ruby 2/-500 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[Protector] = 	"CLASS Enemy LVL 55/50 COINS 25/50 Mace 1 Ruby 2/-500 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteProtector] = "LVL 110/50 Ruby 3/-400 LightningMateriaII 1/-1300 " @ %defaultAlchemyDropsIII;
-$BotEquipment[Peacekeeper] = "CLASS Enemy LVL 57/50 COINS 28/50 LCK 0 HuntingSpear 1 SheafArrow 40/50 Jade 5/-500 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[Peacekeeper] = "CLASS Enemy LVL 57/50 COINS 28/50 HuntingSpear 1 SheafArrow 40/50 Jade 5/-500 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
 $BotEquipment[ElitePeacekeeper] = "LVL 114/50 Jade 6/-400 LightningMateriaII 1/-1200 " @ %defaultAlchemyDropsIII;
-$BotEquipment[Lord] = 		"CLASS Enemy LVL 59/50 COINS 31/50 LCK 1 BattleAxe 1 RLightCrossbow 1 LightQuarrel 25/75 Emerald 1/-2800 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[Lord] = 		"CLASS Enemy LVL 59/50 COINS 31/50 BattleAxe 1 RLightCrossbow 1 LightQuarrel 25/75 Emerald 1/-2800 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteLord] = 	"LVL 118/50 Emerald 1/-2500 LightningMateriaII 1/-1000 " @ %defaultAlchemyDropsIII;
-$BotEquipment[Champion] = 	"CLASS Enemy LVL 63/50 COINS 34/50 LCK 1 IronSword 1 RLightCrossbow 1 HeavyQuarrel 25/75 Sapphire 3/-1000 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[Champion] = 	"CLASS Enemy LVL 63/50 COINS 34/50 IronSword 1 RLightCrossbow 1 HeavyQuarrel 25/75 Sapphire 3/-1000 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteChampion] = "LVL 126/50 Sapphire 4/-800 LightningMateriaII 1/-800 " @ %defaultAlchemyDropsIII;
-$BotEquipment[Conjurer] =	"CLASS Enemy LVL 70/50 COINS 32/50 LCK 0 CastingBlade 1 Topaz 2/-300 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
+$BotEquipment[Conjurer] =	"CLASS Enemy LVL 70/50 COINS 32/50 CastingBlade 1 Topaz 2/-300 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteConjurer] = 	"LVL 140/50 Topaz 3/-250 LightningMateriaII 1/-700 " @ %defaultAlchemyDropsIII;
 
-$BotEquipment[Brigand] = 	"CLASS Enemy LVL 80/50 COINS 30/50 LCK 0 MythrilAxe 1 Sapphire 2/-3000 IceMateriaI 1/-1500 " @ %defaultAlchemyDropsIV;
-$BotEquipment[Marauder] =	"CLASS Enemy LVL 80/50 COINS 33/50 LCK 0 IronHammer 1 Opal 4/-300 Turquoise 1/-800 IceMateriaI 1/-1500 " @ %defaultAlchemyDropsIV;
-$BotEquipment[Knight] = 	"CLASS Enemy LVL 83/50 COINS 36/50 LCK 0 MythrilSword 1  SheafArrow 40/50 Jade 2/-600 IceMateriaI 1/-1500 " @ %defaultAlchemyDropsIV;
-$BotEquipment[BlackMage] = 	"CLASS Enemy LVL 87/50 COINS 39/50 LCK 1 CastingBlade 1 Topaz 1/-300 IceMateriaI 1/-1500 " @ %defaultAlchemyDropsIV;
+$BotEquipment[Brigand] = 	"CLASS Enemy LVL 80/50 COINS 30/50 MythrilAxe 1 Sapphire 2/-3000 IceMateriaI 1/-1500 " @ %defaultAlchemyDropsIV;
+$BotEquipment[Marauder] =	"CLASS Enemy LVL 80/50 COINS 33/50 IronHammer 1 Opal 4/-300 Turquoise 1/-800 IceMateriaI 1/-1500 " @ %defaultAlchemyDropsIV;
+$BotEquipment[Knight] = 	"CLASS Enemy LVL 83/50 COINS 36/50 MythrilSword 1  SheafArrow 40/50 Jade 2/-600 IceMateriaI 1/-1500 " @ %defaultAlchemyDropsIV;
+$BotEquipment[BlackMage] = 	"CLASS Enemy LVL 87/50 COINS 39/50 CastingBlade 1 Topaz 1/-300 IceMateriaI 1/-1500 " @ %defaultAlchemyDropsIV;
 
-$BotEquipment[Civilian] = 	"CLASS Enemy LVL 1 COINS 5/50 LCK 0 ChippedDagger 1";
-$BotEquipment[Gladiator] =	"CLASS Enemy LVL 1 LCK 0";
-$BotEquipment[Mercenary] = 	"CLASS Enemy LVL 65/50 COINS 32/50 LCK 0 ChippedDagger 1";
-$BotEquipment[Militia] = 	"CLASS Enemy LVL 75/50 COINS 35/50 LCK 1 ChippedDagger 1";
+$BotEquipment[Civilian] = 	"CLASS Enemy LVL 1 COINS 5/50 ChippedDagger 1";
+$BotEquipment[Gladiator] =	"CLASS Enemy LVL 1";
+$BotEquipment[Mercenary] = 	"CLASS Enemy LVL 65/50 COINS 32/50 ChippedDagger 1";
+$BotEquipment[Militia] = 	"CLASS Enemy LVL 75/50 COINS 35/50 ChippedDagger 1";
 
-$BotEquipment[Thug] = 		"CLASS Enemy LVL 65/50 COINS 32/50 LCK 1 ChippedDagger 1 Jade 5/-500";
-$BotEquipment[Miner] = 		"CLASS Enemy LVL 29/50 COINS 35/50 LCK 0 ChippedDagger 1 Parchment 1/-16000 Quartz 10/50 Opal 5/50 Turquoise 2/-50 Emerald 1/-1000";
+$BotEquipment[Thug] = 		"CLASS Enemy LVL 65/50 COINS 32/50 ChippedDagger 1 Jade 5/-500";
+$BotEquipment[Miner] = 		"CLASS Enemy LVL 29/50 COINS 35/50 ChippedDagger 1 Parchment 1/-16000 Quartz 10/50 Opal 5/50 Turquoise 2/-50 Emerald 1/-1000";
 
-$BotEquipment[Charger] = 	"CLASS Enemy LVL 33+4 COINS 70/50 LCK 1 IronSword 1 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[Charger] = 	"CLASS Enemy LVL 33+4 COINS 70/50 IronSword 1 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteCharger] = "LVL 66+8 LightningMateriaII 1/-1300 " @ %defaultAlchemyDropsII;
-$BotEquipment[Smasher] = 	"CLASS Enemy LVL 37+5 COINS 105/50 LCK 2 BattleAxe 1 Turquoise 5/-500 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
+$BotEquipment[Smasher] = 	"CLASS Enemy LVL 37+5 COINS 105/50 BattleAxe 1 Turquoise 5/-500 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteSmasher] = "LVL 74+10 Turquoise 6/-400 LightningMateriaII 1/-1200 " @ %defaultAlchemyDropsII;
-$BotEquipment[Goliath] = 	"CLASS Enemy LVL 107/50 COINS 70/50 LCK 1 GiantAxe 1 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsV;
+$BotEquipment[Goliath] = 	"CLASS Enemy LVL 107/50 COINS 70/50 GiantAxe 1 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteGoliath] = 	"LVL 214/50 GiantAxe 1 LightningMateriaII 1/-1300 " @ %defaultAlchemyDropsV;
-$BotEquipment[Reaper] = 	"CLASS Enemy LVL 174/50 COINS 105/50 LCK 2 CastingBlade 1 Turquoise 5/-500 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsV;
+$BotEquipment[Reaper] = 	"CLASS Enemy LVL 174/50 COINS 105/50 CastingBlade 1 Turquoise 5/-500 LightningMateriaI 1/-1500 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteReaper] = 	"LVL 348/50 Turquoise 6/-400 LightningMateriaII 1/-1200 " @ %defaultAlchemyDropsV;
 
-$BotEquipment[Sloth] = 		"CLASS Enemy LVL 317/50 COINS 115/50 LCK 3 AncientSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500 " @ %defaultAlchemyDropsV;
+$BotEquipment[Sloth] = 		"CLASS Enemy LVL 317/50 COINS 115/50 AncientSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteSloth] = 	"LVL 634/50 AncientSword 1 DragonScale 1/-2500 Gold 1/-800 DarkMateriaII 1/-1200 " @ %defaultAlchemyDropsV;
-$BotEquipment[Gohort] = 	"CLASS Enemy LVL 527/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500 " @ %defaultAlchemyDropsV;
+$BotEquipment[Gohort] = 	"CLASS Enemy LVL 527/50 COINS 135/50 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteGohort] = 	"LVL 1054/50 CastingBlade 1 DragonScale 1/-250 Emerald 1/-800 DarkMateriaII 1/-1200 " @ %defaultAlchemyDropsV;
 
-$BotEquipment[Acolyte] = 	"CLASS Enemy LVL 817/50 COINS 115/50 LCK 3 DiamondSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500";
+$BotEquipment[Acolyte] = 	"CLASS Enemy LVL 817/50 COINS 115/50 DiamondSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500";
 $BotEquipment[EliteAcolyte] = 	"LVL 1634/50 DiamondSword 1 DragonScale 1/-2500 Gold 1/-800 DarkMateriaII 1/-1200 ";
-$BotEquipment[Doomsayer] = 	"CLASS Enemy LVL 1027/50 COINS 135/50 LCK 4 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500";
+$BotEquipment[Doomsayer] = 	"CLASS Enemy LVL 1027/50 COINS 135/50 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500";
 $BotEquipment[EliteDoomsayer] = 	"LVL 2054/50 CastingBlade 1 DragonScale 1/-250 Emerald 1/-800 DarkMateriaII 1/-1200 ";
 
-$BotEquipment[Spiderling] = "CLASS Enemy LVL 2+1 COINS 5/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 " @ %defaultAlchemyDropsI;
+$BotEquipment[Spiderling] = "CLASS Enemy LVL 2+1 COINS 5/50 BeastClawI 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteSpiderling] = "LVL 4+1 PoisonMateriaII 1/-1000";
-$BotEquipment[Huntsman] = "CLASS Enemy LVL 5+2 COINS 10/50 LCK 0 BeastClawI 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 " @ %defaultAlchemyDropsI;
+$BotEquipment[Huntsman] = "CLASS Enemy LVL 5+2 COINS 10/50 BeastClawI 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteHuntsman] = "LVL 10+2 PoisonMateriaII 1/-1000";
-$BotEquipment[BrownRecluse] = "CLASS Enemy LVL 9+2 COINS 15/50 LCK 0 BeastClawV 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 SpiderVenom 1/-100 " @ %defaultAlchemyDropsI;
+$BotEquipment[BrownRecluse] = "CLASS Enemy LVL 9+2 COINS 15/50 BeastClawV 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 SpiderVenom 1/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteBrownRecluse] = "LVL 18+4 PoisonMateriaII 1/-1000";
-$BotEquipment[BlackWidow] = "CLASS Enemy LVL 11+3 COINS 20/50 LCK 0 BeastClawV 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 SpiderVenom 1/-100 " @ %defaultAlchemyDropsI;
+$BotEquipment[BlackWidow] = "CLASS Enemy LVL 11+3 COINS 20/50 BeastClawV 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 SpiderVenom 1/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteBlackWidow] = "LVL 22+4 PoisonMateriaII 1/-1000";
 
 // write bot equipment for each shinra type, 3 should be grouped together at a time
 // ex goose grunt infantry lvl 20 - 35, trooper officer sergeant 40 - 55, turk soldier3 soldier2 60 - 75, soldier1 shinra 80 - 90
 // the + indicates the max +/- variance in level from the base level, this should get higher as the level increases but go no larger than 15%
-$BotEquipment[ShinraGoon] = "CLASS Enemy LVL 10+2 COINS 20/50 LCK 0 Club 1 FireMateriaI 1/-800 MakoVial 1/-100 " @ %defaultAlchemyDropsI;
+$BotEquipment[ShinraGoon] = "CLASS Enemy LVL 10+2 COINS 20/50 Club 1 FireMateriaI 1/-800 MakoVial 1/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteShinraGoon] = "LVL 20+4 FireMateriaII 1/-800";
-$BotEquipment[ShinraGrunt] = "CLASS Enemy LVL 15+3 COINS 23/50 LCK 0 HandAxe 1 FireMateriaI 1/-800 MakoVial 1/-100 " @ %defaultAlchemyDropsI;
+$BotEquipment[ShinraGrunt] = "CLASS Enemy LVL 15+3 COINS 23/50 HandAxe 1 FireMateriaI 1/-800 MakoVial 1/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteShinraGrunt] = "LVL 30+6 FireMateriaII 1/-800";
-$BotEquipment[ShinraInfantry] = "CLASS Enemy LVL 20+3 COINS 26/50 LCK 0 Broadsword 1 FireMateriaI 1/-800 MakoVial 1/-100 " @ %defaultAlchemyDropsI;
+$BotEquipment[ShinraInfantry] = "CLASS Enemy LVL 20+3 COINS 26/50 Broadsword 1 FireMateriaI 1/-800 MakoVial 1/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteShinraInfantry] = "LVL 40+6 FireMateriaII 1/-800";
 
-$BotEquipment[ShinraTrooper] = "CLASS Enemy LVL 41+4 COINS 29/50 LCK 0 IronHammer 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
+$BotEquipment[ShinraTrooper] = "CLASS Enemy LVL 41+4 COINS 29/50 IronHammer 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteShinraTrooper] = "LVL 82+8 FireMateriaII 1/-700";
-$BotEquipment[ShinraOfficer] = "CLASS Enemy LVL 44+5 COINS 32/50 LCK 0 CastingBlade 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
+$BotEquipment[ShinraOfficer] = "CLASS Enemy LVL 44+5 COINS 32/50 CastingBlade 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteShinraOfficer] = "LVL 88+10 FireMateriaII 1/-700";
-$BotEquipment[ShinraSergeant] = "CLASS Enemy LVL 48+6 COINS 35/50 LCK 0 MythrilSword 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
+$BotEquipment[ShinraSergeant] = "CLASS Enemy LVL 48+6 COINS 35/50 MythrilSword 1 FireMateriaI 1/-700 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteShinraSergeant] = "LVL 96+12 FireMateriaII 1/-700";
 
-$BotEquipment[ShinraTurk] = "CLASS Enemy LVL 50+3 COINS 38/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-200 " @ %defaultAlchemyDropsIII;
+$BotEquipment[ShinraTurk] = "CLASS Enemy LVL 50+3 COINS 38/50 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-200 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteShinraTurk] = "LVL 100+10 FireMateriaII 1/-600 BombCore 10/-125 TonberryOil 1/-200";
-$BotEquipment[ShinraSoldier3] = "CLASS Enemy LVL 95+7 COINS 41/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-175 " @ %defaultAlchemyDropsIV;
+$BotEquipment[ShinraSoldier3] = "CLASS Enemy LVL 95+7 COINS 41/50 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-175 " @ %defaultAlchemyDropsIV;
 $BotEquipment[EliteShinraSoldier3] = "LVL 190+14 FireMateriaII 1/-600 BombCore 10/-125 TonberryOil 1/-175";
-$BotEquipment[ShinraSoldier2] = "CLASS Enemy LVL 100+8 COINS 44/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-125 " @ %defaultAlchemyDropsIV;
+$BotEquipment[ShinraSoldier2] = "CLASS Enemy LVL 100+8 COINS 44/50 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-125 " @ %defaultAlchemyDropsIV;
 $BotEquipment[EliteShinraSoldier2] = "LVL 200+16 FireMateriaII 1/-600 BombCore 10/-125 TonberryOil 1/-125";
-$BotEquipment[ShinraSoldier1] = "CLASS Enemy LVL 105+10 COINS 47/50 LCK 0 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-100 " @ %defaultAlchemyDropsV;
+$BotEquipment[ShinraSoldier1] = "CLASS Enemy LVL 105+10 COINS 47/50 ChippedDagger 1 FireMateriaI 1/-600 BombCore 10/-125 TonberryOil 1/-100 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteShinraSoldier1] = "LVL 210+20 FireMateriaII 1/-600 BombCore 10/-125 TonberryOil 1/-100";
 
 // dunega crypt bot equipment
-$BotEquipment[ZombieCorpse] = "CLASS Enemy LVL 20+3 COINS 20/50 LCK 0 Club 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-200 ZombieViscera 1/-35 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsI;
+$BotEquipment[ZombieCorpse] = "CLASS Enemy LVL 20+3 COINS 20/50 Club 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-200 ZombieViscera 1/-35 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteZombieCorpse] = "LVL 40+6 IceMateriaII 1/-500 SkeletonBonePowder 1/-200";
-$BotEquipment[ZombieWalker] = "CLASS Enemy LVL 22+4 COINS 20/50 LCK 0 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-175 ZombieViscera 1/-35 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsI;
+$BotEquipment[ZombieWalker] = "CLASS Enemy LVL 22+4 COINS 20/50 HandAxe 1 Quartz 8/-200 IceMateriaI 1/-500 SkeletonBonePowder 1/-175 ZombieViscera 1/-35 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteZombieWalker] = "LVL 44+8 IceMateriaII 1/-500 SkeletonBonePowder 1/-175";
-$BotEquipment[UndeadRattler] = "CLASS Enemy LVL 27+4 COINS 23/50 LCK 0 Broadsword 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-125 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsII;
+$BotEquipment[UndeadRattler] = "CLASS Enemy LVL 27+4 COINS 23/50 Broadsword 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-125 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteUndeadRattler] = "LVL 54+8 IceMateriaII 1/-500 SkeletonBonePowder 1/-125";
-$BotEquipment[UndeadMagician] = "CLASS Enemy LVL 31+5 COINS 26/50 LCK 0 CastingBlade 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-100 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsII;
+$BotEquipment[UndeadMagician] = "CLASS Enemy LVL 31+5 COINS 26/50 CastingBlade 1 IceMateriaI 1/-500 SkeletonBonePowder 1/-100 WrigglyWorm 3/-100 " @ %defaultAlchemyDropsII;
 $BotEquipment[EliteUndeadMagician] = "LVL 62+10 IceMateriaII 1/-500 SkeletonBonePowder 1/-100";
 
-$BotEquipment[DemonImp] = "CLASS Enemy LVL 50+5 COINS 23/50 LCK 0 Kodachi 1 Opal 3/-300 FireMateriaI 1/-400 ChimeraFlameGland 1/-200 " @ %defaultAlchemyDropsIII;
+$BotEquipment[DemonImp] = "CLASS Enemy LVL 50+5 COINS 23/50 Kodachi 1 Opal 3/-300 FireMateriaI 1/-400 ChimeraFlameGland 1/-200 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteDemonImp] = "LVL 100+10 FireMateriaII 1/-400 ChimeraFlameGland 1/-200";
-$BotEquipment[DemonRunt] = "CLASS Enemy LVL 55+5 COINS 26/50 LCK 0 MythrilSword 1 SkeletonBone 1/-250 Turquoise 4/-300 FireMateriaI 1/-400 ChimeraFlameGland 1/-150 " @ %defaultAlchemyDropsIII;
+$BotEquipment[DemonRunt] = "CLASS Enemy LVL 55+5 COINS 26/50 MythrilSword 1 SkeletonBone 1/-250 Turquoise 4/-300 FireMateriaI 1/-400 ChimeraFlameGland 1/-150 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteDemonRunt] = "LVL 110+10 FireMateriaII 1/-400 ChimeraFlameGland 1/-150";
-$BotEquipment[DemonCaster] = "CLASS Enemy LVL 60+5 COINS 29/50 LCK 1 CastingBlade 1 Diamond 1/-3000 FireMateriaI 1/-400 ChimeraFlameGland 1/-100 " @ %defaultAlchemyDropsIII;
+$BotEquipment[DemonCaster] = "CLASS Enemy LVL 60+5 COINS 29/50 CastingBlade 1 Diamond 1/-3000 FireMateriaI 1/-400 ChimeraFlameGland 1/-100 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteDemonCaster] = "LVL 120+10 FireMateriaII 1/-400 ChimeraFlameGland 1/-100";
 
-$BotEquipment[UberWhelp] = "CLASS Enemy LVL 65+5 COINS 23/50 LCK 1 CoralSword 1 Opal 3/-300 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-200 " @ %defaultAlchemyDropsIII;
+$BotEquipment[UberWhelp] = "CLASS Enemy LVL 65+5 COINS 23/50 CoralSword 1 Opal 3/-300 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-200 " @ %defaultAlchemyDropsIII;
 $BotEquipment[EliteUberWhelp] = "LVL 130+10 DarkMateriaIII 1/-3000";
-$BotEquipment[UberCrusher] = "CLASS Enemy LVL 75+6 COINS 26/50 LCK 1 GiantAxe 1 SkeletonBone 1/-250 Turquoise 4/-300 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-150 " @ %defaultAlchemyDropsIV;
+$BotEquipment[UberCrusher] = "CLASS Enemy LVL 75+6 COINS 26/50 GiantAxe 1 SkeletonBone 1/-250 Turquoise 4/-300 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-150 " @ %defaultAlchemyDropsIV;
 $BotEquipment[EliteUberCrusher] = "LVL 150+12 DarkMateriaIII 1/-3000";
-$BotEquipment[UberElemantalist] = "CLASS Enemy LVL 85+6 COINS 29/50 LCK 2 CastingBlade 1 Diamond 1/-3000 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-100 " @ %defaultAlchemyDropsIV;
+$BotEquipment[UberElemantalist] = "CLASS Enemy LVL 85+6 COINS 29/50 CastingBlade 1 Diamond 1/-3000 DarkMateriaI 1/-300 DarkMateriaII 1/-3000 BehemothHornFragment 1/-100 " @ %defaultAlchemyDropsIV;
 $BotEquipment[EliteUberElemantalist] = "LVL 170+12 DarkMateriaIII 1/-3000";
 
-$BotEquipment[HorrorDemon] = "CLASS Enemy LVL 90+5 COINS 23/50 LCK 2 BloodSword 1 Opal 3/-300 DarkMateriaI 1/-250 DarkMateriaII 1/-2500 AhrimanEyeLens 1/-150 " @ %defaultAlchemyDropsIV;
+$BotEquipment[HorrorDemon] = "CLASS Enemy LVL 90+5 COINS 23/50 BloodSword 1 Opal 3/-300 DarkMateriaI 1/-250 DarkMateriaII 1/-2500 AhrimanEyeLens 1/-150 " @ %defaultAlchemyDropsIV;
 $BotEquipment[EliteHorrorDemon] = "LVL 180+10 DarkMateriaIII 1/-2500";
-$BotEquipment[NightmareDemon] = "CLASS Enemy LVL 96+6 COINS 26/50 LCK 2 AncientAxe 1 SkeletonBone 1/-250 Turquoise 4/-250 DarkMateriaI 1/-250 DarkMateriaII 1/-2500 AhrimanEyeLens 1/-100 " @ %defaultAlchemyDropsIV;
+$BotEquipment[NightmareDemon] = "CLASS Enemy LVL 96+6 COINS 26/50 AncientAxe 1 SkeletonBone 1/-250 Turquoise 4/-250 DarkMateriaI 1/-250 DarkMateriaII 1/-2500 AhrimanEyeLens 1/-100 " @ %defaultAlchemyDropsIV;
 $BotEquipment[EliteNightmareDemon] = "LVL 192+12 DarkMateriaIII 1/-2500";
 
-$BotEquipment[Abomination] = "CLASS Enemy LVL 125+8 COINS 500/50 LCK 2 CastingBlade 1 PoisonMateriaI 1/-200 PoisonMateriaI 1/-2000 MalboroSporeSac 1/-100 " @ %defaultAlchemyDropsV;
+$BotEquipment[Abomination] = "CLASS Enemy LVL 125+8 COINS 500/50 CastingBlade 1 PoisonMateriaI 1/-200 PoisonMateriaI 1/-2000 MalboroSporeSac 1/-100 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteAbomination] = "LVL 250+16 PoisonMateriaII 1/-2000";
 
-$BotEquipment[Whelp] = "CLASS Enemy LVL 150+10 COINS 1000/50 LCK 3 CastingBlade 1 FireMateriaI 1/-200 FireMateriaII 1/-2000 ChimeraFlameGland 1/-100 " @ %defaultAlchemyDropsV;
+$BotEquipment[Whelp] = "CLASS Enemy LVL 150+10 COINS 1000/50 CastingBlade 1 FireMateriaI 1/-200 FireMateriaII 1/-2000 ChimeraFlameGland 1/-100 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteWhelp] = "LVL 300+20 FireMateriaIII 1/-2000";
 
-$BotEquipment[Shambler] = "CLASS Enemy LVL 200+50 COINS 115/50 LCK 2 DragonBoneClub 1 DarkMateriaII 1/-800 " @ %defaultAlchemyDropsV;
+$BotEquipment[Shambler] = "CLASS Enemy LVL 200+50 COINS 115/50 DragonBoneClub 1 DarkMateriaII 1/-800 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteShambler] = "LVL 400+100 DarkMateriaIII 1/-800";
 
-$BotEquipment[ShadowDemon] = "CLASS Enemy LVL 250+50 COINS 115/50 LCK 3 SteelJavelin 1 DarkMateriaII 1/-500 " @ %defaultAlchemyDropsV;
+$BotEquipment[ShadowDemon] = "CLASS Enemy LVL 250+50 COINS 115/50 SteelJavelin 1 DarkMateriaII 1/-500 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteShadowDemon] = "LVL 500+100 DarkMateriaIII 1/-500";
-$BotEquipment[ShadowFiend] = "CLASS Enemy LVL 300+50 COINS 115/50 LCK 3 CastingBlade 1 DarkMateriaII 1/-500 " @ %defaultAlchemyDropsV;
+$BotEquipment[ShadowFiend] = "CLASS Enemy LVL 300+50 COINS 115/50 CastingBlade 1 DarkMateriaII 1/-500 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteShadowFiend] = "LVL 600+100 DarkMateriaIII 1/-500";
 
-$BotEquipment[Drainer] = "CLASS Enemy LVL 350+50 COINS 115/50 LCK 3 CastingBlade 1 DarkMateriaII 1/-250 " @ %defaultAlchemyDropsV;
+$BotEquipment[Drainer] = "CLASS Enemy LVL 350+50 COINS 115/50 CastingBlade 1 DarkMateriaII 1/-250 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteDrainer] = "LVL 700+100 DarkMateriaIII 1/-250";
 
-$BotEquipment[AcidMateriaSlime] = "CLASS Enemy LVL 375+75 COINS 11500/50 LCK 3 CastingBlade 1 PoisonMateriaII 1/-250 " @ %defaultAlchemyDropsV;
+$BotEquipment[AcidMateriaSlime] = "CLASS Enemy LVL 375+75 COINS 11500/50 CastingBlade 1 PoisonMateriaII 1/-250 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteAcidMateriaSlime] = "LVL 750+100 PoisonMateriaIII 1/-250";
 
-$BotEquipment[CaveBat] = "CLASS Enemy LVL 10+3 COINS 11500/50 LCK 3 BeastClawI 1 PoisonMateriaI 1/-250 " @ %defaultAlchemyDropsI;
+$BotEquipment[CaveBat] = "CLASS Enemy LVL 10+3 COINS 11500/50 BeastClawI 1 PoisonMateriaI 1/-250 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteCaveBat] = "LVL 20+5 PoisonMateriaII 1/-250";
-$BotEquipment[MateriaBat] = "CLASS Enemy LVL 400+75 COINS 11500/50 LCK 3 BeastClawII 1 PoisonMateriaII 1/-250 " @ %defaultAlchemyDropsV;
+$BotEquipment[MateriaBat] = "CLASS Enemy LVL 400+75 COINS 11500/50 BeastClawII 1 PoisonMateriaII 1/-250 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteMateriaBat] = "LVL 800+100 PoisonMateriaIII 1/-250";
-$BotEquipment[MateriaBear] = "CLASS Enemy LVL 400+75 COINS 11500/50 LCK 3 BeastClawII 1 IceMateriaII 1/-250 " @ %defaultAlchemyDropsV;
+$BotEquipment[MateriaBear] = "CLASS Enemy LVL 400+75 COINS 11500/50 BeastClawII 1 IceMateriaII 1/-250 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteMateriaBear] = "LVL 800+100 IceMateriaIII 1/-250";
 
-$BotEquipment[OgreHellion] = "CLASS Enemy LVL 175+50 COINS 11500/50 LCK 2 DragonBoneClub 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[OgreHellion] = "CLASS Enemy LVL 175+50 COINS 11500/50 DragonBoneClub 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteOgreHellion] = "LVL 350+100 DarkMateriaIII 1/-600";
-$BotEquipment[OgreDemon] = "CLASS Enemy LVL 225+50 COINS 11500/50 LCK 2 BloodSword 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[OgreDemon] = "CLASS Enemy LVL 225+50 COINS 11500/50 BloodSword 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteOgreDemon] = "LVL 450+100 DarkMateriaIII 1/-600";
-$BotEquipment[OgreNecromancer] = "CLASS Enemy LVL 200+50 COINS 11500/50 LCK 2 CastingBlade 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[OgreNecromancer] = "CLASS Enemy LVL 200+50 COINS 11500/50 CastingBlade 1 DarkMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteOgreNecromancer] = "LVL 400+100 DarkMateriaIII 1/-600";
 
 // lower obsidan mines (lvl 350 - 450)
-$BotEquipment[CyclopsAbomination] = "CLASS Enemy LVL 325+50 COINS 11500/50 LCK 3 AncientSword 1 FireMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[CyclopsAbomination] = "CLASS Enemy LVL 325+50 COINS 11500/50 AncientSword 1 FireMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteCyclopsAbomination] = "LVL 650+100 FireMateriaIII 1/-600";
-$BotEquipment[CyclopsObscenity] = "CLASS Enemy LVL 375+50 COINS 11500/50 LCK 3 CastingBlade 1 FireMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[CyclopsObscenity] = "CLASS Enemy LVL 375+50 COINS 11500/50 CastingBlade 1 FireMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteCyclopsObscenity] = "LVL 750+100 FireMateriaIII 1/-600";
 
 // obsidian mines shaft
-$BotEquipment[ObsidianKnight] = "CLASS Enemy LVL 400+50 COINS 11500/50 LCK 3 SleepBlade 1 IceMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[ObsidianKnight] = "CLASS Enemy LVL 400+50 COINS 11500/50 SleepBlade 1 IceMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteObsidianKnight] = "LVL 800+100 IceMateriaIII 1/-600";
-$BotEquipment[ObsidianChanter] = "CLASS Enemy LVL 450+50 COINS 11500/50 LCK 3 CastingBlade 1 IceMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[ObsidianChanter] = "CLASS Enemy LVL 450+50 COINS 11500/50 CastingBlade 1 IceMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteObsidianChanter] = "LVL 900+100 IceMateriaIII 1/-600";
-$BotEquipment[ObsidianBerserker] = "CLASS Enemy LVL 500+50 COINS 11500/50 LCK 3 Slasher 1 IceMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[ObsidianBerserker] = "CLASS Enemy LVL 500+50 COINS 11500/50 Slasher 1 IceMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteObsidianBerserker] = "LVL 1000+100 IceMateriaIII 1/-600";
 
 // Upper ToA
-$BotEquipment[TempleDefender] = "CLASS Enemy LVL 500+50 COINS 11500/50 LCK 3 HolyHammer 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[TempleDefender] = "CLASS Enemy LVL 500+50 COINS 11500/50 HolyHammer 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteTempleDefender] = "LVL 1000+100 LightningMateriaIII 1/-600";
-$BotEquipment[TempleAcolyte] = "CLASS Enemy LVL 550+50 COINS 11500/50 LCK 3 CastingBlade 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[TempleAcolyte] = "CLASS Enemy LVL 550+50 COINS 11500/50 CastingBlade 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteTempleAcolyte] = "LVL 1100+100 LightningMateriaIII 1/-600";
-$BotEquipment[TempleCultist] = "CLASS Enemy LVL 600+50 COINS 11500/50 LCK 3 Onimusha 1 CultistBadge 1/-150 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[TempleCultist] = "CLASS Enemy LVL 600+50 COINS 11500/50 Onimusha 1 CultistBadge 1/-150 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteTempleCultist] = "LVL 1200+100 CultistBadge 1/-100 LightningMateriaIII 1/-600";
 
 // Mid ToA
-$BotEquipment[TempleBerserker] = "CLASS Enemy LVL 700+50 COINS 11500/50 LCK 4 DiamondAxe 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[TempleBerserker] = "CLASS Enemy LVL 700+50 COINS 11500/50 DiamondAxe 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteTempleBerserker] = "LVL 1400+150 LightningMateriaIII 1/-600";
 
 // Lower ToA
-$BotEquipment[TempleGiant] = "CLASS Enemy LVL 750+50 COINS 11500/50 LCK 4 GiantsHammer 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[TempleGiant] = "CLASS Enemy LVL 750+50 COINS 11500/50 GiantsHammer 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteTempleGiant] = "LVL 1500+150 LightningMateriaIII 1/-600";
-$BotEquipment[TempleWarlock] = "CLASS Enemy LVL 800+50 COINS 11500/50 LCK 4 CastingBlade 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[TempleWarlock] = "CLASS Enemy LVL 800+50 COINS 11500/50 CastingBlade 1 LightningMateriaII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteTempleWarlock] = "LVL 1500+150 LightningMateriaIII 1/-600";
 
 // Reactor 2
-$BotEquipment[FailedExperiment] = "CLASS Enemy LVL 1000+100 COINS 11500/50 LCK 4 MagmaHammer 1 IceMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[FailedExperiment] = "CLASS Enemy LVL 1000+100 COINS 11500/50 MagmaHammer 1 IceMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteFailedExperiment] = "LVL 2000+200 IceMateriaIV 1/-600";
-$BotEquipment[TorturedExperiment] = "CLASS Enemy LVL 1000+100 COINS 11500/50 LCK 4 CastingBlade 1 IceMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[TorturedExperiment] = "CLASS Enemy LVL 1000+100 COINS 11500/50 CastingBlade 1 IceMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteTorturedExperiment] = "LVL 2000+200 IceMateriaIV 1/-600";
 
 // Reactor 3
-$BotEquipment[MechSoldier] = "CLASS Enemy LVL 2000+200 COINS 11500/50 LCK 5 MateriaBlade 1 LightningMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[MechSoldier] = "CLASS Enemy LVL 2000+200 COINS 11500/50 MateriaBlade 1 LightningMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteMechSoldier] = "LVL 4000+300 LightningMateriaIV 1/-600";
-$BotEquipment[MechBeamer] = "CLASS Enemy LVL 2000+100 COINS 11500/50 LCK 5 CastingBlade 1 LightningMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[MechBeamer] = "CLASS Enemy LVL 2000+100 COINS 11500/50 CastingBlade 1 LightningMateriaIII 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteMechBeamer] = "LVL 4000+200 LightningMateriaIV 1/-600";
 
 // Reactor 4
-$BotEquipment[FireDragon] = "CLASS Enemy LVL 4000+200 COINS 11500/50 LCK 5 DragonBreath 1 DragonBreathShot 1000 FireMateriaIV 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[FireDragon] = "CLASS Enemy LVL 4000+200 COINS 11500/50 DragonBreath 1 DragonBreathShot 1000 FireMateriaIV 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteFireDragon] = "LVL 6000+300 FireMateriaV 1/-600";
-$BotEquipment[MoltenDragon] = "CLASS Enemy LVL 4000+100 COINS 11500/50 LCK 5 CastingBlade 1 FireMateriaIV 1/-600 " @ %defaultAlchemyDropsV;
+$BotEquipment[MoltenDragon] = "CLASS Enemy LVL 4000+100 COINS 11500/50 CastingBlade 1 FireMateriaIV 1/-600 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteMoltenDragon] = "LVL 6000+200 FireMateriaV 1/-600";
 
 //------------------------------

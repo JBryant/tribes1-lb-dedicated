@@ -273,7 +273,7 @@ $SkillRestriction[$Skill::keyword[19]] = "C Thief";
 $Skill::keyword[20] = "rage";
 $Skill::index[$Skill::keyword[20]] = 20;
 $Skill::name[20] = "Rage";
-$Skill::description[20] = "Enter a fury that doubles your damage but makes you take more damage.";
+$Skill::description[20] = "Enter a fury that doubles your damage but makes you take 25% more damage.";
 $Skill::delay[20] = 1.0;
 $Skill::recoveryTime[20] = 10;
 $Skill::duration[20] = 30;
@@ -281,7 +281,33 @@ $Skill::startSound[20] = Reflected;
 $Skill::groupListCheck[20] = False;
 $Skill::refVal[20] = -10;
 $Skill::graceDistance[20] = 1;
-$SkillRestriction[$Skill::keyword[20]] = "C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
+$SkillRestriction[$Skill::keyword[20]] = "L 50 C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
+
+$Skill::keyword[21] = "berserk";
+$Skill::index[$Skill::keyword[21]] = 21;
+$Skill::name[21] = "Berserk";
+$Skill::description[21] = "Unleash a berserker's wrath to deal triple damage but take 35% more damage.";
+$Skill::delay[21] = 1.0;
+$Skill::recoveryTime[21] = 10;
+$Skill::duration[21] = 30;
+$Skill::startSound[21] = Reflected;
+$Skill::groupListCheck[21] = False;
+$Skill::refVal[21] = -10;
+$Skill::graceDistance[21] = 1;
+$SkillRestriction[$Skill::keyword[21]] = "L 100 C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
+
+$Skill::keyword[22] = "nirvana";
+$Skill::index[$Skill::keyword[22]] = 22;
+$Skill::name[22] = "Nirvana";
+$Skill::description[22] = "Enter a transcendent state to deal quadruple damage but take 45% more damage.";
+$Skill::delay[22] = 1.0;
+$Skill::recoveryTime[22] = 10;
+$Skill::duration[22] = 30;
+$Skill::startSound[22] = Reflected;
+$Skill::groupListCheck[22] = False;
+$Skill::refVal[22] = -10;
+$Skill::graceDistance[22] = 1;
+$SkillRestriction[$Skill::keyword[22]] = "L 250 C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
 
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
@@ -694,6 +720,14 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 	if ($Skill::keyword[%index] == "rage") {
 		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Rage", "left");
 		UpdateBonusState(%clientId, "Rage", %duration, "Rage");
+	}
+	if ($Skill::keyword[%index] == "berserk") {
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Berserk", "left");
+		UpdateBonusState(%clientId, "Berserk", %duration, "Berserk");
+	}
+	if ($Skill::keyword[%index] == "nirvana") {
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Nirvana", "left");
+		UpdateBonusState(%clientId, "Nirvana", %duration, "Nirvana");
 	}
 
 
