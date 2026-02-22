@@ -792,7 +792,7 @@ $Quest::stepReward[19, 2] = "EXP 6000";
 
 $QuestNPC::name[19] = "Brian";
 $QuestNPC::shape[19] = "MaleHumanTownBot";
-$QuestNPC::pos[19] = "-4474.5 -268 65.829";
+$QuestNPC::pos[19] = "-4475.99 -267.829 65.6309";
 $QuestNPC::rot[19] = "0 -0 1.55037";
 $QuestNPC::questId[19] = 19;
 

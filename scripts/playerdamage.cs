@@ -96,6 +96,9 @@ function Player::onKilled(%this) {
 		ai::callbackPeriodic(%aiName, 0, AI::Periodic);
 	}
 
+	if(Merc::isMercenary(%clientId))
+		Merc::HandleDeath(%clientId);
+
 	//revert
 	Client::setControlObject(%clientId.possessId, %clientId.possessId);
 	Client::setControlObject(%clientId, %clientId);

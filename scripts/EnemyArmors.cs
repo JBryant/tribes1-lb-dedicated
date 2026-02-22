@@ -655,10 +655,10 @@ $BotEquipment[EliteSloth] = 	"LVL 634/50 AncientSword 1 DragonScale 1/-2500 Gold
 $BotEquipment[Gohort] = 	"CLASS Enemy LVL 527/50 COINS 135/50 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500 " @ %defaultAlchemyDropsV;
 $BotEquipment[EliteGohort] = 	"LVL 1054/50 CastingBlade 1 DragonScale 1/-250 Emerald 1/-800 DarkMateriaII 1/-1200 " @ %defaultAlchemyDropsV;
 
-$BotEquipment[Acolyte] = 	"CLASS Enemy LVL 817/50 COINS 115/50 DiamondSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500";
-$BotEquipment[EliteAcolyte] = 	"LVL 1634/50 DiamondSword 1 DragonScale 1/-2500 Gold 1/-800 DarkMateriaII 1/-1200 ";
-$BotEquipment[Doomsayer] = 	"CLASS Enemy LVL 1027/50 COINS 135/50 CastingBlade 1 DragonScale 1/-300 Emerald 1/-1000 DarkMateriaI 1/-1500";
-$BotEquipment[EliteDoomsayer] = 	"LVL 2054/50 CastingBlade 1 DragonScale 1/-250 Emerald 1/-800 DarkMateriaII 1/-1200 ";
+$BotEquipment[Acolyte] = 	"CLASS Enemy LVL 200+50 COINS 115/50 CultistBadge 1/-100 DiamondSword 1 DragonScale 1/-3000 Gold 1/-1000 DarkMateriaI 1/-1500";
+$BotEquipment[EliteAcolyte] = 	"LVL 400+50 DiamondSword 1 DragonScale 1/-2500 Gold 1/-800 DarkMateriaII 1/-1200 ";
+$BotEquipment[Doomsayer] = 	"CLASS Enemy LVL 250+50 COINS 135/50 CastingBlade 1 DragonScale 1/-300 CultistBadge 1/-100 Emerald 1/-1000 DarkMateriaI 1/-1500";
+$BotEquipment[EliteDoomsayer] = 	"LVL 500+50 CastingBlade 1 DragonScale 1/-250 Emerald 1/-800 DarkMateriaII 1/-1200 ";
 
 $BotEquipment[Spiderling] = "CLASS Enemy LVL 2+1 COINS 5/50 BeastClawI 1 PoisonMateriaI 1/-1000 SpiderFang 2/-100 " @ %defaultAlchemyDropsI;
 $BotEquipment[EliteSpiderling] = "LVL 4+1 PoisonMateriaII 1/-1000";

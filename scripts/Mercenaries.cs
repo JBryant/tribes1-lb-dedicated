@@ -80,6 +80,7 @@ function Merc::SpawnTownMerc(%mercId, %pos, %rot) {
 	storeData(%id, "tmpbotdata", "");
 	storeData(%id, "petowner", "");
 	storeData(%id, "OwnerID", "");
+	storeData(%id, "noDropLootbagFlag", True);
 
 	$Merc::owner[%id] = "";
 	$Merc::ownerName[%id] = "";
@@ -124,6 +125,63 @@ function Merc::GetOwnerMerc(%clientId) {
 	return "";
 }
 
+function Merc::isMercenary(%clientId) {
+	if(%clientId == "" || %clientId == 0)
+		return False;
+	if(!Player::isAiControlled(%clientId))
+		return False;
+
+	%isMerc = %clientId.isMercenary;
+	if(!%isMerc && %clientId.mercTemplate != "")
+		%isMerc = True;
+	if(!%isMerc && $Merc::templateById[%clientId] != "")
+		%isMerc = True;
+
+	return %isMerc;
+}
+
+function Merc::HandleDeath(%mercId) {
+	if(%mercId == "" || %mercId == 0)
+		return;
+	if(!Merc::isMercenary(%mercId))
+		return;
+
+	%ownerId = $Merc::owner[%mercId];
+	if(%ownerId == "" || %ownerId == False)
+		%ownerId = %mercId.ownerId;
+	if(%ownerId == "" || %ownerId == False)
+		%ownerId = fetchData(%mercId, "OwnerID");
+
+	%templateId = $Merc::templateById[%mercId];
+	if(%templateId == "")
+		%templateId = %mercId.mercTemplate;
+	%homePos = %mercId.mercHomePos;
+	%homeRot = %mercId.mercHomeRot;
+	if(%homePos == "" || %homePos == False)
+		%homePos = $Merc::homePos[%templateId];
+	if(%homeRot == "" || %homeRot == False)
+		%homeRot = $Merc::homeRot[%templateId];
+
+	if(%ownerId != "" && %ownerId != False) {
+		RemoveFromParty(%ownerId, Client::getName(%mercId), True);
+		storeData(%ownerId, "MercenaryId", "");
+		storeData(%ownerId, "MercenaryTemplate", "");
+		storeData(%ownerId, "PersonalPetList", RemoveFromCommaList(fetchData(%ownerId, "PersonalPetList"), %mercId));
+	}
+
+	$PetList = RemoveFromCommaList($PetList, %mercId);
+	$Merc::owner[%mercId] = "";
+	$Merc::ownerName[%mercId] = "";
+	%mercId.ownerId = "";
+	%mercId.ownerName = "";
+	storeData(%mercId, "petowner", "");
+	storeData(%mercId, "OwnerID", "");
+
+	if(%templateId != "" && %homePos != "" && %homePos != False) {
+		schedule("Merc::SpawnTownMerc(" @ %templateId @ ", \"" @ %homePos @ "\", \"" @ %homeRot @ "\");", $CorpseTimeoutValue + 3);
+	}
+}
+
 function Merc::SpawnFor(%clientId, %mercId) {
 	if (Merc::GetOwnerMerc(%clientId) != "")
 		return "";
@@ -151,6 +209,7 @@ function Merc::SpawnFor(%clientId, %mercId) {
 	storeData(%id, "botAttackMode", 2);
 	storeData(%id, "petowner", %clientId);
 	storeData(%id, "OwnerID", %clientId);
+	storeData(%id, "noDropLootbagFlag", True);
 	$Merc::owner[%id] = %clientId;
 	$Merc::ownerName[%id] = Client::getName(%clientId);
 	%id.ownerId = %clientId;
@@ -207,6 +266,7 @@ function Merc::RequestJoin(%mercId, %clientId) {
 	storeData(%mercId, "petowner", %clientId);
 	storeData(%mercId, "OwnerID", %clientId);
 	storeData(%mercId, "frozen", "");
+	storeData(%mercId, "noDropLootbagFlag", True);
 
 	$Merc::owner[%mercId] = %clientId;
 	$Merc::ownerName[%mercId] = Client::getName(%clientId);

@@ -815,6 +815,18 @@ function Game::refreshClientScore(%clientId)
 				Client::sendMessage(%clientId, 0, "Welcome to level " @ fetchData(%clientId, "LVL"));
 				PlaySound(SoundLevelUp, GameBase::getPosition(%clientId));
 
+				if(!Player::isAiControlled(%clientId)) {
+					%mercId = Merc::GetOwnerMerc(%clientId);
+					if(%mercId != "") {
+						%mercLevel = fetchData(%mercId, "LVL");
+						if(%mercLevel == "" || %mercLevel == 0)
+							%mercLevel = GetLevel(fetchData(%mercId, "EXP"), %mercId);
+						%targetLevel = %mercLevel + %lvls;
+						storeData(%mercId, "EXP", GetExp(%targetLevel, %mercId));
+						Game::refreshClientScore(%mercId);
+					}
+				}
+
 				// if new level is greater than or equal to remort level play different sound and send an additional message
 
 				%requiredLevel = 100 + (fetchData(%clientId, "RemortStep") * 5);

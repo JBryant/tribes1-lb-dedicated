@@ -1372,6 +1372,15 @@ instant SimGroup "MissionGroup" {
 				rotation = "0 0 0";
 			};
 		};
+		instant SimGroup "DUNGEON Cultist Lair" {
+			instant SimGroup "MUSIC ffdungeon.wav 55";
+			instant Marker "250 250 200 0" {
+				dataBlock = "PathMarker";
+				name = "";
+				position = "-4446.77 -283.208 913.89";
+				rotation = "0 0 0";
+			};
+		};
 		instant SimGroup "DUNGEON Shinra Mansion" {
 			instant SimGroup "DropPoints" {
 				instant Marker "Marker1" {
@@ -3039,6 +3048,24 @@ instant SimGroup "MissionGroup" {
 			position = "-2356.34 -2477.92 7229.05";
 			rotation = "0 -0 3.07436";
 		};
+		instant Marker "1 0 0 10 30 54 55" {
+			dataBlock = "PathMarker";
+			name = "cultist lair 1";
+			position = "-4427 -287.261 913.421";
+			rotation = "0 -0 1.53101";
+		};
+		instant Marker "1 0 0 10 30 54 55" {
+			dataBlock = "PathMarker";
+			name = "cultist lair 2";
+			position = "-4425.05 -258.231 913.894";
+			rotation = " 0 -0 -3.09475";
+		};
+		instant Marker "1 0 0 10 30 54 55" {
+			dataBlock = "PathMarker";
+			name = "cultist lair 3";
+			position = "-4466 -269.393 913.39";
+			rotation = "0 -0 -1.55677";
+		};
 	};
 	instant SimGroup "Burial Tree" {
 		instant StaticShape "Misc Tree S" {
@@ -3360,7 +3387,6 @@ instant SimGroup "MissionGroup" {
 			locked = "1";
 		};
 	};
-	instant SimGroup "Stronghold";
 	instant SimGroup "Ethren" {
 		instant InteriorShape "bridge1" {
 			fileName = "bridge.0.dis";
@@ -5584,6 +5610,28 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "NEED AI false";
 			instant SimGroup "GSAY You have been teleported to 7th Heaven.~wPortal6.wav";
 		};
+		instant SimGroup "nibelheim well to cultist lair" {
+			instant SimGroup "Input" {
+				instant Trigger "GroupTrigger1" {
+					dataBlock = "GroupTrigger";
+					name = "";
+					position = "-4468.46 -297.221 -34.4024";
+					rotation = "0 -0 0.76353";
+					boundingBox = "-1 -1 -1 1 1 1";
+					isSphere = "True";
+				};
+			};
+			instant SimGroup "Output" {
+				instant Marker "Marker1" {
+					dataBlock = "PathMarker";
+					name = "";
+					position = "-4425.51 -291.514 924.172";
+					rotation = "0 -0 0.806118";
+				};
+			};
+			instant SimGroup "NEED AI false";
+			instant SimGroup "GSAY You have been teleported somewhere.~wPortal6.wav";
+		};
 	};
 	instant SimGroup "HemacTower" {
 		instant InteriorShape "towerf1" {
@@ -6412,6 +6460,14 @@ instant SimGroup "MissionGroup" {
 			destroyable = "True";
 			deleteOnDestroy = "False";
 		};
+		instant StaticShape "BigElectroBeam1" {
+			dataBlock = "ElectricalBeamBig";
+			name = "";
+			position = "-4468.46 -297.221 -34.4024";
+			rotation = "0 0 0";
+			destroyable = "True";
+			deleteOnDestroy = "False";
+		};
 	};
 	instant InteriorShape "ffort1" {
 		fileName = "FFORT.0.dis";
@@ -6990,7 +7046,6 @@ instant SimGroup "MissionGroup" {
 		rotation = "0 -0 2.31996";
 		lightParams = "0 ";
 	};
-	instant SimGroup "CultistLairEntrance";
 	instant SimGroup "TestTown" {
 		instant InteriorShape "rmrshildrasinntester1" {
 			fileName = "rmrshildrasinntester.0.dis";
