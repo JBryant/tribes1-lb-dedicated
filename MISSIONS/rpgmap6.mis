@@ -328,6 +328,24 @@ instant SimGroup "MissionGroup" {
 		instant SimVolume "watchtower" {
 			fileName = "watchtower.vol";
 		};
+		instant SimVolume "prefabtests" {
+			fileName = "prefabtests.vol";
+		};
+		instant SimVolume "pstone" {
+			fileName = "pstone.vol";
+		};
+		instant SimVolume "pwood" {
+			fileName = "pwood.vol";
+		};
+		instant SimVolume "walkbovrpgobjstex" {
+			fileName = "walkbovrpgobjstex.vol";
+		};
+		instant SimVolume "iceflag2" {
+			fileName = "iceflag2.vol";
+		};
+		instant SimVolume "blacksmith" {
+			fileName = "blacksmith.vol";
+		};
 	};
 	instant SimGroup "World" {
 		instant SimPalette "Palette" {

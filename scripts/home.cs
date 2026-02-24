@@ -325,6 +325,127 @@ function EndRotateMode(%clientId) {
     Client::sendMessage(%clientId, 2, "Rotate mode ended.");
 }
 
+function DisStartPlaceMode(%clientId, %objectId) {
+	if(fetchData(%clientId, "DisPlaceMode") == 1)
+		return;
+	if(%objectId == "" || %objectId == 0)
+		return;
+
+	%player = Client::getOwnedObject(%clientId);
+	if(%player == -1)
+		return;
+
+	storeData(%clientId, "DisPlaceMode", 1);
+	$disPlaceObject[%clientId] = %objectId;
+	$disPlaceRot[%clientId] = getWord(GameBase::getRotation(%objectId), 2);
+	$disPlaceLockPos[%clientId] = "";
+
+	Client::sendMessage(%clientId, 2, "Moving object. Type #placedis when you are done.");
+	DisPlaceModeLoop(%clientId);
+}
+
+function DisPlaceModeLoop(%clientId) {
+	if(fetchData(%clientId, "DisPlaceMode") != 1)
+		return;
+
+	%object = $disPlaceObject[%clientId];
+	%player = Client::getOwnedObject(%clientId);
+	if(%object == "" || %object == 0 || %player == -1)
+		return;
+
+	if($disPlaceLockPos[%clientId] != "") {
+		%pos = $disPlaceLockPos[%clientId];
+		%obj = "";
+	} else if(GameBase::getLOSinfo(%player, 1000)) {
+		%pos = $los::position;
+		%obj = $los::object;
+	} else {
+		%pos = "";
+		%obj = "";
+	}
+
+	if(%pos != "" && (%obj == "" || (%obj != %object && getObjectType(%obj) != "Player"))) {
+		GameBase::setPosition(%object, %pos);
+		if($disPlaceRot[%clientId] != "")
+			GameBase::setRotation(%object, "0 0 " @ $disPlaceRot[%clientId]);
+	}
+
+	schedule("DisPlaceModeLoop(" @ %clientId @ ");", 0.2);
+}
+
+function DisEndPlaceMode(%clientId) {
+	if(fetchData(%clientId, "DisPlaceMode") != 1)
+		return;
+
+	%object = $disPlaceObject[%clientId];
+	if(%object != "" && %object != 0) {
+		%objectPos = GameBase::getPosition(%object);
+		Client::sendMessage(%clientId, 2, "Object placed at position " @ %objectPos @ ".");
+	}
+
+	storeData(%clientId, "DisPlaceMode", 0);
+	$disPlaceObject[%clientId] = "";
+	$disPlaceRot[%clientId] = "";
+	$disPlaceLockPos[%clientId] = "";
+}
+
+function DisStartRotateMode(%clientId, %objectId) {
+	if(fetchData(%clientId, "DisRotateMode") == 1)
+		return;
+	if(%objectId == "" || %objectId == 0)
+		return;
+
+	%player = Client::getOwnedObject(%clientId);
+	if(%player == -1)
+		return;
+
+	storeData(%clientId, "DisRotateMode", 1);
+	$disRotateObject[%clientId] = %objectId;
+	$disRotateLastPos[%clientId] = GameBase::getPosition(%player);
+	$disRotateRot[%clientId] = getWord(GameBase::getRotation(%objectId), 2);
+
+	Client::sendMessage(%clientId, 2, "Rotate mode started. Move to rotate, type #rotatedis again to stop.");
+	DisRotateModeLoop(%clientId);
+}
+
+function DisRotateModeLoop(%clientId) {
+	if(fetchData(%clientId, "DisRotateMode") != 1)
+		return;
+
+	%object = $disRotateObject[%clientId];
+	%player = Client::getOwnedObject(%clientId);
+	if(%object == "" || %object == 0 || %player == -1)
+		return;
+
+	%currentPos = GameBase::getPosition(%player);
+	%lastPos = $disRotateLastPos[%clientId];
+	%dx = getWord(%currentPos, 0) - getWord(%lastPos, 0);
+	%dy = getWord(%currentPos, 1) - getWord(%lastPos, 1);
+	%delta = (%dx + %dy) * 0.5;
+
+	if(%delta > 5) %delta = 5;
+	if(%delta < -5) %delta = -5;
+
+	if(%delta != 0) {
+		$disRotateRot[%clientId] = $disRotateRot[%clientId] + %delta;
+		GameBase::setRotation(%object, "0 0 " @ $disRotateRot[%clientId]);
+	}
+
+	$disRotateLastPos[%clientId] = %currentPos;
+	schedule("DisRotateModeLoop(" @ %clientId @ ");", 0.2);
+}
+
+function DisEndRotateMode(%clientId) {
+	if(fetchData(%clientId, "DisRotateMode") != 1)
+		return;
+
+	storeData(%clientId, "DisRotateMode", 0);
+	$disRotateObject[%clientId] = "";
+	$disRotateLastPos[%clientId] = "";
+	$disRotateRot[%clientId] = "";
+	Client::sendMessage(%clientId, 2, "Rotate mode ended.");
+}
+
 function HomeAddX(%clientId, %offset) {
     %home = $tagToObjectId[%clientId @ "_home"];
     if (%home == "" || %home == 0) {

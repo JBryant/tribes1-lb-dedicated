@@ -4709,6 +4709,9 @@ function internalSay(%clientId, %team, %message, %senderName)
 					%r1 = GetWord(%cropped, 5);
 					%r2 = GetWord(%cropped, 6);
 					%r3 = GetWord(%cropped, 7);
+					
+					if(%tag == -1 || %tag == "")
+						%tag = %f @ floor((getRandom() * 1000000) + 1);
 
 					if(%x == -1 && %y == -1 && %z == -1)
 					{
@@ -4725,6 +4728,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 					%fname = %f @ ".dis";
 					%object = newObject(%tag, InteriorShape, %fname);
+					%object.shape = %f;
 
 					if(%object != 0 && %tag != -1)
 					{
@@ -4759,6 +4763,201 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 	      }
+		if(%w1 == "#movedis")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				%tag = GetWord(%cropped, 0);
+				%object = "";
+
+				if(%tag != -1 && %tag != "")
+					%object = $tagToObjectId[%tag];
+
+				if(%object == "" || %object == 0) {
+					%player = Client::getOwnedObject(%TrueClientId);
+					if(%player != -1 && GameBase::getLOSinfo(%player, 1000))
+						%object = $los::object;
+				}
+
+				if(%object == "" || %object == 0 || getObjectType(%object) == "Player") {
+					Client::sendMessage(%TrueClientId, 0, "Invalid object. Use #movedis tagname or look at the object.");
+					return;
+				}
+
+				DisStartPlaceMode(%TrueClientId, %object);
+			}
+			return;
+		}
+		if(%w1 == "#rotatedis")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				if(fetchData(%TrueClientId, "DisRotateMode") == 1) {
+					DisEndRotateMode(%TrueClientId);
+					return;
+				}
+
+				%tag = GetWord(%cropped, 0);
+				%object = "";
+
+				if(fetchData(%TrueClientId, "DisPlaceMode") == 1)
+					%object = $disPlaceObject[%TrueClientId];
+
+				if(%object == "" || %object == 0) {
+					if(%tag != -1 && %tag != "")
+						%object = $tagToObjectId[%tag];
+				}
+
+				if(%object == "" || %object == 0) {
+					%player = Client::getOwnedObject(%TrueClientId);
+					if(%player != -1 && GameBase::getLOSinfo(%player, 1000))
+						%object = $los::object;
+				}
+
+				if(%object == "" || %object == 0 || getObjectType(%object) == "Player") {
+					Client::sendMessage(%TrueClientId, 0, "Invalid object. Use #rotatedis tagname or look at the object.");
+					return;
+				}
+
+				DisStartRotateMode(%TrueClientId, %object);
+			}
+			return;
+		}
+		if(%w1 == "#placedis")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				%didSomething = False;
+				if(fetchData(%TrueClientId, "DisRotateMode") == 1) {
+					DisEndRotateMode(%TrueClientId);
+					%didSomething = True;
+				}
+				if(fetchData(%TrueClientId, "DisPlaceMode") == 1) {
+					DisEndPlaceMode(%TrueClientId);
+					%didSomething = True;
+				}
+				if(!%didSomething)
+					Client::sendMessage(%TrueClientId, 0, "You are not moving any DIS object.");
+			}
+			return;
+		}
+		if(%w1 == "#deletedis")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				%player = Client::getOwnedObject(%TrueClientId);
+				if(%player == -1) {
+					Client::sendMessage(%TrueClientId, 0, "No valid target.");
+					return;
+				}
+
+				if(GameBase::getLOSinfo(%player, 1000)) {
+					%object = $los::object;
+					if(%object == "" || %object == 0 || getObjectType(%object) == "Player") {
+						Client::sendMessage(%TrueClientId, 0, "No valid target.");
+						return;
+					}
+
+					%tag = %object.tag;
+					if(%tag == "" || !IsInCommaList($DISlist, %tag)) {
+						Client::sendMessage(%TrueClientId, 0, "Target is not a tagged DIS object.");
+						return;
+					}
+
+					ClearEvents(%object);
+					deleteObject(%object);
+					$tagToObjectId[%tag] = "";
+					$DISlist = RemoveFromCommaList($DISlist, %tag);
+
+					if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Deleted " @ %tag @ " (" @ %object @ ")");
+				} else {
+					Client::sendMessage(%TrueClientId, 0, "No valid target.");
+				}
+			}
+			return;
+		}
+		if(%w1 == "#dislog")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				%zoneName = %cropped;
+				if(%zoneName == "" || %zoneName == -1) {
+					Client::sendMessage(%TrueClientId, 0, "#dislog \"zone name\"");
+					return;
+				}
+
+				if(String::getSubStr(%zoneName, 0, 1) == "\"" && String::getSubStr(%zoneName, String::len(%zoneName) - 1, 1) == "\"")
+					%zoneName = String::getSubStr(%zoneName, 1, String::len(%zoneName) - 2);
+
+				%list = String::replaceAll($DISlist, ",", " ");
+				for(%i = 0; (%tag = GetWord(%list, %i)) != -1; %i++) {
+					if(%tag == "" || %tag == -1)
+						continue;
+
+					%object = $tagToObjectId[%tag];
+					lbecho("object: " @ %object);
+					if(%object == "" || %object == 0)
+						continue;
+
+					%shape = %object.shape;
+					lbecho("shape: " @ %shape);
+					if(%shape == "")
+						%shape = $tagToObjectShape[%tag];
+
+					if(%shape == "")
+						continue;
+					
+					if(String::findSubStr(%shape, ".dis") == -1)
+						%shape = %shape @ ".dis";
+
+					%pos = GameBase::getPosition(%object);
+					%rot = GameBase::getRotation(%object);
+
+					lbecho("ZoneShapes::AddInterior(\"" @ %zoneName @ "\", \"" @ %tag @ "\", \"" @ %shape @ "\", 0, \"" @ %pos @ "\", \"" @ %rot @ "\", \"0\");");
+				}
+				Client::sendMessage(%TrueClientId, 0, "DIS log complete for zone: " @ %zoneName);
+			}
+			return;
+		}
+		if(%w1 == "#setdisz")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				%newZ = GetWord(%cropped, 0);
+				if(%newZ == -1 || %newZ == "") {
+					Client::sendMessage(%TrueClientId, 0, "#setdisz zValue");
+					return;
+				}
+
+				%player = Client::getOwnedObject(%TrueClientId);
+				if(%player == -1) {
+					Client::sendMessage(%TrueClientId, 0, "No valid target.");
+					return;
+				}
+
+				if(GameBase::getLOSinfo(%player, 1000)) {
+					%object = $los::object;
+					if(%object == "" || %object == 0 || getObjectType(%object) == "Player") {
+						Client::sendMessage(%TrueClientId, 0, "No valid target.");
+						return;
+					}
+
+					%tag = %object.tag;
+					if(%tag == "" || !IsInCommaList($DISlist, %tag)) {
+						Client::sendMessage(%TrueClientId, 0, "Target is not a tagged DIS object.");
+						return;
+					}
+
+					%pos = GameBase::getPosition(%object);
+					%newPos = GetWord(%pos, 0) @ " " @ GetWord(%pos, 1) @ " " @ %newZ;
+					GameBase::setPosition(%object, %newPos);
+					if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Updated " @ %tag @ " Z to " @ %newZ);
+				} else {
+					Client::sendMessage(%TrueClientId, 0, "No valid target.");
+				}
+			}
+			return;
+		}
 	      if(%w1 == "#deldis")
 		{
 	            if(%clientToServerAdminLevel >= 3)

@@ -4,6 +4,10 @@ function ZoneShapes::Init() {
 	$ZoneShapes::UseZoneSpawns = True;
 	$ZoneShapes::count = 0;
 
+	// Kalm
+	ZoneShapes::AddInterior("Kalm", "woodcrate482437", "woodcrate.dis", 0, "-2425.89 -248.264 77.5913", "0 0 0", "0");
+
+
 	// Seventh Heaven (7th Heaven)
 	ZoneShapes::AddInterior("7th Heaven", "cdoore1", "CDoorE.dis", 0, "1436.75 -464.981 -808.135", "0 0 0", "0");
 	ZoneShapes::AddInterior("7th Heaven", "pic51", "pic5.dis", 1, "1416.78 -447.194 -804.25", "0 -0 -1.57989", "0");
