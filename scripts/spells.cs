@@ -1718,6 +1718,82 @@ $Spell::graceDistance[89] = 10;
 $Spell::elementalType[89] = $ElementalPoison;
 $SkillType[holyflaskbomb] = $SkillAlchemy;
 
+$Spell::keyword[90] = "poisonblade";
+$Spell::index[poisonblade] = 90;
+$Spell::name[90] = "Poison Blade";
+$Spell::description[90] = "Poisons the target, dealing damage over time.";
+$Spell::delay[90] = 0;
+$Spell::recoveryTime[90] = 0;
+$Spell::damageValue[90] = "-10";
+$Spell::duration[90] = "20";
+$Spell::LOSrange[90] = 10;
+$Spell::radius[90] = 0;
+$Spell::manaCost[90] = 0;
+$Spell::startSound[90] = Portal11;
+$Spell::groupListCheck[90] = False;
+$Spell::refVal[90] = -9998;
+$Spell::graceDistance[90] = 1;
+$Spell::classRestrictions[90] = "";
+$Spell::minLevel[90] = 0;
+$SkillType[poisonblade] = $SkillAlchemy;
+
+$Spell::keyword[91] = "venomblade";
+$Spell::index[venomblade] = 91;
+$Spell::name[91] = "Venom Blade";
+$Spell::description[91] = "Poisons the target, dealing damage over time.";
+$Spell::delay[91] = 0;
+$Spell::recoveryTime[91] = 0;
+$Spell::damageValue[91] = "-25";
+$Spell::duration[91] = "20";
+$Spell::LOSrange[91] = 10;
+$Spell::radius[91] = 0;
+$Spell::manaCost[91] = 0;
+$Spell::startSound[91] = Portal11;
+$Spell::groupListCheck[91] = False;
+$Spell::refVal[91] = -9998;
+$Spell::graceDistance[91] = 1;
+$Spell::classRestrictions[91] = "";
+$Spell::minLevel[91] = 0;
+$SkillType[venomblade] = $SkillAlchemy;
+
+$Spell::keyword[92] = "toxicblade";
+$Spell::index[toxicblade] = 92;
+$Spell::name[92] = "Toxic Blade";
+$Spell::description[92] = "Poisons the target, dealing damage over time.";
+$Spell::delay[92] = 0;
+$Spell::recoveryTime[92] = 0;
+$Spell::damageValue[92] = "-50";
+$Spell::duration[92] = "20";
+$Spell::LOSrange[92] = 10;
+$Spell::radius[92] = 0;
+$Spell::manaCost[92] = 0;
+$Spell::startSound[92] = Portal11;
+$Spell::groupListCheck[92] = False;
+$Spell::refVal[92] = -9998;
+$Spell::graceDistance[92] = 1;
+$Spell::classRestrictions[92] = "";
+$Spell::minLevel[92] = 0;
+$SkillType[toxicblade] = $SkillAlchemy;
+
+$Spell::keyword[93] = "corruptblade";
+$Spell::index[corruptblade] = 93;
+$Spell::name[93] = "Corrupt Blade";
+$Spell::description[93] = "Poisons the target, dealing damage over time.";
+$Spell::delay[93] = 0;
+$Spell::recoveryTime[93] = 0;
+$Spell::damageValue[93] = "-100";
+$Spell::duration[93] = "20";
+$Spell::LOSrange[93] = 10;
+$Spell::radius[93] = 0;
+$Spell::manaCost[93] = 0;
+$Spell::startSound[93] = Portal11;
+$Spell::groupListCheck[93] = False;
+$Spell::refVal[93] = -9998;
+$Spell::graceDistance[93] = 1;
+$Spell::classRestrictions[93] = "";
+$Spell::minLevel[93] = 0;
+$SkillType[corruptblade] = $SkillAlchemy;
+
 //====================================================================================================================
 //====================================================================================================================
 //====================================================================================================================
@@ -3472,6 +3548,34 @@ function SpellNum86(%clientId, %castObj, %castPos, %w2) {
 function SpellNum87(%clientId, %castObj, %castPos, %w2) {
 	if(Player::isAiControlled(%castObj)) {
 		ApplyBonusStateSpell(Player::getClient(%castObj), %clientId, 87, "HP");
+	}
+}
+
+// poisonblade
+function SpellNum90(%clientId, %castObj, %castPos, %w2) {
+	if(Player::isAiControlled(%castObj)) {
+		ApplyBonusStateSpell(Player::getClient(%castObj), %clientId, 90, "HP");
+	}
+}
+
+// venomblade
+function SpellNum91(%clientId, %castObj, %castPos, %w2) {
+	if(Player::isAiControlled(%castObj)) {
+		ApplyBonusStateSpell(Player::getClient(%castObj), %clientId, 91, "HP");
+	}
+}
+
+// toxicblade
+function SpellNum92(%clientId, %castObj, %castPos, %w2) {
+	if(Player::isAiControlled(%castObj)) {
+		ApplyBonusStateSpell(Player::getClient(%castObj), %clientId, 92, "HP");
+	}
+}
+
+// corruptblade
+function SpellNum93(%clientId, %castObj, %castPos, %w2) {
+	if(Player::isAiControlled(%castObj)) {
+		ApplyBonusStateSpell(Player::getClient(%castObj), %clientId, 93, "HP");
 	}
 }
 

@@ -158,6 +158,17 @@ function HasBonusState(%clientId, %type) {
 	return False;
 }
 
+function GetBonusStateGiver(%clientId, %type) {
+	for(%i = 1; %i <= $maxBonusStates; %i++) {
+		if($BonusStateCnt[%clientId, %i] > 0) {
+			if(String::ICompare($BonusState[%clientId, %i], %type) == 0) {
+				return $BonusStateGiver[%clientId, %i];
+			}
+		}
+	}
+	return "";
+}
+
 function RemoveBonusState(%clientId, %type) {
 	for(%i = 1; %i <= $maxBonusStates; %i++) {
 		if($BonusStateCnt[%clientId, %i] > 0) {

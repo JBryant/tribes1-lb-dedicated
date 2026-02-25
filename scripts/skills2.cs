@@ -309,6 +309,110 @@ $Skill::refVal[22] = -10;
 $Skill::graceDistance[22] = 1;
 $SkillRestriction[$Skill::keyword[22]] = "L 250 C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
 
+$Skill::keyword[23] = "battlewaltz";
+$Skill::index[$Skill::keyword[23]] = 23;
+$Skill::name[23] = "Battle Waltz";
+$Skill::description[23] = "A rhythmic dance that boosts your ATK and MDEF.";
+$Skill::delay[23] = 1.5;
+$Skill::recoveryTime[23] = 12;
+$Skill::duration[23] = 30;
+$Skill::startSound[23] = Reflected;
+$Skill::groupListCheck[23] = False;
+$Skill::refVal[23] = -10;
+$Skill::graceDistance[23] = 1;
+$SkillRestriction[$Skill::keyword[23]] = "L 40 C Dancer C Seraphim C Ancient";
+
+$Skill::keyword[24] = "inspire";
+$Skill::index[$Skill::keyword[24]] = 24;
+$Skill::name[24] = "Inspire";
+$Skill::description[24] = "A rousing speech that bolsters your defenses.";
+$Skill::delay[24] = 1.5;
+$Skill::recoveryTime[24] = 12;
+$Skill::duration[24] = 30;
+$Skill::startSound[24] = ActivateTR;
+$Skill::groupListCheck[24] = False;
+$Skill::refVal[24] = -10;
+$Skill::graceDistance[24] = 1;
+$SkillRestriction[$Skill::keyword[24]] = "L 30 C Orator C Valkyrie";
+
+$Skill::keyword[25] = "etherveil";
+$Skill::index[$Skill::keyword[25]] = 25;
+$Skill::name[25] = "Ether Veil";
+$Skill::description[25] = "Wrap yourself in a mystic veil that raises MDEF and DEF.";
+$Skill::delay[25] = 1.5;
+$Skill::recoveryTime[25] = 12;
+$Skill::duration[25] = 30;
+$Skill::startSound[25] = ActivateTR;
+$Skill::groupListCheck[25] = False;
+$Skill::refVal[25] = -10;
+$Skill::graceDistance[25] = 1;
+$SkillRestriction[$Skill::keyword[25]] = "L 30 C Mystic C Seraphim C Ancient";
+
+$Skill::keyword[26] = "ambush";
+$Skill::index[$Skill::keyword[26]] = 26;
+$Skill::name[26] = "Ambush";
+$Skill::description[26] = "Strike a nearby enemy for heavy damage. Sneak increases the hit.";
+$Skill::delay[26] = 0.1;
+$Skill::recoveryTime[26] = 8;
+$Skill::LOSrange[26] = 20;
+$Skill::startSound[26] = AmrbroseSwordA;
+$Skill::groupListCheck[26] = False;
+$Skill::refVal[26] = -10;
+$Skill::graceDistance[26] = 2;
+$SkillRestriction[$Skill::keyword[26]] = "L 20 C Thief";
+
+$Skill::keyword[27] = "poisonblade";
+$Skill::index[$Skill::keyword[27]] = 27;
+$Skill::name[27] = "Poison Blade";
+$Skill::description[27] = "Coat your weapon in poison, causing hits to inflict a toxic curse (10 dmg).";
+$Skill::delay[27] = 1.5;
+$Skill::recoveryTime[27] = 12;
+$Skill::duration[27] = 30;
+$Skill::startSound[27] = ActivateTR;
+$Skill::groupListCheck[27] = False;
+$Skill::refVal[27] = -10;
+$Skill::graceDistance[27] = 1;
+$SkillRestriction[$Skill::keyword[27]] = "L 1 C Thief";
+
+$Skill::keyword[28] = "venomblade";
+$Skill::index[$Skill::keyword[28]] = 28;
+$Skill::name[28] = "Venom Blade";
+$Skill::description[28] = "Coat your weapon in venom, causing hits to inflict a toxic curse (25 dmg).";
+$Skill::delay[28] = 1.5;
+$Skill::recoveryTime[28] = 12;
+$Skill::duration[28] = 30;
+$Skill::startSound[28] = ActivateTR;
+$Skill::groupListCheck[28] = False;
+$Skill::refVal[28] = -10;
+$Skill::graceDistance[28] = 1;
+$SkillRestriction[$Skill::keyword[28]] = "L 25 C Thief";
+
+$Skill::keyword[29] = "toxicblade";
+$Skill::index[$Skill::keyword[29]] = 29;
+$Skill::name[29] = "Toxic Blade";
+$Skill::description[29] = "Coat your weapon in potent toxins, causing hits to inflict a toxic curse (50 dmg).";
+$Skill::delay[29] = 1.5;
+$Skill::recoveryTime[29] = 12;
+$Skill::duration[29] = 30;
+$Skill::startSound[29] = ActivateTR;
+$Skill::groupListCheck[29] = False;
+$Skill::refVal[29] = -10;
+$Skill::graceDistance[29] = 1;
+$SkillRestriction[$Skill::keyword[29]] = "L 50 C Thief";
+
+$Skill::keyword[30] = "corruptblade";
+$Skill::index[$Skill::keyword[30]] = 30;
+$Skill::name[30] = "Corrupt Blade";
+$Skill::description[30] = "Coat your weapon in a corrupting poison, causing hits to inflict a toxic curse (100 dmg).";
+$Skill::delay[30] = 1.5;
+$Skill::recoveryTime[30] = 12;
+$Skill::duration[30] = 30;
+$Skill::startSound[30] = ActivateTR;
+$Skill::groupListCheck[30] = False;
+$Skill::refVal[30] = -10;
+$Skill::graceDistance[30] = 1;
+$SkillRestriction[$Skill::keyword[30]] = "L 100 C Thief";
+
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
 
@@ -728,6 +832,67 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 	if ($Skill::keyword[%index] == "nirvana") {
 		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Nirvana", "left");
 		UpdateBonusState(%clientId, "Nirvana", %duration, "Nirvana");
+	}
+	if ($Skill::keyword[%index] == "battlewaltz") {
+		%bonus = "ATK 20 MDEF 20";
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Battle Waltz", "left");
+		UpdateBonusState(%clientId, %bonus, %duration, "Battle Waltz");
+	}
+	if ($Skill::keyword[%index] == "inspire") {
+		%bonus = "DEF 25 MDEF 15";
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Inspire", "left");
+		UpdateBonusState(%clientId, %bonus, %duration, "Inspire");
+	}
+	if ($Skill::keyword[%index] == "etherveil") {
+		%bonus = "MDEF 30 DEF 10";
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Ether Veil", "left");
+		UpdateBonusState(%clientId, %bonus, %duration, "Ether Veil");
+	}
+	if ($Skill::keyword[%index] == "ambush") {
+		%targetId = "";
+		if(getObjectType(%castObj) == "Player")
+			%targetId = Player::getClient(%castObj);
+		if(%targetId == "" || %targetId == -1)
+			%targetId = GetClosestEnemyFromPos(%clientId, GameBase::getPosition(%clientId), $Skill::LOSrange[%index]);
+
+		if(%targetId == "" || %targetId == -1) {
+			Client::sendMessage(%clientId, $MsgRed, "No valid target to ambush.");
+			%overrideEndSound = True;
+			%returnFlag = True;
+		} else {
+			%targetObj = Client::getOwnedObject(%targetId);
+			if(%targetObj != -1) {
+				%multi = 1.6;
+				if(HasBonusState(%clientId, "Sneak")) {
+					%multi = 2.2;
+					GameBase::startFadeIn(%clientId);
+					storeData(%clientId, "invisible", "");
+					RemoveBonusState(%clientId, "Sneak");
+				}
+				DoPhysicalDamage(%targetObj, %clientId, "Ambush", %multi, %index);
+			}
+			%returnFlag = True;
+		}
+	}
+	if ($Skill::keyword[%index] == "poisonblade") {
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Poison Blade", "left");
+		UpdateBonusState(%clientId, "poisonblade", %duration, "Poison Blade", "poisonblade");
+		%returnFlag = True;
+	}
+	if ($Skill::keyword[%index] == "venomblade") {
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Venom Blade", "left");
+		UpdateBonusState(%clientId, "venomblade", %duration, "Venom Blade", "venomblade");
+		%returnFlag = True;
+	}
+	if ($Skill::keyword[%index] == "toxicblade") {
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Toxic Blade", "left");
+		UpdateBonusState(%clientId, "toxicblade", %duration, "Toxic Blade", "toxicblade");
+		%returnFlag = True;
+	}
+	if ($Skill::keyword[%index] == "corruptblade") {
+		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Corrupt Blade", "left");
+		UpdateBonusState(%clientId, "corruptblade", %duration, "Corrupt Blade", "corruptblade");
+		%returnFlag = True;
 	}
 
 

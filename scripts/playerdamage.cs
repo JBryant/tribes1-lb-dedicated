@@ -974,6 +974,32 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 					}
 				}
 
+				if(%projectile == "") {
+					%spellEffect = "";
+					if(HasBonusState(%shooterClient, "poisonblade")) {
+						%spellEffect = GetBonusStateGiver(%shooterClient, "poisonblade");
+						if(%spellEffect == "") %spellEffect = "poisonblade";
+					}
+					else if(HasBonusState(%shooterClient, "venomblade")) {
+						%spellEffect = GetBonusStateGiver(%shooterClient, "venomblade");
+						if(%spellEffect == "") %spellEffect = "venomblade";
+					}
+					else if(HasBonusState(%shooterClient, "toxicblade")) {
+						%spellEffect = GetBonusStateGiver(%shooterClient, "toxicblade");
+						if(%spellEffect == "") %spellEffect = "toxicblade";
+					}
+					else if(HasBonusState(%shooterClient, "corruptblade")) {
+						%spellEffect = GetBonusStateGiver(%shooterClient, "corruptblade");
+						if(%spellEffect == "") %spellEffect = "corruptblade";
+					}
+
+					if(%spellEffect != "") {
+						%spellIndex = $Spell::index[%spellEffect];
+						if(%spellIndex != "")
+							eval("SpellNum"@%spellIndex@"("@%shooterClient@", \""@%damagedClient@"\", \""@%pos@"\");");
+					}
+				}
+
 				if(%rhp == -1) {
 					%weaponDamage = -1;	//There was an LCK miss
 				}
