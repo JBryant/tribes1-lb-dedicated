@@ -473,6 +473,23 @@ $Skill::refVal[34] = 320;
 $Skill::graceDistance[34] = 2;
 $SkillRestriction[$Skill::keyword[34]] = "L 100 C HolyKnight";
 
+$Skill::keyword[35] = "finalblade";
+$Skill::index[$Skill::keyword[35]] = 35;
+$Skill::name[35] = "Final Blade";
+$Skill::description[35] = "Calls down a rain of swords upon your foes.";
+$Skill::actionMessage[35] = "You call down the final blade.";
+$Skill::delay[35] = 3;
+$Skill::recoveryTime[35] = 12;
+$Skill::damageValue[35] = 320;
+$Skill::LOSrange[35] = 999;
+$Skill::radius[35] = 50;
+$Skill::startSound[35] = PlaceSeal;
+$Skill::endSound[35] = Explode3FW;
+$Skill::groupListCheck[35] = False;
+$Skill::refVal[35] = 320;
+$Skill::graceDistance[35] = 2;
+$SkillRestriction[$Skill::keyword[35]] = "L 100 C Soldier";
+
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
 
@@ -1017,46 +1034,7 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 
 	if ($Skill::keyword[%index] == "shadowblade") {
 		if(%castPos != "")	{
-			%xPos = getWord(%castPos, 0);
-			%yPos = getWord(%castPos, 1);
-			%zPos = getWord(%castPos, 2) + 350;
-
-			%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
-
-			%sword = newObject("", InteriorShape, "masamunefinal.dis");
-			gamebase::setPosition(%sword, %newPos);
-			addToSet("MissionCleanup", %sword);
-			schedule("Item::Pop(" @ %sword @ ");", 10, %sword);
-
-			%minrad = 0;
-			%maxrad = 4;
-
-			for(%i = 0; %i <= 40; %i++) {
-				%tempPos = RandomPositionXY(%minrad, %maxrad);
-
-				%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
-				%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
-				%zPos = GetWord(%castPos, 2) + %i;
-		
-				%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
-				schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb8\", \"" @ %newPos @ "\", False, \"" @ %index @ "\");", %i / 20, %player);
-			}
-
-			%xPos = getWord(%castPos, 0);
-			%yPos = getWord(%castPos, 1);
-			%zPos = getWord(%castPos, 2) + 350;
-
-			for(%i = 1; %i <= 30; %i++) {
-				%t = %i * 10;
-				%newPos = %xPos @ " " @ %yPos @ " " @ %zPos - %t;
-				schedule("gamebase::setPosition(" @ %sword @ ", \"" @ %newPos @ "\");", ((%i / 100) + 2), %player);
-			}
-
-			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb6\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.3, %player);
-			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb14\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.35, %player);
-			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.4, %player);
-			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.5, %player);
-			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.6, %player);
+			SkillDoBladeStrike(%clientId, %castPos, %index, "Bomb8");
 
 			%overrideEndSound = True;
 			%returnFlag = True;
@@ -1070,46 +1048,26 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 
 	if ($Skill::keyword[%index] == "holyblade") {
 		if(%castPos != "")	{
-			%xPos = getWord(%castPos, 0);
-			%yPos = getWord(%castPos, 1);
-			%zPos = getWord(%castPos, 2) + 350;
+			SkillDoBladeStrike(%clientId, %castPos, %index, "Bomb305");
 
-			%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+			%overrideEndSound = True;
+			%returnFlag = True;
+		}
+		else {
+			Client::sendMessage(%clientId, $MsgBeige, "Could not find a target.");
+			%overrideEndSound = True;
+			%returnFlag = False;
+		}
+    }
 
-			%sword = newObject("", InteriorShape, "masamunefinal.dis");
-			gamebase::setPosition(%sword, %newPos);
-			addToSet("MissionCleanup", %sword);
-			schedule("Item::Pop(" @ %sword @ ");", 10, %sword);
-
-			%minrad = 0;
-			%maxrad = 4;
-
-			for(%i = 0; %i <= 40; %i++) {
-				%tempPos = RandomPositionXY(%minrad, %maxrad);
-
-				%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
-				%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
-				%zPos = GetWord(%castPos, 2) + %i;
-		
-				%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
-				schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb305\", \"" @ %newPos @ "\", False, \"" @ %index @ "\");", %i / 20, %player);
+	if ($Skill::keyword[%index] == "finalblade") {
+		if(%castPos != "")	{
+			for(%s = 0; %s < 5; %s++) {
+				%offsetX = getRandom() * 60 - 30;
+				%offsetY = getRandom() * 60 - 30;
+				%strikePos = (getWord(%castPos, 0) + %offsetX) @ " " @ (getWord(%castPos, 1) + %offsetY) @ " " @ getWord(%castPos, 2);
+				schedule("SkillDoBladeStrike(\"" @ %clientId @ "\", \"" @ %strikePos @ "\", \"" @ %index @ "\", \"Bomb305\");", %s * 0.75, %player);
 			}
-
-			%xPos = getWord(%castPos, 0);
-			%yPos = getWord(%castPos, 1);
-			%zPos = getWord(%castPos, 2) + 350;
-
-			for(%i = 1; %i <= 30; %i++) {
-				%t = %i * 10;
-				%newPos = %xPos @ " " @ %yPos @ " " @ %zPos - %t;
-				schedule("gamebase::setPosition(" @ %sword @ ", \"" @ %newPos @ "\");", ((%i / 100) + 2), %player);
-			}
-
-			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb6\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.3, %player);
-			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb14\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.35, %player);
-			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.4, %player);
-			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.5, %player);
-			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.6, %player);
 
 			%overrideEndSound = True;
 			%returnFlag = True;
@@ -1308,6 +1266,50 @@ function PhysicalRadiusDamage(%clientId, %pos, %radius, %actionName, %multiplier
 	%n = containerBoxFillSet(%set, $SimPlayerObjectType, %pos, %radius, %radius, %radius, 0);
 	Group::iterateRecursive(%set, DoPhysicalDamage, %clientId, %actionName, %multi, %skillIndex);
 	deleteObject(%set);
+}
+
+function SkillDoBladeStrike(%clientId, %castPos, %skillIndex, %beamBomb) {
+	%player = Client::getOwnedObject(%clientId);
+	%xPos = getWord(%castPos, 0);
+	%yPos = getWord(%castPos, 1);
+	%zPos = getWord(%castPos, 2) + 350;
+
+	%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+
+	%sword = newObject("", InteriorShape, "masamunefinal.dis");
+	gamebase::setPosition(%sword, %newPos);
+	addToSet("MissionCleanup", %sword);
+	schedule("Item::Pop(" @ %sword @ ");", 5, %sword);
+
+	%minrad = 0;
+	%maxrad = 4;
+
+	for(%i = 0; %i <= 40; %i++) {
+		%tempPos = RandomPositionXY(%minrad, %maxrad);
+
+		%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
+		%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
+		%zPos = GetWord(%castPos, 2) + %i;
+
+		%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+		schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"" @ %beamBomb @ "\", \"" @ %newPos @ "\", False, \"" @ %skillIndex @ "\");", %i / 20, %player);
+	}
+
+	%xPos = getWord(%castPos, 0);
+	%yPos = getWord(%castPos, 1);
+	%zPos = getWord(%castPos, 2) + 350;
+
+	for(%i = 1; %i <= 30; %i++) {
+		%t = %i * 10;
+		%newPos = %xPos @ " " @ %yPos @ " " @ %zPos - %t;
+		schedule("gamebase::setPosition(" @ %sword @ ", \"" @ %newPos @ "\");", ((%i / 100) + 2), %player);
+	}
+
+	schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb6\", \"" @ %castPos @ "\", True, \"" @ %skillIndex @ "\");", 2.3, %player);
+	schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb14\", \"" @ %castPos @ "\", True, \"" @ %skillIndex @ "\");", 2.35, %player);
+	schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %skillIndex @ "\");", 2.4, %player);
+	schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %skillIndex @ "\");", 2.5, %player);
+	schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %skillIndex @ "\");", 2.6, %player);
 }
 
 function SkillSpellRadiusDamage(%clientId, %pos, %skillIndex, %multiplier) {
