@@ -809,9 +809,12 @@ $SkillMultiplier[Dancer, $SkillWoodCutting] = 1.0;
 $SkillMultiplier[Dancer, $SkillFarming] = 1.0;
 $EXPmultiplier[Dancer] = 0.9;
 $AllowedSkills[Dancer] = ""
+@ $SkillDesc[$SkillSwords] @ " "
+@ $SkillDesc[$SkillAxes] @ " "
 @ $SkillDesc[$SkillHammers] @ " "
 @ $SkillDesc[$SkillSpears] @ " "
 @ $SkillDesc[$SkillKatanas] @ " "
+@ $SkillDesc[$SkillBows] @ " "
 @ $SkillDesc[$SkillWeightCapacity] @ " "
 @ $SkillDesc[$SkillWhiteMagick] @ " "
 @ $SkillDesc[$SkillTimeMagick] @ " "

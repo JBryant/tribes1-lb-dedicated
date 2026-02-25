@@ -1582,7 +1582,8 @@ function RepeatingCrossbowImage::onFire(%player, %slot) {
 	%clientId = Player::getClient(%player);
 	%vel = 100;
 
-	ProjectileAttack(%clientId, %vel);
+	// Repeating crossbow relies on image fireTime; skip manual delay gate
+	ProjectileAttack(%clientId, %vel, True);
 }
 
 // LONGBOW

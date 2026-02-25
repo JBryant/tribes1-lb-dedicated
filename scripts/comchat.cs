@@ -2359,12 +2359,12 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%msg = %msg @ "\n";
 
 			%msg = %msg @ "<f0>Fixes:\n";
-
-			%msg = %msg @ "<f0>Fixes In Development:\n";
 			%msg = %msg @ "<f1>(Leif) - Storm repeater crossbow only fires every second shot.\n";
 			%msg = %msg @ "<f1>(Leif) - Teleporter from Upper Dunega to The Burial Tree not working\n";
 			%msg = %msg @ "<f1>(Leif) - When using projectile spells/skills with an Axe, Ancient axe or Rune axe equipped the projectile fires to the right.\n";
 			%msg = %msg @ "<f1>(AngryGardenGnome) - Dancers have alchemy and summoning skills on menu, but can't use either skill tree.\n";
+
+			%msg = %msg @ "<f0>Fixes In Development:\n";
 
 			%msg = %msg @ "<f2>\nAs always, thank you for playing and your continued support! -LongBow\n";
 
