@@ -563,6 +563,11 @@ function LoadCharacter(%clientId)
 		// load character quest data
 		Quests::LoadCharacter(%clientId);
 
+		// limit break is session-only
+		storeData(%clientId, "LimitBreak", 0);
+		storeData(%clientId, "LimitBreakTier", "");
+		storeData(%clientId, "LimitBreakMaxed", "");
+
 		%recallList = $funk::var[%name, 8, recallList];
 		storeData(%clientId, "recallList", %recallList);
 
@@ -634,6 +639,10 @@ function LoadCharacter(%clientId)
 		storeData(%clientId, "isMimic", "");
 		storeData(%clientId, "MyHouse", "");
 		storeData(%clientId, "RankPoints", 0);
+		// limit break is session-only
+		storeData(%clientId, "LimitBreak", 0);
+		storeData(%clientId, "LimitBreakTier", "");
+		storeData(%clientId, "LimitBreakMaxed", "");
 
 		//%clientId.choosingGroup = True;
 		%clientId.choosingGroup = "";

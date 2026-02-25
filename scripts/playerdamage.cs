@@ -964,6 +964,50 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				%prehithp = fetchData(%damagedClient,"HP");
 				%rhp = refreshHP(%damagedClient, %finalDamage);
 
+				// limit break gain for human players (session-only)
+				if(!Player::isAiControlled(%damagedClient) && %rhp != -1) {
+					%posthp = fetchData(%damagedClient, "HP");
+					%damageTaken = %prehithp - %posthp;
+
+					if(%damageTaken > 0) {
+						%lvl = fetchData(%damagedClient, "LVL");
+						%maxEndurance = %lvl * 10;
+						%targetMaxHP = $MinHP[fetchData(%damagedClient, "RACE")] + (%maxEndurance * 0.6);
+						%targetMaxHP += AddPoints(%damagedClient, 4);
+						%targetMaxHP += floor(fetchData(%damagedClient, "RemortStep") * (%maxEndurance / 8));
+						%targetMaxHP += %lvl;
+						%targetMaxHP += AddBonusStatePoints(%damagedClient, "MaxHP");
+
+						if(%targetMaxHP > 0) {
+							%gain = (%damageTaken / %targetMaxHP) * 100;
+							%lb = fetchData(%damagedClient, "LimitBreak");
+							if(%lb == "")
+								%lb = 0;
+							%oldLb = %lb;
+							%lb = Cap(%lb + %gain, 0, 100);
+							storeData(%damagedClient, "LimitBreak", %lb);
+
+							%oldTier = fetchData(%damagedClient, "LimitBreakTier");
+							if(%oldTier == "")
+								%oldTier = floor(%oldLb / 10);
+
+							if(%lb >= 100) {
+								%maxed = fetchData(%damagedClient, "LimitBreakMaxed");
+								if(%maxed == "") {
+									Client::sendMessage(%damagedClient, $MsgRed, "Limit Break Ready!");
+									storeData(%damagedClient, "LimitBreakMaxed", True);
+								}
+							} else {
+								%newTier = floor(%lb / 10);
+								if(%newTier > %oldTier && %newTier >= 1) {
+									Client::sendMessage(%damagedClient, $MsgBeige, "Your limit break meter is at " @ (%newTier * 10) @ "%.");
+									storeData(%damagedClient, "LimitBreakTier", %newTier);
+								}
+							}
+						}
+					}
+				}
+
 				// check projectiles for spell effects
 				if (%projectile != "") {
 					%spellEffect = $beltitem[%projectile, "SpellEffect"];
