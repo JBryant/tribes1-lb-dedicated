@@ -439,6 +439,40 @@ $Skill::refVal[32] = -10;
 $Skill::graceDistance[32] = 10;
 $SkillRestriction[$Skill::keyword[32]] = "L 120 C Samurai C HolyKnight C Spellblade";
 
+$Skill::keyword[33] = "shadowblade";
+$Skill::index[$Skill::keyword[33]] = 33;
+$Skill::name[33] = "Shadow Blade";
+$Skill::description[33] = "Summons an unholy blade upon enemies.";
+$Skill::actionMessage[33] = "You call forth a shadow blade.";
+$Skill::delay[33] = 3;
+$Skill::recoveryTime[33] = 10;
+$Skill::damageValue[33] = 320;
+$Skill::LOSrange[33] = 999;
+$Skill::radius[33] = 50;
+$Skill::startSound[33] = PlaceSeal;
+$Skill::endSound[33] = Explode3FW;
+$Skill::groupListCheck[33] = False;
+$Skill::refVal[33] = 320;
+$Skill::graceDistance[33] = 2;
+$SkillRestriction[$Skill::keyword[33]] = "L 100 C DarkKnight";
+
+$Skill::keyword[34] = "holyblade";
+$Skill::index[$Skill::keyword[34]] = 34;
+$Skill::name[34] = "Holy Blade";
+$Skill::description[34] = "Summons a divine blade upon enemies.";
+$Skill::actionMessage[34] = "You call down a holy blade.";
+$Skill::delay[34] = 3;
+$Skill::recoveryTime[34] = 10;
+$Skill::damageValue[34] = 320;
+$Skill::LOSrange[34] = 999;
+$Skill::radius[34] = 50;
+$Skill::startSound[34] = PlaceSeal;
+$Skill::endSound[34] = Explode3FW;
+$Skill::groupListCheck[34] = False;
+$Skill::refVal[34] = 320;
+$Skill::graceDistance[34] = 2;
+$SkillRestriction[$Skill::keyword[34]] = "L 100 C HolyKnight";
+
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
 
@@ -981,6 +1015,112 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		schedule("Player::mountItem(" @ %clientId @ ", \"" @ %weaponImage @ "\", 0);", 1.4, %player);
     }
 
+	if ($Skill::keyword[%index] == "shadowblade") {
+		if(%castPos != "")	{
+			%xPos = getWord(%castPos, 0);
+			%yPos = getWord(%castPos, 1);
+			%zPos = getWord(%castPos, 2) + 350;
+
+			%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+
+			%sword = newObject("", InteriorShape, "masamunefinal.dis");
+			gamebase::setPosition(%sword, %newPos);
+			addToSet("MissionCleanup", %sword);
+			schedule("Item::Pop(" @ %sword @ ");", 10, %sword);
+
+			%minrad = 0;
+			%maxrad = 4;
+
+			for(%i = 0; %i <= 40; %i++) {
+				%tempPos = RandomPositionXY(%minrad, %maxrad);
+
+				%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
+				%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
+				%zPos = GetWord(%castPos, 2) + %i;
+		
+				%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+				schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb8\", \"" @ %newPos @ "\", False, \"" @ %index @ "\");", %i / 20, %player);
+			}
+
+			%xPos = getWord(%castPos, 0);
+			%yPos = getWord(%castPos, 1);
+			%zPos = getWord(%castPos, 2) + 350;
+
+			for(%i = 1; %i <= 30; %i++) {
+				%t = %i * 10;
+				%newPos = %xPos @ " " @ %yPos @ " " @ %zPos - %t;
+				schedule("gamebase::setPosition(" @ %sword @ ", \"" @ %newPos @ "\");", ((%i / 100) + 2), %player);
+			}
+
+			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb6\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.3, %player);
+			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb14\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.35, %player);
+			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.4, %player);
+			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.5, %player);
+			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.6, %player);
+
+			%overrideEndSound = True;
+			%returnFlag = True;
+		}
+		else {
+			Client::sendMessage(%clientId, $MsgBeige, "Could not find a target.");
+			%overrideEndSound = True;
+			%returnFlag = False;
+		}
+    }
+
+	if ($Skill::keyword[%index] == "holyblade") {
+		if(%castPos != "")	{
+			%xPos = getWord(%castPos, 0);
+			%yPos = getWord(%castPos, 1);
+			%zPos = getWord(%castPos, 2) + 350;
+
+			%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+
+			%sword = newObject("", InteriorShape, "masamunefinal.dis");
+			gamebase::setPosition(%sword, %newPos);
+			addToSet("MissionCleanup", %sword);
+			schedule("Item::Pop(" @ %sword @ ");", 10, %sword);
+
+			%minrad = 0;
+			%maxrad = 4;
+
+			for(%i = 0; %i <= 40; %i++) {
+				%tempPos = RandomPositionXY(%minrad, %maxrad);
+
+				%xPos = GetWord(%tempPos, 0) + GetWord(%castPos, 0);
+				%yPos = GetWord(%tempPos, 1) + GetWord(%castPos, 1);
+				%zPos = GetWord(%castPos, 2) + %i;
+		
+				%newPos = %xPos @ " " @ %yPos @ " " @ %zPos;
+				schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb305\", \"" @ %newPos @ "\", False, \"" @ %index @ "\");", %i / 20, %player);
+			}
+
+			%xPos = getWord(%castPos, 0);
+			%yPos = getWord(%castPos, 1);
+			%zPos = getWord(%castPos, 2) + 350;
+
+			for(%i = 1; %i <= 30; %i++) {
+				%t = %i * 10;
+				%newPos = %xPos @ " " @ %yPos @ " " @ %zPos - %t;
+				schedule("gamebase::setPosition(" @ %sword @ ", \"" @ %newPos @ "\");", ((%i / 100) + 2), %player);
+			}
+
+			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb6\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.3, %player);
+			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb14\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.35, %player);
+			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.4, %player);
+			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.5, %player);
+			schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %index @ "\");", 2.6, %player);
+
+			%overrideEndSound = True;
+			%returnFlag = True;
+		}
+		else {
+			Client::sendMessage(%clientId, $MsgBeige, "Could not find a target.");
+			%overrideEndSound = True;
+			%returnFlag = False;
+		}
+    }
+
 	if ($Skill::keyword[%index] == "sneak") {
 		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Sneak", "left");
 		UpdateBonusState(%clientId, "Sneak", %duration, "Sneak");
@@ -1168,6 +1308,46 @@ function PhysicalRadiusDamage(%clientId, %pos, %radius, %actionName, %multiplier
 	%n = containerBoxFillSet(%set, $SimPlayerObjectType, %pos, %radius, %radius, %radius, 0);
 	Group::iterateRecursive(%set, DoPhysicalDamage, %clientId, %actionName, %multi, %skillIndex);
 	deleteObject(%set);
+}
+
+function SkillSpellRadiusDamage(%clientId, %pos, %skillIndex, %multiplier) {
+	%percMin = 5;
+	%percMax = 100;
+	%spellDamage = $Skill::damageValue[%skillIndex];
+
+	if (HasBonusState(%clientId, "DoubleCast"))
+		%spellDamage = %spellDamage * 2;
+
+	if (%multiplier != "")
+		%spellDamage = %spellDamage * %multiplier;
+
+	%list = GetEveryoneIdList();
+
+	for(%i = 0; GetWord(%list, %i) != -1; %i++) {
+		%id = GetWord(%list, %i);
+		%dist = Vector::getDistance(%pos, GameBase::getPosition(%id));
+
+		if(%dist <= $Skill::radius[%skillIndex]) {
+			%newDamage = SpellCalcRadiusDamage(%dist, $Skill::radius[%skillIndex], %spellDamage, %percMin, %percMax);
+			GameBase::virtual(%id, "onDamage", $SpellDamageType, %newDamage, "0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, "", "", %skillIndex);
+		}
+	}
+}
+
+function SkillCreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %skillIndex, %multiplier, %skipSound) {
+	%player = Client::getOwnedObject(%clientId);
+	%bomb = newObject("", "Mine", %b);
+
+	addToSet("MissionCleanup", %bomb);
+	GameBase::Throw(%bomb, %player, 0, false);
+	GameBase::setPosition(%bomb, %castPos);
+
+	if (%doDamage != False) {
+		SkillSpellRadiusDamage(%clientId, %castPos, %skillIndex, %multiplier);
+	}
+
+	if ($Skill::endSound[%skillIndex] != "" && !%skipSound)
+		playSound($Skill::endSound[%skillIndex], %castPos);
 }
 
 function GetClosestEnemy(%clientId, %radius) {

@@ -1333,6 +1333,8 @@ $Spell::graceDistance[70] = 2;
 $Spell::classRestrictions[70] = "DarkKnight";
 $Spell::minLevel[70] = 100;
 $SkillType[shadowblade] = $SkillBlackMagick;
+// moved to skills2.cs
+$Spell::index[shadowblade] = "";
 
 // // fire flask spell
 $Spell::keyword[71] = "fireflaskbomb";
@@ -1698,6 +1700,8 @@ $Spell::graceDistance[88] = 2;
 $Spell::classRestrictions[88] = "HolyKnight";
 $Spell::minLevel[88] = 100;
 $SkillType[holyblade] = $SkillWhiteMagick;
+// moved to skills2.cs
+$Spell::index[holyblade] = "";
 
 // // acid flask spell
 $Spell::keyword[89] = "holyflaskbomb";

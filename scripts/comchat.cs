@@ -2340,8 +2340,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%msg = %msg @ "<f0>Skills / Spells:\n";
 			%msg = %msg @ "<f0>Zangetsu (Samurai): <f1>A blade slice that shoots 4 projectiles that do AoE damage. <f0>[#skill zangetsu]\n";
 			%msg = %msg @ "<f0>Double Cast (Mages): <f1>A skill that doubles magic damage but doubles mana cost. <f0>[#skill doublecast]\n";
-			%msg = %msg @ "<f0>Shadow Blade (Dark Knight): <f1>A dark spell that summons an unholy sword upon enemies <f0>[#cast shadowblade]\n";
-			%msg = %msg @ "<f0>Holy Blade (Holy Knight): <f1>A holy spell that summons a divine sword upon enemies <f0>[#cast holyblade]\n";
+			%msg = %msg @ "<f0>Shadow Blade (Dark Knight): <f1>A dark skill that summons an unholy sword upon enemies <f0>[#skill shadowblade]\n";
+			%msg = %msg @ "<f0>Holy Blade (Holy Knight): <f1>A holy skill that summons a divine sword upon enemies <f0>[#skill holyblade]\n";
 			%msg = %msg @ "\n";
 
 			%msg = %msg @ "<f0>Commands:\n";
