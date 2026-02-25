@@ -413,6 +413,32 @@ $Skill::refVal[30] = -10;
 $Skill::graceDistance[30] = 1;
 $SkillRestriction[$Skill::keyword[30]] = "L 100 C Thief";
 
+$Skill::keyword[31] = "moonslice";
+$Skill::index[$Skill::keyword[31]] = 31;
+$Skill::name[31] = "Moon Slice";
+$Skill::description[31] = "A precise blade slice that sends two cutting waves.";
+$Skill::actionMessage[31] = "You draw a swift moon slice.";
+$Skill::delay[31] = 0.1;
+$Skill::recoveryTime[31] = 8;
+$Skill::startSound[31] = AmrbroseSwordA;
+$Skill::groupListCheck[31] = False;
+$Skill::refVal[31] = -10;
+$Skill::graceDistance[31] = 10;
+$SkillRestriction[$Skill::keyword[31]] = "L 60 C Samurai C HolyKnight C Spellblade";
+
+$Skill::keyword[32] = "stormcutter";
+$Skill::index[$Skill::keyword[32]] = 32;
+$Skill::name[32] = "Storm Cutter";
+$Skill::description[32] = "A furious series of cutting waves that tear through enemies.";
+$Skill::actionMessage[32] = "You unleash a storm of slashes.";
+$Skill::delay[32] = 0.1;
+$Skill::recoveryTime[32] = 12;
+$Skill::startSound[32] = AmrbroseSwordA;
+$Skill::groupListCheck[32] = False;
+$Skill::refVal[32] = -10;
+$Skill::graceDistance[32] = 10;
+$SkillRestriction[$Skill::keyword[32]] = "L 120 C Samurai C HolyKnight C Spellblade";
+
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
 
@@ -927,6 +953,32 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 
 		%weaponImage = $beltitem[GetEquippedWeapon(%clientId), "Image"];
 		schedule("Player::mountItem(" @ %clientId @ ", \"" @ %weaponImage @ "\", 0);", 0.8, %player);
+    }
+
+	if ($Skill::keyword[%index] == "moonslice") {
+		if(!Player::isAiControlled(%Client))
+		Player::unmountItem(%player, $WeaponSlot);
+
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 0.01);
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 0.35);
+
+		%weaponImage = $beltitem[GetEquippedWeapon(%clientId), "Image"];
+		schedule("Player::mountItem(" @ %clientId @ ", \"" @ %weaponImage @ "\", 0);", 0.6, %player);
+    }
+
+	if ($Skill::keyword[%index] == "stormcutter") {
+		if(!Player::isAiControlled(%Client))
+		Player::unmountItem(%player, $WeaponSlot);
+
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 0.01);
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 0.25);
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 0.5);
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 0.75);
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 1.0);
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", 1.25);
+
+		%weaponImage = $beltitem[GetEquippedWeapon(%clientId), "Image"];
+		schedule("Player::mountItem(" @ %clientId @ ", \"" @ %weaponImage @ "\", 0);", 1.4, %player);
     }
 
 	if ($Skill::keyword[%index] == "sneak") {
