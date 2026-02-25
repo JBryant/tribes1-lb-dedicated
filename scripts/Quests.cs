@@ -1515,6 +1515,30 @@ $QuestNPC::conversations[39, 39, 0, 1, 1] = "People vanish every other week. We 
 $QuestNPC::conversations[39, 39, 0, 1, 2] = "Deep below, something hums with dark power. If you can, find the source.|I'll look into it.";
 $QuestNPC::conversations[39, 39, 1, 1, 0] = "Rest if you need it. Nibelheim stands with its helpers.|Thanks.";
 
+ // Midgar reactor guide (talk-only)
+$Quest::name[40] = "Midgar Reactor Briefing";
+$Quest::desc[40] = "Hear about the dangers in Midgar's reactors.";
+$Quest::npcId[40] = 40;
+$Quest::type[40] = 0;
+
+$Quest::stepName[40, 0] = "Talk to the guide";
+$Quest::stepDescription[40, 0] = "Listen to the reactor briefing.";
+$Quest::stepReq[40, 0] = "";
+$Quest::stepReq[40, 1] = "";
+$Quest::stepReward[40, 0] = "";
+
+$QuestNPC::name[40] = "Midgar Guide";
+$QuestNPC::shape[40] = "MaleHumanTownBot";
+$QuestNPC::pos[40] = "-2410.78 -2217.37 7549";
+$QuestNPC::rot[40] = "0 -0 -1.26851";
+$QuestNPC::questId[40] = 40;
+
+$QuestNPC::conversations[40, 40, 0, 1, 0] = "Midgar's reactors each tell a different horror story. Want the short version?|Yes, please.";
+$QuestNPC::conversations[40, 40, 0, 1, 1] = "Reactor 2 is South East of here and is haunted by Shinra's failed experiments - undead beings that are incredibly strong and fast.|Next.";
+$QuestNPC::conversations[40, 40, 0, 1, 2] = "Reactor 3 is right here. It was seized by malfunctioning war machines created by Shinra. They patrol the halls looking for prey.|Next.";
+$QuestNPC::conversations[40, 40, 0, 1, 3] = "Reactor 4 is in the sector next to us in the West. It became a dragon's den after Shinra lost control of a specimen. I highly recommend avoiding it.|Anything else?";
+$QuestNPC::conversations[40, 40, 0, 1, 4] = "The other reactors seem quiet for now, but that could change at any time. Stay alert.|Thanks.";
+
 // =====================
 // QUEST INITIALIZATION
 // =====================

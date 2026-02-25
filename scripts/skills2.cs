@@ -490,6 +490,18 @@ $Skill::refVal[35] = 320;
 $Skill::graceDistance[35] = 2;
 $SkillRestriction[$Skill::keyword[35]] = "L 100 C Soldier";
 
+$Skill::keyword[36] = "limitbreak";
+$Skill::index[$Skill::keyword[36]] = 36;
+$Skill::name[36] = "Limit Break";
+$Skill::description[36] = "Unleashes a devastating limit break attack.";
+$Skill::actionMessage[36] = "You unleash your limit break.";
+$Skill::delay[36] = 0.1;
+$Skill::recoveryTime[36] = 10;
+$Skill::startSound[36] = Reflected;
+$Skill::groupListCheck[36] = False;
+$Skill::refVal[36] = -10;
+$Skill::graceDistance[36] = 2;
+
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
 
@@ -1079,6 +1091,25 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 		}
     }
 
+	if ($Skill::keyword[%index] == "limitbreak") {
+		%lb = fetchData(%clientId, "LimitBreak");
+		if(%lb == "" || %lb < 100) {
+			Client::sendMessage(%clientId, $MsgRed, "You are not ready to use your limit break.");
+			%overrideEndSound = True;
+			%returnFlag = False;
+		} else {
+			%class = fetchData(%clientId, "CLASS");
+			LimitBreak::Execute(%clientId, %class, %index);
+
+			storeData(%clientId, "LimitBreak", 0);
+			storeData(%clientId, "LimitBreakTier", "");
+			storeData(%clientId, "LimitBreakMaxed", "");
+			Client::sendMessage(%clientId, $MsgBeige, "Your limit break meter is at 0%.");
+
+			%returnFlag = True;
+		}
+    }
+
 	if ($Skill::keyword[%index] == "sneak") {
 		remoteEval(%clientId, "rpgbarhud", %duration * 2, 3, 2, "||", "", "Sneak", "left");
 		UpdateBonusState(%clientId, "Sneak", %duration, "Sneak");
@@ -1310,6 +1341,16 @@ function SkillDoBladeStrike(%clientId, %castPos, %skillIndex, %beamBomb) {
 	schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %skillIndex @ "\");", 2.4, %player);
 	schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %skillIndex @ "\");", 2.5, %player);
 	schedule("SkillCreateAndDetBomb(\"" @ %clientId @ "\", \"Bomb5\", \"" @ %castPos @ "\", True, \"" @ %skillIndex @ "\");", 2.6, %player);
+}
+
+function LimitBreak::Execute(%clientId, %class, %skillIndex) {
+	LimitBreak::Default(%clientId, %skillIndex);
+}
+
+function LimitBreak::Default(%clientId, %skillIndex) {
+	for(%i = 0; %i < 10; %i++) {
+		schedule("shootProjectile(" @ %clientId @ ", WindCutter);", %i * 0.1);
+	}
 }
 
 function SkillSpellRadiusDamage(%clientId, %pos, %skillIndex, %multiplier) {

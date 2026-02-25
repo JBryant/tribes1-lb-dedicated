@@ -2328,20 +2328,27 @@ function internalSay(%clientId, %team, %message, %senderName)
 		if (%w1 == "#latest") {
 			%msg = "<f2>Latest Changes (1/9/26)\n\n";
 			
-			%msg = %msg @ "<f0>Updates (Questing + Housing):\n";
-			%msg = %msg @ "<f1>The questing system has been fully overhauled.\n";
-			%msg = %msg @ "<f1>Quest lines can span multiple quests with multi-step progression.\n";
-			%msg = %msg @ "<f1>Quests may reset daily, weekly, or per remort depending on the quest.\n";
-			%msg = %msg @ "<f1>Quest data now saves and persists across logout.\n";
-			%msg = %msg @ "<f1>Housing items and homes can be purchased and placed from your inventory (Housing tab).\n";
+			%msg = %msg @ "<f0>Updates (Mercs + Housing + Questing):\n";
+			%msg = %msg @ "<f1>New AI mercenaries can be talked to and hired to fight alongside you.\n";
+			%msg = %msg @ "<f1>Housing is now purchased in Kalm; place items from your inventory (Housing tab).\n";
 			%msg = %msg @ "<f1>Use a Housing item to place it, then #move / #rotate / #place to adjust.\n";
+			%msg = %msg @ "<f1>The questing system has been fully overhauled with multi-step quest lines.\n";
+			%msg = %msg @ "<f1>Quests can reset daily, weekly, or per remort depending on the quest.\n";
+			%msg = %msg @ "<f1>Quest data now saves and persists across logout.\n";
 			%msg = %msg @ "\n";
 
 			%msg = %msg @ "<f0>Skills / Spells:\n";
-			%msg = %msg @ "<f0>Zangetsu (Samurai): <f1>A blade slice that shoots 4 projectiles that do AoE damage. <f0>[#skill zangetsu]\n";
-			%msg = %msg @ "<f0>Double Cast (Mages): <f1>A skill that doubles magic damage but doubles mana cost. <f0>[#skill doublecast]\n";
-			%msg = %msg @ "<f0>Shadow Blade (Dark Knight): <f1>A dark skill that summons an unholy sword upon enemies <f0>[#skill shadowblade]\n";
-			%msg = %msg @ "<f0>Holy Blade (Holy Knight): <f1>A holy skill that summons a divine sword upon enemies <f0>[#skill holyblade]\n";
+			%msg = %msg @ "<f0>Moon Slice (Samurai): <f1>Two cutting waves for fast burst damage. <f0>[#skill moonslice]\n";
+			%msg = %msg @ "<f0>Storm Cutter (Samurai): <f1>A barrage of cutting waves. <f0>[#skill stormcutter]\n";
+			%msg = %msg @ "<f0>Ambush (Thief): <f1>Heavy strike, stronger from Sneak. <f0>[#skill ambush]\n";
+			%msg = %msg @ "<f0>Poison Blade (Thief): <f1>Coat your weapon with poison. <f0>[#skill poisonblade]\n";
+			%msg = %msg @ "<f0>Venom Blade (Thief): <f1>Stronger poison coating. <f0>[#skill venomblade]\n";
+			%msg = %msg @ "<f0>Toxic Blade (Thief): <f1>Potent toxin coating. <f0>[#skill toxicblade]\n";
+			%msg = %msg @ "<f0>Corrupt Blade (Thief): <f1>Corrupting poison coating. <f0>[#skill corruptblade]\n";
+			%msg = %msg @ "<f0>Battle Waltz (Dancer): <f1>Boost ATK and MDEF. <f0>[#skill battlewaltz]\n";
+			%msg = %msg @ "<f0>Inspire (Orator): <f1>Bolster defenses. <f0>[#skill inspire]\n";
+			%msg = %msg @ "<f0>Ether Veil (Mystic): <f1>Raise MDEF and DEF. <f0>[#skill etherveil]\n";
+			%msg = %msg @ "<f0>Limit Break: <f1>Build meter by taking damage, then unleash it. <f0>[#skill limitbreak]\n";
 			%msg = %msg @ "\n";
 
 			%msg = %msg @ "<f0>Commands:\n";
