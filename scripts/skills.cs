@@ -432,10 +432,10 @@ $SkillMultiplier[Thief, $SkillKatanas] = 1.5;
 $SkillMultiplier[Thief, $SkillWeightCapacity] = 1.4;
 $SkillMultiplier[Thief, $SkillSpears] = 1.7;
 $SkillMultiplier[Thief, $SkillStealing] = 1.3;
-$SkillMultiplier[Thief, $SkillHiding] = 1.2;
+$SkillMultiplier[Thief, $SkillHiding] = 1.3;
 $SkillMultiplier[Thief, $SkillBackstabbing] = 1.0;
-$SkillMultiplier[Thief, $SkillBlackMagick] = 0.5;
-$SkillMultiplier[Thief, $SkillWhiteMagick] = 1.0;
+$SkillMultiplier[Thief, $SkillBlackMagick] = 0.2;
+$SkillMultiplier[Thief, $SkillWhiteMagick] = 0.5;
 $SkillMultiplier[Thief, $SkillSummonMagick] = 0.5;
 $SkillMultiplier[Thief, $SkillTimeMagick] = 0.5;
 $SkillMultiplier[Thief, $SkillHealing] = 1.2;
@@ -447,7 +447,7 @@ $SkillMultiplier[Thief, $SkillAlchemy] = 1.0;
 $SkillMultiplier[Thief, $SkillHaggling] = 1.2;
 $SkillMultiplier[Thief, $SkillWoodCutting] = 1.5;
 $SkillMultiplier[Thief, $SkillFarming] = 1.5;
-$EXPmultiplier[Thief] = 1.00;
+$EXPmultiplier[Thief] = 1.25;
 $AllowedSkills[Thief] = ""
 @ $SkillDesc[$SkillSwords] @ " "
 @ $SkillDesc[$SkillKatanas] @ " "
@@ -458,6 +458,88 @@ $AllowedSkills[Thief] = ""
 @ $SkillDesc[$SkillHealing] @ " "
 @ $SkillDesc[$SkillEndurance] @ " "
 @ $SkillDesc[$SkillWeightCapacity] @ " ";
+
+//--------------
+// Assassin
+//--------------
+
+$SkillMultiplier[Assassin, $SkillSwords] = 1.4;
+$SkillMultiplier[Assassin, $SkillAxes] = 1.1;
+$SkillMultiplier[Assassin, $SkillHammers] = 1.1;
+$SkillMultiplier[Assassin, $SkillKatanas] = 1.7;
+$SkillMultiplier[Assassin, $SkillWeightCapacity] = 1.5;
+$SkillMultiplier[Assassin, $SkillSpears] = 1.4;
+$SkillMultiplier[Assassin, $SkillStealing] = 1.5;
+$SkillMultiplier[Assassin, $SkillHiding] = 1.6;
+$SkillMultiplier[Assassin, $SkillBackstabbing] = 2.0;
+$SkillMultiplier[Assassin, $SkillBlackMagick] = 0.6;
+$SkillMultiplier[Assassin, $SkillWhiteMagick] = 0.6;
+$SkillMultiplier[Assassin, $SkillSummonMagick] = 0.6;
+$SkillMultiplier[Assassin, $SkillTimeMagick] = 0.6;
+$SkillMultiplier[Assassin, $SkillHealing] = 1.3;
+$SkillMultiplier[Assassin, $SkillBows] = 1.5;
+$SkillMultiplier[Assassin, $SkillEndurance] = 1.5;
+$SkillMultiplier[Assassin, $SkillMining] = 0.5;
+$SkillMultiplier[Assassin, $SkillMagicka] = 0.5;
+$SkillMultiplier[Assassin, $SkillAlchemy] = 1.2;
+$SkillMultiplier[Assassin, $SkillHaggling] = 1.5;
+$SkillMultiplier[Assassin, $SkillWoodCutting] = 0.5;
+$SkillMultiplier[Assassin, $SkillFarming] = 0.5;
+$EXPmultiplier[Assassin] = 1.15;
+$AllowedSkills[Assassin] = ""
+@ $SkillDesc[$SkillSwords] @ " "
+@ $SkillDesc[$SkillKatanas] @ " "
+@ $SkillDesc[$SkillBows] @ " "
+@ $SkillDesc[$SkillSpears] @ " "
+@ $SkillDesc[$SkillStealing] @ " "
+@ $SkillDesc[$SkillHiding] @ " "
+@ $SkillDesc[$SkillBackstabbing] @ " "
+@ $SkillDesc[$SkillHealing] @ " "
+@ $SkillDesc[$SkillEndurance] @ " "
+@ $SkillDesc[$SkillWeightCapacity] @ " ";
+
+//--------------
+// Dragoon
+//--------------
+
+$SkillMultiplier[Dragoon, $SkillSwords] = 1.4;
+$SkillMultiplier[Dragoon, $SkillAxes] = 1.1;
+$SkillMultiplier[Dragoon, $SkillHammers] = 1.1;
+$SkillMultiplier[Dragoon, $SkillKatanas] = 1.7;
+$SkillMultiplier[Dragoon, $SkillWeightCapacity] = 2.0;
+$SkillMultiplier[Dragoon, $SkillSpears] = 2.0;
+$SkillMultiplier[Dragoon, $SkillStealing] = 1.5;
+$SkillMultiplier[Dragoon, $SkillHiding] = 1.6;
+$SkillMultiplier[Dragoon, $SkillBackstabbing] = 2.0;
+$SkillMultiplier[Dragoon, $SkillBlackMagick] = 2.0;
+$SkillMultiplier[Dragoon, $SkillWhiteMagick] = 1.0;
+$SkillMultiplier[Dragoon, $SkillSummonMagick] = 1.8;
+$SkillMultiplier[Dragoon, $SkillTimeMagick] = 1.5;
+$SkillMultiplier[Dragoon, $SkillHealing] = 0.7;
+$SkillMultiplier[Dragoon, $SkillBows] = 1.5;
+$SkillMultiplier[Dragoon, $SkillEndurance] = 2.0;
+$SkillMultiplier[Dragoon, $SkillMining] = 1.0;
+$SkillMultiplier[Dragoon, $SkillMagicka] = 1.2;
+$SkillMultiplier[Dragoon, $SkillAlchemy] = 2.0;
+$SkillMultiplier[Dragoon, $SkillHaggling] = 1.0;
+$SkillMultiplier[Dragoon, $SkillWoodCutting] = 1.0;
+$SkillMultiplier[Dragoon, $SkillFarming] = 1.0;
+$EXPmultiplier[Dragoon] = 1.0;
+$AllowedSkills[Dragoon] = ""
+@ $SkillDesc[$SkillSwords] @ " "
+@ $SkillDesc[$SkillAxes] @ " "
+@ $SkillDesc[$SkillHammers] @ " "
+@ $SkillDesc[$SkillSpears] @ " "
+@ $SkillDesc[$SkillKatanas] @ " "
+@ $SkillDesc[$SkillBows] @ " "
+@ $SkillDesc[$SkillStealing] @ " "
+@ $SkillDesc[$SkillHiding] @ " "
+@ $SkillDesc[$SkillBackstabbing] @ " "
+@ $SkillDesc[$SkillHealing] @ " "
+@ $SkillDesc[$SkillEndurance] @ " "
+@ $SkillDesc[$SkillWeightCapacity] @ " "
+@ $SkillDesc[$SkillMining] @ " "
+@ $SkillDesc[$SkillHaggling] @ " ";
 
 //--------------
 // Mystic

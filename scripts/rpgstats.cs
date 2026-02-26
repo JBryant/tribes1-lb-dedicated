@@ -554,7 +554,7 @@ function MenuChangeClass(%clientId, %page)
 function processMenuchangeclass(%clientId, %className) {
 	%opt = GetWord(%className, 0);
 	%page = GetWord(%className, 1);
-	lbecho("processMenuchangeclass clientId: " @ %clientId @ ", className/opt: " @ %className @ ", page: " @ %page);
+	// lbecho("processMenuchangeclass clientId: " @ %clientId @ ", className/opt: " @ %className @ ", page: " @ %page);
 
 	if (%opt == "page") {
 		MenuChangeClass(%clientId, %page);

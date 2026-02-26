@@ -3378,7 +3378,7 @@ function SpellNum69(%clientId, %castObj, %castPos) {
 	// if their level is 100 + remort levels then they can remort
 	%requiredLevel = 100 + (fetchData(%clientId, "RemortStep") * 5);
 
-	if (fetchData(%clientId, "LVL") < %requiredLevel) {
+	if (%clientId.adminLevel < 3 && fetchData(%clientId, "LVL") < %requiredLevel) {
 		Client::sendMessage(%clientId, $MsgRed, "You need to be level " @ %requiredLevel @ " to remort.");
 		%returnFlag = False;
 	} else {

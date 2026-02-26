@@ -150,8 +150,16 @@ $ClassRequirements[30] = "HolyKnight 1 DarkKnight 1 Valkyrie 1 ArcaneArcher 1 Se
 $ClassName[31] = "ExSoldier";
 $ClassRequirements[31] = "Soldier 1 OnionKnight 1 Kefka 1";
 
+// Special Tier Classes (specializations)
+
 $ClassName[32] = "Thief";
 $ClassRequirements[32] = "Archer 3";
+
+$ClassName[33] = "Assassin";
+$ClassRequirements[33] = "Thief 5";
+
+$ClassName[34] = "Dragoon";
+$ClassRequirements[34] = "Geomancer 5 Assassin 1";
 
 
 function getFinalCLASS(%clientId) {

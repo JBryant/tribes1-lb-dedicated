@@ -423,11 +423,11 @@ function Game::menuRequest(%clientId) {
 				%house = "No House";
 			
 			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 1, \"" @ Client::getName(%clientId) @ ":\");", 0.1);
-			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 2, \"HP: " @ fetchData(%clientId, "HP") @ "/" @ fetchData(%clientId, "MaxHP") @ " | MANA: " @ fetchData(%clientId, "MANA") @ "/" @ fetchData(%clientId, "MaxMANA") @ "\");", 0.1);
-			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 3, \"ATK: " @ fetchData(%clientId, "ATK") @ " | DEF: " @ fetchData(%clientId, "DEF") @ " | MDEF: " @ fetchData(%clientId, "MDEF") @ "\");", 0.1);
-			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 4, \"LCK: " @ fetchData(%clientId, "LCK") @ " | " @ %house @ " | RP: " @ fetchData(%clientId, "RankPoints") @ "\");", 0.1);
-			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 5, \"COINS: " @ fetchData(%clientId, "COINS") @ " | BANK: " @ fetchData(%clientId, "BANK") @ "\");", 0.1);
-			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 6, \"RL: " @ fetchData(%clientId, "RemortStep") @ "\");", 0.1);
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 2, \"HP: " @  Number::Beautify(fetchData(%clientId, "HP")) @ "/" @ Number::Beautify(fetchData(%clientId, "MaxHP")) @ " | MANA: " @ Number::Beautify(fetchData(%clientId, "MANA")) @ "/" @ Number::Beautify(fetchData(%clientId, "MaxMANA")) @ "\");", 0.1);
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 3, \"ATK: " @ Number::Beautify(fetchData(%clientId, "ATK")) @ " | DEF: " @  Number::Beautify(fetchData(%clientId, "DEF")) @ " | MDEF: " @ Number::Beautify(fetchData(%clientId, "MDEF")) @ "\");", 0.1);
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 4, \"LCK: " @ Number::Beautify(fetchData(%clientId, "LCK")) @ " | " @ %house @ " | RP: " @ Number::Beautify(fetchData(%clientId, "RankPoints")) @ "\");", 0.1);
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 5, \"COINS: " @ Number::Beautify(fetchData(%clientId, "COINS")) @ " | BANK: " @ Number::Beautify(fetchData(%clientId, "BANK")) @ "\");", 0.1);
+			schedule("remoteEval(" @ %clientId @ ", \"setInfoLine\", 6, \"RL: " @ Number::Beautify(fetchData(%clientId, "RemortStep")) @ "\");", 0.1);
 		}
 	}
 }

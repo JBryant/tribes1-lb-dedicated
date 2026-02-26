@@ -827,6 +827,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 		if(%damagedClient == %shooterClient) {
 			if(%type == $SpellDamageType)
 				%value = %value / 10; // 1/3 default
+			else if(%type == $LandingDamageType)
+				%value = %value; // 2/3 default
 			else
 				%value = 0; // no damage to self
 		}
@@ -965,7 +967,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				%rhp = refreshHP(%damagedClient, %finalDamage);
 
 				// limit break gain for human players (session-only)
-				if(!Player::isAiControlled(%damagedClient) && %rhp != -1) {
+				if(!Player::isAiControlled(%damagedClient) && %rhp != -1 && %type != $LandingDamageType) {
 					%posthp = fetchData(%damagedClient, "HP");
 					%damageTaken = %prehithp - %posthp;
 

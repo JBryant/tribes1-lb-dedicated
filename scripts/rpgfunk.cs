@@ -2797,7 +2797,7 @@ function UnequipMountedStuff(%clientId)
 
 	// unequip their armor
 	%armor = GetEquippedArmor(%clientId);
-	lbecho("equipped armor: " @ %armor);
+	// lbecho("equipped armor: " @ %armor);
 	if (%armor != "") {
 		Item::onUse(%clientId, %armor);
 	}
@@ -2806,8 +2806,8 @@ function UnequipMountedStuff(%clientId)
 
 	if (%accessories != "") {
 		%total = GetEquippedAccessoriesCountByBeltType(%clientId, "AccessoryItems");
-		lbecho("Total Accessories: " @ %total);
-		lbecho("Accessories: " @ %accessories);
+		// lbecho("Total Accessories: " @ %total);
+		// lbecho("Accessories: " @ %accessories);
 
 		for(%i = 0; %i < %total; %i++) {
 			Item::onUse(%clientId, getword(%accessories, %i));

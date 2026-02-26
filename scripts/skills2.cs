@@ -372,7 +372,7 @@ $Skill::startSound[27] = ActivateTR;
 $Skill::groupListCheck[27] = False;
 $Skill::refVal[27] = -10;
 $Skill::graceDistance[27] = 1;
-$SkillRestriction[$Skill::keyword[27]] = "L 1 C Thief";
+$SkillRestriction[$Skill::keyword[27]] = "L 1 C Thief C Assassin";
 
 $Skill::keyword[28] = "venomblade";
 $Skill::index[$Skill::keyword[28]] = 28;
@@ -385,7 +385,7 @@ $Skill::startSound[28] = ActivateTR;
 $Skill::groupListCheck[28] = False;
 $Skill::refVal[28] = -10;
 $Skill::graceDistance[28] = 1;
-$SkillRestriction[$Skill::keyword[28]] = "L 25 C Thief";
+$SkillRestriction[$Skill::keyword[28]] = "L 25 C Thief C Assassin";
 
 $Skill::keyword[29] = "toxicblade";
 $Skill::index[$Skill::keyword[29]] = 29;
@@ -398,7 +398,7 @@ $Skill::startSound[29] = ActivateTR;
 $Skill::groupListCheck[29] = False;
 $Skill::refVal[29] = -10;
 $Skill::graceDistance[29] = 1;
-$SkillRestriction[$Skill::keyword[29]] = "L 50 C Thief";
+$SkillRestriction[$Skill::keyword[29]] = "L 50 C Thief C Assassin";
 
 $Skill::keyword[30] = "corruptblade";
 $Skill::index[$Skill::keyword[30]] = 30;
@@ -411,7 +411,7 @@ $Skill::startSound[30] = ActivateTR;
 $Skill::groupListCheck[30] = False;
 $Skill::refVal[30] = -10;
 $Skill::graceDistance[30] = 1;
-$SkillRestriction[$Skill::keyword[30]] = "L 100 C Thief";
+$SkillRestriction[$Skill::keyword[30]] = "L 100 C Thief C Assassin";
 
 $Skill::keyword[31] = "moonslice";
 $Skill::index[$Skill::keyword[31]] = 31;
