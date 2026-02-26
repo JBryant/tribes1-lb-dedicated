@@ -464,8 +464,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 	// lbecho("skillIndex: " @ %skillIndex);
 
 	if(Player::isExposed(%this) && %object != -1 && %type != $NullDamageType && !Player::IsDead(%this)) {
-		%initialDamage = %value;
 		%damagedClient = Player::getClient(%this);
+		%initialDamage = %value;
 
 		if ($BotShootingAt_WithId[%damagedClient] != "" && %object == 0) {
 			%object = $BotShootingAt_WithId[%damagedClient];
@@ -674,7 +674,6 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			if (%type == $TrueDamageType) {
 				%value = (%initialDamage / $TribesDamageToNumericDamage);
 			}
-
 		}
 
         // Nobody likes missing... remove it or make it so that Miss does minimal damage
@@ -846,6 +845,15 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 			else
 				%value = 0; // no damage to self
 		}
+
+		%mercOwner = $Merc::owner[%damagedClient];
+		if(%mercOwner == "" || %mercOwner == False)
+			%mercOwner = %damagedClient.ownerId;
+		if(%mercOwner == "" || %mercOwner == False)
+			%mercOwner = fetchData(%damagedClient, "OwnerID");
+
+		if(Merc::isMercenary(%damagedClient) && %mercOwner != "" && %mercOwner != False)
+			%value = %value * 0.1;
 
 		//-------------------------------------------------
 		// ARENA DAMAGE CHECKS
@@ -1245,7 +1253,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 					%flash = 1;
 
 				Player::SetDamageFlash(%this, %flash);
-				%blood = floor(%flash*10);
+				%blood = floor(%flash * 10);
 				
 				for(%i=1; %i <= %blood; %i++)
 					bloodSpray(%damagedClient);
@@ -1265,7 +1273,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				if(!Player::IsDead(%this)) {
 					if(%damagedClient.lastDamage < getSimTime()) {
 						%sound = radnomItems(3, injure1, injure2, injure3);
-						playVoice(%damagedClient,%sound);
+						playVoice(%damagedClient, %sound);
 						%damagedClient.lastdamage = getSimTime() + 1.5;
 					}
 				}

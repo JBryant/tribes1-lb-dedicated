@@ -502,6 +502,18 @@ $Skill::groupListCheck[36] = False;
 $Skill::refVal[36] = -10;
 $Skill::graceDistance[36] = 2;
 
+$Skill::keyword[37] = "jump";
+$Skill::index[$Skill::keyword[37]] = 37;
+$Skill::name[37] = "Jump";
+$Skill::description[37] = "Launches you high into the air.";
+$Skill::actionMessage[37] = "You leap skyward.";
+$Skill::delay[37] = 0.1;
+$Skill::recoveryTime[37] = 5;
+$Skill::groupListCheck[37] = False;
+$Skill::refVal[37] = -10;
+$Skill::graceDistance[37] = 2;
+$SkillRestriction[$Skill::keyword[37]] = "L 1 C Dragoon";
+
 function BeginUseSkill(%clientId, %keyword) {
 	dbecho($dbechoMode, "BeginUseSkill(" @ %clientId @ ", " @ %keyword @ ")");
 
@@ -1108,6 +1120,14 @@ function DoUseSkill(%clientId, %index, %oldpos, %castObj, %rest) {
 
 			%returnFlag = True;
 		}
+    }
+
+	if ($Skill::keyword[%index] == "jump") {
+		%jumpImpulse = fetchData(%clientId, "LVL") + 70;
+		if(%jumpImpulse > 1000)
+			%jumpImpulse = 1000;
+		Player::applyImpulse(%player, "0 0 " @ %jumpImpulse);
+		%returnFlag = True;
     }
 
 	if ($Skill::keyword[%index] == "sneak") {
