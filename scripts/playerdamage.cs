@@ -733,6 +733,20 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 		//============================================================================================
 
 		//-------------------------------------------------
+		// DRAGOON LANDING AOE (SELF LANDING ONLY)
+		//-------------------------------------------------
+		if(%damagedClient == %shooterClient && %type == $LandingDamageType) {
+			%class = fetchData(%damagedClient, "CLASS");
+			if(String::ICompare(%class, "Dragoon") == 0) {
+				%fallDamage = %value * $TribesDamageToNumericDamage;
+				DragoonLandingExplosion(%damagedClient, %fallDamage);
+
+				%value = 0;
+				%noImpulse = True;
+			}
+		}
+
+		//-------------------------------------------------
 		// IF PLAYER IS ADMIN, NULLIFY LANDING DAMAGE
 		// IF PLAYER IS SUPERADMIN, NULLIFY ALL DAMAGE
 		//-------------------------------------------------

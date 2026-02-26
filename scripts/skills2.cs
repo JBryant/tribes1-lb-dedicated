@@ -32,7 +32,7 @@ $Skill::startSound[2] = AmrbroseSwordA;
 $Skill::groupListCheck[2] = False;
 $Skill::refVal[2] = -10;
 $Skill::graceDistance[2] = 2;
-$SkillRestriction[$Skill::keyword[2]] = "L 20 C Squire C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
+$SkillRestriction[$Skill::keyword[2]] = "L 20 C Squire C Knight C Monk C Geomancer C Dragoon C Samurai C HolyKnight C DarkKnight C Spellblade";
 
 $Skill::keyword[3] = "harvest";
 $Skill::index[harvest] = 3;
@@ -112,7 +112,7 @@ $Skill::startSound[8] = AmrbroseSwordA;
 $Skill::groupListCheck[8] = False;
 $Skill::refVal[8] = -10;
 $Skill::graceDistance[8] = 2;
-$SkillRestriction[$Skill::keyword[8]] = "L 40 C Knight C Monk C Geomancer C Samurai C HolyKnight C Spellblade";
+$SkillRestriction[$Skill::keyword[8]] = "L 40 C Knight C Monk C Geomancer C Dragoon C Samurai C HolyKnight C Spellblade";
 
 $Skill::keyword[9] = "parry";
 $Skill::index[parry] = 9;
@@ -128,7 +128,7 @@ $Skill::startSound[9] = AmrbroseSwordA;
 $Skill::groupListCheck[9] = False;
 $Skill::refVal[9] = -10;
 $Skill::graceDistance[9] = 2;
-$SkillRestriction[$Skill::keyword[9]] = "C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
+$SkillRestriction[$Skill::keyword[9]] = "C Knight C Monk C Geomancer C Dragoon C Samurai C HolyKnight C DarkKnight C Spellblade";
 
 $Skill::keyword[10] = "infusepotions";
 $Skill::index[infusepotions] = 10;
@@ -158,7 +158,7 @@ $Skill::startSound[11] = AmrbroseSwordA;
 $Skill::groupListCheck[11] = False;
 $Skill::refVal[11] = -10;
 $Skill::graceDistance[11] = 2;
-$SkillRestriction[$Skill::keyword[11]] = "L 60 C Monk C Geomancer C Samurai C HolyKnight C Spellblade";
+$SkillRestriction[$Skill::keyword[11]] = "L 60 C Monk C Geomancer C Dragoon C Samurai C HolyKnight C Spellblade";
 
 $Skill::keyword[12] = "earthquake";
 $Skill::index[earthquake] = 12;
@@ -173,7 +173,7 @@ $Skill::startSound[12] = AmrbroseSwordA;
 $Skill::groupListCheck[12] = False;
 $Skill::refVal[12] = -10;
 $Skill::graceDistance[12] = 2;
-$SkillRestriction[$Skill::keyword[12]] = "L 80 C Geomancer C Samurai C HolyKnight C Spellblade";
+$SkillRestriction[$Skill::keyword[12]] = "L 80 C Geomancer C Dragoon C Samurai C HolyKnight C Spellblade";
 
 $Skill::keyword[13] = "volley";
 $Skill::index[volley] = 13;
@@ -268,7 +268,7 @@ $Skill::startSound[19] = Portal6;
 $Skill::groupListCheck[19] = False;
 $Skill::refVal[19] = -10;
 $Skill::graceDistance[19] = 1;
-$SkillRestriction[$Skill::keyword[19]] = "C Thief";
+$SkillRestriction[$Skill::keyword[19]] = "C Thief C Dragoon";
 
 $Skill::keyword[20] = "rage";
 $Skill::index[$Skill::keyword[20]] = 20;
@@ -281,7 +281,7 @@ $Skill::startSound[20] = Reflected;
 $Skill::groupListCheck[20] = False;
 $Skill::refVal[20] = -10;
 $Skill::graceDistance[20] = 1;
-$SkillRestriction[$Skill::keyword[20]] = "L 50 C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
+$SkillRestriction[$Skill::keyword[20]] = "L 50 C Knight C Monk C Geomancer C Dragoon C Samurai C HolyKnight C DarkKnight C Spellblade";
 
 $Skill::keyword[21] = "berserk";
 $Skill::index[$Skill::keyword[21]] = 21;
@@ -294,7 +294,7 @@ $Skill::startSound[21] = Reflected;
 $Skill::groupListCheck[21] = False;
 $Skill::refVal[21] = -10;
 $Skill::graceDistance[21] = 1;
-$SkillRestriction[$Skill::keyword[21]] = "L 100 C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
+$SkillRestriction[$Skill::keyword[21]] = "L 100 C Knight C Monk C Geomancer C Dragoon C Samurai C HolyKnight C DarkKnight C Spellblade";
 
 $Skill::keyword[22] = "nirvana";
 $Skill::index[$Skill::keyword[22]] = 22;
@@ -307,7 +307,7 @@ $Skill::startSound[22] = Reflected;
 $Skill::groupListCheck[22] = False;
 $Skill::refVal[22] = -10;
 $Skill::graceDistance[22] = 1;
-$SkillRestriction[$Skill::keyword[22]] = "L 250 C Knight C Monk C Geomancer C Samurai C HolyKnight C DarkKnight C Spellblade";
+$SkillRestriction[$Skill::keyword[22]] = "L 250 C Knight C Monk C Geomancer C Dragoon C Samurai C HolyKnight C DarkKnight C Spellblade";
 
 $Skill::keyword[23] = "battlewaltz";
 $Skill::index[$Skill::keyword[23]] = 23;
@@ -359,7 +359,7 @@ $Skill::startSound[26] = AmrbroseSwordA;
 $Skill::groupListCheck[26] = False;
 $Skill::refVal[26] = -10;
 $Skill::graceDistance[26] = 2;
-$SkillRestriction[$Skill::keyword[26]] = "L 20 C Thief";
+$SkillRestriction[$Skill::keyword[26]] = "L 20 C Thief C Dragoon";
 
 $Skill::keyword[27] = "poisonblade";
 $Skill::index[$Skill::keyword[27]] = 27;
@@ -372,7 +372,7 @@ $Skill::startSound[27] = ActivateTR;
 $Skill::groupListCheck[27] = False;
 $Skill::refVal[27] = -10;
 $Skill::graceDistance[27] = 1;
-$SkillRestriction[$Skill::keyword[27]] = "L 1 C Thief C Assassin";
+$SkillRestriction[$Skill::keyword[27]] = "L 1 C Thief C Assassin C Dragoon";
 
 $Skill::keyword[28] = "venomblade";
 $Skill::index[$Skill::keyword[28]] = 28;
@@ -385,7 +385,7 @@ $Skill::startSound[28] = ActivateTR;
 $Skill::groupListCheck[28] = False;
 $Skill::refVal[28] = -10;
 $Skill::graceDistance[28] = 1;
-$SkillRestriction[$Skill::keyword[28]] = "L 25 C Thief C Assassin";
+$SkillRestriction[$Skill::keyword[28]] = "L 25 C Thief C Assassin C Dragoon";
 
 $Skill::keyword[29] = "toxicblade";
 $Skill::index[$Skill::keyword[29]] = 29;
@@ -398,7 +398,7 @@ $Skill::startSound[29] = ActivateTR;
 $Skill::groupListCheck[29] = False;
 $Skill::refVal[29] = -10;
 $Skill::graceDistance[29] = 1;
-$SkillRestriction[$Skill::keyword[29]] = "L 50 C Thief C Assassin";
+$SkillRestriction[$Skill::keyword[29]] = "L 50 C Thief C Assassin C Dragoon";
 
 $Skill::keyword[30] = "corruptblade";
 $Skill::index[$Skill::keyword[30]] = 30;
@@ -411,7 +411,7 @@ $Skill::startSound[30] = ActivateTR;
 $Skill::groupListCheck[30] = False;
 $Skill::refVal[30] = -10;
 $Skill::graceDistance[30] = 1;
-$SkillRestriction[$Skill::keyword[30]] = "L 100 C Thief C Assassin";
+$SkillRestriction[$Skill::keyword[30]] = "L 100 C Thief C Assassin C Dragoon";
 
 $Skill::keyword[31] = "moonslice";
 $Skill::index[$Skill::keyword[31]] = 31;
@@ -1385,12 +1385,49 @@ function SkillCreateAndDetBomb(%clientId, %b, %castPos, %doDamage, %skillIndex, 
 	GameBase::Throw(%bomb, %player, 0, false);
 	GameBase::setPosition(%bomb, %castPos);
 
-	if (%doDamage != False) {
+	if (%doDamage != False)
 		SkillSpellRadiusDamage(%clientId, %castPos, %skillIndex, %multiplier);
-	}
 
 	if ($Skill::endSound[%skillIndex] != "" && !%skipSound)
 		playSound($Skill::endSound[%skillIndex], %castPos);
+}
+
+function DragoonLandingExplosion(%clientId, %fallDamage) {
+	if(%fallDamage < 0 || %fallDamage == "")
+		%fallDamage = 0;
+
+	%weapon = GetEquippedWeapon(%clientId);
+	%weaponDamage = 0;
+	if(%weapon != "") {
+		%skilltype = $SkillType[%weapon];
+		%weapondamage = GetRoll(GetWord(GetAccessoryVar(%weapon, $SpecialVar), 1));
+		%weaponDamage = round(((%weapondamage / 1000) * $PlayerSkill[%clientId, %skilltype]));
+	}
+
+	%heightFactor = floor(%fallDamage / 10) + 1;
+	%totalDamage = (%weaponDamage + %fallDamage + fetchData(%clientId, "LVL")) * %heightFactor;
+
+	if(%totalDamage <= 0)
+		return;
+
+	%pos = GameBase::getPosition(%clientId);
+	CreateAndDetBomb(%clientId, "Bomb5", %pos, False);
+	playSound(ExplodeLM, %pos);
+
+	%radius = 20;
+	%set = newObject("set", SimSet);
+	%n = containerBoxFillSet(%set, $SimPlayerObjectType, %pos, %radius, %radius, %radius, 0);
+	for(%i = 0; %i < Group::objectCount(%set); %i++) {
+		%target = Group::getObject(%set, %i);
+		%targetId = Player::getClient(%target);
+		if(%targetId != "" && %targetId != -1 && %targetId != %clientId) {
+			if(GameBase::getTeam(%targetId) != GameBase::getTeam(%clientId)) {
+				GameBase::virtual(%target, "onDamage", $TrueDamageType, %totalDamage,
+					"0 0 0", "0 0 0", "0 0 0", "torso", "front_right", %clientId, %weapon, "", "");
+			}
+		}
+	}
+	deleteObject(%set);
 }
 
 function GetClosestEnemy(%clientId, %radius) {
