@@ -66,7 +66,7 @@ function quickSkill(%skill, %TrueClientId, %trueClientId, %TCsenderName, %messag
 	}
 
 	if (fetchData(%TrueClientId, "autoSkill") != "" && fetchData(%TrueClientId, "autoSkillDelay") != "") {
-		schedule("quickSkill(\"" @ fetchData(%TrueClientId, "autoSkill") @ "\", " @ %TrueClientId @ ", " @ %TrueClientId @ ", \"\", \"\", \"\", \"\");", fetchData(%TrueClientId, "autoSkillDelay"));
+		schedule("quickSkill(\"" @ fetchData(%TrueClientId, "autoSkill") @ "\", " @ %TrueClientId @ ", " @ %TrueClientId @ ", \"\", \"\", \"" @ fetchData(%TrueClientId, "autoSkillCropped") @ "\", \"\");", fetchData(%TrueClientId, "autoSkillDelay"));
 	}
 
 	return;
@@ -1399,8 +1399,33 @@ function internalSay(%clientId, %team, %message, %senderName)
 		// }
 
 		if(%w1 == "#autoskill") {
-			%skill = GetWord(%cropped, 0);
-			%delay = GetWord(%cropped, 1);
+			%wordCount = getWordCount(%cropped);
+			%delay = "";
+			%skill = "";
+			%skillKeyword = "";
+			%skillCropped = "";
+			if(%wordCount >= 2) {
+				%delay = getWord(%cropped, %wordCount - 1);
+				for(%i = 0; %i < %wordCount - 1; %i++) {
+					if(%skill == "")
+						%skill = getWord(%cropped, %i);
+					else
+						%skill = %skill @ " " @ getWord(%cropped, %i);
+				}
+
+				%skillKeyword = getWord(%skill, 0);
+				for(%i = 1; %i < getWordCount(%skill); %i++) {
+					if(%skillCropped == "")
+						%skillCropped = getWord(%skill, %i);
+					else
+						%skillCropped = %skillCropped @ " " @ getWord(%skill, %i);
+				}
+			}
+
+			if(fetchData(%TrueClientId, "autoSkill") != "") {
+				Client::sendMessage(%TrueClientId, 0, "Auto Skill is already active. Use #autoskilloff first.");
+				return;
+			}
 
 			if(%skill == "" || %skill == -1) {
 				Client::sendMessage(%TrueClientId, 0, "Please specify what skill will be used automatically.");
@@ -1409,9 +1434,20 @@ function internalSay(%clientId, %team, %message, %senderName)
 				Client::sendMessage(%TrueClientId, 0, "Please specify a delay in seconds.");
 			}
 			else {
-				storeData(%TrueClientId, "autoSkill", %skill);
+				%delayNum = %delay * 1;
+				if(%delayNum == 0 && %delay != "0" && %delay != "0.0")
+					return;
+
+				if(%delayNum <= 0) {
+					Client::sendMessage(%TrueClientId, 0, "Please specify a delay in seconds.");
+					return;
+				}
+
+				%delay = %delayNum;
+				storeData(%TrueClientId, "autoSkill", %skillKeyword);
+				storeData(%TrueClientId, "autoSkillCropped", %skillCropped);
 				storeData(%TrueClientId, "autoSkillDelay", %delay);
-				schedule("quickSkill(\"" @ %skill @ "\", " @ %TrueClientId @ ", " @ %TrueClientId @ ", \"\", \"\", \"\", \"\");", 0.1);
+				schedule("quickSkill(\"" @ %skillKeyword @ "\", " @ %TrueClientId @ ", " @ %TrueClientId @ ", \"\", \"\", \"" @ %skillCropped @ "\", \"\");", %delay);
 				Client::sendMessage(%TrueClientId, 0, "Changed Auto Skill to " @ fetchData(%TrueClientId, "autoSkill") @ ".");
 			}
 
@@ -2378,6 +2414,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%msg = %msg @ "<f0>Skills / Spells:\n";
 			%msg = %msg @ "<f0>Moon Slice (Samurai): <f1>Two cutting waves for fast burst damage. <f0>[#skill moonslice]\n";
 			%msg = %msg @ "<f0>Storm Cutter (Samurai): <f1>A barrage of cutting waves. <f0>[#skill stormcutter]\n";
+			%msg = %msg @ "<f0>Jump (Dragoon): <f1>Launch into the air. <f0>[#skill jump]\n";
 			%msg = %msg @ "<f0>Ambush (Thief): <f1>Heavy strike, stronger from Sneak. <f0>[#skill ambush]\n";
 			%msg = %msg @ "<f0>Poison Blade (Thief): <f1>Coat your weapon with poison. <f0>[#skill poisonblade]\n";
 			%msg = %msg @ "<f0>Venom Blade (Thief): <f1>Stronger poison coating. <f0>[#skill venomblade]\n";
@@ -2387,6 +2424,11 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%msg = %msg @ "<f0>Inspire (Orator): <f1>Bolster defenses. <f0>[#skill inspire]\n";
 			%msg = %msg @ "<f0>Ether Veil (Mystic): <f1>Raise MDEF and DEF. <f0>[#skill etherveil]\n";
 			%msg = %msg @ "<f0>Limit Break: <f1>Build meter by taking damage, then unleash it. <f0>[#skill limitbreak]\n";
+			%msg = %msg @ "\n";
+
+			%msg = %msg @ "<f0>Classes:\n";
+			%msg = %msg @ "<f1>New Assassin class (stronger Thief variant).\n";
+			%msg = %msg @ "<f1>New Dragoon class (Geomancer/Assassin hybrid).\n";
 			%msg = %msg @ "\n";
 
 			%msg = %msg @ "<f0>Commands:\n";
@@ -2401,6 +2443,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 			%msg = %msg @ "<f1>(Leif) - Teleporter from Upper Dunega to The Burial Tree not working\n";
 			%msg = %msg @ "<f1>(Leif) - When using projectile spells/skills with an Axe, Ancient axe or Rune axe equipped the projectile fires to the right.\n";
 			%msg = %msg @ "<f1>(AngryGardenGnome) - Dancers have alchemy and summoning skills on menu, but can't use either skill tree.\n";
+			%msg = %msg @ "<f1>(Ramza) - Mercenary party experience now works correctly.\n";
 
 			%msg = %msg @ "<f0>Fixes In Development:\n";
 
