@@ -35,6 +35,13 @@ $MsgBeige = 2;
 $MsgGreen = 3;
 
 function quickSkill(%skill, %TrueClientId, %trueClientId, %TCsenderName, %message, %cropped, %missingCroppedString) {
+	if(%TrueClientId == "" || %TrueClientId == 0)
+		return;
+	if(IsDead(%TrueClientId))
+		return;
+	if(Client::getOwnedObject(%TrueClientId) == -1)
+		return;
+
 	if(fetchData(%TrueClientId, "UseSkillStep") == 1)
 		Client::sendMessage(%TrueClientId, 0, "You are already using a skill!");
 	else if(fetchData(%TrueClientId, "UseSkillStep") == 2)
@@ -49,13 +56,17 @@ function quickSkill(%skill, %TrueClientId, %trueClientId, %TCsenderName, %messag
 		BeginUseSkill(%TrueClientId, %skill @" "@ escapestring(%cropped));
 
 		// Exploit detection
-		if(String::findSubStr(%cropped, "\"") != -1){
+		if(String::findSubStr(%cropped, "\"") != -1) {
 			%ip = Client::getTransportAddress(%ClientId);
 			echo("Exploit attempt detected and blocked: " @ %trueClientId @ ", aka " @ %TCsenderName @ ", at " @ %ip @ ".");
 			echo("Exploit: " @ %message);
 			messageall(0,"Exploit attempt detected and blocked: " @ %trueClientId @ ", aka " @ %TCsenderName @ ", at " @ %ip @ ".");
 			schedule("delayedban(" @ %TrueClientId @ ");",1.0);
 		}
+	}
+
+	if (fetchData(%TrueClientId, "autoSkill") != "" && fetchData(%TrueClientId, "autoSkillDelay") != "") {
+		schedule("quickSkill(\"" @ fetchData(%TrueClientId, "autoSkill") @ "\", " @ %TrueClientId @ ", " @ %TrueClientId @ ", \"\", \"\", \"\", \"\");", fetchData(%TrueClientId, "autoSkillDelay"));
 	}
 
 	return;
@@ -1386,6 +1397,33 @@ function internalSay(%clientId, %team, %message, %senderName)
 		// 	}
 		// 	return;
 		// }
+
+		if(%w1 == "#autoskill") {
+			%skill = GetWord(%cropped, 0);
+			%delay = GetWord(%cropped, 1);
+
+			if(%skill == "" || %skill == -1) {
+				Client::sendMessage(%TrueClientId, 0, "Please specify what skill will be used automatically.");
+			}
+			else if(%delay == "" || %delay == -1) {
+				Client::sendMessage(%TrueClientId, 0, "Please specify a delay in seconds.");
+			}
+			else {
+				storeData(%TrueClientId, "autoSkill", %skill);
+				storeData(%TrueClientId, "autoSkillDelay", %delay);
+				schedule("quickSkill(\"" @ %skill @ "\", " @ %TrueClientId @ ", " @ %TrueClientId @ ", \"\", \"\", \"\", \"\");", 0.1);
+				Client::sendMessage(%TrueClientId, 0, "Changed Auto Skill to " @ fetchData(%TrueClientId, "autoSkill") @ ".");
+			}
+
+			return;
+		}
+
+		if (%w1 == "#autoskilloff") {
+			storeData(%TrueClientId, "autoSkill", "");
+			Client::sendMessage(%TrueClientId, 0, "Auto Skill disabled.");
+			return;
+		}
+
 		if(%w1 == "#shove")
 		{
 			%time = getIntegerTime(true) >> 5;
