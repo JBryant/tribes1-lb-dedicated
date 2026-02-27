@@ -13,8 +13,8 @@ function Merc::Init() {
 
 	// id, displayName, class, defaults, cost, race, gender, role
 	Merc::AddTemplate(1, "Pelinor", "Squire", "Broadsword 1 Longsword 1 LeatherArmor 1 LVL 20", 1500, "MaleHuman", "Male", "tank", "Pelinor is a stout and sturdy boy.");
-	Merc::AddTemplate(2, "Mr Squiggles", "Chemist", "Club 1 IronwoodStaff 1 LeatherArmor 1 LVL 20", 2000, "MaleHuman", "Male", "support", "Mr. Squiggles is a mischievous chemist.");
-	Merc::AddTemplate(3, "Lady Lisandra", "BlackMage", "CastingBlade 1 WhiteMageVestment 1 LVL 20", 2400, "FemaleHuman", "Female", "dps", "Lady Lisandra is a confident mage with a teasing streak.");
+	Merc::AddTemplate(2, "MrSquiggles", "Chemist", "Club 1 IronwoodStaff 1 LeatherArmor 1 LVL 20", 2000, "MaleHuman", "Male", "support", "Mr. Squiggles is a mischievous chemist.");
+	Merc::AddTemplate(3, "LadyLisandra", "BlackMage", "CastingBlade 1 WhiteMageVestment 1 LVL 20", 2400, "FemaleHuman", "Female", "dps", "Lady Lisandra is a confident mage with a teasing streak.");
 
 	Merc::SpawnTownMerc(1, "-2364.02 -278.263 65.0002", "0 -0 2.31905");
 	Merc::SpawnTownMerc(2, "-2400.94 -268.489 65.095", "0 -0 2.0142");

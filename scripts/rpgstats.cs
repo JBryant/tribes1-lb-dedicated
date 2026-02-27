@@ -670,7 +670,7 @@ function DistributeExpForKilling(%damagedClient)
 					%inv = GetWord(%p, 1);
 					if(%inv == -1)
 					{
-						%tmppartylist[%id] = %tmppartylist[%id] @ %n @ " ";
+						%tmppartylist[%id] = AddToCommaList(%tmppartylist[%id], %n);
 						if(String::findSubStr(%tmpl, %id @ " ") == -1)
 							%tmpl = %tmpl @ %id @ " ";
 					}
@@ -687,9 +687,12 @@ function DistributeExpForKilling(%damagedClient)
 	//parse thru all tmppartylists and determine the number of same party members involved in exp split
 	for(%w = 0; (%a = GetWord(%tmpl, %w)) != -1; %w++)
 	{
-		%n = CountObjInList(%tmppartylist[%a]);
-		for(%ww = 0; (%aa = GetWord(%tmppartylist[%a], %ww)) != -1; %ww++)
+		%tmpList = %tmppartylist[%a];
+		%n = CountObjInCommaList(%tmpList);
+		for(%p = String::findSubStr(%tmpList, ","); (%p = String::findSubStr(%tmpList, ",")) != -1; %tmpList = String::NEWgetSubStr(%tmpList, %p+1, 99999)) {
+			%aa = String::NEWgetSubStr(%tmpList, 0, %p);
 			%partyFactor[%aa] = %n;
+		}
 	}
 
 	//distribute exp
