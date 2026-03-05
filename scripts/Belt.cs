@@ -1141,7 +1141,7 @@ function processMenuBuyBeltItemFinal(%clientId, %opt) {
 				UseSkill(%clientId, $SkillHaggling, True, True);
 				storeData(%clientId, "COINS", %cost, "dec");
 				Belt::GiveThisStuff(%clientid,%item,%amnt);
-				Client::SendMessage(%clientId, $MsgWhite, "You purchased "@%amnt@" "@%name@" for "@%cost@" coins.~wbuysellsound.wav");
+				Client::SendMessage(%clientId, $MsgWhite, "You purchased "@%amnt@" "@%name@" for "@ Number::Beautify(%cost) @" coins.~wbuysellsound.wav");
 				RefreshAll(%clientId);
 				%clientId.bulkNum = 1;
 

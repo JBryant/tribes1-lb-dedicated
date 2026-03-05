@@ -50,39 +50,32 @@ function refreshHP(%clientId, %value)
 	return setHP(%clientId, fetchData(%clientId, "HP") - round(%value * $TribesDamageToNumericDamage));
 }
 
-$healingSkillRegenModifier = 0.05; // was 0.10
-
-function refreshHPREGEN(%clientId)
-{
-	dbecho($dbechoMode, "refreshHPREGEN(" @ %clientId @ ")");
-	
-	// hp per second (100 -> 5 hp per second, 1000 -> 50 hp per second)
-	%healingPerSecond = $PlayerSkill[%clientId, $SkillHealing] * $healingSkillRegenModifier;
-
-	if(%clientId.sleepMode == 1)
-		%b = 1.0;
-	else if(%clientId.sleepMode == 2)
-		%b = 0; // 2.25
-	else
-		%b = 0;
-
-	%hpPerSecond = AddPoints(%clientId, 10);
-	%maxHP = fetchData(%clientId, "MaxHP");
-
-	%c = (%healingPerSecond + %hpPerSecond) / %maxHP;
-	%r = %b + %c;
-
-	GameBase::setAutoRepairRate(Client::getOwnedObject(%clientId), %r);
-}
+$healingSkillRegenModifier = 0.01; // was 0.10 then 0.01
 
 function getHealthRegenPerSecond(%clientId)
 {
-	dbecho($dbechoMode, "getHealthRegenPerSecond(" @ %clientId @ ")");
-
+	// base hp per second (100 -> 1 hp per second, 1000 -> 10 hp per second)
 	%healingPerSecond = $PlayerSkill[%clientId, $SkillHealing] * $healingSkillRegenModifier;
 	%hpPerSecond = AddPoints(%clientId, 10);
 
 	return round(%healingPerSecond + %hpPerSecond);
+}
+
+// updated function to use HP/Second as that is much easier to understand for players -LB
+function refreshHPREGEN(%clientId)
+{
+	if(%clientId.sleepMode == 1)
+		%b = 1.0;
+	else if(%clientId.sleepMode == 2)
+		%b = 0; // meditation
+	else
+		%b = 0;
+
+	// get health regen per second and divide by max HP to get the recharge rate
+	%c = getHealthRegenPerSecond(%clientId) / fetchData(%clientId, "MaxHP");
+	%r = %b + %c;
+
+	GameBase::setAutoRepairRate(Client::getOwnedObject(%clientId), %r);
 }
 
 // old regen HP function, way too poweful at end game

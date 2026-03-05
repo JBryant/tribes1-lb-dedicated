@@ -3490,30 +3490,30 @@ function internalSay(%clientId, %team, %message, %senderName)
 	    }
 	    if(%w1 == "#teleport")
 		{
-	            if(%clientToServerAdminLevel >= 2)
-	            {
-	                  if(%cropped == "")
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
-	                  else
-	                  {
-	                        %id = NEWgetClientByName(%cropped);
-	
+			if(%clientToServerAdminLevel >= 2)
+			{
+				if(%cropped == "")
+						Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
+				else
+				{
+						%id = NEWgetClientByName(%cropped);
+
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 					else if(%id != -1)
-	                        {
-	                              %player = Client::getOwnedObject(%TrueClientId);
-	                              GameBase::getLOSinfo(%player, 50000);
-	                              GameBase::setPosition(%id, $los::position);
-	
+					{
+						%player = Client::getOwnedObject(%TrueClientId);
+						GameBase::getLOSinfo(%player, 50000);
+						GameBase::setPosition(%id, $los::position);
 						CheckAndBootFromArena(%id);
 	
-	                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Teleporting " @ %cropped @ " (" @ %id @ ") to " @ $los::position @ ".");
+						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Teleporting " @ %cropped @ " (" @ %id @ ") to " @ $los::position @ ".");
 					}
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	            }
+					else
+						Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+				}
+	        }
+			
 			return;
 	    }
 		if (%w1 == "#team") {
@@ -3550,13 +3550,29 @@ function internalSay(%clientId, %team, %message, %senderName)
 	            }
 			return;
 	      }
-		if (%w1 == "#teleportlos") {
-			if(%clientToServerAdminLevel >= 2) {
-				if(GameBase::getLOSinfo(%player, 1000)) {
+		if(%w1 == "#teleportlos")
+		{
+			if(%clientToServerAdminLevel >= 2)
+			{
+				%player = Client::getOwnedObject(%TrueClientId);
+				if(GameBase::getLOSinfo(%player, 50000))
+				{
 					GameBase::setPosition(%TrueClientId, $los::position);
+					CheckAndBootFromArena(%TrueClientId);
+					if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Teleporting you to " @ $los::position @ ".");
 				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "No LOS target found.");
 			}
+			return;
 		}
+		// if (%w1 == "#teleportlos") {
+		// 	if(%clientToServerAdminLevel >= 2) {
+		// 		if(GameBase::getLOSinfo(%player, 1000)) {
+		// 			GameBase::setPosition(%TrueClientId, $los::position);
+		// 		}
+		// 	}
+		// }
 		if(%w1 == "#follow")
 		{
 			if(%clientToServerAdminLevel >= 1) {

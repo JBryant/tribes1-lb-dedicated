@@ -5486,30 +5486,6 @@ instant SimGroup "MissionGroup" {
 			instant SimGroup "GSAY ~wnull.wav";
 			instant SimGroup "NSAY ~wnull.wav";
 		};
-		instant SimGroup "Message 1" {
-			instant SimGroup "Input" {
-				instant Trigger "GroupTrigger1" {
-					dataBlock = "GroupTrigger";
-					name = "";
-					position = "427.2 -486.08 1438";
-					rotation = "0 0 0";
-					boundingBox = "-1 -1 -1 1 1 1";
-					isSphere = "True";
-				};
-			};
-			instant SimGroup "Output" {
-				instant Marker "Marker1" {
-					dataBlock = "PathMarker";
-					name = "";
-					position = "-160.598 -1700.25 55.2588";
-					rotation = "0 0 0";
-				};
-			};
-			instant SimGroup "NEED AI false COINS 0";
-			instant SimGroup "TAKE COINS 0";
-			instant SimGroup "NSAY There is a cool draft coming from the North East.~wTink.wav";
-			instant SimGroup "GSAY .~wenterprotected.wav";
-		};
 		instant SimGroup "Goomba to Goomba Catacombs" {
 			instant SimGroup "Input" {
 				instant Trigger "GroupTrigger1" {

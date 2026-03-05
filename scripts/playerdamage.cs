@@ -966,7 +966,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 					if (%modId == 2) {
 						if (%type != $SpellDamageType || $skillType[%weapon] == $SkillSpears) {
 							// percent damage (eg 10 = 10% of hit damage)
-							%enchantDamage = round((%value * $TribesDamageToNumericDamage) * (%modValue / 100));
+							%enchantDamage = floor((%value * $TribesDamageToNumericDamage) * (%modValue / 100)) + 1;
 						}
 					}
 
@@ -1148,6 +1148,26 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 							%hitpast = "damaged";
 						%daction = %hitpast;
 						%saction = %hitpast;
+
+						%accessoryType = $AccessoryVar[%weapon, $AccessoryType];
+						if (%accessoryType == $SwordAccessoryType) {
+							%saction = "slashed";
+						}
+						else if (%accessoryType == $AxeAccessoryType) {
+							%saction = "chopped";
+						}
+						else if (%accessoryType == $PolearmAccessoryType) {
+							%saction = "impaled";
+						}
+						else if (%accessoryType == $BludgeonAccessoryType) {
+							%saction = "smashed";
+						}
+						else if (%accessoryType == $RangedAccessoryType) {
+							%saction = "shot";
+						}
+						else if (%accessoryType == $ProjectileAccessoryType) {
+							%saction = "shot";
+						}
 					}
 
 					//--------------------
@@ -1266,7 +1286,7 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 				//	RefreshWeight(%damagedClient);
 				//	schedule("storeData(" @ %damagedClient @ ", \"SlowdownHitFlag\", False);", $SlowdownHitDelay);
 				//	schedule("RefreshWeight(" @ %damagedClient @ ");", $SlowdownHitDelay, Client::getOwnedObject(%damagedClient));
-				//	=== This idea is also DUMB and not FUN... get rid of it -LongBow
+				//	=== This idea is also NOT FUN... get rid of it -LongBow
 				}
 
 				//If player not dead then play a random hurt sound
@@ -1277,7 +1297,8 @@ function Player::onDamage(%this, %type, %value, %pos, %vec, %mom, %vertPos, %qua
 						%damagedClient.lastdamage = getSimTime() + 1.5;
 					}
 				}
-				else		//player died
+				//player died, play death animation and sounds
+				else
 				{
 					if(Player::isAiControlled(%shooterClient)) {
 						RemotePlayAnim(%shooterClient, 8);

@@ -16,10 +16,8 @@ $PlayerAnim::DieBack = 37;
 
 function Player::onAdd(%this)
 {
-	dbecho($dbechoMode, "Player::onAdd(" @ %this @ ")");
-
 	//reset the player's recharge rates for HP and MANA
-      GameBase::setRechargeRate(%this, 0);
+   GameBase::setRechargeRate(%this, 0);
 	GameBase::setAutoRepairRate(%this, 0);
 }
 
@@ -40,24 +38,20 @@ function radnomItems(%num, %an0, %an1, %an2, %an3, %an4, %an5, %an6)
 	return %an[floor(getRandom() * (%num - 0.01))];
 }
 
-function Player::onCollision(%this,%object)
+function Player::onCollision(%this, %object)
 {
-	dbecho($dbechoMode, "Player::onCollision(" @ %this @ ", " @ %object @ ")");
-
 	%clientId = Player::getClient(%object);
 }
 
 function Player::getHeatFactor(%this)
 {
-	dbecho($dbechoMode, "Player::getHeatFactor(" @ %this @ ")");
-
-        // Hack to avoid turret turret not tracking vehicles.
-        // Assumes that if we are not in the player we are
-        // controlling a vechicle, which is not always correct
-        // but should be OK for now.
-        %clientId = Player::getClient(%this);
-        if (Client::getControlObject(%clientId) != %this)
-                return 1.0;
+   // Hack to avoid turret turret not tracking vehicles.
+   // Assumes that if we are not in the player we are
+   // controlling a vechicle, which is not always correct
+   // but should be OK for now.
+   %clientId = Player::getClient(%this);
+   if (Client::getControlObject(%clientId) != %this)
+            return 1.0;
 
    %time = getIntegerTime(true) >> 5;
    %lastTime = Player::lastJetTime(%this) >> 10;
@@ -73,18 +67,17 @@ function Player::getHeatFactor(%this)
 
 function Player::jump(%this,%mom)
 {
-	dbecho($dbechoMode, "Player::jump(" @ %this @ ", " @ %mom @ ")");
-
    %cl = GameBase::getControlClient(%this);
+   
    if(%cl != -1)
    {
       %vehicle = Player::getMountObject (%this);
-                %this.lastMount = %vehicle;
-                %this.newMountTime = getSimTime() + 3.0;
-                Player::setMountObject(%this, %vehicle, 0);
-                Player::setMountObject(%this, -1, 0);
-                Player::applyImpulse(%pl,%mom);
-                playSound (GameBase::getDataName(%this).dismountSound, GameBase::getPosition(%this));
+      %this.lastMount = %vehicle;
+      %this.newMountTime = getSimTime() + 3.0;
+      Player::setMountObject(%this, %vehicle, 0);
+      Player::setMountObject(%this, -1, 0);
+      Player::applyImpulse(%pl,%mom);
+      playSound (GameBase::getDataName(%this).dismountSound, GameBase::getPosition(%this));
    }
 }
 
@@ -94,11 +87,10 @@ function Player::jump(%this,%mom)
 $animNumber = 25;
 function playNextAnim(%clientId)
 {
-	dbecho($dbechoMode, "playNextAnim(" @ %clientId @ ")");
+   if($animNumber > 36)
+      $animNumber = 25;
 
-        if($animNumber > 36)
-                $animNumber = 25;
-        Player::setAnimation(%clientId, $animNumber++);
+   Player::setAnimation(%clientId, $animNumber++);
 }
 
 function Client::takeControl(%clientId, %objectId)
