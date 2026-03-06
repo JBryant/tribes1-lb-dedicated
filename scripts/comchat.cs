@@ -1447,7 +1447,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 				storeData(%TrueClientId, "autoSkill", %skillKeyword);
 				storeData(%TrueClientId, "autoSkillCropped", %skillCropped);
 				storeData(%TrueClientId, "autoSkillDelay", %delay);
-				schedule("quickSkill(\"" @ %skillKeyword @ "\", " @ %TrueClientId @ ", " @ %TrueClientId @ ", \"\", \"\", \"" @ %skillCropped @ "\", \"\");", %delay);
+				quickSkill(%skillKeyword, %TrueClientId, %TrueClientId, "", "", %skillCropped);
 				Client::sendMessage(%TrueClientId, 0, "Changed Auto Skill to " @ fetchData(%TrueClientId, "autoSkill") @ ".");
 			}
 

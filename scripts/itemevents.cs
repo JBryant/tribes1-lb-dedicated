@@ -28,8 +28,9 @@ function Item::onCollision(%this, %object) {
 
 	%clientId = Player::getClient(%object);
 	%armor = Player::getArmor(%clientId);
+	%objectType = getObjectType(%object);
 
-	if(getObjectType(%object) == "Player" && !IsDead(%clientId)) {
+	if(%objectType == "Player" && !IsDead(%clientId)) {
 		// %time = getIntegerTime(true) >> 5;
 		
 		// if(%time - %clientId.lastItemPickupTime <= 0.01)
@@ -40,7 +41,9 @@ function Item::onCollision(%this, %object) {
 		%item = Item::getItemData(%this);
 
 		if(%item == "Lootbag") {
-			if (Player::isAiControlled(%clientId)) return;
+			// let's allow lootbags to be picked up by AI players again -LB
+			// This should reduce all the constant Item::onCollision calls for AI players.
+			// if (Player::isAiControlled(%clientId)) return;
 			%msg = "";
 
 			%ownerName = GetWord($loot[%this], 0);
