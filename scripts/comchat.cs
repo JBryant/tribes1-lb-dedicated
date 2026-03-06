@@ -1902,6 +1902,34 @@ function internalSay(%clientId, %team, %message, %senderName)
 
 			rpg::longPrint(%TrueClientId, %msg, 0, 10);
 		}
+		if (%w1 == "#dislist") {
+			if(%clientToServerAdminLevel >= 5) {
+				DisList::Init();
+				%search = GetWord(%cropped, 0);
+				%found = 0;
+				%msg = "";
+				for(%i = 0; %i < $DisList::Count; %i++) {
+					%name = $DisList::Name[%i];
+					if(%name == "")
+						continue;
+
+					if(%search == "" || String::findSubStr(%name, %search) != -1) {
+						%line = %name;
+						%desc = $DisList::Desc[%i];
+						if(%desc != "")
+							%line = %line @ " - " @ %desc;
+						%msg = %msg @ %line @ "\n";
+						%found++;
+					}
+				}
+
+				if(%found == 0)
+					Client::sendMessage(%TrueClientId, 0, "No DIS entries found.");
+				else
+					rpg::longPrint(%TrueClientId, %msg, 0, 15);
+			}
+			return;
+		}
 
 		if (%w1 == "#place") {
 			//if(%clientToServerAdminLevel >= 4) {
@@ -4927,6 +4955,76 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
+		if(%w1 == "#movedisz")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				if(fetchData(%TrueClientId, "DisMoveZMode") == 1) {
+					DisEndMoveZMode(%TrueClientId);
+					return;
+				}
+
+				%tag = GetWord(%cropped, 0);
+				%object = "";
+
+				if(fetchData(%TrueClientId, "DisPlaceMode") == 1)
+					%object = $disPlaceObject[%TrueClientId];
+
+				if(%object == "" || %object == 0) {
+					if(%tag != -1 && %tag != "")
+						%object = $tagToObjectId[%tag];
+				}
+
+				if(%object == "" || %object == 0) {
+					%player = Client::getOwnedObject(%TrueClientId);
+					if(%player != -1 && GameBase::getLOSinfo(%player, 1000))
+						%object = $los::object;
+				}
+
+				if(%object == "" || %object == 0 || getObjectType(%object) == "Player") {
+					Client::sendMessage(%TrueClientId, 0, "Invalid object. Use #movedisz tagname or look at the object.");
+					return;
+				}
+
+				DisStartMoveZMode(%TrueClientId, %object);
+			}
+			return;
+		}
+		if(%w1 == "#movedisxy")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				if(fetchData(%TrueClientId, "DisMoveXYMode") == 1) {
+					DisEndMoveXYMode(%TrueClientId);
+					return;
+				}
+
+				%tag = GetWord(%cropped, 0);
+				%object = "";
+
+				if(fetchData(%TrueClientId, "DisPlaceMode") == 1)
+					%object = $disPlaceObject[%TrueClientId];
+
+				if(%object == "" || %object == 0) {
+					if(%tag != -1 && %tag != "")
+						%object = $tagToObjectId[%tag];
+				}
+
+				if(%object == "" || %object == 0) {
+					%player = Client::getOwnedObject(%TrueClientId);
+					if(%player != -1 && GameBase::getLOSinfo(%player, 1000))
+						%object = $los::object;
+				}
+
+				if(%object == "" || %object == 0 || getObjectType(%object) == "Player") {
+					Client::sendMessage(%TrueClientId, 0, "Invalid object. Use #movedisxy tagname or look at the object.");
+					return;
+				}
+
+				DisStartMoveXYMode(%TrueClientId, %object);
+			}
+			return;
+		}
 		if(%w1 == "#placedis")
 		{
 			if(%clientToServerAdminLevel >= 5)
@@ -4934,6 +5032,14 @@ function internalSay(%clientId, %team, %message, %senderName)
 				%didSomething = False;
 				if(fetchData(%TrueClientId, "DisRotateMode") == 1) {
 					DisEndRotateMode(%TrueClientId);
+					%didSomething = True;
+				}
+				if(fetchData(%TrueClientId, "DisMoveZMode") == 1) {
+					DisEndMoveZMode(%TrueClientId);
+					%didSomething = True;
+				}
+				if(fetchData(%TrueClientId, "DisMoveXYMode") == 1) {
+					DisEndMoveXYMode(%TrueClientId);
 					%didSomething = True;
 				}
 				if(fetchData(%TrueClientId, "DisPlaceMode") == 1) {

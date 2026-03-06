@@ -606,8 +606,8 @@ $Quest::stepReward[14, 1] = "SkeletonBone 1";
 
 $QuestNPC::name[14] = "Johannes";
 $QuestNPC::shape[14] = "MaleHumanTownBot";
-$QuestNPC::pos[14] = "-2436.75 -258.375 77.5914";
-$QuestNPC::rot[14] = "0 -0 -2.23957";
+$QuestNPC::pos[14] = "-2428.79 -268.635 78.4444";
+$QuestNPC::rot[14] = "0 -0 0.712547";
 $QuestNPC::questId[14] = 14;
 
 $QuestNPC::conversations[14, 14, 0, 1, 0] = "Welcome to Kalm! I'm Johannes, the mayor of this town. We're just a small rural village but there are plenty of jobs to be found.|jobs";
@@ -641,8 +641,8 @@ $Quest::stepReward[15, 1] = "SmallBeltPouch 1";
 
 $QuestNPC::name[15] = "Brien";
 $QuestNPC::shape[15] = "MaleHumanTownBot";
-$QuestNPC::pos[15] = "-2430.5 -246.25 77.5914";
-$QuestNPC::rot[15] = "0 -0 2.38281";
+$QuestNPC::pos[15] = "-2436.95 -244.37 77.5997";
+$QuestNPC::rot[15] = "0 -0 1.55523";
 $QuestNPC::questId[15] = 15;
 
 $QuestNPC::conversations[15, 15, 0, 1, 0] = "Hey, nice belt you got there!|belt?";
@@ -676,8 +676,8 @@ $Quest::stepReward[16, 1] = "HealingKitI 1";
 
 $QuestNPC::name[16] = "Lance";
 $QuestNPC::shape[16] = "MaleHumanTownBot";
-$QuestNPC::pos[16] = "-2421.5 -252.25 77.5914";
-$QuestNPC::rot[16] = "0 -0 2.12282";
+$QuestNPC::pos[16] = "-2420.62 -255.268 77.5923";
+$QuestNPC::rot[16] = "0 -0 0.730803";
 $QuestNPC::questId[16] = 16;
 
 $QuestNPC::conversations[16, 16, 0, 1, 0] = "Hey there stranger. Have you learned about skills yet?|skills";

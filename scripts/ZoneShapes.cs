@@ -5,8 +5,28 @@ function ZoneShapes::Init() {
 	$ZoneShapes::count = 0;
 
 	// Kalm
-	ZoneShapes::AddInterior("Kalm", "woodcrate482437", "woodcrate.dis", 0, "-2425.89 -248.264 77.5913", "0 0 0", "0");
-
+	ZoneShapes::AddInterior("Kalm", "throne2831538", "throne2.dis", 0, "-2428 -269.551 78.4434", "0 -0 -2.41393", "0");
+	ZoneShapes::AddInterior("Kalm", "fireplace288766", "fireplace.dis", 0, "-2436.54 -267.621 77.6264", "0 -0 2.28548", "0");
+	ZoneShapes::AddInterior("Kalm", "chair1639271", "chair1.dis", 0, "-2427.31 -262.744 77.5897", "0 -0 1.22999", "0");
+	ZoneShapes::AddInterior("Kalm", "endtable875362", "endtable.dis", 0, "-2429.05 -261.077 77.4472", "0 -0 -0.854499", "0");
+	ZoneShapes::AddInterior("Kalm", "chair1640095", "chair1.dis", 0, "-2430.15 -259.487 77.5895", "0 -0 -3.12718", "0");
+	ZoneShapes::AddInterior("Kalm", "pic5867000", "pic5.dis", 0, "-2427.75 -260.25 80.4829", "0 -0 -0.854499", "0");
+	ZoneShapes::AddInterior("Kalm", "candelabra778832", "candelabra.dis", 0, "-2431.85 -272.385 77.5913", "0 0 0", "0");
+	ZoneShapes::AddInterior("Kalm", "candelabra132206", "candelabra.dis", 0, "-2424.33 -265.648 77.591", "0 0 0", "0");
+	ZoneShapes::AddInterior("Kalm", "pic4644154", "pic4.dis", 0, "-2438.75 -257.032 80.3094", "0 -0 0.716498", "0");
+	ZoneShapes::AddInterior("Kalm", "bench2341502", "bench2.dis", 0, "-2439.8 -258.943 77.5903", "0 -0 0.720999", "0");
+	ZoneShapes::AddInterior("Kalm", "bench2988433", "bench2.dis", 0, "-2436.3 -255.632 77.5913", "0 -0 0.690499", "0");
+	ZoneShapes::AddInterior("Kalm", "bigtable243580", "bigtable2.dis", 0, "-2424.03 -250.175 77.3125", "0 -0 0.724997", "0");
+	ZoneShapes::AddInterior("Kalm", "chair1438032", "chair1.dis", 0, "-2427.13 -249.932 77.1963", "0 -0 -0.872498", "0");
+	ZoneShapes::AddInterior("Kalm", "chair1779687", "chair1.dis", 0, "-2425.45 -251.861 77.1291", "0 -0 -0.881499", "0");
+	ZoneShapes::AddInterior("Kalm", "chair136714", "chair1.dis", 0, "-2423.8 -253.729 77.1686", "0 -0 -0.881999", "0");
+	ZoneShapes::AddInterior("Kalm", "chair1715445", "chair1.dis", 0, "-2419.46 -254.072 77.5908", "0 -0 1.66716", "0");
+	ZoneShapes::AddInterior("Kalm", "easel646992", "easel.dis", 0, "-2439.26 -244.144 77.5913", "0 -0 1.44899", "0");
+	ZoneShapes::AddInterior("Kalm", "woodchair586383", "woodchair.dis", 0, "-2436.5 -242.9 77.5909", "0 -0 1.13149", "0");
+	ZoneShapes::AddInterior("Kalm", "bookshelf728355", "bookshelf.dis", 0, "-2427.34 -243.533 77.5899", "0 -0 0.684499", "0");
+	ZoneShapes::AddInterior("Kalm", "bookshelfm413800", "bookshelfm.dis", 0, "-2418.75 -254.772 69.2323", "0 -0 -0.868999", "0");
+	ZoneShapes::AddInterior("Kalm", "candelabra781030", "candelabra.dis", 0, "-2418.64 -257.55 71.0913", "0 0 0", "0");
+	ZoneShapes::AddInterior("Kalm", "chair1360210", "chair1.dis", 0, "-2421.54 -254.828 71.0896", "0 -0 -2.42848", "0");
 
 	// Seventh Heaven (7th Heaven)
 	ZoneShapes::AddInterior("7th Heaven", "cdoore1", "CDoorE.dis", 0, "1436.75 -464.981 -808.135", "0 0 0", "0");
@@ -65,6 +85,7 @@ function ZoneShapes::Init() {
 	ZoneShapes::AddInterior("7th Heaven", "woodcrateb1", "woodcrateb.dis", 0, "1435.5 -437.145 -808.031", "0 -0 0.0199989", "0");
 	ZoneShapes::AddInterior("7th Heaven", "woodcrate1e", "woodcrate.dis", 0, "1435.53 -439.912 -808.031", "0 -0 -0.279989", "0");
 	ZoneShapes::AddInterior("7th Heaven", "pic11", "pic1.dis", 0, "1399.83 -448.891 -804.661", "0 -0 1.57989", "0");
+	
 	// Midgar
 	ZoneShapes::AddInterior("Midgar", "w64gate1", "W64gate.dis", 1, "-2503.08 -2106.67 7545.79", "0 0 0", "0 ");
 	ZoneShapes::AddInterior("Midgar", "w64long1", "W64long.dis", 1, "-2355.01 -2657.58 7547.92", "0 -0 -2.71993", "0 ");
@@ -160,6 +181,7 @@ function ZoneShapes::Init() {
 	ZoneShapes::AddInterior("Midgar", "w64short1_8", "W64short.dis", 1, "-2558.06 -2472.51 7555.67", "-0.241063 0.620601 -0.322335", "0 ");
 	ZoneShapes::AddInterior("Midgar", "w64short1_9", "W64short.dis", 1, "-2455.71 -2465.2 7547.82", "0.276233 0.372629 -2.53233", "0 ");
 	ZoneShapes::AddInterior("Midgar", "w64short1_10", "W64short.dis", 1, "-2442.35 -2365.41 7547.81", "0 -0 -1.01997", "0 ");
+	
 	// Midgar Slums
 	ZoneShapes::AddInterior("Midgar", "shildrikhousesfinal1", "shildrikhousesfinal.dis", 1, "-2379.24 -2183.6 7556.58", "0 -0 -1.09999", "2 2.500000 1 2.500000 1 ");
 	ZoneShapes::AddInterior("Midgar", "lowershildriksfinal1", "lowershildriksfinal.dis", 1, "-2443.08 -2192.79 7556.37", "0 -0 -1.57998", "0 ");
