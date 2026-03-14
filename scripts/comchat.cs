@@ -4636,61 +4636,61 @@ function internalSay(%clientId, %team, %message, %senderName)
 	            }
 			return;
 	      }
-	      if(%w1 == "#getfinaldef")
+	    if(%w1 == "#getfinaldef")
 		{
-	            if(%clientToServerAdminLevel >= 1)
+	        if(%clientToServerAdminLevel >= 1)
+	        {
+	            if(%cropped != -1)
 	            {
-	                  if(%cropped != -1)
-	                  {
-	                        %id = NEWgetClientByName(%cropped);
+	                %id = NEWgetClientByName(%cropped);
 	
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 					else if(%id != -1)
-	                              Client::sendMessage(%TrueClientId, 0, %cropped @ " (" @ %id @ ") max DEF roll is " @ fetchData(%id, "DEF") @ ".");
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
+	                    Client::sendMessage(%TrueClientId, 0, %cropped @ " (" @ %id @ ") max DEF roll is " @ fetchData(%id, "DEF") @ ".");
+	                else
+	                	Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
 	            }
+	            else
+	            	Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
+	        }
 			return;
-	      }
-	      if(%w1 == "#getfinalatk")
+	    }
+	    if(%w1 == "#getfinalatk")
 		{
-	            if(%clientToServerAdminLevel >= 1)
-	            {
-	                  if(%cropped != -1)
-	                  {
-	                        %id = NEWgetClientByName(%cropped);
-	
+	        if(%clientToServerAdminLevel >= 1)
+	        {
+				if(%cropped != -1)
+				{
+					%id = NEWgetClientByName(%cropped);
+
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 					else if(%id != -1)
-	                              Client::sendMessage(%TrueClientId, 0, %cropped @ " (" @ %id @ ") max ATK roll is " @ fetchData(%id, "ATK") @ ".");
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
-	            }
+						Client::sendMessage(%TrueClientId, 0, %cropped @ " (" @ %id @ ") max ATK roll is " @ fetchData(%id, "ATK") @ ".");
+					else
+						Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
+	        }
 			return;
-	      }
-	      if(%w1 == "#exportchat")
+	    }
+	    if(%w1 == "#exportchat")
 		{
-	            if(%clientToServerAdminLevel >= 5)
-	            {
-	                  if(%cropped != "")
+			if(%clientToServerAdminLevel >= 5)
+			{
+				if(%cropped != "")
 				{
 					if(%cropped == "0")
 						$exportChat = False;
 					else if(%cropped == "1")
 						$exportChat = True;
-	
-	                        if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "exportChat set to " @ $exportChat @ ".");
+
+					if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "exportChat set to " @ $exportChat @ ".");
 				}
 				else
-	                        Client::sendMessage(%TrueClientId, 0, "Specify 1 or 0 (1 = True, 0 = False).");
+					Client::sendMessage(%TrueClientId, 0, "Specify 1 or 0 (1 = True, 0 = False).");
 			}
 			return;
 		}
@@ -4701,55 +4701,55 @@ function internalSay(%clientId, %team, %message, %senderName)
 				%c1 = GetWord(%cropped, 0);
 				%c2 = GetWord(%cropped, 1);
 
-	                  if(%c1 != -1 && %c2 != -1)
-	                  {
-	                        %id = NEWgetClientByName(%c1);
-	
+				if(%c1 != -1 && %c2 != -1)
+				{
+					%id = NEWgetClientByName(%c1);
+
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 					else if(%id != -1)
-	                        {
-	                              if(%c2 == 0)
+					{
+						if(%c2 == 0)
 							%id.doExport = False;
-	                              else if(%c2 == 1)
+						else if(%c2 == 1)
 							%id.doExport = True;
-	
-	                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Changed " @ %c1 @ " (" @ %id @ ") doExport to " @ %id.doExport @ ".");
-	                        }
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
-	            }
+
+						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Changed " @ %c1 @ " (" @ %id @ ") doExport to " @ %id.doExport @ ".");
+					}
+					else
+						Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
+			}
 			return;
-	      }
-	      if(%w1 == "#getip")
+		}
+	    if(%w1 == "#getip")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
-	                  if(%cropped != "")
-	                  {
-	                        %id = NEWgetClientByName(%cropped);
-	
+			if(%clientToServerAdminLevel >= 3)
+			{
+				if(%cropped != "")
+				{
+					%id = NEWgetClientByName(%cropped);
+
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 					else if(%id != -1)
-	                              Client::sendMessage(%TrueClientId, 0, %cropped @ " (" @ %id @ ") IP is " @ Client::getTransportAddress(%id));
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
-	            }
+						Client::sendMessage(%TrueClientId, 0, %cropped @ " (" @ %id @ ") IP is " @ Client::getTransportAddress(%id));
+					else
+						Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
+			}
 			return;
-	      }
-	      if(%w1 == "#spawnpack")
+	    }
+	    if(%w1 == "#spawnpack")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
-	                  if(%cropped != "")
-	                  {
+			if(%clientToServerAdminLevel >= 3)
+			{
+				if(%cropped != "")
+				{
 					%event = String::findSubStr(%cropped, ">");
 					if(%event != -1)
 					{
@@ -4758,9 +4758,9 @@ function internalSay(%clientId, %team, %message, %senderName)
 					}
 					else
 						%info	= %cropped;
-	
+
 					%div = String::findSubStr(%info, "|");
-	
+
 					if(%div != -1)
 					{
 						%a = String::NEWgetSubStr(%info, 0, %div-1);
@@ -4776,7 +4776,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 						}
 						else
 							%pos = %ox @ " " @ %oy @ " " @ %oz;
-	
+
 						if(!IsInCommaList($SpawnPackList, %tag))
 						{
 							%pack = String::NEWgetSubStr(%info, %div+1, 99999);
@@ -4788,27 +4788,28 @@ function internalSay(%clientId, %team, %message, %senderName)
 							if(%event != -1)
 								AddEventCommand(%pid, %senderName, "onpickup", %cmd);
 		
-		                    if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Spawned pack (" @ %pid @ ") at position " @ %pos @ ".");
+							if(!%echoOff)
+								Client::sendMessage(%TrueClientId, 0, "Spawned pack (" @ %pid @ ") at position " @ %pos @ ".");
 						}
 						else
 							Client::sendMessage(%TrueClientId, 0, "Tagname " @ %tag @ " already exists.");
 					}
-		                  else
-		                        Client::sendMessage(%TrueClientId, 0, "Divider not found. Type #spawnpack with no parameters to get a quick overview.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "#spawnpack tagname [x] [y] [z] | packstring. Use this command only if you know what you're doing.");
-	            }
+					else
+						Client::sendMessage(%TrueClientId, 0, "Divider not found. Type #spawnpack with no parameters to get a quick overview.");
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "#spawnpack tagname [x] [y] [z] | packstring. Use this command only if you know what you're doing.");
+			}
 			return;
-	      }
-	      if(%w1 == "#delpack")
+	    }
+	    if(%w1 == "#delpack")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
+			if(%clientToServerAdminLevel >= 3)
+			{
 				%tag = GetWord(%cropped, 0);
-	
-	                  if(%cropped != -1)
-	                  {
+
+				if(%cropped != -1)
+				{
 					if($tagToObjectId[%tag] != "")
 					{
 						%object = $tagToObjectId[%tag];
@@ -4816,17 +4817,17 @@ function internalSay(%clientId, %team, %message, %senderName)
 						deleteObject(%object);
 						$tagToObjectId[%tag] = "";
 						$SpawnPackList = RemoveFromCommaList($SpawnPackList, %tag);
-	
+
 						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Deleted " @ %tag @ " (" @ %object @ ")");
 					}
 					else
 						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Invalid tagname.");
 				}
-	                  else
+				else
 					Client::sendMessage(%TrueClientId, 0, "#delpack tagname.");
-	            }
+			}
 			return;
-	      }
+	    }
 	    if(%w1 == "#spawndis")
 		{
 			if(%clientToServerAdminLevel >= 3)
@@ -4894,7 +4895,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 					Client::sendMessage(%TrueClientId, 0, "#spawndis filename tagname [x] [y] [z] [r1] [r2] [r3]. Do not specify .dis, this will automatically be added.");
 			}
 			return;
-	      }
+	    }
 		if(%w1 == "#movedis")
 		{
 			if(%clientToServerAdminLevel >= 5)
@@ -5105,12 +5106,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 						continue;
 
 					%object = $tagToObjectId[%tag];
-					lbecho("object: " @ %object);
 					if(%object == "" || %object == 0)
 						continue;
 
 					%shape = %object.shape;
-					lbecho("shape: " @ %shape);
 					if(%shape == "")
 						%shape = $tagToObjectShape[%tag];
 
@@ -5168,14 +5167,14 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
-	      if(%w1 == "#deldis")
+	    if(%w1 == "#deldis")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
+			if(%clientToServerAdminLevel >= 3)
+			{
 				%tag = GetWord(%cropped, 0);
-	
-	                  if(%cropped != -1)
-	                  {
+
+				if(%cropped != -1)
+				{
 					if($tagToObjectId[%tag] != "")
 					{
 						%object = $tagToObjectId[%tag];
@@ -5183,17 +5182,17 @@ function internalSay(%clientId, %team, %message, %senderName)
 						deleteObject(%object);
 						$tagToObjectId[%tag] = "";
 						$DISlist = RemoveFromCommaList($DISlist, %tag);
-	
+
 						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Deleted " @ %tag @ " (" @ %object @ ")");
 					}
 					else
 						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Invalid tagname.");
 				}
-	                  else
+				else
 					Client::sendMessage(%TrueClientId, 0, "#deldis tagname.");
-	            }
+			}
 			return;
-	      }
+	    }
 		if(%w1 == "#listdis")
 		{
 			if(%clientToServerAdminLevel >= 1)
@@ -5210,13 +5209,13 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
-	      if(%w1 == "#deleteobject")
+	    if(%w1 == "#deleteobject")
 		{
-	            if(%clientToServerAdminLevel >= 5)
-	            {
+			if(%clientToServerAdminLevel >= 5)
+			{
 				%c1 = GetWord(%cropped, 0);
-	                  if(%c1 != -1)
-	                  {
+				if(%c1 != -1)
+				{
 					if(%c1.tag != "")
 					{
 						$tagToObjectId[%c1.tag] = "";
@@ -5227,14 +5226,14 @@ function internalSay(%clientId, %team, %message, %senderName)
 					}
 					deleteObject(%c1);
 					ClearEvents(%c1);
-	
+
 					if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Attempted to deleteObject(" @ %c1 @ ")");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "#deleteobject [objectId].  Be careful with this command.");
-	            }
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "#deleteobject [objectId].  Be careful with this command.");
+			}
 			return;
-	      }
+	    }
 		if(%w1 == "#getposition")
 		{
 			if(%clientToServerAdminLevel >= 1)
@@ -5535,29 +5534,28 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
-	      if(%w1 == "#refreshbotskills")
+	    if(%w1 == "#refreshbotskills")
 		{
-	            if(%clientToServerAdminLevel >= 2)
-	            {
-	                  if(%cropped == "")
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
-	                  else
-	                  {
-	                        %id = NEWgetClientByName(%cropped);
-	
+			if(%clientToServerAdminLevel >= 2)
+			{
+				if(%cropped == "")
+					Client::sendMessage(%TrueClientId, 0, "Please specify player name.");
+				else
+				{
+					%id = NEWgetClientByName(%cropped);
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 					else if(%id != -1)
-	                        {
+					{
 						HardcodeAIskills(%id);
-	                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Refreshed skills for " @ %cropped @ " (" @ %id @ ").");
+						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Refreshed skills for " @ %cropped @ " (" @ %id @ ").");
 					}
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	            }
+					else
+						Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+				}
+			}
 			return;
-	      }
+	    }
 		if(%w1 == "#listblockowners")
 		{
 			if(%clientToServerAdminLevel >= 5)
@@ -5621,7 +5619,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
-	      if(%w1 == "#delbot")
+	    if(%w1 == "#delbot")
 		{
 	            if(%clientToServerAdminLevel >= 3)
 	            {
@@ -5750,70 +5748,72 @@ function internalSay(%clientId, %team, %message, %senderName)
 				%c1 = GetWord(%cropped, 0);
 				%c2 = GetWord(%cropped, 1);
 	
-	                  if(%c1 != -1 && %c2 != -1)
-	                  {
-	                        %id = NEWgetClientByName(%c1);
-	
+				if(%c1 != -1 && %c2 != -1)
+				{
+					%id = NEWgetClientByName(%c1);
+
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
-	                        else if(%id != -1)
-	                        {
+					else if(%id != -1)
+					{
 						if(%c2 == 0)
 							storeData(%id, "noBotSniff", "");
+
 						else if(%c2 == 1)
 							storeData(%id, "noBotSniff", True);
-	
-						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Changed " @ %c1 @ " (" @ %id @ ") noBotSniff flag to " @ %c2 @ ".");
-	                        }
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
-	            }
+
+						if(!%echoOff)
+							Client::sendMessage(%TrueClientId, 0, "Changed " @ %c1 @ " (" @ %id @ ") noBotSniff flag to " @ %c2 @ ".");
+					}
+					else
+						Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
+	        }
 			return;
-	      }
-	      if(%w1 == "#addrankpoints")
+	    }
+	    if(%w1 == "#addrankpoints")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
-	                  %c1 = GetWord(%cropped, 0);
-	                  %c2 = GetWord(%cropped, 1);
-	
-	                  if(%c1 != -1 && %c2 != -1)
-	                  {
-	                        %id = NEWgetClientByName(%c1);
-	
+			if(%clientToServerAdminLevel >= 3)
+			{
+				%c1 = GetWord(%cropped, 0);
+				%c2 = GetWord(%cropped, 1);
+
+				if(%c1 != -1 && %c2 != -1)
+				{
+					%id = NEWgetClientByName(%c1);
+
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 					else if(%id != -1)
-	                        {
+					{
 						storeData(%id, "RankPoints", %c2, "inc");
 						if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Setting " @ %c1 @ " (" @ %id @ ") RankPoints to " @ fetchData(%id, "RankPoints") @ ".");
-	                        }
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
-	            }
+					}
+					else
+						Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "Please specify player name & data.");
+			}
 			return;
-	      }
-	      if(%w1 == "#sethouse")
+	    }
+	    if(%w1 == "#sethouse")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
-	                  %c1 = GetWord(%cropped, 0);
+			if(%clientToServerAdminLevel >= 3)
+			{
+				%c1 = GetWord(%cropped, 0);
 				%c2 = GetWord(%cropped, 1);
-	
-	                  if(%c1 != -1 && %c2 != -1)
-	                  {
-	                        %id = NEWgetClientByName(%c1);
-	
+
+				if(%c1 != -1 && %c2 != -1)
+				{
+					%id = NEWgetClientByName(%c1);
+
 					if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 						Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 					else if(%id != -1)
-	                        {
+					{
 						%hn = "";
 						if(String::ICompare(%c2, "null") == 0)
 							%hn = 0;
@@ -5822,10 +5822,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 							for(%i = 1; $HouseName[%i] != ""; %i++)
 							{
 								if(String::findSubStr($HouseName[%i], %c2) != -1)
-									%hn = %i;
+								%hn = %i;
 							}
 						}
-	
+
 						if(%hn != "")
 						{
 							%hname = $HouseName[%hn];
@@ -5833,14 +5833,15 @@ function internalSay(%clientId, %team, %message, %senderName)
 							if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Setting " @ %c1 @ " (" @ %id @ ") House to " @ fetchData(%id, "MyHouse") @ ".");
 						}
 						else
-		                              Client::sendMessage(%TrueClientId, 0, "Invalid House.");
-	                        }
-	                        else
-	                              Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	                  }
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Please specify player name & house (to clear house, use: #sethouse name NULL).");
-	            }
+							Client::sendMessage(%TrueClientId, 0, "Invalid House.");
+					}
+					else
+						Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+				}
+				else
+					Client::sendMessage(%TrueClientId, 0, "Please specify player name & house (to clear house, use: #sethouse name NULL).");
+			}
+
 			return;
 	      }
 		if(%w1 == "#setspawnmultiplier")
@@ -5859,7 +5860,7 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
-	      if(%w1 == "#jail")
+	    if(%w1 == "#jail")
 		{
 	            if(%clientToServerAdminLevel >= 3)
 	            {
@@ -5929,10 +5930,10 @@ function internalSay(%clientId, %team, %message, %senderName)
 		}
 		if(%w1 == "#onhear")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
-	                  if(%cropped != "")
-	                  {
+			if(%clientToServerAdminLevel >= 3)
+			{
+				if(%cropped != "")
+				{
 					%event = String::findSubStr(%cropped, ">");
 					if(%event != -1)
 					{
@@ -6004,17 +6005,17 @@ function internalSay(%clientId, %team, %message, %senderName)
 					else
 						Client::sendMessage(%TrueClientId, 0, "Quotes for text not found.");
 				}
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "#onhear name radius keep all/targetname \"text\"/var.");
-	            }
+				else
+					Client::sendMessage(%TrueClientId, 0, "#onhear name radius keep all/targetname \"text\"/var.");
+			}
 			return;
-	      }
-			if(%w1 == "#if")
+	    }
+		if(%w1 == "#if")
+		{
+			if(%clientToServerAdminLevel >= 5)
 			{
-	            if(%clientToServerAdminLevel >= 5)
-	            {
-	                  if(%cropped != "")
-	                  {
+				if(%cropped != "")
+				{
 					%info	= %cropped;
 
 					%para1 = String::findSubStr(%info, "{");
@@ -6031,8 +6032,8 @@ function internalSay(%clientId, %team, %message, %senderName)
 								%r = false;
 							else
 								%r = true;
-		                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "(" @ %expression @ ") = " @ %r);
-	
+										if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "(" @ %expression @ ") = " @ %r);
+
 							if(%retval && %command != "")
 								internalSay(%clientId, 0, %command, %senderName);
 						}
@@ -6042,19 +6043,18 @@ function internalSay(%clientId, %team, %message, %senderName)
 					else
 						Client::sendMessage(%TrueClientId, 0, "{ and } found.");
 				}
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "#if {expression} command");
-	            }
+				else
+					Client::sendMessage(%TrueClientId, 0, "#if {expression} command");
+			}
 			return;
-	      }
-	      if(%w1 == "#addskill")
+	    }
+	    if(%w1 == "#addskill")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
+			if(%clientToServerAdminLevel >= 3)
+			{
 				%name = GetWord(%cropped, 0);
-	
-	                  %id = NEWgetClientByName(%name);
-	
+				%id = NEWgetClientByName(%name);
+
 				if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 					Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 				else if(%id != -1)
@@ -6071,12 +6071,12 @@ function internalSay(%clientId, %team, %message, %senderName)
 						}
 					}
 				}
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	            }
+				else
+					Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+			}
 			return;
-	      }
-	      if(%w1 == "#setvelocity")
+	    }
+	    if(%w1 == "#setvelocity")
 		{
 	            if(%clientToServerAdminLevel >= 2)
 	            {
@@ -6102,15 +6102,14 @@ function internalSay(%clientId, %team, %message, %senderName)
 	                        Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
 	            }
 			return;
-	      }
-	      if(%w1 == "#getskill")
+	    }
+	    if(%w1 == "#getskill")
 		{
-	            if(%clientToServerAdminLevel >= 2)
-	            {
+			if(%clientToServerAdminLevel >= 2)
+			{
 				%name = GetWord(%cropped, 0);
-	
-	                  %id = NEWgetClientByName(%name);
-	
+				%id = NEWgetClientByName(%name);
+
 				if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 					Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 				else if(%id != -1)
@@ -6119,12 +6118,12 @@ function internalSay(%clientId, %team, %message, %senderName)
 					if($SkillDesc[%sid] != "")
 						Client::sendMessage(%TrueClientId, 0, %name @ " (" @ %id @ ") " @ $SkillDesc[%sid] @ " is " @ $PlayerSkill[%id, %sid]);
 				}
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	            }
+				else
+					Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+			}
 			return;
-	      }
-	      if(%w1 == "#scheduleblock")
+	    }
+	    if(%w1 == "#scheduleblock")
 		{
 	            if(%clientToServerAdminLevel >= 3)
 	            {
@@ -6224,14 +6223,13 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
-	      if(%w1 == "#getvelocity")
+	    if(%w1 == "#getvelocity")
 		{
-	            if(%clientToServerAdminLevel >= 2)
-	            {
+			if(%clientToServerAdminLevel >= 2)
+			{
 				%name = GetWord(%cropped, 0);
-	
-	                  %id = NEWgetClientByName(%name);
-	
+				%id = NEWgetClientByName(%name);
+
 				if(floor(%id.adminLevel) >= floor(%clientToServerAdminLevel) && Client::getName(%id) != %senderName)
 					Client::sendMessage(%TrueClientId, 0, "Could not process command: Target admin clearance level too high.");
 				else if(%id != -1)
@@ -6239,12 +6237,12 @@ function internalSay(%clientId, %team, %message, %senderName)
 					%vel = Item::getVelocity(%id);
 					Client::sendMessage(%TrueClientId, 0, %name @ " (" @ %id @ ") velocity: " @ %vel);
 				}
-	                  else
-	                        Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
-	            }
+				else
+					Client::sendMessage(%TrueClientId, 0, "Invalid player name.");
+			}
 			return;
-	      }
-	      if(%w1 == "#onconsider")
+	    }
+	    if(%w1 == "#onconsider")
 		{
 	            if(%clientToServerAdminLevel >= 3)
 	            {

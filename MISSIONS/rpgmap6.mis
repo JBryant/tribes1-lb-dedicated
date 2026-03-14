@@ -547,8 +547,8 @@ instant SimGroup "MissionGroup" {
 			instant Marker "Marker1" {
 				dataBlock = "PathMarker";
 				name = "";
-				position = "-2437.75 -272.028 77.0914";
-				rotation = "0 -0 0.8998";
+				position = "-2436.95 -258.495 77.5923";
+				rotation = "0 -0 -2.44193";
 			};
 		};
 		instant SimGroup "TeleportEntranceMarkers" {
@@ -899,6 +899,7 @@ instant SimGroup "MissionGroup" {
 		instant SimGroup "PROTECTED Kalm" {
 			instant SimGroup "MUSIC fftown.wav 55";
 			instant SimGroup "MUSIC gelid.wav 28";
+			instant SimGroup "MUSIC KeldrinTown.wav 55";
 			instant SimGroup "ENTERSOUND object_harp.wav";
 			instant SimGroup "DropPoints" {
 				instant Marker "Marker1" {

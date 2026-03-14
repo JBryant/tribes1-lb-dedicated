@@ -13,7 +13,7 @@ function ZoneShapes::Init() {
 	ZoneShapes::AddInterior("Kalm", "pic5867000", "pic5.dis", 0, "-2427.75 -260.25 80.4829", "0 -0 -0.854499", "0");
 	ZoneShapes::AddInterior("Kalm", "candelabra778832", "candelabra.dis", 0, "-2431.85 -272.385 77.5913", "0 0 0", "0");
 	ZoneShapes::AddInterior("Kalm", "candelabra132206", "candelabra.dis", 0, "-2424.33 -265.648 77.591", "0 0 0", "0");
-	ZoneShapes::AddInterior("Kalm", "pic4644154", "pic4.dis", 0, "-2438.75 -257.032 80.3094", "0 -0 0.716498", "0");
+	ZoneShapes::AddInterior("Kalm", "pic4644154", "pic4.dis", 0, "-2438.75 -257.032 80.7433", "0 -0 0.716498", "0");
 	ZoneShapes::AddInterior("Kalm", "bench2341502", "bench2.dis", 0, "-2439.8 -258.943 77.5903", "0 -0 0.720999", "0");
 	ZoneShapes::AddInterior("Kalm", "bench2988433", "bench2.dis", 0, "-2436.3 -255.632 77.5913", "0 -0 0.690499", "0");
 	ZoneShapes::AddInterior("Kalm", "bigtable243580", "bigtable2.dis", 0, "-2424.03 -250.175 77.3125", "0 -0 0.724997", "0");
@@ -27,6 +27,12 @@ function ZoneShapes::Init() {
 	ZoneShapes::AddInterior("Kalm", "bookshelfm413800", "bookshelfm.dis", 0, "-2418.75 -254.772 69.2323", "0 -0 -0.868999", "0");
 	ZoneShapes::AddInterior("Kalm", "candelabra781030", "candelabra.dis", 0, "-2418.64 -257.55 71.0913", "0 0 0", "0");
 	ZoneShapes::AddInterior("Kalm", "chair1360210", "chair1.dis", 0, "-2421.54 -254.828 71.0896", "0 -0 -2.42848", "0");
+	ZoneShapes::AddStatic("Kalm", "harvestPlant14", "PlantTwo", "-2446.84 -265.161 65", "0 0 0", True, False, 0);
+	ZoneShapes::AddStatic("Kalm", "harvestPlant15", "PlantTwo", "-2231.5 -298.928 50.2164", "0 0 0", True, False, 0);
+	ZoneShapes::AddInterior("kalm", "bed1182928", "bed1.dis", 0, "-2435.75 -273.939 76.9084", "0 -0 -2.41497", "0");
+	ZoneShapes::AddInterior("kalm", "woodcrate370190", "woodcrate.dis", 0, "-2424.5 -248.18 71.0893", "0 -0 -0.815497", "0");
+	ZoneShapes::AddInterior("kalm", "woodcrateb870113", "woodcrateb.dis", 0, "-2423.15 -251.367 71.0899", "0 -0 0.381999", "0");
+	ZoneShapes::AddInterior("kalm", "woodcrate241615", "woodcrate.dis", 0, "-2425.33 -254.7 71.0906", "0 -0 0.724999", "0");
 
 	// Seventh Heaven (7th Heaven)
 	ZoneShapes::AddInterior("7th Heaven", "cdoore1", "CDoorE.dis", 0, "1436.75 -464.981 -808.135", "0 0 0", "0");
@@ -111,37 +117,50 @@ function ZoneShapes::Init() {
 	ZoneShapes::AddInterior("7th Heaven", "d2_woodcrateb1c", "woodcrateb.dis", 0, "1435.41 -471.093 -808.031", "0 -0 -2.97957e-08", "0");
 	ZoneShapes::AddInterior("7th Heaven", "d2_woodcrate1f", "woodcrate.dis", 0, "1435.76 -468.154 -808.031", "0 -0 0.139993", "0");
 	ZoneShapes::AddInterior("7th Heaven", "d2_cdoord1b", "CDoorD.dis", 0, "1483.13 -1230.53 -696.502", "0 -0 1.47991", "0");
-	// HarvestFoliage (moved from rpgmap6.mis)
+
+	// Jaten Outpost HarvestFoliage
+	ZoneShapes::AddStatic("Jaten Outpost", "harvestPlant07", "PlantTwo", "-252.542 1725.25 52.7319", "0 0 0", True, False, 0);
+	ZoneShapes::AddStatic("Jaten Outpost", "harvestPlant12", "PlantTwo", "-363.75 1766.5 65", "0 -0 1.57723", True, False, 0);
+	ZoneShapes::AddStatic("Jaten Outpost", "harvestPlant13", "PlantTwo", "-358.75 1790 65", "0 -0 1.57723", True, False, 0);
+
+	// Elven Ruins HarvestFoliage
+	ZoneShapes::AddStatic("Elven Ruins", "harvestPlant08", "PlantTwo", "-1618.75 2688.57 400", "0 0 0", True, False, 0);
+	ZoneShapes::AddStatic("Elven Ruins", "harvestPlant09", "PlantTwo", "-1588.26 2558.79 419.321", "0 0 0", True, False, 0);
+
+	// Mythril Mine HarvestFoliage
+	ZoneShapes::AddStatic("Mythril Mine", "harvestPlant17", "PlantTwo", "-1821 -768.528 243.988", "0 0 0", True, False, 0);
+	ZoneShapes::AddStatic("Mythril Mine", "harvestPlant18", "PlantTwo", "-1945.36 -829.018 246.3", "0 0 0", True, False, 0);
+	ZoneShapes::AddStatic("Mythril Mine", "harvestPlant19", "PlantTwo", "-1710.1 -940.721 241.046", "0 0 0", True, False, 0);
+
+	// Ancient Crypt HarvestFoliage
+	ZoneShapes::AddStatic("Ancient Crypt", "harvestPlant20", "PlantTwo", "-756.721 824.911 700.989", "0 0 0", True, False, 0);
+	ZoneShapes::AddStatic("Ancient Crypt", "harvestPlant23", "PlantTwo", "-778.942 861.984 700.989", "0 0 0", True, False, 0);
+
+	// Stronghold Yolanda HarvestFoliage
+	ZoneShapes::AddStatic("Stronghold Yolanda", "harvestPlant21", "PlantTwo", "-1568.75 -342.562 333", "0 0 0", True, False, 0);
+	ZoneShapes::AddStatic("Stronghold Yolanda", "harvestPlant22", "PlantTwo", "-1467.08 -362.024 320.915", "0 0 0", True, False, 0);
+
+	// Uber Zone HarvestFoliage
+	ZoneShapes::AddStatic("Uber Zone", "harvestPlant28", "PlantTwo", "-615.114 -2458.31 60.9718", "0 0 0", True, False, 0);
+
+	// Fort Ethren HarvestFoliage
+	ZoneShapes::AddStatic("Fort Ethren", "harvestPlant30", "PlantTwo", "-2404.75 -2364.55 65", "0 0 0", True, False, 0);
+
+	// Wilderness HarvestFoliage (outside defined zones)
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant01", "PlantTwo", "-2304 -2398.25 52.9375", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant02", "PlantTwo", "-2328.75 -2415.25 53.977", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant03", "PlantTwo", "-2620.5 578.125 678.875", "-0.82745 1.07591 -1.56648", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant04", "PlantTwo", "-2613 582.625 676.625", "0.0486281 -1.67062 0.497617", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant05", "PlantTwo", "-2596 577.375 684.625", "-0.945297 1.11436 -0.394477", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant06", "PlantTwo", "-2607.75 571 670.875", "0.0162106 -3.1309 -2.058", True, False, 0);
-	ZoneShapes::AddStatic("Jaten Outpost", "harvestPlant07", "PlantTwo", "-252.542 1725.25 52.7319", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Elven Ruins", "harvestPlant08", "PlantTwo", "-1618.75 2688.57 400", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Elven Ruins", "harvestPlant09", "PlantTwo", "-1588.26 2558.79 419.321", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant10", "PlantTwo", "-878.101 2379.81 578.94", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant11", "PlantTwo", "169.714 1212.86 221.283", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Jaten Outpost", "harvestPlant12", "PlantTwo", "-363.75 1766.5 65", "0 -0 1.57723", True, False, 0);
-	ZoneShapes::AddStatic("Jaten Outpost", "harvestPlant13", "PlantTwo", "-358.75 1790 65", "0 -0 1.57723", True, False, 0);
-	ZoneShapes::AddStatic("Kalm", "harvestPlant14", "PlantTwo", "-2446.84 -265.161 65", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Kalm", "harvestPlant15", "PlantTwo", "-2231.5 -298.928 50.2164", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant16", "PlantTwo", "-377.632 -182.005 65", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Mythril Mine", "harvestPlant17", "PlantTwo", "-1821 -768.528 243.988", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Mythril Mine", "harvestPlant18", "PlantTwo", "-1945.36 -829.018 246.3", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Mythril Mine", "harvestPlant19", "PlantTwo", "-1710.1 -940.721 241.046", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Ancient Crypt", "harvestPlant20", "PlantTwo", "-756.721 824.911 700.989", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Stronghold Yolanda", "harvestPlant21", "PlantTwo", "-1568.75 -342.562 333", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Stronghold Yolanda", "harvestPlant22", "PlantTwo", "-1467.08 -362.024 320.915", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Ancient Crypt", "harvestPlant23", "PlantTwo", "-778.942 861.984 700.989", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant24", "PlantTwo", "-2844.5 -1168.5 700.989", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant25", "PlantTwo", "-2066.55 -2585.54 108.125", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant26", "PlantTwo", "-1138.25 -2593.01 167.822", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant27", "PlantTwo", "-2837 845.325 700.989", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Uber Zone", "harvestPlant28", "PlantTwo", "-615.114 -2458.31 60.9718", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant29", "PlantTwo", "-2260 -2432.75 66.7241", "0 0 0", True, False, 0);
-	ZoneShapes::AddStatic("Fort Ethren", "harvestPlant30", "PlantTwo", "-2404.75 -2364.55 65", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant31", "PlantTwo", "-3568 -313.162 330.718", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant32", "PlantTwo", "-3741.83 -974.554 254.574", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant33", "PlantTwo", "-4412.5 -304.686 65", "0 0 0", True, False, 0);
@@ -150,7 +169,7 @@ function ZoneShapes::Init() {
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant36", "PlantTwo", "-2416.75 1794.81 65", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestPlant37", "PlantTwo", "-401.807 -371.712 1569.25", "0 0 0", True, False, 0);
 	ZoneShapes::AddStatic("Wilderness", "harvestCactus01", "Cactus3", "30.4323 -10.3386 1875", "0 0 0", True, False, 0);
-	
+
 	// Midgar
 	ZoneShapes::AddInterior("Midgar", "w64gate1", "W64gate.dis", 1, "-2503.08 -2106.67 7545.79", "0 0 0", "0 ");
 	ZoneShapes::AddInterior("Midgar", "w64long1", "W64long.dis", 1, "-2355.01 -2657.58 7547.92", "0 -0 -2.71993", "0 ");
@@ -262,6 +281,7 @@ function ZoneShapes::Init() {
 	ZoneShapes::AddInterior("Midgar", "anvil1", "anvil.dis", 0, "-2370.23 -2187.02 7549.11", "0 -0 -0.519996", "0 ");
 	ZoneShapes::AddInterior("Midgar", "anvil1_2", "anvil.dis", 0, "-2367.61 -2191.83 7549.11", "0 -0 -1.61998", "0 ");
 	ZoneShapes::AddInterior("Midgar", "bssign1", "bssign.dis", 1, "-2384.04 -2207.1 7548.99", "0 -0 0.499986", "0 ");
+
 }
 
 function ZoneShapes::AddInterior(%zoneDesc, %name, %file, %isContainer, %pos, %rot, %lightParams) {

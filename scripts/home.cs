@@ -1783,6 +1783,11 @@ function DisEndMoveZMode(%clientId) {
 	if(fetchData(%clientId, "DisMoveZMode") != 1)
 		return;
 
+	%object = $disMoveZObject[%clientId];
+	if(%object != "" && %object != 0) {
+		%finalPos = GameBase::getPosition(%object);
+		lbecho("Move Z mode ended for object " @ %object @ " at " @ %finalPos);
+	}
 	storeData(%clientId, "DisMoveZMode", 0);
 	$disMoveZObject[%clientId] = "";
 	$disMoveZLastPos[%clientId] = "";

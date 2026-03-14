@@ -295,12 +295,11 @@ function SaveWorld()
 	%i = 0;
 	%ii = 0;
 	%othercnt = 0;
-	if($saveworldsearch == "")
-		$saveworldsearch = 100;
+
+	if($saveworldsearch == "") $saveworldsearch = 100;
 	%eomID = $END_OF_MAP;
-	if(%eomID < 1){
-		%eomId = 8361;
-	}
+	if(%eomID < 1) %eomId = 8361;
+
 	while(%othercnt < $saveworldsearch)
 	{
 		%i++;
@@ -310,33 +309,37 @@ function SaveWorld()
 		{
 			%pos = GameBase::getPosition(%ID);
 			%zpos = getWord(%pos,2);
+			%skipSave = False;
 			if(%zpos < -10000){//reasonably unobtainable, off world
-				%pos = vector::add(%pos, "0 0 "@((%zpos * -1) + 710));
-				gamebase::setposition(%ID, %pos);
-				echo("Recovered falling pack "@%ID);
+				deleteObject(%ID);
+				echo("Deleted falling pack " @ %ID);
+				%skipSave = True;
 			}
-			
-			%ii++;
-			//echo("Saving object #" @ %ii @ " : " @ %obj);
-			$world::object[%ii] = %obj;
-			$world::owner[%ii] = $owner[%ID];
-			$world::pos[%ii] = %pos;
-			$world::rot[%ii] = GameBase::getRotation(%ID);
-			$world::team[%ii] = GameBase::getTeam(%ID);
-			$world::special[%ii] = "";
-			//modify special depending on the item
-			if(%obj == "Lootbag")
+
+			if(!%skipSave)
 			{
-				%loot = $loot[%ID];
-				%w0 = getWord(%loot, 0);
-				%w1 = getWord(%loot, 1);
-				if(%w1 != "*")
-					%loot = %w0 @ " * " @ String::getSubStr(%loot, String::len(%w0)+String::len(%w1)+2, 99999);
-				$world::special[%ii] = %loot;
-				%ownername = GetWord(%loot, 0);
-				$sw::packowner[%ii] = %ownername;
-				$sw::packid[%ii] = %ID;
-				$swpacknum++;
+				%ii++;
+				//echo("Saving object #" @ %ii @ " : " @ %obj);
+				$world::object[%ii] = %obj;
+				$world::owner[%ii] = $owner[%ID];
+				$world::pos[%ii] = %pos;
+				$world::rot[%ii] = GameBase::getRotation(%ID);
+				$world::team[%ii] = GameBase::getTeam(%ID);
+				$world::special[%ii] = "";
+				//modify special depending on the item
+				if(%obj == "Lootbag")
+				{
+					%loot = $loot[%ID];
+					%w0 = getWord(%loot, 0);
+					%w1 = getWord(%loot, 1);
+					if(%w1 != "*")
+						%loot = %w0 @ " * " @ String::getSubStr(%loot, String::len(%w0)+String::len(%w1)+2, 99999);
+					$world::special[%ii] = %loot;
+					%ownername = GetWord(%loot, 0);
+					$sw::packowner[%ii] = %ownername;
+					$sw::packid[%ii] = %ID;
+					$swpacknum++;
+				}
 			}
 		}
 		//if(%obj == "")
