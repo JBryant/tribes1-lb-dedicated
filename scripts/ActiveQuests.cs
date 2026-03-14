@@ -88,6 +88,9 @@ function ActiveQuests::StartGoblinAttackKalm(%duration, %interval) {
 	$ActiveQuest::GoblinAttackKalm::SpawnInterval = %interval;
 	$ActiveQuest::GoblinAttackKalm::Active = True;
 	$ActiveQuest::GoblinAttackKalm::EndTime = (getIntegerTime(true) >> 5) + %duration;
+	$ActiveQuest::GoblinAttackKalm::RewardScheduled = False;
+	$ActiveQuest::GoblinAttackKalm::RewardActive = False;
+	$ActiveQuest::GoblinAttackKalm::RewardRemaining = "";
 
 	messageAll($MsgRed, "Kalm is under attack by a goblin horde!");
 	ActiveQuests::GoblinAttackKalmLoop();
@@ -100,11 +103,18 @@ function ActiveQuests::EndGoblinAttackKalm() {
 	$ActiveQuest::GoblinAttackKalm::Active = False;
 	$ActiveQuest::GoblinAttackKalm::EndTime = "";
 	messageAll($MsgGreen, "The attack on Kalm by the goblin horde has subsided.");
+
+	if(!$ActiveQuest::GoblinAttackKalm::RewardScheduled) {
+		$ActiveQuest::GoblinAttackKalm::RewardScheduled = True;
+		messageAll($MsgGreen, "Quest rewards will begin in 60 seconds.");
+		schedule("messageAll(" @ $MsgGreen @ ", \"Quest rewards will begin in 30 seconds.\");", 30);
+		schedule("messageAll(" @ $MsgGreen @ ", \"Quest rewards will begin in 10 seconds.\");", 50);
+		schedule("ActiveQuests::StartGoblinAttackKalmRewards();", 60);
+	}
 }
 
 function ActiveQuests::RewardGoblinAttackKalm() {
-	// Reward phase placeholder (pack drops will be added later)
-	messageAll($MsgGreen, "Rewards are being distributed for defending Kalm.");
+	ActiveQuests::StartGoblinAttackKalmRewards();
 }
 
 function ActiveQuests::GoblinAttackKalmLoop() {
@@ -128,4 +138,58 @@ function ActiveQuests::GoblinAttackKalmLoop() {
 	AI::helper(%mob, %name, "TempSpawn " @ %pos @ " " @ %team, %loadout);
 
 	schedule("ActiveQuests::GoblinAttackKalmLoop();", $ActiveQuest::GoblinAttackKalm::SpawnInterval);
+}
+
+function ActiveQuests::StartGoblinAttackKalmRewards() {
+	if($ActiveQuest::GoblinAttackKalm::RewardActive)
+		return;
+
+	$ActiveQuest::GoblinAttackKalm::RewardActive = True;
+	$ActiveQuest::GoblinAttackKalm::RewardRemaining = 60;
+	messageAll($MsgGreen, "Quest rewards have begun! Watch the sky over Kalm.");
+	ActiveQuests::GoblinAttackKalmRewardLoop();
+}
+
+function ActiveQuests::GoblinAttackKalmRewardLoop() {
+	if(!$ActiveQuest::GoblinAttackKalm::RewardActive)
+		return;
+
+	if($ActiveQuest::GoblinAttackKalm::RewardRemaining <= 0) {
+		$ActiveQuest::GoblinAttackKalm::RewardActive = False;
+		return;
+	}
+
+	%pos = RandomGoblinAttackKalmRewardPos();
+	%loot = RandomEliteMobPackLoot();
+	DeployLootbag(%pos, "0 0 0", "Server * " @ %loot);
+
+	$ActiveQuest::GoblinAttackKalm::RewardRemaining--;
+	schedule("ActiveQuests::GoblinAttackKalmRewardLoop();", 1);
+}
+
+function RandomGoblinAttackKalmRewardPos() {
+	// Reward bounds (four corners)
+	%x1 = -2361.34; %y1 = -280.924;
+	%x2 = -2372.3;  %y2 = -291.231;
+	%x3 = -2392.63; %y3 = -267.974;
+	%x4 = -2380.87; %y4 = -257.924;
+
+	%minX = %x1; %maxX = %x1;
+	if(%x2 < %minX) %minX = %x2; if(%x2 > %maxX) %maxX = %x2;
+	if(%x3 < %minX) %minX = %x3; if(%x3 > %maxX) %maxX = %x3;
+	if(%x4 < %minX) %minX = %x4; if(%x4 > %maxX) %maxX = %x4;
+
+	%minY = %y1; %maxY = %y1;
+	if(%y2 < %minY) %minY = %y2; if(%y2 > %maxY) %maxY = %y2;
+	if(%y3 < %minY) %minY = %y3; if(%y3 > %maxY) %maxY = %y3;
+	if(%y4 < %minY) %minY = %y4; if(%y4 > %maxY) %maxY = %y4;
+
+	%x = %minX + (getRandom() * (%maxX - %minX));
+	%y = %minY + (getRandom() * (%maxY - %minY));
+	%z = 80;
+	return %x @ " " @ %y @ " " @ %z;
+}
+
+function RandomEliteMobPackLoot() {
+	return GenerateSpecialLoot(9999);
 }

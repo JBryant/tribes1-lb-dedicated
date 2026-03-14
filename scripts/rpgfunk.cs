@@ -1231,21 +1231,8 @@ function TossLootbag(%clientId, %loot, %vel, %namelist, %t)
 	}
 }
 
-function TossSpecialLootbag(%clientId, %loot, %vel, %namelist, %t) {
-	%player = Client::getOwnedObject(%clientId);
-	%ownerName = Client::getName(%clientId);
-
-	%lootbag = newObject("", "Item", "Lootbag", 1, false);
-	%preLoot = %ownerName @ " " @ %namelist;
-	%ownerLevel = fetchData(%clientId, "LVL");
-
-	// generate teh random loot
-	// we want a chance to get:
-	// 50k, 100k, 250k, 500k, 1M
-	// 1 LCK, 5 LCK, 10 LCK, 20 LCK, 50 LCK
-	// 1000 EXP, 2500 EXP, 5000 EXP, 7500 EXP, 10000 EXP
-	// 100 SP, 250 SP, 500 SP, 750 SP, 1000 SP
-	// 1 RankPoint
+function GenerateSpecialLoot(%ownerLevel) {
+	%loot = "";
 	%rand = floor(getRandom() * 100);
 	%amtRand = floor(getRandom() * 100);
 
@@ -1315,32 +1302,38 @@ function TossSpecialLootbag(%clientId, %loot, %vel, %namelist, %t) {
 	}
 
 	// Randomize amounts in loot string (1 to max for each amount)
-	// Format: "TYPE1 AMOUNT1 TYPE2 AMOUNT2 ..." -> "TYPE1 RAND1 TYPE2 RAND2 ..."
 	%randomizedLoot = "";
 	%wordCount = getWordCount(%loot);
 	for (%i = 0; %i < %wordCount; %i += 2) {
 		%type = getWord(%loot, %i);
 		%maxAmount = getWord(%loot, %i + 1);
-		
 		if (%type == "" || %maxAmount == "")
 			break;
-		
-		// Convert to number (TorqueScript auto-converts strings to numbers)
+
 		%maxAmountNum = %maxAmount * 1;
-		
-		// Generate random amount from 1 to maxAmount
 		if (%maxAmountNum > 0)
 			%randomAmount = floor(getRandom() * %maxAmountNum) + 1;
 		else
-			%randomAmount = %maxAmount; // Keep original if 0 or invalid
-		
+			%randomAmount = %maxAmount;
+
 		if (%randomizedLoot == "")
 			%randomizedLoot = %type @ " " @ %randomAmount;
 		else
 			%randomizedLoot = %randomizedLoot @ " " @ %type @ " " @ %randomAmount;
 	}
-	%loot = %randomizedLoot;
 
+	return %randomizedLoot;
+}
+
+function TossSpecialLootbag(%clientId, %loot, %vel, %namelist, %t) {
+	%player = Client::getOwnedObject(%clientId);
+	%ownerName = Client::getName(%clientId);
+
+	%lootbag = newObject("", "Item", "Lootbag", 1, false);
+	%preLoot = %ownerName @ " " @ %namelist;
+	%ownerLevel = fetchData(%clientId, "LVL");
+
+	%loot = GenerateSpecialLoot(%ownerLevel);
 	%loot = %preLoot @ " " @ %loot;
 
 	$loot[%lootbag] = %loot;
