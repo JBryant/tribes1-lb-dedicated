@@ -1233,7 +1233,6 @@ $Spell::classRestrictions[%index] = "Cleric Druid Ranger Paladin Fighter Thief B
 $Spell::minLevel[%index] = 20;
 $Spell::groupListCheck[%index] = False;
 
-
 %index = 65;
 $Spell::keyword[%index] = "Medic5";
 $Spell::index["Medic5"] = %index;
@@ -1798,6 +1797,20 @@ $Spell::classRestrictions[93] = "";
 $Spell::minLevel[93] = 0;
 $SkillType[corruptblade] = $SkillAlchemy;
 
+$Spell::keyword[94] = "HeavenlyHealing";
+$Spell::index[heavenlyhealing] = 94;
+$Spell::name[94] = "Heavenly Healing";
+$Spell::description[94] = "Restores all HP and MP to all allies.";
+$Spell::delay[94] = 0.1;
+$Spell::recoveryTime[94] = 1;
+$Spell::damageValue[94] = -9999999;
+$Spell::LOSrange[94] = 999;
+$Spell::manaCost[94] = 1;
+$Spell::startSound[94] = DeActivateWA;
+$Spell::endSound[94] = bigheal;
+$Spell::classRestrictions[94] = $WhiteMagicClasses;
+$Spell::minLevel[94] = 9999;
+
 //====================================================================================================================
 //====================================================================================================================
 //====================================================================================================================
@@ -1964,6 +1977,32 @@ function SpellNum4(%Client, %castObj, %castPos) {
 //	%castPos = GameBase::getPosition(%Client);
 
 	return "returnFlag 1"; //return "returnFlag 1";
+}
+function SpellNum94(%Client, %castObj, %castPos) {
+	// Heavenly Healing
+	%casterPos = GameBase::getPosition(%Client);
+	%casterTeam = GameBase::getTeam(%Client);
+	%radius = 500;
+	%set = newObject("heavenlyHealingSet", SimSet);
+	containerBoxFillSet(%set, $SimPlayerObjectType, %casterPos, %radius, %radius, %radius, 0);
+	Group::iterateRecursive(%set, Spell::HeavenlyHealingApply, %Client, %casterTeam);
+	deleteObject(%set);
+
+	return "returnFlag 1";
+}
+function Spell::HeavenlyHealingApply(%obj, %casterId, %casterTeam) {
+	if(getObjectType(%obj) != "Player")
+		return;
+
+	%healId = Player::getClient(%obj);
+	if(%healId == -1)
+		return;
+	if(GameBase::getTeam(%healId) != %casterTeam)
+		return;
+
+	setHP(%healId, fetchData(%healId, "MaxHP"));
+	setMANA(%healId, fetchData(%healId, "MaxMANA"));
+	Client::sendMessage(%healId, $MsgGreen, "Your wounds have been blessed by " @ Client::getName(%casterId) @ "'s Heavenly Light");
 }
 function SpellNum5(%Client, %castObj, %castPos) {
 	//Medic 2
