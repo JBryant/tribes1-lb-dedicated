@@ -203,6 +203,7 @@ function createServer(%mission, %dedicated)
 	exec(rpgfunk);
 	// insert new quests controller before charfunk
 	exec(Quests);
+	exec(ActiveQuests);
 	exec(charfunk);
 	exec(connectivity);
 

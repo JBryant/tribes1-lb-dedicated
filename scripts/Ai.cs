@@ -789,7 +789,11 @@ function AI::helper(%aiName, %displayName, %commandIssuer, %loadout)
 	%customNames = $RaceToNamesList[$NameForRace[%aiName]];
 
 	%isElite = False;
-	if($BotEquipment["Elite" @ %aiName] != "") {
+	%forceElite = (String::findSubStr(%aiName, "Elite") == 0);
+	if(%forceElite) {
+		%isElite = True;
+	}
+	else if($BotEquipment["Elite" @ %aiName] != "") {
 		%rand = floor(getRandom() * 100);
 		if(%rand >= 80) { // 20% chance of elite spawning
 			%isElite = True;

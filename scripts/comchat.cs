@@ -2562,23 +2562,18 @@ function internalSay(%clientId, %team, %message, %senderName)
 				Client::sendMessage(%TrueClientId, $MsgBeige, "use #bug [message] to send a bug report to be reviewed for work.");
 			}
 		}
-
 		//============================
 		// ADMIN COMMANDS =============
 		//============================
-
 		if (%w1 == "#epoch") {
 			Client::sendMessage(%TrueClientId, 0, "Epoch: " @ Time::Epoch());
 		}
-
 		if (%w1 == "#timestamp") {
 			Client::sendMessage(%TrueClientId, 0, "Timestamp: " @ String::timestamp());
 		}
-
 		if (%w1 == "#strip") {
 			UnequipMountedStuff(%TrueClientId);
 		}
-
 		if(%w1 == "#spawnflyer")
 			{
 			
@@ -3754,12 +3749,12 @@ function internalSay(%clientId, %team, %message, %senderName)
 	    }
 	    if(%w1 == "#spawn")
 		{
-	            if(%clientToServerAdminLevel >= 3)
-	            {
-	                  if(%cropped == "")
-	                        Client::sendMessage(%TrueClientId, 0, "syntax: #spawn botType displayName loadout [team] [x] [y] [z]");
-	                  else
-	                  {
+			if(%clientToServerAdminLevel >= 3)
+			{
+				if(%cropped == "")
+					Client::sendMessage(%TrueClientId, 0, "syntax: #spawn botType displayName loadout [team] [x] [y] [z]");
+				else
+				{
 					%event = String::findSubStr(%cropped, ">");
 					if(%event != -1)
 					{
@@ -3768,44 +3763,81 @@ function internalSay(%clientId, %team, %message, %senderName)
 					}
 					else
 						%info	= %cropped;
-	
-	                        %c1 = GetWord(%info, 0);
-	                        %c2 = GetWord(%info, 1);
+
+					%botType = GetWord(%info, 0);
+					%displayName = GetWord(%info, 1);
 					%loadout = GetWord(%info, 2);
 					%team = GetWord(%info, 3);
 					%ox = GetWord(%info, 4);
 					%oy = GetWord(%info, 5);
 					%oz = GetWord(%info, 6);
-	
-	                        if(%c1 != -1 && %c2 != -1 && %loadout != -1)
-	                        {
-						if(NEWgetClientByName(%c2) == -1)
+
+					if(%botType != -1 && %displayName != -1 && %loadout != -1)
+					{
+						if(NEWgetClientByName(%displayName) == -1)
 						{
-							if(%ox == -1 && %oy == -1 && %oz == -1)
+							if(%ox == -1 || %oy == -1 || %oz == -1)
 							{
-			                              %player = Client::getOwnedObject(%TrueClientId);
-			                              GameBase::getLOSinfo(%player, 50000);
+								%player = Client::getOwnedObject(%TrueClientId);
+								GameBase::getLOSinfo(%player, 50000);
 								%lospos = $los::position;
 							}
 							else
 								%lospos = %ox @ " " @ %oy @ " " @ %oz;
-		
+
 							if(%team == -1) %team = 0;
-		                              %n = AI::helper(%c1, %c2, "TempSpawn " @ %lospos @ " " @ %team, %loadout);
-		                              %id = AI::getId(%n);
-		
+							
+							%n = AI::helper(%botType, %displayName, "TempSpawn " @ %lospos @ " " @ %team, %loadout);
+							%id = AI::getId(%n);
+
 							if(%event != -1)
 								AddEventCommand(%id, %senderName, "onkill", %cmd);
-		
-		                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Spawned " @ %n @ " (" @ %id @ ") at " @ %lospos @ ".");
-		                        }
+
+							if(!%echoOff) Client::sendMessage(%TrueClientId, 0, "Spawned " @ %n @ " (" @ %id @ ") at " @ %lospos @ ".");
+						}
 						else
-		                              if(!%echoOff) Client::sendMessage(%TrueClientId, 0, %c2 @ " already exists.");
+							if(!%echoOff) Client::sendMessage(%TrueClientId, 0, %displayName @ " already exists.");
 					}
 					else
-	                              Client::sendMessage(%TrueClientId, 0, "syntax: #spawn botType displayName loadout [team] [x] [y] [z]");
-	                  }
-	            }
+						Client::sendMessage(%TrueClientId, 0, "syntax: #spawn botType displayName loadout [team] [x] [y] [z]");
+				}
+			}
+			return;
+		}
+		if(%w1 == "#startactivequest")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				%qname = GetWord(%cropped, 0);
+				if(String::ICompare(%qname, "GoblinAttackKalm") == 0)
+					ActiveQuests::StartGoblinAttackKalm(GetWord(%cropped, 1), GetWord(%cropped, 2));
+				else
+					Client::sendMessage(%TrueClientId, 0, "Unknown active quest.");
+			}
+			return;
+		}
+		if(%w1 == "#endactivequest")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				%qname = GetWord(%cropped, 0);
+				if(String::ICompare(%qname, "GoblinAttackKalm") == 0)
+					ActiveQuests::EndGoblinAttackKalm();
+				else
+					Client::sendMessage(%TrueClientId, 0, "Unknown active quest.");
+			}
+			return;
+		}
+		if(%w1 == "#rewardactivequest")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				%qname = GetWord(%cropped, 0);
+				if(String::ICompare(%qname, "GoblinAttackKalm") == 0)
+					ActiveQuests::RewardGoblinAttackKalm();
+				else
+					Client::sendMessage(%TrueClientId, 0, "Unknown active quest.");
+			}
 			return;
 		}
 		if(%w1 == "#fell")
