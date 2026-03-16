@@ -37,6 +37,28 @@ function rpg::getname(%client){
 		return %oldname;
 }
 
+function GetWords(%str, %start, %end) {
+	if(%str == "")
+		return "";
+
+	%count = GetWordCount(%str);
+	if(%start == "" || %start < 0)
+		%start = 0;
+	if(%end == "" || %end < 0 || %end >= %count)
+		%end = %count - 1;
+	if(%start > %end)
+		return "";
+
+	%out = "";
+	for(%i = %start; %i <= %end; %i++) {
+		if(%out == "")
+			%out = GetWord(%str, %i);
+		else
+			%out = %out @ " " @ GetWord(%str, %i);
+	}
+	return %out;
+}
+
 //Client will only identify to this if they have been
 //asked by the server; see connectivity.cs
 function remoteRepackConfirm(%client, %val)

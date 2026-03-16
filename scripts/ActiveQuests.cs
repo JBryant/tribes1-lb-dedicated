@@ -52,6 +52,9 @@ function ActiveQuests::InitGoblinAttackKalm() {
 	$ActiveQuest::GoblinAttackKalm::MobType[1] = "EliteGoblinThief";
 	$ActiveQuest::GoblinAttackKalm::MobType[2] = "EliteGoblinWizard";
 	$ActiveQuest::GoblinAttackKalm::MobType[3] = "EliteGoblinRaider";
+	$ActiveQuest::GoblinAttackKalm::MobList = "EliteGoblinRunt EliteGoblinThief EliteGoblinWizard EliteGoblinRaider";
+
+	ActiveQuests::InitTownSpawns();
 }
 
 function ActiveQuests::RandomGoblinName() {
@@ -87,22 +90,35 @@ function ActiveQuests::StartGoblinAttackKalm(%duration, %interval) {
 	$ActiveQuest::GoblinAttackKalm::Duration = %duration;
 	$ActiveQuest::GoblinAttackKalm::SpawnInterval = %interval;
 	$ActiveQuest::GoblinAttackKalm::Active = True;
-	$ActiveQuest::GoblinAttackKalm::EndTime = (getIntegerTime(true) >> 5) + %duration;
 	$ActiveQuest::GoblinAttackKalm::RewardScheduled = False;
 	$ActiveQuest::GoblinAttackKalm::RewardActive = False;
 	$ActiveQuest::GoblinAttackKalm::RewardRemaining = "";
 
-	messageAll($MsgRed, "Kalm is under attack by a goblin horde!");
-	ActiveQuests::GoblinAttackKalmLoop();
+	ActiveQuests::StartTownRaid(
+		"GoblinAttackKalm",
+		"Kalm",
+		$ActiveQuest::GoblinAttackKalm::MobList,
+		%duration,
+		%interval,
+		2,
+		"Kalm is under attack by a goblin horde!",
+		"The attack on Kalm by the goblin horde has subsided.",
+		"ActiveQuests::GoblinAttackKalmRaidEnded"
+	);
 }
 
 function ActiveQuests::EndGoblinAttackKalm() {
 	if(!$ActiveQuest::GoblinAttackKalm::Active)
 		return;
+	ActiveQuests::EndTownRaid("GoblinAttackKalm");
+}
 
+function ActiveQuests::RewardGoblinAttackKalm() {
+	ActiveQuests::StartGoblinAttackKalmRewards();
+}
+
+function ActiveQuests::GoblinAttackKalmRaidEnded() {
 	$ActiveQuest::GoblinAttackKalm::Active = False;
-	$ActiveQuest::GoblinAttackKalm::EndTime = "";
-	messageAll($MsgGreen, "The attack on Kalm by the goblin horde has subsided.");
 
 	if(!$ActiveQuest::GoblinAttackKalm::RewardScheduled) {
 		$ActiveQuest::GoblinAttackKalm::RewardScheduled = True;
@@ -111,33 +127,6 @@ function ActiveQuests::EndGoblinAttackKalm() {
 		schedule("messageAll(" @ $MsgGreen @ ", \"Quest rewards will begin in 10 seconds.\");", 50);
 		schedule("ActiveQuests::StartGoblinAttackKalmRewards();", 60);
 	}
-}
-
-function ActiveQuests::RewardGoblinAttackKalm() {
-	ActiveQuests::StartGoblinAttackKalmRewards();
-}
-
-function ActiveQuests::GoblinAttackKalmLoop() {
-	if(!$ActiveQuest::GoblinAttackKalm::Active)
-		return;
-
-	%now = getIntegerTime(true) >> 5;
-	if(%now >= $ActiveQuest::GoblinAttackKalm::EndTime) {
-		ActiveQuests::EndGoblinAttackKalm();
-		return;
-	}
-
-	%posIndex = floor(GetRandom() * $ActiveQuest::GoblinAttackKalm::SpawnCount);
-	%mobIndex = floor(GetRandom() * $ActiveQuest::GoblinAttackKalm::MobCount);
-	%pos = $ActiveQuest::GoblinAttackKalm::SpawnPos[%posIndex];
-	%mob = $ActiveQuest::GoblinAttackKalm::MobType[%mobIndex];
-	%name = ActiveQuests::RandomGoblinName();
-	%team = 2;
-	%loadout = "default";
-
-	AI::helper(%mob, %name, "TempSpawn " @ %pos @ " " @ %team, %loadout);
-
-	schedule("ActiveQuests::GoblinAttackKalmLoop();", $ActiveQuest::GoblinAttackKalm::SpawnInterval);
 }
 
 function ActiveQuests::StartGoblinAttackKalmRewards() {
@@ -192,4 +181,159 @@ function RandomGoblinAttackKalmRewardPos() {
 
 function RandomEliteMobPackLoot() {
 	return GenerateSpecialLoot(9999);
+}
+
+function ActiveQuests::InitTownSpawns() {
+	if($ActiveQuest::Town["Kalm", "Initialized"] && $ActiveQuest::Town["Kalm", "SpawnCount"] > 0)
+		return;
+
+	$ActiveQuest::Town["Kalm", "Initialized"] = True;
+	$ActiveQuest::Town["Kalm", "SpawnCount"] = $ActiveQuest::GoblinAttackKalm::SpawnCount;
+	for(%i = 0; %i < $ActiveQuest::GoblinAttackKalm::SpawnCount; %i++)
+		$ActiveQuest::Town["Kalm", "SpawnPos", %i] = $ActiveQuest::GoblinAttackKalm::SpawnPos[%i];
+}
+
+function ActiveQuests::ClearTownSpawns(%townName) {
+	%count = $ActiveQuest::Town[%townName, "SpawnCount"];
+	for(%i = 0; %i < %count; %i++)
+		$ActiveQuest::Town[%townName, "SpawnPos", %i] = "";
+	$ActiveQuest::Town[%townName, "SpawnCount"] = 0;
+	$ActiveQuest::Town[%townName, "Initialized"] = True;
+}
+
+function ActiveQuests::AddTownSpawn(%townName, %pos) {
+	%count = $ActiveQuest::Town[%townName, "SpawnCount"];
+	if(%count == "")
+		%count = 0;
+	$ActiveQuest::Town[%townName, "SpawnPos", %count] = %pos;
+	$ActiveQuest::Town[%townName, "SpawnCount"] = %count + 1;
+	$ActiveQuest::Town[%townName, "Initialized"] = True;
+}
+
+function ActiveQuests::StartTownRaid(%raidName, %townName, %mobList, %duration, %interval, %team, %startMsg, %endMsg, %endCallback) {
+	if(%raidName == "" || %townName == "")
+		return;
+	if($ActiveQuest::Raid[%raidName, "Active"])
+		return;
+	if(!$ActiveQuest::Town[%townName, "Initialized"])
+		ActiveQuests::InitTownSpawns();
+	if(String::ICompare(%townName, "Kalm") == 0) {
+		if($ActiveQuest::GoblinAttackKalm::SpawnCount == "" || $ActiveQuest::GoblinAttackKalm::SpawnCount <= 0)
+			ActiveQuests::InitGoblinAttackKalm();
+		%spawnCount = $ActiveQuest::Town[%townName, "SpawnCount"];
+		if(%spawnCount == "" || %spawnCount <= 0)
+			ActiveQuests::InitTownSpawns();
+	}
+
+	if(%duration == "" || %duration <= 0)
+		%duration = 300;
+	if(%interval == "" || %interval <= 0)
+		%interval = 10;
+	if(%team == "" || %team == -1)
+		%team = 2;
+
+	$ActiveQuest::Raid[%raidName, "Active"] = True;
+	$ActiveQuest::Raid[%raidName, "Town"] = %townName;
+	$ActiveQuest::Raid[%raidName, "MobList"] = %mobList;
+	$ActiveQuest::Raid[%raidName, "SpawnInterval"] = %interval;
+	$ActiveQuest::Raid[%raidName, "EndTime"] = (getIntegerTime(true) >> 5) + %duration;
+	$ActiveQuest::Raid[%raidName, "Team"] = %team;
+	$ActiveQuest::Raid[%raidName, "EndMsg"] = %endMsg;
+	$ActiveQuest::Raid[%raidName, "EndCallback"] = %endCallback;
+
+	if(String::ICompare(%townName, "Kalm") == 0) {
+		$ActiveQuest::GoblinAttackKalm::RewardScheduled = False;
+		$ActiveQuest::GoblinAttackKalm::RewardActive = False;
+		$ActiveQuest::GoblinAttackKalm::RewardRemaining = "";
+	}
+
+	if(%startMsg != "")
+		messageAll($MsgRed, %startMsg);
+
+	schedule("ActiveQuests::TownRaidLoop(\"" @ %raidName @ "\");", 0);
+}
+
+function ActiveQuests::EndTownRaid(%raidName) {
+	if(!$ActiveQuest::Raid[%raidName, "Active"])
+		return;
+
+	$ActiveQuest::Raid[%raidName, "Active"] = False;
+	$ActiveQuest::Raid[%raidName, "EndTime"] = "";
+
+	%town = $ActiveQuest::Raid[%raidName, "Town"];
+
+	%endMsg = $ActiveQuest::Raid[%raidName, "EndMsg"];
+	if(%endMsg != "")
+		messageAll($MsgGreen, %endMsg);
+
+	%endCallback = $ActiveQuest::Raid[%raidName, "EndCallback"];
+	if(%endCallback != "")
+		schedule(%endCallback @ "();", 0);
+
+	if(String::ICompare(%town, "Kalm") == 0 && String::ICompare(%endCallback, "ActiveQuests::GoblinAttackKalmRaidEnded") != 0)
+		ActiveQuests::GoblinAttackKalmRaidEnded();
+}
+
+function ActiveQuests::TownRaidLoop(%raidName) {
+	if(!$ActiveQuest::Raid[%raidName, "Active"])
+		return;
+
+	%now = getIntegerTime(true) >> 5;
+	if(%now >= $ActiveQuest::Raid[%raidName, "EndTime"]) {
+		ActiveQuests::EndTownRaid(%raidName);
+		return;
+	}
+
+	%town = $ActiveQuest::Raid[%raidName, "Town"];
+	%spawnCount = $ActiveQuest::Town[%town, "SpawnCount"];
+	if(%spawnCount <= 0) {
+		ActiveQuests::EndTownRaid(%raidName);
+		return;
+	}
+
+	%mobList = $ActiveQuest::Raid[%raidName, "MobList"];
+	%mobCount = getWordCount(%mobList);
+	if(%mobCount <= 0) {
+		schedule("ActiveQuests::TownRaidLoop(\"" @ %raidName @ "\");", $ActiveQuest::Raid[%raidName, "SpawnInterval"]);
+		return;
+	}
+
+	%pos = $ActiveQuest::Town[%town, "SpawnPos", floor(getRandom() * %spawnCount)];
+	%mob = getWord(%mobList, floor(getRandom() * %mobCount));
+	%name = ActiveQuests::RandomRaidDisplayName(%mob);
+	%team = $ActiveQuest::Raid[%raidName, "Team"];
+
+	AI::helper(%mob, %name, "TempSpawn " @ %pos @ " " @ %team, "default");
+
+	schedule("ActiveQuests::TownRaidLoop(\"" @ %raidName @ "\");", $ActiveQuest::Raid[%raidName, "SpawnInterval"]);
+}
+
+function ActiveQuests::RandomRaidDisplayName(%mobType) {
+	%race = $NameForRace[%mobType];
+	%names = $RaceToNamesList[%race];
+	%count = getWordCount(%names);
+
+	%elitePrefix = "";
+	if(String::findSubStr(%mobType, "Elite") == 0)
+		%elitePrefix = "Elite";
+
+	if(%race == "")
+		%race = %mobType;
+
+	if(%count > 0)
+		%baseName = %race @ GetWord(%names, floor(getRandom() * %count));
+	else
+		%baseName = %race @ floor(getRandom() * 100000);
+
+	%name = %elitePrefix @ %baseName;
+	for(%i = 0; %i < 10; %i++) {
+		if(NEWgetClientByName(%name) == -1)
+			return %name;
+		if(%count > 0)
+			%baseName = %race @ GetWord(%names, floor(getRandom() * %count));
+		else
+			%baseName = %race @ floor(getRandom() * 100000);
+		%name = %elitePrefix @ %baseName;
+	}
+	return %name;
 }

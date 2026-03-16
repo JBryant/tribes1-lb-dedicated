@@ -3816,6 +3816,28 @@ function internalSay(%clientId, %team, %message, %senderName)
 			}
 			return;
 		}
+		if(%w1 == "#starttownraid")
+		{
+			if(%clientToServerAdminLevel >= 5)
+			{
+				%town = GetWord(%cropped, 0);
+				%duration = GetWord(%cropped, 1);
+				%interval = GetWord(%cropped, 2);
+				%team = GetWord(%cropped, 3);
+				%mobList = GetWords(%cropped, 4, "");
+
+				if(%town == "" || %mobList == "")
+				{
+					Client::sendMessage(%TrueClientId, 0, "syntax: #starttownraid town duration interval team mobtype1 mobtype2 ...");
+					return;
+				}
+
+				%startMsg = %town @ " is under attack!";
+				%endMsg = "The attack on " @ %town @ " has subsided.";
+				ActiveQuests::StartTownRaid("Raid_" @ %town, %town, %mobList, %duration, %interval, %team, %startMsg, %endMsg, "");
+			}
+			return;
+		}
 		if(%w1 == "#endactivequest")
 		{
 			if(%clientToServerAdminLevel >= 5)
