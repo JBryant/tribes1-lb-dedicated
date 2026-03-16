@@ -3354,8 +3354,12 @@ BeltItem::Add("Dragon Scale", "DragonScale", "QuestItems", $AccessoryVar[DragonS
 BeltItem::Add("Parchment", "Parchment", "QuestItems", $AccessoryVar[Parchment, $Weight], GenerateItemCost(Parchment));
 BeltItem::Add("Magic Dust", "MagicDust", "QuestItems", $AccessoryVar[MagicDust, $Weight], GenerateItemCost(MagicDust));
 BeltItem::Add("Cultist Badge", "CultistBadge", "QuestItems", $AccessoryVar[CultistBadge, $Weight], GenerateItemCost(CultistBadge));
-$AccessoryVar[CultistBadge, $Weight] = 0.01;
+$AccessoryVar[CultistBadge, $Weight] = 1;
 $AccessoryVar[CultistBadge, $MiscInfo] = "A dark insignia taken from a cultist. Proof of their presence.";
+// GoblinHordeMedallion
+BeltItem::Add("Goblin Horde Medallion", "GoblinHordeMedallion", "QuestItems", $AccessoryVar[GoblinHordeMedallion, $Weight], 1000);
+$AccessoryVar[GoblinHordeMedallion, $Weight] = 1;
+$AccessoryVar[GoblinHordeMedallion, $MiscInfo] = "A medallion taken from a goblin horde. Proof of their presence and defeat.";
 
 // Enemy Weapons
 $description = "A casting blade.";

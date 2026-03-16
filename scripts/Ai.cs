@@ -803,9 +803,9 @@ function AI::helper(%aiName, %displayName, %commandIssuer, %loadout)
 
 	if (%customNames != "") {
 		// TODO: dynamically get the length of words in the list somehow (or always have 100)
-		// %randName = GetWord(%customNames, (getRandom() * 100));
+		%randName = GetWord(%customNames, (floor(getRandom() * 100)));
 		
-		%displayName = $NameForRace[%aiName] @ "" @ GetWord(%customNames, (getRandom() * 100));
+		%displayName = $NameForRace[%aiName] @ "" @ %randName @ "" @ floor(getRandom() * 10);
 
 		if (%isElite)
 			%displayName = "Elite" @ %displayName;

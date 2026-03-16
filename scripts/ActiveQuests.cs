@@ -48,33 +48,13 @@ function ActiveQuests::InitGoblinAttackKalm() {
 	$ActiveQuest::GoblinAttackKalm::SpawnPos[34] = "-2400.61 -279.153 65.0002";
 
 	$ActiveQuest::GoblinAttackKalm::MobCount = 4;
-	$ActiveQuest::GoblinAttackKalm::MobType[0] = "EliteGoblinRunt";
-	$ActiveQuest::GoblinAttackKalm::MobType[1] = "EliteGoblinThief";
-	$ActiveQuest::GoblinAttackKalm::MobType[2] = "EliteGoblinWizard";
-	$ActiveQuest::GoblinAttackKalm::MobType[3] = "EliteGoblinRaider";
-	$ActiveQuest::GoblinAttackKalm::MobList = "EliteGoblinRunt EliteGoblinThief EliteGoblinWizard EliteGoblinRaider";
+	$ActiveQuest::GoblinAttackKalm::MobType[0] = "GoblinRunt";
+	$ActiveQuest::GoblinAttackKalm::MobType[1] = "GoblinThief";
+	$ActiveQuest::GoblinAttackKalm::MobType[2] = "GoblinWizard";
+	$ActiveQuest::GoblinAttackKalm::MobType[3] = "GoblinRaider";
+	$ActiveQuest::GoblinAttackKalm::MobList = "GoblinRunt GoblinThief GoblinWizard GoblinRaider";
 
 	ActiveQuests::InitTownSpawns();
-}
-
-function ActiveQuests::RandomGoblinName() {
-	%names = $RaceToNamesList[Goblin];
-	%count = getWordCount(%names);
-    
-	if(%count <= 0)
-		%name = "EliteGoblin" @ floor(GetRandom() * 100000);
-	else
-		%name = "EliteGoblin" @ GetWord(%names, floor(GetRandom() * %count));
-
-	for(%i = 0; %i < 10; %i++) {
-		if(NEWgetClientByName(%name) == -1)
-			return %name;
-		if(%count > 0)
-			%name = "EliteGoblin" @ GetWord(%names, floor(GetRandom() * %count));
-		else
-			%name = "EliteGoblin" @ floor(GetRandom() * 100000);
-	}
-	return %name;
 }
 
 function ActiveQuests::StartGoblinAttackKalm(%duration, %interval) {
@@ -136,6 +116,7 @@ function ActiveQuests::StartGoblinAttackKalmRewards() {
 	$ActiveQuest::GoblinAttackKalm::RewardActive = True;
 	$ActiveQuest::GoblinAttackKalm::RewardRemaining = 60;
 	messageAll($MsgGreen, "Quest rewards have begun! Watch the sky over Kalm.");
+	Quests::GiveGoblinHordeMedallionToEligiblePlayers();
 	ActiveQuests::GoblinAttackKalmRewardLoop();
 }
 
@@ -157,26 +138,13 @@ function ActiveQuests::GoblinAttackKalmRewardLoop() {
 }
 
 function RandomGoblinAttackKalmRewardPos() {
-	// Reward bounds (four corners)
-	%x1 = -2361.34; %y1 = -280.924;
-	%x2 = -2372.3;  %y2 = -291.231;
-	%x3 = -2392.63; %y3 = -267.974;
-	%x4 = -2380.87; %y4 = -257.924;
-
-	%minX = %x1; %maxX = %x1;
-	if(%x2 < %minX) %minX = %x2; if(%x2 > %maxX) %maxX = %x2;
-	if(%x3 < %minX) %minX = %x3; if(%x3 > %maxX) %maxX = %x3;
-	if(%x4 < %minX) %minX = %x4; if(%x4 > %maxX) %maxX = %x4;
-
-	%minY = %y1; %maxY = %y1;
-	if(%y2 < %minY) %minY = %y2; if(%y2 > %maxY) %maxY = %y2;
-	if(%y3 < %minY) %minY = %y3; if(%y3 > %maxY) %maxY = %y3;
-	if(%y4 < %minY) %minY = %y4; if(%y4 > %maxY) %maxY = %y4;
-
-	%x = %minX + (getRandom() * (%maxX - %minX));
-	%y = %minY + (getRandom() * (%maxY - %minY));
-	%z = 80;
-	return %x @ " " @ %y @ " " @ %z;
+	%posList = "-2367.96 -293.15 -2365.86 -291.043 -2363.81 -289.164 -2361.35 -287.052 -2358.76 -284.862 -2360.8 -282.407 -2362.77 -283.791 -2364.45 -285.195 -2366.42 -286.883 -2368.07 -288.456 -2369.9 -290.185 -2372.05 -291.644 -2373.7 -289.778 -2371.71 -288.039 -2369.97 -286.557 -2367.81 -284.808 -2365.63 -283.112 -2363.41 -281.458 -2361.29 -279.886 -2365.37 -279.494 -2367.58 -281.143 -2368.98 -282.33 -2370.75 -283.948 -2372.34 -285.85 -2375.37 -287.072 -2377.14 -285.047 -2375.2 -283.301 -2373.08 -281.41 -2370.37 -279.09 -2367.58 -276.799 -2365.87 -275.401 -2367.41 -273.41 -2368.66 -274.547 -2371.15 -276.796 -2373.38 -278.734 -2375.91 -280.897 -2378.67 -283.254 -2380.67 -281.018 -2378.52 -279.211 -2375.66 -276.901 -2373.08 -274.85 -2370.44 -272.753 -2371.93 -270.014 -2373.67 -271.392 -2375.83 -273.453 -2378.41 -275.717 -2381.42 -278.311 -2384.56 -281.023 -2386.43 -278.884 -2388.14 -276.985 -2386.16 -275.352 -2384.46 -273.891 -2382.04 -276.456 -2380.12 -274.592 -2378.08 -272.944 -2375.71 -270.718 -2373.37 -268.521 -2375.64 -266.753 -2377.67 -268.466 -2380.02 -270.369 -2382.16 -272.062 -2384.79 -274.138 -2390.36 -275.557 -2388.29 -273.554 -2386.08 -271.698 -2383.5 -269.502 -2380.81 -267.217 -2378.72 -265.435 -2376.34 -263.408 -2378.31 -261.333 -2380.26 -262.963 -2382.65 -264.987 -2385 -266.937 -2387.6 -269.078 -2389.72 -270.793 -2393.02 -273.478 -2394.65 -271.366 -2392.5 -269.986 -2390.42 -268.216 -2387.48 -265.749 -2384.74 -263.482 -2381.97 -261.293 -2379.71 -259.511 -2376.94 -257.334 -2377.11 -254.523 -2379.27 -256.396 -2381.45 -258.269 -2384.33 -260.696 -2387.08 -262.983 -2389.89 -265.319 -2391.85 -266.953 -2394.66 -269.289";
+	%count = 92;
+	%idx = floor(getRandom() * %count);
+	%offset = %idx * 2;
+	%x = getWord(%posList, %offset);
+	%y = getWord(%posList, %offset + 1);
+	return %x @ " " @ %y @ " 200";
 }
 
 function RandomEliteMobPackLoot() {

@@ -911,7 +911,13 @@ function DoRemort(%clientId)
 	
 	Player::setDamageFlash(%clientId, 1.0);
 	Item::setVelocity(%clientId, "0 0 0");
-	%pos = TeleportToMarker(%clientId, "Teams/team0/DropPoints", 0, 0);
+	// %pos = TeleportToMarker(%clientId, "Teams/team0/DropPoints", 0, 0);
+
+	%pos = "-2432.24 -264.344 77.5922";
+	%rot = "0 -0 -2.45705";
+	
+	GameBase::setPosition(%clientId, %pos);
+	GameBase::setRotation(%clientId, %rot);
 
 	playSound(RespawnC, GameBase::getPosition(%clientId));
 

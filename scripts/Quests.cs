@@ -1540,6 +1540,47 @@ $QuestNPC::conversations[40, 40, 0, 1, 3] = "Reactor 4 is in the sector next to 
 $QuestNPC::conversations[40, 40, 0, 1, 4] = "The other reactors seem quiet for now, but that could change at any time. Stay alert.|Thanks.";
 
 // =====================
+// QUEST 41 — The Goblin Horde is coming!
+// =====================
+$Quest::name[41] = "The Goblin Horde is coming!";
+$Quest::desc[41] = "Ashton has seen a giant horde of goblins headed towards Kalm. Help defend the town.";
+$Quest::npcId[41] = 41;
+$Quest::type[41] = 0; // one-time per remort
+
+$Quest::stepName[41, 0] = "Speak to Ashton";
+$Quest::stepName[41, 1] = "Defeat the Goblin Horde";
+
+$Quest::stepDescription[41, 0] = "On the outskirts of Kalm, a man named Ashton is out of breath and seems distressed. Speak to him.";
+$Quest::stepDescription[41, 1] = "Ashton begged you to help defend Kalm from the goblin horde. Survive the attack and prove the town is safe.";
+
+$Quest::stepReq[41, 0] = "LVLG 1";
+$Quest::stepReq[41, 1] = "GoblinHordeMedallion 1";
+
+$Quest::stepReward[41, 0] = "";
+$Quest::stepReward[41, 1] = "EXP 10000";
+
+// When accepted, broadcast and start Goblin Attack on Kalm after 1 minute
+$Quest::onAccept[41] = "Quests::OnAcceptGoblinHorde";
+
+$QuestNPC::name[41] = "Ashton";
+$QuestNPC::shape[41] = "MaleHumanTownBot";
+$QuestNPC::pos[41] = "-2291.44 -441.793 96.6814";
+$QuestNPC::rot[41] = "0 -0 0.553246";
+$QuestNPC::questId[41] = 41;
+
+// Step 0 — not accepted (accept gate): distressed, out of breath
+$QuestNPC::conversations[41, 41, 0, 1, 0] = "*He gasps for air* You - you have to listen!|What's wrong?";
+$QuestNPC::conversations[41, 41, 0, 1, 1] = "I've seen a giant horde of goblins headed towards Kalm! They'll overrun us if we don't act!|Tell me more.";
+$QuestNPC::conversations[41, 41, 0, 1, 2] = "I ran here as fast as I could. Please - will you help defend the town? We need every blade we can get.|I'll help defend Kalm.";
+
+// Step 1 — on quest, turn in medallion when raid is done
+$QuestNPC::conversations[41, 41, 1, 0, 0] = "The horde - they're still coming, or the town is under attack! Get out there and fight!|I'm on it.";
+$QuestNPC::conversations[41, 41, 1, 1, 0] = "You did it! You helped drive them back. The town owes you a debt. Here - take this for your bravery.|Thank you.";
+
+// Step 2 — completed
+$QuestNPC::conversations[41, 41, 2, 1, 0] = "Kalm is safe thanks to you. Rest well, hero.|I will.";
+
+// =====================
 // QUEST INITIALIZATION
 // =====================
 $QuestBotList = "";
@@ -1832,6 +1873,10 @@ function Quests::ProgressQuest(%clientId, %questId) {
 		%state = 1;
 		Client::sendMessage(%clientId, 0, "You have accepted the quest " @ $Quest::name[%questId]);
 		PlaySound(EnterProtected, GameBase::getPosition(%clientId));
+		// Optional: run quest-specific on-accept callback (e.g. start world event)
+		%onAccept = $Quest::onAccept[%questId];
+		if (%onAccept != "")
+			schedule(%onAccept @ "(" @ %clientId @ ");", 0.1);
 	}
 
 	// Consume only for real turn-ins (usually steps >= 1)
@@ -1867,6 +1912,29 @@ function Quests::ProgressQuest(%clientId, %questId) {
 	Quests::MarkActive(%clientId, %questId);
 
 	return 1;
+}
+
+function Quests::OnAcceptGoblinHorde(%clientId) {
+	messageAll($MsgRed, "A Goblin Horde has been seen heading to Kalm! The attack will begin in 1 minute!");
+	schedule("ActiveQuests::StartGoblinAttackKalm(300, 3);", 60);
+}
+
+// Called when Goblin Attack Kalm raid ends: give GoblinHordeMedallion to all players on that quest (step 1) so they can turn in.
+function Quests::GiveGoblinHordeMedallionToEligiblePlayers() {
+	%questId = 41;
+	for (%cl = Client::getFirst(); %cl != -1; %cl = Client::getNext(%cl)) {
+		if (Player::isAiControlled(%cl))
+			continue;
+		%data = Quests::GetData(%cl, %questId);
+		if (%data == "")
+			continue;
+		%state = getWord(%data, 0);
+		%step  = getWord(%data, 1);
+		if (%state == 1 && %step == 1) {
+			GiveThisStuff(%cl, "GoblinHordeMedallion 1", True);
+			Client::sendMessage(%cl, 0, "You received a Goblin Horde Medallion. Return to Ashton to complete your quest!");
+		}
+	}
 }
 
 function Quests::MarkActive(%clientId, %questId) {
